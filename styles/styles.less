@@ -1,0 +1,67 @@
+.transition-mixin(@varighet: 150ms, @type: all) {
+  transition: @type @varighet cubic-bezier(0.465, 0.183, 0.153, 0.946);
+}
+
+@greenLight: #63b282;
+@blueLight: #c3ddf4;
+@purple-light: #e0dae7;
+@bannerblaa: #C2EAF7;
+
+@import "@{nodeModulesPath}nav-frontend-core/less/core";
+@import "@{nodeModulesPath}nav-frontend-typografi-style/src/index";
+@import "_mixinsTypografiSykefravaer";
+
+@import "_paneler.less";
+
+@import "@{nodeModulesPath}nav-frontend-etiketter-style/src/index";
+@import "@{nodeModulesPath}nav-frontend-knapper-style/src/index";
+@import "@{nodeModulesPath}nav-frontend-lenker-style/src/lenker-mixins";
+@import "@{nodeModulesPath}nav-frontend-lenker-style/src/lenker-style";
+@import "@{nodeModulesPath}nav-frontend-skjema-style/src/index";
+@import "@{nodeModulesPath}nav-frontend-snakkeboble-style/src/snakkeboble-style";
+
+@import "@{nodeModulesPath}nav-frontend-brodsmuler-design/less/styles";
+@import "@{nodeModulesPath}nav-frontend-lukknapp-style/src/lukknapp-style";
+
+@import "@{nodeModulesPath}oppfolgingsdialog-npm/less/styles";
+
+@import "_knapperSykefravaer";
+@import "_layout.less";
+@import "_overstyringer-dekorator.less";
+@import "_inngangspanel.less";
+@import "_illustrertTittel";
+@import "_oppfolgingsdialoger.less";
+@import "_oppfolgingsdialogerInfoPersonvern";
+@import "_opplysninger.less";
+@import "_hoder.less";
+@import "_utvidbar.less";
+@import "_redaksjonelt.less";
+@import "_sidetopp.less";
+@import "_timeoutbox.less";
+@import "_side.less";
+@import "_avstander.less";
+@import "_print.less";
+@import "_dekoratorVarsler.less";
+@import "_modal.less";
+@import "_landingspanel.less";
+@import "_knapperad.less";
+@import "_hjelpeboble.less";
+@import "_snakkeboble-nav-frontend";
+
+a {
+  text-decoration: none;
+}
+
+p {
+  margin-top: 0;
+}
+
+.mixin-panel-padding() {
+  padding-left: 1em;
+  padding-right: 1em;
+
+  @media(min-width: @screen-sm-min) {
+    padding-left: 2em;
+    padding-right: 2em;
+  }
+}

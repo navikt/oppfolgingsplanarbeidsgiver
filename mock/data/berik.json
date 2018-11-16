@@ -1,0 +1,32 @@
+[
+  {
+    "navn": "Mariann Løvold",
+    "fnr": "01010112345",
+    "koblingId": 26890,
+    "oppfoelgingsdato": "2018-09-01"
+  },
+  {
+    "navn": "Kjersti Glad",
+    "fnr": "02020212345",
+    "koblingId": 28780,
+    "oppfoelgingsdato": "2018-11-04"
+  },
+  {
+    "navn": "Lilli Foss",
+    "fnr": "03040512345",
+    "koblingId": 30267,
+    "oppfoelgingsdato": "2018-11-04"
+  },
+  {
+    "navn": "Kristina Salamonsen",
+    "fnr": "12121255555",
+    "koblingId": 30269,
+    "oppfoelgingsdato": "2018-11-05"
+  },
+  {
+    "navn": "Karina Mostad",
+    "fnr": "12121200100",
+    "koblingId": 30270,
+    "oppfoelgingsdato": "2018-11-05"
+  }
+]

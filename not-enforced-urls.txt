@@ -1,0 +1,4 @@
+https://${DomainName}/oppfolgingsplanarbeidsgiver/img/*
+https://${DomainName}/oppfolgingsplanarbeidsgiver/resources/*
+https://${DomainName}/oppfolgingsplan/img/*
+https://${DomainName}/oppfolgingsplan/resources/*

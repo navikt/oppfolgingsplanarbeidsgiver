@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+    <!-- /sykefravaerarbeidsgiver -->
+    <title></title>
+    <meta charset="UTF-8">
+    <script>
+        dataLayer = [];
+    </script>
+    {{{NAV_STYLES}}}
+    {{{NAV_MEGAMENU_RESOURCES}}}
+    {{{NAV_SCRIPTS}}}
+    {{#isProd}}
+    <link href="/sykefravaerarbeidsgiver/resources/styles.{{{timestamp}}}.css" rel="stylesheet"/>
+    {{/isProd}}
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <style>
+        .app:focus {
+            outline: none;
+        }
+        .app--laster {
+            height: 100vh;
+        }
+        .app-spinner {
+            width: 4em;
+            height: 4em;
+            border-top: 0.3125em solid #7f756c;
+            border-left: 0.3125em solid #b7b1a9;
+            border-bottom: 0.3125em solid #b7b1a9;
+            border-right: 0.3125em solid #7f756c;
+            border-radius: 50%;
+            -webkit-transform: translateZ(0);
+            -ms-transform: translateZ(0);
+            transform: translateZ(0);
+            -webkit-animation: rotering 800ms infinite linear;
+            animation: rotering 800ms infinite linear;
+            margin: 8em auto;
+        }
+        .fremdrift {
+            display: block;
+            width: 14em;
+            margin-top: 8em;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .fremdriftsbar {
+            border-radius: 1px;
+            display: block;
+            box-shadow: 0 0 0 2px #005b82;
+            height: 2em;
+            margin-bottom: .25em;
+            box-sizing: border-box;
+            position: relative;
+        }
+        .fremdriftsbar__inner {
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-color: #005b82;
+            height: 2em;
+            display: block;
+            width: 5%;
+            min-width: 5%;
+            max-width: 100%;
+            -webkit-transition: all 100ms cubic-bezier(0.23, 1, 0.32, 1);
+            -o-transition: all 100ms cubic-bezier(0.23, 1, 0.32, 1);
+            transition: all 100ms cubic-bezier(0.23, 1, 0.32, 1);
+        }
+        .fremdriftsbar__inner--animerTilStart {
+            -webkit-transition: all 3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            -o-transition: all 3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: all 3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .fremdriftsbar__tekst {
+            line-height: 2em;
+            font-size: 16px;
+            font-family: Arial, Helvetica, Sans-serif!important;
+        }
+        @-webkit-keyframes rotering {
+            from {
+                -webkit-transform: rotate(0deg);
+                transform: rotate(0deg);
+            }
+            to {
+                -webkit-transform: rotate(360deg);
+                transform: rotate(360deg);
+            }
+        }
+        @keyframes rotering {
+            from {
+                -webkit-transform: rotate(0deg);
+                transform: rotate(0deg);
+            }
+            to {
+                -webkit-transform: rotate(360deg);
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+{{{NAV_SKIPLINKS}}}
+{{{NAV_HEADING}}}
+<div id="maincontent" class="app app--laster" tabindex="-1">
+    {{#spinnerMedTekst}}
+    <div class="fremdrift" aria-label="Vent litt, mens siden laster">
+        <div class="fremdriftsbar">
+            <div class="fremdriftsbar__inner"></div>
+        </div>
+        <div class="fremdriftsbar__tekst">Vent litt, mens siden laster...</div>
+    </div>
+    {{/spinnerMedTekst}}
+    {{#spinnerUtenTekst}}
+    <div class="app-spinner" aria-label="Vent litt, mens siden laster"></div>
+    {{/spinnerUtenTekst}}
+</div>
+{{{NAV_FOOTER}}}
+<script>
+    window.APP_SETTINGS = {
+        "STARTTID": new Date(),
+        "REST_ROOT": "{{{SYFOREST_URL}}}",
+        "MOTEREST_ROOT": "{{{MOTEREST_URL}}}",
+        "SYFOTEKSTERREST_ROOT": "{{{SYFOTEKSTER_URL}}}",
+        "OPPFOELGINGSDIALOGREST_ROOT": "{{{OPPFOLGINGSDIALOGREST_URL}}}",
+        "APP_ROOT": "/sykefravaerarbeidsgiver",
+    {{^isProd}}"LOGGING_ENABLED": true{{/isProd}}
+    };
+</script>
+{{#isProd}}<script src="/sykefravaerarbeidsgiver/resources/bundle-prod.{{timestamp}}.js"></script>{{/isProd}}
+{{^isProd}}<script src="http://localhost:9094/assets/bundle.js"></script>{{/isProd}}
+</body>
+</html>

@@ -1,0 +1,393 @@
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { getLedetekst, keyValue, hentToggles, togglesPt, sykeforlopsPerioderReducerPt, hentSykeforlopsPerioder } from 'digisyfo-npm';
+import {
+    settAktivtSteg,
+    hentPdfurler,
+    OppfolgingsdialogInfoboks,
+    sjekkTilgangAg as sjekkTilgang,
+    hentOppfolgingsdialogerAg as hentOppfolgingsdialoger,
+    godkjennDialogAg,
+    nullstillGodkjenning,
+    slettArbeidsoppgave,
+    lagreArbeidsoppgave,
+    slettTiltak,
+    lagreTiltak,
+    lagreKommentar,
+    slettKommentar,
+    avvisDialogAg,
+    giSamtykke,
+    settDialog,
+    avbrytDialog,
+    dialogAvbruttOgNyOpprettet,
+    finnNyOppfolgingsplanMedVirkshomhetEtterAvbrutt,
+    hentArbeidsforhold,
+    hentVirksomhet,
+    hentPerson,
+    hentKontaktinfo,
+    hentNaermesteLeder,
+    delMedFastlege,
+    delMedNav as delMedNavFunc,
+    forespoerRevidering,
+    proptypes as oppfolgingProptypes,
+    henterEllerHarHentetOppfolgingsdialoger,
+    henterEllerHarHentetTilgang,
+    oppfolgingsdialogHarBlittAvbrutt,
+    populerDialogFraState,
+} from 'oppfolgingsdialog-npm';
+import {
+    sykmeldt as sykmeldtPt,
+    brodsmule as brodsmulePt,
+    sykmeldteReducerPt,
+    sykmeldingerReducerPt,
+} from '../shapes';
+import {
+    forsoektHentetOppfolgingsdialoger,
+    forsoektHentetSykmeldte,
+    forsoektHentetTilgang,
+    henterEllerHarHentetSykmeldinger,
+    henterEllerHarHentetToggles,
+} from '../utils/reducerUtils';
+import { sykmeldtHarGyldigSykmelding } from '../utils/oppfolgingsdialogUtils';
+import Side from '../sider/Side';
+import AppSpinner from '../components/AppSpinner';
+import Feilmelding from '../components/Feilmelding';
+import { hentSykmeldinger } from '../actions/sykmeldinger_actions';
+import Oppfolgingsdialog from '../components/oppfolgingsdialog/Oppfolgingsdialog';
+import { getContextRoot } from '../routers/paths';
+import history from '../history';
+import { hentSykmeldteBerikelser as hentSykmeldteBerikelserAction } from '../actions/sykmeldte_actions';
+import { beregnSkalHenteSykmeldtBerikelse } from '../utils/sykmeldtUtils';
+
+export class OppfolgingsdialogSide extends Component {
+    componentDidMount() {
+        const {
+            koblingId,
+            alleOppfolgingsdialogerReducer,
+            sykmeldinger,
+            toggles,
+        } = this.props;
+        if (!henterEllerHarHentetOppfolgingsdialoger(alleOppfolgingsdialogerReducer)) {
+            this.props.hentOppfolgingsdialoger();
+        }
+        if (!henterEllerHarHentetSykmeldinger(sykmeldinger)) {
+            this.props.hentSykmeldinger(koblingId);
+        }
+        if (!henterEllerHarHentetToggles(toggles)) {
+            this.props.hentToggles();
+        }
+        this.berikSykmeldt();
+    }
+
+    componentWillReceiveProps(nextProps) {
+        const {
+            avbrytdialogReducer,
+            alleOppfolgingsdialogerReducer,
+            koblingId,
+            tilgang,
+        } = this.props;
+        const {
+            sykmeldt,
+        } = nextProps;
+
+        if (sykmeldt && sykmeldt.fnr && !henterEllerHarHentetTilgang(tilgang)) {
+            this.props.sjekkTilgang(sykmeldt.fnr);
+        }
+        if (oppfolgingsdialogHarBlittAvbrutt(avbrytdialogReducer, nextProps.avbrytdialogReducer)) {
+            this.props.hentOppfolgingsdialoger();
+        }
+        if (avbrytdialogReducer.sendt && alleOppfolgingsdialogerReducer.henter && nextProps.alleOppfolgingsdialogerReducer.hentet) {
+            const nyOpprettetDialog = finnNyOppfolgingsplanMedVirkshomhetEtterAvbrutt(nextProps.oppfolgingsdialoger, nextProps.oppfolgingsdialog.virksomhet.virksomhetsnummer);
+            if (nyOpprettetDialog) {
+                this.props.dialogAvbruttOgNyOpprettet(nyOpprettetDialog.id);
+                history.push(`${getContextRoot()}/${koblingId}/oppfolgingsplaner/${nyOpprettetDialog.id}`);
+                window.location.hash = 'arbeidsoppgaver';
+                window.sessionStorage.setItem('hash', 'arbeidsoppgaver');
+            }
+        }
+        this.berikSykmeldt();
+    }
+
+    componentDidUpdate() {
+        if (window.location.hash === '' && window.sessionStorage.getItem('hash')) {
+            window.location.hash = window.sessionStorage.getItem('hash');
+        }
+
+        if (window.location.hash === '#arbeidsoppgaver' && this.props.navigasjontoggles.steg !== 1) {
+            this.props.settAktivtSteg(1);
+        }
+
+        if (window.location.hash === '#tiltak' && this.props.navigasjontoggles.steg !== 2) {
+            this.props.settAktivtSteg(2);
+        }
+
+        if (window.location.hash === '#godkjenn' && this.props.navigasjontoggles.steg !== 3) {
+            this.props.settAktivtSteg(3);
+        }
+    }
+
+    berikSykmeldt() {
+        const {
+            skalHenteBerikelse,
+            hentSykmeldteBerikelser,
+            koblingId,
+        } = this.props;
+        if (skalHenteBerikelse) {
+            hentSykmeldteBerikelser([koblingId]);
+        }
+    }
+
+    render() {
+        const {
+            harSykmeldtGyldigSykmelding,
+            navigasjontoggles,
+            brodsmuler,
+            henter,
+            hentingFeilet,
+            hentet,
+            sender,
+            sendingFeilet,
+            tilgang,
+            sykmeldt,
+        } = this.props;
+        return (
+            <Side
+                tittel={getLedetekst('oppfolgingsdialoger.sidetittel')}
+                brodsmuler={brodsmuler}
+                laster={(henter || sender || !hentet) && !(sendingFeilet || hentingFeilet)}>
+                {
+                    (() => {
+                        if (henter || sender) {
+                            return <AppSpinner />;
+                        } else if (hentingFeilet || sendingFeilet) {
+                            return <Feilmelding />;
+                        } else if (!tilgang.data.harTilgang || !sykmeldt || !harSykmeldtGyldigSykmelding) {
+                            return (<OppfolgingsdialogInfoboks
+                                svgUrl={`${getContextRoot()}/img/svg/oppfolgingsdialogFeilmeldingAG.svg`}
+                                svgAlt="OppfølgingsdialogFeilmelding"
+                                tittel={getLedetekst('oppfolgingsdialog.infoboks.ikke-tilgang.tittel')}
+                                tekst={getLedetekst('oppfolgingsdialog.infoboks.ikke-tilgang.naermesteleder.tekst')}
+                            />);
+                        }
+                        return (<Oppfolgingsdialog
+                            {...this.props}
+                            steg={navigasjontoggles.steg}
+                        />);
+                    })()
+                }
+            </Side>
+        );
+    }
+}
+
+OppfolgingsdialogSide.propTypes = {
+    henter: PropTypes.bool,
+    hentingFeilet: PropTypes.bool,
+    hentet: PropTypes.bool,
+    sender: PropTypes.bool,
+    sendingFeilet: PropTypes.bool,
+    toggles: togglesPt,
+    arbeidsforhold: oppfolgingProptypes.arbeidsforholdReducerPt,
+    arbeidsoppgaver: oppfolgingProptypes.arbeidsoppgaverReducerPt,
+    avbrytdialogReducer: oppfolgingProptypes.avbrytdialogReducerPt,
+    dokument: oppfolgingProptypes.dokumentReducerPt,
+    forespoerselRevidering: oppfolgingProptypes.forespoerselRevideringPt,
+    kontaktinfo: oppfolgingProptypes.kontaktinfoReducerPt,
+    navigasjontoggles: oppfolgingProptypes.navigasjonstogglesReducerPt,
+    alleOppfolgingsdialogerReducer: oppfolgingProptypes.alleOppfolgingsdialogerAgPt,
+    oppfolgingsdialogerReducer: oppfolgingProptypes.oppfolgingsdialogerAgPt,
+    naermesteleder: oppfolgingProptypes.naermestelederReducerPt,
+    sykmeldinger: sykmeldingerReducerPt,
+    sykmeldte: sykmeldteReducerPt,
+    tilgang: oppfolgingProptypes.tilgangReducerPt,
+    tiltak: oppfolgingProptypes.tiltakReducerPt,
+    person: oppfolgingProptypes.personReducerPt,
+    virksomhet: oppfolgingProptypes.virksomhetReducerPt,
+    sykeforlopsPerioder: sykeforlopsPerioderReducerPt,
+    koblingId: PropTypes.string,
+    harSykmeldtGyldigSykmelding: PropTypes.bool,
+    ledetekster: keyValue,
+    oppfolgingsdialog: oppfolgingProptypes.oppfolgingsdialogPt,
+    oppfolgingsdialoger: PropTypes.arrayOf(oppfolgingProptypes.oppfolgingsdialogPt),
+    params: PropTypes.shape({
+        koblingId: PropTypes.string,
+    }),
+    sykmeldt: sykmeldtPt,
+    brodsmuler: PropTypes.arrayOf(brodsmulePt),
+    lagreArbeidsoppgave: PropTypes.func,
+    slettArbeidsoppgave: PropTypes.func,
+    lagreTiltak: PropTypes.func,
+    slettTiltak: PropTypes.func,
+    lagreKommentar: PropTypes.func,
+    slettKommentar: PropTypes.func,
+    avbrytDialog: PropTypes.func,
+    dialogAvbruttOgNyOpprettet: PropTypes.func,
+    delMedFastlege: PropTypes.func,
+    delMedNavFunc: PropTypes.func,
+    forespoerRevidering: PropTypes.func,
+    hentArbeidsforhold: PropTypes.func,
+    godkjennDialogAg: PropTypes.func,
+    hentKontaktinfo: PropTypes.func,
+    hentOppfolgingsdialoger: PropTypes.func,
+    hentPdfurler: PropTypes.func,
+    hentPerson: PropTypes.func,
+    hentNaermesteLeder: PropTypes.func,
+    hentToggles: PropTypes.func,
+    hentVirksomhet: PropTypes.func,
+    nullstillGodkjenning: PropTypes.func,
+    settAktivtSteg: PropTypes.func,
+    settDialog: PropTypes.func,
+    sjekkTilgang: PropTypes.func,
+    oppfolgingsdialogId: PropTypes.string,
+    hentSykmeldinger: PropTypes.func,
+    hentSykeforlopsPerioder: PropTypes.func,
+    skalHenteBerikelse: PropTypes.bool,
+    hentSykmeldteBerikelser: PropTypes.func,
+};
+
+export function mapStateToProps(state, ownProps) {
+    const koblingId = ownProps.params.koblingId;
+    const id = ownProps.params.oppfolgingsdialogId;
+    const sykmeldt = state.sykmeldte.data && state.sykmeldte.data.filter((s) => {
+        return `${s.koblingId}` === koblingId;
+    })[0];
+    let tilgang = { data: {} };
+    const alleOppfolgingsdialogerReducer = state.oppfolgingsdialoger;
+    let oppfolgingsdialogerReducer = {};
+    let oppfolgingsdialoger = [];
+    let oppfolgingsdialog = {};
+    if (sykmeldt && sykmeldt.fnr) {
+        tilgang = state.tilgang[sykmeldt.fnr] || tilgang;
+        oppfolgingsdialogerReducer = state.oppfolgingsdialoger[sykmeldt.fnr] || {};
+        oppfolgingsdialoger = oppfolgingsdialogerReducer.data || [];
+        oppfolgingsdialog = oppfolgingsdialoger
+            .filter((dialog) => { return `${dialog.id}` === id; })[0];
+        oppfolgingsdialog = oppfolgingsdialog ?
+            populerDialogFraState(oppfolgingsdialog, state) : {};
+    }
+    const sykmeldinger = state.sykmeldinger[koblingId] || {};
+    const harSykmeldtGyldigSykmelding = sykmeldinger.data && sykmeldtHarGyldigSykmelding(sykmeldinger.data);
+    const harForsoektHentetOppfolgingsdialoger = forsoektHentetOppfolgingsdialoger(alleOppfolgingsdialogerReducer);
+    const harForsoektHentetTilgang = forsoektHentetTilgang(tilgang);
+    const harForsoektHentetAlt = harForsoektHentetOppfolgingsdialoger
+        && forsoektHentetSykmeldte(state.sykmeldte)
+        && sykmeldinger.hentet;
+    const erSykmeldteHentet = state.sykmeldte.hentet && !state.sykmeldte.hentingFeilet;
+    const skalHenteBerikelse = beregnSkalHenteSykmeldtBerikelse(sykmeldt, state);
+
+    return {
+        henter: state.ledetekster.henter
+        || state.sykmeldte.henter
+        || alleOppfolgingsdialogerReducer.henter
+        || tilgang.henter
+        || sykmeldinger.henter
+        || !harForsoektHentetAlt
+        || (erSykmeldteHentet && sykmeldt && !harForsoektHentetTilgang)
+        || (state.sykmeldte.henterBerikelser.length > 0 && !state.sykmeldte.hentingFeilet),
+        hentingFeilet: state.ledetekster.hentingFeilet
+        || state.sykmeldte.hentingFeilet
+        || alleOppfolgingsdialogerReducer.hentingFeilet
+        || tilgang.hentingFeilet
+        || sykmeldinger.hentingFeilet,
+        hentet: oppfolgingsdialogerReducer.hentet
+        || state.ledetekster.hentet
+        || state.tilgang.hentet
+        || harForsoektHentetOppfolgingsdialoger
+        || oppfolgingsdialogerReducer.avvist
+        || oppfolgingsdialogerReducer.godkjent
+        || state.avbrytdialogReducer.sendt
+        || state.nullstill.sendt,
+        oppfolgingsdialogerHentet: oppfolgingsdialogerReducer.hentet,
+        oppfolgingsdialogerHenter: oppfolgingsdialogerReducer.henter,
+        oppfolgingsdialogAvbrutt: state.avbrytdialogReducer.sendt,
+        sjekkTilgangHentet: state.tilgang.hentet,
+        sykmeldinger,
+        sjekkTilgangHenter: state.tilgang.henter,
+        sender: oppfolgingsdialogerReducer.avviser
+        || oppfolgingsdialogerReducer.godkjenner
+        || state.avbrytdialogReducer.sender
+        || state.nullstill.sender
+        || state.samtykke.sender,
+        sendingFeilet: oppfolgingsdialogerReducer.avvisFeilet
+        || oppfolgingsdialogerReducer.godkjenningFeilet
+        || state.avbrytdialogReducer.sendingFeilet
+        || state.nullstill.sendingFeilet
+        || state.samtykke.sendingFeilet,
+        arbeidsoppgaver: state.arbeidsoppgaver,
+        avbrytdialogReducer: state.avbrytdialogReducer,
+        dokument: state.dokument,
+        delmednav: state.delmednav,
+        fastlegeDeling: state.fastlegeDeling,
+        forespoerselRevidering: state.forespoerselRevidering,
+        arbeidsforhold: state.arbeidsforhold,
+        kontaktinfo: state.kontaktinfo,
+        navigasjontoggles: state.navigasjontoggles,
+        naermesteleder: state.naermesteleder,
+        alleOppfolgingsdialogerReducer,
+        oppfolgingsdialogerReducer,
+        sykeforlopsPerioderReducer: state.sykeforlopsPerioder,
+        person: state.person,
+        sykmeldte: state.sykmeldte,
+        toggles: state.toggles,
+        tilgang,
+        tiltak: state.tiltak,
+        virksomhet: state.virksomhet,
+        koblingId: ownProps.params.koblingId,
+        ledetekster: state.ledetekster.data,
+        oppfolgingsdialog,
+        oppfolgingsdialoger,
+        sykmeldt,
+        harSykmeldtGyldigSykmelding,
+        skalHenteBerikelse,
+        brodsmuler: [{
+            tittel: getLedetekst('sykefravaerarbeidsgiver.dinesykmeldte.sidetittel'),
+            sti: '/sykefravaerarbeidsgiver',
+            erKlikkbar: true,
+        }, {
+            tittel: sykmeldt ? sykmeldt.navn : '',
+            sti: sykmeldt ? `/sykefravaerarbeidsgiver/${sykmeldt.koblingId}` : '',
+            erKlikkbar: true,
+        }, {
+            tittel: getLedetekst('oppfolgingsdialoger.sidetittel.arbeidsgiver'),
+            sti: sykmeldt ? `/${sykmeldt.koblingId}/oppfolgingsplaner` : '',
+            erKlikkbar: true,
+        }, {
+            tittel: getLedetekst('oppfolgingsdialog.sidetittel.arbeidsgiver'),
+        }],
+    };
+}
+
+const OppfolgingsdialogContainer = connect(mapStateToProps, {
+    hentOppfolgingsdialoger,
+    sjekkTilgang,
+    godkjennDialogAg,
+    avvisDialogAg,
+    nullstillGodkjenning,
+    settAktivtSteg,
+    settDialog,
+    hentPdfurler,
+    giSamtykke,
+    slettArbeidsoppgave,
+    lagreArbeidsoppgave,
+    slettTiltak,
+    lagreTiltak,
+    lagreKommentar,
+    slettKommentar,
+    avbrytDialog,
+    dialogAvbruttOgNyOpprettet,
+    hentArbeidsforhold,
+    hentToggles,
+    delMedFastlege,
+    delMedNavFunc,
+    forespoerRevidering,
+    hentVirksomhet,
+    hentPerson,
+    hentKontaktinfo,
+    hentSykmeldinger,
+    hentNaermesteLeder,
+    hentSykeforlopsPerioder,
+    hentSykmeldteBerikelser: hentSykmeldteBerikelserAction,
+})(OppfolgingsdialogSide);
+
+export default OppfolgingsdialogContainer;
