@@ -1,4 +1,3 @@
-import { all } from 'redux-saga/effects';
 import { ledeteksterSagas, togglesSagas, sykeforlopsPerioderSagas } from 'digisyfo-npm';
 import {
     oppfolgingsdialogerAgSagas as oppfolgingsdialogerSagas,
@@ -25,7 +24,7 @@ import sykmeldteSagas from './sykmeldteSagas';
 import sykmeldingerSagas from './sykmeldingerSagas';
 
 export default function* rootSaga() {
-    yield all([
+    yield [
         ledeteksterSagas(),
         arbeidsforholdSagas(),
         sykmeldteSagas(),
@@ -50,6 +49,6 @@ export default function* rootSaga() {
         kontaktinfoSagas(),
         naermesteLederSagas(),
         sykeforlopsPerioderSagas(),
-    ]);
+    ];
 }
 
