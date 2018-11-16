@@ -5,14 +5,17 @@ import { getContextRoot } from '../routers/paths';
 import { brodsmule as brodsmulePt } from '../shapes';
 
 const Brodsmule = ({ sti, tittel, sisteSmule, erKlikkbar }) => {
+    const root = sti && sti.indexOf('/sykefravaerarbeidsgiver') > -1 ? '' : getContextRoot();
+    const link = root === ''
+        ? <a className="js-smule js-smule-a brodsmuler__smule" href={sti}>{tittel}</a>
+        : <Link className="js-smule brodsmuler__smule" to={root + sti}>{tittel}</Link>;
     if (sisteSmule) {
         return (<span className="js-smuletekst">
             <span className="vekk">Du er her:</span> <span className="brodsmule">{tittel}</span>
         </span>);
     } else if (erKlikkbar) {
-        const root = sti.indexOf('sykefravaerarbeidsgiver') > -1 ? '' : getContextRoot();
         return (<span className="js-smuletekst">
-            <Link className="js-smule brodsmuler__smule" to={root + sti}>{tittel}</Link>
+            {link}
             <span className="brodsmule__skille"> / </span>
         </span>);
     }
