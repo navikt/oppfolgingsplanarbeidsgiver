@@ -70,6 +70,13 @@ const renderApp = (decoratorFragments) => {
     ]);
 };
 
+function nocache(req, res, next) {
+    res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
+    res.header('Expires', '-1');
+    res.header('Pragma', 'no-cache');
+    next();
+}
+
 const startServer = (html) => {
 
     const htmlFrontPage = html[0];
@@ -87,6 +94,7 @@ const startServer = (html) => {
 
     server.get(
         ['/', '/oppfolgingsplanarbeidsgiver/?', /^\/oppfolgingsplanarbeidsgiver\/(?!(resources|img)).*$/],
+        nocache,
         (req, res) => {
             const html = (req.url === 'oppfolgingsplanarbeidsgiver' || req.url === 'oppfolgingsplanarbeidsgiver/')
                 ? htmlFrontPage
