@@ -1,5 +1,5 @@
 name: oppfolgingsplanarbeidsgiver
-team: digisyfo
+team: teamsykefravr
 image: repo.adeo.no:5443/digisyfo/oppfolgingsplanarbeidsgiver
 replicas:
   min: 2
