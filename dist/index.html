@@ -11,7 +11,7 @@
     {{{NAV_MEGAMENU_RESOURCES}}}
     {{{NAV_SCRIPTS}}}
     {{#isProd}}
-    <link href="/oppfolgingsplanarbeidsgiver/resources/styles.{{{timestamp}}}.css" rel="stylesheet"/>
+    <link href="/oppfolgingsplanarbeidsgiver/resources/styles.css?ts={{{timestamp}}}" rel="stylesheet" />
     {{/isProd}}
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <style>
@@ -126,7 +126,7 @@
     {{^isProd}}"LOGGING_ENABLED": true{{/isProd}}
     };
 </script>
-{{#isProd}}<script src="/oppfolgingsplanarbeidsgiver/resources/bundle-prod.{{timestamp}}.js"></script>{{/isProd}}
+{{#isProd}}<script src="/oppfolgingsplanarbeidsgiver/resources/bundle-prod.js?ts={{timestamp}}"></script>{{/isProd}}
 {{^isProd}}<script src="http://localhost:9094/assets/bundle.js"></script>{{/isProd}}
 </body>
 </html>

@@ -9,7 +9,7 @@ var Dotenv = require('dotenv-webpack');
 var config = function (opts) {
     var timestamp = opts.timestamp;
     var extractLess = new MiniCssExtractPlugin({
-        filename: 'styles.' + timestamp + '.css',
+        filename: 'styles.css',
         disable: false,
     });
 
@@ -19,7 +19,7 @@ var config = function (opts) {
         entry: ['babel-polyfill', mainPath],
         output: {
             path: buildPath,
-            filename: 'bundle-prod.' + timestamp + '.js',
+            filename: 'bundle-prod.js',
         },
         mode: 'production',
         resolve: {
