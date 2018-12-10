@@ -16,9 +16,9 @@ const mockData = {};
 const lastFilTilMinne = (filnavn) => {
     fs.readFile(path.join(__dirname, `/data/${filnavn}.json`), (err, data) => {
         if (err) {
-            console.log("feil i " + filnavn);
-            throw err
-        };
+            console.log('feil i ' + filnavn);
+            throw err;
+        }
         mockData[filnavn] = JSON.parse(data.toString());
     });
 };
@@ -52,7 +52,7 @@ let teksterFraProd;
 
 function hentTeksterFraProd() {
     const TEKSTER_URL = 'https://syfoapi.nav.no/syfotekster/api/tekster';
-    request(TEKSTER_URL, function (error, response, body) {
+    request(TEKSTER_URL, (error, response, body) => {
         if (error) {
             console.log('Kunne ikke hente tekster fra prod', error);
         } else {
@@ -71,7 +71,14 @@ function mockTekster(server) {
         res.setHeader('Content-Type', 'application/json');
         res.send(JSON.stringify(teksterFraProd || mockData[TEKSTER]));
     });
-};
+}
+
+function mockOpprettetIdResultat(res) {
+    mockOpprettetIdResultat.rollingCounter += 1;
+    res.setHeader('Content-Type', 'application/json');
+    res.send(JSON.stringify(mockOpprettetIdResultat.rollingCounter));
+}
+mockOpprettetIdResultat.rollingCounter = 100;
 
 function mockForOpplaeringsmiljo(server) {
     mockTekster(server);
@@ -141,14 +148,64 @@ function mockForOpplaeringsmiljo(server) {
     });
 
     server.get('/esso/logout', (req, res) => {
-        res.send('<p>Du har blitt sendt til utlogging.</p><p><a href="/sykefravaer">Gå til Ditt sykefravær</a></p>');
+        res.send('<p>Du har blitt sendt til utlogging.</p><p><a href="/oppfolgingsplanarbeidsgiver/26890/">Gå til Dine Sykmeldtes Oppfølgingplaner</a></p>');
     });
 
     server.get('/dittnav', (req, res) => {
-        res.send('<p>Ditt Nav er ikke tilgjengelig - dette er en testside som kun viser Ditt sykefravær.</p><p><a href="/sykefravaer">Gå til Ditt sykefravær</a></p>');
+        res.send('<p>Ditt Nav er ikke tilgjengelig - dette er en testside som kun viser Ditt sykefravær.</p><p><a href="/oppfolgingsplanarbeidsgiver/26890">Gå til Dine Sykmeldtes Oppfølgingplaner</a></p>');
+    });
+}
+
+function mockForLokaltMiljo(server) {
+    server.use(express.json());
+    server.use(express.urlencoded());
+
+    server.post('/restoppfoelgingsdialog/api/tiltak/actions/:response/lagreKommentar', (req, res) => {
+        mockOpprettetIdResultat(res);
+    });
+
+    server.post('/restoppfoelgingsdialog/api/kommentar/actions/:response/slett', (req, res) => {
+        res.send();
+    });
+
+    server.post('/restoppfoelgingsdialog/api/arbeidsoppgave/actions/:id/slett', (req, res) => {
+        res.send();
+    });
+
+    server.post('/restoppfoelgingsdialog/api/tiltak/actions/:id/slett', (req, res) => {
+        res.send();
+    });
+
+    server.post('/restoppfoelgingsdialog/api/oppfoelgingsdialoger/actions/:id/lagreArbeidsoppgave', (req, res) => {
+        mockOpprettetIdResultat(res);
+    });
+
+    server.post('/restoppfoelgingsdialog/api/oppfoelgingsdialoger/actions/:id/lagreTiltak', (req, res) => {
+        mockOpprettetIdResultat(res);
+    });
+
+    server.post('/restoppfoelgingsdialog/api/oppfoelgingsdialoger/actions/:id/godkjenn', (req, res) => {
+        res.send({
+            fom: req.body.fom,
+            tom: req.body.tom,
+            evalueres: req.body.evalueres,
+        });
+    });
+
+    server.post('/restoppfoelgingsdialog/api/oppfoelgingsdialoger/actions/:id/samtykke', (req, res) => {
+        res.send();
+    });
+
+    server.post('/restoppfoelgingsdialog/api/oppfoelgingsdialoger/actions/:id/nullstillGodkjenning', (req, res) => {
+        res.send();
+    });
+
+    server.post('/restoppfoelgingsdialog/api/oppfoelgingsdialoger/actions/:id/forespoerRevidering', (req, res) => {
+        res.send();
     });
 }
 
 module.exports = {
     mockForOpplaeringsmiljo,
+    mockForLokaltMiljo,
 };
