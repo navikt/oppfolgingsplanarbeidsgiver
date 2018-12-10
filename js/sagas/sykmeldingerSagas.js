@@ -1,5 +1,10 @@
-import { call, put, fork } from 'redux-saga/effects';
-import { takeEvery } from 'redux-saga';
+import {
+    all,
+    call,
+    put,
+    fork,
+    takeEvery,
+} from 'redux-saga/effects';
 import { get, log } from 'digisyfo-npm';
 import * as actions from '../actions/sykmeldinger_actions';
 import * as actiontyper from '../actions/actiontyper';
@@ -18,12 +23,12 @@ export function* hentSykmeldinger(action) {
 }
 
 function* watchHentSykmeldinger() {
-    yield* takeEvery(actiontyper.HENT_SYKMELDINGER_FORESPURT, hentSykmeldinger);
+    yield takeEvery(actiontyper.HENT_SYKMELDINGER_FORESPURT, hentSykmeldinger);
 }
 
 
 export default function* sykmeldingerSagas() {
-    yield [
+    yield all([
         fork(watchHentSykmeldinger),
-    ];
+    ]);
 }

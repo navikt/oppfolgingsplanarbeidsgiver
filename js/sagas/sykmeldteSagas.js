@@ -1,5 +1,10 @@
-import { call, put, fork } from 'redux-saga/effects';
-import { takeEvery } from 'redux-saga';
+import {
+    all,
+    call,
+    put,
+    fork,
+    takeEvery,
+} from 'redux-saga/effects';
 import { get, log } from 'digisyfo-npm';
 import * as actions from '../actions/sykmeldte_actions';
 import * as actiontyper from '../actions/actiontyper';
@@ -7,7 +12,7 @@ import * as actiontyper from '../actions/actiontyper';
 export function* hentArbeidsgiversSykmeldte() {
     yield put(actions.henterSykmeldte());
     try {
-        const data = yield call(get, `${window.APP_SETTINGS.REST_ROOT}/arbeidsgiver/sykmeldte`);
+        const data = yield call(get, `${process.env.REACT_APP_SYFOREST_ROOT}/arbeidsgiver/sykmeldte`);
         yield put(actions.sykmeldteHentet(data));
     } catch (e) {
         log(e);
@@ -19,7 +24,7 @@ export function* berikSykmeldte(action) {
     yield put(actions.henterSykmeldteBerikelser(action.koblingIder));
     try {
         const args = action.koblingIder.join(',');
-        const data = yield call(get, `${window.APP_SETTINGS.REST_ROOT}/arbeidsgiver/sykmeldte/berik?koblingsIder=${args}`);
+        const data = yield call(get, `${process.env.REACT_APP_SYFOREST_ROOT}/arbeidsgiver/sykmeldte/berik?koblingsIder=${args}`);
         yield put(actions.sykmeldteBerikelserHentet(data));
     } catch (e) {
         log(e);
@@ -28,16 +33,16 @@ export function* berikSykmeldte(action) {
 }
 
 function* watchHentArbeidsgiversSykmeldte() {
-    yield* takeEvery(actiontyper.HENT_SYKMELDTE_FORESPURT, hentArbeidsgiversSykmeldte);
+    yield takeEvery(actiontyper.HENT_SYKMELDTE_FORESPURT, hentArbeidsgiversSykmeldte);
 }
 
 function* watchHentBerikelser() {
-    yield* takeEvery(actiontyper.HENT_SYKMELDTE_BERIKELSER_FORESPURT, berikSykmeldte);
+    yield takeEvery(actiontyper.HENT_SYKMELDTE_BERIKELSER_FORESPURT, berikSykmeldte);
 }
 
 export default function* sykmeldteSagas() {
-    yield [
+    yield all([
         fork(watchHentArbeidsgiversSykmeldte),
         fork(watchHentBerikelser),
-    ];
+    ]);
 }

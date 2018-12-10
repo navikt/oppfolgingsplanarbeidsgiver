@@ -1,10 +1,10 @@
-# Sykefravaerarbeidsgiver (tidligere kjent som «syfoagfront»)
+# Oppfolgingsplanarbeidsgiver
 
-Frontend for arbeidsgivers digitalisering av sykefraværsoppfølging (DigiSYFO) http://tjenester.nav.no/sykefravaerarbeidsgiver/
+Frontend for arbeidsgivers digitalisering av sykefraværsoppfølging (DigiSYFO) http://tjenester.nav.no/oppfolgingsplanarbeidsgiver/
 
 ### TL;DR
 
-React-app for den sykmeldtes nærmeste leder. Viser sykmeldingene, sykepengesøknadene og møtene til lederens sykmeldte.
+React-app for den sykmeldtes nærmeste leder. Viser oppfølgingsplaner til lederens sykmeldte.
 
 * For å kjøre koden lokalt:
     - `$ npm install`

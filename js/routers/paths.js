@@ -1,3 +1,3 @@
 export function getContextRoot() {
-    return '/oppfolgingsplanarbeidsgiver';
+    return process.env.REACT_APP_CONTEXT_ROOT;
 }
