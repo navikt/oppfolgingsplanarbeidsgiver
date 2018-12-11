@@ -12,7 +12,6 @@ import {
     finnGodkjentedialogerAvbruttAvMotpartSidenSistInnlogging,
     NyNaermestelederInfoboks,
     proptypes as oppfolgingProptypes,
-    UnderUtviklingVarsel,
 } from 'oppfolgingsdialog-npm';
 import Sidetopp from '../Sidetopp';
 import { harForrigeNaermesteLeder, harNaermesteLeder } from '../../utils/oppfolgingsdialogUtils';
@@ -73,10 +72,6 @@ const OppfolgingsdialogerInnhold = ({
                 {getLedetekst('oppfolgingsdialog.oppfolgingsdialoger.notifikasjonboks.generell-info')}
             </Alertstripe>
             }
-            <UnderUtviklingVarsel
-                ledetekster={ledetekster}
-                rootUrl={getContextRoot()}
-            />
             <Sidetopp tittel={getLedetekst('oppfolgingsdialoger.sidetittel')} />
             <OppfolgingsdialogerInfoPersonvern
                 ledetekster={ledetekster}

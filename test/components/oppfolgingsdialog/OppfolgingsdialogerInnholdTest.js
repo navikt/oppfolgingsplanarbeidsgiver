@@ -2,10 +2,7 @@ import chai from 'chai';
 import React from 'react';
 import { shallow } from 'enzyme';
 import chaiEnzyme from 'chai-enzyme';
-import {
-    NyNaermestelederInfoboks,
-    UnderUtviklingVarsel,
-} from 'oppfolgingsdialog-npm';
+import { NyNaermestelederInfoboks } from 'oppfolgingsdialog-npm';
 import Sidetopp from '../../../js/components/Sidetopp';
 import OppfolgingsdialogerInnhold from '../../../js/components/oppfolgingsdialog/OppfolgingsdialogerInnhold';
 import OppfolgingsdialogerVisning from '../../../js/components/oppfolgingsdialog/OppfolgingsdialogerVisning';
@@ -24,10 +21,6 @@ describe('OppfolgingsdialogerInnhold', () => {
             toggles={toggles}
             oppfolgingsdialoger={[]}
         />);
-    });
-
-    it('Skal vise UnderUtviklingVarsel', () => {
-        expect(component.find(UnderUtviklingVarsel)).to.have.length(1);
     });
 
     it('Skal vise overskrift for Oppfolgingsdialoger', () => {
