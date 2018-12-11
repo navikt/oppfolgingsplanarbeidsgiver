@@ -3,11 +3,17 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 import { getContextRoot } from '../routers/paths';
 import { brodsmule as brodsmulePt } from '../shapes';
+import { getSykefravaerarbeidsgiverUrl } from '../utils/urlUtils';
 
 const Brodsmule = ({ sti, tittel, sisteSmule, erKlikkbar }) => {
-    const root = sti && sti.indexOf('/sykefravaerarbeidsgiver') > -1 ? '' : getContextRoot();
+    const nySti = sti && sti.indexOf('/sykefravaerarbeidsgiver') > -1
+        ? getSykefravaerarbeidsgiverUrl(sti)
+        : sti;
+    const root = sti && sti.indexOf('/sykefravaerarbeidsgiver') > -1
+        ? ''
+        : getContextRoot();
     const link = root === ''
-        ? <a className="js-smule js-smule-a brodsmuler__smule" href={sti}>{tittel}</a>
+        ? <a className="js-smule js-smule-a brodsmuler__smule" href={nySti}>{tittel}</a>
         : <Link className="js-smule brodsmuler__smule" to={root + sti}>{tittel}</Link>;
     if (sisteSmule) {
         return (<span className="js-smuletekst">
@@ -45,7 +51,7 @@ ToggleLink.propTypes = {
 
 const Brodsmuler = ({ brodsmuler }) => {
     return (<nav className="brodsmuler" aria-label="Du er her: ">
-        <img src="/oppfolgingsplanarbeidsgiver/img/svg/person.svg" alt="Du" className="brodsmuler__ikon" />
+        <img src={`${process.env.REACT_APP_CONTEXT_ROOT}/img/svg/person.svg`} alt="Du" className="brodsmuler__ikon" />
         <div className="brodsmuler__smuler">
             {
                 brodsmuler

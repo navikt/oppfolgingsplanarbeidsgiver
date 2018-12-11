@@ -9,7 +9,7 @@ const prometheus = require('prom-client');
 
 // Prometheus metrics
 const collectDefaultMetrics = prometheus.collectDefaultMetrics;
-collectDefaultMetrics({timeout: 5000});
+collectDefaultMetrics({ timeout: 5000 });
 
 const httpRequestDurationMicroseconds = new prometheus.Histogram({
     name: 'http_request_duration_ms',
@@ -21,7 +21,7 @@ const httpRequestDurationMicroseconds = new prometheus.Histogram({
 const server = express();
 
 const env = process.argv[2];
-const settings = env === 'local' ? {isProd: false} : require('./settings.json');
+const settings = env === 'local' ? { isProd: false } : require('./settings.json');
 
 server.set('views', `${__dirname}/dist`);
 server.set('view engine', 'mustache');
@@ -66,7 +66,7 @@ const renderFrontPage = (decoratorFragments) => {
 const renderApp = (decoratorFragments) => {
     return Promise.all([
         renderFrontPage(decoratorFragments),
-        renderSubpages(decoratorFragments)
+        renderSubpages(decoratorFragments),
     ]);
 };
 
@@ -78,7 +78,6 @@ function nocache(req, res, next) {
 }
 
 const startServer = (html) => {
-
     const htmlFrontPage = html[0];
     const htmlOtherPages = html[1];
 
@@ -119,15 +118,19 @@ const startServer = (html) => {
         res.sendStatus(200);
     });
 
+    if (env === 'opplaering') {
+        require('./mock/mockEndepunkter').mockForOpplaeringsmiljo(server);
+    }
+
     if (env === 'local') {
         require('./mock/mockEndepunkter').mockForOpplaeringsmiljo(server);
+        require('./mock/mockEndepunkter').mockForLokaltMiljo(server);
     }
 
     const port = env !== 'local' ? process.env.PORT : 8289;
     server.listen(port, () => {
         console.log(`App listening on port: ${port}`);
     });
-
 };
 
 const logError = (errorMessage, details) => {
