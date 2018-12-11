@@ -29,6 +29,11 @@ const NAERMESTELEDER = 'naermesteleder';
 const OPPFOLGINGSDIALOGER = 'oppfolgingsdialoger';
 const PERIODER = 'perioder';
 const PERSON = 'person';
+const PERSON_KARINA = 'personKarina';
+const PERSON_KJERSTI = 'personKjersti';
+const PERSON_KRISTINA = 'personKristina';
+const PERSON_LILLI = 'personLilli';
+const PERSON_MARIANN = 'personMariann';
 const SYKMELDINGER = 'sykmeldinger';
 const SYKMELDTE = 'sykmeldte';
 const TILGANG = 'tilgang';
@@ -42,6 +47,11 @@ lastFilTilMinne(OPPFOLGINGSDIALOGER);
 lastFilTilMinne(BERIK);
 lastFilTilMinne(PERIODER);
 lastFilTilMinne(PERSON);
+lastFilTilMinne(PERSON_KARINA);
+lastFilTilMinne(PERSON_KJERSTI);
+lastFilTilMinne(PERSON_KRISTINA);
+lastFilTilMinne(PERSON_LILLI);
+lastFilTilMinne(PERSON_MARIANN);
 lastFilTilMinne(BERIK);
 lastFilTilMinne(KONTAKTINFO);
 lastFilTilMinne(NAERMESTELEDER);
@@ -127,6 +137,31 @@ function mockForOpplaeringsmiljo(server) {
         res.send(JSON.stringify(mockData[VIRKSOMHET]));
     });
 
+    server.get('/restoppfoelgingsdialog/api/person/12121200100', (req, res) => {
+        res.setHeader('Content-Type', 'application/json');
+        res.send(JSON.stringify(mockData[PERSON_KARINA]));
+    });
+
+    server.get('/restoppfoelgingsdialog/api/person/02020212345', (req, res) => {
+        res.setHeader('Content-Type', 'application/json');
+        res.send(JSON.stringify(mockData[PERSON_KJERSTI]));
+    });
+
+    server.get('/restoppfoelgingsdialog/api/person/12121255555', (req, res) => {
+        res.setHeader('Content-Type', 'application/json');
+        res.send(JSON.stringify(mockData[PERSON_KRISTINA]));
+    });
+
+    server.get('/restoppfoelgingsdialog/api/person/03040512345', (req, res) => {
+        res.setHeader('Content-Type', 'application/json');
+        res.send(JSON.stringify(mockData[PERSON_LILLI]));
+    });
+
+    server.get('/restoppfoelgingsdialog/api/person/01010112345', (req, res) => {
+        res.setHeader('Content-Type', 'application/json');
+        res.send(JSON.stringify(mockData[PERSON_MARIANN]));
+    });
+
     server.get('/restoppfoelgingsdialog/api/person/*', (req, res) => {
         res.setHeader('Content-Type', 'application/json');
         res.send(JSON.stringify(mockData[PERSON]));
@@ -135,6 +170,11 @@ function mockForOpplaeringsmiljo(server) {
     server.get('/restoppfoelgingsdialog/api/naermesteleder/*', (req, res) => {
         res.setHeader('Content-Type', 'application/json');
         res.send(JSON.stringify(mockData[NAERMESTELEDER]));
+    });
+
+    server.get('/restoppfoelgingsdialog/api/kontaktinfo/*', (req, res) => {
+        res.setHeader('Content-Type', 'application/json');
+        res.send(JSON.stringify(mockData[KONTAKTINFO]));
     });
 
     server.get('/restoppfoelgingsdialog/api/kontaktinfo/*', (req, res) => {
