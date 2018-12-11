@@ -177,11 +177,6 @@ function mockForOpplaeringsmiljo(server) {
         res.send(JSON.stringify(mockData[KONTAKTINFO]));
     });
 
-    server.get('/restoppfoelgingsdialog/api/kontaktinfo/*', (req, res) => {
-        res.setHeader('Content-Type', 'application/json');
-        res.send(JSON.stringify(mockData[KONTAKTINFO]));
-    });
-
     server.post('/restoppfoelgingsdialog/api/logging', (req, res) => {
         console.log('Logger i restoppfoelgingsdialog');
         res.send(200);
