@@ -120,14 +120,18 @@ export class OppfolgingsdialogerSide extends Component {
             this.props.hentOppfolgingsdialoger();
         }
         if (oppfolgingsdialogHarBlittOpprettet(oppfolgingsdialogerReducer, nextProps.oppfolgingsdialogerReducer)) {
-            history.push(`${getContextRoot()}/${koblingId}/oppfolgingsplaner/${nextProps.oppfolgingsdialogerReducer.opprettetId}`);
             this.props.hentOppfolgingsdialoger();
+        }
+        if (kopierDialogReducer.sender && nextProps.kopierDialogReducer.sendt) {
+            this.props.hentOppfolgingsdialoger();
+        }
+        if (oppfolgingsdialogerReducer.opprettet && !oppfolgingsdialogerReducer.hentet && nextProps.oppfolgingsdialogerReducer.hentet) {
+            history.push(`${getContextRoot()}/${koblingId}/oppfolgingsplaner/${nextProps.oppfolgingsdialogerReducer.opprettetId}`);
             window.location.hash = 'arbeidsoppgaver';
             window.sessionStorage.setItem('hash', 'arbeidsoppgaver');
         }
-        if (kopierDialogReducer.sender && nextProps.kopierDialogReducer.sendt) {
+        if (kopierDialogReducer.sendt && !oppfolgingsdialogerReducer.hentet && nextProps.oppfolgingsdialogerReducer.hentet) {
             history.push(`${getContextRoot()}/${koblingId}/oppfolgingsplaner/${nextProps.kopierDialogReducer.data}`);
-            this.props.hentOppfolgingsdialoger();
         }
         this.berikSykmeldt();
     }
