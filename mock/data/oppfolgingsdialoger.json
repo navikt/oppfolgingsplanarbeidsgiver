@@ -1,1 +1,195 @@
-[]
+[
+  {
+    "id": 2765,
+    "sistEndretDato": "2018-11-08T12:58:32.741+01:00",
+    "opprettetDato": "2018-11-08T12:00:00+01:00",
+    "status": "UNDER_ARBEID",
+    "virksomhet": {
+      "virksomhetsnummer": "333444555",
+      "navn": ""
+    },
+    "godkjentPlan": null,
+    "godkjenninger": [],
+    "arbeidsoppgaveListe": [
+      {
+        "arbeidsoppgaveId": 5081,
+        "arbeidsoppgavenavn": "Vaske opp",
+        "erVurdertAvSykmeldt": true,
+        "gjennomfoering": {
+          "kanGjennomfoeres": "KAN",
+          "paaAnnetSted": null,
+          "medMerTid": null,
+          "medHjelp": null,
+          "kanBeskrivelse": null,
+          "kanIkkeBeskrivelse": null
+        },
+        "opprettetDato": "2018-11-08T12:57:34.014+01:00",
+        "sistEndretDato": "2018-11-08T12:57:34.014+01:00",
+        "sistEndretAv": {
+          "navn": " ",
+          "fnr": "01010112345",
+          "epost": null,
+          "tlf": null,
+          "sistInnlogget": null,
+          "samtykke": null,
+          "evaluering": null,
+          "stillinger": []
+        },
+        "opprettetAv": {
+          "navn": " ",
+          "fnr": "01010112345",
+          "epost": null,
+          "tlf": null,
+          "sistInnlogget": null,
+          "samtykke": null,
+          "evaluering": null,
+          "stillinger": []
+        }
+      },
+      {
+        "arbeidsoppgaveId": 5082,
+        "arbeidsoppgavenavn": "Støvsuge",
+        "erVurdertAvSykmeldt": true,
+        "gjennomfoering": {
+          "kanGjennomfoeres": "TILRETTELEGGING",
+          "paaAnnetSted": false,
+          "medMerTid": true,
+          "medHjelp": false,
+          "kanBeskrivelse": "Trenger mer tid til å støvsuge.",
+          "kanIkkeBeskrivelse": null
+        },
+        "opprettetDato": "2018-11-08T12:57:54.347+01:00",
+        "sistEndretDato": "2018-11-08T12:57:54.347+01:00",
+        "sistEndretAv": {
+          "navn": " ",
+          "fnr": "01010112345",
+          "epost": null,
+          "tlf": null,
+          "sistInnlogget": null,
+          "samtykke": null,
+          "evaluering": null,
+          "stillinger": []
+        },
+        "opprettetAv": {
+          "navn": " ",
+          "fnr": "01010112345",
+          "epost": null,
+          "tlf": null,
+          "sistInnlogget": null,
+          "samtykke": null,
+          "evaluering": null,
+          "stillinger": []
+        }
+      },
+      {
+        "arbeidsoppgaveId": 5083,
+        "arbeidsoppgavenavn": "Brette sammen klær",
+        "erVurdertAvSykmeldt": true,
+        "gjennomfoering": {
+          "kanGjennomfoeres": "KAN_IKKE",
+          "paaAnnetSted": null,
+          "medMerTid": null,
+          "medHjelp": null,
+          "kanBeskrivelse": null,
+          "kanIkkeBeskrivelse": "Har vondt i skuldrene"
+        },
+        "opprettetDato": "2018-11-08T12:58:15.531+01:00",
+        "sistEndretDato": "2018-11-08T12:58:15.531+01:00",
+        "sistEndretAv": {
+          "navn": " ",
+          "fnr": "01010112345",
+          "epost": null,
+          "tlf": null,
+          "sistInnlogget": null,
+          "samtykke": null,
+          "evaluering": null,
+          "stillinger": []
+        },
+        "opprettetAv": {
+          "navn": " ",
+          "fnr": "01010112345",
+          "epost": null,
+          "tlf": null,
+          "sistInnlogget": null,
+          "samtykke": null,
+          "evaluering": null,
+          "stillinger": []
+        }
+      }
+    ],
+    "tiltakListe": [
+      {
+        "tiltakId": 3674,
+        "tiltaknavn": "Mer tid",
+        "knyttetTilArbeidsoppgaveId": null,
+        "fom": "2018-11-07T12:00:00+01:00",
+        "tom": "2018-11-15T12:00:00+01:00",
+        "beskrivelse": "Trenger mer tid til å utføre arbeidet mitt.",
+        "beskrivelseIkkeAktuelt": null,
+        "opprettetDato": "2018-11-08T12:58:32.744+01:00",
+        "sistEndretDato": "2018-11-08T12:58:32.744+01:00",
+        "kommentarer": [],
+        "status": "FORSLAG",
+        "gjennomfoering": null,
+        "opprettetAv": {
+          "navn": " ",
+          "fnr": "01010112345",
+          "epost": null,
+          "tlf": null,
+          "sistInnlogget": null,
+          "samtykke": null,
+          "evaluering": null,
+          "stillinger": []
+        },
+        "sistEndretAv": {
+          "navn": " ",
+          "fnr": "01010112345",
+          "epost": null,
+          "tlf": null,
+          "sistInnlogget": null,
+          "samtykke": null,
+          "evaluering": null,
+          "stillinger": []
+        }
+      }
+    ],
+    "avbruttPlanListe": [],
+    "arbeidsgiver": {
+      "naermesteLeder": {
+        "navn": " ",
+        "fnr": null,
+        "epost": null,
+        "tlf": null,
+        "sistInnlogget": "2018-11-08T13:16:26.991+01:00",
+        "samtykke": null,
+        "evaluering": null,
+        "stillinger": [],
+        "virksomhetsnummer": null,
+        "erAktiv": false,
+        "aktivFom": null,
+        "aktivTom": null
+      },
+      "forrigeNaermesteLeder": null
+    },
+    "arbeidstaker": {
+      "navn": " ",
+      "fnr": "01010112345",
+      "epost": null,
+      "tlf": null,
+      "sistInnlogget": "2018-11-08T12:57:24.745+01:00",
+      "samtykke": null,
+      "evaluering": null,
+      "stillinger": []
+    },
+    "sistEndretAv": {
+      "navn": " ",
+      "fnr": "01010112345",
+      "epost": null,
+      "tlf": null,
+      "sistInnlogget": null,
+      "samtykke": null,
+      "evaluering": null,
+      "stillinger": []
+    }
+  }
+]
