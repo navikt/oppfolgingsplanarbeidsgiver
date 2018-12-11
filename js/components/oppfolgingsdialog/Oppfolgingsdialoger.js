@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { getLedetekst, keyValue } from 'digisyfo-npm';
+import { getLedetekst } from 'digisyfo-npm';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import {
     proptypes as oppfolgingProptypes,
@@ -68,7 +68,7 @@ class Oppfolgingsdialoger extends Component {
         hentKontaktinfo(sykmeldt.fnr);
     }
     render() {
-        const { ledetekster, kontaktinfo, sykmeldt, slettetSykmeldt } = this.props;
+        const { kontaktinfo, sykmeldt, slettetSykmeldt } = this.props;
         if (kontaktinfo.henter.includes(sykmeldt.fnr)) {
             return <AppSpinner />;
         }
@@ -77,7 +77,6 @@ class Oppfolgingsdialoger extends Component {
         }
         if (erBrukerReservertMotKontakt(kontaktinfo, sykmeldt.fnr) && !this.state.settReservertVarsel) {
             return (<SykmeldtIngenKontaktinformasjon
-                ledetekster={ledetekster}
                 meldingSett={() => {
                     this.setState({
                         settReservertVarsel: true,
@@ -90,7 +89,6 @@ class Oppfolgingsdialoger extends Component {
 }
 
 Oppfolgingsdialoger.propTypes = {
-    ledetekster: keyValue,
     kontaktinfo: oppfolgingProptypes.kontaktinfoReducerPt,
     naermesteleder: oppfolgingProptypes.naermestelederReducerPt,
     sykmeldt: sykmeldtPt,

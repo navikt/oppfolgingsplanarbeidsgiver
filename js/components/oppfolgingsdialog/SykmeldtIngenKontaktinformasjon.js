@@ -1,18 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { getLedetekst } from 'digisyfo-npm';
-import { UnderUtviklingVarsel } from 'oppfolgingsdialog-npm';
 import Knapp from 'nav-frontend-knapper';
-import { getContextRoot } from '../../routers/paths';
 import Sidetopp from '../Sidetopp';
 import Infomelding from '../Infomelding';
 
-const SykmeldtIngenKontaktinformasjon = ({ meldingSett, ledetekster }) => {
+const SykmeldtIngenKontaktinformasjon = ({ meldingSett }) => {
     return (<div>
-        <UnderUtviklingVarsel
-            ledetekster={ledetekster}
-            rootUrl={getContextRoot()}
-        />
         <Sidetopp tittel={getLedetekst('oppfolgingsdialoger.sidetittel')} />
         <div className="panel">
             <Infomelding
@@ -29,7 +23,6 @@ const SykmeldtIngenKontaktinformasjon = ({ meldingSett, ledetekster }) => {
 };
 
 SykmeldtIngenKontaktinformasjon.propTypes = {
-    ledetekster: PropTypes.string,
     meldingSett: PropTypes.func,
 };
 
