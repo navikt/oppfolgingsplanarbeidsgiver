@@ -127,12 +127,12 @@ export class OppfolgingsdialogerSide extends Component {
             this.props.hentOppfolgingsdialoger();
         }
         if (oppfolgingsdialogerReducer.opprettet && !alleOppfolgingsdialogerReducer.hentet && nextProps.alleOppfolgingsdialogerReducer.hentet) {
-            history.push(`${getContextRoot()}/${koblingId}/oppfolgingsplaner/${nextProps.oppfolgingsdialogerReducer.opprettetId}`);
+            history.push(`${getContextRoot()}/${koblingId}/oppfolgingsplaner/${oppfolgingsdialogerReducer.opprettetId}`);
             window.location.hash = 'arbeidsoppgaver';
             window.sessionStorage.setItem('hash', 'arbeidsoppgaver');
         }
         if (kopierDialogReducer.sendt && !oppfolgingsdialogerReducer.hentet && nextProps.oppfolgingsdialogerReducer.hentet) {
-            history.push(`${getContextRoot()}/${koblingId}/oppfolgingsplaner/${nextProps.kopierDialogReducer.data}`);
+            history.push(`${getContextRoot()}/${koblingId}/oppfolgingsplaner/${kopierDialogReducer.data}`);
         }
         this.berikSykmeldt();
     }
