@@ -104,6 +104,7 @@ export class OppfolgingsdialogerSide extends Component {
     componentWillReceiveProps(nextProps) {
         const {
             koblingId,
+            alleOppfolgingsdialogerReducer,
             kopierDialogReducer,
             oppfolgingsdialogerReducer,
             sykmeldte,
@@ -125,7 +126,7 @@ export class OppfolgingsdialogerSide extends Component {
         if (kopierDialogReducer.sender && nextProps.kopierDialogReducer.sendt) {
             this.props.hentOppfolgingsdialoger();
         }
-        if (oppfolgingsdialogerReducer.opprettet && !oppfolgingsdialogerReducer.hentet && nextProps.oppfolgingsdialogerReducer.hentet) {
+        if (oppfolgingsdialogerReducer.opprettet && !alleOppfolgingsdialogerReducer.hentet && nextProps.alleOppfolgingsdialogerReducer.hentet) {
             history.push(`${getContextRoot()}/${koblingId}/oppfolgingsplaner/${nextProps.oppfolgingsdialogerReducer.opprettetId}`);
             window.location.hash = 'arbeidsoppgaver';
             window.sessionStorage.setItem('hash', 'arbeidsoppgaver');

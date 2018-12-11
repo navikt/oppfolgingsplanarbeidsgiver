@@ -203,6 +203,10 @@ function mockForLokaltMiljo(server) {
     server.post('/restoppfoelgingsdialog/api/oppfoelgingsdialoger/actions/:id/forespoerRevidering', (req, res) => {
         res.send();
     });
+
+    server.post('/restoppfoelgingsdialog/api/arbeidsgiver/oppfoelgingsdialoger', (req, res) => {
+        mockOpprettetIdResultat(res);
+    });
 }
 
 module.exports = {
