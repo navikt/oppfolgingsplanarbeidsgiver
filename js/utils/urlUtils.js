@@ -10,6 +10,6 @@ const erHerokuApp = () => {
 
 export const getSykefravaerarbeidsgiverUrl = (sti) => {
     return erHerokuApp()
-        ? 'https://sykefravaerarbeidsgiver.herokuapp.com'
+        ? `https://sykefravaerarbeidsgiver.herokuapp.com${sti}`
         : sti;
 };
