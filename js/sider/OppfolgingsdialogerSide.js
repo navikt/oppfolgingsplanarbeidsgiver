@@ -40,7 +40,6 @@ import {
     henterEllerHarHentetToggles,
     sykmeldtHarBlittSlettet,
 } from '../utils/reducerUtils';
-import { sykmeldtHarGyldigSykmelding } from '../utils/oppfolgingsdialogUtils';
 import Side from '../sider/Side';
 import AppSpinner from '../components/AppSpinner';
 import Feilmelding from '../components/Feilmelding';
@@ -161,7 +160,6 @@ export class OppfolgingsdialogerSide extends Component {
     render() {
         const {
             brodsmuler,
-            harSykmeldtGyldigSykmelding,
             henter,
             hentingFeilet,
             tilgang,
@@ -189,7 +187,7 @@ export class OppfolgingsdialogerSide extends Component {
                                 });
                             }
                             return (<Feilmelding />);
-                        } else if (!tilgang.data.harTilgang || !sykmeldt || !harSykmeldtGyldigSykmelding) {
+                        } else if (!tilgang.data.harTilgang || !sykmeldt) {
                             return (<OppfolgingsdialogInfoboks
                                 svgUrl={`${getContextRoot()}/img/svg/oppfolgingsdialogFeilmeldingAG.svg`}
                                 svgAlt="OppfølgingsdialogFeilmelding"
@@ -229,7 +227,6 @@ OppfolgingsdialogerSide.propTypes = {
     sykmeldt: sykmeldtPt,
     toggles: togglesPt,
     bekreftetNyNaermesteLeder: PropTypes.bool,
-    harSykmeldtGyldigSykmelding: PropTypes.bool,
     slettetSykmeldt: PropTypes.bool,
     brodsmuler: PropTypes.arrayOf(brodsmulePt),
     bekreftNyNaermesteLeder: PropTypes.func,
@@ -268,7 +265,6 @@ export function mapStateToProps(state, ownProps) {
             }) : [];
     }
     const sykmeldinger = state.sykmeldinger[koblingId] || {};
-    const harSykmeldtGyldigSykmelding = sykmeldinger.data && sykmeldtHarGyldigSykmelding(sykmeldinger.data);
     const harForsoektHentetOppfolgingsdialoger = forsoektHentetOppfolgingsdialoger(alleOppfolgingsdialogerReducer);
     const harForsoektHentetTilgang = forsoektHentetTilgang(tilgang);
     const harForsoektHentetAlt = harForsoektHentetOppfolgingsdialoger
@@ -326,7 +322,6 @@ export function mapStateToProps(state, ownProps) {
         oppfolgingsdialoger,
         sykmeldt,
         kontaktinfo: state.kontaktinfo,
-        harSykmeldtGyldigSykmelding,
         slettetSykmeldt: state.sykmeldte.slettet,
         hentingFeiletMap,
         loggError,

@@ -49,7 +49,6 @@ import {
     henterEllerHarHentetSykmeldinger,
     henterEllerHarHentetToggles,
 } from '../utils/reducerUtils';
-import { sykmeldtHarGyldigSykmelding } from '../utils/oppfolgingsdialogUtils';
 import Side from '../sider/Side';
 import AppSpinner from '../components/AppSpinner';
 import Feilmelding from '../components/Feilmelding';
@@ -140,7 +139,6 @@ export class OppfolgingsdialogSide extends Component {
 
     render() {
         const {
-            harSykmeldtGyldigSykmelding,
             navigasjontoggles,
             brodsmuler,
             henter,
@@ -162,7 +160,7 @@ export class OppfolgingsdialogSide extends Component {
                             return <AppSpinner />;
                         } else if (hentingFeilet || sendingFeilet) {
                             return <Feilmelding />;
-                        } else if (!tilgang.data.harTilgang || !sykmeldt || !harSykmeldtGyldigSykmelding) {
+                        } else if (!tilgang.data.harTilgang || !sykmeldt) {
                             return (<OppfolgingsdialogInfoboks
                                 svgUrl={`${getContextRoot()}/img/svg/oppfolgingsdialogFeilmeldingAG.svg`}
                                 svgAlt="OppfølgingsdialogFeilmelding"
@@ -206,7 +204,6 @@ OppfolgingsdialogSide.propTypes = {
     virksomhet: oppfolgingProptypes.virksomhetReducerPt,
     sykeforlopsPerioder: sykeforlopsPerioderReducerPt,
     koblingId: PropTypes.string,
-    harSykmeldtGyldigSykmelding: PropTypes.bool,
     ledetekster: keyValue,
     oppfolgingsdialog: oppfolgingProptypes.oppfolgingsdialogPt,
     oppfolgingsdialoger: PropTypes.arrayOf(oppfolgingProptypes.oppfolgingsdialogPt),
@@ -267,7 +264,6 @@ export function mapStateToProps(state, ownProps) {
             populerDialogFraState(oppfolgingsdialog, state) : {};
     }
     const sykmeldinger = state.sykmeldinger[koblingId] || {};
-    const harSykmeldtGyldigSykmelding = sykmeldinger.data && sykmeldtHarGyldigSykmelding(sykmeldinger.data);
     const harForsoektHentetOppfolgingsdialoger = forsoektHentetOppfolgingsdialoger(alleOppfolgingsdialogerReducer);
     const harForsoektHentetTilgang = forsoektHentetTilgang(tilgang);
     const harForsoektHentetAlt = harForsoektHentetOppfolgingsdialoger
@@ -338,7 +334,6 @@ export function mapStateToProps(state, ownProps) {
         oppfolgingsdialog,
         oppfolgingsdialoger,
         sykmeldt,
-        harSykmeldtGyldigSykmelding,
         skalHenteBerikelse,
         brodsmuler: [{
             tittel: getLedetekst('sykefravaerarbeidsgiver.dinesykmeldte.sidetittel'),

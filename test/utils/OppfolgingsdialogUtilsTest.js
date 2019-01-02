@@ -1,12 +1,8 @@
 import chai from 'chai';
-import sinon from 'sinon';
 import {
     MND_SIDEN_SYKMELDING_GRENSE_FOR_OPPFOELGING,
 } from 'oppfolgingsdialog-npm';
 import {
-    fraInputdatoTilJSDato,
-    oppgaverOppfoelgingsdialoger,
-    parsedato,
     harOppfolgingsdialog,
 } from '../../js/utils/oppfolgingsdialogUtils';
 import getSykmelding from '../mock/mockSykmeldinger';
@@ -91,107 +87,6 @@ describe('OppfolgingdialogUtils', () => {
                 fnr: '123',
             };
             expect(harOppfolgingsdialog(state, sykmeldt)).to.equal(false);
-        });
-    });
-
-    describe('fraInputdatoTilJSDato', () => {
-        it('Skal kontrollere fraInputdatoTilJSDato funksjonen returnere korrekt datum', () => {
-            expect(fraInputdatoTilJSDato('01.12.2018').toString()).to.equal(new Date('2018-12-01').toString());
-        });
-        it('Skal kontrollere fraInputdatoTilJSDato funksjonen returnere null', () => {
-            expect(fraInputdatoTilJSDato()).to.be.equal(null);
-        });
-    });
-    describe('parsedato', () => {
-        it('Skal kontrollere parsedato funksjonen returnere korrekt datum', () => {
-            expect(parsedato('01.12.2018').toString()).to.contains('2018-12-01');
-        });
-    });
-
-    describe('oppgaverOppfoelgingsdialoger', () => {
-        let clock;
-        let sykmeldingAktiv;
-        let oppfolgingsdialogUnderArbeid;
-        const dagensDato = new Date('2017-01-01');
-
-        beforeEach(() => {
-            clock = sinon.useFakeTimers(dagensDato.getTime());
-            sykmeldingAktiv = hentSykmeldingAktiv(dagensDato);
-            oppfolgingsdialogUnderArbeid = {
-                status: 'UNDER_ARBEID',
-                virksomhet: {
-                    virksomhetsnummer: sykmeldingAktiv.orgnummer,
-                },
-                godkjenninger: [],
-                sistEndretAv: {
-                    fnr: 'fnr',
-                },
-                arbeidstaker: {
-                    fnr: 'fnr',
-                },
-            };
-        });
-
-        afterEach(() => {
-            clock.restore();
-        });
-
-        describe('med aktiv sykmelding', () => {
-            it('Tom state.oppfoelgingsdialoger.data gir tomt array', () => {
-                expect(oppgaverOppfoelgingsdialoger([], [sykmeldingAktiv])).to.deep.equal([]);
-            });
-
-            it('Finner ny plan', () => {
-                const dialog = {
-                    ...oppfolgingsdialogUnderArbeid,
-                    arbeidsgiver: {
-                        naermesteLeder: {
-                            sistInnlogget: null,
-                        },
-                    },
-                };
-                expect(oppgaverOppfoelgingsdialoger({ data: [dialog] }, [sykmeldingAktiv])).to.deep.equal([dialog]);
-            });
-
-            it('Finner godkjent plan', () => {
-                const dialog = {
-                    ...oppfolgingsdialogUnderArbeid,
-                    godkjenninger: [{
-                        godkjent: true,
-                        godkjentAv: {
-                            fnr: 'fnr',
-                        },
-                    }],
-                    arbeidsgiver: {
-                        naermesteLeder: {
-                            sistInnlogget: new Date(),
-                        },
-                    },
-                };
-                expect(oppgaverOppfoelgingsdialoger({ data: [dialog] }, [sykmeldingAktiv])).to.deep.equal([dialog]);
-            });
-
-            it('Ny og godkjent plan telles bare som en', () => {
-                const dialog = {
-                    ...oppfolgingsdialogUnderArbeid,
-                    godkjenninger: [{
-                        godkjent: true,
-                        godkjentAv: {
-                            fnr: 'fnr',
-                        },
-                    }],
-                    arbeidsgiver: {
-                        naermesteLeder: {
-                            sistInnlogget: null,
-                        },
-                    },
-                };
-                expect(oppgaverOppfoelgingsdialoger({ data: [dialog] }, [sykmeldingAktiv])).to.deep.equal([dialog]);
-            });
-        });
-
-        describe('med sykmelding utgaat over grense', () => {
-
         });
     });
 });

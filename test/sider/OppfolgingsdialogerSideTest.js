@@ -4,7 +4,6 @@ import sinon from 'sinon';
 import { shallow } from 'enzyme';
 import chaiEnzyme from 'chai-enzyme';
 import { OppfolgingsdialogInfoboks } from 'oppfolgingsdialog-npm';
-import { hentSykmeldingGyldigForOppfoelging, hentSykmeldingIkkeGyldigForOppfoelging } from '../mock/mockSykmeldinger';
 import { OppfolgingsdialogerSide, mapStateToProps } from '../../js/sider/OppfolgingsdialogerSide';
 import Oppfolgingsdialoger from '../../js/components/oppfolgingsdialog/Oppfolgingsdialoger';
 import AppSpinner from '../../js/components/AppSpinner';
@@ -179,29 +178,6 @@ describe('OppfolgingsdialogerSideTest', () => {
                     },
                 },
             );
-            expect(res.harSykmeldtGyldigSykmelding).to.deep.equal(false);
-        });
-
-        it('Skal returnere harSykmeldtGyldigSykmelding lik false, om det ikke er sykmeldinger gyldig for oppfoelging', () => {
-            const res = mapStateToProps(Object.assign({}, state, {
-                sykmeldinger: {
-                    [sykmeldt1.koblingId]: {
-                        data: [hentSykmeldingIkkeGyldigForOppfoelging(dagensDato)],
-                    },
-                },
-            }), ownProps);
-            expect(res.harSykmeldtGyldigSykmelding).to.deep.equal(false);
-        });
-
-        it('Skal returnere harSykmeldtGyldigSykmelding lik true, om det er sykmeldinger gyldig for oppfoelging', () => {
-            const res = mapStateToProps(Object.assign({}, state, {
-                sykmeldinger: {
-                    [sykmeldt1.koblingId]: {
-                        data: [hentSykmeldingGyldigForOppfoelging(dagensDato)],
-                    },
-                },
-            }), ownProps);
-            expect(res.harSykmeldtGyldigSykmelding).to.deep.equal(true);
         });
     });
 
@@ -359,27 +335,6 @@ describe('OppfolgingsdialogerSideTest', () => {
             expect(component.find(OppfolgingsdialogInfoboks)).to.have.length(1);
         });
 
-        it('Skal vise OppfolgingsdialogInfoboks dersom leder ikke har sykmeldt, ' +
-            'og det ikke eksisterer en sykmelding gyldig for oppfoelging', () => {
-            const component = shallow(<OppfolgingsdialogerSide
-                alleOppfolgingsdialogerReducer={alleOppfolgingsdialogerReducer}
-                oppfolgingsdialogerReducer={oppfolgingsdialogerReducer}
-                sykmeldinger={sykmeldinger}
-                oppfolgingsdialoger={[]}
-                tilgang={{ data: harTilgang }}
-                toggles={toggles}
-                hentOppfolgingsdialoger={hentOppfolgingsdialoger}
-                hentSykmeldinger={hentSykmeldinger}
-                hentToggles={hentToggles}
-                sjekkTilgang={sjekkTilgang}
-                params={params}
-                hentSykmeldte={hentSykmeldte}
-                sykmeldt={null}
-                harSykmeldtGyldigSykmelding={false}
-            />);
-            expect(component.find(OppfolgingsdialogInfoboks)).to.have.length(1);
-        });
-
         it('Skal vise Oppfolgingsdialoger dersom henting er OK, ' +
             'og det eksisterer minst en sykmelding gyldig for oppfoelging', () => {
             const component = shallow(<OppfolgingsdialogerSide
@@ -396,7 +351,6 @@ describe('OppfolgingsdialogerSideTest', () => {
                 params={params}
                 hentSykmeldte={hentSykmeldte}
                 sykmeldt={sykmeldt}
-                harSykmeldtGyldigSykmelding
             />);
             expect(component.find(Oppfolgingsdialoger)).to.have.length(1);
         });
