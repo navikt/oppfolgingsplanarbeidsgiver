@@ -1,29 +1,29 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux';
-import { ledetekster, toggles, timeout, sykeforlopsPerioder } from 'digisyfo-npm';
-import {
-    oppfolgingsdialogerAg as oppfolgingsdialoger,
-    arbeidsoppgaver,
-    samtykke,
-    tiltak,
-    nullstill,
-    kommentar,
-    dokument,
-    forespoerselRevidering,
-    navigasjontoggles,
-    avbrytdialogReducer,
-    arbeidsforhold,
-    kopierDialog as kopierDialogReducer,
-    tilgangAg as tilgang,
-    nyNaermesteLeder,
-    delmednav,
-    fastlegeDeling,
-    virksomhet,
-    person,
-    kontaktinfo,
-    naermesteleder,
-} from 'oppfolgingsdialog-npm';
 import { reducer as formReducer } from 'redux-form';
 import createSagaMiddleware from 'redux-saga';
+
+import { ledetekster, toggles, timeout, sykeforlopsPerioder } from 'digisyfo-npm';
+import arbeidsoppgaver from './reducers/arbeidsoppgaver';
+import arbeidsforhold from './reducers/arbeidsforhold';
+import avbrytdialogReducer from './reducers/avbrytdialog';
+import delmednav from './reducers/delmednav';
+import dokument from './reducers/dokument';
+import fastlegeDeling from './reducers/fastlegeDeling';
+import forespoerselRevidering from './reducers/forespoerselRevidering';
+import kommentar from './reducers/kommentar';
+import kontaktinfo from './reducers/kontaktinfo';
+import kopierDialogReducer from './reducers/kopierOppfolgingsdialog';
+import oppfolgingsdialoger from './reducers/oppfolgingsdialog';
+import navigasjontoggles from './reducers/navigasjontoggles';
+import naermesteleder from './reducers/naermesteleder';
+import nullstill from './reducers/nullstillGodkjenning';
+import person from './reducers/person';
+import nyNaermesteLeder from './reducers/nyNaermesteLeder';
+import samtykke from './reducers/samtykke';
+import tilgang from './reducers/tilgang';
+import tiltak from './reducers/tiltak';
+import virksomhet from './reducers/virksomhet';
+
 import sykmeldte from './reducers/sykmeldte';
 import sykmeldinger from './reducers/sykmeldinger';
 import rootSaga from './sagas';

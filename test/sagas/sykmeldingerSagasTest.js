@@ -5,6 +5,12 @@ import { hentSykmeldinger } from '../../js/sagas/sykmeldingerSagas';
 import * as actions from '../../js/actions/sykmeldinger_actions';
 
 describe('sykmeldingerSagas', () => {
+    beforeEach(() => {
+        window.APP_SETTINGS = {
+            REST_ROOT: '/syforest',
+        };
+    });
+
     describe('hentSykmeldinger med sykmeldt på plass', () => {
         const koblingId = '123';
         let action = actions.hentSykmeldinger(koblingId);
@@ -23,7 +29,7 @@ describe('sykmeldingerSagas', () => {
         });
 
         it('Skal dernest hente sykmeldinger', () => {
-            const nextCall = call(get, '/syforest/arbeidsgiver/sykmeldinger?koblingId=123');
+            const nextCall = call(get, `${window.APP_SETTINGS.REST_ROOT}/arbeidsgiver/sykmeldinger?koblingId=123`);
             expect(generator.next().value).to.deep.equal(nextCall);
         });
 
