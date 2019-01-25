@@ -1,26 +1,26 @@
 import { all } from 'redux-saga/effects';
 import { ledeteksterSagas, togglesSagas, sykeforlopsPerioderSagas } from 'digisyfo-npm';
-import {
-    oppfolgingsdialogerAgSagas as oppfolgingsdialogerSagas,
-    settDialogSagas,
-    tilgangAgSagas as tilgangSagas,
-    arbeidsoppgaveSagas,
-    kommentarSagas,
-    kopierOppfolgingsdialogSagas,
-    samtykkeSagas,
-    tiltakSagas,
-    nullstillGodkjenningSagas,
-    dokumentSagas,
-    avbrytdialogSagas,
-    arbeidsforholdSagas,
-    delMedFastlegeSagas,
-    delMedNavSagas,
-    forespoerRevideringSagas,
-    virksomhetSagas,
-    personSagas,
-    kontaktinfoSagas,
-    naermesteLederSagas,
-} from 'oppfolgingsdialog-npm';
+
+import arbeidsforholdSagas from './oppfolgingsplan/arbeidsforholdSagas';
+import arbeidsoppgaveSagas from './oppfolgingsplan/arbeidsoppgaveSagas';
+import avbrytdialogSagas from './oppfolgingsplan/avbrytdialogSagas';
+import delMedFastlegeSagas from './oppfolgingsplan/delMedFastlegeSagas';
+import delMedNavSagas from './oppfolgingsplan/delMedNavSagas';
+import dokumentSagas from './oppfolgingsplan/dokumentSagas';
+import forespoerRevideringSagas from './oppfolgingsplan/forespoerRevideringSagas';
+import kommentarSagas from './oppfolgingsplan/kommentarSagas';
+import kontaktinfoSagas from './oppfolgingsplan/kontaktinfoSagas';
+import kopierOppfolgingsdialogSagas from './oppfolgingsplan/kopierOppfolgingsdialogSagas';
+import naermesteLederSagas from './oppfolgingsplan/naermestelederSagas';
+import nullstillGodkjenningSagas from './oppfolgingsplan/nullstillGodkjenningSagas';
+import oppfolgingsdialogerSagas from './oppfolgingsplan/oppfolgingsdialogerSagas';
+import personSagas from './oppfolgingsplan/personSagas';
+import samtykkeSagas from './oppfolgingsplan/samtykkeSagas';
+import settDialogSagas from './oppfolgingsplan/settDialogSagas';
+import tilgangSagas from './oppfolgingsplan/tilgangSagas';
+import tiltakSagas from './oppfolgingsplan/tiltakSagas';
+import virksomhetSagas from './oppfolgingsplan/virksomhetSagas';
+
 import sykmeldteSagas from './sykmeldteSagas';
 import sykmeldingerSagas from './sykmeldingerSagas';
 

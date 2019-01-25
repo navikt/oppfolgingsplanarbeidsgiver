@@ -8,14 +8,14 @@ import {
 import OppfolgingsdialogerVisning from '../../../js/components/oppfolgingsdialog/OppfolgingsdialogerVisning';
 import OppfolgingsdialogerIngenplanAG from '../../../js/components/oppfolgingsdialog/opprett/OppfolgingsdialogerIngenplanAG';
 import OppfolgingsdialogFilm from '../../../js/filmer/OppfolgingsdialogFilm';
-import getOppfolgingsdialog, { getOppfolgingsdialoger } from '../../mock/mockOppfolgingsdialog';
+import getOppfolgingsdialog from '../../mock/mockOppfolgingsdialog';
 
 chai.use(chaiEnzyme());
 const expect = chai.expect;
 
 describe('OppfolgingsdialogerVisning', () => {
     let component;
-    const oppfolgingsdialoger = getOppfolgingsdialoger;
+    const oppfolgingsdialoger = [getOppfolgingsdialog()];
     beforeEach(() => {
         component = shallow(<OppfolgingsdialogerVisning
             oppfolgingsdialoger={[]}

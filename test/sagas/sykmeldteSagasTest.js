@@ -6,6 +6,12 @@ import * as actiontyper from '../../js/actions/actiontyper';
 import { henterSykmeldteBerikelser, hentSykmeldteBerikelser, sykmeldteBerikelserHentet } from '../../js/actions/sykmeldte_actions';
 
 describe('sykmeldteSagas', () => {
+    beforeEach(() => {
+        process.env = {
+            REACT_APP_SYFOREST_ROOT: '/syforest',
+        };
+    });
+
     describe('hentSykmeldte', () => {
         const generator = hentArbeidsgiversSykmeldte();
 
@@ -17,7 +23,7 @@ describe('sykmeldteSagas', () => {
         });
 
         it('Skal dernest hente sykmeldte', () => {
-            const nextCall = call(get, '/syforest/arbeidsgiver/sykmeldte');
+            const nextCall = call(get, `${process.env.REACT_APP_SYFOREST_ROOT}/arbeidsgiver/sykmeldte`);
             expect(generator.next().value).to.deep.equal(nextCall);
         });
 
@@ -50,7 +56,7 @@ describe('sykmeldteSagas', () => {
         });
 
         it('Skal dernest berike sykmeldte', () => {
-            const nextCall = call(get, '/syforest/arbeidsgiver/sykmeldte/berik?koblingsIder=1,2');
+            const nextCall = call(get, `${process.env.REACT_APP_SYFOREST_ROOT}/arbeidsgiver/sykmeldte/berik?koblingsIder=1,2`);
             expect(generator.next().value).to.deep.equal(nextCall);
         });
 
