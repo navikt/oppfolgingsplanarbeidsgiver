@@ -243,7 +243,7 @@ function mockForLokaltMiljo(server) {
         mockOpprettetIdResultat(res);
     });
 
-    server.post('/restoppfoelgingsdialog/api/oppfoelgingsdialoger/actions/undefined/sett', (req, res) => {
+    server.post('/restoppfoelgingsdialog/api/oppfoelgingsdialoger/actions/:id/sett', (req, res) => {
         res.send();
     });
 }
