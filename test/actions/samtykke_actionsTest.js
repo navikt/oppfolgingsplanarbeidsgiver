@@ -2,13 +2,10 @@ import { expect } from 'chai';
 import * as actions from '../../js/actions/oppfolgingsplan/samtykke_actions';
 
 describe('samtykke_actions', () => {
-    const fnr = '12345678';
+    let fnr;
 
     beforeEach(() => {
-        window = window || {};
-        window.APP_SETTINGS = {
-            OPPFOELGINGSDIALOGREST_ROOT: 'http://tjenester.nav.no/oppfoelgingsdialogrest/api',
-        };
+        fnr = '12345678';
     });
 
     it('Skal ha en giSamtykke()-funksjon som returnerer riktig action', () => {

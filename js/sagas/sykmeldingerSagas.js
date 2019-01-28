@@ -14,7 +14,7 @@ export function* hentSykmeldinger(action) {
 
     yield put(actions.henterSykmeldinger(koblingId));
     try {
-        const data = yield call(get, `${window.APP_SETTINGS.REST_ROOT}/arbeidsgiver/sykmeldinger?koblingId=${koblingId}`);
+        const data = yield call(get, `${process.env.REACT_APP_SYFOREST_ROOT}/arbeidsgiver/sykmeldinger?koblingId=${koblingId}`);
         yield put(actions.sykmeldingerHentet(data, koblingId));
     } catch (e) {
         log(e);

@@ -2,13 +2,6 @@ import { expect } from 'chai';
 import * as actions from '../../js/actions/oppfolgingsplan/kopierOppfolgingsdialog_actions';
 
 describe('avbrytdialog_actions', () => {
-    beforeEach(() => {
-        window = window || {};
-        window.APP_SETTINGS = {
-            OPPFOELGINGSDIALOGREST_ROOT: '/restoppfoelgingsdialog/api',
-        };
-    });
-
     it('Skal ha en kopierOppfolgingsdialog()-funksjon som returnerer riktig action', () => {
         expect(actions.kopierOppfolgingsdialog(1)).to.deep.equal({
             type: actions.KOPIER_OPPFOLGINGSDIALOG_FORESPURT,

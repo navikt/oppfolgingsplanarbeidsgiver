@@ -41,10 +41,6 @@ global.document = window.document;
 global.navigator = {
     userAgent: 'node.js',
 };
-global.window.APP_SETTINGS = {
-    APP_ROOT: '/oppfolgingsplanarbeidsgiver',
-    REST_ROOT: '/syforest',
-};
 global.window.sessionStorage = {
     removeItem: () => {},
 };

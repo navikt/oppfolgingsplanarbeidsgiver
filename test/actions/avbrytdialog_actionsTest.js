@@ -2,13 +2,10 @@ import { expect } from 'chai';
 import * as actions from '../../js/actions/oppfolgingsplan/avbrytdialog_actions';
 
 describe('avbrytdialog_actions', () => {
-    const fnr = '12345678';
+    let fnr;
 
     beforeEach(() => {
-        window = window || {};
-        window.APP_SETTINGS = {
-            OPPFOELGINGSDIALOGREST_ROOT: '/restoppfoelgingsdialog/api',
-        };
+        fnr = '12345678';
     });
 
     it('Skal ha en avbrytDialog()-funksjon som returnerer riktig action', () => {

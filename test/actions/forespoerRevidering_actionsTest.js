@@ -2,13 +2,10 @@ import { expect } from 'chai';
 import * as actions from '../../js/actions/oppfolgingsplan/forespoerRevidering_actions';
 
 describe('forespoerRevidering_actions', () => {
-    const id = 1;
+    let id;
 
     beforeEach(() => {
-        window = window || {};
-        window.APP_SETTINGS = {
-            OPPFOELGINGSDIALOGREST_ROOT: '/restoppfoelgingsdialog/api',
-        };
+        id = 1;
     });
 
     it('Skal ha en forespoerRevidering()-funksjon som returnerer riktig action', () => {
