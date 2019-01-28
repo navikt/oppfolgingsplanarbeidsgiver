@@ -12,14 +12,14 @@ import Oppfolgingsdialoger, {
 } from '../../../js/components/oppfolgingsdialog/Oppfolgingsdialoger';
 import OppfolgingsdialogerInnhold from '../../../js/components/oppfolgingsdialog/OppfolgingsdialogerInnhold';
 import SykmeldtIngenKontaktinformasjon from '../../../js/components/oppfolgingsdialog/SykmeldtIngenKontaktinformasjon';
-import { getOppfolgingsdialoger } from '../../mock/mockOppfolgingsdialog';
+import getOppfolgingsdialog from '../../mock/mockOppfolgingsdialog';
 
 chai.use(chaiEnzyme());
 const expect = chai.expect;
 
 describe('Oppfolgingsdialoger', () => {
     let component;
-    const oppfolgingsdialoger = getOppfolgingsdialoger;
+    const oppfolgingsdialoger = [getOppfolgingsdialog()];
     let hentNaermesteLeder;
     let hentVirksomhet;
     let hentPerson;

@@ -10,17 +10,7 @@ import {
 import {
     loggerOppfolgingsdialog,
     OppfolgingsdialogInfoboks,
-    kopierOppfolgingsdialog,
-    opprettOppfolgingsdialogAg,
-    sjekkTilgangAg as sjekkTilgang,
-    hentOppfolgingsdialogerAg as hentOppfolgingsdialoger,
     proptypes as oppfolgingProptypes,
-    giSamtykke,
-    hentNaermesteLeder,
-    hentVirksomhet,
-    hentPerson,
-    hentKontaktinfo,
-    bekreftNyNaermesteLeder,
     henterEllerHarHentetTilgang,
     henterEllerHarHentetOppfolgingsdialoger,
     oppfolgingsdialogHarBlittOpprettet,
@@ -45,6 +35,19 @@ import Side from '../sider/Side';
 import AppSpinner from '../components/AppSpinner';
 import Feilmelding from '../components/Feilmelding';
 import history from '../history';
+
+import {
+    hentOppfolgingsdialoger,
+    opprettOppfolgingsdialog,
+} from '../actions/oppfolgingsplan/oppfolgingsdialog_actions';
+import { kopierOppfolgingsdialog } from '../actions/oppfolgingsplan/kopierOppfolgingsdialog_actions';
+import { giSamtykke } from '../actions/oppfolgingsplan/samtykke_actions';
+import { hentKontaktinfo } from '../actions/oppfolgingsplan/kontaktinfo_actions';
+import { hentNaermesteLeder } from '../actions/oppfolgingsplan/naermesteLeder_actions';
+import { bekreftNyNaermesteLeder } from '../actions/oppfolgingsplan/nyNaermesteleder_actions';
+import { hentPerson } from '../actions/oppfolgingsplan/person_actions';
+import { hentVirksomhet } from '../actions/oppfolgingsplan/virksomhet_actions';
+import { sjekkTilgang } from '../actions/oppfolgingsplan/sjekkTilgang_actions';
 import { slettSykmeldt } from '../actions/sykmeldt_actions';
 import { hentSykmeldinger } from '../actions/sykmeldinger_actions';
 import Oppfolgingsdialoger from '../components/oppfolgingsdialog/Oppfolgingsdialoger';
@@ -348,7 +351,7 @@ export function mapStateToProps(state, ownProps) {
 const OppfolgingsdialogerContainer = connect(mapStateToProps, {
     hentOppfolgingsdialoger,
     kopierOppfolgingsdialog,
-    opprettOppfolgingsdialogAg,
+    opprettOppfolgingsdialogAg: opprettOppfolgingsdialog,
     sjekkTilgang,
     giSamtykke,
     bekreftNyNaermesteLeder,

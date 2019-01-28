@@ -3,33 +3,9 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getLedetekst, keyValue, hentToggles, togglesPt, sykeforlopsPerioderReducerPt, hentSykeforlopsPerioder } from 'digisyfo-npm';
 import {
-    settAktivtSteg,
-    hentPdfurler,
     OppfolgingsdialogInfoboks,
-    sjekkTilgangAg as sjekkTilgang,
-    hentOppfolgingsdialogerAg as hentOppfolgingsdialoger,
-    godkjennDialogAg,
-    nullstillGodkjenning,
-    slettArbeidsoppgave,
-    lagreArbeidsoppgave,
-    slettTiltak,
-    lagreTiltak,
-    lagreKommentar,
-    slettKommentar,
-    avvisDialogAg,
-    giSamtykke,
-    settDialog,
-    avbrytDialog,
     dialogAvbruttOgNyOpprettet,
     finnNyOppfolgingsplanMedVirkshomhetEtterAvbrutt,
-    hentArbeidsforhold,
-    hentVirksomhet,
-    hentPerson,
-    hentKontaktinfo,
-    hentNaermesteLeder,
-    delMedFastlege,
-    delMedNav as delMedNavFunc,
-    forespoerRevidering,
     proptypes as oppfolgingProptypes,
     henterEllerHarHentetOppfolgingsdialoger,
     henterEllerHarHentetTilgang,
@@ -53,7 +29,30 @@ import { sykmeldtHarGyldigSykmelding } from '../utils/oppfolgingsdialogUtils';
 import Side from '../sider/Side';
 import AppSpinner from '../components/AppSpinner';
 import Feilmelding from '../components/Feilmelding';
+import { settAktivtSteg } from '../actions/oppfolgingsplan/toggle_actions';
+import { hentArbeidsforhold } from '../actions/oppfolgingsplan/arbeidsforhold_actions';
+import { hentKontaktinfo } from '../actions/oppfolgingsplan/kontaktinfo_actions';
+import { hentNaermesteLeder } from '../actions/oppfolgingsplan/naermesteLeder_actions';
+import { hentPdfurler } from '../actions/oppfolgingsplan/dokument_actions';
+import { hentPerson } from '../actions/oppfolgingsplan/person_actions';
+import { hentVirksomhet } from '../actions/oppfolgingsplan/virksomhet_actions';
 import { hentSykmeldinger } from '../actions/sykmeldinger_actions';
+import { forespoerRevidering } from '../actions/oppfolgingsplan/forespoerRevidering_actions';
+import { delMedNav as delMedNavFunc } from '../actions/oppfolgingsplan/delmednav_actions';
+import { avbrytDialog } from '../actions/oppfolgingsplan/avbrytdialog_actions';
+import { delMedFastlege } from '../actions/oppfolgingsplan/delMedFastlege_actions';
+import { nullstillGodkjenning } from '../actions/oppfolgingsplan/nullstillGodkjenning_actions';
+import { giSamtykke } from '../actions/oppfolgingsplan/samtykke_actions';
+import { lagreArbeidsoppgave, slettArbeidsoppgave } from '../actions/oppfolgingsplan/arbeidsoppgave_actions';
+import { lagreKommentar, slettKommentar } from '../actions/oppfolgingsplan/kommentar_actions';
+import { lagreTiltak, slettTiltak } from '../actions/oppfolgingsplan/tiltak_actions';
+import { sjekkTilgang } from '../actions/oppfolgingsplan/sjekkTilgang_actions';
+import { settDialog } from '../actions/oppfolgingsplan/sett_actions';
+import {
+    avvisDialog,
+    godkjennDialog,
+    hentOppfolgingsdialoger,
+} from '../actions/oppfolgingsplan/oppfolgingsdialog_actions';
 import Oppfolgingsdialog from '../components/oppfolgingsdialog/Oppfolgingsdialog';
 import { getContextRoot } from '../routers/paths';
 import history from '../history';
@@ -361,8 +360,8 @@ export function mapStateToProps(state, ownProps) {
 const OppfolgingsdialogContainer = connect(mapStateToProps, {
     hentOppfolgingsdialoger,
     sjekkTilgang,
-    godkjennDialogAg,
-    avvisDialogAg,
+    godkjennDialogAg: godkjennDialog,
+    avvisDialogAg: avvisDialog,
     nullstillGodkjenning,
     settAktivtSteg,
     settDialog,
