@@ -47,7 +47,7 @@ class Oppfolgingsdialoger extends Component {
             settReservertVarsel: false,
         };
     }
-    componentWillMount() {
+    componentDidMount() {
         const {
             naermesteleder,
             oppfolgingsdialoger,

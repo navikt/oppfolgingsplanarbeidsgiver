@@ -34,6 +34,8 @@ class Tiltak extends Component {
             oppdateringFeilet: false,
             varselTekst: '',
         };
+        window.location.hash = 'tiltak';
+        window.sessionStorage.setItem('hash', 'tiltak');
         this.sendLagreTiltak = this.sendLagreTiltak.bind(this);
         this.sendSlettTiltak = this.sendSlettTiltak.bind(this);
         this.sendLagreKommentar = this.sendLagreKommentar.bind(this);
@@ -41,11 +43,6 @@ class Tiltak extends Component {
         this.toggleTiltakSkjema = this.toggleTiltakSkjema.bind(this);
         this.visOppdateringFeilet = this.visOppdateringFeilet.bind(this);
         this.skjulSkjema = this.skjulSkjema.bind(this);
-    }
-
-    componentWillMount() {
-        window.location.hash = 'tiltak';
-        window.sessionStorage.setItem('hash', 'tiltak');
     }
 
     componentWillReceiveProps(nextProps) {
