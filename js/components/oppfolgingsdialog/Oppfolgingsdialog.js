@@ -57,7 +57,7 @@ export const erTvangsgodkjent = (oppfolgingsdialog) => {
 };
 
 class Oppfolgingsdialog extends Component {
-    componentWillMount() {
+    componentDidMount() {
         const {
             oppfolgingsdialog,
             virksomhet,

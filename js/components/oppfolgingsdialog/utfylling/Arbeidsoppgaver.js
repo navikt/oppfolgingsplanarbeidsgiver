@@ -27,17 +27,14 @@ class Arbeidsoppgaver extends Component {
             varselTekst: '',
             oppdateringFeilet: false,
         };
+        window.location.hash = 'arbeidsoppgaver';
+        window.sessionStorage.setItem('hash', 'arbeidsoppgaver');
         this.sendLagreArbeidsoppgave = this.sendLagreArbeidsoppgave.bind(this);
         this.sendSlettArbeidsoppgave = this.sendSlettArbeidsoppgave.bind(this);
         this.toggleArbeidsoppgaveSkjema = this.toggleArbeidsoppgaveSkjema.bind(this);
         this.scrollToForm = this.scrollToForm.bind(this);
         this.visOppdateringFeilet = this.visOppdateringFeilet.bind(this);
         this.skjulSkjema = this.skjulSkjema.bind(this);
-    }
-
-    componentWillMount() {
-        window.location.hash = 'arbeidsoppgaver';
-        window.sessionStorage.setItem('hash', 'arbeidsoppgaver');
     }
 
     componentDidMount() {
