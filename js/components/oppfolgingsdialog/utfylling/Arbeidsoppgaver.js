@@ -43,7 +43,13 @@ class Arbeidsoppgaver extends Component {
         }
     }
 
-    componentWillReceiveProps(nextProps) {
+    componentDidUpdate(prevProps, prevState) {
+        if (!prevState.visArbeidsoppgaveSkjema && this.state.visArbeidsoppgaveSkjema && this.lagreSkjema) {
+            this.scrollToForm();
+        }
+    }
+    // eslint-disable-next-line camelcase
+    UNSAFE_componentWillReceiveProps(nextProps) {
         if (!nextProps.arbeidsoppgaver.feiletOppgaveId
             && nextProps.arbeidsoppgaver.lagringFeilet
             && this.props.arbeidsoppgaver.lagringFeilet !== nextProps.arbeidsoppgaver.lagringFeilet) {
@@ -52,12 +58,6 @@ class Arbeidsoppgaver extends Component {
                 visArbeidsoppgaveSkjema: true,
                 varselTekst: getLedetekst('oppfolgingsdialog.oppdatering.feilmelding', this.props.ledetekster),
             });
-        }
-    }
-
-    componentDidUpdate(prevProps, prevState) {
-        if (!prevState.visArbeidsoppgaveSkjema && this.state.visArbeidsoppgaveSkjema && this.lagreSkjema) {
-            this.scrollToForm();
         }
     }
 

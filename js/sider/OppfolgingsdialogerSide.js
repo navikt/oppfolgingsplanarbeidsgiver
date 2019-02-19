@@ -104,7 +104,8 @@ export class OppfolgingsdialogerSide extends Component {
         this.berikSykmeldt();
     }
 
-    componentWillReceiveProps(nextProps) {
+    // eslint-disable-next-line camelcase
+    UNSAFE_componentWillReceiveProps(nextProps) {
         const {
             koblingId,
             alleOppfolgingsdialogerReducer,

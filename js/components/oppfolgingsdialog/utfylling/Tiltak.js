@@ -45,20 +45,21 @@ class Tiltak extends Component {
         this.skjulSkjema = this.skjulSkjema.bind(this);
     }
 
-    componentWillReceiveProps(nextProps) {
+    componentDidUpdate(prevProps, prevState) {
+        if (!prevState.visTiltakSkjema && this.state.visTiltakSkjema && this.lagreSkjema) {
+            const form = findDOMNode(this.lagreSkjema);
+            scrollTo(form, 300);
+        }
+    }
+
+    // eslint-disable-next-line camelcase
+    UNSAFE_componentWillReceiveProps(nextProps) {
         if (!nextProps.tiltak.feiletTiltakId && nextProps.tiltak.lagringFeilet && this.props.tiltak.lagringFeilet !== nextProps.tiltak.lagringFeilet) {
             this.setState({
                 lagreNyTiltakFeilet: true,
                 visTiltakSkjema: true,
                 varselTekst: getLedetekst('oppfolgingsdialog.oppdatering.feilmelding', this.props.ledetekster),
             });
-        }
-    }
-
-    componentDidUpdate(prevProps, prevState) {
-        if (!prevState.visTiltakSkjema && this.state.visTiltakSkjema && this.lagreSkjema) {
-            const form = findDOMNode(this.lagreSkjema);
-            scrollTo(form, 300);
         }
     }
 

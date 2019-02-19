@@ -29,7 +29,8 @@ class Side extends Component {
         };
     }
 
-    componentWillReceiveProps(nextProps) {
+    // eslint-disable-next-line camelcase
+    UNSAFE_componentWillReceiveProps(nextProps) {
         if (this.props.laster && !nextProps.laster) {
             const timeoutHandle = window.setTimeout(() => {
                 this.setState({
