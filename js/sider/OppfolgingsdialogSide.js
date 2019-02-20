@@ -20,7 +20,6 @@ import {
 import {
     forsoektHentetOppfolgingsdialoger,
     forsoektHentetSykmeldte,
-    forsoektHentetTilgang,
     henterEllerHarHentetSykmeldinger,
     henterEllerHarHentetToggles,
 } from '../utils/reducerUtils';
@@ -266,7 +265,6 @@ export function mapStateToProps(state, ownProps) {
     const sykmeldinger = state.sykmeldinger[koblingId] || {};
     const harSykmeldtGyldigSykmelding = sykmeldinger.data && sykmeldtHarGyldigSykmelding(sykmeldinger.data);
     const harForsoektHentetOppfolgingsdialoger = forsoektHentetOppfolgingsdialoger(alleOppfolgingsdialogerReducer);
-    const harForsoektHentetTilgang = forsoektHentetTilgang(tilgang);
     const harForsoektHentetAlt = harForsoektHentetOppfolgingsdialoger
         && forsoektHentetSykmeldte(state.sykmeldte)
         && sykmeldinger.hentet;
@@ -280,7 +278,7 @@ export function mapStateToProps(state, ownProps) {
         || tilgang.henter
         || sykmeldinger.henter
         || !harForsoektHentetAlt
-        || (erSykmeldteHentet && sykmeldt && !harForsoektHentetTilgang)
+        || (erSykmeldteHentet && sykmeldt && !tilgang.hentingForsokt)
         || (state.sykmeldte.henterBerikelser.length > 0 && !state.sykmeldte.hentingFeilet),
         hentingFeilet: state.ledetekster.hentingFeilet
         || state.sykmeldte.hentingFeilet
