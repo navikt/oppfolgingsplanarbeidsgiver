@@ -14,7 +14,9 @@ describe('tilgangSagas', () => {
 
         const fnr = '12345678';
         const generator = sjekkerTilgang({
-            fnr,
+            sykmeldt: {
+                fnr,
+            },
         });
 
         it('Skal dispatche SJEKKER_TILGANG', () => {

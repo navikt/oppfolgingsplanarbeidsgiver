@@ -92,6 +92,7 @@ describe('OppfolgingsdialogerSideTest', () => {
                     henter: false,
                     hentet: true,
                     hentingFeilet: false,
+                    hentingForsokt: true,
                     data: {
                         harTilgang: true,
                         ikkeTilgangGrunn: null,
@@ -173,6 +174,7 @@ describe('OppfolgingsdialogerSideTest', () => {
                     henter: false,
                     hentet: true,
                     hentingFeilet: false,
+                    hentingForsokt: true,
                     data: {
                         harTilgang: true,
                         ikkeTilgangGrunn: null,

@@ -8,7 +8,7 @@ describe('tilgang', () => {
         let initialState = deepFreeze({});
         const fnr = '12345678';
 
-        it('håndterer SJEKKER_TILGANG_AG', () => {
+        it('håndterer SJEKKER_TILGANG', () => {
             const action = actions.sjekkerTilgang(fnr);
             const nextState = tilgang(initialState, action);
             expect(nextState).to.deep.equal({
@@ -16,12 +16,13 @@ describe('tilgang', () => {
                     henter: true,
                     hentet: false,
                     hentingFeilet: false,
+                    hentingForsokt: false,
                     data: {},
                 },
             });
         });
 
-        it('håndterer SJEKKET_TILGANG_AG', () => {
+        it('håndterer SJEKKET_TILGANG', () => {
             const action = actions.sjekketTilgang({ tilgang: 'tilgang' }, fnr);
             const nextState = tilgang(initialState, action);
 
@@ -30,12 +31,13 @@ describe('tilgang', () => {
                     henter: false,
                     hentet: true,
                     hentingFeilet: false,
+                    hentingForsokt: true,
                     data: { tilgang: 'tilgang' },
                 },
             });
         });
 
-        it('håndterer SJEKK_TILGANG_AG_FEILET', () => {
+        it('håndterer SJEKK_TILGANG_FEILET', () => {
             initialState = deepFreeze({
                 [fnr]: {
                     henter: false,
@@ -52,6 +54,7 @@ describe('tilgang', () => {
                     henter: false,
                     hentet: false,
                     hentingFeilet: true,
+                    hentingForsokt: true,
                     data: {},
                 },
             });

@@ -6,10 +6,6 @@ export const forsoektHentetOppfolgingsdialoger = (oppfolgingsdialoger) => {
     return oppfolgingsdialoger.hentet || oppfolgingsdialoger.hentingFeilet;
 };
 
-export const forsoektHentetTilgang = (tilgang) => {
-    return tilgang.hentet || tilgang.hentingFeilet;
-};
-
 export const henterEllerHarHentetSykmeldinger = (sykmeldinger) => {
     return sykmeldinger.henter || sykmeldinger.hentet;
 };

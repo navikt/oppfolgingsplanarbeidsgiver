@@ -1,17 +1,19 @@
 import { expect } from 'chai';
 import * as actions from '../../js/actions/oppfolgingsplan/sjekkTilgang_actions';
 
-describe('tilgangAg_actions', () => {
+describe('sjekkTilgang_actions', () => {
+    let sykmeldt;
     let fnr;
 
     beforeEach(() => {
         fnr = '12345678';
+        sykmeldt = { fnr };
     });
 
     it('Skal ha en sjekkTilgang()-funksjon som returnerer riktig action', () => {
-        expect(actions.sjekkTilgang(fnr)).to.deep.equal({
+        expect(actions.sjekkTilgang(sykmeldt)).to.deep.equal({
             type: actions.SJEKK_TILGANG_FORESPURT,
-            fnr,
+            sykmeldt,
         });
     });
 

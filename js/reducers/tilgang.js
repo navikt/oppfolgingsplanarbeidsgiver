@@ -15,6 +15,7 @@ const tilgang = (state = initiellState, action = {}) => {
                 henter: true,
                 hentet: false,
                 hentingFeilet: false,
+                hentingForsokt: false,
                 data: {},
             };
             return Object.assign({}, state, sykmeldt);
@@ -24,6 +25,7 @@ const tilgang = (state = initiellState, action = {}) => {
                 henter: false,
                 hentet: true,
                 hentingFeilet: false,
+                hentingForsokt: true,
                 data: action.data,
             };
             return Object.assign({}, state, sykmeldt);
@@ -33,6 +35,7 @@ const tilgang = (state = initiellState, action = {}) => {
                 henter: false,
                 hentet: false,
                 hentingFeilet: true,
+                hentingForsokt: true,
                 data: {},
             };
             return Object.assign({}, state, sykmeldt);
@@ -42,6 +45,7 @@ const tilgang = (state = initiellState, action = {}) => {
                 henter: false,
                 hentet: false,
                 hentingFeilet: false,
+                hentingForsokt: true,
                 data: {
                     harTilgang: false,
                 },

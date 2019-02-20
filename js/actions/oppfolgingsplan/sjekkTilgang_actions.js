@@ -4,10 +4,10 @@ export const SJEKK_TILGANG_FEILET = 'SJEKK_TILGANG_FEILET';
 export const SJEKKET_TILGANG = 'SJEKKET_TILGANG';
 export const SJEKK_TILGANG_403 = 'SJEKK_TILGANG_403';
 
-export const sjekkTilgang = (fnr) => {
+export const sjekkTilgang = (sykmeldt) => {
     return {
         type: SJEKK_TILGANG_FORESPURT,
-        fnr,
+        sykmeldt,
     };
 };
 

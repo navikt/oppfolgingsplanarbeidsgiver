@@ -11,7 +11,6 @@ import {
     loggerOppfolgingsdialog,
     OppfolgingsdialogInfoboks,
     proptypes as oppfolgingProptypes,
-    henterEllerHarHentetTilgang,
     henterEllerHarHentetOppfolgingsdialoger,
     oppfolgingsdialogHarBlittOpprettet,
     populerDialogFraState,
@@ -25,7 +24,6 @@ import {
 import {
     forsoektHentetOppfolgingsdialoger,
     forsoektHentetSykmeldte,
-    forsoektHentetTilgang,
     henterEllerHarHentetSykmeldinger,
     henterEllerHarHentetToggles,
     sykmeldtHarBlittSlettet,
@@ -112,15 +110,13 @@ export class OppfolgingsdialogerSide extends Component {
             kopierDialogReducer,
             oppfolgingsdialogerReducer,
             sykmeldte,
-            tilgang,
         } = this.props;
         const {
             sykmeldt,
         } = nextProps;
 
-        if (sykmeldt && sykmeldt.fnr && !henterEllerHarHentetTilgang(tilgang)) {
-            this.props.sjekkTilgang(sykmeldt.fnr);
-        }
+        this.props.sjekkTilgang(sykmeldt);
+
         if (sykmeldtHarBlittSlettet(sykmeldte, nextProps.sykmeldte)) {
             this.props.hentOppfolgingsdialoger();
         }
@@ -274,7 +270,6 @@ export function mapStateToProps(state, ownProps) {
     const sykmeldinger = state.sykmeldinger[koblingId] || {};
     const harSykmeldtGyldigSykmelding = sykmeldinger.data && sykmeldtHarGyldigSykmelding(sykmeldinger.data);
     const harForsoektHentetOppfolgingsdialoger = forsoektHentetOppfolgingsdialoger(alleOppfolgingsdialogerReducer);
-    const harForsoektHentetTilgang = forsoektHentetTilgang(tilgang);
     const harForsoektHentetAlt = harForsoektHentetOppfolgingsdialoger
         && forsoektHentetSykmeldte(state.sykmeldte)
         && sykmeldinger.hentet;
@@ -295,7 +290,7 @@ export function mapStateToProps(state, ownProps) {
         || tilgang.henter
         || sykmeldinger.henter
         || !harForsoektHentetAlt
-        || (erSykmeldteHentet && sykmeldt && !harForsoektHentetTilgang)
+        || (erSykmeldteHentet && sykmeldt && !tilgang.hentingForsokt)
         || (state.sykmeldte.henterBerikelser.length > 0 && !state.sykmeldte.hentingFeilet),
         hentingFeilet: state.ledetekster.hentingFeilet
         || state.sykmeldte.hentingFeilet
