@@ -11,7 +11,6 @@ import {
     loggerOppfolgingsdialog,
     OppfolgingsdialogInfoboks,
     proptypes as oppfolgingProptypes,
-    henterEllerHarHentetTilgang,
     henterEllerHarHentetOppfolgingsdialoger,
     oppfolgingsdialogHarBlittOpprettet,
     populerDialogFraState,
@@ -112,15 +111,13 @@ export class OppfolgingsdialogerSide extends Component {
             kopierDialogReducer,
             oppfolgingsdialogerReducer,
             sykmeldte,
-            tilgang,
         } = this.props;
         const {
             sykmeldt,
         } = nextProps;
 
-        if (sykmeldt && sykmeldt.fnr && !henterEllerHarHentetTilgang(tilgang)) {
-            this.props.sjekkTilgang(sykmeldt.fnr);
-        }
+        this.props.sjekkTilgang(sykmeldt);
+
         if (sykmeldtHarBlittSlettet(sykmeldte, nextProps.sykmeldte)) {
             this.props.hentOppfolgingsdialoger();
         }

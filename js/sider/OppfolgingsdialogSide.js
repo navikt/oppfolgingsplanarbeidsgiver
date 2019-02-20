@@ -8,7 +8,6 @@ import {
     finnNyOppfolgingsplanMedVirkshomhetEtterAvbrutt,
     proptypes as oppfolgingProptypes,
     henterEllerHarHentetOppfolgingsdialoger,
-    henterEllerHarHentetTilgang,
     oppfolgingsdialogHarBlittAvbrutt,
     populerDialogFraState,
 } from 'oppfolgingsdialog-npm';
@@ -103,15 +102,13 @@ export class OppfolgingsdialogSide extends Component {
             avbrytdialogReducer,
             alleOppfolgingsdialogerReducer,
             koblingId,
-            tilgang,
         } = this.props;
         const {
             sykmeldt,
         } = nextProps;
 
-        if (sykmeldt && sykmeldt.fnr && !henterEllerHarHentetTilgang(tilgang)) {
-            this.props.sjekkTilgang(sykmeldt.fnr);
-        }
+        this.props.sjekkTilgang(sykmeldt);
+
         if (oppfolgingsdialogHarBlittAvbrutt(avbrytdialogReducer, nextProps.avbrytdialogReducer)) {
             this.props.hentOppfolgingsdialoger();
         }

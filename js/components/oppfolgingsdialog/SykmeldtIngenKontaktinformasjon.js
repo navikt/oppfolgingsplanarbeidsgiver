@@ -16,7 +16,7 @@ const SykmeldtIngenKontaktinformasjon = ({ meldingSett }) => {
                 tekst={getLedetekst('sykefravaerarbeidsgiver.sykmeldt-ingen-kontaktinformasjon.tekst')}
             />
             <div className="knapperad">
-                <Knapp type="button" onClick={meldingSett}>Jeg forstår</Knapp>
+                <Knapp type="standard" onClick={meldingSett}>Jeg forstår</Knapp>
             </div>
         </div>
     </div>);
