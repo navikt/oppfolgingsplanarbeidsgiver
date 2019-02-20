@@ -1,4 +1,4 @@
-import * as actions from '../actions/oppfolgingsplan/oppfolgingsdialog_actions';
+import * as actions from '../actions/oppfolgingsplan/oppfolgingsplan_actions';
 import {
     ARBEIDSOPPGAVE_LAGRET,
     ARBEIDSOPPGAVE_SLETTET,
@@ -25,9 +25,9 @@ const initiellState = {
     data: {},
 };
 
-const setStateVedOppfolgingsdialogerHentet = (state, oppfolgingsdialoger) => {
-    const unikeFnr = [...new Set(oppfolgingsdialoger.map((dialog) => {
-        return dialog.arbeidstaker.fnr;
+const setStateVedOppfolgingsplanerHentet = (state, oppfolgingsplaner) => {
+    const unikeFnr = [...new Set(oppfolgingsplaner.map((plan) => {
+        return plan.arbeidstaker.fnr;
     }))];
     let nyState = Object.assign({}, state, {
         henter: false,
@@ -35,19 +35,19 @@ const setStateVedOppfolgingsdialogerHentet = (state, oppfolgingsdialoger) => {
         hentingForsokt: true,
     });
     unikeFnr.forEach((fnr) => {
-        const oppfolgingsdialogerFnr = oppfolgingsdialoger.filter((dialog) => {
-            return dialog.arbeidstaker.fnr === fnr;
+        const oppfolgingsplanerFnr = oppfolgingsplaner.filter((plan) => {
+            return plan.arbeidstaker.fnr === fnr;
         });
         nyState = Object.assign({}, nyState, {
             [fnr]: {
-                data: oppfolgingsdialogerFnr,
+                data: oppfolgingsplanerFnr,
             },
         });
     });
     return nyState;
 };
 
-const oppfolgingsdialoger = (state = initiellState, action = {}) => {
+const oppfolgingsplaner = (state = initiellState, action = {}) => {
     const fnr = action.fnr;
     const oppfolgingsdialogerSykmeldt = {};
 
@@ -277,7 +277,7 @@ const oppfolgingsdialoger = (state = initiellState, action = {}) => {
             });
             return Object.assign({}, state, oppfolgingsdialogerSykmeldt);
         }
-        case actions.HENTER_OPPFOLGINGSDIALOGER: {
+        case actions.HENTER_OPPFOLGINGSPLANER: {
             return Object.assign({}, state, {
                 henter: true,
                 hentet: false,
@@ -285,17 +285,17 @@ const oppfolgingsdialoger = (state = initiellState, action = {}) => {
                 hentingForsokt: false,
             });
         }
-        case actions.OPPFOLGINGSDIALOGER_HENTET: {
-            return setStateVedOppfolgingsdialogerHentet(state, action.data);
+        case actions.OPPFOLGINGSPLANER_HENTET: {
+            return setStateVedOppfolgingsplanerHentet(state, action.data);
         }
-        case actions.HENT_OPPFOLGINGSDIALOGER_FEILET: {
+        case actions.HENT_OPPFOLGINGSPLANER_FEILET: {
             return Object.assign({}, state, {
                 henter: false,
                 hentingFeilet: true,
                 hentingForsokt: true,
             });
         }
-        case actions.OPPRETTER_OPPFOLGINGSDIALOG: {
+        case actions.OPPRETTER_OPPFOLGINGSPLAN: {
             oppfolgingsdialogerSykmeldt[fnr] = Object.assign({}, state[fnr], {
                 oppretter: true,
                 opprettet: false,
@@ -303,7 +303,7 @@ const oppfolgingsdialoger = (state = initiellState, action = {}) => {
             });
             return Object.assign({}, state, oppfolgingsdialogerSykmeldt);
         }
-        case actions.OPPFOLGINGSDIALOG_OPPRETTET: {
+        case actions.OPPFOLGINGSPLAN_OPPRETTET: {
             oppfolgingsdialogerSykmeldt[fnr] = Object.assign({}, state[fnr], {
                 oppretter: false,
                 opprettet: true,
@@ -311,14 +311,14 @@ const oppfolgingsdialoger = (state = initiellState, action = {}) => {
             });
             return Object.assign({}, state, oppfolgingsdialogerSykmeldt);
         }
-        case actions.OPPRETT_OPPFOLGINGSDIALOG_FEILET: {
+        case actions.OPPRETT_OPPFOLGINGSPLAN_FEILET: {
             oppfolgingsdialogerSykmeldt[fnr] = Object.assign({}, state[fnr], {
                 oppretter: false,
                 opprettingFeilet: true,
             });
             return Object.assign({}, state, oppfolgingsdialogerSykmeldt);
         }
-        case actions.GODKJENNER_DIALOG: {
+        case actions.GODKJENNER_PLAN: {
             oppfolgingsdialogerSykmeldt[fnr] = Object.assign({}, state[fnr], {
                 godkjenner: true,
                 godkjent: false,
@@ -326,7 +326,7 @@ const oppfolgingsdialoger = (state = initiellState, action = {}) => {
             });
             return Object.assign({}, state, oppfolgingsdialogerSykmeldt);
         }
-        case actions.DIALOG_GODKJENT: {
+        case actions.PLAN_GODKJENT: {
             const data = state[fnr].data.map((oppfolgingsdialog) => {
                 if (Number(action.id) === oppfolgingsdialog.id) {
                     if ((oppfolgingsdialog.godkjenninger.length > 0 && finnNyesteGodkjenning(oppfolgingsdialog.godkjenninger).godkjent) || action.status === 'tvungenGodkjenning') {
@@ -368,7 +368,7 @@ const oppfolgingsdialoger = (state = initiellState, action = {}) => {
             });
             return Object.assign({}, state, oppfolgingsdialogerSykmeldt);
         }
-        case actions.GODKJENN_DIALOG_FEILET: {
+        case actions.GODKJENN_PLAN_FEILET: {
             oppfolgingsdialogerSykmeldt[fnr] = Object.assign({}, state[fnr], {
                 godkjenner: false,
                 godkjenningFeilet: true,
@@ -376,7 +376,7 @@ const oppfolgingsdialoger = (state = initiellState, action = {}) => {
             return Object.assign({}, state, oppfolgingsdialogerSykmeldt);
         }
 
-        case actions.AVVISER_DIALOG: {
+        case actions.AVVISER_PLAN: {
             oppfolgingsdialogerSykmeldt[fnr] = Object.assign({}, state[fnr], {
                 avviser: true,
                 avvist: false,
@@ -385,7 +385,7 @@ const oppfolgingsdialoger = (state = initiellState, action = {}) => {
             return Object.assign({}, state, oppfolgingsdialogerSykmeldt);
         }
 
-        case actions.DIALOG_AVVIST: {
+        case actions.PLAN_AVVIST: {
             const data = state[fnr].data.map((oppfolgingsdialog) => {
                 if (Number(action.id) === oppfolgingsdialog.id) {
                     return Object.assign({}, oppfolgingsdialog, {
@@ -467,7 +467,7 @@ const oppfolgingsdialoger = (state = initiellState, action = {}) => {
             });
             return Object.assign({}, state, oppfolgingsdialogerSykmeldt);
         }
-        case actions.AVVIS_DIALOG_FEILET: {
+        case actions.AVVIS_PLAN_FEILET: {
             oppfolgingsdialogerSykmeldt[fnr] = Object.assign({}, state[fnr], {
                 godkjenner: false,
                 avviser: false,
@@ -480,4 +480,4 @@ const oppfolgingsdialoger = (state = initiellState, action = {}) => {
     }
 };
 
-export default oppfolgingsdialoger;
+export default oppfolgingsplaner;

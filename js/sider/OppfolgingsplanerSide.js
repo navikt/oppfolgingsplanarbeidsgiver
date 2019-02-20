@@ -34,9 +34,9 @@ import Feilmelding from '../components/Feilmelding';
 import history from '../history';
 
 import {
-    hentOppfolgingsdialoger,
-    opprettOppfolgingsdialog,
-} from '../actions/oppfolgingsplan/oppfolgingsdialog_actions';
+    hentOppfolgingsplaner,
+    opprettOppfolgingsplan,
+} from '../actions/oppfolgingsplan/oppfolgingsplan_actions';
 import { kopierOppfolgingsdialog } from '../actions/oppfolgingsplan/kopierOppfolgingsdialog_actions';
 import { giSamtykke } from '../actions/oppfolgingsplan/samtykke_actions';
 import { hentKontaktinfo } from '../actions/oppfolgingsplan/kontaktinfo_actions';
@@ -70,7 +70,7 @@ const hentingFeiletMapPt = PropTypes.shape({
     sykmeldinger: PropTypes.bool,
 });
 
-export class OppfolgingsdialogerSide extends Component {
+export class OppfolgingsplanerSide extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -90,7 +90,7 @@ export class OppfolgingsdialogerSide extends Component {
             toggles,
         } = this.props;
         if (!henterEllerHarHentetOppfolgingsdialoger(alleOppfolgingsdialogerReducer)) {
-            this.props.hentOppfolgingsdialoger();
+            this.props.hentOppfolgingsplaner();
         }
         if (!henterEllerHarHentetSykmeldinger(sykmeldinger)) {
             this.props.hentSykmeldinger(koblingId);
@@ -117,13 +117,13 @@ export class OppfolgingsdialogerSide extends Component {
         this.props.sjekkTilgang(sykmeldt);
 
         if (sykmeldtHarBlittSlettet(sykmeldte, nextProps.sykmeldte)) {
-            this.props.hentOppfolgingsdialoger();
+            this.props.hentOppfolgingsplaner();
         }
         if (oppfolgingsdialogHarBlittOpprettet(oppfolgingsdialogerReducer, nextProps.oppfolgingsdialogerReducer)) {
-            this.props.hentOppfolgingsdialoger();
+            this.props.hentOppfolgingsplaner();
         }
         if (kopierDialogReducer.sender && nextProps.kopierDialogReducer.sendt) {
-            this.props.hentOppfolgingsdialoger();
+            this.props.hentOppfolgingsplaner();
         }
         if (oppfolgingsdialogerReducer.opprettet && !alleOppfolgingsdialogerReducer.hentet && nextProps.alleOppfolgingsdialogerReducer.hentet) {
             history.push(`${getContextRoot()}/${koblingId}/oppfolgingsplaner/${oppfolgingsdialogerReducer.opprettetId}`);
@@ -207,7 +207,7 @@ export class OppfolgingsdialogerSide extends Component {
     }
 }
 
-OppfolgingsdialogerSide.propTypes = {
+OppfolgingsplanerSide.propTypes = {
     henter: PropTypes.bool,
     hentingFeilet: PropTypes.bool,
     hentet: PropTypes.bool,
@@ -234,7 +234,7 @@ OppfolgingsdialogerSide.propTypes = {
     bekreftNyNaermesteLeder: PropTypes.func,
     giSamtykke: PropTypes.func,
     hentNaermesteLeder: PropTypes.func,
-    hentOppfolgingsdialoger: PropTypes.func,
+    hentOppfolgingsplaner: PropTypes.func,
     hentPerson: PropTypes.func,
     hentSykmeldinger: PropTypes.func,
     hentVirksomhet: PropTypes.func,
@@ -344,9 +344,9 @@ export function mapStateToProps(state, ownProps) {
 }
 
 const OppfolgingsdialogerContainer = connect(mapStateToProps, {
-    hentOppfolgingsdialoger,
+    hentOppfolgingsplaner,
     kopierOppfolgingsdialog,
-    opprettOppfolgingsdialogAg: opprettOppfolgingsdialog,
+    opprettOppfolgingsdialogAg: opprettOppfolgingsplan,
     sjekkTilgang,
     giSamtykke,
     bekreftNyNaermesteLeder,
@@ -358,6 +358,6 @@ const OppfolgingsdialogerContainer = connect(mapStateToProps, {
     hentSykmeldinger,
     hentToggles,
     hentSykmeldteBerikelser: hentSykmeldteBerikelserAction,
-})(OppfolgingsdialogerSide);
+})(OppfolgingsplanerSide);
 
 export default OppfolgingsdialogerContainer;

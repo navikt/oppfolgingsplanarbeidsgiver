@@ -13,7 +13,7 @@ import kontaktinfoSagas from './oppfolgingsplan/kontaktinfoSagas';
 import kopierOppfolgingsdialogSagas from './oppfolgingsplan/kopierOppfolgingsdialogSagas';
 import naermesteLederSagas from './oppfolgingsplan/naermestelederSagas';
 import nullstillGodkjenningSagas from './oppfolgingsplan/nullstillGodkjenningSagas';
-import oppfolgingsdialogerSagas from './oppfolgingsplan/oppfolgingsdialogerSagas';
+import oppfolgingsdialogerSagas from './oppfolgingsplan/oppfolgingsplanerSagas';
 import personSagas from './oppfolgingsplan/personSagas';
 import samtykkeSagas from './oppfolgingsplan/samtykkeSagas';
 import settDialogSagas from './oppfolgingsplan/settDialogSagas';

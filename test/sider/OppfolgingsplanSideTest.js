@@ -11,9 +11,9 @@ import {
     hentSykmeldingIkkeGyldigForOppfoelging,
 } from '../mock/mockSykmeldinger';
 import {
-    OppfolgingsdialogSide as Container,
+    OppfolgingsplanSide as Container,
     mapStateToProps,
-} from '../../js/sider/OppfolgingsdialogSide';
+} from '../../js/sider/OppfolgingsplanSide';
 import AppSpinner from '../../js/components/AppSpinner';
 import Feilmelding from '../../js/components/Feilmelding';
 import Oppfolgingsdialog from '../../js/components/oppfolgingsdialog/Oppfolgingsdialog';
@@ -21,7 +21,7 @@ import Oppfolgingsdialog from '../../js/components/oppfolgingsdialog/Oppfolgings
 chai.use(chaiEnzyme());
 const expect = chai.expect;
 
-describe('OppfolgingsdialogSide', () => {
+describe('OppfolgingsplanSide', () => {
     describe('mapStateToProps', () => {
         let clock;
         const dagensDato = new Date('2017-01-01');
@@ -48,7 +48,7 @@ describe('OppfolgingsdialogSide', () => {
         const ownProps = {
             params: {
                 koblingId: sykmeldt1.koblingId,
-                oppfolgingsdialogId: '1',
+                oppfolgingsplanId: '1',
             },
         };
         const state = {
@@ -68,7 +68,7 @@ describe('OppfolgingsdialogSide', () => {
             oppfolgingsdialoger: {
                 [sykmeldt1.fnr]: {
                     data: [{
-                        id: ownProps.params.oppfolgingsdialogId,
+                        id: ownProps.params.oppfolgingsplanId,
                         virksomhet: {
                             virksomhetsnummer: '12345678',
                         },
@@ -163,7 +163,7 @@ describe('OppfolgingsdialogSide', () => {
 
     describe('OppfolgingsdialogSideComponent', () => {
         let sjekkTilgang;
-        let hentOppfolgingsdialoger;
+        let hentOppfolgingsplaner;
         let hentSykmeldinger;
         let settDialog;
         let hentArbeidsforhold;
@@ -198,7 +198,7 @@ describe('OppfolgingsdialogSide', () => {
             sykmeldinger = {};
             tilgang = { data: {} };
             sjekkTilgang = sinon.spy();
-            hentOppfolgingsdialoger = sinon.spy();
+            hentOppfolgingsplaner = sinon.spy();
             hentSykmeldinger = sinon.spy();
             settDialog = sinon.spy();
             hentArbeidsforhold = sinon.spy();
@@ -215,7 +215,7 @@ describe('OppfolgingsdialogSide', () => {
                 henter
                 hentet={false}
                 toggles={toggles}
-                hentOppfolgingsdialoger={hentOppfolgingsdialoger}
+                hentOppfolgingsplaner={hentOppfolgingsplaner}
                 hentSykmeldinger={hentSykmeldinger}
                 sjekkTilgang={sjekkTilgang}
                 settDialog={settDialog}
@@ -235,7 +235,7 @@ describe('OppfolgingsdialogSide', () => {
                 sender
                 hentet={false}
                 toggles={toggles}
-                hentOppfolgingsdialoger={hentOppfolgingsdialoger}
+                hentOppfolgingsplaner={hentOppfolgingsplaner}
                 hentSykmeldinger={hentSykmeldinger}
                 sjekkTilgang={sjekkTilgang}
                 settDialog={settDialog}
@@ -255,7 +255,7 @@ describe('OppfolgingsdialogSide', () => {
                 hentet={false}
                 hentingFeilet
                 toggles={toggles}
-                hentOppfolgingsdialoger={hentOppfolgingsdialoger}
+                hentOppfolgingsplaner={hentOppfolgingsplaner}
                 hentSykmeldinger={hentSykmeldinger}
                 sjekkTilgang={sjekkTilgang}
                 settDialog={settDialog}
@@ -275,7 +275,7 @@ describe('OppfolgingsdialogSide', () => {
                 hentet={false}
                 sendingFeilet
                 toggles={toggles}
-                hentOppfolgingsdialoger={hentOppfolgingsdialoger}
+                hentOppfolgingsplaner={hentOppfolgingsplaner}
                 hentSykmeldinger={hentSykmeldinger}
                 sjekkTilgang={sjekkTilgang}
                 settDialog={settDialog}
@@ -293,7 +293,7 @@ describe('OppfolgingsdialogSide', () => {
                 oppfolgingsdialoger={[]}
                 tilgang={{ data: ikkeTilgang }}
                 toggles={toggles}
-                hentOppfolgingsdialoger={hentOppfolgingsdialoger}
+                hentOppfolgingsplaner={hentOppfolgingsplaner}
                 hentSykmeldinger={hentSykmeldinger}
                 sjekkTilgang={sjekkTilgang}
                 settDialog={settDialog}
@@ -312,7 +312,7 @@ describe('OppfolgingsdialogSide', () => {
                 oppfolgingsdialoger={[]}
                 tilgang={{ data: ikkeTilgang }}
                 toggles={toggles}
-                hentOppfolgingsdialoger={hentOppfolgingsdialoger}
+                hentOppfolgingsplaner={hentOppfolgingsplaner}
                 hentSykmeldinger={hentSykmeldinger}
                 sjekkTilgang={sjekkTilgang}
                 settDialog={settDialog}
@@ -332,7 +332,7 @@ describe('OppfolgingsdialogSide', () => {
                 oppfolgingsdialoger={[]}
                 tilgang={{ data: harTilgang }}
                 toggles={toggles}
-                hentOppfolgingsdialoger={hentOppfolgingsdialoger}
+                hentOppfolgingsplaner={hentOppfolgingsplaner}
                 hentSykmeldinger={hentSykmeldinger}
                 sjekkTilgang={sjekkTilgang}
                 settDialog={settDialog}
