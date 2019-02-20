@@ -21,6 +21,7 @@ const initiellState = {
     henter: false,
     hentet: false,
     hentingFeilet: false,
+    hentingForsokt: false,
     data: {},
 };
 
@@ -31,6 +32,7 @@ const setStateVedOppfolgingsdialogerHentet = (state, oppfolgingsdialoger) => {
     let nyState = Object.assign({}, state, {
         henter: false,
         hentet: true,
+        hentingForsokt: true,
     });
     unikeFnr.forEach((fnr) => {
         const oppfolgingsdialogerFnr = oppfolgingsdialoger.filter((dialog) => {
@@ -280,6 +282,7 @@ const oppfolgingsdialoger = (state = initiellState, action = {}) => {
                 henter: true,
                 hentet: false,
                 hentingFeilet: false,
+                hentingForsokt: false,
             });
         }
         case actions.OPPFOLGINGSDIALOGER_HENTET: {
@@ -289,6 +292,7 @@ const oppfolgingsdialoger = (state = initiellState, action = {}) => {
             return Object.assign({}, state, {
                 henter: false,
                 hentingFeilet: true,
+                hentingForsokt: true,
             });
         }
         case actions.OPPRETTER_OPPFOLGINGSDIALOG: {

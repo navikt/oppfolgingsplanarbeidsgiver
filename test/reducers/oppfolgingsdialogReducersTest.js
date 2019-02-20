@@ -18,6 +18,7 @@ describe('oppfolgingsdialoger', () => {
         henter: false,
         hentet: false,
         hentingFeilet: false,
+        hentingForsokt: false,
     });
     const initialState = deepFreeze({
         [fnr]: {
@@ -33,6 +34,7 @@ describe('oppfolgingsdialoger', () => {
                 henter: true,
                 hentet: false,
                 hentingFeilet: false,
+                hentingForsokt: false,
             });
         });
 
@@ -71,6 +73,7 @@ describe('oppfolgingsdialoger', () => {
                 henter: false,
                 hentet: true,
                 hentingFeilet: false,
+                hentingForsokt: true,
                 [fnr]: {
                     data: oppfolgingsdialogListeSykmeldt,
                 },
@@ -87,6 +90,7 @@ describe('oppfolgingsdialoger', () => {
                 henter: false,
                 hentet: false,
                 hentingFeilet: true,
+                hentingForsokt: true,
             });
         });
     });
@@ -99,6 +103,7 @@ describe('oppfolgingsdialoger', () => {
                 henter: false,
                 hentet: false,
                 hentingFeilet: false,
+                hentingForsokt: false,
                 [fnr]: {
                     oppretter: true,
                     opprettet: false,
@@ -114,6 +119,7 @@ describe('oppfolgingsdialoger', () => {
                 henter: false,
                 hentet: false,
                 hentingFeilet: false,
+                hentingForsokt: false,
                 [fnr]: {
                     oppretter: false,
                     opprettet: true,
@@ -129,6 +135,7 @@ describe('oppfolgingsdialoger', () => {
                 henter: false,
                 hentet: false,
                 hentingFeilet: false,
+                hentingForsokt: false,
                 [fnr]: {
                     oppretter: false,
                     opprettingFeilet: true,

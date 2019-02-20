@@ -65,6 +65,7 @@ describe('OppfolgingsdialogerSideTest', () => {
                 henter: false,
                 hentet: true,
                 hentingFeilet: false,
+                hentingForsokt: true,
                 [sykmeldt1.fnr]: {
                     data: [{
                         opprettetDato: '05-05-2017',

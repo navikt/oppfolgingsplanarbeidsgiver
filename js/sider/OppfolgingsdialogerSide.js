@@ -22,7 +22,6 @@ import {
     sykmeldingerReducerPt,
 } from '../shapes';
 import {
-    forsoektHentetOppfolgingsdialoger,
     forsoektHentetSykmeldte,
     henterEllerHarHentetSykmeldinger,
     henterEllerHarHentetToggles,
@@ -269,7 +268,7 @@ export function mapStateToProps(state, ownProps) {
     }
     const sykmeldinger = state.sykmeldinger[koblingId] || {};
     const harSykmeldtGyldigSykmelding = sykmeldinger.data && sykmeldtHarGyldigSykmelding(sykmeldinger.data);
-    const harForsoektHentetOppfolgingsdialoger = forsoektHentetOppfolgingsdialoger(alleOppfolgingsdialogerReducer);
+    const harForsoektHentetOppfolgingsdialoger = alleOppfolgingsdialogerReducer.hentingForsokt;
     const harForsoektHentetAlt = harForsoektHentetOppfolgingsdialoger
         && forsoektHentetSykmeldte(state.sykmeldte)
         && sykmeldinger.hentet;
