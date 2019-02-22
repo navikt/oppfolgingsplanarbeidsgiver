@@ -2,14 +2,14 @@ import { expect } from 'chai';
 import { put, call } from 'redux-saga/effects';
 import { get, post } from 'digisyfo-npm';
 import {
-    avvisDialogSaga,
+    avvisPlanSaga,
     hentArbeidsgiversOppfolginger,
-    opprettOppfolgingsdialog,
-    godkjennDialogSaga,
-} from '../../js/sagas/oppfolgingsplan/oppfolgingsdialogerSagas';
-import * as actions from '../../js/actions/oppfolgingsplan/oppfolgingsdialog_actions';
+    opprettOppfolgingsplan,
+    godkjennPlanSaga,
+} from '../../js/sagas/oppfolgingsplan/oppfolgingsplanerSagas';
+import * as actions from '../../js/actions/oppfolgingsplan/oppfolgingsplan_actions';
 
-describe('oppfolgingsdialogerSagas', () => {
+describe('oppfolgingsplanerSagas', () => {
     const fnr = '12345678';
 
     beforeEach(() => {
@@ -21,9 +21,9 @@ describe('oppfolgingsdialogerSagas', () => {
     describe('hentArbeidsgiversOppfolginger', () => {
         const generator = hentArbeidsgiversOppfolginger();
 
-        it('Skal dispatche HENTER_OPPFOLGINGSDIALOGER', () => {
+        it('Skal dispatche HENTER_OPPFOLGINGSPLANER', () => {
             const nextPut = put({
-                type: actions.HENTER_OPPFOLGINGSDIALOGER,
+                type: actions.HENTER_OPPFOLGINGSPLANER,
             });
             expect(generator.next().value).to.deep.equal(nextPut);
         });
@@ -36,15 +36,15 @@ describe('oppfolgingsdialogerSagas', () => {
 
         it('Skal dernest sette oppfolgingsdialoger henter', () => {
             const nextPut = put({
-                type: actions.OPPFOLGINGSDIALOGER_HENTET,
+                type: actions.OPPFOLGINGSPLANER_HENTET,
                 data: [],
             });
             expect(generator.next().value).to.deep.equal(nextPut);
         });
     });
 
-    describe('opprettOppfolgingsdialog', () => {
-        const generator = opprettOppfolgingsdialog({
+    describe('opprettOppfolgingsplan', () => {
+        const generator = opprettOppfolgingsplan({
             oppfolgingsdialog: {
                 fnr,
                 virksomhet: {
@@ -54,9 +54,9 @@ describe('oppfolgingsdialogerSagas', () => {
             fnr,
         });
 
-        it('Skal dispatche OPPRETTER_OPPFOLGINGSDIALOG', () => {
+        it('Skal dispatche OPPRETTER_OPPFOLGINGSPLAN', () => {
             const nextPut = put({
-                type: actions.OPPRETTER_OPPFOLGINGSDIALOG,
+                type: actions.OPPRETTER_OPPFOLGINGSPLAN,
                 fnr,
             });
             expect(generator.next().value).to.deep.equal(nextPut);
@@ -73,10 +73,10 @@ describe('oppfolgingsdialogerSagas', () => {
             expect(generator.next().value).to.deep.equal(nextCall);
         });
 
-        it('Skal dernest sette oppfolgingsdialoger til opprettet', () => {
+        it('Skal dernest sette oppfolgingsplaner til opprettet', () => {
             const data = 1;
             const nextPut = put({
-                type: actions.OPPFOLGINGSDIALOG_OPPRETTET,
+                type: actions.OPPFOLGINGSPLAN_OPPRETTET,
                 data,
                 fnr,
             });
@@ -84,7 +84,7 @@ describe('oppfolgingsdialogerSagas', () => {
         });
     });
 
-    describe('godkjennOppfolgingsdialog', () => {
+    describe('godkjennOppfolgingsplan', () => {
         const action = {
             id: '12345678',
             gyldighetstidspunkt: {},
@@ -92,11 +92,11 @@ describe('oppfolgingsdialogerSagas', () => {
             fnr,
         };
 
-        const generator = godkjennDialogSaga(action);
+        const generator = godkjennPlanSaga(action);
 
-        it('Skal dispatche GODKJENNER_DIALOG', () => {
+        it('Skal dispatche GODKJENNER_PLAN', () => {
             const nextPut = put({
-                type: actions.GODKJENNER_DIALOG,
+                type: actions.GODKJENNER_PLAN,
                 fnr,
             });
             expect(generator.next().value).to.deep.equal(nextPut);
@@ -108,9 +108,9 @@ describe('oppfolgingsdialogerSagas', () => {
             expect(generator.next().value).to.deep.equal(nextCall);
         });
 
-        it('Skal dernest sette oppfolgingsdialoger til godkjent', () => {
+        it('Skal dernest sette oppfolgingsplaner til godkjent', () => {
             const nextPut = put({
-                type: actions.DIALOG_GODKJENT,
+                type: actions.PLAN_GODKJENT,
                 id: action.id,
                 status: action.status,
                 gyldighetstidspunkt: {},
@@ -120,17 +120,17 @@ describe('oppfolgingsdialogerSagas', () => {
         });
     });
 
-    describe('avvisDialogSaga', () => {
+    describe('avvisPlanSaga', () => {
         const action = {
             id: '12345678',
             fnr,
         };
 
-        const generator = avvisDialogSaga(action);
+        const generator = avvisPlanSaga(action);
 
-        it('Skal dispatche AVVISER_DIALOG', () => {
+        it('Skal dispatche AVVISER_PLAN', () => {
             const nextPut = put({
-                type: actions.AVVISER_DIALOG,
+                type: actions.AVVISER_PLAN,
                 fnr,
             });
             expect(generator.next().value).to.deep.equal(nextPut);
@@ -142,9 +142,9 @@ describe('oppfolgingsdialogerSagas', () => {
             expect(generator.next().value).to.deep.equal(nextCall);
         });
 
-        it('Skal dernest sette oppfolgingsdialoger til godkjent', () => {
+        it('Skal dernest sette oppfolgingsplaner til godkjent', () => {
             const nextPut = put({
-                type: actions.DIALOG_AVVIST,
+                type: actions.PLAN_AVVIST,
                 id: action.id,
                 fnr,
             });

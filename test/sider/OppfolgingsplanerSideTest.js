@@ -5,7 +5,7 @@ import { shallow } from 'enzyme';
 import chaiEnzyme from 'chai-enzyme';
 import { OppfolgingsdialogInfoboks } from 'oppfolgingsdialog-npm';
 import { hentSykmeldingGyldigForOppfoelging, hentSykmeldingIkkeGyldigForOppfoelging } from '../mock/mockSykmeldinger';
-import { OppfolgingsdialogerSide, mapStateToProps } from '../../js/sider/OppfolgingsdialogerSide';
+import { OppfolgingsplanerSide, mapStateToProps } from '../../js/sider/OppfolgingsplanerSide';
 import Oppfolgingsdialoger from '../../js/components/oppfolgingsdialog/Oppfolgingsdialoger';
 import AppSpinner from '../../js/components/AppSpinner';
 import Feilmelding from '../../js/components/Feilmelding';
@@ -13,7 +13,7 @@ import Feilmelding from '../../js/components/Feilmelding';
 chai.use(chaiEnzyme());
 const expect = chai.expect;
 
-describe('OppfolgingsdialogerSideTest', () => {
+describe('OppfolgingsplanerSide', () => {
     describe('mapStateToProps', () => {
         let clock;
         const dagensDato = new Date('2017-01-01');
@@ -41,7 +41,7 @@ describe('OppfolgingsdialogerSideTest', () => {
         const ownProps = {
             params: {
                 koblingId: sykmeldt1.koblingId,
-                oppfolgingsdialogId: '1',
+                oppfolgingsplanId: '1',
             },
         };
         const state = {
@@ -208,12 +208,12 @@ describe('OppfolgingsdialogerSideTest', () => {
         });
     });
 
-    describe('OppfolgingsdialogerSide', () => {
+    describe('OppfolgingsplanerSide', () => {
         let clock;
         const dagensDato = new Date('2017-01-01');
         let ledetekster;
         let sjekkTilgang;
-        let hentOppfolgingsdialoger;
+        let hentOppfolgingsplaner;
         let hentSykmeldinger;
         let hentSykmeldte;
         let hentToggles;
@@ -249,7 +249,7 @@ describe('OppfolgingsdialogerSideTest', () => {
             tilgang = { data: {} };
             toggles = { data: {} };
             sjekkTilgang = sinon.spy();
-            hentOppfolgingsdialoger = sinon.spy();
+            hentOppfolgingsplaner = sinon.spy();
             hentSykmeldinger = sinon.spy();
             hentSykmeldte = sinon.spy();
             hentToggles = sinon.spy();
@@ -262,7 +262,7 @@ describe('OppfolgingsdialogerSideTest', () => {
         });
 
         it('Skal vise spinner dersom data hentes', () => {
-            const component = shallow(<OppfolgingsdialogerSide
+            const component = shallow(<OppfolgingsplanerSide
                 tilgang={tilgang}
                 toggles={toggles}
                 alleOppfolgingsdialogerReducer={alleOppfolgingsdialogerReducer}
@@ -270,7 +270,7 @@ describe('OppfolgingsdialogerSideTest', () => {
                 sykmeldinger={sykmeldinger}
                 oppfolgingsdialoger={[]}
                 henter
-                hentOppfolgingsdialoger={hentOppfolgingsdialoger}
+                hentOppfolgingsplaner={hentOppfolgingsplaner}
                 hentSykmeldinger={hentSykmeldinger}
                 hentToggles={hentToggles}
                 sjekkTilgang={sjekkTilgang}
@@ -281,7 +281,7 @@ describe('OppfolgingsdialogerSideTest', () => {
         });
 
         it('Skal vise spinner dersom sender', () => {
-            const component = shallow(<OppfolgingsdialogerSide
+            const component = shallow(<OppfolgingsplanerSide
                 tilgang={tilgang}
                 toggles={toggles}
                 alleOppfolgingsdialogerReducer={alleOppfolgingsdialogerReducer}
@@ -289,7 +289,7 @@ describe('OppfolgingsdialogerSideTest', () => {
                 sykmeldinger={sykmeldinger}
                 oppfolgingsdialoger={[]}
                 sender
-                hentOppfolgingsdialoger={hentOppfolgingsdialoger}
+                hentOppfolgingsplaner={hentOppfolgingsplaner}
                 hentSykmeldinger={hentSykmeldinger}
                 hentToggles={hentToggles}
                 sjekkTilgang={sjekkTilgang}
@@ -300,7 +300,7 @@ describe('OppfolgingsdialogerSideTest', () => {
         });
 
         it('Skal vise feilmelding dersom hentingFeilet', () => {
-            const component = shallow(<OppfolgingsdialogerSide
+            const component = shallow(<OppfolgingsplanerSide
                 ledetekster={ledetekster}
                 tilgang={tilgang}
                 toggles={toggles}
@@ -309,7 +309,7 @@ describe('OppfolgingsdialogerSideTest', () => {
                 sykmeldinger={sykmeldinger}
                 oppfolgingsdialoger={[]}
                 hentingFeilet
-                hentOppfolgingsdialoger={hentOppfolgingsdialoger}
+                hentOppfolgingsplaner={hentOppfolgingsplaner}
                 hentSykmeldinger={hentSykmeldinger}
                 hentToggles={hentToggles}
                 sjekkTilgang={sjekkTilgang}
@@ -322,7 +322,7 @@ describe('OppfolgingsdialogerSideTest', () => {
         });
 
         it('Skal vise feilmelding dersom sendingFeilet', () => {
-            const component = shallow(<OppfolgingsdialogerSide
+            const component = shallow(<OppfolgingsplanerSide
                 ledetekster={ledetekster}
                 tilgang={tilgang}
                 toggles={toggles}
@@ -331,7 +331,7 @@ describe('OppfolgingsdialogerSideTest', () => {
                 sykmeldinger={sykmeldinger}
                 sendingFeilet
                 oppfolgingsdialoger={[]}
-                hentOppfolgingsdialoger={hentOppfolgingsdialoger}
+                hentOppfolgingsplaner={hentOppfolgingsplaner}
                 hentSykmeldinger={hentSykmeldinger}
                 hentToggles={hentToggles}
                 sjekkTilgang={sjekkTilgang}
@@ -344,14 +344,14 @@ describe('OppfolgingsdialogerSideTest', () => {
         });
 
         it('Skal vise OppfolgingsdialogInfoboks dersom leder ikke har tilgang', () => {
-            const component = shallow(<OppfolgingsdialogerSide
+            const component = shallow(<OppfolgingsplanerSide
                 alleOppfolgingsdialogerReducer={alleOppfolgingsdialogerReducer}
                 oppfolgingsdialogerReducer={oppfolgingsdialogerReducer}
                 sykmeldinger={sykmeldinger}
                 oppfolgingsdialoger={[]}
                 tilgang={{ data: ikkeTilgang }}
                 toggles={toggles}
-                hentOppfolgingsdialoger={hentOppfolgingsdialoger}
+                hentOppfolgingsplaner={hentOppfolgingsplaner}
                 hentSykmeldinger={hentSykmeldinger}
                 hentToggles={hentToggles}
                 sjekkTilgang={sjekkTilgang}
@@ -364,14 +364,14 @@ describe('OppfolgingsdialogerSideTest', () => {
 
         it('Skal vise OppfolgingsdialogInfoboks dersom leder ikke har sykmeldt, ' +
             'og det ikke eksisterer en sykmelding gyldig for oppfoelging', () => {
-            const component = shallow(<OppfolgingsdialogerSide
+            const component = shallow(<OppfolgingsplanerSide
                 alleOppfolgingsdialogerReducer={alleOppfolgingsdialogerReducer}
                 oppfolgingsdialogerReducer={oppfolgingsdialogerReducer}
                 sykmeldinger={sykmeldinger}
                 oppfolgingsdialoger={[]}
                 tilgang={{ data: harTilgang }}
                 toggles={toggles}
-                hentOppfolgingsdialoger={hentOppfolgingsdialoger}
+                hentOppfolgingsplaner={hentOppfolgingsplaner}
                 hentSykmeldinger={hentSykmeldinger}
                 hentToggles={hentToggles}
                 sjekkTilgang={sjekkTilgang}
@@ -385,14 +385,14 @@ describe('OppfolgingsdialogerSideTest', () => {
 
         it('Skal vise Oppfolgingsdialoger dersom henting er OK, ' +
             'og det eksisterer minst en sykmelding gyldig for oppfoelging', () => {
-            const component = shallow(<OppfolgingsdialogerSide
+            const component = shallow(<OppfolgingsplanerSide
                 alleOppfolgingsdialogerReducer={alleOppfolgingsdialogerReducer}
                 oppfolgingsdialogerReducer={oppfolgingsdialogerReducer}
                 sykmeldinger={sykmeldinger}
                 oppfolgingsdialoger={[]}
                 tilgang={{ data: harTilgang }}
                 toggles={toggles}
-                hentOppfolgingsdialoger={hentOppfolgingsdialoger}
+                hentOppfolgingsplaner={hentOppfolgingsplaner}
                 hentSykmeldinger={hentSykmeldinger}
                 hentToggles={hentToggles}
                 sjekkTilgang={sjekkTilgang}

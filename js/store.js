@@ -13,7 +13,7 @@ import forespoerselRevidering from './reducers/forespoerselRevidering';
 import kommentar from './reducers/kommentar';
 import kontaktinfo from './reducers/kontaktinfo';
 import kopierDialogReducer from './reducers/kopierOppfolgingsdialog';
-import oppfolgingsdialoger from './reducers/oppfolgingsdialog';
+import oppfolgingsdialoger from './reducers/oppfolgingsplaner';
 import navigasjontoggles from './reducers/navigasjontoggles';
 import naermesteleder from './reducers/naermesteleder';
 import nullstill from './reducers/nullstillGodkjenning';

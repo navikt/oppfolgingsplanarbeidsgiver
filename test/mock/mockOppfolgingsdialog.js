@@ -347,8 +347,8 @@ export const hentOppfolgingsdialogAktiv = (dagensDato) => {
     });
 };
 
-const getOppfolgingsdialog = (oppfolgingsdialogId = {}) => {
-    return Object.assign({}, oppfolgingsdialog, oppfolgingsdialogId);
+const getOppfolgingsdialog = (oppfolgingsplanId = {}) => {
+    return Object.assign({}, oppfolgingsdialog, oppfolgingsplanId);
 };
 
 export default getOppfolgingsdialog;

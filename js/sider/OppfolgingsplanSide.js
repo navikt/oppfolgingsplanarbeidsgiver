@@ -46,17 +46,17 @@ import { lagreTiltak, slettTiltak } from '../actions/oppfolgingsplan/tiltak_acti
 import { sjekkTilgang } from '../actions/oppfolgingsplan/sjekkTilgang_actions';
 import { settDialog } from '../actions/oppfolgingsplan/sett_actions';
 import {
-    avvisDialog,
-    godkjennDialog,
-    hentOppfolgingsdialoger,
-} from '../actions/oppfolgingsplan/oppfolgingsdialog_actions';
+    avvisPlan,
+    godkjennPlan,
+    hentOppfolgingsplaner,
+} from '../actions/oppfolgingsplan/oppfolgingsplan_actions';
 import Oppfolgingsdialog from '../components/oppfolgingsdialog/Oppfolgingsdialog';
 import { getContextRoot } from '../routers/paths';
 import history from '../history';
 import { hentSykmeldteBerikelser as hentSykmeldteBerikelserAction } from '../actions/sykmeldte_actions';
 import { beregnSkalHenteSykmeldtBerikelse } from '../utils/sykmeldtUtils';
 
-export class OppfolgingsdialogSide extends Component {
+export class OppfolgingsplanSide extends Component {
     componentDidMount() {
         const {
             koblingId,
@@ -65,7 +65,7 @@ export class OppfolgingsdialogSide extends Component {
             toggles,
         } = this.props;
         if (!henterEllerHarHentetOppfolgingsdialoger(alleOppfolgingsdialogerReducer)) {
-            this.props.hentOppfolgingsdialoger();
+            this.props.hentOppfolgingsplaner();
         }
         if (!henterEllerHarHentetSykmeldinger(sykmeldinger)) {
             this.props.hentSykmeldinger(koblingId);
@@ -108,7 +108,7 @@ export class OppfolgingsdialogSide extends Component {
         this.props.sjekkTilgang(sykmeldt);
 
         if (oppfolgingsdialogHarBlittAvbrutt(avbrytdialogReducer, nextProps.avbrytdialogReducer)) {
-            this.props.hentOppfolgingsdialoger();
+            this.props.hentOppfolgingsplaner();
         }
         if (avbrytdialogReducer.sendt && alleOppfolgingsdialogerReducer.henter && nextProps.alleOppfolgingsdialogerReducer.hentet) {
             const nyOpprettetDialog = finnNyOppfolgingsplanMedVirkshomhetEtterAvbrutt(nextProps.oppfolgingsdialoger, nextProps.oppfolgingsdialog.virksomhet.virksomhetsnummer);
@@ -176,7 +176,7 @@ export class OppfolgingsdialogSide extends Component {
     }
 }
 
-OppfolgingsdialogSide.propTypes = {
+OppfolgingsplanSide.propTypes = {
     henter: PropTypes.bool,
     hentingFeilet: PropTypes.bool,
     hentet: PropTypes.bool,
@@ -224,7 +224,7 @@ OppfolgingsdialogSide.propTypes = {
     hentArbeidsforhold: PropTypes.func,
     godkjennDialogAg: PropTypes.func,
     hentKontaktinfo: PropTypes.func,
-    hentOppfolgingsdialoger: PropTypes.func,
+    hentOppfolgingsplaner: PropTypes.func,
     hentPdfurler: PropTypes.func,
     hentPerson: PropTypes.func,
     hentNaermesteLeder: PropTypes.func,
@@ -234,7 +234,7 @@ OppfolgingsdialogSide.propTypes = {
     settAktivtSteg: PropTypes.func,
     settDialog: PropTypes.func,
     sjekkTilgang: PropTypes.func,
-    oppfolgingsdialogId: PropTypes.string,
+    oppfolgingsplanId: PropTypes.string,
     hentSykmeldinger: PropTypes.func,
     hentSykeforlopsPerioder: PropTypes.func,
     skalHenteBerikelse: PropTypes.bool,
@@ -243,7 +243,7 @@ OppfolgingsdialogSide.propTypes = {
 
 export function mapStateToProps(state, ownProps) {
     const koblingId = ownProps.params.koblingId;
-    const id = ownProps.params.oppfolgingsdialogId;
+    const id = ownProps.params.oppfolgingsplanId;
     const sykmeldt = state.sykmeldte.data && state.sykmeldte.data.filter((s) => {
         return `${s.koblingId}` === koblingId;
     })[0];
@@ -353,10 +353,10 @@ export function mapStateToProps(state, ownProps) {
 }
 
 const OppfolgingsdialogContainer = connect(mapStateToProps, {
-    hentOppfolgingsdialoger,
+    hentOppfolgingsplaner,
     sjekkTilgang,
-    godkjennDialogAg: godkjennDialog,
-    avvisDialogAg: avvisDialog,
+    godkjennDialogAg: godkjennPlan,
+    avvisDialogAg: avvisPlan,
     nullstillGodkjenning,
     settAktivtSteg,
     settDialog,
@@ -382,6 +382,6 @@ const OppfolgingsdialogContainer = connect(mapStateToProps, {
     hentNaermesteLeder,
     hentSykeforlopsPerioder,
     hentSykmeldteBerikelser: hentSykmeldteBerikelserAction,
-})(OppfolgingsdialogSide);
+})(OppfolgingsplanSide);
 
 export default OppfolgingsdialogContainer;

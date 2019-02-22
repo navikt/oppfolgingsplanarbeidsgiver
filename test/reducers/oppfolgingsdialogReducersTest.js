@@ -1,11 +1,11 @@
 import deepFreeze from 'deep-freeze';
 import { expect } from 'chai';
-import * as oppfolgingsdialogActions from '../../js/actions/oppfolgingsplan/oppfolgingsdialog_actions';
+import * as oppfolgingsdialogActions from '../../js/actions/oppfolgingsplan/oppfolgingsplan_actions';
 import * as nullstillGodkjenningAction from '../../js/actions/oppfolgingsplan/nullstillGodkjenning_actions';
 import * as samtykkeAction from '../../js/actions/oppfolgingsplan/samtykke_actions';
 import * as arbeidsoppgaveAction from '../../js/actions/oppfolgingsplan/arbeidsoppgave_actions';
 import * as tiltakAction from '../../js/actions/oppfolgingsplan/tiltak_actions';
-import oppfolgingsdialoger from '../../js/reducers/oppfolgingsdialog';
+import oppfolgingsdialoger from '../../js/reducers/oppfolgingsplaner';
 import getOppfolgingsdialog from '../mock/mockOppfolgingsdialog';
 
 describe('oppfolgingsdialoger', () => {
@@ -27,8 +27,8 @@ describe('oppfolgingsdialoger', () => {
     });
 
     describe('henter', () => {
-        it('håndterer HENTER_OPPFOLGINGSDIALOGER', () => {
-            const action = oppfolgingsdialogActions.henterOppfolgingsdialoger();
+        it('håndterer HENTER_OPPFOLGINGSPLANER', () => {
+            const action = oppfolgingsdialogActions.henterOppfolgingsplaner();
             const nextState = oppfolgingsdialoger(initialStateUtenData, action);
             expect(nextState).to.deep.equal({
                 henter: true,
@@ -38,7 +38,7 @@ describe('oppfolgingsdialoger', () => {
             });
         });
 
-        it('håndterer OPPFOLGINGSDIALOGER_HENTET', () => {
+        it('håndterer OPPFOLGINGSPLANER_HENTET', () => {
             const oppfolgingsdialogListeSykmeldt = [
                 Object.assign({}, mockdata.oppfolgingsdialoger[0], {
                     id: 1,
@@ -67,7 +67,7 @@ describe('oppfolgingsdialoger', () => {
                     }),
                 }),
             ];
-            const action = oppfolgingsdialogActions.oppfolgingsdialogerHentet(oppfolgingsdialogListeSykmeldt.concat(oppfolgingsdialogListeSykmeldt2));
+            const action = oppfolgingsdialogActions.oppfolgingsplanerHentet(oppfolgingsdialogListeSykmeldt.concat(oppfolgingsdialogListeSykmeldt2));
             const nextState = oppfolgingsdialoger(initialStateUtenData, action);
             expect(nextState).to.deep.equal({
                 henter: false,
@@ -83,8 +83,8 @@ describe('oppfolgingsdialoger', () => {
             });
         });
 
-        it('håndterer HENT_OPPFOLGINGSDIALOGER_FEILET', () => {
-            const action = oppfolgingsdialogActions.hentOppfolgingsdialogerFeilet();
+        it('håndterer HENT_OPPFOLGINGSPLANER_FEILET', () => {
+            const action = oppfolgingsdialogActions.hentOppfolgingsplanerFeilet();
             const nextState = oppfolgingsdialoger(initialStateUtenData, action);
             expect(nextState).to.deep.equal({
                 henter: false,
@@ -96,8 +96,8 @@ describe('oppfolgingsdialoger', () => {
     });
 
     describe('oppretter', () => {
-        it('håndterer OPPRETTER_OPPFOLGINGSDIALOG', () => {
-            const action = oppfolgingsdialogActions.oppretterOppfolgingsdialog(fnr);
+        it('håndterer OPPRETTER_OPPFOLGINGSPLAN', () => {
+            const action = oppfolgingsdialogActions.oppretterOppfolgingsplan(fnr);
             const nextState = oppfolgingsdialoger(initialStateUtenData, action);
             expect(nextState).to.deep.equal({
                 henter: false,
@@ -112,8 +112,8 @@ describe('oppfolgingsdialoger', () => {
             });
         });
 
-        it('håndterer OPPFOLGINGSDIALOG_OPPRETTET', () => {
-            const action = oppfolgingsdialogActions.oppfolgingsdialogOpprettet(1, fnr);
+        it('håndterer OPPFOLGINGSPLAN_OPPRETTET', () => {
+            const action = oppfolgingsdialogActions.oppfolgingsplanOpprettet(1, fnr);
             const nextState = oppfolgingsdialoger(initialStateUtenData, action);
             expect(nextState).to.deep.equal({
                 henter: false,
@@ -128,8 +128,8 @@ describe('oppfolgingsdialoger', () => {
             });
         });
 
-        it('håndterer OPPRETT_OPPFOLGINGSDIALOG_FEILET', () => {
-            const action = oppfolgingsdialogActions.opprettOppfolgingsdialogFeilet(fnr);
+        it('håndterer OPPRETT_OPPFOLGINGSPLAN_FEILET', () => {
+            const action = oppfolgingsdialogActions.opprettOppfolgingsplanFeilet(fnr);
             const nextState = oppfolgingsdialoger(initialStateUtenData, action);
             expect(nextState).to.deep.equal({
                 henter: false,
@@ -145,8 +145,8 @@ describe('oppfolgingsdialoger', () => {
     });
 
     describe('godkjenner', () => {
-        it('håndterer GODKJENNER_DIALOG', () => {
-            const action = oppfolgingsdialogActions.godkjennerDialog(fnr);
+        it('håndterer GODKJENNER_PLAN', () => {
+            const action = oppfolgingsdialogActions.godkjennerPlan(fnr);
             const nextState = oppfolgingsdialoger(initialState, action);
             expect(nextState).to.deep.equal({
                 [fnr]: {
@@ -159,8 +159,8 @@ describe('oppfolgingsdialoger', () => {
         });
 
 
-        it('håndterer DIALOG_GODKJENT', () => {
-            const action = oppfolgingsdialogActions.dialogGodkjent(1, 'tvungenGodkjenning', new Date(), fnr);
+        it('håndterer PLAN_GODKJENT', () => {
+            const action = oppfolgingsdialogActions.planGodkjent(1, 'tvungenGodkjenning', new Date(), fnr);
             const nextState = oppfolgingsdialoger(initialState, action);
             expect(nextState).to.deep.equal({
                 [fnr]: {
@@ -171,8 +171,8 @@ describe('oppfolgingsdialoger', () => {
             });
         });
 
-        it('håndterer GODKJENN_DIALOG_FEILET', () => {
-            const action = oppfolgingsdialogActions.godkjennDialogFeilet(fnr);
+        it('håndterer GODKJENN_PLAN_FEILET', () => {
+            const action = oppfolgingsdialogActions.godkjennPlanFeilet(fnr);
             const nextState = oppfolgingsdialoger(initialState, action);
             expect(nextState).to.deep.equal({
                 [fnr]: {
@@ -204,8 +204,8 @@ describe('oppfolgingsdialoger', () => {
         });
     });
 
-    it('håndterer AVVISER_DIALOG', () => {
-        const action = oppfolgingsdialogActions.avviserDialog(fnr);
+    it('håndterer AVVISER_PLAN', () => {
+        const action = oppfolgingsdialogActions.avviserPlan(fnr);
         const nextState = oppfolgingsdialoger(initialState, action);
         expect(nextState).to.deep.equal({
             [fnr]: {
@@ -217,8 +217,8 @@ describe('oppfolgingsdialoger', () => {
         });
     });
 
-    it('håndterer DIALOG_AVVIST', () => {
-        const action = oppfolgingsdialogActions.dialogAvvist(1, fnr);
+    it('håndterer PLAN_AVVIST', () => {
+        const action = oppfolgingsdialogActions.planAvvist(1, fnr);
         const nextState = oppfolgingsdialoger(initialState, action);
         expect(nextState).to.deep.equal({
             [fnr]: {
@@ -229,8 +229,8 @@ describe('oppfolgingsdialoger', () => {
         });
     });
 
-    it('håndterer AVVIS_DIALOG_FEILET', () => {
-        const action = oppfolgingsdialogActions.avvisDialogFeilet(fnr);
+    it('håndterer AVVIS_PLAN_FEILET', () => {
+        const action = oppfolgingsdialogActions.avvisPlanFeilet(fnr);
         const nextState = oppfolgingsdialoger(initialState, action);
         expect(nextState).to.deep.equal({
             [fnr]: {

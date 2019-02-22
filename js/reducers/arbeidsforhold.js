@@ -1,5 +1,5 @@
 import * as actions from '../actions/oppfolgingsplan/arbeidsforhold_actions';
-import { HENTER_OPPFOLGINGSDIALOGER } from '../actions/oppfolgingsplan/oppfolgingsdialog_actions';
+import { HENTER_OPPFOLGINGSPLANER } from '../actions/oppfolgingsplan/oppfolgingsplan_actions';
 
 const initiellState = {
     henter: [],
@@ -38,7 +38,7 @@ const arbeidsforhold = (state = initiellState, action = {}) => {
                 hentingFeilet: state.hentingFeilet.concat({ fnr: action.fnr, virksomhetsnummer: action.virksomhetsnummer }),
             });
         }
-        case HENTER_OPPFOLGINGSDIALOGER:
+        case HENTER_OPPFOLGINGSPLANER:
             return initiellState;
         default:
             return state;
