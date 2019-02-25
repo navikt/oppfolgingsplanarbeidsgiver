@@ -45,7 +45,7 @@ describe('oppfolgingsplanerSagas', () => {
 
     describe('opprettOppfolgingsplan', () => {
         const generator = opprettOppfolgingsplan({
-            oppfolgingsdialog: {
+            oppfolgingsplan: {
                 fnr,
                 virksomhet: {
                     virksomhetsnummer: '123',
