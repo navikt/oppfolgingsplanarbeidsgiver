@@ -22,7 +22,7 @@ export function* opprettOppfolgingsplan(action) {
     yield put(actions.oppretterOppfolgingsplan(fnr));
     try {
         const url = `${process.env.REACT_APP_OPPFOELGINGSDIALOGREST_ROOT}/arbeidsgiver/oppfoelgingsdialoger`;
-        const data = yield call(post, url, action.oppfolgingsdialog);
+        const data = yield call(post, url, action.oppfolgingsplan);
         yield put(actions.oppfolgingsplanOpprettet(data, fnr));
     } catch (e) {
         log(e);
