@@ -4,7 +4,7 @@
       "id": "6d0a02e5-3425-4583-b588-ce73a45d0e79",
       "startLegemeldtFravaer": "2018-10-30",
       "skalViseSkravertFelt": true,
-      "identdato": "2018-10-30",
+      "identdato": "2019-03-30",
       "status": "SENDT",
       "naermesteLederStatus": "LEST",
       "innsendtArbeidsgivernavn": null,
@@ -15,7 +15,7 @@
         "juridiskOrgnummer": "111222333"
       },
       "orgnummer": "333444555",
-      "sendtdato": "2018-11-08T12:33:46",
+      "sendtdato": "2019-05-08T12:33:46",
       "sporsmal": null,
       "pasient": {
         "fnr": "01010112345",
@@ -37,8 +37,8 @@
       "mulighetForArbeid": {
         "perioder": [
           {
-            "fom": "2018-10-30",
-            "tom": "2018-11-07",
+            "fom": "2019-03-30",
+            "tom": "2019-08-07",
             "grad": 100,
             "behandlingsdager": null,
             "reisetilskudd": null,
@@ -56,7 +56,7 @@
         "arbeidsfoerEtterPerioden": true,
         "hensynPaaArbeidsplassen": "Må ta det pent",
         "antarReturSammeArbeidsgiver": true,
-        "antattDatoReturSammeArbeidsgiver": "2018-10-30",
+        "antattDatoReturSammeArbeidsgiver": "2019-03-30",
         "antarReturAnnenArbeidsgiver": true,
         "tilbakemeldingReturArbeid": null,
         "utenArbeidsgiverAntarTilbakeIArbeid": false,
@@ -85,16 +85,16 @@
         "tilbakedatertBegrunnelse": null
       },
       "bekreftelse": {
-        "utstedelsesdato": "2018-10-30",
+        "utstedelsesdato": "2019-03-30",
         "sykmelder": "Frida Perma Frost",
         "sykmelderTlf": "99998888"
       }
     },
     {
       "id": "fd021487-c238-4d3b-aabb-ed2fe58ffb09",
-      "startLegemeldtFravaer": "2018-10-30",
+      "startLegemeldtFravaer": "2019-03-30",
       "skalViseSkravertFelt": true,
-      "identdato": "2018-10-30",
+      "identdato": "2019-03-30",
       "status": "SENDT",
       "naermesteLederStatus": "LEST",
       "innsendtArbeidsgivernavn": null,
@@ -105,7 +105,7 @@
         "juridiskOrgnummer": "111222333"
       },
       "orgnummer": "333444555",
-      "sendtdato": "2018-11-08T12:33:57",
+      "sendtdato": "2019-05-08T12:33:57",
       "sporsmal": null,
       "pasient": {
         "fnr": "01010112345",
@@ -127,8 +127,8 @@
       "mulighetForArbeid": {
         "perioder": [
           {
-            "fom": "2018-10-30",
-            "tom": "2018-11-07",
+            "fom": "2019-03-30",
+            "tom": "2019-08-07",
             "grad": 100,
             "behandlingsdager": null,
             "reisetilskudd": null,
@@ -146,7 +146,7 @@
         "arbeidsfoerEtterPerioden": true,
         "hensynPaaArbeidsplassen": "Må ta det pent",
         "antarReturSammeArbeidsgiver": true,
-        "antattDatoReturSammeArbeidsgiver": "2018-10-30",
+        "antattDatoReturSammeArbeidsgiver": "2019-05-07",
         "antarReturAnnenArbeidsgiver": true,
         "tilbakemeldingReturArbeid": null,
         "utenArbeidsgiverAntarTilbakeIArbeid": false,
@@ -175,7 +175,7 @@
         "tilbakedatertBegrunnelse": null
       },
       "bekreftelse": {
-        "utstedelsesdato": "2018-10-30",
+        "utstedelsesdato": "2019-03-30",
         "sykmelder": "Frida Perma Frost",
         "sykmelderTlf": "99998888"
       }
@@ -184,9 +184,9 @@
   "28780": [
     {
       "id": "ee8819c0-63cc-4c86-b041-64140c6ec0dc",
-      "startLegemeldtFravaer": "2018-11-04",
+      "startLegemeldtFravaer": "2019-04-04",
       "skalViseSkravertFelt": true,
-      "identdato": "2018-11-04",
+      "identdato": "2019-04-04",
       "status": "SENDT",
       "naermesteLederStatus": "LEST",
       "innsendtArbeidsgivernavn": null,
@@ -197,7 +197,7 @@
         "juridiskOrgnummer": "111222333"
       },
       "orgnummer": "333444555",
-      "sendtdato": "2018-11-13T14:51:01",
+      "sendtdato": "2019-04-06T14:51:01",
       "sporsmal": null,
       "pasient": {
         "fnr": "02020212345",
@@ -219,8 +219,8 @@
       "mulighetForArbeid": {
         "perioder": [
           {
-            "fom": "2018-11-04",
-            "tom": "2018-11-12",
+            "fom": "2019-04-04",
+            "tom": "2019-09-12",
             "grad": 100,
             "behandlingsdager": null,
             "reisetilskudd": null,
@@ -238,7 +238,7 @@
         "arbeidsfoerEtterPerioden": true,
         "hensynPaaArbeidsplassen": "Må ta det pent",
         "antarReturSammeArbeidsgiver": true,
-        "antattDatoReturSammeArbeidsgiver": "2018-11-04",
+        "antattDatoReturSammeArbeidsgiver": "2019-04-04",
         "antarReturAnnenArbeidsgiver": true,
         "tilbakemeldingReturArbeid": null,
         "utenArbeidsgiverAntarTilbakeIArbeid": false,
@@ -267,7 +267,7 @@
         "tilbakedatertBegrunnelse": null
       },
       "bekreftelse": {
-        "utstedelsesdato": "2018-11-04",
+        "utstedelsesdato": "2019-04-04",
         "sykmelder": "Frida Perma Frost",
         "sykmelderTlf": "99998888"
       }
@@ -276,9 +276,9 @@
   "30267": [
     {
       "id": "69920026-7a41-4cae-bad4-60792fd7309e",
-      "startLegemeldtFravaer": "2018-11-04",
+      "startLegemeldtFravaer": "2019-04-04",
       "skalViseSkravertFelt": true,
-      "identdato": "2018-11-04",
+      "identdato": "2019-04-04",
       "status": "SENDT",
       "naermesteLederStatus": "LEST",
       "innsendtArbeidsgivernavn": null,
@@ -289,7 +289,7 @@
         "juridiskOrgnummer": "111222333"
       },
       "orgnummer": "333999555",
-      "sendtdato": "2018-11-14T15:32:32",
+      "sendtdato": "2019-04-14T15:32:32",
       "sporsmal": null,
       "pasient": {
         "fnr": "03040512345",
@@ -311,8 +311,8 @@
       "mulighetForArbeid": {
         "perioder": [
           {
-            "fom": "2018-11-04",
-            "tom": "2018-11-12",
+            "fom": "2019-04-04",
+            "tom": "2019-09-12",
             "grad": 100,
             "behandlingsdager": null,
             "reisetilskudd": null,
@@ -330,7 +330,7 @@
         "arbeidsfoerEtterPerioden": true,
         "hensynPaaArbeidsplassen": "Må ta det pent",
         "antarReturSammeArbeidsgiver": true,
-        "antattDatoReturSammeArbeidsgiver": "2018-11-04",
+        "antattDatoReturSammeArbeidsgiver": "2019-04-04",
         "antarReturAnnenArbeidsgiver": true,
         "tilbakemeldingReturArbeid": null,
         "utenArbeidsgiverAntarTilbakeIArbeid": false,
@@ -359,16 +359,16 @@
         "tilbakedatertBegrunnelse": null
       },
       "bekreftelse": {
-        "utstedelsesdato": "2018-11-04",
+        "utstedelsesdato": "2019-04-04",
         "sykmelder": "Frida Perma Frost",
         "sykmelderTlf": "99998888"
       }
     },
     {
       "id": "67e491ae-b893-40df-8bf8-d3b1618b1623",
-      "startLegemeldtFravaer": "2018-11-05",
+      "startLegemeldtFravaer": "2019-04-05",
       "skalViseSkravertFelt": true,
-      "identdato": "2018-11-05",
+      "identdato": "2019-04-05",
       "status": "SENDT",
       "naermesteLederStatus": "LEST",
       "innsendtArbeidsgivernavn": null,
@@ -379,7 +379,7 @@
         "juridiskOrgnummer": "111222333"
       },
       "orgnummer": "333999555",
-      "sendtdato": "2018-11-14T15:32:58",
+      "sendtdato": "2019-04-05T15:32:58",
       "sporsmal": null,
       "pasient": {
         "fnr": "03040512345",
@@ -401,8 +401,8 @@
       "mulighetForArbeid": {
         "perioder": [
           {
-            "fom": "2018-11-05",
-            "tom": "2018-11-13",
+            "fom": "2019-04-05",
+            "tom": "2019-09-13",
             "grad": 100,
             "behandlingsdager": null,
             "reisetilskudd": null,
@@ -420,7 +420,7 @@
         "arbeidsfoerEtterPerioden": true,
         "hensynPaaArbeidsplassen": "Må ta det pent",
         "antarReturSammeArbeidsgiver": true,
-        "antattDatoReturSammeArbeidsgiver": "2018-11-05",
+        "antattDatoReturSammeArbeidsgiver": "2019-04-05",
         "antarReturAnnenArbeidsgiver": true,
         "tilbakemeldingReturArbeid": null,
         "utenArbeidsgiverAntarTilbakeIArbeid": false,
@@ -449,16 +449,16 @@
         "tilbakedatertBegrunnelse": null
       },
       "bekreftelse": {
-        "utstedelsesdato": "2018-11-05",
+        "utstedelsesdato": "2019-04-05",
         "sykmelder": "Frida Perma Frost",
         "sykmelderTlf": "99998888"
       }
     },
     {
       "id": "cf13f7db-cf3d-45b7-bbfa-d577cf88cc7e",
-      "startLegemeldtFravaer": "2018-11-05",
+      "startLegemeldtFravaer": "2019-04-05",
       "skalViseSkravertFelt": true,
-      "identdato": "2018-11-05",
+      "identdato": "2019-04-05",
       "status": "SENDT",
       "naermesteLederStatus": "LEST",
       "innsendtArbeidsgivernavn": null,
@@ -469,7 +469,7 @@
         "juridiskOrgnummer": "111222333"
       },
       "orgnummer": "333999555",
-      "sendtdato": "2018-11-14T15:32:41",
+      "sendtdato": "2019-04-05T15:32:41",
       "sporsmal": null,
       "pasient": {
         "fnr": "03040512345",
@@ -491,8 +491,8 @@
       "mulighetForArbeid": {
         "perioder": [
           {
-            "fom": "2018-11-05",
-            "tom": "2018-11-13",
+            "fom": "2019-04-05",
+            "tom": "2019-09-13",
             "grad": 100,
             "behandlingsdager": null,
             "reisetilskudd": null,
@@ -510,7 +510,7 @@
         "arbeidsfoerEtterPerioden": true,
         "hensynPaaArbeidsplassen": "Må ta det pent",
         "antarReturSammeArbeidsgiver": true,
-        "antattDatoReturSammeArbeidsgiver": "2018-11-05",
+        "antattDatoReturSammeArbeidsgiver": "2019-04-05",
         "antarReturAnnenArbeidsgiver": true,
         "tilbakemeldingReturArbeid": null,
         "utenArbeidsgiverAntarTilbakeIArbeid": false,
@@ -539,7 +539,7 @@
         "tilbakedatertBegrunnelse": null
       },
       "bekreftelse": {
-        "utstedelsesdato": "2018-11-05",
+        "utstedelsesdato": "2019-04-05",
         "sykmelder": "Frida Perma Frost",
         "sykmelderTlf": "99998888"
       }
@@ -548,9 +548,9 @@
   "30269": [
     {
       "id": "6486bad4-1524-43bf-b176-e4177f7f1061",
-      "startLegemeldtFravaer": "2018-08-02",
+      "startLegemeldtFravaer": "2019-04-02",
       "skalViseSkravertFelt": true,
-      "identdato": "2018-08-02",
+      "identdato": "2019-04-02",
       "status": "SENDT",
       "naermesteLederStatus": "LEST",
       "innsendtArbeidsgivernavn": null,
@@ -561,7 +561,7 @@
         "juridiskOrgnummer": "111222333"
       },
       "orgnummer": "000111222",
-      "sendtdato": "2018-11-14T15:27:23",
+      "sendtdato": "2019-04-02T15:27:23",
       "sporsmal": null,
       "pasient": {
         "fnr": "12121255555",
@@ -583,8 +583,8 @@
       "mulighetForArbeid": {
         "perioder": [
           {
-            "fom": "2018-08-02",
-            "tom": "2018-09-01",
+            "fom": "2019-04-02",
+            "tom": "2019-10-01",
             "grad": 100,
             "behandlingsdager": null,
             "reisetilskudd": null,
@@ -602,7 +602,7 @@
         "arbeidsfoerEtterPerioden": true,
         "hensynPaaArbeidsplassen": "Må ta det pent",
         "antarReturSammeArbeidsgiver": true,
-        "antattDatoReturSammeArbeidsgiver": "2018-08-02",
+        "antattDatoReturSammeArbeidsgiver": "2019-04-02",
         "antarReturAnnenArbeidsgiver": true,
         "tilbakemeldingReturArbeid": null,
         "utenArbeidsgiverAntarTilbakeIArbeid": false,
@@ -631,16 +631,16 @@
         "tilbakedatertBegrunnelse": null
       },
       "bekreftelse": {
-        "utstedelsesdato": "2018-08-02",
+        "utstedelsesdato": "2019-04-02",
         "sykmelder": "Frida Perma Frost",
         "sykmelderTlf": "99998888"
       }
     },
     {
       "id": "b6da9de8-9f71-45fe-bfe8-9f6d0cef2d72",
-      "startLegemeldtFravaer": "2018-11-05",
+      "startLegemeldtFravaer": "2019-04-05",
       "skalViseSkravertFelt": true,
-      "identdato": "2018-11-05",
+      "identdato": "2019-04-05",
       "status": "SENDT",
       "naermesteLederStatus": "LEST",
       "innsendtArbeidsgivernavn": null,
@@ -651,7 +651,7 @@
         "juridiskOrgnummer": "111222333"
       },
       "orgnummer": "000111222",
-      "sendtdato": "2018-11-14T15:30:00",
+      "sendtdato": "2019-04-05T15:30:00",
       "sporsmal": null,
       "pasient": {
         "fnr": "12121255555",
@@ -673,8 +673,8 @@
       "mulighetForArbeid": {
         "perioder": [
           {
-            "fom": "2018-11-05",
-            "tom": "2018-11-13",
+            "fom": "2019-04-05",
+            "tom": "2019-10-13",
             "grad": 100,
             "behandlingsdager": null,
             "reisetilskudd": null,
@@ -692,7 +692,7 @@
         "arbeidsfoerEtterPerioden": true,
         "hensynPaaArbeidsplassen": "Må ta det pent",
         "antarReturSammeArbeidsgiver": true,
-        "antattDatoReturSammeArbeidsgiver": "2018-11-05",
+        "antattDatoReturSammeArbeidsgiver": "2019-04-05",
         "antarReturAnnenArbeidsgiver": true,
         "tilbakemeldingReturArbeid": null,
         "utenArbeidsgiverAntarTilbakeIArbeid": false,
@@ -721,7 +721,7 @@
         "tilbakedatertBegrunnelse": null
       },
       "bekreftelse": {
-        "utstedelsesdato": "2018-11-05",
+        "utstedelsesdato": "2019-04-05",
         "sykmelder": "Frida Perma Frost",
         "sykmelderTlf": "99998888"
       }
@@ -730,9 +730,9 @@
   "30270": [
     {
       "id": "a92d674d-82a0-4e21-8e8e-99c8d80e79ba",
-      "startLegemeldtFravaer": "2018-11-05",
+      "startLegemeldtFravaer": "2019-04-05",
       "skalViseSkravertFelt": true,
-      "identdato": "2018-11-05",
+      "identdato": "2019-04-05",
       "status": "SENDT",
       "naermesteLederStatus": "LEST",
       "innsendtArbeidsgivernavn": null,
@@ -743,7 +743,7 @@
         "juridiskOrgnummer": "111222333"
       },
       "orgnummer": "666333777",
-      "sendtdato": "2018-11-14T15:35:24",
+      "sendtdato": "2019-04-05T15:35:24",
       "sporsmal": null,
       "pasient": {
         "fnr": "12121200100",
@@ -765,8 +765,8 @@
       "mulighetForArbeid": {
         "perioder": [
           {
-            "fom": "2018-11-05",
-            "tom": "2018-11-13",
+            "fom": "2019-04-05",
+            "tom": "2019-10-13",
             "grad": 100,
             "behandlingsdager": null,
             "reisetilskudd": null,
@@ -784,7 +784,7 @@
         "arbeidsfoerEtterPerioden": true,
         "hensynPaaArbeidsplassen": "Må ta det pent",
         "antarReturSammeArbeidsgiver": true,
-        "antattDatoReturSammeArbeidsgiver": "2018-11-05",
+        "antattDatoReturSammeArbeidsgiver": "2019-07-05",
         "antarReturAnnenArbeidsgiver": true,
         "tilbakemeldingReturArbeid": null,
         "utenArbeidsgiverAntarTilbakeIArbeid": false,
@@ -813,16 +813,16 @@
         "tilbakedatertBegrunnelse": null
       },
       "bekreftelse": {
-        "utstedelsesdato": "2018-11-05",
+        "utstedelsesdato": "2019-04-05",
         "sykmelder": "Frida Perma Frost",
         "sykmelderTlf": "99998888"
       }
     },
     {
       "id": "6b4957ff-d959-43ed-bc36-0eb01ec4986f",
-      "startLegemeldtFravaer": "2018-11-05",
+      "startLegemeldtFravaer": "2019-04-15",
       "skalViseSkravertFelt": true,
-      "identdato": "2018-11-05",
+      "identdato": "2019-04-15",
       "status": "SENDT",
       "naermesteLederStatus": "LEST",
       "innsendtArbeidsgivernavn": null,
@@ -833,7 +833,7 @@
         "juridiskOrgnummer": "111222333"
       },
       "orgnummer": "666333777",
-      "sendtdato": "2018-11-14T15:35:36",
+      "sendtdato": "2019-04-25T15:35:36",
       "sporsmal": null,
       "pasient": {
         "fnr": "12121200100",
@@ -855,8 +855,8 @@
       "mulighetForArbeid": {
         "perioder": [
           {
-            "fom": "2018-11-05",
-            "tom": "2018-11-13",
+            "fom": "2019-04-15",
+            "tom": "2019-11-03",
             "grad": 100,
             "behandlingsdager": null,
             "reisetilskudd": null,
@@ -874,7 +874,7 @@
         "arbeidsfoerEtterPerioden": true,
         "hensynPaaArbeidsplassen": "Må ta det pent",
         "antarReturSammeArbeidsgiver": true,
-        "antattDatoReturSammeArbeidsgiver": "2018-11-05",
+        "antattDatoReturSammeArbeidsgiver": "2019-04-15",
         "antarReturAnnenArbeidsgiver": true,
         "tilbakemeldingReturArbeid": null,
         "utenArbeidsgiverAntarTilbakeIArbeid": false,
@@ -903,16 +903,16 @@
         "tilbakedatertBegrunnelse": null
       },
       "bekreftelse": {
-        "utstedelsesdato": "2018-11-05",
+        "utstedelsesdato": "2019-04-15",
         "sykmelder": "Frida Perma Frost",
         "sykmelderTlf": "99998888"
       }
     },
     {
       "id": "b427ea76-5b99-42e0-b0f8-1d06ff385948",
-      "startLegemeldtFravaer": "2018-11-05",
+      "startLegemeldtFravaer": "2019-04-15",
       "skalViseSkravertFelt": true,
-      "identdato": "2018-11-05",
+      "identdato": "2019-04-15",
       "status": "SENDT",
       "naermesteLederStatus": "LEST",
       "innsendtArbeidsgivernavn": null,
@@ -923,7 +923,7 @@
         "juridiskOrgnummer": "111222333"
       },
       "orgnummer": "666333777",
-      "sendtdato": "2018-11-14T15:35:15",
+      "sendtdato": "2019-04-15T15:35:15",
       "sporsmal": null,
       "pasient": {
         "fnr": "12121200100",
@@ -945,97 +945,7 @@
       "mulighetForArbeid": {
         "perioder": [
           {
-            "fom": "2018-11-05",
-            "tom": "2019-05-13",
-            "grad": 100,
-            "behandlingsdager": null,
-            "reisetilskudd": null,
-            "avventende": null
-          }
-        ],
-        "aktivitetIkkeMulig433": [],
-        "aktivitetIkkeMulig434": [
-          "Annet"
-        ],
-        "aarsakAktivitetIkkeMulig433": null,
-        "aarsakAktivitetIkkeMulig434": "andre årsaker til sykefravær"
-      },
-      "friskmelding": {
-        "arbeidsfoerEtterPerioden": true,
-        "hensynPaaArbeidsplassen": "Må ta det pent",
-        "antarReturSammeArbeidsgiver": true,
-        "antattDatoReturSammeArbeidsgiver": "2018-11-05",
-        "antarReturAnnenArbeidsgiver": true,
-        "tilbakemeldingReturArbeid": null,
-        "utenArbeidsgiverAntarTilbakeIArbeid": false,
-        "utenArbeidsgiverAntarTilbakeIArbeidDato": null,
-        "utenArbeidsgiverTilbakemelding": null
-      },
-      "utdypendeOpplysninger": {
-        "sykehistorie": null,
-        "paavirkningArbeidsevne": null,
-        "resultatAvBehandling": null,
-        "henvisningUtredningBehandling": null,
-        "grupper": []
-      },
-      "arbeidsevne": {
-        "tilretteleggingArbeidsplass": "Fortsett som sist.",
-        "tiltakNAV": null,
-        "tiltakAndre": null
-      },
-      "meldingTilNav": {
-        "navBoerTaTakISaken": false,
-        "navBoerTaTakISakenBegrunnelse": null
-      },
-      "innspillTilArbeidsgiver": null,
-      "tilbakedatering": {
-        "dokumenterbarPasientkontakt": null,
-        "tilbakedatertBegrunnelse": null
-      },
-      "bekreftelse": {
-        "utstedelsesdato": "2018-11-05",
-        "sykmelder": "Frida Perma Frost",
-        "sykmelderTlf": "99998888"
-      }
-    },
-    {
-      "id": "8e00b2f6-a551-45cb-9df1-854b919212fc",
-      "startLegemeldtFravaer": "2018-11-05",
-      "skalViseSkravertFelt": true,
-      "identdato": "2018-11-05",
-      "status": "SENDT",
-      "naermesteLederStatus": "LEST",
-      "innsendtArbeidsgivernavn": null,
-      "valgtArbeidssituasjon": null,
-      "mottakendeArbeidsgiver": {
-        "navn": "VANN- OG AVLØPSETATEN",
-        "virksomhetsnummer": "666333777",
-        "juridiskOrgnummer": "111222333"
-      },
-      "orgnummer": "666333777",
-      "sendtdato": "2018-11-14T15:35:03",
-      "sporsmal": null,
-      "pasient": {
-        "fnr": "12121200100",
-        "fornavn": "Frida",
-        "mellomnavn": "Perma",
-        "etternavn": "Frost"
-      },
-      "arbeidsgiver": "LOMMEN BARNEHAVE",
-      "stillingsprosent": 100,
-      "diagnose": {
-        "hoveddiagnose": null,
-        "bidiagnoser": [],
-        "fravaersgrunnLovfestet": null,
-        "fravaerBeskrivelse": null,
-        "svangerskap": null,
-        "yrkesskade": null,
-        "yrkesskadeDato": null
-      },
-      "mulighetForArbeid": {
-        "perioder": [
-          {
-            "fom": "2018-11-05",
+            "fom": "2019-04-15",
             "tom": "2019-11-13",
             "grad": 100,
             "behandlingsdager": null,
@@ -1054,7 +964,7 @@
         "arbeidsfoerEtterPerioden": true,
         "hensynPaaArbeidsplassen": "Må ta det pent",
         "antarReturSammeArbeidsgiver": true,
-        "antattDatoReturSammeArbeidsgiver": "2018-11-05",
+        "antattDatoReturSammeArbeidsgiver": "2019-04-15",
         "antarReturAnnenArbeidsgiver": true,
         "tilbakemeldingReturArbeid": null,
         "utenArbeidsgiverAntarTilbakeIArbeid": false,
@@ -1083,7 +993,97 @@
         "tilbakedatertBegrunnelse": null
       },
       "bekreftelse": {
-        "utstedelsesdato": "2018-11-05",
+        "utstedelsesdato": "2019-04-15",
+        "sykmelder": "Frida Perma Frost",
+        "sykmelderTlf": "99998888"
+      }
+    },
+    {
+      "id": "8e00b2f6-a551-45cb-9df1-854b919212fc",
+      "startLegemeldtFravaer": "2019-04-15",
+      "skalViseSkravertFelt": true,
+      "identdato": "2019-04-15",
+      "status": "SENDT",
+      "naermesteLederStatus": "LEST",
+      "innsendtArbeidsgivernavn": null,
+      "valgtArbeidssituasjon": null,
+      "mottakendeArbeidsgiver": {
+        "navn": "VANN- OG AVLØPSETATEN",
+        "virksomhetsnummer": "666333777",
+        "juridiskOrgnummer": "111222333"
+      },
+      "orgnummer": "666333777",
+      "sendtdato": "2019-04-15T15:35:03",
+      "sporsmal": null,
+      "pasient": {
+        "fnr": "12121200100",
+        "fornavn": "Frida",
+        "mellomnavn": "Perma",
+        "etternavn": "Frost"
+      },
+      "arbeidsgiver": "LOMMEN BARNEHAVE",
+      "stillingsprosent": 100,
+      "diagnose": {
+        "hoveddiagnose": null,
+        "bidiagnoser": [],
+        "fravaersgrunnLovfestet": null,
+        "fravaerBeskrivelse": null,
+        "svangerskap": null,
+        "yrkesskade": null,
+        "yrkesskadeDato": null
+      },
+      "mulighetForArbeid": {
+        "perioder": [
+          {
+            "fom": "2019-04-15",
+            "tom": "2019-11-13",
+            "grad": 100,
+            "behandlingsdager": null,
+            "reisetilskudd": null,
+            "avventende": null
+          }
+        ],
+        "aktivitetIkkeMulig433": [],
+        "aktivitetIkkeMulig434": [
+          "Annet"
+        ],
+        "aarsakAktivitetIkkeMulig433": null,
+        "aarsakAktivitetIkkeMulig434": "andre årsaker til sykefravær"
+      },
+      "friskmelding": {
+        "arbeidsfoerEtterPerioden": true,
+        "hensynPaaArbeidsplassen": "Må ta det pent",
+        "antarReturSammeArbeidsgiver": true,
+        "antattDatoReturSammeArbeidsgiver": "2019-04-15",
+        "antarReturAnnenArbeidsgiver": true,
+        "tilbakemeldingReturArbeid": null,
+        "utenArbeidsgiverAntarTilbakeIArbeid": false,
+        "utenArbeidsgiverAntarTilbakeIArbeidDato": null,
+        "utenArbeidsgiverTilbakemelding": null
+      },
+      "utdypendeOpplysninger": {
+        "sykehistorie": null,
+        "paavirkningArbeidsevne": null,
+        "resultatAvBehandling": null,
+        "henvisningUtredningBehandling": null,
+        "grupper": []
+      },
+      "arbeidsevne": {
+        "tilretteleggingArbeidsplass": "Fortsett som sist.",
+        "tiltakNAV": null,
+        "tiltakAndre": null
+      },
+      "meldingTilNav": {
+        "navBoerTaTakISaken": false,
+        "navBoerTaTakISakenBegrunnelse": null
+      },
+      "innspillTilArbeidsgiver": null,
+      "tilbakedatering": {
+        "dokumenterbarPasientkontakt": null,
+        "tilbakedatertBegrunnelse": null
+      },
+      "bekreftelse": {
+        "utstedelsesdato": "2019-04-15",
         "sykmelder": "Frida Perma Frost",
         "sykmelderTlf": "99998888"
       }
