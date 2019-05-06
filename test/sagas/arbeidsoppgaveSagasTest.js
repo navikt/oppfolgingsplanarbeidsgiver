@@ -1,17 +1,20 @@
 import { expect } from 'chai';
 import { put, call } from 'redux-saga/effects';
-import { post } from 'digisyfo-npm';
+import {
+    post,
+    hentSyfoapiUrl,
+    API_NAVN,
+} from '../../js/gateway-api/gatewayApi';
 import { lagreArbeidsoppgave, slettArbeidsoppgave } from '../../js/sagas/oppfolgingsplan/arbeidsoppgaveSagas';
 import * as actions from '../../js/actions/oppfolgingsplan/arbeidsoppgave_actions';
 
 describe('arbeidsoppgaveSagas', () => {
+    let apiUrlBase;
     const fnr = '12345678';
     const arbeidsoppgaveId = 1;
 
     beforeEach(() => {
-        process.env = {
-            REACT_APP_OPPFOELGINGSDIALOGREST_ROOT: '/restoppfoelgingsdialog/api',
-        };
+        apiUrlBase = hentSyfoapiUrl(API_NAVN.SYFOOPPFOLGINGSPLANSERVICE);
     });
 
     describe('lagreArbeidsoppgave', () => {
@@ -25,7 +28,7 @@ describe('arbeidsoppgaveSagas', () => {
             arbeidsoppgaveId: 1,
         });
 
-        it('Skal dispatche LAGRER_ARBEIDSOPPGAVE', () => {
+        it(`Skal dispatche ${actions.LAGRER_ARBEIDSOPPGAVE}`, () => {
             const nextPut = put({
                 type: actions.LAGRER_ARBEIDSOPPGAVE,
                 fnr,
@@ -35,7 +38,7 @@ describe('arbeidsoppgaveSagas', () => {
         });
 
         it('Skal dernest kalle resttjenesten', () => {
-            const url = `${process.env.REACT_APP_OPPFOELGINGSDIALOGREST_ROOT}/oppfoelgingsdialoger/actions/123/lagreArbeidsoppgave`;
+            const url = `${apiUrlBase}/oppfolgingsplan/actions/123/lagreArbeidsoppgave`;
             const nextCall = call(post, url, {
                 arbeidsoppgavenavn: 'navn',
                 arbeidsoppgaveId: 1,
@@ -43,7 +46,7 @@ describe('arbeidsoppgaveSagas', () => {
             expect(generator.next().value).to.deep.equal(nextCall);
         });
 
-        it('Skal dernest sette arbeidsoppgave lagret', () => {
+        it(`Skal dernest sette ${actions.ARBEIDSOPPGAVE_LAGRET}`, () => {
             const nextPut = put({
                 type: actions.ARBEIDSOPPGAVE_LAGRET,
                 data: 1,
@@ -65,7 +68,7 @@ describe('arbeidsoppgaveSagas', () => {
             fnr,
         });
 
-        it('Skal dispatche SLETTER_ARBEIDSOPPGAVE', () => {
+        it(`Skal dispatche ${actions.SLETTER_ARBEIDSOPPGAVE}`, () => {
             const nextPut = put({
                 type: actions.SLETTER_ARBEIDSOPPGAVE,
                 fnr,
@@ -74,12 +77,12 @@ describe('arbeidsoppgaveSagas', () => {
         });
 
         it('Skal dernest sende postcall', () => {
-            const url = `${process.env.REACT_APP_OPPFOELGINGSDIALOGREST_ROOT}/arbeidsoppgave/actions/123/slett`;
+            const url = `${apiUrlBase}/arbeidsoppgave/actions/123/slett`;
             const nextCall = call(post, url);
             expect(generator.next().value).to.deep.equal(nextCall);
         });
 
-        it('Skal dernest sette arbeidsoppgave til slettet', () => {
+        it(`Skal dernest sette ${actions.ARBEIDSOPPGAVE_SLETTET}`, () => {
             const nextPut = put({
                 type: actions.ARBEIDSOPPGAVE_SLETTET,
                 arbeidsoppgaveId: '123',
