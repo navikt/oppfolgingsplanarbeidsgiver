@@ -1,17 +1,20 @@
 import { expect } from 'chai';
 import { put, call } from 'redux-saga/effects';
-import { post } from 'digisyfo-npm';
+import {
+    post,
+    hentSyfoapiUrl,
+    API_NAVN,
+} from '../../js/gateway-api/gatewayApi';
 import { lagreKommentar, slettKommentar } from '../../js/sagas/oppfolgingsplan/kommentarSagas';
 import * as actions from '../../js/actions/oppfolgingsplan/kommentar_actions';
 
 describe('kommentarSagas', () => {
+    let apiUrlBase;
     const fnr = '12345678';
     const tiltakId = 1;
 
     beforeEach(() => {
-        process.env = {
-            REACT_APP_OPPFOELGINGSDIALOGREST_ROOT: '/restoppfoelgingsdialog/api',
-        };
+        apiUrlBase = hentSyfoapiUrl(API_NAVN.SYFOOPPFOLGINGSPLANSERVICE);
     });
 
     describe('lagreKommentar', () => {
@@ -24,7 +27,7 @@ describe('kommentarSagas', () => {
             fnr,
         });
 
-        it('Skal dispatche LAGRER_KOMMENTAR', () => {
+        it(`Skal dispatche ${actions.LAGRER_KOMMENTAR}`, () => {
             const nextPut = put({
                 type: actions.LAGRER_KOMMENTAR,
                 fnr,
@@ -34,14 +37,14 @@ describe('kommentarSagas', () => {
         });
 
         it('Skal dernest kalle resttjenesten', () => {
-            const url = `${process.env.REACT_APP_OPPFOELGINGSDIALOGREST_ROOT}/tiltak/actions/1/lagreKommentar`;
+            const url = `${apiUrlBase}/tiltak/actions/1/lagreKommentar`;
             const nextCall = call(post, url, {
                 tekst: 'tekst',
             });
             expect(generator.next().value).to.deep.equal(nextCall);
         });
 
-        it('Skal dernest sette kommentar lagret', () => {
+        it(`Skal dernest sette ${actions.KOMMENTAR_LAGRET}`, () => {
             const nextPut = put({
                 type: actions.KOMMENTAR_LAGRET,
                 id: 1,
@@ -64,7 +67,7 @@ describe('kommentarSagas', () => {
             fnr,
         });
 
-        it('Skal dispatche SLETTER_KOMMENTAR', () => {
+        it(`Skal dispatche ${actions.SLETTER_KOMMENTAR}`, () => {
             const nextPut = put({
                 type: actions.SLETTER_KOMMENTAR,
                 fnr,
@@ -73,12 +76,12 @@ describe('kommentarSagas', () => {
         });
 
         it('Skal dernest sende postcall', () => {
-            const url = `${process.env.REACT_APP_OPPFOELGINGSDIALOGREST_ROOT}/kommentar/actions/1/slett`;
+            const url = `${apiUrlBase}/kommentar/actions/1/slett`;
             const nextCall = call(post, url);
             expect(generator.next().value).to.deep.equal(nextCall);
         });
 
-        it('Skal dernest sette kommentar til slettet', () => {
+        it(`Skal dernest sette ${actions.KOMMENTAR_SLETTET}`, () => {
             const nextPut = put({
                 type: actions.KOMMENTAR_SLETTET,
                 id: 1,
