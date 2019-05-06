@@ -1,5 +1,10 @@
 import { call, put, fork, takeEvery, all } from 'redux-saga/effects';
-import { post, log } from 'digisyfo-npm';
+import { log } from 'digisyfo-npm';
+import {
+    API_NAVN,
+    hentSyfoapiUrl,
+    post,
+} from '../../gateway-api/gatewayApi';
 import * as actions from '../../actions/oppfolgingsplan/kommentar_actions';
 
 export function* lagreKommentar(action) {
@@ -7,7 +12,7 @@ export function* lagreKommentar(action) {
     yield put(actions.lagrerKommentar(fnr, action.tiltakId));
     const body = action.kommentar;
     try {
-        const url = `${process.env.REACT_APP_OPPFOELGINGSDIALOGREST_ROOT}/tiltak/actions/${action.tiltakId}/lagreKommentar`;
+        const url = `${hentSyfoapiUrl(API_NAVN.SYFOOPPFOLGINGSPLANSERVICE)}/tiltak/actions/${action.tiltakId}/lagreKommentar`;
         const data = yield call(post, url, body);
         yield put(actions.kommentarLagret(action.id, action.tiltakId, data, action.kommentar, fnr));
     } catch (e) {
@@ -25,7 +30,7 @@ export function* slettKommentar(action) {
 
     yield put(actions.sletterKommentar(fnr));
     try {
-        const url = `${process.env.REACT_APP_OPPFOELGINGSDIALOGREST_ROOT}/kommentar/actions/${action.kommentarId}/slett`;
+        const url = `${hentSyfoapiUrl(API_NAVN.SYFOOPPFOLGINGSPLANSERVICE)}/kommentar/actions/${action.kommentarId}/slett`;
         yield call(post, url);
         yield put(actions.kommentarSlettet(action.id, action.tiltakId, action.kommentarId, fnr));
     } catch (e) {
