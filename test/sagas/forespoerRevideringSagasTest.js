@@ -1,6 +1,10 @@
 import { expect } from 'chai';
 import { put, call } from 'redux-saga/effects';
-import { post } from 'digisyfo-npm';
+import {
+    API_NAVN,
+    hentSyfoapiUrl,
+    post,
+} from '../../js/gateway-api/gatewayApi';
 import { forespoerRevidering } from '../../js/sagas/oppfolgingsplan/forespoerRevideringSagas';
 import {
     FORESPOER_REVIDERING_SENDER,
@@ -8,12 +12,11 @@ import {
 } from '../../js/actions/oppfolgingsplan/forespoerRevidering_actions';
 
 describe('forespoerRevideringSagas', () => {
+    let apiUrlBase;
     const id = '1';
 
     beforeEach(() => {
-        process.env = {
-            REACT_APP_OPPFOELGINGSDIALOGREST_ROOT: '/restoppfoelgingsdialog/api',
-        };
+        apiUrlBase = hentSyfoapiUrl(API_NAVN.SYFOOPPFOLGINGSPLANSERVICE);
     });
 
     describe('forespoerRevidering', () => {
@@ -22,7 +25,7 @@ describe('forespoerRevideringSagas', () => {
         };
         const generator = forespoerRevidering(action);
 
-        it('Skal dispatche DELER_MED_NAV', () => {
+        it(`Skal dispatche ${FORESPOER_REVIDERING_SENDER}`, () => {
             const nextPut = put({
                 type: FORESPOER_REVIDERING_SENDER,
                 id,
@@ -31,12 +34,12 @@ describe('forespoerRevideringSagas', () => {
         });
 
         it('Skal dernest kalle resttjenesten', () => {
-            const url = `${process.env.REACT_APP_OPPFOELGINGSDIALOGREST_ROOT}/oppfoelgingsdialoger/actions/${action.id}/forespoerRevidering`;
+            const url = `${apiUrlBase}/oppfolgingsplan/actions/${action.id}/foresporRevidering`;
             const nextCall = call(post, url);
             expect(generator.next().value).to.deep.equal(nextCall);
         });
 
-        it('Skal dernest sette FORESPOER_REVIDERING_SUKSESS', () => {
+        it(`Skal dernest sette ${FORESPOER_REVIDERING_SUKSESS}`, () => {
             const nextPut = put({
                 type: FORESPOER_REVIDERING_SUKSESS,
                 id,
