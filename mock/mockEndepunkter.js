@@ -117,7 +117,7 @@ function mockForOpplaeringsmiljo(server) {
         res.send(JSON.stringify(mockData[SYKMELDINGER][koblingId] || []));
     });
 
-    server.get('/restoppfoelgingsdialog/api/arbeidsgiver/oppfoelgingsdialoger', (req, res) => {
+    server.get('/syfooppfolgingsplanservice/api/arbeidsgiver/oppfolgingsplaner', (req, res) => {
         res.setHeader('Content-Type', 'application/json');
         res.send(JSON.stringify(mockData[OPPFOLGINGSDIALOGER]));
     });
