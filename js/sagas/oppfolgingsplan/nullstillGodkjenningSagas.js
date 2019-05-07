@@ -1,5 +1,10 @@
 import { call, put, fork, takeEvery } from 'redux-saga/effects';
-import { post, log } from 'digisyfo-npm';
+import { log } from 'digisyfo-npm';
+import {
+    API_NAVN,
+    hentSyfoapiUrl,
+    post,
+} from '../../gateway-api/gatewayApi';
 import * as actions from '../../actions/oppfolgingsplan/nullstillGodkjenning_actions';
 
 export function* nullstillGodkjenning(action) {
@@ -7,7 +12,7 @@ export function* nullstillGodkjenning(action) {
 
     yield put(actions.nullstillerGodkjenning(fnr));
     try {
-        const url = `${process.env.REACT_APP_OPPFOELGINGSDIALOGREST_ROOT}/oppfoelgingsdialoger/actions/${action.id}/nullstillGodkjenning`;
+        const url = `${hentSyfoapiUrl(API_NAVN.SYFOOPPFOLGINGSPLANSERVICE)}/oppfolgingsplan/actions/${action.id}/nullstillGodkjenning`;
         yield call(post, url);
         yield put(actions.nullstiltGodkjenning(action.id, fnr));
     } catch (e) {

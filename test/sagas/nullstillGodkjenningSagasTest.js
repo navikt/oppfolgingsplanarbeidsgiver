@@ -1,16 +1,19 @@
 import { expect } from 'chai';
 import { put, call } from 'redux-saga/effects';
-import { post } from 'digisyfo-npm';
+import {
+    API_NAVN,
+    hentSyfoapiUrl,
+    post,
+} from '../../js/gateway-api/gatewayApi';
 import { nullstillGodkjenning } from '../../js/sagas/oppfolgingsplan/nullstillGodkjenningSagas';
 import * as actions from '../../js/actions/oppfolgingsplan/nullstillGodkjenning_actions';
 
 describe('nullstillGodkjenningSagas', () => {
+    let apiUrlBase;
     const fnr = '12345678';
 
     beforeEach(() => {
-        process.env = {
-            REACT_APP_OPPFOELGINGSDIALOGREST_ROOT: '/restoppfoelgingsdialog/api',
-        };
+        apiUrlBase = hentSyfoapiUrl(API_NAVN.SYFOOPPFOLGINGSPLANSERVICE);
     });
 
     describe('nullstillGodkjenning', () => {
@@ -28,12 +31,12 @@ describe('nullstillGodkjenningSagas', () => {
         });
 
         it('Skal dernest kalle resttjenesten', () => {
-            const url = `${process.env.REACT_APP_OPPFOELGINGSDIALOGREST_ROOT}/oppfoelgingsdialoger/actions/1/nullstillGodkjenning`;
+            const url = `${apiUrlBase}/oppfolgingsplan/actions/1/nullstillGodkjenning`;
             const nextCall = call(post, url);
             expect(generator.next().value).to.deep.equal(nextCall);
         });
 
-        it('Skal dernest sette NULLSTILT_GODKJENNING', () => {
+        it(`Skal dernest sette ${actions.NULLSTILT_GODKJENNING}`, () => {
             const nextPut = put({
                 type: actions.NULLSTILT_GODKJENNING,
                 id: 1,
