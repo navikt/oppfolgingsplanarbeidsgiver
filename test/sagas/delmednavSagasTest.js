@@ -1,16 +1,19 @@
 import { expect } from 'chai';
 import { put, call } from 'redux-saga/effects';
-import { post } from 'digisyfo-npm';
+import {
+    API_NAVN,
+    hentSyfoapiUrl,
+    post,
+} from '../../js/gateway-api/gatewayApi';
 import { delMedNav } from '../../js/sagas/oppfolgingsplan/delMedNavSagas';
 import * as actions from '../../js/actions/oppfolgingsplan/delmednav_actions';
 
 describe('delmednavSagas', () => {
+    let apiUrlBase;
     const fnr = '12345678';
 
     beforeEach(() => {
-        process.env = {
-            REACT_APP_OPPFOELGINGSDIALOGREST_ROOT: '/restoppfoelgingsdialog/api',
-        };
+        apiUrlBase = hentSyfoapiUrl(API_NAVN.SYFOOPPFOLGINGSPLANSERVICE);
     });
 
     describe('delMedNav', () => {
@@ -20,7 +23,7 @@ describe('delmednavSagas', () => {
         };
         const generator = delMedNav(action);
 
-        it('Skal dispatche DELER_MED_NAV', () => {
+        it(`Skal dispatche ${actions.DELER_MED_NAV}`, () => {
             const nextPut = put({
                 type: actions.DELER_MED_NAV,
                 fnr,
@@ -29,12 +32,12 @@ describe('delmednavSagas', () => {
         });
 
         it('Skal dernest kalle resttjenesten', () => {
-            const url = `${process.env.REACT_APP_OPPFOELGINGSDIALOGREST_ROOT}/oppfoelgingsdialoger/actions/${action.id}/delmednav`;
+            const url = `${apiUrlBase}/oppfolgingsplan/actions/${action.id}/delmednav`;
             const nextCall = call(post, url);
             expect(generator.next().value).to.deep.equal(nextCall);
         });
 
-        it('Skal dernest sette DELT_MED_NAV', () => {
+        it(`Skal dernest sette ${actions.DELT_MED_NAV}`, () => {
             const nextPut = put({
                 type: actions.DELT_MED_NAV,
                 id: 1,

@@ -1,11 +1,16 @@
 import { call, put, fork, takeEvery } from 'redux-saga/effects';
-import { post, log } from 'digisyfo-npm';
+import { log } from 'digisyfo-npm';
+import {
+    API_NAVN,
+    hentSyfoapiUrl,
+    post,
+} from '../../gateway-api/gatewayApi';
 import * as actions from '../../actions/oppfolgingsplan/forespoerRevidering_actions';
 
 export function* forespoerRevidering(action) {
     yield put(actions.forespoerRevideringSender(action.id));
     try {
-        const url = `${process.env.REACT_APP_OPPFOELGINGSDIALOGREST_ROOT}/oppfoelgingsdialoger/actions/${action.id}/forespoerRevidering`;
+        const url = `${hentSyfoapiUrl(API_NAVN.SYFOOPPFOLGINGSPLANSERVICE)}/oppfolgingsplan/actions/${action.id}/foresporRevidering`;
         yield call(post, url);
         yield put(actions.forespoerRevideringSuksess(action.id));
     } catch (e) {
