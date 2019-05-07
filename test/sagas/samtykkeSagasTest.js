@@ -1,11 +1,20 @@
 import { expect } from 'chai';
 import { put, call } from 'redux-saga/effects';
-import { post } from 'digisyfo-npm';
+import {
+    API_NAVN,
+    hentSyfoapiUrl,
+    post,
+} from '../../js/gateway-api/gatewayApi';
 import { giSamtykke } from '../../js/sagas/oppfolgingsplan/samtykkeSagas';
 import * as actions from '../../js/actions/oppfolgingsplan/samtykke_actions';
 
 describe('samtykkeSagas', () => {
     const fnr = '12345678';
+
+    let apiUrlBase;
+    beforeEach(() => {
+        apiUrlBase = hentSyfoapiUrl(API_NAVN.SYFOOPPFOLGINGSPLANSERVICE);
+    });
 
     describe('giSamtykke', () => {
         const generator = giSamtykke({
@@ -14,7 +23,7 @@ describe('samtykkeSagas', () => {
             fnr,
         });
 
-        it('Skal dispatche GIR_SAMTYKKE', () => {
+        it(`Skal dispatche ${actions.GIR_SAMTYKKE}`, () => {
             const nextPut = put({
                 type: actions.GIR_SAMTYKKE,
                 fnr,
@@ -23,12 +32,12 @@ describe('samtykkeSagas', () => {
         });
 
         it('Skal dernest kalle resttjenesten', () => {
-            const url = `${process.env.REACT_APP_OPPFOELGINGSDIALOGREST_ROOT}/oppfoelgingsdialoger/actions/1/samtykke?samtykke=true`;
+            const url = `${apiUrlBase}/oppfolgingsplan/actions/1/samtykk?samtykke=true`;
             const nextCall = call(post, url);
             expect(generator.next().value).to.deep.equal(nextCall);
         });
 
-        it('Skal dernest sette SAMTYKKE_GITT', () => {
+        it(`Skal dernest sette ${actions.SAMTYKKE_GITT}`, () => {
             const nextPut = put({
                 type: actions.SAMTYKKE_GITT,
                 id: 1,

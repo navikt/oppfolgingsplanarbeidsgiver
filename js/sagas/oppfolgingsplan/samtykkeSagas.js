@@ -1,5 +1,10 @@
 import { call, put, fork, takeEvery } from 'redux-saga/effects';
-import { post, log } from 'digisyfo-npm';
+import { log } from 'digisyfo-npm';
+import {
+    API_NAVN,
+    hentSyfoapiUrl,
+    post,
+} from '../../gateway-api/gatewayApi';
 import * as actions from '../../actions/oppfolgingsplan/samtykke_actions';
 
 export function* giSamtykke(action) {
@@ -7,7 +12,7 @@ export function* giSamtykke(action) {
 
     yield put(actions.girSamtykke(fnr));
     try {
-        const url = `${process.env.REACT_APP_OPPFOELGINGSDIALOGREST_ROOT}/oppfoelgingsdialoger/actions/${action.id}/samtykke?samtykke=${action.samtykke}`;
+        const url = `${hentSyfoapiUrl(API_NAVN.SYFOOPPFOLGINGSPLANSERVICE)}/oppfolgingsplan/actions/${action.id}/samtykk?samtykke=${action.samtykke}`;
         yield call(post, url);
         yield put(actions.samtykkeGitt(action.id, action.samtykke, fnr));
     } catch (e) {

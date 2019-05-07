@@ -1,14 +1,20 @@
 import { expect } from 'chai';
-import { post } from 'digisyfo-npm';
 import { put, call } from 'redux-saga/effects';
+import {
+    API_NAVN,
+    hentSyfoapiUrl,
+    post,
+} from '../../js/gateway-api/gatewayApi';
 import { settDialoger } from '../../js/sagas/oppfolgingsplan/settDialogSagas';
 import * as actions from '../../js/actions/oppfolgingsplan/sett_actions';
 
 describe('settDialogSagas', () => {
+    let apiUrlBase;
+
     beforeEach(() => {
-        process.env = {
-            REACT_APP_OPPFOELGINGSDIALOGREST_ROOT: '/restoppfoelgingsdialog/api',
-        };
+        beforeEach(() => {
+            apiUrlBase = hentSyfoapiUrl(API_NAVN.SYFOOPPFOLGINGSPLANSERVICE);
+        });
     });
 
     describe('settDialoger', () => {
@@ -16,7 +22,7 @@ describe('settDialogSagas', () => {
             id: 1,
         });
 
-        it('Skal dispatche SETTER_SETT_DIALOG', () => {
+        it(`Skal dispatche ${actions.SETTER_SETT_DIALOG}`, () => {
             const nextPut = put({
                 type: actions.SETTER_SETT_DIALOG,
             });
@@ -24,12 +30,12 @@ describe('settDialogSagas', () => {
         });
 
         it('Skal dernest kalle resttjenesten', () => {
-            const url = `${process.env.REACT_APP_OPPFOELGINGSDIALOGREST_ROOT}/oppfoelgingsdialoger/actions/1/sett`;
+            const url = `${apiUrlBase}/oppfolgingsplan/actions/1/sett`;
             const nextCall = call(post, url);
             expect(generator.next().value).to.deep.equal(nextCall);
         });
 
-        it('Skal dernest sette DIALOG_SETT', () => {
+        it(`Skal dernest sette ${actions.DIALOG_SETT}`, () => {
             const nextPut = put({
                 type: actions.DIALOG_SETT,
                 id: 1,
