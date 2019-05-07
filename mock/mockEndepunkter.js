@@ -127,7 +127,7 @@ function mockForOpplaeringsmiljo(server) {
         res.send(JSON.stringify(mockData[PERIODER]));
     });
 
-    server.get('/restoppfoelgingsdialog/api/tilgang', (req, res) => {
+    server.get('/syfooppfolgingsplanservice/api/tilgang', (req, res) => {
         res.setHeader('Content-Type', 'application/json');
         res.send(JSON.stringify(mockData[TILGANG]));
     });
@@ -231,7 +231,7 @@ function mockForLokaltMiljo(server) {
         res.send();
     });
 
-    server.post('/restoppfoelgingsdialog/api/oppfoelgingsdialoger/actions/:id/nullstillGodkjenning', (req, res) => {
+    server.post('/syfooppfolgingsplanservice/api/oppfolgingsplan/actions/:id/nullstillGodkjenning', (req, res) => {
         res.send();
     });
 
