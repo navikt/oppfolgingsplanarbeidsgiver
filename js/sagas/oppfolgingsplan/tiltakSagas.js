@@ -1,5 +1,10 @@
 import { call, put, fork, takeEvery, all } from 'redux-saga/effects';
-import { post, log } from 'digisyfo-npm';
+import { log } from 'digisyfo-npm';
+import {
+    API_NAVN,
+    hentSyfoapiUrl,
+    post,
+} from '../../gateway-api/gatewayApi';
 import * as actions from '../../actions/oppfolgingsplan/tiltak_actions';
 import { input2RSTiltak } from '../../utils/tiltakUtils';
 
@@ -8,7 +13,7 @@ export function* lagreTiltak(action) {
     yield put(actions.lagrerTiltak(fnr, action.tiltak.tiltakId));
     const body = input2RSTiltak(action.tiltak);
     try {
-        const url = `${process.env.REACT_APP_OPPFOELGINGSDIALOGREST_ROOT}/oppfoelgingsdialoger/actions/${action.id}/lagreTiltak`;
+        const url = `${hentSyfoapiUrl(API_NAVN.SYFOOPPFOLGINGSPLANSERVICE)}/oppfolgingsplan/actions/${action.id}/lagreTiltak`;
         const data = yield call(post, url, body);
         yield put(actions.tiltakLagret(action.id, data, action.tiltak, fnr));
     } catch (e) {
@@ -26,7 +31,7 @@ export function* slettTiltak(action) {
 
     yield put(actions.sletterTiltak(fnr));
     try {
-        const url = `${process.env.REACT_APP_OPPFOELGINGSDIALOGREST_ROOT}/tiltak/actions/${action.tiltakId}/slett`;
+        const url = `${hentSyfoapiUrl(API_NAVN.SYFOOPPFOLGINGSPLANSERVICE)}/tiltak/actions/${action.tiltakId}/slett`;
         yield call(post, url);
         yield put(actions.tiltakSlettet(action.id, action.tiltakId, fnr));
     } catch (e) {

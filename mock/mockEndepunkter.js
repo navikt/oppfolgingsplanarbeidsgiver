@@ -195,27 +195,27 @@ function mockForLokaltMiljo(server) {
     server.use(express.json());
     server.use(express.urlencoded());
 
-    server.post('/restoppfoelgingsdialog/api/tiltak/actions/:response/lagreKommentar', (req, res) => {
+    server.post('/syfooppfolgingsplanservice/api/tiltak/actions/:response/lagreKommentar', (req, res) => {
         mockOpprettetIdResultat(res);
     });
 
-    server.post('/restoppfoelgingsdialog/api/kommentar/actions/:response/slett', (req, res) => {
+    server.post('/syfooppfolgingsplanservice/api/kommentar/actions/:response/slett', (req, res) => {
         res.send();
     });
 
-    server.post('/restoppfoelgingsdialog/api/arbeidsoppgave/actions/:id/slett', (req, res) => {
+    server.post('/syfooppfolgingsplanservice/api/arbeidsoppgave/actions/:id/slett', (req, res) => {
         res.send();
     });
 
-    server.post('/restoppfoelgingsdialog/api/tiltak/actions/:id/slett', (req, res) => {
+    server.post('/syfooppfolgingsplanservice/api/tiltak/actions/:id/slett', (req, res) => {
         res.send();
     });
 
-    server.post('/restoppfoelgingsdialog/api/oppfoelgingsdialoger/actions/:id/lagreArbeidsoppgave', (req, res) => {
+    server.post('/syfooppfolgingsplanservice/api/oppfolgingsplan/actions/:id/lagreArbeidsoppgave', (req, res) => {
         mockOpprettetIdResultat(res);
     });
 
-    server.post('/restoppfoelgingsdialog/api/oppfoelgingsdialoger/actions/:id/lagreTiltak', (req, res) => {
+    server.post('/syfooppfolgingsplanservice/api/oppfolgingsplan/actions/:id/lagreTiltak', (req, res) => {
         mockOpprettetIdResultat(res);
     });
 
