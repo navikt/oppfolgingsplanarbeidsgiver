@@ -10,7 +10,7 @@ import dokumentSagas from './oppfolgingsplan/dokumentSagas';
 import forespoerRevideringSagas from './oppfolgingsplan/forespoerRevideringSagas';
 import kommentarSagas from './oppfolgingsplan/kommentarSagas';
 import kontaktinfoSagas from './oppfolgingsplan/kontaktinfoSagas';
-import kopierOppfolgingsdialogSagas from './oppfolgingsplan/kopierOppfolgingsdialogSagas';
+import kopierOppfolgingsplanSagas from './oppfolgingsplan/kopierOppfolgingsplanSagas';
 import naermesteLederSagas from './oppfolgingsplan/naermestelederSagas';
 import nullstillGodkjenningSagas from './oppfolgingsplan/nullstillGodkjenningSagas';
 import oppfolgingsdialogerSagas from './oppfolgingsplan/oppfolgingsplanerSagas';
@@ -37,7 +37,7 @@ export default function* rootSaga() {
         tilgangSagas(),
         arbeidsoppgaveSagas(),
         kommentarSagas(),
-        kopierOppfolgingsdialogSagas(),
+        kopierOppfolgingsplanSagas(),
         samtykkeSagas(),
         tiltakSagas(),
         dokumentSagas(),

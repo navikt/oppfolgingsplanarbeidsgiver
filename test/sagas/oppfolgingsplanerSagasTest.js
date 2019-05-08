@@ -1,9 +1,8 @@
 import { expect } from 'chai';
 import { put, call } from 'redux-saga/effects';
-import { post } from 'digisyfo-npm';
 import {
     get,
-    post as gatewayPost,
+    post,
     hentSyfoapiUrl,
     API_NAVN,
 } from '../../js/gateway-api/gatewayApi';
@@ -70,7 +69,7 @@ describe('oppfolgingsplanerSagas', () => {
 
         it('Skal dernest sende postcall', () => {
             const url = `${apiUrlBase}/arbeidsgiver/oppfolgingsplaner`;
-            const nextCall = call(gatewayPost, url, {
+            const nextCall = call(post, url, {
                 fnr,
                 virksomhet: {
                     virksomhetsnummer: '123',
@@ -100,7 +99,7 @@ describe('oppfolgingsplanerSagas', () => {
 
         const generator = godkjennPlanSaga(action);
 
-        it('Skal dispatche GODKJENNER_PLAN', () => {
+        it(`Skal dispatche ${actions.GODKJENNER_PLAN}`, () => {
             const nextPut = put({
                 type: actions.GODKJENNER_PLAN,
                 fnr,
@@ -109,12 +108,12 @@ describe('oppfolgingsplanerSagas', () => {
         });
 
         it('Skal dernest sende postcall', () => {
-            const url = `${process.env.REACT_APP_OPPFOELGINGSDIALOGREST_ROOT}/oppfoelgingsdialoger/actions/${action.id}/godkjenn?status=${action.status}&aktoer=arbeidsgiver`;
+            const url = `${apiUrlBase}/oppfolgingsplan/actions/${action.id}/godkjenn?status=${action.status}&aktoer=arbeidsgiver`;
             const nextCall = call(post, url, action.gyldighetstidspunkt);
             expect(generator.next().value).to.deep.equal(nextCall);
         });
 
-        it('Skal dernest sette oppfolgingsplaner til godkjent', () => {
+        it(`Skal dernest dispatche ${actions.PLAN_GODKJENT}`, () => {
             const nextPut = put({
                 type: actions.PLAN_GODKJENT,
                 id: action.id,
@@ -134,7 +133,7 @@ describe('oppfolgingsplanerSagas', () => {
 
         const generator = avvisPlanSaga(action);
 
-        it('Skal dispatche AVVISER_PLAN', () => {
+        it(`Skal dispatche ${actions.AVVISER_PLAN}`, () => {
             const nextPut = put({
                 type: actions.AVVISER_PLAN,
                 fnr,
@@ -143,12 +142,12 @@ describe('oppfolgingsplanerSagas', () => {
         });
 
         it('Skal dernest sende postcall', () => {
-            const url = `${process.env.REACT_APP_OPPFOELGINGSDIALOGREST_ROOT}/oppfoelgingsdialoger/actions/${action.id}/avvis`;
+            const url = `${apiUrlBase}/oppfolgingsplan/actions/${action.id}/avvis`;
             const nextCall = call(post, url);
             expect(generator.next().value).to.deep.equal(nextCall);
         });
 
-        it('Skal dernest sette oppfolgingsplaner til godkjent', () => {
+        it(`Skal dernest dispatche ${actions.PLAN_AVVIST}`, () => {
             const nextPut = put({
                 type: actions.PLAN_AVVIST,
                 id: action.id,

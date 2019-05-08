@@ -1,5 +1,10 @@
 import { call, put, fork, takeEvery } from 'redux-saga/effects';
-import { post, log } from 'digisyfo-npm';
+import { log } from 'digisyfo-npm';
+import {
+    hentSyfoapiUrl,
+    API_NAVN,
+    post,
+} from '../../gateway-api/gatewayApi';
 import * as actions from '../../actions/oppfolgingsplan/avbrytdialog_actions';
 
 export function* avbrytDialog(action) {
@@ -7,7 +12,7 @@ export function* avbrytDialog(action) {
 
     yield put(actions.avbryterDialog(fnr));
     try {
-        const url = `${process.env.REACT_APP_OPPFOELGINGSDIALOGREST_ROOT}/oppfoelgingsdialoger/actions/${action.id}/avbryt`;
+        const url = `${hentSyfoapiUrl(API_NAVN.SYFOOPPFOLGINGSPLANSERVICE)}/oppfolgingsplan/actions/${action.id}/avbryt`;
         yield call(post, url);
         yield put(actions.dialogAvbrutt(action.id, fnr));
     } catch (e) {

@@ -219,7 +219,7 @@ function mockForLokaltMiljo(server) {
         mockOpprettetIdResultat(res);
     });
 
-    server.post('/restoppfoelgingsdialog/api/oppfoelgingsdialoger/actions/:id/godkjenn', (req, res) => {
+    server.post('/syfooppfolgingsplanservice/api/oppfoelgingsdialoger/actions/:id/godkjenn', (req, res) => {
         res.send({
             fom: req.body.fom,
             tom: req.body.tom,

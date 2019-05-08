@@ -1,16 +1,19 @@
 import { expect } from 'chai';
 import { put, call } from 'redux-saga/effects';
-import { post } from 'digisyfo-npm';
+import {
+    post,
+    hentSyfoapiUrl,
+    API_NAVN,
+} from '../../js/gateway-api/gatewayApi';
 import { avbrytDialog } from '../../js/sagas/oppfolgingsplan/avbrytdialogSagas';
 import * as actions from '../../js/actions/oppfolgingsplan/avbrytdialog_actions';
 
 describe('avbrytdialogSagas', () => {
     const fnr = '12345678';
+    let apiUrlBase;
 
     beforeEach(() => {
-        process.env = {
-            REACT_APP_OPPFOELGINGSDIALOGREST_ROOT: '/restoppfoelgingsdialog/api',
-        };
+        apiUrlBase = hentSyfoapiUrl(API_NAVN.SYFOOPPFOLGINGSPLANSERVICE);
     });
 
     describe('avbrytDialog', () => {
@@ -28,7 +31,7 @@ describe('avbrytdialogSagas', () => {
         });
 
         it('Skal dernest kalle resttjenesten', () => {
-            const url = `${process.env.REACT_APP_OPPFOELGINGSDIALOGREST_ROOT}/oppfoelgingsdialoger/actions/1/avbryt`;
+            const url = `${apiUrlBase}/oppfolgingsplan/actions/1/avbryt`;
             const nextCall = call(post, url);
             expect(generator.next().value).to.deep.equal(nextCall);
         });
