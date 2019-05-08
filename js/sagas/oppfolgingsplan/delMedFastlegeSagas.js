@@ -4,10 +4,12 @@ import {
     fork,
     takeEvery,
 } from 'redux-saga/effects';
+import { log } from 'digisyfo-npm';
 import {
+    API_NAVN,
+    hentSyfoapiUrl,
     post,
-    log,
-} from 'digisyfo-npm';
+} from '../../gateway-api/gatewayApi';
 import * as actions from '../../actions/oppfolgingsplan/delMedFastlege_actions';
 
 export function* delMedFastlege(action) {
@@ -15,7 +17,7 @@ export function* delMedFastlege(action) {
 
     yield put(actions.delerMedFastlege(fnr));
     try {
-        const url = `${process.env.REACT_APP_OPPFOELGINGSDIALOGREST_ROOT}/oppfoelgingsdialoger/actions/${action.id}/delmedfastlege`;
+        const url = `${hentSyfoapiUrl(API_NAVN.SYFOOPPFOLGINGSPLANSERVICE)}/oppfolgingsplan/actions/${action.id}/delmedfastlege`;
         yield call(post, url);
         yield put(actions.deltMedFastlege(action.id, fnr));
     } catch (e) {
