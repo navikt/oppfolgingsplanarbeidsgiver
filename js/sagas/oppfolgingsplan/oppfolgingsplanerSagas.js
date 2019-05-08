@@ -4,6 +4,7 @@ import {
     API_NAVN,
     hentSyfoapiUrl,
     get,
+    post as gatewayPost,
 } from '../../gateway-api/gatewayApi';
 import logger from '../../logg/logging';
 import * as actions from '../../actions/oppfolgingsplan/oppfolgingsplan_actions';
@@ -26,8 +27,8 @@ export function* opprettOppfolgingsplan(action) {
 
     yield put(actions.oppretterOppfolgingsplan(fnr));
     try {
-        const url = `${process.env.REACT_APP_OPPFOELGINGSDIALOGREST_ROOT}/arbeidsgiver/oppfoelgingsdialoger`;
-        const data = yield call(post, url, action.oppfolgingsplan);
+        const url = `${hentSyfoapiUrl(API_NAVN.SYFOOPPFOLGINGSPLANSERVICE)}/arbeidsgiver/oppfolgingsplaner`;
+        const data = yield call(gatewayPost, url, action.oppfolgingsplan);
         yield put(actions.oppfolgingsplanOpprettet(data, fnr));
     } catch (e) {
         log(e);

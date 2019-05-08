@@ -3,6 +3,7 @@ import { put, call } from 'redux-saga/effects';
 import { post } from 'digisyfo-npm';
 import {
     get,
+    post as gatewayPost,
     hentSyfoapiUrl,
     API_NAVN,
 } from '../../js/gateway-api/gatewayApi';
@@ -59,7 +60,7 @@ describe('oppfolgingsplanerSagas', () => {
             fnr,
         });
 
-        it('Skal dispatche OPPRETTER_OPPFOLGINGSPLAN', () => {
+        it(`Skal dispatche ${actions.OPPRETTER_OPPFOLGINGSPLAN}`, () => {
             const nextPut = put({
                 type: actions.OPPRETTER_OPPFOLGINGSPLAN,
                 fnr,
@@ -68,8 +69,8 @@ describe('oppfolgingsplanerSagas', () => {
         });
 
         it('Skal dernest sende postcall', () => {
-            const url = `${process.env.REACT_APP_OPPFOELGINGSDIALOGREST_ROOT}/arbeidsgiver/oppfoelgingsdialoger`;
-            const nextCall = call(post, url, {
+            const url = `${apiUrlBase}/arbeidsgiver/oppfolgingsplaner`;
+            const nextCall = call(gatewayPost, url, {
                 fnr,
                 virksomhet: {
                     virksomhetsnummer: '123',
@@ -78,7 +79,7 @@ describe('oppfolgingsplanerSagas', () => {
             expect(generator.next().value).to.deep.equal(nextCall);
         });
 
-        it('Skal dernest sette oppfolgingsplaner til opprettet', () => {
+        it(`Skal dispatche ${actions.OPPFOLGINGSPLAN_OPPRETTET}`, () => {
             const data = 1;
             const nextPut = put({
                 type: actions.OPPFOLGINGSPLAN_OPPRETTET,
