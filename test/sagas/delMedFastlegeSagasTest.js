@@ -3,7 +3,11 @@ import {
     put,
     call,
 } from 'redux-saga/effects';
-import { post } from 'digisyfo-npm';
+import {
+    API_NAVN,
+    hentSyfoapiUrl,
+    post,
+} from '../../js/gateway-api/gatewayApi';
 import { delMedFastlege } from '../../js/sagas/oppfolgingsplan/delMedFastlegeSagas';
 import {
     DELER_MED_FASTLEGE,
@@ -12,11 +16,10 @@ import {
 
 describe('delMedFastlegeSagas', () => {
     const fnr = '12345678';
+    let apiUrlBase;
 
     beforeEach(() => {
-        process.env = {
-            REACT_APP_OPPFOELGINGSDIALOGREST_ROOT: '/restoppfoelgingsdialog/api',
-        };
+        apiUrlBase = hentSyfoapiUrl(API_NAVN.SYFOOPPFOLGINGSPLANSERVICE);
     });
 
     describe('delMedNav', () => {
@@ -26,7 +29,7 @@ describe('delMedFastlegeSagas', () => {
         };
         const generator = delMedFastlege(action);
 
-        it('Skal dispatche DELER_MED_FASTLEGE', () => {
+        it(`Skal dispatche ${DELER_MED_FASTLEGE}`, () => {
             const nextPut = put({
                 type: DELER_MED_FASTLEGE,
                 fnr,
@@ -35,12 +38,12 @@ describe('delMedFastlegeSagas', () => {
         });
 
         it('Skal dernest kalle resttjenesten', () => {
-            const url = `${process.env.REACT_APP_OPPFOELGINGSDIALOGREST_ROOT}/oppfoelgingsdialoger/actions/${action.id}/delmedfastlege`;
+            const url = `${apiUrlBase}/oppfolgingsplan/actions/${action.id}/delmedfastlege`;
             const nextCall = call(post, url);
             expect(generator.next().value).to.deep.equal(nextCall);
         });
 
-        it('Skal dernest sette DELT_MED_FASTLEGE', () => {
+        it(`Skal dernest sette ${DELT_MED_FASTLEGE}`, () => {
             const nextPut = put({
                 type: DELT_MED_FASTLEGE,
                 id: 1,
