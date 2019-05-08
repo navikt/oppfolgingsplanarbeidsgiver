@@ -1,6 +1,11 @@
 import { expect } from 'chai';
 import { put, call } from 'redux-saga/effects';
-import { get, post } from 'digisyfo-npm';
+import { post } from 'digisyfo-npm';
+import {
+    get,
+    hentSyfoapiUrl,
+    API_NAVN,
+} from '../../js/gateway-api/gatewayApi';
 import {
     avvisPlanSaga,
     hentArbeidsgiversOppfolginger,
@@ -12,16 +17,16 @@ import * as actions from '../../js/actions/oppfolgingsplan/oppfolgingsplan_actio
 describe('oppfolgingsplanerSagas', () => {
     const fnr = '12345678';
 
+    let apiUrlBase;
+
     beforeEach(() => {
-        process.env = {
-            REACT_APP_OPPFOELGINGSDIALOGREST_ROOT: '/restoppfoelgingsdialog/api',
-        };
+        apiUrlBase = hentSyfoapiUrl(API_NAVN.SYFOOPPFOLGINGSPLANSERVICE);
     });
 
     describe('hentArbeidsgiversOppfolginger', () => {
         const generator = hentArbeidsgiversOppfolginger();
 
-        it('Skal dispatche HENTER_OPPFOLGINGSPLANER', () => {
+        it(`Skal dispatche ${actions.HENTER_OPPFOLGINGSPLANER}`, () => {
             const nextPut = put({
                 type: actions.HENTER_OPPFOLGINGSPLANER,
             });
@@ -29,12 +34,12 @@ describe('oppfolgingsplanerSagas', () => {
         });
 
         it('Skal dernest kalle resttjenesten', () => {
-            const url = `${process.env.REACT_APP_OPPFOELGINGSDIALOGREST_ROOT}/arbeidsgiver/oppfoelgingsdialoger`;
+            const url = `${apiUrlBase}/arbeidsgiver/oppfolgingsplaner`;
             const nextCall = call(get, url);
             expect(generator.next().value).to.deep.equal(nextCall);
         });
 
-        it('Skal dernest sette oppfolgingsdialoger henter', () => {
+        it(`Skal dernest sette ${actions.OPPFOLGINGSPLANER_HENTET}`, () => {
             const nextPut = put({
                 type: actions.OPPFOLGINGSPLANER_HENTET,
                 data: [],
