@@ -1,14 +1,17 @@
 import { expect } from 'chai';
-import { get } from 'digisyfo-npm';
 import { put, call } from 'redux-saga/effects';
+import {
+    API_NAVN,
+    hentSyfoapiUrl,
+    get,
+} from '../../js/gateway-api/gatewayApi';
 import { henterPdfurler } from '../../js/sagas/oppfolgingsplan/dokumentSagas';
 import * as actions from '../../js/actions/oppfolgingsplan/dokument_actions';
 
 describe('dokumentSagas', () => {
+    let apiUrlBase;
     beforeEach(() => {
-        process.env = {
-            REACT_APP_OPPFOELGINGSDIALOGREST_ROOT: '/restoppfoelgingsdialog/api',
-        };
+        apiUrlBase = hentSyfoapiUrl(API_NAVN.SYFOOPPFOLGINGSPLANSERVICE);
     });
 
     describe('henterPdfurler', () => {
@@ -16,7 +19,7 @@ describe('dokumentSagas', () => {
             id: '1',
         });
 
-        it('Skal dispatche HENTER_PDFURLER', () => {
+        it(`Skal dispatche ${actions.HENTER_PDFURLER}`, () => {
             const nextPut = put({
                 type: actions.HENTER_PDFURLER,
             });
@@ -24,12 +27,12 @@ describe('dokumentSagas', () => {
         });
 
         it('Skal dernest kalle resttjenesten', () => {
-            const url = `${process.env.REACT_APP_OPPFOELGINGSDIALOGREST_ROOT}/dokument/1/pdfurler`;
+            const url = `${apiUrlBase}/dokument/1/pdfurler`;
             const nextCall = call(get, url);
             expect(generator.next().value).to.deep.equal(nextCall);
         });
 
-        it('Skal dernest sette pdfurler henter', () => {
+        it(`Skal dernest dispatche ${actions.PDFURLER_HENTET}`, () => {
             const nextPut = put({
                 type: actions.PDFURLER_HENTET,
                 data: [],
