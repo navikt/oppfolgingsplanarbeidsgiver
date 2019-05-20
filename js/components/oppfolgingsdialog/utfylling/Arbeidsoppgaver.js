@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { findDOMNode } from 'react-dom';
 import {
-    OppfolgingsdialogInfoboks,
     ArbeidsoppgaverListe,
     LeggTilElementKnapper,
     LagreArbeidsoppgaveSkjemaAG,
@@ -15,6 +14,7 @@ import {
 import { getLedetekst, keyValue, scrollTo } from 'digisyfo-npm';
 import { getContextRoot } from '../../../routers/paths';
 import { isEmpty } from '../../../utils/oppfolgingsdialogUtils';
+import OppfolgingsplanInfoboks from '../../app/OppfolgingsplanInfoboks';
 
 class Arbeidsoppgaver extends Component {
     constructor(props) {
@@ -140,7 +140,7 @@ class Arbeidsoppgaver extends Component {
                         }
                         {
                             !this.state.visArbeidsoppgaveSkjema ?
-                                <OppfolgingsdialogInfoboks
+                                <OppfolgingsplanInfoboks
                                     svgUrl={`${getContextRoot()}/img/svg/arbeidsoppgave-onboarding.svg`}
                                     svgAlt="nyArbeidsoppgave"
                                     tittel={getLedetekst('oppfolgingsdialog.arbeidsgiver.onboarding.arbeidsoppgave.tittel')}
@@ -151,7 +151,7 @@ class Arbeidsoppgaver extends Component {
                                         visSkjema={this.state.visArbeidsoppgaveSkjema}
                                         toggleSkjema={this.toggleArbeidsoppgaveSkjema}
                                     />
-                                </OppfolgingsdialogInfoboks> :
+                                </OppfolgingsplanInfoboks> :
                                 <LagreArbeidsoppgaveSkjemaAG
                                     ledetekster={ledetekster}
                                     toggleArbeidsoppgaveSkjema={this.toggleArbeidsoppgaveSkjema}

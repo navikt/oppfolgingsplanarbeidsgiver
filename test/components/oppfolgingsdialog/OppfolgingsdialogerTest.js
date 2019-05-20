@@ -4,14 +4,12 @@ import { shallow } from 'enzyme';
 import chaiEnzyme from 'chai-enzyme';
 import sinon from 'sinon';
 import { Hovedknapp } from 'nav-frontend-knapper';
-import {
-    OppfolgingsdialogInfoboks,
-} from 'oppfolgingsdialog-npm';
 import Oppfolgingsdialoger, {
     AvkreftetLederInfoboks,
 } from '../../../js/components/oppfolgingsdialog/Oppfolgingsdialoger';
 import OppfolgingsdialogerInnhold from '../../../js/components/oppfolgingsdialog/OppfolgingsdialogerInnhold';
 import SykmeldtIngenKontaktinformasjon from '../../../js/components/oppfolgingsdialog/SykmeldtIngenKontaktinformasjon';
+import OppfolgingsplanInfoboks from '../../../js/components/app/OppfolgingsplanInfoboks';
 import getOppfolgingsdialog from '../../mock/mockOppfolgingsdialog';
 
 chai.use(chaiEnzyme());
@@ -101,9 +99,9 @@ describe('Oppfolgingsdialoger', () => {
     });
 
     describe('AvkreftetLederInfoboks', () => {
-        it('Skal vise OppfolgingsdialogInfoboks', () => {
+        it('Skal vise OppfolgingsplanInfoboks', () => {
             component = shallow(<AvkreftetLederInfoboks />);
-            expect(component.find(OppfolgingsdialogInfoboks)).to.have.length(1);
+            expect(component.find(OppfolgingsplanInfoboks)).to.have.length(1);
         });
 
         it('Skal vise knapp', () => {

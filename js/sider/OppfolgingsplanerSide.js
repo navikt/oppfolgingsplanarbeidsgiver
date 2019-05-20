@@ -9,7 +9,6 @@ import {
 } from 'digisyfo-npm';
 import {
     loggerOppfolgingsdialog,
-    OppfolgingsdialogInfoboks,
     proptypes as oppfolgingProptypes,
     henterEllerHarHentetOppfolgingsdialoger,
     oppfolgingsdialogHarBlittOpprettet,
@@ -31,6 +30,7 @@ import { sykmeldtHarGyldigSykmelding } from '../utils/oppfolgingsdialogUtils';
 import Side from '../sider/Side';
 import AppSpinner from '../components/AppSpinner';
 import Feilmelding from '../components/Feilmelding';
+import OppfolgingsplanInfoboks from '../components/app/OppfolgingsplanInfoboks';
 import history from '../history';
 
 import {
@@ -189,7 +189,7 @@ export class OppfolgingsplanerSide extends Component {
                             }
                             return (<Feilmelding />);
                         } else if (!tilgang.data.harTilgang || !sykmeldt || !harSykmeldtGyldigSykmelding) {
-                            return (<OppfolgingsdialogInfoboks
+                            return (<OppfolgingsplanInfoboks
                                 svgUrl={`${getContextRoot()}/img/svg/oppfolgingsdialogFeilmeldingAG.svg`}
                                 svgAlt="OppfølgingsdialogFeilmelding"
                                 tittel={getLedetekst('oppfolgingsdialog.infoboks.ikke-tilgang.tittel')}

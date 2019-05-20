@@ -5,7 +5,6 @@ import chaiEnzyme from 'chai-enzyme';
 import sinon from 'sinon';
 import { setLedetekster } from 'digisyfo-npm';
 import {
-    OppfolgingsdialogInfoboks,
     LagreArbeidsoppgaveSkjemaAG,
     LeggTilElementKnapper,
     ArbeidsoppgaverInfoboks,
@@ -13,6 +12,7 @@ import {
 } from 'oppfolgingsdialog-npm';
 import ledetekster from '../../mock/ledetekster_mock';
 import Arbeidsoppgaver from '../../../js/components/oppfolgingsdialog/utfylling/Arbeidsoppgaver';
+import OppfolgingsplanInfoboks from '../../../js/components/app/OppfolgingsplanInfoboks';
 import getOppfolgingsdialog from '../../mock/mockOppfolgingsdialog';
 
 chai.use(chaiEnzyme());
@@ -134,8 +134,8 @@ describe('Arbeidsoppgaver', () => {
             expect(componentUtenArbeidsoppgaver.find(ArbeidsoppgaverInfoboks)).to.have.length(1);
         });
 
-        it('Skal vise OppfolgingsdialogInfoboks, om det ikke er arbeidsoppgaver', () => {
-            expect(componentUtenArbeidsoppgaver.find(OppfolgingsdialogInfoboks)).to.have.length(1);
+        it('Skal vise OppfolgingsplanInfoboks, om det ikke er arbeidsoppgaver', () => {
+            expect(componentUtenArbeidsoppgaver.find(OppfolgingsplanInfoboks)).to.have.length(1);
         });
 
         it('Skal vise LeggTilElementKnapper, om det ikke er tiltak', () => {
