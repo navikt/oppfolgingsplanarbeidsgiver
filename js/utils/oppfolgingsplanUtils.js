@@ -1,19 +1,11 @@
 import {
-    erSykmeldingGyldigForOppfolgingMedGrensedato,
-} from 'oppfolgingsdialog-npm';
-
-import { STATUS } from '../konstanter';
+    MND_SIDEN_SYKMELDING_GRENSE_FOR_OPPFOELGING,
+    STATUS,
+} from '../konstanter';
 import { erGyldigDatoIFortiden } from './datoUtils';
 
 export const isEmpty = (array) => {
     return !array || array.length === 0;
-};
-
-export const sykmeldtHarGyldigSykmelding = (sykmeldinger) => {
-    const dagensDato = new Date();
-    return sykmeldinger.filter((sykmelding) => {
-        return erSykmeldingGyldigForOppfolgingMedGrensedato(sykmelding, dagensDato);
-    }).length > 0;
 };
 
 export const harForrigeNaermesteLeder = (oppfolgingsdialog) => {
@@ -34,6 +26,22 @@ export const sorterOppfolgingsdialogerEtterSluttdato = (oppfolgingsdialoger) => 
     return oppfolgingsdialoger.sort((o1, o2) => {
         return new Date(o2.godkjentPlan.gyldighetstidspunkt.tom) - new Date(o1.godkjentPlan.gyldighetstidspunkt.tom);
     });
+};
+
+export const erSykmeldingGyldigForOppfolgingMedGrensedato = (sykmelding, dato) => {
+    return sykmelding.mulighetForArbeid.perioder.filter((periode) => {
+        const tomGrenseDato = new Date(dato);
+        tomGrenseDato.setHours(0, 0, 0, 0);
+        tomGrenseDato.setMonth(tomGrenseDato.getMonth() - MND_SIDEN_SYKMELDING_GRENSE_FOR_OPPFOELGING);
+        return new Date(periode.tom) >= new Date(tomGrenseDato);
+    }).length > 0;
+};
+
+export const sykmeldtHarGyldigSykmelding = (sykmeldinger) => {
+    const dagensDato = new Date();
+    return sykmeldinger.filter((sykmelding) => {
+        return erSykmeldingGyldigForOppfolgingMedGrensedato(sykmelding, dagensDato);
+    }).length > 0;
 };
 
 export const erOppfolgingsdialogKnyttetTilGyldigSykmelding = (oppfolgingsdialog, sykmeldinger) => {

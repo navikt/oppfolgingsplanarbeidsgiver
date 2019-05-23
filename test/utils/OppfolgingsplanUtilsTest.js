@@ -1,6 +1,7 @@
 import chai from 'chai';
 import sinon from 'sinon';
 import {
+    erSykmeldingGyldigForOppfolgingMedGrensedato,
     finnAktiveOppfolgingsdialoger,
     harForrigeNaermesteLeder,
     harNaermesteLeder,
@@ -25,6 +26,7 @@ describe('OppfolgingplanUtils', () => {
     afterEach(() => {
         clock.restore();
     });
+
     describe('harForrigeNaermesteLeder', () => {
         const forrigeNaermesteLeder = {};
         it('Skal returnere forrigeNaermesteLeder', () => {
@@ -48,6 +50,50 @@ describe('OppfolgingplanUtils', () => {
                 },
             });
             expect(res).to.equal(fnr);
+        });
+    });
+
+    describe('erSykmeldingGyldigForOppfolgingMedGrensedato', () => {
+        const virksomhet = {
+            virksomhetsnummer: '12345678',
+        };
+        const sykmeldingUtgaattOver3mnder = {
+            orgnummer: virksomhet.virksomhetsnummer,
+            mulighetForArbeid: {
+                perioder: [
+                    {
+                        fom: leggTilMnderPaaDato(today, -(MND_SIDEN_SYKMELDING_GRENSE_FOR_OPPFOELGING + 3)).toISOString(),
+                        tom: leggTilMnderPaaDato(today, -(MND_SIDEN_SYKMELDING_GRENSE_FOR_OPPFOELGING + 2)).toISOString(),
+                    },
+                    {
+                        fom: leggTilMnderPaaDato(today, -(MND_SIDEN_SYKMELDING_GRENSE_FOR_OPPFOELGING + 1)).toISOString(),
+                        tom: leggTilMnderOgDagerPaaDato(today, -MND_SIDEN_SYKMELDING_GRENSE_FOR_OPPFOELGING, -1).toISOString(),
+                    },
+                ],
+            },
+        };
+        const sykmeldingGyldig = {
+            orgnummer: virksomhet.virksomhetsnummer,
+            mulighetForArbeid: {
+                perioder: [
+                    {
+                        fom: leggTilMnderPaaDato(today, -4).toISOString(),
+                        tom: leggTilMnderOgDagerPaaDato(today, -MND_SIDEN_SYKMELDING_GRENSE_FOR_OPPFOELGING, -0).toISOString(),
+                    },
+                    {
+                        fom: leggTilMnderPaaDato(today, -5).toISOString(),
+                        tom: leggTilDagerPaaDato(today, 35).toISOString(),
+                    },
+                ],
+            },
+        };
+
+        it('skal returnere false dersom det er 1 sykmelding som ikke er ', () => {
+            expect(erSykmeldingGyldigForOppfolgingMedGrensedato(sykmeldingUtgaattOver3mnder, today)).to.equal(false);
+        });
+
+        it('skal returnere true dersom det er 1 sykmelding som gyldig for oppfolging', () => {
+            expect(erSykmeldingGyldigForOppfolgingMedGrensedato(sykmeldingGyldig, today)).to.equal(true);
         });
     });
 
