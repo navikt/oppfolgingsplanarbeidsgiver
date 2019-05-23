@@ -26,7 +26,7 @@ import {
     henterEllerHarHentetToggles,
     sykmeldtHarBlittSlettet,
 } from '../utils/reducerUtils';
-import { sykmeldtHarGyldigSykmelding } from '../utils/oppfolgingsdialogUtils';
+import { sykmeldtHarGyldigSykmelding } from '../utils/oppfolgingsplanUtils';
 import Side from '../sider/Side';
 import AppSpinner from '../components/AppSpinner';
 import Feilmelding from '../components/Feilmelding';

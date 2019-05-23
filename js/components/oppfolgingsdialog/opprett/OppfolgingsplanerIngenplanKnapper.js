@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { getLedetekst, keyValue } from 'digisyfo-npm';
 import { proptypes as oppfolgingProptypes } from 'oppfolgingsdialog-npm';
-import { erOppfolgingsdialogOpprettbarDirekte } from '../../../utils/oppfolgingsdialogUtils';
+import { erOppfolgingsdialogOpprettbarDirekte } from '../../../utils/oppfolgingsplanUtils';
 
 const OppfolgingsplanerIngenplanKnapper = (
     {

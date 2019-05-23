@@ -2,7 +2,7 @@ import chai from 'chai';
 import {
     harForrigeNaermesteLeder,
     harNaermesteLeder,
-} from '../../js/utils/oppfolgingsdialogUtils';
+} from '../../js/utils/oppfolgingsplanUtils';
 
 const expect = chai.expect;
 

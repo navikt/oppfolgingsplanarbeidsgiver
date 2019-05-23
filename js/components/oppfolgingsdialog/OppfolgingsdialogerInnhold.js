@@ -14,7 +14,7 @@ import {
     proptypes as oppfolgingProptypes,
 } from 'oppfolgingsdialog-npm';
 import Sidetopp from '../Sidetopp';
-import { harForrigeNaermesteLeder, harNaermesteLeder } from '../../utils/oppfolgingsdialogUtils';
+import { harForrigeNaermesteLeder, harNaermesteLeder } from '../../utils/oppfolgingsplanUtils';
 import { getContextRoot } from '../../routers/paths';
 import OppfolgingsdialogVisning from './OppfolgingsdialogerVisning';
 import OppfolgingsdialogerInfoPersonvern from './OppfolgingsdialogerInfoPersonvern';

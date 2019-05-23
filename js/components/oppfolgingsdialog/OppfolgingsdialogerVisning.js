@@ -11,7 +11,7 @@ import {
     proptypes as oppfolgingProptypes,
 } from 'oppfolgingsdialog-npm';
 import { getContextRoot } from '../../routers/paths';
-import OppfolgingsdialogerOpprett from './opprett/OppfolgingsdialogerOpprett';
+import OppfolgingsplanerOpprett from './opprett/OppfolgingsplanerOpprett';
 import OppfolgingsplanerIngenplan from './opprett/OppfolgingsplanerIngenplan';
 import OppfolgingsdialogFilm from '../../filmer/OppfolgingsdialogFilm';
 
@@ -40,7 +40,7 @@ class OppfolgingsdialogerVisning extends Component {
         return (
             <div>
                 { this.state.visOppfolgingsdialogOpprett &&
-                <OppfolgingsdialogerOpprett
+                <OppfolgingsplanerOpprett
                     ledetekster={ledetekster}
                     oppfolgingsdialoger={oppfolgingsdialoger}
                     opprett={opprettOppfolgingsdialog}

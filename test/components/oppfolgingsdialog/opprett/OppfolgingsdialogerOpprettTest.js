@@ -7,7 +7,7 @@ import {
     BaserTidligereSkjema,
 } from 'oppfolgingsdialog-npm';
 import Lightbox from '../../../../js/components/Lightbox';
-import OppfolgingsdialogerOpprett from '../../../../js/components/oppfolgingsdialog/opprett/OppfolgingsdialogerOpprett';
+import OppfolgingsplanerOpprett from '../../../../js/components/oppfolgingsdialog/opprett/OppfolgingsplanerOpprett';
 import getOppfolgingsdialog, {
     hentOppfolgingsdialogTidligere,
 } from '../../../mock/mockOppfolgingsdialog';
@@ -16,7 +16,7 @@ chai.use(chaiEnzyme());
 const expect = chai.expect;
 const assert = chai.assert;
 
-describe('OppfolgingsdialogerOpprett', () => {
+describe('OppfolgingsplanerOpprett', () => {
     const dagensDato = new Date('2017-01-01');
     dagensDato.setHours(0, 0, 0, 0);
     let klokke;
@@ -36,7 +36,7 @@ describe('OppfolgingsdialogerOpprett', () => {
             virksomhetsnummer: '1234568',
         };
 
-        komponent = shallow(<OppfolgingsdialogerOpprett
+        komponent = shallow(<OppfolgingsplanerOpprett
             oppfolgingsdialoger={[oppfolgingsdialog]}
             visOppfolgingsdialogOpprett={visOppfolgingsdialogOpprett}
             kopier={kopier}
@@ -65,7 +65,7 @@ describe('OppfolgingsdialogerOpprett', () => {
                     virksomhetsnummer: arbeidsgiver.virksomhetsnummer,
                 },
             };
-            const komponentMedTidligereDialog = shallow(<OppfolgingsdialogerOpprett
+            const komponentMedTidligereDialog = shallow(<OppfolgingsplanerOpprett
                 oppfolgingsdialoger={[oppfolgingsdialogTidligere]}
                 visOppfolgingsdialogOpprett={visOppfolgingsdialogOpprett}
                 kopier={kopier}

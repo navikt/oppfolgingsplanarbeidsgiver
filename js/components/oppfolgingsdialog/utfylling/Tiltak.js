@@ -14,7 +14,7 @@ import {
     BRUKERTYPE,
 } from 'oppfolgingsdialog-npm';
 import { getContextRoot } from '../../../routers/paths';
-import { isEmpty } from '../../../utils/oppfolgingsdialogUtils';
+import { isEmpty } from '../../../utils/oppfolgingsplanUtils';
 import OppfolgingsplanInfoboks from '../../app/OppfolgingsplanInfoboks';
 
 const harArbeidsgiverKommentert = (tiltak, fnr) => {

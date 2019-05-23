@@ -5,10 +5,10 @@ import {
     BaserTidligereSkjema,
     proptypes as oppfolgingProptypes,
 } from 'oppfolgingsdialog-npm';
-import { finnNyesteTidligereOppfolgingsdialogMedVirksomhet } from '../../../utils/oppfolgingsdialogUtils';
+import { finnNyesteTidligereOppfolgingsdialogMedVirksomhet } from '../../../utils/oppfolgingsplanUtils';
 import Lightbox from '../../Lightbox';
 
-class OppfolgingsdialogerOpprett extends Component {
+class OppfolgingsplanerOpprett extends Component {
     constructor(props) {
         super(props);
         this.opprett = this.opprett.bind(this);
@@ -30,19 +30,17 @@ class OppfolgingsdialogerOpprett extends Component {
             ledetekster,
             visOppfolgingsdialogOpprett,
         } = this.props;
-        return (
-            <Lightbox lukkLightbox={() => {
-                visOppfolgingsdialogOpprett(false);
-            }}>
-                <BaserTidligereSkjema
-                    ledetekster={ledetekster}
-                    onSubmit={this.opprett}
-                />
-            </Lightbox>
-        );
+        return (<Lightbox lukkLightbox={() => {
+            visOppfolgingsdialogOpprett(false);
+        }}>
+            <BaserTidligereSkjema
+                ledetekster={ledetekster}
+                onSubmit={this.opprett}
+            />
+        </Lightbox>);
     }
 }
-OppfolgingsdialogerOpprett.propTypes = {
+OppfolgingsplanerOpprett.propTypes = {
     ledetekster: keyValue,
     oppfolgingsdialoger: PropTypes.arrayOf(oppfolgingProptypes.oppfolgingsdialogPt),
     visOppfolgingsdialogOpprett: PropTypes.func,
@@ -50,4 +48,4 @@ OppfolgingsdialogerOpprett.propTypes = {
     kopier: PropTypes.func,
 };
 
-export default OppfolgingsdialogerOpprett;
+export default OppfolgingsplanerOpprett;

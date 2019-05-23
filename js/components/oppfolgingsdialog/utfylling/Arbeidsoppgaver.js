@@ -13,7 +13,7 @@ import {
 } from 'oppfolgingsdialog-npm';
 import { getLedetekst, keyValue, scrollTo } from 'digisyfo-npm';
 import { getContextRoot } from '../../../routers/paths';
-import { isEmpty } from '../../../utils/oppfolgingsdialogUtils';
+import { isEmpty } from '../../../utils/oppfolgingsplanUtils';
 import OppfolgingsplanInfoboks from '../../app/OppfolgingsplanInfoboks';
 
 class Arbeidsoppgaver extends Component {
