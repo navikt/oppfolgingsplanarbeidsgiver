@@ -4,7 +4,6 @@ import { getLedetekst } from 'digisyfo-npm';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import {
     proptypes as oppfolgingProptypes,
-    OppfolgingsdialogInfoboks,
     finnOgHentNaermesteLedereSomMangler,
     finnOgHentVirksomheterSomMangler,
     finnOgHentPersonerSomMangler,
@@ -17,10 +16,11 @@ import history from '../../history';
 import OppfolgingsdialogerInnhold from './OppfolgingsdialogerInnhold';
 import SykmeldtIngenKontaktinformasjon from './SykmeldtIngenKontaktinformasjon';
 import AppSpinner from '../AppSpinner';
+import OppfolgingsplanInfoboks from '../app/OppfolgingsplanInfoboks';
 import { getContextRoot } from '../../routers/paths';
 
 export const AvkreftetLederInfoboks = () => {
-    return (<OppfolgingsdialogInfoboks
+    return (<OppfolgingsplanInfoboks
         svgUrl={`${getContextRoot()}/img/svg/ny-naermesteleder-slettet.svg`}
         svgAlt="Leder"
         tittel={getLedetekst('oppfolgingsdialog.arbeidsgiver.avkreftetLederInfoboks.tittel')}
@@ -31,7 +31,7 @@ export const AvkreftetLederInfoboks = () => {
                 {getLedetekst('oppfolgingsdialog.knapp.tilbake-forsiden')}
             </Hovedknapp>
         </div>
-    </OppfolgingsdialogInfoboks>);
+    </OppfolgingsplanInfoboks>);
 };
 
 const erBrukerReservertMotKontakt = (kontaktinfo, fnr) => {

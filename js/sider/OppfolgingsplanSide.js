@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getLedetekst, keyValue, hentToggles, togglesPt, sykeforlopsPerioderReducerPt, hentSykeforlopsPerioder } from 'digisyfo-npm';
 import {
-    OppfolgingsdialogInfoboks,
     dialogAvbruttOgNyOpprettet,
     finnNyOppfolgingsplanMedVirkshomhetEtterAvbrutt,
     proptypes as oppfolgingProptypes,
@@ -26,6 +25,7 @@ import { sykmeldtHarGyldigSykmelding } from '../utils/oppfolgingsdialogUtils';
 import Side from '../sider/Side';
 import AppSpinner from '../components/AppSpinner';
 import Feilmelding from '../components/Feilmelding';
+import OppfolgingsplanInfoboks from '../components/app/OppfolgingsplanInfoboks';
 import { settAktivtSteg } from '../actions/oppfolgingsplan/toggle_actions';
 import { hentArbeidsforhold } from '../actions/oppfolgingsplan/arbeidsforhold_actions';
 import { hentKontaktinfo } from '../actions/oppfolgingsplan/kontaktinfo_actions';
@@ -158,7 +158,7 @@ export class OppfolgingsplanSide extends Component {
                         } else if (hentingFeilet || sendingFeilet) {
                             return <Feilmelding />;
                         } else if (!tilgang.data.harTilgang || !sykmeldt || !harSykmeldtGyldigSykmelding) {
-                            return (<OppfolgingsdialogInfoboks
+                            return (<OppfolgingsplanInfoboks
                                 svgUrl={`${getContextRoot()}/img/svg/oppfolgingsdialogFeilmeldingAG.svg`}
                                 svgAlt="OppfølgingsdialogFeilmelding"
                                 tittel={getLedetekst('oppfolgingsdialog.infoboks.ikke-tilgang.tittel')}

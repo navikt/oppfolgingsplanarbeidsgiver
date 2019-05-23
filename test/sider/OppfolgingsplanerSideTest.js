@@ -3,12 +3,12 @@ import React from 'react';
 import sinon from 'sinon';
 import { shallow } from 'enzyme';
 import chaiEnzyme from 'chai-enzyme';
-import { OppfolgingsdialogInfoboks } from 'oppfolgingsdialog-npm';
 import { hentSykmeldingGyldigForOppfoelging, hentSykmeldingIkkeGyldigForOppfoelging } from '../mock/mockSykmeldinger';
 import { OppfolgingsplanerSide, mapStateToProps } from '../../js/sider/OppfolgingsplanerSide';
 import Oppfolgingsdialoger from '../../js/components/oppfolgingsdialog/Oppfolgingsdialoger';
 import AppSpinner from '../../js/components/AppSpinner';
 import Feilmelding from '../../js/components/Feilmelding';
+import OppfolgingsplanInfoboks from '../../js/components/app/OppfolgingsplanInfoboks';
 
 chai.use(chaiEnzyme());
 const expect = chai.expect;
@@ -343,7 +343,7 @@ describe('OppfolgingsplanerSide', () => {
             expect(component.contains(<Feilmelding />)).to.equal(true);
         });
 
-        it('Skal vise OppfolgingsdialogInfoboks dersom leder ikke har tilgang', () => {
+        it('Skal vise OppfolgingsplanInfoboks dersom leder ikke har tilgang', () => {
             const component = shallow(<OppfolgingsplanerSide
                 alleOppfolgingsdialogerReducer={alleOppfolgingsdialogerReducer}
                 oppfolgingsdialogerReducer={oppfolgingsdialogerReducer}
@@ -359,10 +359,10 @@ describe('OppfolgingsplanerSide', () => {
                 hentSykmeldte={hentSykmeldte}
                 sykmeldt={sykmeldt}
             />);
-            expect(component.find(OppfolgingsdialogInfoboks)).to.have.length(1);
+            expect(component.find(OppfolgingsplanInfoboks)).to.have.length(1);
         });
 
-        it('Skal vise OppfolgingsdialogInfoboks dersom leder ikke har sykmeldt, ' +
+        it('Skal vise OppfolgingsplanInfoboks dersom leder ikke har sykmeldt, ' +
             'og det ikke eksisterer en sykmelding gyldig for oppfoelging', () => {
             const component = shallow(<OppfolgingsplanerSide
                 alleOppfolgingsdialogerReducer={alleOppfolgingsdialogerReducer}
@@ -380,7 +380,7 @@ describe('OppfolgingsplanerSide', () => {
                 sykmeldt={null}
                 harSykmeldtGyldigSykmelding={false}
             />);
-            expect(component.find(OppfolgingsdialogInfoboks)).to.have.length(1);
+            expect(component.find(OppfolgingsplanInfoboks)).to.have.length(1);
         });
 
         it('Skal vise Oppfolgingsdialoger dersom henting er OK, ' +

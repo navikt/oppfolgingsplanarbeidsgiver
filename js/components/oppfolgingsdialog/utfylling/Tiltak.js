@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { findDOMNode } from 'react-dom';
 import { getLedetekst, keyValue, scrollTo } from 'digisyfo-npm';
 import {
-    OppfolgingsdialogInfoboks,
     LeggTilElementKnapper,
     TiltakTabell,
     sorterTiltakEtterNyeste,
@@ -16,6 +15,7 @@ import {
 } from 'oppfolgingsdialog-npm';
 import { getContextRoot } from '../../../routers/paths';
 import { isEmpty } from '../../../utils/oppfolgingsdialogUtils';
+import OppfolgingsplanInfoboks from '../../app/OppfolgingsplanInfoboks';
 
 const harArbeidsgiverKommentert = (tiltak, fnr) => {
     return tiltak.kommentarer.filter((kommentar) => {
@@ -131,7 +131,7 @@ class Tiltak extends Component {
                     <div>
                         {
                             !this.state.visTiltakSkjema ?
-                                <OppfolgingsdialogInfoboks
+                                <OppfolgingsplanInfoboks
                                     svgUrl={`${getContextRoot()}/img/svg/tiltak-onboarding.svg`}
                                     svgAlt="nyttTiltak"
                                     tittel={getLedetekst('oppfolgingsdialog.arbeidsgiver.onboarding.tiltak.tittel')}
@@ -142,7 +142,7 @@ class Tiltak extends Component {
                                         visSkjema={this.state.visTiltakSkjema}
                                         toggleSkjema={this.toggleTiltakSkjema}
                                     />
-                                </OppfolgingsdialogInfoboks> :
+                                </OppfolgingsplanInfoboks> :
                                 <div>
                                     <TiltakInfoboks
                                         ledetekster={ledetekster}

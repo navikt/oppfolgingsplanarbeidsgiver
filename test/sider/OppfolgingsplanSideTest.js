@@ -4,9 +4,6 @@ import { shallow } from 'enzyme';
 import chaiEnzyme from 'chai-enzyme';
 import sinon from 'sinon';
 import {
-    OppfolgingsdialogInfoboks,
-} from 'oppfolgingsdialog-npm';
-import {
     hentSykmeldingGyldigForOppfoelging,
     hentSykmeldingIkkeGyldigForOppfoelging,
 } from '../mock/mockSykmeldinger';
@@ -16,6 +13,7 @@ import {
 } from '../../js/sider/OppfolgingsplanSide';
 import AppSpinner from '../../js/components/AppSpinner';
 import Feilmelding from '../../js/components/Feilmelding';
+import OppfolgingsplanInfoboks from '../../js/components/app/OppfolgingsplanInfoboks';
 import Oppfolgingsdialog from '../../js/components/oppfolgingsdialog/Oppfolgingsdialog';
 
 chai.use(chaiEnzyme());
@@ -285,7 +283,7 @@ describe('OppfolgingsplanSide', () => {
             expect(component.contains(<Feilmelding />)).to.equal(true);
         });
 
-        it('Skal vise OppfolgingsdialogInfoboks dersom leder ikke har tilgang', () => {
+        it('Skal vise OppfolgingsplanInfoboks dersom leder ikke har tilgang', () => {
             const component = shallow(<Container
                 alleOppfolgingsdialogerReducer={alleOppfolgingsdialogerReducer}
                 oppfolgingsdialogerReducer={oppfolgingsdialogerReducer}
@@ -301,10 +299,10 @@ describe('OppfolgingsplanSide', () => {
                 hentToggles={hentToggles}
                 sykmeldt={sykmeldt}
             />);
-            expect(component.find(OppfolgingsdialogInfoboks)).to.have.length(1);
+            expect(component.find(OppfolgingsplanInfoboks)).to.have.length(1);
         });
 
-        it('Skal vise OppfolgingsdialogInfoboks, om oppfolgingsdialog er knyttet til gyldig sykmelding', () => {
+        it('Skal vise OppfolgingsplanInfoboks, om oppfolgingsdialog er knyttet til gyldig sykmelding', () => {
             const component = shallow(<Container
                 alleOppfolgingsdialogerReducer={alleOppfolgingsdialogerReducer}
                 oppfolgingsdialogerReducer={oppfolgingsdialogerReducer}
@@ -321,7 +319,7 @@ describe('OppfolgingsplanSide', () => {
                 sykmeldt={null}
                 harSykmeldtGyldigSykmelding={false}
             />);
-            expect(component.find(OppfolgingsdialogInfoboks)).to.have.length(1);
+            expect(component.find(OppfolgingsplanInfoboks)).to.have.length(1);
         });
 
         it('Skal vise Oppfolgingsdialoger dersom henting er OK, og oppfolgingsdialog er knyttet til gyldig sykmelding', () => {
