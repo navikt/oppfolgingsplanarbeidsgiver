@@ -7,7 +7,6 @@ import {
     togglesPt,
 } from 'digisyfo-npm';
 import {
-    AvbruttPlanNotifikasjonBoksAdvarsel,
     BRUKERTYPE,
     finnGodkjentedialogerAvbruttAvMotpartSidenSistInnlogging,
     NyNaermestelederInfoboks,
@@ -18,6 +17,7 @@ import { harForrigeNaermesteLeder, harNaermesteLeder } from '../../utils/oppfolg
 import { getContextRoot } from '../../routers/paths';
 import OppfolgingsdialogVisning from './OppfolgingsdialogerVisning';
 import OppfolgingsdialogerInfoPersonvern from './OppfolgingsdialogerInfoPersonvern';
+import AvbruttPlanNotifikasjonBoksAdvarsel from './godkjennplan/godkjentplan/AvbruttPlanNotifikasjonBoksAdvarsel';
 
 const finnOppfolgingsdialogMedFoersteInnloggingSidenNyNaermesteLeder = (oppfolgingsdialoger) => {
     return oppfolgingsdialoger.filter((oppfolgingsdialog) => {
@@ -78,7 +78,6 @@ const OppfolgingsdialogerInnhold = ({
             />
             {
                 dialogerAvbruttAvMotpartSidenSistInnlogging.length > 0 && <AvbruttPlanNotifikasjonBoksAdvarsel
-                    ledetekster={ledetekster}
                     motpartnavn={dialogerAvbruttAvMotpartSidenSistInnlogging[0].arbeidstaker.navn}
                 />
             }
