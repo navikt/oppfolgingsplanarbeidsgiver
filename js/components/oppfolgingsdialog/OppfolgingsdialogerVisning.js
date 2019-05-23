@@ -7,10 +7,10 @@ import {
     finnTidligereOppfolgingsdialoger,
     harTidligereOppfolgingsdialoger,
     finnAktiveOppfolgingsdialoger,
-    harAktivOppfolgingsdialog,
     proptypes as oppfolgingProptypes,
 } from 'oppfolgingsdialog-npm';
 import { getContextRoot } from '../../routers/paths';
+import { harAktivOppfolgingsdialog } from '../../utils/oppfolgingsplanUtils';
 import OppfolgingsplanerOpprett from './opprett/OppfolgingsplanerOpprett';
 import OppfolgingsplanerIngenplan from './opprett/OppfolgingsplanerIngenplan';
 import OppfolgingsdialogFilm from '../../filmer/OppfolgingsdialogFilm';

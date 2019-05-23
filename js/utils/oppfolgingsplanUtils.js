@@ -4,6 +4,9 @@ import {
     harTidligereOppfolgingsdialoger,
 } from 'oppfolgingsdialog-npm';
 
+import { STATUS } from '../konstanter';
+import { erGyldigDatoIFortiden } from './datoUtils';
+
 export const isEmpty = (array) => {
     return !array || array.length === 0;
 };
@@ -37,3 +40,31 @@ export const finnNyesteGodkjenning = (godkjenninger) => {
     })[0];
 };
 
+export const erOppfolgingsdialogKnyttetTilGyldigSykmelding = (oppfolgingsdialog, sykmeldinger) => {
+    const dagensDato = new Date();
+    return sykmeldinger.filter((sykmelding) => {
+        return oppfolgingsdialog.virksomhet.virksomhetsnummer === sykmelding.orgnummer
+            && erSykmeldingGyldigForOppfolgingMedGrensedato(sykmelding, dagensDato);
+    }).length > 0;
+};
+
+export const erOppfolgingsdialogAktiv = (oppfolgingsdialog) => {
+    return !oppfolgingsdialog.godkjentPlan ||
+        (oppfolgingsdialog.status !== STATUS.AVBRUTT && !erGyldigDatoIFortiden(oppfolgingsdialog.godkjentPlan.gyldighetstidspunkt.tom));
+};
+
+export const finnAktiveOppfolgingsdialoger = (oppfolgingsdialoger, sykmeldinger) => {
+    if (!sykmeldinger) {
+        return oppfolgingsdialoger.filter((oppfolgingsdialog) => {
+            return !oppfolgingsdialog.godkjentPlan || erOppfolgingsdialogAktiv(oppfolgingsdialog);
+        });
+    }
+    return oppfolgingsdialoger.filter((oppfolgingsdialog) => {
+        return erOppfolgingsdialogKnyttetTilGyldigSykmelding(oppfolgingsdialog, sykmeldinger) &&
+            (!oppfolgingsdialog.godkjentPlan || (oppfolgingsdialog.status !== STATUS.AVBRUTT && !erGyldigDatoIFortiden(oppfolgingsdialog.godkjentPlan.gyldighetstidspunkt.tom)));
+    });
+};
+
+export const harAktivOppfolgingsdialog = (oppfolgingsdialoger, sykmeldinger) => {
+    return finnAktiveOppfolgingsdialoger(oppfolgingsdialoger, sykmeldinger).length > 0;
+};
