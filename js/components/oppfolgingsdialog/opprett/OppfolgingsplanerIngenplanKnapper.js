@@ -4,7 +4,7 @@ import { getLedetekst, keyValue } from 'digisyfo-npm';
 import { proptypes as oppfolgingProptypes } from 'oppfolgingsdialog-npm';
 import { erOppfolgingsdialogOpprettbarDirekte } from '../../../utils/oppfolgingsdialogUtils';
 
-const OppfolgingsdialogerIngenplanKnapper = (
+const OppfolgingsplanerIngenplanKnapper = (
     {
         ledetekster,
         oppfolgingsdialoger,
@@ -31,11 +31,11 @@ const OppfolgingsdialogerIngenplanKnapper = (
         </div>
     );
 };
-OppfolgingsdialogerIngenplanKnapper.propTypes = {
+OppfolgingsplanerIngenplanKnapper.propTypes = {
     ledetekster: keyValue,
     oppfolgingsdialoger: PropTypes.arrayOf(oppfolgingProptypes.oppfolgingsdialogPt),
     opprett: PropTypes.func,
     visOppfolgingsdialogOpprett: PropTypes.func,
 };
 
-export default OppfolgingsdialogerIngenplanKnapper;
+export default OppfolgingsplanerIngenplanKnapper;

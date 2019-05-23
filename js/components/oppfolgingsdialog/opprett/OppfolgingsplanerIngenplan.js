@@ -5,9 +5,9 @@ import {
     proptypes as oppfolgingProptypes,
     OppfolgingsdialogerIngenplan,
 } from 'oppfolgingsdialog-npm';
-import OppfolgingsdialogerIngenplanKnapper from './OppfolgingsdialogerIngenplanKnapper';
+import OppfolgingsplanerIngenplanKnapper from './OppfolgingsplanerIngenplanKnapper';
 
-const OppfolgingsdialogerIngenplanAG = (
+const OppfolgingsplanerIngenplan = (
     {
         ledetekster,
         oppfolgingsdialoger,
@@ -19,7 +19,7 @@ const OppfolgingsdialogerIngenplanAG = (
         ledetekster={ledetekster}
         rootUrl={rootUrl}
     >
-        <OppfolgingsdialogerIngenplanKnapper
+        <OppfolgingsplanerIngenplanKnapper
             ledetekster={ledetekster}
             oppfolgingsdialoger={oppfolgingsdialoger}
             opprett={opprett}
@@ -29,7 +29,7 @@ const OppfolgingsdialogerIngenplanAG = (
     </OppfolgingsdialogerIngenplan>);
 };
 
-OppfolgingsdialogerIngenplanAG.propTypes = {
+OppfolgingsplanerIngenplan.propTypes = {
     ledetekster: keyValue,
     oppfolgingsdialoger: PropTypes.arrayOf(oppfolgingProptypes.oppfolgingsdialogPt),
     opprett: PropTypes.func,
@@ -37,4 +37,4 @@ OppfolgingsdialogerIngenplanAG.propTypes = {
     rootUrl: PropTypes.string,
 };
 
-export default OppfolgingsdialogerIngenplanAG;
+export default OppfolgingsplanerIngenplan;

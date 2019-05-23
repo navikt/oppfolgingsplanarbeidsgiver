@@ -12,7 +12,7 @@ import {
 } from 'oppfolgingsdialog-npm';
 import { getContextRoot } from '../../routers/paths';
 import OppfolgingsdialogerOpprett from './opprett/OppfolgingsdialogerOpprett';
-import OppfolgingsdialogerIngenplanAG from './opprett/OppfolgingsdialogerIngenplanAG';
+import OppfolgingsplanerIngenplan from './opprett/OppfolgingsplanerIngenplan';
 import OppfolgingsdialogFilm from '../../filmer/OppfolgingsdialogFilm';
 
 class OppfolgingsdialogerVisning extends Component {
@@ -62,7 +62,7 @@ class OppfolgingsdialogerVisning extends Component {
 
                 { (oppfolgingsdialoger.length === 0 || !harAktivOppfolgingsdialog(oppfolgingsdialoger)) &&
                 <div className="blokk--l">
-                    <OppfolgingsdialogerIngenplanAG
+                    <OppfolgingsplanerIngenplan
                         ledetekster={ledetekster}
                         oppfolgingsdialoger={oppfolgingsdialoger}
                         opprett={opprettOppfolgingsdialog}

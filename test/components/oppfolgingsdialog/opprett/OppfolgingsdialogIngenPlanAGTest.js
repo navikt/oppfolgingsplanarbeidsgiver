@@ -4,8 +4,8 @@ import { mount } from 'enzyme';
 import chaiEnzyme from 'chai-enzyme';
 import sinon from 'sinon';
 import { OppfolgingsdialogerIngenplan } from 'oppfolgingsdialog-npm';
-import OppfolgingsdialogerIngenplanAG from '../../../../js/components/oppfolgingsdialog/opprett/OppfolgingsdialogerIngenplanAG';
-import OppfolgingsdialogerIngenplanKnapper from '../../../../js/components/oppfolgingsdialog/opprett/OppfolgingsdialogerIngenplanKnapper';
+import OppfolgingsplanerIngenplan from '../../../../js/components/oppfolgingsdialog/opprett/OppfolgingsplanerIngenplan';
+import OppfolgingsplanerIngenplanKnapper from '../../../../js/components/oppfolgingsdialog/opprett/OppfolgingsplanerIngenplanKnapper';
 import getOppfolgingsdialog, {
     hentOppfolgingsdialogTidligere,
 } from '../../../mock/mockOppfolgingsdialog';
@@ -14,7 +14,7 @@ chai.use(chaiEnzyme());
 const expect = chai.expect;
 const assert = chai.assert;
 
-describe('OppfolgingsdialogerIngenplanAG', () => {
+describe('OppfolgingsplanerIngenplan', () => {
     let klokke;
     const dagensDato = new Date('2017-01-01');
 
@@ -32,7 +32,7 @@ describe('OppfolgingsdialogerIngenplanAG', () => {
         arbeidsgiver = {
             virksomhetsnummer: '12345678',
         };
-        komponent = mount(<OppfolgingsdialogerIngenplanAG
+        komponent = mount(<OppfolgingsplanerIngenplan
             ledetekster={ledetekster}
             opprett={opprett}
             oppfolgingsdialoger={[]}
@@ -45,15 +45,15 @@ describe('OppfolgingsdialogerIngenplanAG', () => {
         klokke.restore();
     });
 
-    it('Skal vise OppfolgingsdialogerIngenplanKnapper', () => {
+    it('Skal vise OppfolgingsplanerIngenplanKnapper', () => {
         expect(komponent.find(OppfolgingsdialogerIngenplan)).to.have.length(1);
     });
 
-    it('Skal vise OppfolgingsdialogerIngenplanKnapper', () => {
-        expect(komponent.find(OppfolgingsdialogerIngenplanKnapper)).to.have.length(1);
+    it('Skal vise OppfolgingsplanerIngenplanKnapper', () => {
+        expect(komponent.find(OppfolgingsplanerIngenplanKnapper)).to.have.length(1);
     });
 
-    describe('OppfolgingsdialogerIngenplanKnapper', () => {
+    describe('OppfolgingsplanerIngenplanKnapper', () => {
         let oppfolgingsdialogTidligere;
         let oppfolgingsdialogIkkeTidligere;
         let virksomhet;
@@ -76,7 +76,7 @@ describe('OppfolgingsdialogerIngenplanAG', () => {
         });
 
         it('Skal vise knapp som kaller opprett, om oppfolgingsdialog er opprettbar direkte uten ekstra utfylling', () => {
-            komponent = mount(<OppfolgingsdialogerIngenplanAG
+            komponent = mount(<OppfolgingsplanerIngenplan
                 ledetekster={ledetekster}
                 opprett={opprett}
                 visOppfolgingsdialogOpprett={visOppfolgingsdialogOpprett}
@@ -88,7 +88,7 @@ describe('OppfolgingsdialogerIngenplanAG', () => {
         });
 
         it('Skal vise knapp som kaller visOppfolgingsdialogOpprett, om AT har tidligere godkjent oppfolgingsdialog med virksomhet', () => {
-            komponent = mount(<OppfolgingsdialogerIngenplanAG
+            komponent = mount(<OppfolgingsplanerIngenplan
                 ledetekster={ledetekster}
                 opprett={opprett}
                 visOppfolgingsdialogOpprett={visOppfolgingsdialogOpprett}

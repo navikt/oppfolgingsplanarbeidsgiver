@@ -6,7 +6,7 @@ import {
     OppfolgingsdialogTeasere,
 } from 'oppfolgingsdialog-npm';
 import OppfolgingsdialogerVisning from '../../../js/components/oppfolgingsdialog/OppfolgingsdialogerVisning';
-import OppfolgingsdialogerIngenplanAG from '../../../js/components/oppfolgingsdialog/opprett/OppfolgingsdialogerIngenplanAG';
+import OppfolgingsplanerIngenplan from '../../../js/components/oppfolgingsdialog/opprett/OppfolgingsplanerIngenplan';
 import OppfolgingsdialogFilm from '../../../js/filmer/OppfolgingsdialogFilm';
 import getOppfolgingsdialog from '../../mock/mockOppfolgingsdialog';
 
@@ -35,14 +35,14 @@ describe('OppfolgingsdialogerVisning', () => {
             expect(component.find(OppfolgingsdialogTeasere)).to.have.length(0);
         });
 
-        it('Skal vise OppfolgingsdialogerIngenplanAG, dersom det ikke er oppfolgingsdialoger', () => {
+        it('Skal vise OppfolgingsplanerIngenplan, dersom det ikke er oppfolgingsdialoger', () => {
             component = shallow(<OppfolgingsdialogerVisning
                 oppfolgingsdialoger={[]}
             />);
-            expect(component.find(OppfolgingsdialogerIngenplanAG)).to.have.length(1);
+            expect(component.find(OppfolgingsplanerIngenplan)).to.have.length(1);
         });
 
-        it('Skal vise OppfolgingsdialogerIngenplanAG, dersom det ikke er aktive oppfolgingsdialoger', () => {
+        it('Skal vise OppfolgingsplanerIngenplan, dersom det ikke er aktive oppfolgingsdialoger', () => {
             const oppfolgingsdialogListe = [Object.assign({}, getOppfolgingsdialog(), {
                 godkjentPlan: {
                     gyldighetstidspunkt: {
@@ -53,7 +53,7 @@ describe('OppfolgingsdialogerVisning', () => {
             component = shallow(<OppfolgingsdialogerVisning
                 oppfolgingsdialoger={oppfolgingsdialogListe}
             />);
-            expect(component.find(OppfolgingsdialogerIngenplanAG)).to.have.length(1);
+            expect(component.find(OppfolgingsplanerIngenplan)).to.have.length(1);
         });
     });
 
