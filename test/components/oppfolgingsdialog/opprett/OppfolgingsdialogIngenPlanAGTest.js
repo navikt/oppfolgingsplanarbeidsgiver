@@ -4,7 +4,8 @@ import { mount } from 'enzyme';
 import chaiEnzyme from 'chai-enzyme';
 import sinon from 'sinon';
 import { OppfolgingsdialogerIngenplan } from 'oppfolgingsdialog-npm';
-import OppfolgingsdialogerIngenplanAG, { OppfolgingsdialogerIngenplanKnapper } from '../../../../js/components/oppfolgingsdialog/opprett/OppfolgingsdialogerIngenplanAG';
+import OppfolgingsdialogerIngenplanAG from '../../../../js/components/oppfolgingsdialog/opprett/OppfolgingsdialogerIngenplanAG';
+import OppfolgingsdialogerIngenplanKnapper from '../../../../js/components/oppfolgingsdialog/opprett/OppfolgingsdialogerIngenplanKnapper';
 import getOppfolgingsdialog, {
     hentOppfolgingsdialogTidligere,
 } from '../../../mock/mockOppfolgingsdialog';
