@@ -2,7 +2,6 @@ import 'whatwg-fetch';
 import 'babel-polyfill';
 import { render } from 'react-dom';
 import { hentLedetekster, hentToggles, setPerformOnHttpCalls, forlengInnloggetSesjon, sjekkInnloggingssesjon } from 'digisyfo-npm';
-import { setPerformOnOppDialogHttpCalls } from 'oppfolgingsdialog-npm';
 import { Provider } from 'react-redux';
 import React from 'react';
 import AppRouter from './routers/AppRouter';
@@ -11,6 +10,7 @@ import store from './store';
 import { hentSykmeldte } from './actions/sykmeldte_actions';
 import '../styles/styles.less';
 import './logging';
+import { setPerformOnOppDialogHttpCalls } from './utils/oppfolgingsplanUtils';
 
 if (window.location.href.indexOf('visLedetekster=true') > -1) {
     window.APP_SETTINGS.VIS_LEDETEKSTNOKLER = true;
