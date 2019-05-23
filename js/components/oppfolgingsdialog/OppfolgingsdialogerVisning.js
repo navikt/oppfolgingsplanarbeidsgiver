@@ -69,7 +69,6 @@ class OppfolgingsdialogerVisning extends Component {
                         oppfolgingsdialoger={oppfolgingsdialoger}
                         opprett={opprettOppfolgingsdialog}
                         visOppfolgingsdialogOpprett={this.visOppfolgingsdialogOpprett}
-                        rootUrl={getContextRoot()}
                     />
                 </div>
                 }

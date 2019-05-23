@@ -6,6 +6,7 @@ import {
 } from 'digisyfo-npm';
 import { proptypes as oppfolgingProptypes } from 'oppfolgingsdialog-npm';
 import OppfolgingsplanerIngenplanKnapper from './OppfolgingsplanerIngenplanKnapper';
+import { getContextRoot } from '../../../routers/paths';
 
 const OppfolgingsplanerIngenplan = (
     {
@@ -13,14 +14,13 @@ const OppfolgingsplanerIngenplan = (
         oppfolgingsdialoger,
         opprett,
         visOppfolgingsdialogOpprett,
-        rootUrl,
     }) => {
     return (<div className="oppfolgingsdialogerIngenplan">
         <header className="oppfolgingsdialogerIngenplan__header">
             <h2>{getLedetekst('oppfolgingsdialoger.oppfolgingsdialoger.header.tittel')}</h2>
         </header>
         <div className="oppfolgingsdialogerIngenplan__blokk">
-            <img alt="tom-plan" src={`${rootUrl}/img/svg/oppfolgingsdialog-tom.svg`} />
+            <img alt="tom-plan" src={`${getContextRoot()}/img/svg/oppfolgingsdialog-tom.svg`} />
             <div className="inngangspanel__innhold">
                 <header className="inngangspanel__header">
                     <h3 className="js-title">
@@ -50,7 +50,6 @@ OppfolgingsplanerIngenplan.propTypes = {
     oppfolgingsdialoger: PropTypes.arrayOf(oppfolgingProptypes.oppfolgingsdialogPt),
     opprett: PropTypes.func,
     visOppfolgingsdialogOpprett: PropTypes.func,
-    rootUrl: PropTypes.string,
 };
 
 export default OppfolgingsplanerIngenplan;
