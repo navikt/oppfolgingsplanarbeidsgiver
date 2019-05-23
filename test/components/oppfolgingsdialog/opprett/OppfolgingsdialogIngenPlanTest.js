@@ -3,7 +3,6 @@ import chai from 'chai';
 import { mount } from 'enzyme';
 import chaiEnzyme from 'chai-enzyme';
 import sinon from 'sinon';
-import { OppfolgingsdialogerIngenplan } from 'oppfolgingsdialog-npm';
 import OppfolgingsplanerIngenplan from '../../../../js/components/oppfolgingsdialog/opprett/OppfolgingsplanerIngenplan';
 import OppfolgingsplanerIngenplanKnapper from '../../../../js/components/oppfolgingsdialog/opprett/OppfolgingsplanerIngenplanKnapper';
 import getOppfolgingsdialog, {
@@ -43,10 +42,6 @@ describe('OppfolgingsplanerIngenplan', () => {
 
     afterEach(() => {
         klokke.restore();
-    });
-
-    it('Skal vise OppfolgingsplanerIngenplanKnapper', () => {
-        expect(komponent.find(OppfolgingsdialogerIngenplan)).to.have.length(1);
     });
 
     it('Skal vise OppfolgingsplanerIngenplanKnapper', () => {
