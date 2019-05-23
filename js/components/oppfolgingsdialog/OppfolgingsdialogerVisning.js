@@ -4,14 +4,14 @@ import { getLedetekst, keyValue } from 'digisyfo-npm';
 import {
     OppfolgingsdialogTeasere,
     BRUKERTYPE,
-    finnTidligereOppfolgingsdialoger,
-    harTidligereOppfolgingsdialoger,
     proptypes as oppfolgingProptypes,
 } from 'oppfolgingsdialog-npm';
 import { getContextRoot } from '../../routers/paths';
 import {
     finnAktiveOppfolgingsdialoger,
+    finnTidligereOppfolgingsdialoger,
     harAktivOppfolgingsdialog,
+    harTidligereOppfolgingsdialoger,
 } from '../../utils/oppfolgingsplanUtils';
 import OppfolgingsplanerOpprett from './opprett/OppfolgingsplanerOpprett';
 import OppfolgingsplanerIngenplan from './opprett/OppfolgingsplanerIngenplan';

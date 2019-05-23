@@ -1,7 +1,5 @@
 import {
     erSykmeldingGyldigForOppfolgingMedGrensedato,
-    finnTidligereOppfolgingsdialoger,
-    harTidligereOppfolgingsdialoger,
 } from 'oppfolgingsdialog-npm';
 
 import { STATUS } from '../konstanter';
@@ -18,14 +16,6 @@ export const sykmeldtHarGyldigSykmelding = (sykmeldinger) => {
     }).length > 0;
 };
 
-export const erOppfolgingsdialogOpprettbarDirekte = (oppfolgingsdialoger) => {
-    return !harTidligereOppfolgingsdialoger(oppfolgingsdialoger);
-};
-
-export const finnNyesteTidligereOppfolgingsdialogMedVirksomhet = (oppfolgingsdialoger) => {
-    return finnTidligereOppfolgingsdialoger(oppfolgingsdialoger)[0];
-};
-
 export const harForrigeNaermesteLeder = (oppfolgingsdialog) => {
     return oppfolgingsdialog.arbeidsgiver.forrigeNaermesteLeder;
 };
@@ -40,6 +30,12 @@ export const finnNyesteGodkjenning = (godkjenninger) => {
     })[0];
 };
 
+export const sorterOppfolgingsdialogerEtterSluttdato = (oppfolgingsdialoger) => {
+    return oppfolgingsdialoger.sort((o1, o2) => {
+        return new Date(o2.godkjentPlan.gyldighetstidspunkt.tom) - new Date(o1.godkjentPlan.gyldighetstidspunkt.tom);
+    });
+};
+
 export const erOppfolgingsdialogKnyttetTilGyldigSykmelding = (oppfolgingsdialog, sykmeldinger) => {
     const dagensDato = new Date();
     return sykmeldinger.filter((sykmelding) => {
@@ -51,6 +47,30 @@ export const erOppfolgingsdialogKnyttetTilGyldigSykmelding = (oppfolgingsdialog,
 export const erOppfolgingsdialogAktiv = (oppfolgingsdialog) => {
     return !oppfolgingsdialog.godkjentPlan ||
         (oppfolgingsdialog.status !== STATUS.AVBRUTT && !erGyldigDatoIFortiden(oppfolgingsdialog.godkjentPlan.gyldighetstidspunkt.tom));
+};
+
+export const erOppfolgingsdialogTidligere = (oppfolgingsdialog) => {
+    return oppfolgingsdialog.godkjentPlan
+        && erGyldigDatoIFortiden(oppfolgingsdialog.godkjentPlan.gyldighetstidspunkt.tom)
+        && oppfolgingsdialog.status !== STATUS.AVBRUTT;
+};
+
+export const finnTidligereOppfolgingsdialoger = (oppfolgingsdialoger) => {
+    return sorterOppfolgingsdialogerEtterSluttdato(oppfolgingsdialoger.filter((oppfolgingsdialog) => {
+        return erOppfolgingsdialogTidligere(oppfolgingsdialog);
+    }));
+};
+
+export const finnNyesteTidligereOppfolgingsdialogMedVirksomhet = (oppfolgingsdialoger) => {
+    return finnTidligereOppfolgingsdialoger(oppfolgingsdialoger)[0];
+};
+
+export const harTidligereOppfolgingsdialoger = (oppfolgingsdialoger) => {
+    return finnTidligereOppfolgingsdialoger(oppfolgingsdialoger).length > 0;
+};
+
+export const erOppfolgingsdialogOpprettbarDirekte = (oppfolgingsdialoger) => {
+    return !harTidligereOppfolgingsdialoger(oppfolgingsdialoger);
 };
 
 export const finnAktiveOppfolgingsdialoger = (oppfolgingsdialoger, sykmeldinger) => {
