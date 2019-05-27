@@ -40,12 +40,12 @@ const OppfolgingsdialogerInnhold = ({
     slettSykmeldt,
 }) => {
     let panel;
-    const dialogerAvbruttAvMotpartSidenSistInnlogging = finnGodkjentedialogerAvbruttAvMotpartSidenSistInnlogging(oppfolgingsdialoger);
-    const oppfolgingsdialogMedNyNaermesteLeder = finnOppfolgingsdialogMedFoersteInnloggingSidenNyNaermesteLeder(oppfolgingsdialoger);
+    const planerAvbruttAvMotpartSidenSistInnlogging = finnGodkjentedialogerAvbruttAvMotpartSidenSistInnlogging(oppfolgingsdialoger);
+    const oppfolgingsplanMedNyNaermesteLeder = finnOppfolgingsdialogMedFoersteInnloggingSidenNyNaermesteLeder(oppfolgingsdialoger);
 
-    if (!bekreftetNyNaermesteLeder && oppfolgingsdialogMedNyNaermesteLeder) {
+    if (!bekreftetNyNaermesteLeder && oppfolgingsplanMedNyNaermesteLeder) {
         panel = (<NyNaermestelederInfoboks
-            oppfolgingsdialog={oppfolgingsdialogMedNyNaermesteLeder}
+            oppfolgingsdialog={oppfolgingsplanMedNyNaermesteLeder}
             avkreftNyNaermesteleder={slettSykmeldt}
             bekreftNyNaermesteLeder={bekreftNyNaermesteLeder}
         />);
@@ -71,8 +71,8 @@ const OppfolgingsdialogerInnhold = ({
             <Sidetopp tittel={getLedetekst('oppfolgingsdialoger.sidetittel')} />
             <OppfolgingsdialogerInfoPersonvern />
             {
-                dialogerAvbruttAvMotpartSidenSistInnlogging.length > 0 && <AvbruttPlanNotifikasjonBoksAdvarsel
-                    motpartnavn={dialogerAvbruttAvMotpartSidenSistInnlogging[0].arbeidstaker.navn}
+                planerAvbruttAvMotpartSidenSistInnlogging.length > 0 && <AvbruttPlanNotifikasjonBoksAdvarsel
+                    motpartnavn={planerAvbruttAvMotpartSidenSistInnlogging[0].arbeidstaker.navn}
                 />
             }
             {panel}
