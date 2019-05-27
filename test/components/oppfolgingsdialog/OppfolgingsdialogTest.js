@@ -9,12 +9,12 @@ import {
     NavigasjonsBunn,
     Godkjenn,
     Godkjenninger,
-    Samtykke,
     AvbruttGodkjentPlanVarsel,
     ReleasetPlan,
 } from 'oppfolgingsdialog-npm';
 import Oppfolgingsdialog, { erAvvistAvArbeidsgiver } from '../../../js/components/oppfolgingsdialog/Oppfolgingsdialog';
 import Arbeidsoppgaver from '../../../js/components/oppfolgingsdialog/utfylling/Arbeidsoppgaver';
+import Samtykke from '../../../js/components/oppfolgingsdialog/godkjennplan/samtykke/Samtykke';
 import Tiltak from '../../../js/components/oppfolgingsdialog/utfylling/Tiltak';
 import getOppfolgingsdialog from '../../mock/mockOppfolgingsdialog';
 

@@ -9,7 +9,6 @@ import {
     Godkjenn,
     Godkjenninger,
     ReleasetPlan,
-    Samtykke,
     AvbruttGodkjentPlanVarsel,
     finnOgHentVirksomheterSomMangler,
     finnOgHentNaermesteLedereSomMangler,
@@ -22,6 +21,7 @@ import {
 import { getContextRoot } from '../../routers/paths';
 import Arbeidsoppgaver from './utfylling/Arbeidsoppgaver';
 import Tiltak from './utfylling/Tiltak';
+import Samtykke from '../oppfolgingsdialog/godkjennplan/samtykke/Samtykke';
 
 const manglerSamtykke = (oppfolgingsdialog) => {
     return oppfolgingsdialog.arbeidsgiver.naermesteLeder.samtykke === null;
@@ -125,8 +125,6 @@ class Oppfolgingsdialog extends Component {
             panel = (<Samtykke
                 sendSamtykke={giSamtykke}
                 oppfolgingsdialog={oppfolgingsdialog}
-                ledetekster={ledetekster}
-                rootUrl={`${getContextRoot()}`}
             />);
         } else if (inneholderGodkjenninger(oppfolgingsdialog) && !erAvvistAvArbeidsgiver(oppfolgingsdialog)) {
             disableNavigation = true;
