@@ -195,6 +195,10 @@ function mockForLokaltMiljo(server) {
     server.use(express.json());
     server.use(express.urlencoded());
 
+    server.post('/syforest/arbeidsgiver/:fnr/:orgnr/actions/avkreft', (req, res) => {
+        res.send();
+    });
+
     server.post('/syfooppfolgingsplanservice/api/tiltak/actions/:response/lagreKommentar', (req, res) => {
         mockOpprettetIdResultat(res);
     });

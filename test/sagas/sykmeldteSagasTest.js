@@ -1,9 +1,24 @@
 import { expect } from 'chai';
-import { get } from 'digisyfo-npm';
-import { put, call } from 'redux-saga/effects';
-import { hentArbeidsgiversSykmeldte, berikSykmeldte } from '../../js/sagas/sykmeldteSagas';
+import {
+    put,
+    call,
+} from 'redux-saga/effects';
+import {
+    get,
+    post,
+} from 'digisyfo-npm';
+import {
+    hentArbeidsgiversSykmeldte,
+    berikSykmeldte,
+    slettSykmeldt,
+} from '../../js/sagas/sykmeldteSagas';
 import * as actiontyper from '../../js/actions/actiontyper';
-import { henterSykmeldteBerikelser, hentSykmeldteBerikelser, sykmeldteBerikelserHentet } from '../../js/actions/sykmeldte_actions';
+import {
+    henterSykmeldteBerikelser,
+    hentSykmeldteBerikelser,
+    sykmeldteBerikelserHentet,
+} from '../../js/actions/sykmeldte_actions';
+import * as sykmeldtActions from '../../js/actions/sykmeldt_actions';
 
 describe('sykmeldteSagas', () => {
     beforeEach(() => {
@@ -73,6 +88,36 @@ describe('sykmeldteSagas', () => {
             const action = sykmeldteBerikelserHentet(data);
             const nextPut = put(action);
             expect(generator.next(data).value).to.deep.equal(nextPut);
+        });
+    });
+
+    describe('avkreft', () => {
+        const fnr = '10101010101';
+        const orgnr = '123456789';
+        const generator = slettSykmeldt({
+            fnr,
+            orgnr,
+        });
+
+        it(`Skal dispatche ${sykmeldtActions.SLETTER_SYKMELDT}`, () => {
+            const nextPut = put({
+                type: sykmeldtActions.SLETTER_SYKMELDT,
+            });
+            expect(generator.next().value).to.deep.equal(nextPut);
+        });
+
+        it('Skal dernest slette sykmeldt', () => {
+            const nextCall = call(post, `${process.env.REACT_APP_SYFOREST_ROOT}/arbeidsgiver/${fnr}/${orgnr}/actions/avkreft`);
+            expect(generator.next().value).to.deep.equal(nextCall);
+        });
+
+        it(`Skal dernest dispatche ${sykmeldtActions.SYKMELDT_SLETTET}`, () => {
+            const nextPut = put({
+                type: sykmeldtActions.SYKMELDT_SLETTET,
+                fnr,
+                orgnr,
+            });
+            expect(generator.next().value).to.deep.equal(nextPut);
         });
     });
 });
