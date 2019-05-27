@@ -18,13 +18,13 @@ import OppfolgingsdialogerInfoPersonvern from './OppfolgingsdialogerInfoPersonve
 import AvbruttPlanNotifikasjonBoksAdvarsel from './godkjennplan/godkjentplan/AvbruttPlanNotifikasjonBoksAdvarsel';
 import NyNaermestelederInfoboks from '../oppfolgingsplaner/NyNaermestelederInfoboks';
 
-const finnOppfolgingsdialogMedFoersteInnloggingSidenNyNaermesteLeder = (oppfolgingsdialoger) => {
-    return oppfolgingsdialoger.filter((oppfolgingsdialog) => {
-        return harForrigeNaermesteLeder(oppfolgingsdialog) &&
-            harNaermesteLeder(oppfolgingsdialog) &&
-            (!oppfolgingsdialog.arbeidsgiver.naermesteLeder.sistInnlogget ||
-                new Date(oppfolgingsdialog.arbeidsgiver.naermesteLeder.sistInnlogget).toISOString().split('T')[0]
-                < new Date(oppfolgingsdialog.arbeidsgiver.naermesteLeder.aktivFom).toISOString().split('T')[0]);
+const finnOppfolgingsdialogMedFoersteInnloggingSidenNyNaermesteLeder = (oppfolgingsplaner) => {
+    return oppfolgingsplaner.filter((oppfolgingsplan) => {
+        return harForrigeNaermesteLeder(oppfolgingsplan) &&
+            harNaermesteLeder(oppfolgingsplan) &&
+            (!oppfolgingsplan.arbeidsgiver.naermesteLeder.sistInnlogget ||
+                new Date(oppfolgingsplan.arbeidsgiver.naermesteLeder.sistInnlogget).toISOString().split('T')[0]
+                < new Date(oppfolgingsplan.arbeidsgiver.naermesteLeder.aktivFom).toISOString().split('T')[0]);
     })[0];
 };
 
