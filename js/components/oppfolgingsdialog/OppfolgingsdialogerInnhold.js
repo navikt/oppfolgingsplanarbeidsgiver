@@ -18,7 +18,7 @@ import OppfolgingsdialogerInfoPersonvern from './OppfolgingsdialogerInfoPersonve
 import AvbruttPlanNotifikasjonBoksAdvarsel from './godkjennplan/godkjentplan/AvbruttPlanNotifikasjonBoksAdvarsel';
 import NyNaermestelederInfoboks from '../oppfolgingsplaner/NyNaermestelederInfoboks';
 
-const finnOppfolgingsdialogMedFoersteInnloggingSidenNyNaermesteLeder = (oppfolgingsplaner) => {
+const finnOppfolgingsplanMedFoersteInnloggingSidenNyNaermesteLeder = (oppfolgingsplaner) => {
     return oppfolgingsplaner.filter((oppfolgingsplan) => {
         return harForrigeNaermesteLeder(oppfolgingsplan) &&
             harNaermesteLeder(oppfolgingsplan) &&
@@ -41,7 +41,7 @@ const OppfolgingsdialogerInnhold = ({
 }) => {
     let panel;
     const planerAvbruttAvMotpartSidenSistInnlogging = finnGodkjentedialogerAvbruttAvMotpartSidenSistInnlogging(oppfolgingsdialoger);
-    const oppfolgingsplanMedNyNaermesteLeder = finnOppfolgingsdialogMedFoersteInnloggingSidenNyNaermesteLeder(oppfolgingsdialoger);
+    const oppfolgingsplanMedNyNaermesteLeder = finnOppfolgingsplanMedFoersteInnloggingSidenNyNaermesteLeder(oppfolgingsdialoger);
 
     if (!bekreftetNyNaermesteLeder && oppfolgingsplanMedNyNaermesteLeder) {
         panel = (<NyNaermestelederInfoboks
