@@ -18,21 +18,18 @@ describe('OppfolgingsplanerIngenplan', () => {
     const dagensDato = new Date('2017-01-01');
 
     let komponent;
-    let ledetekster;
     let opprett;
     let visOppfolgingsdialogOpprett;
     let arbeidsgiver;
 
     beforeEach(() => {
         klokke = sinon.useFakeTimers(dagensDato.getTime());
-        ledetekster = {};
         opprett = sinon.spy();
         visOppfolgingsdialogOpprett = sinon.spy();
         arbeidsgiver = {
             virksomhetsnummer: '12345678',
         };
         komponent = mount(<OppfolgingsplanerIngenplan
-            ledetekster={ledetekster}
             opprett={opprett}
             oppfolgingsdialoger={[]}
             visOppfolgingsdialogOpprett={visOppfolgingsdialogOpprett}
@@ -72,7 +69,6 @@ describe('OppfolgingsplanerIngenplan', () => {
 
         it('Skal vise knapp som kaller opprett, om oppfolgingsdialog er opprettbar direkte uten ekstra utfylling', () => {
             komponent = mount(<OppfolgingsplanerIngenplan
-                ledetekster={ledetekster}
                 opprett={opprett}
                 visOppfolgingsdialogOpprett={visOppfolgingsdialogOpprett}
                 oppfolgingsdialoger={[oppfolgingsdialogIkkeTidligere]}
@@ -84,7 +80,6 @@ describe('OppfolgingsplanerIngenplan', () => {
 
         it('Skal vise knapp som kaller visOppfolgingsdialogOpprett, om AT har tidligere godkjent oppfolgingsdialog med virksomhet', () => {
             komponent = mount(<OppfolgingsplanerIngenplan
-                ledetekster={ledetekster}
                 opprett={opprett}
                 visOppfolgingsdialogOpprett={visOppfolgingsdialogOpprett}
                 oppfolgingsdialoger={[oppfolgingsdialogTidligere]}

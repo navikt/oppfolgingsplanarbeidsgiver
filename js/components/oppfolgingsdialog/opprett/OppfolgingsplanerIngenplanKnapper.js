@@ -1,12 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { getLedetekst, keyValue } from 'digisyfo-npm';
-import { proptypes as oppfolgingProptypes } from 'oppfolgingsdialog-npm';
+import { getLedetekst } from 'digisyfo-npm';
+import { oppfolgingsdialogPt } from '../../../proptypes/opproptypes';
 import { erOppfolgingsdialogOpprettbarDirekte } from '../../../utils/oppfolgingsplanUtils';
 
 const OppfolgingsplanerIngenplanKnapper = (
     {
-        ledetekster,
         oppfolgingsdialoger,
         opprett,
         visOppfolgingsdialogOpprett,
@@ -17,7 +16,7 @@ const OppfolgingsplanerIngenplanKnapper = (
                 <button
                     className="knapp knapperad__element"
                     onClick={opprett}>
-                    {getLedetekst('oppfolgingsdialog.knapp.ny-oppfolgingsdialog', ledetekster)}
+                    {getLedetekst('oppfolgingsdialog.knapp.ny-oppfolgingsdialog')}
                 </button>
                 :
                 <button
@@ -32,8 +31,7 @@ const OppfolgingsplanerIngenplanKnapper = (
     );
 };
 OppfolgingsplanerIngenplanKnapper.propTypes = {
-    ledetekster: keyValue,
-    oppfolgingsdialoger: PropTypes.arrayOf(oppfolgingProptypes.oppfolgingsdialogPt),
+    oppfolgingsdialoger: PropTypes.arrayOf(oppfolgingsdialogPt),
     opprett: PropTypes.func,
     visOppfolgingsdialogOpprett: PropTypes.func,
 };

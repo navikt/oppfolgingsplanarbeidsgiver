@@ -1,16 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-    getLedetekst,
-    keyValue,
-} from 'digisyfo-npm';
-import { proptypes as oppfolgingProptypes } from 'oppfolgingsdialog-npm';
-import OppfolgingsplanerIngenplanKnapper from './OppfolgingsplanerIngenplanKnapper';
+import { getLedetekst } from 'digisyfo-npm';
 import { getContextRoot } from '../../../routers/paths';
+import { oppfolgingsdialogPt } from '../../../proptypes/opproptypes';
+import OppfolgingsplanerIngenplanKnapper from './OppfolgingsplanerIngenplanKnapper';
 
 const OppfolgingsplanerIngenplan = (
     {
-        ledetekster,
         oppfolgingsdialoger,
         opprett,
         visOppfolgingsdialogOpprett,
@@ -34,7 +30,6 @@ const OppfolgingsplanerIngenplan = (
                         {getLedetekst('oppfolgingsdialoger.oppfolgingsdialoger.ingenplan.tekst')}
                     </p>
                     <OppfolgingsplanerIngenplanKnapper
-                        ledetekster={ledetekster}
                         oppfolgingsdialoger={oppfolgingsdialoger}
                         opprett={opprett}
                         visOppfolgingsdialogOpprett={visOppfolgingsdialogOpprett}
@@ -46,8 +41,7 @@ const OppfolgingsplanerIngenplan = (
 };
 
 OppfolgingsplanerIngenplan.propTypes = {
-    ledetekster: keyValue,
-    oppfolgingsdialoger: PropTypes.arrayOf(oppfolgingProptypes.oppfolgingsdialogPt),
+    oppfolgingsdialoger: PropTypes.arrayOf(oppfolgingsdialogPt),
     opprett: PropTypes.func,
     visOppfolgingsdialogOpprett: PropTypes.func,
 };
