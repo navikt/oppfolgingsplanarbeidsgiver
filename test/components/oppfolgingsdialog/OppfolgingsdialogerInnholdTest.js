@@ -2,11 +2,11 @@ import chai from 'chai';
 import React from 'react';
 import { shallow } from 'enzyme';
 import chaiEnzyme from 'chai-enzyme';
-import { NyNaermestelederInfoboks } from 'oppfolgingsdialog-npm';
 import Sidetopp from '../../../js/components/Sidetopp';
 import OppfolgingsdialogerInnhold from '../../../js/components/oppfolgingsdialog/OppfolgingsdialogerInnhold';
 import OppfolgingsdialogerVisning from '../../../js/components/oppfolgingsdialog/OppfolgingsdialogerVisning';
 import OppfolgingsdialogerInfoPersonvern from '../../../js/components/oppfolgingsdialog/OppfolgingsdialogerInfoPersonvern';
+import NyNaermestelederInfoboks from '../../../js/components/oppfolgingsplaner/NyNaermestelederInfoboks';
 import getOppfolgingsdialog from '../../mock/mockOppfolgingsdialog';
 
 chai.use(chaiEnzyme());

@@ -9,15 +9,14 @@ import {
 import {
     BRUKERTYPE,
     finnGodkjentedialogerAvbruttAvMotpartSidenSistInnlogging,
-    NyNaermestelederInfoboks,
     proptypes as oppfolgingProptypes,
 } from 'oppfolgingsdialog-npm';
 import Sidetopp from '../Sidetopp';
 import { harForrigeNaermesteLeder, harNaermesteLeder } from '../../utils/oppfolgingsplanUtils';
-import { getContextRoot } from '../../routers/paths';
 import OppfolgingsdialogVisning from './OppfolgingsdialogerVisning';
 import OppfolgingsdialogerInfoPersonvern from './OppfolgingsdialogerInfoPersonvern';
 import AvbruttPlanNotifikasjonBoksAdvarsel from './godkjennplan/godkjentplan/AvbruttPlanNotifikasjonBoksAdvarsel';
+import NyNaermestelederInfoboks from '../oppfolgingsplaner/NyNaermestelederInfoboks';
 
 const finnOppfolgingsdialogMedFoersteInnloggingSidenNyNaermesteLeder = (oppfolgingsdialoger) => {
     return oppfolgingsdialoger.filter((oppfolgingsdialog) => {
@@ -46,12 +45,9 @@ const OppfolgingsdialogerInnhold = ({
 
     if (!bekreftetNyNaermesteLeder && oppfolgingsdialogMedNyNaermesteLeder) {
         panel = (<NyNaermestelederInfoboks
-            ledetekster={ledetekster}
             oppfolgingsdialog={oppfolgingsdialogMedNyNaermesteLeder}
             avkreftNyNaermesteleder={slettSykmeldt}
             bekreftNyNaermesteLeder={bekreftNyNaermesteLeder}
-            brukerType={BRUKERTYPE.ARBEIDSGIVER}
-            rootUrlImg={getContextRoot()}
         />);
     } else {
         panel = (<OppfolgingsdialogVisning
@@ -73,9 +69,7 @@ const OppfolgingsdialogerInnhold = ({
             </Alertstripe>
             }
             <Sidetopp tittel={getLedetekst('oppfolgingsdialoger.sidetittel')} />
-            <OppfolgingsdialogerInfoPersonvern
-                ledetekster={ledetekster}
-            />
+            <OppfolgingsdialogerInfoPersonvern />
             {
                 dialogerAvbruttAvMotpartSidenSistInnlogging.length > 0 && <AvbruttPlanNotifikasjonBoksAdvarsel
                     motpartnavn={dialogerAvbruttAvMotpartSidenSistInnlogging[0].arbeidstaker.navn}

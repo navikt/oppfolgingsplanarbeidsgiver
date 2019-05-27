@@ -1,20 +1,11 @@
 import React from 'react';
-import {
-    getHtmlLedetekst,
-    keyValue,
-} from 'digisyfo-npm';
+import { getHtmlLedetekst } from 'digisyfo-npm';
 
-const OppfolgingsdialogerInfoPersonvern = (
-    {
-        ledetekster,
-    }) => {
+const OppfolgingsdialogerInfoPersonvern = () => {
     return (<div
         className="oppfolgingsdialogerInfoPersonvern"
-        dangerouslySetInnerHTML={getHtmlLedetekst('oppfolgingsdialog.oppfolgingsdialogerInfoPersonvern.ag', ledetekster)}
+        dangerouslySetInnerHTML={getHtmlLedetekst('oppfolgingsdialog.oppfolgingsdialogerInfoPersonvern.ag')}
     />);
-};
-OppfolgingsdialogerInfoPersonvern.propTypes = {
-    ledetekster: keyValue,
 };
 
 export default OppfolgingsdialogerInfoPersonvern;
