@@ -227,7 +227,7 @@ function mockForLokaltMiljo(server) {
         });
     });
 
-    server.post('/syfooppfolgingsplanservice/api/oppfoelgingsdialoger/actions/:id/samtykke', (req, res) => {
+    server.post('/syfooppfolgingsplanservice/api/oppfolgingsplan/actions/:id/samtykk', (req, res) => {
         res.send();
     });
 
@@ -235,11 +235,11 @@ function mockForLokaltMiljo(server) {
         res.send();
     });
 
-    server.post('/syfooppfolgingsplanservice/api/oppfoelgingsdialoger/actions/:id/forespoerRevidering', (req, res) => {
+    server.post('/syfooppfolgingsplanservice/api/oppfolgingsplan/actions/:id/forespoerRevidering', (req, res) => {
         res.send();
     });
 
-    server.post('/syfooppfolgingsplanservice/api/arbeidsgiver/oppfoelgingsdialoger', (req, res) => {
+    server.post('/syfooppfolgingsplanservice/api/arbeidsgiver/oppfolgingsplaner', (req, res) => {
         mockOpprettetIdResultat(res);
     });
 
