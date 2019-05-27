@@ -101,3 +101,26 @@ export const finnAktiveOppfolgingsdialoger = (oppfolgingsdialoger, sykmeldinger)
 export const harAktivOppfolgingsdialog = (oppfolgingsdialoger, sykmeldinger) => {
     return finnAktiveOppfolgingsdialoger(oppfolgingsdialoger, sykmeldinger).length > 0;
 };
+
+export const finnBrukersSisteInnlogging = (oppfolgingsdialoger) => {
+    const innlogginger = oppfolgingsdialoger.map((oppfolgingsdialog) => {
+        return new Date(oppfolgingsdialog.arbeidsgiver.naermesteLeder.sistInnlogget);
+    });
+    return new Date(Math.max.apply(null, innlogginger));
+};
+
+export const finnGodkjentedialogerAvbruttAvMotpartSidenSistInnlogging = (oppfolgingsdialoger) => {
+    if (!oppfolgingsdialoger) {
+        return [];
+    }
+    const sisteInnlogging = finnBrukersSisteInnlogging(oppfolgingsdialoger);
+    return oppfolgingsdialoger.filter((oppfolgingsdialog) => {
+        const avbruttplan = oppfolgingsdialog.godkjentPlan && oppfolgingsdialog.godkjentPlan.avbruttPlan;
+        return oppfolgingsdialog.status === STATUS.AVBRUTT
+            && (avbruttplan.av.fnr === oppfolgingsdialog.arbeidstaker.fnr)
+            && oppfolgingsdialog.arbeidsgiver.naermesteLeder
+            && (new Date(sisteInnlogging) < new Date(avbruttplan.tidspunkt));
+    }).sort((o1, o2) => {
+        return new Date(o2.godkjentPlan.avbruttPlan.tidspunkt) - new Date(o2.godkjentPlan.avbruttPlan.tidspunkt);
+    });
+};

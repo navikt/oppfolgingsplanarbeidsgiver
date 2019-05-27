@@ -6,13 +6,13 @@ import {
     keyValue,
     togglesPt,
 } from 'digisyfo-npm';
-import {
-    BRUKERTYPE,
-    finnGodkjentedialogerAvbruttAvMotpartSidenSistInnlogging,
-    proptypes as oppfolgingProptypes,
-} from 'oppfolgingsdialog-npm';
 import Sidetopp from '../Sidetopp';
-import { harForrigeNaermesteLeder, harNaermesteLeder } from '../../utils/oppfolgingsplanUtils';
+import {
+    finnGodkjentedialogerAvbruttAvMotpartSidenSistInnlogging,
+    harForrigeNaermesteLeder,
+    harNaermesteLeder,
+} from '../../utils/oppfolgingsplanUtils';
+import { oppfolgingsdialogPt } from '../../proptypes/opproptypes';
 import OppfolgingsdialogVisning from './OppfolgingsdialogerVisning';
 import OppfolgingsdialogerInfoPersonvern from './OppfolgingsdialogerInfoPersonvern';
 import AvbruttPlanNotifikasjonBoksAdvarsel from './godkjennplan/godkjentplan/AvbruttPlanNotifikasjonBoksAdvarsel';
@@ -40,7 +40,7 @@ const OppfolgingsdialogerInnhold = ({
     slettSykmeldt,
 }) => {
     let panel;
-    const dialogerAvbruttAvMotpartSidenSistInnlogging = finnGodkjentedialogerAvbruttAvMotpartSidenSistInnlogging(oppfolgingsdialoger, BRUKERTYPE.ARBEIDSGIVER);
+    const dialogerAvbruttAvMotpartSidenSistInnlogging = finnGodkjentedialogerAvbruttAvMotpartSidenSistInnlogging(oppfolgingsdialoger);
     const oppfolgingsdialogMedNyNaermesteLeder = finnOppfolgingsdialogMedFoersteInnloggingSidenNyNaermesteLeder(oppfolgingsdialoger);
 
     if (!bekreftetNyNaermesteLeder && oppfolgingsdialogMedNyNaermesteLeder) {
@@ -84,7 +84,7 @@ OppfolgingsdialogerInnhold.propTypes = {
     toggles: togglesPt,
     bekreftetNyNaermesteLeder: PropTypes.bool,
     koblingId: PropTypes.string,
-    oppfolgingsdialoger: PropTypes.arrayOf(oppfolgingProptypes.oppfolgingsdialogPt),
+    oppfolgingsdialoger: PropTypes.arrayOf(oppfolgingsdialogPt),
     bekreftNyNaermesteLeder: PropTypes.func,
     kopierOppfolgingsdialog: PropTypes.func,
     opprettOppfolgingsdialog: PropTypes.func,

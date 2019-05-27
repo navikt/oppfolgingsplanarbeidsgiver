@@ -3,6 +3,8 @@ import sinon from 'sinon';
 import {
     erSykmeldingGyldigForOppfolgingMedGrensedato,
     finnAktiveOppfolgingsdialoger,
+    finnBrukersSisteInnlogging,
+    finnGodkjentedialogerAvbruttAvMotpartSidenSistInnlogging,
     harForrigeNaermesteLeder,
     harNaermesteLeder,
 } from '../../js/utils/oppfolgingsplanUtils';
@@ -197,6 +199,87 @@ describe('OppfolgingplanUtils', () => {
                 },
             }];
             expect(finnAktiveOppfolgingsdialoger(dialog, sykmeldinger)).to.have.length(0);
+        });
+    });
+
+    describe('finnBrukersSisteInnlogging', () => {
+        it('finnBrukersSisteInnlogging for arbeidsgiver', () => {
+            const sisteInnloggingDato = new Date('2017-10-25T08:02:18');
+            const dialoger = [
+                {
+                    arbeidsgiver: {
+                        naermesteLeder: {
+                            sistInnlogget: '2017-10-25T08:02:18',
+                        },
+                    },
+                },
+                {
+                    arbeidsgiver: {
+                        naermesteLeder: {
+                            sistInnlogget: '2017-10-24T08:02:18.075',
+                        },
+                    },
+                },
+            ];
+            const returnertInnlogging = finnBrukersSisteInnlogging(dialoger);
+            expect(returnertInnlogging.getTime()).to.equal(sisteInnloggingDato.getTime());
+        });
+    });
+
+    describe('finnGodkjentedialogerAvbruttAvMotpartSidenSistInnlogging', () => {
+        it('finnGodkjentedialogerAvbruttAvMotpartSidenSistInnlogging skal returnere 1 dialog for ARBEIDSGIVER om SYKMELDT har AVBRUTT ', () => {
+            const oppfolgingsdialoger = [
+                {
+                    id: 403,
+                    status: 'AVBRUTT',
+                    godkjentPlan: {
+                        avbruttPlan: {
+                            av: {
+                                fnr: '1000004284466',
+                            },
+                            tidspunkt: '2017-10-25T07:54:23.467',
+                            id: 403,
+                        },
+                    },
+                    arbeidsgiver: {
+                        naermesteLeder: {
+                            fnr: '1000006119492',
+                            sistInnlogget: '2017-10-25T07:53:32.757',
+                        },
+                    },
+                    arbeidstaker: {
+                        fnr: '1000004284466',
+                        sistInnlogget: '2017-10-25T07:52:57.158',
+                    },
+                },
+                {
+                    id: 404,
+                    status: 'AKTIV',
+                    godkjentPlan: {
+                        avbruttPlan: null,
+                    },
+                    avbruttPlanListe: [
+                        {
+                            av: {
+                                fnr: '1000004284466',
+                            },
+                            tidspunkt: '2017-10-25T07:54:23.467',
+                            id: 403,
+                        },
+                    ],
+                    arbeidsgiver: {
+                        naermesteLeder: {
+                            fnr: '1000006119492',
+                            sistInnlogget: '2017-10-25T07:53:32.757',
+                        },
+                    },
+                    arbeidstaker: {
+                        fnr: '1000004284466',
+                        sistInnlogget: '2017-10-25T07:52:57.158',
+                    },
+                },
+            ];
+            expect(finnGodkjentedialogerAvbruttAvMotpartSidenSistInnlogging(oppfolgingsdialoger)).to.have.length(1);
         });
     });
 });
