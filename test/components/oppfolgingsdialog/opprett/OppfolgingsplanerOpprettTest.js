@@ -3,11 +3,9 @@ import chai from 'chai';
 import { shallow } from 'enzyme';
 import chaiEnzyme from 'chai-enzyme';
 import sinon from 'sinon';
-import {
-    BaserTidligereSkjema,
-} from 'oppfolgingsdialog-npm';
 import Lightbox from '../../../../js/components/Lightbox';
 import OppfolgingsplanerOpprett from '../../../../js/components/oppfolgingsdialog/opprett/OppfolgingsplanerOpprett';
+import BaserTidligereSkjema from '../../../../js/components/oppfolgingsplaner/opprett/BaserTidligereSkjema';
 import getOppfolgingsdialog, {
     hentOppfolgingsdialogTidligere,
 } from '../../../mock/mockOppfolgingsdialog';

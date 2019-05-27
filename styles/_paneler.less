@@ -78,3 +78,28 @@
         }
     }
 }
+
+@panelOppfoelgingPaddingMini: 1em;
+@panelOppfoelgingPadding: 2em;
+@panelTiltakPadding: 0.3em 2em 2em 2em;
+.panel--oppfoelging {
+    display: block;
+    padding: @panelOppfoelgingPaddingMini;
+    background: @white;
+    &:focus {
+        outline: 3px @orangeFocus solid;
+    }
+    @media(min-width: @screen-sm-min) {
+        padding: @panelOppfoelgingPadding;
+    }
+}
+
+.panel--lysblaa {
+    background: @panelLysblaa;
+}
+.panel--advarsel {
+    background: @fargeAdvarsel;
+}
+.panel--suksess {
+    background: @fargeSuksess;
+}

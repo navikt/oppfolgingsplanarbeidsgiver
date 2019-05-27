@@ -39,59 +39,57 @@ class OppfolgingsdialogerVisning extends Component {
             kopierOppfolgingsdialog,
             opprettOppfolgingsdialog,
         } = this.props;
-        return (
-            <div>
-                { this.state.visOppfolgingsdialogOpprett &&
-                <OppfolgingsplanerOpprett
+        return (<div>
+            { this.state.visOppfolgingsdialogOpprett &&
+            <OppfolgingsplanerOpprett
+                ledetekster={ledetekster}
+                oppfolgingsdialoger={oppfolgingsdialoger}
+                opprett={opprettOppfolgingsdialog}
+                kopier={kopierOppfolgingsdialog}
+                visOppfolgingsdialogOpprett={this.visOppfolgingsdialogOpprett}
+            />
+            }
+            { oppfolgingsdialoger.length > 0 && harAktivOppfolgingsdialog(oppfolgingsdialoger) &&
+            <OppfolgingsdialogTeasere
+                ledetekster={ledetekster}
+                oppfolgingsdialoger={finnAktiveOppfolgingsdialoger(oppfolgingsdialoger)}
+                tittel={getLedetekst('oppfolgingsdialoger.oppfolgingsdialoger.header.tittel')}
+                id="OppfolgingsdialogTeasereAG"
+                brukerType={BRUKERTYPE.ARBEIDSGIVER}
+                rootUrlPlaner={`${getContextRoot()}/${koblingId}`}
+                rootUrl={getContextRoot()}
+            />
+            }
+
+            { (oppfolgingsdialoger.length === 0 || !harAktivOppfolgingsdialog(oppfolgingsdialoger)) &&
+            <div className="blokk--l">
+                <OppfolgingsplanerIngenplan
                     ledetekster={ledetekster}
                     oppfolgingsdialoger={oppfolgingsdialoger}
                     opprett={opprettOppfolgingsdialog}
-                    kopier={kopierOppfolgingsdialog}
                     visOppfolgingsdialogOpprett={this.visOppfolgingsdialogOpprett}
                 />
-                }
-                { oppfolgingsdialoger.length > 0 && harAktivOppfolgingsdialog(oppfolgingsdialoger) &&
+            </div>
+            }
+
+            { oppfolgingsdialoger.length > 0 && harTidligereOppfolgingsdialoger(oppfolgingsdialoger) &&
+            <div>
                 <OppfolgingsdialogTeasere
                     ledetekster={ledetekster}
-                    oppfolgingsdialoger={finnAktiveOppfolgingsdialoger(oppfolgingsdialoger)}
-                    tittel={getLedetekst('oppfolgingsdialoger.oppfolgingsdialoger.header.tittel')}
+                    oppfolgingsdialoger={finnTidligereOppfolgingsdialoger(oppfolgingsdialoger)}
+                    harTidligerOppfolgingsdialoger
+                    tittel={getLedetekst('oppfolgingsdialoger.tidligereplaner.tittel')}
                     id="OppfolgingsdialogTeasereAG"
                     brukerType={BRUKERTYPE.ARBEIDSGIVER}
                     rootUrlPlaner={`${getContextRoot()}/${koblingId}`}
                     rootUrl={getContextRoot()}
+                    svgUrl={`${getContextRoot()}/img/svg/plan-godkjent.svg`}
+                    svgAlt="OppfølgingsdialogTidligere"
                 />
-                }
-
-                { (oppfolgingsdialoger.length === 0 || !harAktivOppfolgingsdialog(oppfolgingsdialoger)) &&
-                <div className="blokk--l">
-                    <OppfolgingsplanerIngenplan
-                        ledetekster={ledetekster}
-                        oppfolgingsdialoger={oppfolgingsdialoger}
-                        opprett={opprettOppfolgingsdialog}
-                        visOppfolgingsdialogOpprett={this.visOppfolgingsdialogOpprett}
-                    />
-                </div>
-                }
-
-                { oppfolgingsdialoger.length > 0 && harTidligereOppfolgingsdialoger(oppfolgingsdialoger) &&
-                <div>
-                    <OppfolgingsdialogTeasere
-                        ledetekster={ledetekster}
-                        oppfolgingsdialoger={finnTidligereOppfolgingsdialoger(oppfolgingsdialoger)}
-                        harTidligerOppfolgingsdialoger
-                        tittel={getLedetekst('oppfolgingsdialoger.tidligereplaner.tittel')}
-                        id="OppfolgingsdialogTeasereAG"
-                        brukerType={BRUKERTYPE.ARBEIDSGIVER}
-                        rootUrlPlaner={`${getContextRoot()}/${koblingId}`}
-                        rootUrl={getContextRoot()}
-                        svgUrl={`${getContextRoot()}/img/svg/plan-godkjent.svg`}
-                        svgAlt="OppfølgingsdialogTidligere"
-                    />
-                </div>
-                }
-                <OppfolgingsdialogFilm />
             </div>
-        );
+            }
+            <OppfolgingsdialogFilm />
+        </div>);
     }
 }
 OppfolgingsdialogerVisning.propTypes = {
