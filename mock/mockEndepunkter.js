@@ -243,7 +243,7 @@ function mockForLokaltMiljo(server) {
         mockOpprettetIdResultat(res);
     });
 
-    server.post('/syfooppfolgingsplanservice/api/oppfoelgingsdialoger/actions/:id/sett', (req, res) => {
+    server.post('/syfooppfolgingsplanservice/api/oppfolgingsplan/actions/:id/sett', (req, res) => {
         res.send();
     });
 }
