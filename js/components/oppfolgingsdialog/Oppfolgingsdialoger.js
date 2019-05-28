@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { getLedetekst } from 'digisyfo-npm';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import {
-    proptypes as oppfolgingProptypes,
     finnOgHentNaermesteLedereSomMangler,
     finnOgHentVirksomheterSomMangler,
     finnOgHentPersonerSomMangler,
@@ -12,6 +11,13 @@ import {
 import {
     sykmeldt as sykmeldtPt,
 } from '../../shapes';
+import {
+    personReducerPt,
+    kontaktinfoReducerPt,
+    naermestelederReducerPt,
+    oppfolgingsdialogPt,
+    virksomhetReducerPt,
+} from '../../proptypes/opproptypes';
 import history from '../../history';
 import OppfolgingsdialogerInnhold from './OppfolgingsdialogerInnhold';
 import SykmeldtIngenKontaktinformasjon from './SykmeldtIngenKontaktinformasjon';
@@ -89,16 +95,16 @@ class Oppfolgingsdialoger extends Component {
 }
 
 Oppfolgingsdialoger.propTypes = {
-    kontaktinfo: oppfolgingProptypes.kontaktinfoReducerPt,
-    naermesteleder: oppfolgingProptypes.naermestelederReducerPt,
+    kontaktinfo: kontaktinfoReducerPt,
+    naermesteleder: naermestelederReducerPt,
     sykmeldt: sykmeldtPt,
-    oppfolgingsdialoger: PropTypes.arrayOf(oppfolgingProptypes.oppfolgingsdialogPt),
+    oppfolgingsdialoger: PropTypes.arrayOf(oppfolgingsdialogPt),
     hentNaermesteLeder: PropTypes.func,
     hentPerson: PropTypes.func,
     hentVirksomhet: PropTypes.func,
     hentKontaktinfo: PropTypes.func,
-    virksomhet: oppfolgingProptypes.virksomhetReducerPt,
-    person: oppfolgingProptypes.personReducerPt,
+    virksomhet: virksomhetReducerPt,
+    person: personReducerPt,
     slettetSykmeldt: PropTypes.bool,
 };
 

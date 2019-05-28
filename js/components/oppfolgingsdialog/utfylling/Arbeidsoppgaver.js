@@ -8,10 +8,10 @@ import {
     BRUKERTYPE,
     captitalizeFirstLetter,
     sorterArbeidsoppgaverEtterOpprettet,
-    proptypes as oppfolgingProptypes,
     ArbeidsoppgaverInfoboks,
 } from 'oppfolgingsdialog-npm';
 import { getLedetekst, keyValue, scrollTo } from 'digisyfo-npm';
+import * as opProptypes from '../../../proptypes/opproptypes';
 import { getContextRoot } from '../../../routers/paths';
 import { isEmpty } from '../../../utils/oppfolgingsplanUtils';
 import OppfolgingsplanInfoboks from '../../app/OppfolgingsplanInfoboks';
@@ -221,8 +221,8 @@ class Arbeidsoppgaver extends Component {
 
 Arbeidsoppgaver.propTypes = {
     ledetekster: keyValue,
-    arbeidsoppgaver: oppfolgingProptypes.arbeidsoppgaverReducerPt,
-    oppfolgingsdialog: oppfolgingProptypes.oppfolgingsdialogPt,
+    arbeidsoppgaver: opProptypes.arbeidsoppgaverReducerPt,
+    oppfolgingsdialog: opProptypes.oppfolgingsdialogPt,
     lagreArbeidsoppgave: PropTypes.func,
     slettArbeidsoppgave: PropTypes.func,
 };

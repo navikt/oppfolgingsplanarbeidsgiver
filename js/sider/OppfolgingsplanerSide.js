@@ -9,7 +9,6 @@ import {
 } from 'digisyfo-npm';
 import {
     loggerOppfolgingsdialog,
-    proptypes as oppfolgingProptypes,
     henterEllerHarHentetOppfolgingsdialoger,
     oppfolgingsdialogHarBlittOpprettet,
     populerDialogFraState,
@@ -32,6 +31,7 @@ import AppSpinner from '../components/AppSpinner';
 import Feilmelding from '../components/Feilmelding';
 import OppfolgingsplanInfoboks from '../components/app/OppfolgingsplanInfoboks';
 import history from '../history';
+import * as opproptypes from '../proptypes/opproptypes';
 
 import {
     hentOppfolgingsplaner,
@@ -213,16 +213,16 @@ OppfolgingsplanerSide.propTypes = {
     hentet: PropTypes.bool,
     sender: PropTypes.bool,
     sendingFeilet: PropTypes.bool,
-    kopierDialogReducer: oppfolgingProptypes.kopierDialogReducerPt,
-    oppfolgingsdialogerReducer: oppfolgingProptypes.oppfolgingsdialogerAgPt,
-    alleOppfolgingsdialogerReducer: oppfolgingProptypes.alleOppfolgingsdialogerAgPt,
-    naermesteleder: oppfolgingProptypes.naermestelederReducerPt,
-    person: oppfolgingProptypes.personReducerPt,
+    kopierDialogReducer: opproptypes.kopierDialogReducerPt,
+    oppfolgingsdialogerReducer: opproptypes.oppfolgingsdialogerAgPt,
+    alleOppfolgingsdialogerReducer: opproptypes.alleOppfolgingsdialogerAgPt,
+    naermesteleder: opproptypes.naermestelederReducerPt,
+    person: opproptypes.personReducerPt,
     sykmeldinger: sykmeldingerReducerPt,
     sykmeldte: sykmeldteReducerPt,
-    tilgang: oppfolgingProptypes.tilgangReducerPt,
-    virksomhet: oppfolgingProptypes.virksomhetReducerPt,
-    oppfolgingsdialoger: PropTypes.arrayOf(oppfolgingProptypes.oppfolgingsdialogPt),
+    tilgang: opproptypes.tilgangReducerPt,
+    virksomhet: opproptypes.virksomhetReducerPt,
+    oppfolgingsdialoger: PropTypes.arrayOf(opproptypes.oppfolgingsdialogPt),
     koblingId: PropTypes.string,
     ledetekster: keyValue,
     sykmeldt: sykmeldtPt,

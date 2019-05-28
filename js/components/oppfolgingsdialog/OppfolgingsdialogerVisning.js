@@ -4,8 +4,8 @@ import { getLedetekst, keyValue } from 'digisyfo-npm';
 import {
     OppfolgingsdialogTeasere,
     BRUKERTYPE,
-    proptypes as oppfolgingProptypes,
 } from 'oppfolgingsdialog-npm';
+import * as opProptypes from '../../proptypes/opproptypes';
 import { getContextRoot } from '../../routers/paths';
 import {
     finnAktiveOppfolgingsdialoger,
@@ -95,7 +95,7 @@ class OppfolgingsdialogerVisning extends Component {
 OppfolgingsdialogerVisning.propTypes = {
     ledetekster: keyValue,
     koblingId: PropTypes.string,
-    oppfolgingsdialoger: PropTypes.arrayOf(oppfolgingProptypes.oppfolgingsdialogPt),
+    oppfolgingsdialoger: PropTypes.arrayOf(opProptypes.oppfolgingsdialogPt),
     kopierOppfolgingsdialog: PropTypes.func,
     opprettOppfolgingsdialog: PropTypes.func,
 };

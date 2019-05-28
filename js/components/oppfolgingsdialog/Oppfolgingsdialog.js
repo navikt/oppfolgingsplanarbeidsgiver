@@ -16,8 +16,8 @@ import {
     finnOgHentPersonerSomMangler,
     finnOgHentArbeidsforholdSomMangler,
     finnOgHentSykeforlopsPerioderSomMangler,
-    proptypes as oppfolgingProptypes,
 } from 'oppfolgingsdialog-npm';
+import * as opProptypes from '../../proptypes/opproptypes';
 import { getContextRoot } from '../../routers/paths';
 import Arbeidsoppgaver from './utfylling/Arbeidsoppgaver';
 import Tiltak from './utfylling/Tiltak';
@@ -225,25 +225,25 @@ class Oppfolgingsdialog extends Component {
 }
 
 Oppfolgingsdialog.propTypes = {
-    arbeidsforhold: oppfolgingProptypes.arbeidsforholdReducerPt,
-    avbrytdialogReducer: oppfolgingProptypes.avbrytdialogReducerPt,
-    arbeidsoppgaver: oppfolgingProptypes.arbeidsoppgaverReducerPt,
-    dokument: oppfolgingProptypes.dokumentReducerPt,
-    delmednav: oppfolgingProptypes.delmednavPt,
-    fastlegeDeling: oppfolgingProptypes.delMedFastlegePt,
-    forespoerselRevidering: oppfolgingProptypes.forespoerselRevideringPt,
-    kontaktinfo: oppfolgingProptypes.kontaktinfoReducerPt,
-    naermesteleder: oppfolgingProptypes.naermestelederReducerPt,
-    navigasjontoggles: oppfolgingProptypes.navigasjonstogglesReducerPt,
-    oppfolgingsdialog: oppfolgingProptypes.oppfolgingsdialogPt,
+    arbeidsforhold: opProptypes.arbeidsforholdReducerPt,
+    avbrytdialogReducer: opProptypes.avbrytdialogReducerPt,
+    arbeidsoppgaver: opProptypes.arbeidsoppgaverReducerPt,
+    dokument: opProptypes.dokumentReducerPt,
+    delmednav: opProptypes.delmednavPt,
+    fastlegeDeling: opProptypes.delMedFastlegePt,
+    forespoerselRevidering: opProptypes.forespoerselRevideringPt,
+    kontaktinfo: opProptypes.kontaktinfoReducerPt,
+    naermesteleder: opProptypes.naermestelederReducerPt,
+    navigasjontoggles: opProptypes.navigasjonstogglesReducerPt,
+    oppfolgingsdialog: opProptypes.oppfolgingsdialogPt,
     koblingId: PropTypes.string,
     ledetekster: keyValue,
-    person: oppfolgingProptypes.personReducerPt,
-    tiltak: oppfolgingProptypes.tiltakReducerPt,
+    person: opProptypes.personReducerPt,
+    tiltak: opProptypes.tiltakReducerPt,
     toggles: togglesPt,
-    virksomhet: oppfolgingProptypes.virksomhetReducerPt,
+    virksomhet: opProptypes.virksomhetReducerPt,
     sykeforlopsPerioderReducer: sykeforlopsPerioderReducerPt,
-    oppfolgingsdialoger: PropTypes.arrayOf(oppfolgingProptypes.oppfolgingsdialogPt),
+    oppfolgingsdialoger: PropTypes.arrayOf(opProptypes.oppfolgingsdialogPt),
     lagreKommentar: PropTypes.func,
     slettKommentar: PropTypes.func,
     lagreArbeidsoppgave: PropTypes.func,

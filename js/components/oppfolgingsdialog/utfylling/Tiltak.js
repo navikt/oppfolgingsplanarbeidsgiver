@@ -7,12 +7,12 @@ import {
     TiltakTabell,
     sorterTiltakEtterNyeste,
     captitalizeFirstLetter,
-    proptypes as oppfolgingProptypes,
     TiltakSkjema,
     TiltakInfoboks,
     NotifikasjonBoksVurdering,
     BRUKERTYPE,
 } from 'oppfolgingsdialog-npm';
+import * as opProptypes from '../../../proptypes/opproptypes';
 import { getContextRoot } from '../../../routers/paths';
 import { isEmpty } from '../../../utils/oppfolgingsplanUtils';
 import OppfolgingsplanInfoboks from '../../app/OppfolgingsplanInfoboks';
@@ -223,8 +223,8 @@ class Tiltak extends Component {
 
 Tiltak.propTypes = {
     ledetekster: keyValue,
-    tiltak: oppfolgingProptypes.tiltakReducerPt,
-    oppfolgingsdialog: oppfolgingProptypes.oppfolgingsdialogPt,
+    tiltak: opProptypes.tiltakReducerPt,
+    oppfolgingsdialog: opProptypes.oppfolgingsdialogPt,
     lagreTiltak: PropTypes.func,
     slettTiltak: PropTypes.func,
     lagreKommentar: PropTypes.func,
