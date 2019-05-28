@@ -8,7 +8,6 @@ import {
     togglesPt,
 } from 'digisyfo-npm';
 import {
-    loggerOppfolgingsdialog,
     henterEllerHarHentetOppfolgingsdialoger,
     oppfolgingsdialogHarBlittOpprettet,
     populerDialogFraState,
@@ -25,6 +24,7 @@ import {
     henterEllerHarHentetToggles,
     sykmeldtHarBlittSlettet,
 } from '../utils/reducerUtils';
+import logger from '../logg/logging';
 import { sykmeldtHarGyldigSykmelding } from '../utils/oppfolgingsplanUtils';
 import Side from '../sider/Side';
 import AppSpinner from '../components/AppSpinner';
@@ -280,7 +280,7 @@ export function mapStateToProps(state, ownProps) {
         tilgang: tilgang.hentingFeilet,
         sykmeldinger: sykmeldinger.hentingFeilet,
     };
-    const loggError = loggerOppfolgingsdialog.error;
+    const loggError = logger.error;
 
     return {
         henter: state.ledetekster.henter
