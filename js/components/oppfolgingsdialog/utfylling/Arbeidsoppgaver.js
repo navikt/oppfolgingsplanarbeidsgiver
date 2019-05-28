@@ -2,19 +2,23 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { findDOMNode } from 'react-dom';
 import {
+    getLedetekst,
+    keyValue,
+    scrollTo,
+} from 'digisyfo-npm';
+import {
     ArbeidsoppgaverListe,
     LeggTilElementKnapper,
     LagreArbeidsoppgaveSkjemaAG,
-    BRUKERTYPE,
-    captitalizeFirstLetter,
-    sorterArbeidsoppgaverEtterOpprettet,
     ArbeidsoppgaverInfoboks,
 } from 'oppfolgingsdialog-npm';
-import { getLedetekst, keyValue, scrollTo } from 'digisyfo-npm';
+import { sorterArbeidsoppgaverEtterOpprettet } from '../../../utils/arbeidsoppgaveUtils';
+import { captitalizeFirstLetter } from '../../../utils/tekstUtils';
 import * as opProptypes from '../../../proptypes/opproptypes';
 import { getContextRoot } from '../../../routers/paths';
 import { isEmpty } from '../../../utils/oppfolgingsplanUtils';
 import OppfolgingsplanInfoboks from '../../app/OppfolgingsplanInfoboks';
+import { BRUKERTYPE } from '../../../konstanter';
 
 class Arbeidsoppgaver extends Component {
     constructor(props) {

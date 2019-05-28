@@ -8,11 +8,6 @@ import {
     togglesPt,
 } from 'digisyfo-npm';
 import {
-    henterEllerHarHentetOppfolgingsdialoger,
-    oppfolgingsdialogHarBlittOpprettet,
-    populerDialogFraState,
-} from 'oppfolgingsdialog-npm';
-import {
     sykmeldt as sykmeldtPt,
     brodsmule as brodsmulePt,
     sykmeldteReducerPt,
@@ -20,10 +15,13 @@ import {
 } from '../shapes';
 import {
     forsoektHentetSykmeldte,
+    henterEllerHarHentetOppfolgingsdialoger,
     henterEllerHarHentetSykmeldinger,
     henterEllerHarHentetToggles,
+    oppfolgingsdialogHarBlittOpprettet,
     sykmeldtHarBlittSlettet,
 } from '../utils/reducerUtils';
+import { populerDialogFraState } from '../utils/stateUtils';
 import logger from '../logg/logging';
 import { sykmeldtHarGyldigSykmelding } from '../utils/oppfolgingsplanUtils';
 import Side from '../sider/Side';
@@ -31,8 +29,8 @@ import AppSpinner from '../components/AppSpinner';
 import Feilmelding from '../components/Feilmelding';
 import OppfolgingsplanInfoboks from '../components/app/OppfolgingsplanInfoboks';
 import history from '../history';
-import * as opproptypes from '../proptypes/opproptypes';
 
+import * as opproptypes from '../proptypes/opproptypes';
 import {
     hentOppfolgingsplaner,
     opprettOppfolgingsplan,

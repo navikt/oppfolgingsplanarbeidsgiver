@@ -2,9 +2,7 @@ import React from 'react';
 import chai from 'chai';
 import { shallow } from 'enzyme';
 import chaiEnzyme from 'chai-enzyme';
-import {
-    OppfolgingsdialogTeasere,
-} from 'oppfolgingsdialog-npm';
+import { OppfolgingsdialogTeasere } from 'oppfolgingsdialog-npm';
 import OppfolgingsdialogerVisning from '../../../js/components/oppfolgingsdialog/OppfolgingsdialogerVisning';
 import OppfolgingsplanerIngenplan from '../../../js/components/oppfolgingsdialog/opprett/OppfolgingsplanerIngenplan';
 import OppfolgingsdialogFilm from '../../../js/filmer/OppfolgingsdialogFilm';

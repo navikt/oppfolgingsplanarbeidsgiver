@@ -1,21 +1,25 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { findDOMNode } from 'react-dom';
-import { getLedetekst, keyValue, scrollTo } from 'digisyfo-npm';
+import {
+    getLedetekst,
+    keyValue,
+    scrollTo,
+} from 'digisyfo-npm';
 import {
     LeggTilElementKnapper,
     TiltakTabell,
-    sorterTiltakEtterNyeste,
-    captitalizeFirstLetter,
     TiltakSkjema,
     TiltakInfoboks,
     NotifikasjonBoksVurdering,
-    BRUKERTYPE,
 } from 'oppfolgingsdialog-npm';
 import * as opProptypes from '../../../proptypes/opproptypes';
+import { captitalizeFirstLetter } from '../../../utils/tekstUtils';
+import { sorterTiltakEtterNyeste } from '../../../utils/tiltakUtils';
 import { getContextRoot } from '../../../routers/paths';
 import { isEmpty } from '../../../utils/oppfolgingsplanUtils';
 import OppfolgingsplanInfoboks from '../../app/OppfolgingsplanInfoboks';
+import { BRUKERTYPE } from '../../../konstanter';
 
 const harArbeidsgiverKommentert = (tiltak, fnr) => {
     return tiltak.kommentarer.filter((kommentar) => {

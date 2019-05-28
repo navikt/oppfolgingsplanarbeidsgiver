@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { getLedetekst, keyValue, hentToggles, togglesPt, sykeforlopsPerioderReducerPt, hentSykeforlopsPerioder } from 'digisyfo-npm';
 import {
-    dialogAvbruttOgNyOpprettet,
-    finnNyOppfolgingsplanMedVirkshomhetEtterAvbrutt,
-    henterEllerHarHentetOppfolgingsdialoger,
-    oppfolgingsdialogHarBlittAvbrutt,
-    populerDialogFraState,
-} from 'oppfolgingsdialog-npm';
+    getLedetekst,
+    keyValue,
+    hentToggles,
+    togglesPt,
+    sykeforlopsPerioderReducerPt,
+    hentSykeforlopsPerioder,
+} from 'digisyfo-npm';
 import {
     sykmeldt as sykmeldtPt,
     brodsmule as brodsmulePt,
@@ -18,10 +18,16 @@ import {
 import * as opProptypes from '../proptypes/opproptypes';
 import {
     forsoektHentetSykmeldte,
+    henterEllerHarHentetOppfolgingsdialoger,
     henterEllerHarHentetSykmeldinger,
     henterEllerHarHentetToggles,
+    oppfolgingsdialogHarBlittAvbrutt,
 } from '../utils/reducerUtils';
-import { sykmeldtHarGyldigSykmelding } from '../utils/oppfolgingsplanUtils';
+import { populerDialogFraState } from '../utils/stateUtils';
+import {
+    finnNyOppfolgingsplanMedVirkshomhetEtterAvbrutt,
+    sykmeldtHarGyldigSykmelding,
+} from '../utils/oppfolgingsplanUtils';
 import Side from '../sider/Side';
 import AppSpinner from '../components/AppSpinner';
 import Feilmelding from '../components/Feilmelding';
@@ -36,7 +42,10 @@ import { hentVirksomhet } from '../actions/oppfolgingsplan/virksomhet_actions';
 import { hentSykmeldinger } from '../actions/sykmeldinger_actions';
 import { forespoerRevidering } from '../actions/oppfolgingsplan/forespoerRevidering_actions';
 import { delMedNav as delMedNavFunc } from '../actions/oppfolgingsplan/delmednav_actions';
-import { avbrytDialog } from '../actions/oppfolgingsplan/avbrytdialog_actions';
+import {
+    avbrytDialog,
+    dialogAvbruttOgNyOpprettet,
+} from '../actions/oppfolgingsplan/avbrytdialog_actions';
 import { delMedFastlege } from '../actions/oppfolgingsplan/delMedFastlege_actions';
 import { nullstillGodkjenning } from '../actions/oppfolgingsplan/nullstillGodkjenning_actions';
 import { giSamtykke } from '../actions/oppfolgingsplan/samtykke_actions';

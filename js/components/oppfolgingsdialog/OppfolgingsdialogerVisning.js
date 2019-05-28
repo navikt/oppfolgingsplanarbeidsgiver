@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { getLedetekst, keyValue } from 'digisyfo-npm';
 import {
-    OppfolgingsdialogTeasere,
-    BRUKERTYPE,
-} from 'oppfolgingsdialog-npm';
+    getLedetekst,
+    keyValue,
+} from 'digisyfo-npm';
+import { OppfolgingsdialogTeasere } from 'oppfolgingsdialog-npm';
 import * as opProptypes from '../../proptypes/opproptypes';
 import { getContextRoot } from '../../routers/paths';
 import {
@@ -13,6 +13,7 @@ import {
     harAktivOppfolgingsdialog,
     harTidligereOppfolgingsdialoger,
 } from '../../utils/oppfolgingsplanUtils';
+import { BRUKERTYPE } from '../../konstanter';
 import OppfolgingsplanerOpprett from './opprett/OppfolgingsplanerOpprett';
 import OppfolgingsplanerIngenplan from './opprett/OppfolgingsplanerIngenplan';
 import OppfolgingsdialogFilm from '../../filmer/OppfolgingsdialogFilm';

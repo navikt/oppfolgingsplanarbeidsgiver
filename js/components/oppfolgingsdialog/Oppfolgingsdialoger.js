@@ -3,12 +3,6 @@ import PropTypes from 'prop-types';
 import { getLedetekst } from 'digisyfo-npm';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import {
-    finnOgHentNaermesteLedereSomMangler,
-    finnOgHentVirksomheterSomMangler,
-    finnOgHentPersonerSomMangler,
-    finnOgHentKontaktinfoSomMangler,
-} from 'oppfolgingsdialog-npm';
-import {
     sykmeldt as sykmeldtPt,
 } from '../../shapes';
 import {
@@ -19,6 +13,12 @@ import {
     virksomhetReducerPt,
 } from '../../proptypes/opproptypes';
 import history from '../../history';
+import {
+    finnOgHentKontaktinfoSomMangler,
+    finnOgHentNaermesteLedereSomMangler,
+    finnOgHentPersonerSomMangler,
+    finnOgHentVirksomheterSomMangler,
+} from '../../utils/reducerUtils';
 import OppfolgingsdialogerInnhold from './OppfolgingsdialogerInnhold';
 import SykmeldtIngenKontaktinformasjon from './SykmeldtIngenKontaktinformasjon';
 import AppSpinner from '../AppSpinner';

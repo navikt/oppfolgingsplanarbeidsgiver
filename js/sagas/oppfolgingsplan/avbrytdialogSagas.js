@@ -25,7 +25,6 @@ export function* avbrytDialog(action) {
     }
 }
 
-
 function* watchAvbrytDialog() {
     yield takeEvery(actions.AVBRYT_DIALOG_FORESPURT, avbrytDialog);
 }

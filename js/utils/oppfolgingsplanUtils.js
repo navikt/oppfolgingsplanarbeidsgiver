@@ -102,6 +102,12 @@ export const harAktivOppfolgingsdialog = (oppfolgingsdialoger, sykmeldinger) => 
     return finnAktiveOppfolgingsdialoger(oppfolgingsdialoger, sykmeldinger).length > 0;
 };
 
+export const finnNyOppfolgingsplanMedVirkshomhetEtterAvbrutt = (oppfolgingsdialoger, virksomhetsnummer) => {
+    return finnAktiveOppfolgingsdialoger(oppfolgingsdialoger).filter((oppfolgingsdialog) => {
+        return oppfolgingsdialog.virksomhet.virksomhetsnummer === virksomhetsnummer;
+    })[0];
+};
+
 export const finnBrukersSisteInnlogging = (oppfolgingsdialoger) => {
     const innlogginger = oppfolgingsdialoger.map((oppfolgingsdialog) => {
         return new Date(oppfolgingsdialog.arbeidsgiver.naermesteLeder.sistInnlogget);

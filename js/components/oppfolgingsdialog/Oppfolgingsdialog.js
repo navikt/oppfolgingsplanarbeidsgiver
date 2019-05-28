@@ -1,27 +1,33 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { getLedetekst, keyValue, togglesPt, sykeforlopsPerioderReducerPt } from 'digisyfo-npm';
+import {
+    getLedetekst,
+    keyValue,
+    togglesPt,
+    sykeforlopsPerioderReducerPt,
+} from 'digisyfo-npm';
 import {
     SideOverskrift,
     NavigasjonsTopp,
     NavigasjonsBunn,
-    BRUKERTYPE,
     Godkjenn,
     Godkjenninger,
     ReleasetPlan,
     AvbruttGodkjentPlanVarsel,
-    finnOgHentVirksomheterSomMangler,
-    finnOgHentNaermesteLedereSomMangler,
-    finnOgHentKontaktinfoSomMangler,
-    finnOgHentPersonerSomMangler,
-    finnOgHentArbeidsforholdSomMangler,
-    finnOgHentSykeforlopsPerioderSomMangler,
 } from 'oppfolgingsdialog-npm';
 import * as opProptypes from '../../proptypes/opproptypes';
+import {
+    finnOgHentArbeidsforholdSomMangler,
+    finnOgHentKontaktinfoSomMangler,
+    finnOgHentNaermesteLedereSomMangler,
+    finnOgHentPersonerSomMangler, finnOgHentSykeforlopsPerioderSomMangler,
+    finnOgHentVirksomheterSomMangler,
+} from '../../utils/reducerUtils';
 import { getContextRoot } from '../../routers/paths';
 import Arbeidsoppgaver from './utfylling/Arbeidsoppgaver';
 import Tiltak from './utfylling/Tiltak';
 import Samtykke from '../oppfolgingsdialog/godkjennplan/samtykke/Samtykke';
+import { BRUKERTYPE } from '../../konstanter';
 
 const manglerSamtykke = (oppfolgingsdialog) => {
     return oppfolgingsdialog.arbeidsgiver.naermesteLeder.samtykke === null;
