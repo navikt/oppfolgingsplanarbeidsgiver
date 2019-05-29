@@ -16,7 +16,7 @@ import {
 import { BRUKERTYPE } from '../../konstanter';
 import OppfolgingsplanerOpprett from './opprett/OppfolgingsplanerOpprett';
 import OppfolgingsplanerIngenplan from './opprett/OppfolgingsplanerIngenplan';
-import OppfolgingsdialogFilm from '../../filmer/OppfolgingsdialogFilm';
+import OppfolgingsplanFilm from '../oppfolgingsplaner/OppfolgingsplanFilm';
 
 class OppfolgingsdialogerVisning extends Component {
     constructor() {
@@ -89,7 +89,7 @@ class OppfolgingsdialogerVisning extends Component {
                 />
             </div>
             }
-            <OppfolgingsdialogFilm />
+            <OppfolgingsplanFilm />
         </div>);
     }
 }
