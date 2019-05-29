@@ -5,7 +5,7 @@ import chaiEnzyme from 'chai-enzyme';
 import { OppfolgingsdialogTeasere } from 'oppfolgingsdialog-npm';
 import OppfolgingsdialogerVisning from '../../../js/components/oppfolgingsdialog/OppfolgingsdialogerVisning';
 import OppfolgingsplanerIngenplan from '../../../js/components/oppfolgingsdialog/opprett/OppfolgingsplanerIngenplan';
-import OppfolgingsdialogFilm from '../../../js/filmer/OppfolgingsdialogFilm';
+import OppfolgingsplanFilm from '../../../js/components/oppfolgingsplaner/OppfolgingsplanFilm';
 import getOppfolgingsdialog from '../../mock/mockOppfolgingsdialog';
 
 chai.use(chaiEnzyme());
@@ -20,8 +20,8 @@ describe('OppfolgingsdialogerVisning', () => {
         />);
     });
 
-    it('Skal vise OppfolgingsdialogFilm', () => {
-        expect(component.find(OppfolgingsdialogFilm)).to.have.length(1);
+    it('Skal vise OppfolgingsplanFilm', () => {
+        expect(component.find(OppfolgingsplanFilm)).to.have.length(1);
     });
 
     describe('Uten Aktiv(e) Oppfolgingsdialog(er)', () => {

@@ -19,13 +19,14 @@
     "images-nav-frontend": "cp -R node_modules/nav-frontend-grafikk dist/resources/img",
     "images-local": "cp -R img dist/resources",
     "images": "npm-run-all images-nav-frontend images-local",
+    "filmer": "cp -R filmer ./dist/resources/",
     "filmtekster": "cp -R filmtekster ./dist/resources/",
-    "nais-build": "npm-run-all clean deploy images filmtekster",
+    "nais-build": "npm-run-all clean deploy images filmtekster filmer",
     "start": "node ./server.js",
     "start-local": "node ./server.js local",
     "start-opplaering": "node ./server.js opplaering",
     "scripts:watch": "webpack-dev-server --inline --port 9094",
-    "dev": "npm-run-all clean images filmtekster scripts:watch"
+    "dev": "npm-run-all clean images filmtekster filmer scripts:watch"
   },
   "author": "DigiSyfo <digisyfo@nav.no>",
   "license": "ISC",
