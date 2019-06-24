@@ -26,6 +26,7 @@ import {
 import { populerDialogFraState } from '../utils/stateUtils';
 import {
     finnNyOppfolgingsplanMedVirkshomhetEtterAvbrutt,
+    finnOppfolgingsplanerPaVirksomhet,
     sykmeldtHarGyldigSykmelding,
 } from '../utils/oppfolgingsplanUtils';
 import Side from '../sider/Side';
@@ -265,7 +266,7 @@ export function mapStateToProps(state, ownProps) {
         tilgang = state.tilgang[sykmeldt.fnr] || tilgang;
         oppfolgingsdialogerReducer = state.oppfolgingsdialoger[sykmeldt.fnr] || {};
         oppfolgingsdialoger = oppfolgingsdialogerReducer.data || [];
-        oppfolgingsdialog = oppfolgingsdialoger
+        oppfolgingsdialog = finnOppfolgingsplanerPaVirksomhet(oppfolgingsdialoger, sykmeldt.orgnummer)
             .filter((dialog) => { return `${dialog.id}` === id; })[0];
         oppfolgingsdialog = oppfolgingsdialog ?
             populerDialogFraState(oppfolgingsdialog, state) : {};

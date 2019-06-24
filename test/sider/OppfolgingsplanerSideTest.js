@@ -73,7 +73,7 @@ describe('OppfolgingsplanerSide', () => {
                             fnr: '81549300',
                         },
                         virksomhet: {
-                            virksomhetsnummer: '123456789',
+                            virksomhetsnummer: sykmeldt1.orgnummer,
                         },
                         arbeidsgiver: {
                             naermesteLeder: {},
@@ -141,8 +141,8 @@ describe('OppfolgingsplanerSide', () => {
                         skalHaVarsel: true,
                     },
                     virksomhet: {
-                        virksomhetsnummer: '123456789',
-                        navn: 'DigiTech Consulting AS',
+                        virksomhetsnummer: sykmeldt1.orgnummer,
+                        navn: '',
                     },
                     arbeidsgiver: {
                         naermesteLeder: {
