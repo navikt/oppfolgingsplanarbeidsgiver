@@ -23,7 +23,10 @@ import {
 } from '../utils/reducerUtils';
 import { populerDialogFraState } from '../utils/stateUtils';
 import logger from '../logg/logging';
-import { sykmeldtHarGyldigSykmelding } from '../utils/oppfolgingsplanUtils';
+import {
+    finnOppfolgingsplanerPaVirksomhet,
+    sykmeldtHarGyldigSykmelding,
+} from '../utils/oppfolgingsplanUtils';
 import Side from '../sider/Side';
 import AppSpinner from '../components/AppSpinner';
 import Feilmelding from '../components/Feilmelding';
@@ -260,9 +263,10 @@ export function mapStateToProps(state, ownProps) {
         tilgang = state.tilgang[sykmeldt.fnr] || tilgang;
         oppfolgingsdialogerReducer = state.oppfolgingsdialoger[sykmeldt.fnr] || {};
         oppfolgingsdialoger = oppfolgingsdialogerReducer.data ?
-            oppfolgingsdialogerReducer.data.map((oppfolgingsdialog) => {
-                return populerDialogFraState(oppfolgingsdialog, state);
-            }) : [];
+            finnOppfolgingsplanerPaVirksomhet(oppfolgingsdialogerReducer.data, sykmeldt.orgnummer)
+                .map((oppfolgingsdialog) => {
+                    return populerDialogFraState(oppfolgingsdialog, state);
+                }) : [];
     }
     const sykmeldinger = state.sykmeldinger[koblingId] || {};
     const harSykmeldtGyldigSykmelding = sykmeldinger.data && sykmeldtHarGyldigSykmelding(sykmeldinger.data);

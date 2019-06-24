@@ -68,6 +68,12 @@ export const erOppfolgingsdialogTidligere = (oppfolgingsdialog) => {
         && oppfolgingsdialog.status !== STATUS.AVBRUTT;
 };
 
+export const finnOppfolgingsplanerPaVirksomhet = (planer, orgnummer) => {
+    return planer.filter((plan) => {
+        return plan.virksomhet.virksomhetsnummer === orgnummer;
+    });
+};
+
 export const finnTidligereOppfolgingsdialoger = (oppfolgingsdialoger) => {
     return sorterOppfolgingsdialogerEtterSluttdato(oppfolgingsdialoger.filter((oppfolgingsdialog) => {
         return erOppfolgingsdialogTidligere(oppfolgingsdialog);

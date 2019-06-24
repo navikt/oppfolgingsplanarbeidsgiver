@@ -68,7 +68,7 @@ describe('OppfolgingsplanSide', () => {
                     data: [{
                         id: ownProps.params.oppfolgingsplanId,
                         virksomhet: {
-                            virksomhetsnummer: '12345678',
+                            virksomhetsnummer: sykmeldt1.orgnummer,
                         },
                         arbeidstaker: {
                             fnr: sykmeldt1.fnr,
