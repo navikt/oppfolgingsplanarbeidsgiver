@@ -31,6 +31,10 @@ export function* opprettOppfolgingsplan(action) {
         const data = yield call(post, url, action.oppfolgingsplan);
         yield put(actions.oppfolgingsplanOpprettet(data, fnr));
     } catch (e) {
+        if (e.message === '409') {
+            window.location.reload();
+            return;
+        }
         log(e);
         yield put(actions.opprettOppfolgingsplanFeilet(fnr));
     }
