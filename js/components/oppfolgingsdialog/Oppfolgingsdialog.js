@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {
-    getLedetekst,
     keyValue,
     togglesPt,
     sykeforlopsPerioderReducerPt,
@@ -12,7 +11,6 @@ import {
     Godkjenn,
     Godkjenninger,
     ReleasetPlan,
-    AvbruttGodkjentPlanVarsel,
 } from 'oppfolgingsdialog-npm';
 import * as opProptypes from '../../proptypes/opproptypes';
 import {
@@ -26,6 +24,7 @@ import { getContextRoot } from '../../routers/paths';
 import Arbeidsoppgaver from './utfylling/Arbeidsoppgaver';
 import Tiltak from './utfylling/Tiltak';
 import SideOverskrift from '../oppfolgingsdialog/SideOverskrift';
+import AvbruttGodkjentPlanVarsel from '../oppfolgingsdialog/AvbruttGodkjentPlanVarsel';
 import Samtykke from '../oppfolgingsdialog/godkjennplan/samtykke/Samtykke';
 import { BRUKERTYPE } from '../../konstanter';
 
@@ -201,12 +200,7 @@ class Oppfolgingsdialog extends Component {
         }
         return (
             <div className="oppfolgingsdialog">
-                { oppfolgingsdialogAvbruttOgNyOpprettet &&
-                <AvbruttGodkjentPlanVarsel
-                    tekst={getLedetekst('oppfolgingdialog.avbruttGodkjentPlanVarsel.opprettet-plan')}
-                    rootUrl={`${getContextRoot()}`}
-                />
-                }
+                { oppfolgingsdialogAvbruttOgNyOpprettet && <AvbruttGodkjentPlanVarsel /> }
                 <SideOverskrift tittel={oppfolgingsdialog.arbeidstaker.navn} />
                 { !disableNavigation && <NavigasjonsTopp
                     ledetekster={ledetekster}
