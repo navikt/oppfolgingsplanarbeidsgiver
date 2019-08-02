@@ -20,7 +20,7 @@ import {
 } from '../../utils/reducerUtils';
 import { getContextRoot } from '../../routers/paths';
 import Arbeidsoppgaver from './utfylling/arbeidsoppgaver/Arbeidsoppgaver';
-import Tiltak from './utfylling/Tiltak';
+import Tiltak from './utfylling/tiltak/Tiltak';
 import SideOverskrift from '../oppfolgingsdialog/SideOverskrift';
 import AvbruttGodkjentPlanVarsel from '../oppfolgingsdialog/AvbruttGodkjentPlanVarsel';
 import NavigasjonsBunn from '../oppfolgingsdialog/NavigasjonsBunn';

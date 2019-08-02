@@ -9,17 +9,17 @@ import {
 import {
     TiltakTabell,
     TiltakSkjema,
-    TiltakInfoboks,
     NotifikasjonBoksVurdering,
 } from 'oppfolgingsdialog-npm';
-import * as opProptypes from '../../../proptypes/opproptypes';
-import { captitalizeFirstLetter } from '../../../utils/tekstUtils';
-import { sorterTiltakEtterNyeste } from '../../../utils/tiltakUtils';
-import { getContextRoot } from '../../../routers/paths';
-import { isEmpty } from '../../../utils/oppfolgingsplanUtils';
-import OppfolgingsplanInfoboks from '../../app/OppfolgingsplanInfoboks';
-import LeggTilElementKnapper from './LeggTilElementKnapper';
-import { BRUKERTYPE } from '../../../konstanter';
+import * as opProptypes from '../../../../proptypes/opproptypes';
+import { captitalizeFirstLetter } from '../../../../utils/tekstUtils';
+import { sorterTiltakEtterNyeste } from '../../../../utils/tiltakUtils';
+import { getContextRoot } from '../../../../routers/paths';
+import { isEmpty } from '../../../../utils/oppfolgingsplanUtils';
+import OppfolgingsplanInfoboks from '../../../app/OppfolgingsplanInfoboks';
+import LeggTilElementKnapper from '../LeggTilElementKnapper';
+import TiltakInfoboks from './TiltakInfoboks';
+import { BRUKERTYPE } from '../../../../konstanter';
 
 const harArbeidsgiverKommentert = (tiltak, fnr) => {
     return tiltak.kommentarer.filter((kommentar) => {
@@ -149,10 +149,8 @@ class Tiltak extends Component {
                                 </OppfolgingsplanInfoboks> :
                                 <div>
                                     <TiltakInfoboks
-                                        ledetekster={ledetekster}
                                         visTiltakSkjema={this.state.visTiltakSkjema}
                                         toggleSkjema={this.toggleTiltakSkjema}
-                                        tittel={getLedetekst('oppfolgingsdialog.tiltak.arbeidsgiver.tittel')}
                                     />
 
                                     <TiltakSkjema
@@ -184,10 +182,8 @@ class Tiltak extends Component {
                         }
                         {
                             <TiltakInfoboks
-                                ledetekster={ledetekster}
                                 visTiltakSkjema={this.state.visTiltakSkjema}
                                 toggleSkjema={this.toggleTiltakSkjema}
-                                tittel={getLedetekst('oppfolgingsdialog.tiltak.arbeidsgiver.tittel')}
                             />
                         }
                         { this.state.visTiltakSkjema &&

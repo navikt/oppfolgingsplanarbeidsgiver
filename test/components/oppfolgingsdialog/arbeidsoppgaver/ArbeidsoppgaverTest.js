@@ -8,12 +8,12 @@ import {
     LagreArbeidsoppgaveSkjemaAG,
     ArbeidsoppgaverListe,
 } from 'oppfolgingsdialog-npm';
-import ledetekster from '../../mock/ledetekster_mock';
-import Arbeidsoppgaver from '../../../js/components/oppfolgingsdialog/utfylling/arbeidsoppgaver/Arbeidsoppgaver';
-import LeggTilElementKnapper from '../../../js/components/oppfolgingsdialog/utfylling/LeggTilElementKnapper';
-import ArbeidsoppgaverInfoboks from '../../../js/components/oppfolgingsdialog/utfylling/arbeidsoppgaver/ArbeidsoppgaverInfoboks';
-import OppfolgingsplanInfoboks from '../../../js/components/app/OppfolgingsplanInfoboks';
-import getOppfolgingsdialog from '../../mock/mockOppfolgingsdialog';
+import ledetekster from '../../../mock/ledetekster_mock';
+import Arbeidsoppgaver from '../../../../js/components/oppfolgingsdialog/utfylling/arbeidsoppgaver/Arbeidsoppgaver';
+import LeggTilElementKnapper from '../../../../js/components/oppfolgingsdialog/utfylling/LeggTilElementKnapper';
+import ArbeidsoppgaverInfoboks from '../../../../js/components/oppfolgingsdialog/utfylling/arbeidsoppgaver/ArbeidsoppgaverInfoboks';
+import OppfolgingsplanInfoboks from '../../../../js/components/app/OppfolgingsplanInfoboks';
+import getOppfolgingsdialog from '../../../mock/mockOppfolgingsdialog';
 
 chai.use(chaiEnzyme());
 const expect = chai.expect;

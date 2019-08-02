@@ -15,7 +15,7 @@ import NavigasjonsBunn from '../../../js/components/oppfolgingsdialog/Navigasjon
 import NavigasjonsTopp from '../../../js/components/oppfolgingsdialog/NavigasjonsTopp';
 import Arbeidsoppgaver from '../../../js/components/oppfolgingsdialog/utfylling/arbeidsoppgaver/Arbeidsoppgaver';
 import Samtykke from '../../../js/components/oppfolgingsdialog/godkjennplan/samtykke/Samtykke';
-import Tiltak from '../../../js/components/oppfolgingsdialog/utfylling/Tiltak';
+import Tiltak from '../../../js/components/oppfolgingsdialog/utfylling/tiltak/Tiltak';
 import getOppfolgingsdialog from '../../mock/mockOppfolgingsdialog';
 
 chai.use(chaiEnzyme());
