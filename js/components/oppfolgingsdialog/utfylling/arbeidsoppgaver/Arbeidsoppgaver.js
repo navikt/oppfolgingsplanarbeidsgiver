@@ -8,7 +8,6 @@ import {
 } from 'digisyfo-npm';
 import {
     ArbeidsoppgaverListe,
-    LagreArbeidsoppgaveSkjemaAG,
 } from 'oppfolgingsdialog-npm';
 import { sorterArbeidsoppgaverEtterOpprettet } from '../../../../utils/arbeidsoppgaveUtils';
 import { captitalizeFirstLetter } from '../../../../utils/tekstUtils';
@@ -18,6 +17,7 @@ import { isEmpty } from '../../../../utils/oppfolgingsplanUtils';
 import OppfolgingsplanInfoboks from '../../../app/OppfolgingsplanInfoboks';
 import LeggTilElementKnapper from '../LeggTilElementKnapper';
 import ArbeidsoppgaverInfoboks from './ArbeidsoppgaverInfoboks';
+import LagreArbeidsoppgaveSkjema from './LagreArbeidsoppgaveSkjema';
 import { BRUKERTYPE } from '../../../../konstanter';
 
 class Arbeidsoppgaver extends Component {
@@ -155,7 +155,7 @@ class Arbeidsoppgaver extends Component {
                                         toggleSkjema={this.toggleArbeidsoppgaveSkjema}
                                     />
                                 </OppfolgingsplanInfoboks> :
-                                <LagreArbeidsoppgaveSkjemaAG
+                                <LagreArbeidsoppgaveSkjema
                                     ledetekster={ledetekster}
                                     toggleArbeidsoppgaveSkjema={this.toggleArbeidsoppgaveSkjema}
                                     varselTekst={this.state.varselTekst}
@@ -191,7 +191,7 @@ class Arbeidsoppgaver extends Component {
                         </ArbeidsoppgaverInfoboks>
                         {
                             this.state.visArbeidsoppgaveSkjema &&
-                            <LagreArbeidsoppgaveSkjemaAG
+                            <LagreArbeidsoppgaveSkjema
                                 ledetekster={ledetekster}
                                 onSubmit={this.sendLagreArbeidsoppgave}
                                 avbryt={this.skjulSkjema}

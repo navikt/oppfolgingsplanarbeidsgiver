@@ -1,4 +1,4 @@
-const erHerokuApp = () => {
+export const erHerokuApp = () => {
     const url = window
     && window.location
     && window.location.href

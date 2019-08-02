@@ -5,11 +5,11 @@ import chaiEnzyme from 'chai-enzyme';
 import sinon from 'sinon';
 import { setLedetekster } from 'digisyfo-npm';
 import {
-    LagreArbeidsoppgaveSkjemaAG,
     ArbeidsoppgaverListe,
 } from 'oppfolgingsdialog-npm';
 import ledetekster from '../../../mock/ledetekster_mock';
 import Arbeidsoppgaver from '../../../../js/components/oppfolgingsdialog/utfylling/arbeidsoppgaver/Arbeidsoppgaver';
+import LagreArbeidsoppgaveSkjema from '../../../../js/components/oppfolgingsdialog/utfylling/arbeidsoppgaver/LagreArbeidsoppgaveSkjema';
 import LeggTilElementKnapper from '../../../../js/components/oppfolgingsdialog/utfylling/LeggTilElementKnapper';
 import ArbeidsoppgaverInfoboks from '../../../../js/components/oppfolgingsdialog/utfylling/arbeidsoppgaver/ArbeidsoppgaverInfoboks';
 import OppfolgingsplanInfoboks from '../../../../js/components/app/OppfolgingsplanInfoboks';
@@ -146,7 +146,7 @@ describe('Arbeidsoppgaver', () => {
             componentUtenArbeidsoppgaver.setState({
                 visArbeidsoppgaveSkjema: true,
             });
-            expect(componentUtenArbeidsoppgaver.find(LagreArbeidsoppgaveSkjemaAG)).to.have.length(1);
+            expect(componentUtenArbeidsoppgaver.find(LagreArbeidsoppgaveSkjema)).to.have.length(1);
         });
     });
 
@@ -175,11 +175,11 @@ describe('Arbeidsoppgaver', () => {
             expect(componentMedArbeidsoppgaver.find(ArbeidsoppgaverListe)).to.have.length(1);
         });
 
-        it('Skal vise LagreArbeidsoppgaveSkjemaAG, om det er arbeidsoppgaver og visArbeidsoppgaveSkjema er true', () => {
+        it('Skal vise LagreArbeidsoppgaveSkjema, om det er arbeidsoppgaver og visArbeidsoppgaveSkjema er true', () => {
             componentMedArbeidsoppgaver.setState({
                 visArbeidsoppgaveSkjema: true,
             });
-            expect(componentMedArbeidsoppgaver.find(LagreArbeidsoppgaveSkjemaAG)).to.have.length(1);
+            expect(componentMedArbeidsoppgaver.find(LagreArbeidsoppgaveSkjema)).to.have.length(1);
         });
     });
 });
