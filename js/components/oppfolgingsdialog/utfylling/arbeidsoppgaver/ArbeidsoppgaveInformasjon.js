@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { getLedetekst, keyValue } from 'digisyfo-npm';
 import {
@@ -13,36 +13,18 @@ export const ArbeidsoppgaveInformasjonKnapper = (
         ledetekster,
         element,
         fnr,
-        visLagreSkjema,
         sendSlett,
-        brukerType,
     }) => {
     const elementId = element.arbeidsoppgaveId;
     const aktoerHarOpprettetElement = fnr === (element.opprettetAv && element.opprettetAv.fnr);
-    const visKnapperad = brukerType === BRUKERTYPE.ARBEIDSTAKER || aktoerHarOpprettetElement;
     return (
-        visKnapperad ? (<div className="arbeidsoppgaveInformasjonKnapper knapperad knapperad--justervenstre">
-            { brukerType === BRUKERTYPE.ARBEIDSTAKER &&
-            <button
-                type="button"
-                className={`${element.gjennomfoering ? 'knapp--endre' : 'knapp knapp--standard'} knapperad__element`}
-                aria-pressed={visLagreSkjema}
-                onClick={visLagreSkjema}>
-                {element.gjennomfoering ?
-                    getLedetekst('oppfolgingsdialog.knapp.endre-element', ledetekster)
-                    :
-                    getLedetekst('oppfolgingsdialog.knapp.givurdering', ledetekster)
-                }
-            </button>
-            }
-            { aktoerHarOpprettetElement &&
+        aktoerHarOpprettetElement ? (<div className="arbeidsoppgaveInformasjonKnapper knapperad knapperad--justervenstre">
             <button
                 type="button"
                 onClick={() => { sendSlett(elementId); }}
                 className="knapperad__element knapp--slett">
                 {getLedetekst('oppfolgingsdialog.knapp.slett-element', ledetekster)}
             </button>
-            }
         </div>) : null
     );
 };
@@ -50,9 +32,7 @@ ArbeidsoppgaveInformasjonKnapper.propTypes = {
     ledetekster: keyValue,
     element: opProptypes.arbeidsoppgavePt,
     fnr: PropTypes.string,
-    visLagreSkjema: PropTypes.func,
     sendSlett: PropTypes.func,
-    brukerType: PropTypes.string,
 };
 
 export const ArbeidsoppgaveInformasjonInnhold = ({ ledetekster, arbeidsoppgave, brukerType }) => {
@@ -124,72 +104,47 @@ ArbeidsoppgaveInformasjonInnhold.propTypes = {
     brukerType: PropTypes.string,
 };
 
-class ArbeidsoppgaveInformasjon extends Component {
-    constructor() {
-        super();
-        this.state = {
-            lagreKommentarSkjema: false,
-        };
-        this.visLagreKommentarSkjema = this.visLagreKommentarSkjema.bind(this);
-        this.skjulLagreKommentarSkjema = this.skjulLagreKommentarSkjema.bind(this);
-    }
+const ArbeidsoppgaveInformasjon = (
+    {
+        ledetekster,
+        element,
+        fnr,
+        brukerType,
+        sendSlett,
+        oppdateringFeilet,
+        varselTekst,
+        rootUrlImg,
+    }) => {
+    return (
+        <div className="arbeidsoppgaveInformasjon">
+            <ArbeidsoppgaveInformasjonInnhold
+                ledetekster={ledetekster}
+                arbeidsoppgave={element}
+                brukerType={brukerType}
+            />
 
-    visLagreKommentarSkjema() {
-        this.setState({ lagreKommentarSkjema: true });
-    }
+            { oppdateringFeilet &&
+            <ArbeidsoppgaveVarselFeil
+                tekst={varselTekst}
+                rootUrlImg={rootUrlImg}
+            />
+            }
 
-    skjulLagreKommentarSkjema() {
-        this.setState({ lagreKommentarSkjema: false });
-    }
-
-    render() {
-        const {
-            ledetekster,
-            element,
-            fnr,
-            brukerType,
-            visLagreSkjema,
-            sendSlett,
-            oppdateringFeilet,
-            varselTekst,
-            rootUrlImg,
-        } = this.props;
-        return (
-            <div className="arbeidsoppgaveInformasjon">
-                <ArbeidsoppgaveInformasjonInnhold
-                    ledetekster={ledetekster}
-                    arbeidsoppgave={element}
-                    brukerType={brukerType}
-                />
-
-                { oppdateringFeilet &&
-                <ArbeidsoppgaveVarselFeil
-                    tekst={varselTekst}
-                    rootUrlImg={rootUrlImg}
-                />
-                }
-
-                <ArbeidsoppgaveInformasjonKnapper
-                    ledetekster={ledetekster}
-                    element={element}
-                    fnr={fnr}
-                    visLagreSkjema={visLagreSkjema}
-                    lagreKommentarSkjema={this.state.lagreKommentarSkjema}
-                    visLagreKommentarSkjema={this.visLagreKommentarSkjema}
-                    sendSlett={sendSlett}
-                    brukerType={brukerType}
-                />
-            </div>
-        );
-    }
-}
+            <ArbeidsoppgaveInformasjonKnapper
+                ledetekster={ledetekster}
+                element={element}
+                fnr={fnr}
+                sendSlett={sendSlett}
+            />
+        </div>
+    );
+};
 
 ArbeidsoppgaveInformasjon.propTypes = {
     ledetekster: keyValue,
     element: opProptypes.arbeidsoppgavePt,
     fnr: PropTypes.string,
     brukerType: PropTypes.string,
-    visLagreSkjema: PropTypes.func,
     sendSlett: PropTypes.func,
     oppdateringFeilet: PropTypes.bool,
     varselTekst: PropTypes.string,
