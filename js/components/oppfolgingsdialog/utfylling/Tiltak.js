@@ -7,7 +7,6 @@ import {
     scrollTo,
 } from 'digisyfo-npm';
 import {
-    LeggTilElementKnapper,
     TiltakTabell,
     TiltakSkjema,
     TiltakInfoboks,
@@ -19,6 +18,7 @@ import { sorterTiltakEtterNyeste } from '../../../utils/tiltakUtils';
 import { getContextRoot } from '../../../routers/paths';
 import { isEmpty } from '../../../utils/oppfolgingsplanUtils';
 import OppfolgingsplanInfoboks from '../../app/OppfolgingsplanInfoboks';
+import LeggTilElementKnapper from './LeggTilElementKnapper';
 import { BRUKERTYPE } from '../../../konstanter';
 
 const harArbeidsgiverKommentert = (tiltak, fnr) => {

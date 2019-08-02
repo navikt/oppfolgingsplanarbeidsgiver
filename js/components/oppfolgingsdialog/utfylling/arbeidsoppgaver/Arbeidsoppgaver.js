@@ -8,7 +8,6 @@ import {
 } from 'digisyfo-npm';
 import {
     ArbeidsoppgaverListe,
-    LeggTilElementKnapper,
     LagreArbeidsoppgaveSkjemaAG,
 } from 'oppfolgingsdialog-npm';
 import { sorterArbeidsoppgaverEtterOpprettet } from '../../../../utils/arbeidsoppgaveUtils';
@@ -17,6 +16,7 @@ import * as opProptypes from '../../../../proptypes/opproptypes';
 import { getContextRoot } from '../../../../routers/paths';
 import { isEmpty } from '../../../../utils/oppfolgingsplanUtils';
 import OppfolgingsplanInfoboks from '../../../app/OppfolgingsplanInfoboks';
+import LeggTilElementKnapper from '../LeggTilElementKnapper';
 import ArbeidsoppgaverInfoboks from './ArbeidsoppgaverInfoboks';
 import { BRUKERTYPE } from '../../../../konstanter';
 
