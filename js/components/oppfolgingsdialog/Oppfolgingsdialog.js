@@ -19,7 +19,7 @@ import {
     finnOgHentVirksomheterSomMangler,
 } from '../../utils/reducerUtils';
 import { getContextRoot } from '../../routers/paths';
-import Arbeidsoppgaver from './utfylling/Arbeidsoppgaver';
+import Arbeidsoppgaver from './utfylling/arbeidsoppgaver/Arbeidsoppgaver';
 import Tiltak from './utfylling/Tiltak';
 import SideOverskrift from '../oppfolgingsdialog/SideOverskrift';
 import AvbruttGodkjentPlanVarsel from '../oppfolgingsdialog/AvbruttGodkjentPlanVarsel';

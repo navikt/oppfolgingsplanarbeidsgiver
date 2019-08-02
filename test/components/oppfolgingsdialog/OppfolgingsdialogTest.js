@@ -13,7 +13,7 @@ import SideOverskrift from '../../../js/components/oppfolgingsdialog/SideOverskr
 import AvbruttGodkjentPlanVarsel from '../../../js/components/oppfolgingsdialog/AvbruttGodkjentPlanVarsel';
 import NavigasjonsBunn from '../../../js/components/oppfolgingsdialog/NavigasjonsBunn';
 import NavigasjonsTopp from '../../../js/components/oppfolgingsdialog/NavigasjonsTopp';
-import Arbeidsoppgaver from '../../../js/components/oppfolgingsdialog/utfylling/Arbeidsoppgaver';
+import Arbeidsoppgaver from '../../../js/components/oppfolgingsdialog/utfylling/arbeidsoppgaver/Arbeidsoppgaver';
 import Samtykke from '../../../js/components/oppfolgingsdialog/godkjennplan/samtykke/Samtykke';
 import Tiltak from '../../../js/components/oppfolgingsdialog/utfylling/Tiltak';
 import getOppfolgingsdialog from '../../mock/mockOppfolgingsdialog';

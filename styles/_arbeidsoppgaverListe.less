@@ -1,0 +1,82 @@
+@tabellRadPadding: 2em;
+@tabellRadPaddingLiten: 1em;
+
+.arbeidsoppgaverListe {
+  width: 100%;
+  color: @navMorkGra;
+  .utvidbar__toggle {
+    color: inherit;
+    &:visited, &:hover, &:active, &:focus {
+      color: inherit;
+    }
+  }
+}
+.arbeidsoppgaverListe__rad {
+  background: @white;
+}
+.arbeidsoppgaverListe__rad:before,
+.arbeidsoppgaverListe__rad:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.arbeidsoppgaverListe__rad--element {
+  padding: 0;
+  margin-bottom: .325em;
+}
+.arbeidsoppgaveTabellUtvidbarOverskrift {
+  display: flex;
+}
+.arbeidsoppgaverListe__kol {
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+  p {
+    margin: 0;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    width: 100%;
+  }
+}
+.arbeidsoppgaveUtvidbarOverskrift__pil {
+  width: 1.2em;
+  @media all and (min-width: @screen-sm-min){
+    width: 1.5em;
+  }
+  &:focus {
+    outline: none;
+  }
+}
+.arbeidsoppgaverListe__rad__advarsel {
+  margin-right: 1em;
+}
+.arbeidsoppgaverListe__utvidbarrad {
+  &:extend(.panel--oppfoelging);
+  margin-bottom: .325em;
+  overflow: auto;
+  font-weight: 600;
+  width: 100%;
+  word-break: break-all;
+
+  .arbeidsoppgaverListe__rad__ikon, .arbeidsoppgaverListe__rad__tekst {
+    display: inline-block;
+  }
+  .arbeidsoppgaveUtvidbarOverskrift__ikon {
+    width: @arbeidsoppgaveUtvibarOverskriftIkonBredde;
+    height: auto;
+    margin-right: 1em;
+  }
+  .arbeidsoppgaveUtvidbarOverskrift__tekst {
+    flex-grow: 1;
+    p {
+      &:extend(.tekst--dynamisk);
+      margin: 0;
+      &:nth-child(1) {
+        font-weight: 600;
+      }
+      &:nth-child(2) {
+        font-weight: normal;
+      }
+    }
+  }
+}

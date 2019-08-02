@@ -1,0 +1,47 @@
+.oppfolgingsdialogtabell {
+  width: 100%;
+  color: @navMorkGra;
+  .utvidbar__toggle {
+    color: inherit;
+    &:visited, &:hover, &:active, &:focus {
+      color: inherit;
+    }
+  }
+}
+.oppfolgingsdialogtabell__rad {
+  background: @white;
+}
+.oppfolgingsdialogtabell__rad:before,
+.oppfolgingsdialogtabell__rad:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.oppfolgingsdialogtabell__rad--element {
+  padding: 0;
+  margin-bottom: .325em;
+}
+.oppfolgingsdialogtabell__rad__utvidbar {
+  padding: @panelOppfoelgingPaddingMini;
+  @media (min-width: @screen-sm-min) {
+    padding: @panelOppfoelgingPadding;
+  }
+}
+.oppfolgingsdialogtabell__utvidbarrad {
+  &:extend(.panel--oppfoelging);
+  margin-bottom: .325em;
+  overflow: auto;
+  font-weight: 600;
+  width: 100%;
+  word-break: break-all;
+}
+.tabellRadUtvidbar--erApen {
+  & > img {
+    transform: rotate(180deg);
+  }
+}
+@media (max-width: @screen-xs-max) {
+  .lenke--avbryt {
+    margin-left: 2em;
+  }
+}

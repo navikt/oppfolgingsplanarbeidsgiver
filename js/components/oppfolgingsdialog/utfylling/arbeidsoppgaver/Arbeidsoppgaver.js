@@ -10,15 +10,15 @@ import {
     ArbeidsoppgaverListe,
     LeggTilElementKnapper,
     LagreArbeidsoppgaveSkjemaAG,
-    ArbeidsoppgaverInfoboks,
 } from 'oppfolgingsdialog-npm';
-import { sorterArbeidsoppgaverEtterOpprettet } from '../../../utils/arbeidsoppgaveUtils';
-import { captitalizeFirstLetter } from '../../../utils/tekstUtils';
-import * as opProptypes from '../../../proptypes/opproptypes';
-import { getContextRoot } from '../../../routers/paths';
-import { isEmpty } from '../../../utils/oppfolgingsplanUtils';
-import OppfolgingsplanInfoboks from '../../app/OppfolgingsplanInfoboks';
-import { BRUKERTYPE } from '../../../konstanter';
+import { sorterArbeidsoppgaverEtterOpprettet } from '../../../../utils/arbeidsoppgaveUtils';
+import { captitalizeFirstLetter } from '../../../../utils/tekstUtils';
+import * as opProptypes from '../../../../proptypes/opproptypes';
+import { getContextRoot } from '../../../../routers/paths';
+import { isEmpty } from '../../../../utils/oppfolgingsplanUtils';
+import OppfolgingsplanInfoboks from '../../../app/OppfolgingsplanInfoboks';
+import ArbeidsoppgaverInfoboks from './ArbeidsoppgaverInfoboks';
+import { BRUKERTYPE } from '../../../../konstanter';
 
 class Arbeidsoppgaver extends Component {
     constructor(props) {
@@ -122,7 +122,6 @@ class Arbeidsoppgaver extends Component {
                 return isEmpty(oppfolgingsdialog.arbeidsoppgaveListe) ?
                     <div>
                         { this.state.visArbeidsoppgaveSkjema && <ArbeidsoppgaverInfoboks
-                            ledetekster={ledetekster}
                             tittel={getLedetekst('oppfolgingsdialog.arbeidsoppgaverInfoboks.tittel.arbeidsgiver')}
                             visSkjema={this.state.visArbeidsoppgaveSkjema}
                             toggleSkjema={this.toggleArbeidsoppgaveSkjema}
@@ -172,7 +171,6 @@ class Arbeidsoppgaver extends Component {
                     :
                     <div>
                         <ArbeidsoppgaverInfoboks
-                            ledetekster={ledetekster}
                             tittel={getLedetekst('oppfolgingsdialog.arbeidsoppgaverInfoboks.tittel.arbeidsgiver')}
                             visSkjema={this.state.visArbeidsoppgaveSkjema}
                             toggleSkjema={this.toggleArbeidsoppgaveSkjema}
