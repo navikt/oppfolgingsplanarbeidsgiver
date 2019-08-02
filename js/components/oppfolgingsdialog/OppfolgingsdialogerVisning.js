@@ -4,7 +4,6 @@ import {
     getLedetekst,
     keyValue,
 } from 'digisyfo-npm';
-import { OppfolgingsdialogTeasere } from 'oppfolgingsdialog-npm';
 import * as opProptypes from '../../proptypes/opproptypes';
 import { getContextRoot } from '../../routers/paths';
 import {
@@ -17,6 +16,7 @@ import { BRUKERTYPE } from '../../konstanter';
 import OppfolgingsplanerOpprett from './opprett/OppfolgingsplanerOpprett';
 import OppfolgingsplanerIngenplan from './opprett/OppfolgingsplanerIngenplan';
 import OppfolgingsplanFilm from '../oppfolgingsplaner/OppfolgingsplanFilm';
+import OppfolgingsdialogTeasere from '../oppfolgingsplaner/OppfolgingsdialogTeasere';
 
 class OppfolgingsdialogerVisning extends Component {
     constructor() {
