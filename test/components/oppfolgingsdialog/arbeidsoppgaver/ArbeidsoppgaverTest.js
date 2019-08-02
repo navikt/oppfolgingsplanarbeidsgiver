@@ -4,11 +4,9 @@ import { shallow } from 'enzyme';
 import chaiEnzyme from 'chai-enzyme';
 import sinon from 'sinon';
 import { setLedetekster } from 'digisyfo-npm';
-import {
-    ArbeidsoppgaverListe,
-} from 'oppfolgingsdialog-npm';
 import ledetekster from '../../../mock/ledetekster_mock';
 import Arbeidsoppgaver from '../../../../js/components/oppfolgingsdialog/utfylling/arbeidsoppgaver/Arbeidsoppgaver';
+import ArbeidsoppgaverListe from '../../../../js/components/oppfolgingsdialog/utfylling/arbeidsoppgaver/ArbeidsoppgaverListe';
 import LagreArbeidsoppgaveSkjema from '../../../../js/components/oppfolgingsdialog/utfylling/arbeidsoppgaver/LagreArbeidsoppgaveSkjema';
 import LeggTilElementKnapper from '../../../../js/components/oppfolgingsdialog/utfylling/LeggTilElementKnapper';
 import ArbeidsoppgaverInfoboks from '../../../../js/components/oppfolgingsdialog/utfylling/arbeidsoppgaver/ArbeidsoppgaverInfoboks';

@@ -6,9 +6,6 @@ import {
     keyValue,
     scrollTo,
 } from 'digisyfo-npm';
-import {
-    ArbeidsoppgaverListe,
-} from 'oppfolgingsdialog-npm';
 import { sorterArbeidsoppgaverEtterOpprettet } from '../../../../utils/arbeidsoppgaveUtils';
 import { captitalizeFirstLetter } from '../../../../utils/tekstUtils';
 import * as opProptypes from '../../../../proptypes/opproptypes';
@@ -16,6 +13,7 @@ import { getContextRoot } from '../../../../routers/paths';
 import { isEmpty } from '../../../../utils/oppfolgingsplanUtils';
 import OppfolgingsplanInfoboks from '../../../app/OppfolgingsplanInfoboks';
 import LeggTilElementKnapper from '../LeggTilElementKnapper';
+import ArbeidsoppgaverListe from './ArbeidsoppgaverListe';
 import ArbeidsoppgaverInfoboks from './ArbeidsoppgaverInfoboks';
 import LagreArbeidsoppgaveSkjema from './LagreArbeidsoppgaveSkjema';
 import { BRUKERTYPE } from '../../../../konstanter';
