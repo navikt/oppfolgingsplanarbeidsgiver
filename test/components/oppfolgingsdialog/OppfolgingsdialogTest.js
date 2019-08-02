@@ -4,7 +4,6 @@ import { shallow } from 'enzyme';
 import chaiEnzyme from 'chai-enzyme';
 import sinon from 'sinon';
 import {
-    NavigasjonsBunn,
     Godkjenn,
     Godkjenninger,
     ReleasetPlan,
@@ -12,6 +11,7 @@ import {
 import Oppfolgingsdialog, { erAvvistAvArbeidsgiver } from '../../../js/components/oppfolgingsdialog/Oppfolgingsdialog';
 import SideOverskrift from '../../../js/components/oppfolgingsdialog/SideOverskrift';
 import AvbruttGodkjentPlanVarsel from '../../../js/components/oppfolgingsdialog/AvbruttGodkjentPlanVarsel';
+import NavigasjonsBunn from '../../../js/components/oppfolgingsdialog/NavigasjonsBunn';
 import NavigasjonsTopp from '../../../js/components/oppfolgingsdialog/NavigasjonsTopp';
 import Arbeidsoppgaver from '../../../js/components/oppfolgingsdialog/utfylling/Arbeidsoppgaver';
 import Samtykke from '../../../js/components/oppfolgingsdialog/godkjennplan/samtykke/Samtykke';
