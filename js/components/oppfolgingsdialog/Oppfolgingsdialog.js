@@ -6,7 +6,6 @@ import {
     sykeforlopsPerioderReducerPt,
 } from 'digisyfo-npm';
 import {
-    NavigasjonsTopp,
     NavigasjonsBunn,
     Godkjenn,
     Godkjenninger,
@@ -25,6 +24,7 @@ import Arbeidsoppgaver from './utfylling/Arbeidsoppgaver';
 import Tiltak from './utfylling/Tiltak';
 import SideOverskrift from '../oppfolgingsdialog/SideOverskrift';
 import AvbruttGodkjentPlanVarsel from '../oppfolgingsdialog/AvbruttGodkjentPlanVarsel';
+import NavigasjonsTopp from '../oppfolgingsdialog/NavigasjonsTopp';
 import Samtykke from '../oppfolgingsdialog/godkjennplan/samtykke/Samtykke';
 import { BRUKERTYPE } from '../../konstanter';
 
@@ -203,7 +203,6 @@ class Oppfolgingsdialog extends Component {
                 { oppfolgingsdialogAvbruttOgNyOpprettet && <AvbruttGodkjentPlanVarsel /> }
                 <SideOverskrift tittel={oppfolgingsdialog.arbeidstaker.navn} />
                 { !disableNavigation && <NavigasjonsTopp
-                    ledetekster={ledetekster}
                     disabled={disableNavigation}
                     settAktivtSteg={settAktivtSteg}
                     steg={navigasjontoggles.steg}
