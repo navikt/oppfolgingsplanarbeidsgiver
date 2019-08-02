@@ -4,7 +4,6 @@ import { shallow } from 'enzyme';
 import chaiEnzyme from 'chai-enzyme';
 import sinon from 'sinon';
 import {
-    SideOverskrift,
     NavigasjonsTopp,
     NavigasjonsBunn,
     Godkjenn,
@@ -13,6 +12,7 @@ import {
     ReleasetPlan,
 } from 'oppfolgingsdialog-npm';
 import Oppfolgingsdialog, { erAvvistAvArbeidsgiver } from '../../../js/components/oppfolgingsdialog/Oppfolgingsdialog';
+import SideOverskrift from '../../../js/components/oppfolgingsdialog/SideOverskrift';
 import Arbeidsoppgaver from '../../../js/components/oppfolgingsdialog/utfylling/Arbeidsoppgaver';
 import Samtykke from '../../../js/components/oppfolgingsdialog/godkjennplan/samtykke/Samtykke';
 import Tiltak from '../../../js/components/oppfolgingsdialog/utfylling/Tiltak';

@@ -7,7 +7,6 @@ import {
     sykeforlopsPerioderReducerPt,
 } from 'digisyfo-npm';
 import {
-    SideOverskrift,
     NavigasjonsTopp,
     NavigasjonsBunn,
     Godkjenn,
@@ -26,6 +25,7 @@ import {
 import { getContextRoot } from '../../routers/paths';
 import Arbeidsoppgaver from './utfylling/Arbeidsoppgaver';
 import Tiltak from './utfylling/Tiltak';
+import SideOverskrift from '../oppfolgingsdialog/SideOverskrift';
 import Samtykke from '../oppfolgingsdialog/godkjennplan/samtykke/Samtykke';
 import { BRUKERTYPE } from '../../konstanter';
 
