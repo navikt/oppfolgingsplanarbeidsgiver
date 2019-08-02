@@ -9,7 +9,6 @@ import {
 import {
     TiltakTabell,
     TiltakSkjema,
-    NotifikasjonBoksVurdering,
 } from 'oppfolgingsdialog-npm';
 import * as opProptypes from '../../../../proptypes/opproptypes';
 import { captitalizeFirstLetter } from '../../../../utils/tekstUtils';
@@ -18,6 +17,7 @@ import { getContextRoot } from '../../../../routers/paths';
 import { isEmpty } from '../../../../utils/oppfolgingsplanUtils';
 import OppfolgingsplanInfoboks from '../../../app/OppfolgingsplanInfoboks';
 import LeggTilElementKnapper from '../LeggTilElementKnapper';
+import NotifikasjonBoksVurdering from './NotifikasjonBoksVurdering';
 import TiltakInfoboks from './TiltakInfoboks';
 import { BRUKERTYPE } from '../../../../konstanter';
 
@@ -176,7 +176,6 @@ class Tiltak extends Component {
                                 ledetekster={ledetekster}
                                 navn={oppfolgingsdialog.arbeidstaker.navn}
                                 antallIkkeVurderte={antallIkkeVurderteTiltak}
-                                rootUrl={`${getContextRoot()}`}
                                 tekst="oppfolgingsdialog.notifikasjonboks.tiltak.vurderes.tekst"
                             />
                         }
