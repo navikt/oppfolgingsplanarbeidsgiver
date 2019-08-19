@@ -37,7 +37,5 @@ fasitResources:
     resourceType: restservice
   - alias: sykefravaerapi
     resourceType: restservice
-  - alias: moterestapi
-    resourceType: restservice
   - alias: oppfoelgingsdialogapi
     resourceType: restservice
