@@ -391,7 +391,7 @@
     "opprettetDato": "2018-11-08T12:00:00+01:00",
     "status": "UNDER_ARBEID",
     "virksomhet": {
-      "virksomhetsnummer": "333444555",
+      "virksomhetsnummer": "333999555",
       "navn": ""
     },
     "godkjentPlan": null,
@@ -584,7 +584,7 @@
     "opprettetDato": "2018-11-08T12:00:00+01:00",
     "status": "UNDER_ARBEID",
     "virksomhet": {
-      "virksomhetsnummer": "333444555",
+      "virksomhetsnummer": "000111222",
       "navn": ""
     },
     "godkjentPlan": null,
