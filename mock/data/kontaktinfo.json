@@ -1,1 +1,7 @@
-{"fnr":"03040512345","epost":null,"tlf":null,"skalHaVarsel":false,"feilAarsak":"KONTAKTINFO_IKKE_FUNNET"}
+{
+  "fnr": "03040512345",
+  "epost": null,
+  "tlf": null,
+  "skalHaVarsel": true,
+  "feilAarsak": "KONTAKTINFO_IKKE_FUNNET"
+}
