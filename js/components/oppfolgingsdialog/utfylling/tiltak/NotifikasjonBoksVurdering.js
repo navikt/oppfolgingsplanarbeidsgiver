@@ -1,14 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-    getLedetekst,
-    keyValue,
-} from 'digisyfo-npm';
+import { getLedetekst } from 'digisyfo-npm';
 import Alertstripe from 'nav-frontend-alertstriper';
 
 const NotifikasjonBoksVurdering = (
     {
-        ledetekster,
         navn,
         antallIkkeVurderte,
         tekst,
@@ -28,7 +24,7 @@ const NotifikasjonBoksVurdering = (
         className="alertstripe--notifikasjonboks"
         type="info"
         solid>
-        {getLedetekst(tekst, ledetekster, {
+        {getLedetekst(tekst, {
             '%MOTPARTNAVN%': navn,
             '%ANTALLTILTAK%': antallIkkeVurderte,
             '%STATUS%': status,
@@ -36,7 +32,6 @@ const NotifikasjonBoksVurdering = (
     </Alertstripe>);
 };
 NotifikasjonBoksVurdering.propTypes = {
-    ledetekster: keyValue,
     navn: PropTypes.string,
     antallIkkeVurderte: PropTypes.number,
     tekst: PropTypes.string,

@@ -18,7 +18,7 @@ import TiltakForeslaattAv from './TiltakForeslaattAv';
 import TiltakInfoVarsel from './TiltakInfoVarsel';
 import { restdatoTildato, sluttDatoSenereEnnStartDato } from '../../../../utils/datoUtils';
 import { konvertDatoTiltak, konvertDatoTiltakMedPunkt } from '../../../../utils/tiltakUtils';
-import { TiltakVarselFeil } from './TiltakVarselFeil';
+import TiltakVarselFeil from './TiltakVarselFeil';
 import {
     tiltakPt,
     tiltakReducerPt,
@@ -351,8 +351,7 @@ export class TiltakSkjemaKomponent extends Component {
                         tiltakReducer={tiltakReducer}
                     />
                 </form>
-            </div>
-        );
+            </div>);
     }
 }
 
