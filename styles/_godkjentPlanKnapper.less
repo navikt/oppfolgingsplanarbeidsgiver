@@ -1,0 +1,100 @@
+.godkjentPlanKnapper {
+    list-style-type: none;
+    margin: 2em 0 0 0;
+    padding: 0;
+    button.lenke {
+        font-weight: 600;
+        border-bottom: none;
+    }
+    .knapp--standard, .knapp--hoved {
+        text-transform: none;
+    }
+    @media (min-width: @screen-sm-min) {
+        display: flex;
+        position: relative;
+
+        & > li {
+            display: inline-block;
+            width: 33.3333333333333333333333333%;
+            margin: 0;
+            padding: 0;
+        }
+
+        & > li:nth-child(2) .innholdboksPil {
+            left: -100%;
+        }
+
+        & > li:nth-child(3) .innholdboksPil {
+            left: -200%;
+        }
+
+        .innholdboksPil {
+            position: relative;
+            left: 0;
+            width: 300%;
+        }
+    }
+
+    .innholdboksPil {
+        padding: 2em;
+        background: #e7e9e9;
+        margin-bottom: 2em;
+        .knapperad {
+            padding-top: 0;
+        }
+    }
+
+    .godkjentPlanKnapper__knapp {
+        display: inline-block;
+        position: relative;
+        height: 3em;
+    }
+
+    .godkjentPlanKnapper__knapp--aktiv:after {
+        position: absolute;
+        bottom: -50%;
+        left: 50%;
+        content: "";
+        height: 1.9em;
+        width: 1.9em;
+        background-color: #e7e9e9;
+        transform: translateX(-50%) rotate(45deg);
+    }
+
+    .godkjentPlanKnapper__knapp--endre {
+        &::before {
+            content: "";
+            background: data-uri("./img/svg/endre-plan.svg") no-repeat center center;
+            padding: 1em 1em;
+        }
+        &:hover {
+            &::before {
+                background: data-uri("./img/svg/endre-plan--hover.svg") no-repeat center center;
+            }
+        }
+    }
+
+    .godkjentPlanKnapper__knapp--tidligere {
+        &::before {
+            content: "";
+            background: data-uri("./img/svg/binders.svg") no-repeat center center;
+            padding: 1em 1em;
+        }
+        &:hover {
+            &::before {
+                background: data-uri("./img/svg/binders--hover.svg") no-repeat center center;
+            }
+        }
+    }
+
+    .godkjentPlan__infoboks:before {
+        position: absolute;
+        bottom: -50%;
+        left: 50%;
+        content: "";
+        height: 1.9em;
+        width: 1.9em;
+        background-color: #e7e9e9;
+        transform: translateX(-50%) rotate(45deg);
+    }
+}

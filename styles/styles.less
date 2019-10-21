@@ -32,10 +32,29 @@
 @import "_arbeidsoppgaveInformasjon";
 @import "_arbeidsoppgaverInfoboks";
 @import "_arbeidsoppgaverListe";
+@import "_avbruttGodkjentPlanVarsel";
+@import "_avbruttGodkjentPlanVarsel";
+@import "_avvisPlan";
+@import "_avvistPlanKvittering";
 @import "_baserTidligereSkjema";
+@import "_bildeTekstLinje";
+@import "_chevron";
 @import "_daypicker";
+@import "_godkjennPlanAvslaatt";
+@import "_godkjennPlanAvslaattOgGodkjent";
+@import "_godkjennPlanMottatt";
+@import "_godkjennPlanOversiktInformasjon";
+@import "_godkjennPlanSendt";
+@import "_godkjennPlanSkjema";
+@import "_godkjennPlanTilAltinnTekst";
+@import "_godkjentPlan";
+@import "_godkjentPlanAvbrutt";
+@import "_godkjentPlanDelKnapper";
+@import "_godkjentPlanKnapper";
+@import "_ikkeUtfyltPlanFeilmelding";
 @import "_knapper";
 @import "_knapperSykefravaer";
+@import "_kommentarListe";
 @import "_navigasjonsBunn";
 @import "_navigasjonsTopp";
 @import "_oppfolgingsplanInnhold";
@@ -52,13 +71,16 @@
 @import "_illustrertTittel";
 @import "_oppfolgingsdialoger.less";
 @import "_oppfolgingsdialogerInfoPersonvern";
+@import "_oppfolgingsdialogsamtykke";
 @import "_opplysninger.less";
 @import "_hoder.less";
 @import "_utvidbar.less";
 @import "_redaksjonelt.less";
+@import "_side.less";
+@import "_sideOverskrift";
 @import "_sidetopp.less";
 @import "_timeoutbox.less";
-@import "_side.less";
+@import "_tidligereAvbruttePlaner";
 @import "_avstander.less";
 @import "_print.less";
 @import "_dekoratorVarsler.less";
@@ -85,4 +107,28 @@ p {
     padding-left: 2em;
     padding-right: 2em;
   }
+}
+
+.typo-sitat-mixin {
+  .typo-normal-mixin();
+  font-style: italic;.knapp--tekst
+  q {
+    quotes: "\201C" "\201D";
+  }
+}
+
+.z-index-1 {
+  * {
+    z-index: 1 !important;
+  }
+}
+
+.lenke--avbryt {
+  text-transform: uppercase;
+}
+
+.tekst--dynamisk {
+  white-space: pre-line;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 }
