@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Alertstripe from 'nav-frontend-alertstriper';
 import { erHerokuApp } from '../../../../utils/urlUtils';
 
-export const TiltakVarselFeil = ({ tekst }) => {
+const TiltakVarselFeil = ({ tekst }) => {
     return (<Alertstripe
         className="tiltakVarselFeil alertstripe--notifikasjonboks"
         type="advarsel">

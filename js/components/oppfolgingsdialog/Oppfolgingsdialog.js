@@ -177,7 +177,6 @@ class Oppfolgingsdialog extends Component {
                 } else if (navigasjontoggles.steg === 2) {
                     panel = (<Tiltak
                         tiltak={tiltak}
-                        ledetekster={ledetekster}
                         oppfolgingsdialog={oppfolgingsdialog}
                         lagreTiltak={lagreTiltak}
                         slettTiltak={slettTiltak}

@@ -1,4 +1,5 @@
 import { leggTilDagerPaaDato } from './testUtils';
+import { STATUS_TILTAK } from '../../js/konstanter';
 
 export const getOppfolgingsdialoger = [
     {
@@ -279,8 +280,8 @@ const oppfolgingsdialog = {
             tiltakId: 1461,
             tiltaknavn: 'Tiltak',
             knyttetTilArbeidsoppgaveId: null,
-            fom: null,
-            tom: null,
+            fom: '2017-05-07',
+            tom: '2017-05-09',
             beskrivelse: 'Dette er et tiltak',
             ansvarlig: null,
             maal: null,
@@ -297,6 +298,19 @@ const oppfolgingsdialog = {
                 samtykke: null,
                 godkjent: null,
             },
+            status: STATUS_TILTAK.AVTALT,
+            gjennomfoering: 'Gjennomfoering',
+            kommentarer: [
+                {
+                    tekst: 'En kommentar',
+                    opprettetAv: {
+                        fnr: '1000000000000',
+                    },
+                    sistEndretAv: {
+                        fnr: '1000000000000',
+                    },
+                },
+            ],
         },
     ],
     arbeidsgiver: {

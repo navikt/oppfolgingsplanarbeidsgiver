@@ -109,6 +109,22 @@ export const tiltakPt = PropTypes.shape({
     opprettetAv: personPt,
 });
 
+export const kommentarPt = PropTypes.shape({
+    id: PropTypes.number,
+    tiltakId: PropTypes.number,
+    tekst: PropTypes.string,
+    sistEndretAvAktoerId: PropTypes.string,
+    sistEndretDato: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.instanceOf(Date),
+    ]),
+    opprettetAvAktoerId: PropTypes.string,
+    opprettetDato: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.instanceOf(Date),
+    ]),
+});
+
 export const avbruttPlanPt = PropTypes.shape({
     av: personPt,
     tidspunkt: PropTypes.oneOfType([

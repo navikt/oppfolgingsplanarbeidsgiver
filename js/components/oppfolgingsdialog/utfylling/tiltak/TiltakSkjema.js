@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form';
 import { getLedetekst } from 'digisyfo-npm';
 import {
-    BRUKERTYPE,
     OPPRETT_TILTAK_NY,
     STATUS_TILTAK,
     tekstfeltRegex,
@@ -18,7 +17,7 @@ import TiltakForeslaattAv from './TiltakForeslaattAv';
 import TiltakInfoVarsel from './TiltakInfoVarsel';
 import { restdatoTildato, sluttDatoSenereEnnStartDato } from '../../../../utils/datoUtils';
 import { konvertDatoTiltak, konvertDatoTiltakMedPunkt } from '../../../../utils/tiltakUtils';
-import { TiltakVarselFeil } from './TiltakVarselFeil';
+import TiltakVarselFeil from './TiltakVarselFeil';
 import {
     tiltakPt,
     tiltakReducerPt,
@@ -121,19 +120,8 @@ TiltakBeskrivelse.propTypes = {
     tekst: PropTypes.string,
 };
 
-export const Gjennomfoering = ({ felt, brukerType, tiltak, tekst, fnr }) => {
-    return (brukerType === BRUKERTYPE.ARBEIDSTAKER ?
-        <div className="lagretiltakskjema__inputgruppe">
-            { tiltak && tiltak.gjennomfoering &&
-            [
-                <label key={`tiltak-gjenn-label-${tiltak.tiltakId}`} >
-                    {getLedetekst('oppfolgingsdialog.tiltak.oppfoelging')}
-                </label>,
-                <p key={`tiltak-gjenn-p-${tiltak.tiltakId}`} >{tiltak.gjennomfoering}</p>,
-            ]
-            }
-        </div>
-        :
+export const Gjennomfoering = ({ felt, tiltak, tekst, fnr }) => {
+    return (
         <div className="skjemaelement lagretiltakskjema__inputgruppe">
             <label
                 className="skjemaelement__label"
@@ -157,24 +145,12 @@ export const Gjennomfoering = ({ felt, brukerType, tiltak, tekst, fnr }) => {
 Gjennomfoering.propTypes = {
     felt: tiltakSkjemaFeltPt,
     tiltak: tiltakPt,
-    brukerType: PropTypes.string,
     tekst: PropTypes.string,
     fnr: PropTypes.string,
 };
 
-export const BeskrivelseIkkeAktuelt = ({ felt, brukerType, tiltak, tekst, fnr }) => {
-    return (brukerType === BRUKERTYPE.ARBEIDSTAKER ?
-        <div className="lagretiltakskjema__inputgruppe">
-            { tiltak && tiltak.beskrivelseIkkeAktuelt &&
-            [
-                <label key={`tiltak-gjenn-label-${tiltak.tiltakId}`} >
-                    {getLedetekst('oppfolgingsdialog.tiltak.vurdering')}
-                </label>,
-                <p key={`tiltak-gjenn-p-${tiltak.tiltakId}`} >{tiltak.beskrivelseIkkeAktuelt}</p>,
-            ]
-            }
-        </div>
-        :
+export const BeskrivelseIkkeAktuelt = ({ felt, tiltak, tekst, fnr }) => {
+    return (
         <div className="skjemaelement">
             <label
                 className="skjemaelement__label"
@@ -200,7 +176,6 @@ export const BeskrivelseIkkeAktuelt = ({ felt, brukerType, tiltak, tekst, fnr })
 BeskrivelseIkkeAktuelt.propTypes = {
     felt: tiltakSkjemaFeltPt,
     tiltak: tiltakPt,
-    brukerType: PropTypes.string,
     tekst: PropTypes.string,
     fnr: PropTypes.string,
 };
@@ -276,16 +251,13 @@ export class TiltakSkjemaKomponent extends Component {
         const {
             tiltak,
             handleSubmit,
-            brukerType,
             fnr,
             oppdateringFeilet,
             varselTekst,
             visFeilMelding,
             tiltakReducer,
         } = this.props;
-        const personvernTekst = brukerType === BRUKERTYPE.ARBEIDSGIVER ?
-            getLedetekst('oppfolgingsdialog.personvern.arbeidsgiver') :
-            getLedetekst('oppfolgingsdialog.personvern.sykmeldt');
+        const personvernTekst = getLedetekst('oppfolgingsdialog.personvern.arbeidsgiver');
         return (
             <div className="utvidbar__innholdContainer">
                 <form onSubmit={handleSubmit(this.handleSubmit)} className={this.hentSkjemaClassName()} >
@@ -306,14 +278,12 @@ export class TiltakSkjemaKomponent extends Component {
                         tiltak={tiltak}
                     />
 
-                    { brukerType === BRUKERTYPE.ARBEIDSGIVER &&
                     <TiltakRadioKnapper
                         tiltak={tiltak}
                         setStatus={this.setStatus}
                     />
-                    }
 
-                    { this.state.status === STATUS_TILTAK.IKKE_AKTUELT && brukerType === BRUKERTYPE.ARBEIDSGIVER &&
+                    { this.state.status === STATUS_TILTAK.IKKE_AKTUELT &&
                     <BeskrivelseIkkeAktuelt
                         felt={FELTER.beskrivelseIkkeAktuelt}
                         tiltak={tiltak}
@@ -322,7 +292,7 @@ export class TiltakSkjemaKomponent extends Component {
                     />
                     }
 
-                    { this.state.status === STATUS_TILTAK.AVTALT && brukerType === BRUKERTYPE.ARBEIDSGIVER &&
+                    { this.state.status === STATUS_TILTAK.AVTALT &&
                     <Gjennomfoering
                         felt={FELTER.gjennomfoering}
                         tekst={personvernTekst}
@@ -351,8 +321,7 @@ export class TiltakSkjemaKomponent extends Component {
                         tiltakReducer={tiltakReducer}
                     />
                 </form>
-            </div>
-        );
+            </div>);
     }
 }
 
@@ -362,7 +331,6 @@ TiltakSkjemaKomponent.propTypes = {
     sendLagre: PropTypes.func,
     avbryt: PropTypes.func,
     initialize: PropTypes.func,
-    brukerType: PropTypes.string,
     fnr: PropTypes.string,
     oppdateringFeilet: PropTypes.bool,
     varselTekst: PropTypes.string,
