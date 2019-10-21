@@ -6,10 +6,7 @@ import {
     keyValue,
     scrollTo,
 } from 'digisyfo-npm';
-import {
-    TiltakTabell,
-    TiltakSkjema,
-} from 'oppfolgingsdialog-npm';
+import { TiltakTabell } from 'oppfolgingsdialog-npm';
 import * as opProptypes from '../../../../proptypes/opproptypes';
 import { captitalizeFirstLetter } from '../../../../utils/tekstUtils';
 import { sorterTiltakEtterNyeste } from '../../../../utils/tiltakUtils';
@@ -20,6 +17,7 @@ import LeggTilElementKnapper from '../LeggTilElementKnapper';
 import NotifikasjonBoksVurdering from './NotifikasjonBoksVurdering';
 import TiltakInfoboks from './TiltakInfoboks';
 import { BRUKERTYPE } from '../../../../konstanter';
+import TiltakSkjema from './TiltakSkjema';
 
 const harArbeidsgiverKommentert = (tiltak, fnr) => {
     return tiltak.kommentarer.filter((kommentar) => {
@@ -154,7 +152,6 @@ class Tiltak extends Component {
                                     />
 
                                     <TiltakSkjema
-                                        ledetekster={ledetekster}
                                         sendLagre={this.sendLagreTiltak}
                                         avbryt={this.skjulSkjema}
                                         fnr={oppfolgingsdialog.arbeidsgiver.naermesteLeder.fnr}
@@ -162,7 +159,6 @@ class Tiltak extends Component {
                                         varselTekst={this.state.varselTekst}
                                         oppdateringFeilet={this.state.lagreNyTiltakFeilet}
                                         tiltakReducer={tiltak}
-                                        rootUrlImg={getContextRoot()}
                                     />
                                 </div>
                         }
@@ -187,7 +183,6 @@ class Tiltak extends Component {
                         }
                         { this.state.visTiltakSkjema &&
                         <TiltakSkjema
-                            ledetekster={ledetekster}
                             sendLagre={this.sendLagreTiltak}
                             avbryt={this.skjulSkjema}
                             fnr={oppfolgingsdialog.arbeidsgiver.naermesteLeder.fnr}
@@ -198,7 +193,6 @@ class Tiltak extends Component {
                             varselTekst={this.state.varselTekst}
                             oppdateringFeilet={this.state.lagreNyTiltakFeilet}
                             tiltakReducer={tiltak}
-                            rootUrlImg={getContextRoot()}
                         />
                         }
                         <TiltakTabell
