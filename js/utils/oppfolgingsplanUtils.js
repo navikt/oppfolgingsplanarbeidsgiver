@@ -22,6 +22,10 @@ export const harNaermesteLeder = (oppfolgingsdialog) => {
     return oppfolgingsdialog.arbeidsgiver.naermesteLeder.fnr;
 };
 
+export const erIkkeOppfolgingsdialogUtfylt = (oppfolgingsdialog) => {
+    return oppfolgingsdialog.arbeidsoppgaveListe.length === 0 || oppfolgingsdialog.tiltakListe.length === 0;
+};
+
 export const finnNyesteGodkjenning = (godkjenninger) => {
     return godkjenninger.sort((g1, g2) => {
         return new Date(g2.godkjenningsTidspunkt) - new Date(g1.godkjenningsTidspunkt);

@@ -5,10 +5,7 @@ import {
     togglesPt,
     sykeforlopsPerioderReducerPt,
 } from 'digisyfo-npm';
-import {
-    Godkjenn,
-    ReleasetPlan,
-} from 'oppfolgingsdialog-npm';
+import { ReleasetPlan } from 'oppfolgingsdialog-npm';
 import * as opProptypes from '../../proptypes/opproptypes';
 import {
     finnOgHentArbeidsforholdSomMangler,
@@ -26,6 +23,7 @@ import AvbruttGodkjentPlanVarsel from '../oppfolgingsdialog/AvbruttGodkjentPlanV
 import NavigasjonsBunn from '../oppfolgingsdialog/NavigasjonsBunn';
 import NavigasjonsTopp from '../oppfolgingsdialog/NavigasjonsTopp';
 import Samtykke from '../oppfolgingsdialog/godkjennplan/samtykke/Samtykke';
+import Godkjenn from './godkjennplan/Godkjenn';
 import Godkjenninger from './godkjennplan/godkjenninger/Godkjenninger';
 
 const manglerSamtykke = (oppfolgingsdialog) => {
@@ -182,12 +180,10 @@ class Oppfolgingsdialog extends Component {
                     />);
                 } else {
                     panel = (<Godkjenn
-                        ledetekster={ledetekster}
                         oppfolgingsdialog={oppfolgingsdialog}
                         forespoerselRevidering={forespoerselRevidering}
                         forespoerRevidering={forespoerRevidering}
                         godkjennPlan={godkjennDialogAg}
-                        brukerType={BRUKERTYPE.ARBEIDSGIVER}
                         settAktivtSteg={settAktivtSteg}
                         rootUrl={`${getContextRoot()}`}
                     />);

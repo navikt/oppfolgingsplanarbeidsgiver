@@ -5,6 +5,11 @@ export const tiltakSkjemaFeltPt = PropTypes.shape({
     tekst: PropTypes.string,
 });
 
+export const datovelgerFeltPt = PropTypes.shape({
+    navn: PropTypes.string,
+    tekst: PropTypes.string,
+});
+
 export const tiltakSkjemaFelterPt = PropTypes.shape({
     tiltaknavn: tiltakSkjemaFeltPt,
     beskrivelse: tiltakSkjemaFeltPt,
