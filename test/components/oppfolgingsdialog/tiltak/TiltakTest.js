@@ -3,14 +3,12 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import sinon from 'sinon';
 import chaiEnzyme from 'chai-enzyme';
-import {
-    TiltakSkjema,
-    TiltakTabell,
-} from 'oppfolgingsdialog-npm';
+import { TiltakTabell } from 'oppfolgingsdialog-npm';
 import { setLedetekster } from 'digisyfo-npm';
 import ledetekster from '../../../mock/ledetekster_mock';
 import NotifikasjonBoksVurdering from '../../../../js/components/oppfolgingsdialog/utfylling/tiltak/NotifikasjonBoksVurdering';
 import Tiltak from '../../../../js/components/oppfolgingsdialog/utfylling/tiltak/Tiltak';
+import TiltakSkjema from '../../../../js/components/oppfolgingsdialog/utfylling/tiltak/TiltakSkjema';
 import LeggTilElementKnapper from '../../../../js/components/oppfolgingsdialog/utfylling/LeggTilElementKnapper';
 import OppfolgingsplanInfoboks from '../../../../js/components/app/OppfolgingsplanInfoboks';
 import getOppfolgingsdialog from '../../../mock/mockOppfolgingsdialog';
