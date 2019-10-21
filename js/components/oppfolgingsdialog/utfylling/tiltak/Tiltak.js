@@ -6,7 +6,7 @@ import {
     scrollTo,
 } from 'digisyfo-npm';
 import * as opProptypes from '../../../../proptypes/opproptypes';
-import { captitalizeFirstLetter } from '../../../../utils/tekstUtils';
+import { capitalizeFirstLetter } from '../../../../utils/tekstUtils';
 import { sorterTiltakEtterNyeste } from '../../../../utils/tiltakUtils';
 import { getContextRoot } from '../../../../routers/paths';
 import { isEmpty } from '../../../../utils/oppfolgingsplanUtils';
@@ -80,7 +80,7 @@ class Tiltak extends Component {
             this.state.oppdatertTiltak = true;
         }
         const nyeValues = Object.assign({}, values, {
-            tiltaknavn: captitalizeFirstLetter(values.tiltaknavn),
+            tiltaknavn: capitalizeFirstLetter(values.tiltaknavn),
         });
         this.props.lagreTiltak(oppfolgingsdialog.id, nyeValues, oppfolgingsdialog.arbeidstaker.fnr);
         this.setState({

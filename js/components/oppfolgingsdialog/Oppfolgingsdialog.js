@@ -7,7 +7,6 @@ import {
 } from 'digisyfo-npm';
 import {
     Godkjenn,
-    Godkjenninger,
     ReleasetPlan,
 } from 'oppfolgingsdialog-npm';
 import * as opProptypes from '../../proptypes/opproptypes';
@@ -19,6 +18,7 @@ import {
     finnOgHentVirksomheterSomMangler,
 } from '../../utils/reducerUtils';
 import { getContextRoot } from '../../routers/paths';
+import { BRUKERTYPE } from '../../konstanter';
 import Arbeidsoppgaver from './utfylling/arbeidsoppgaver/Arbeidsoppgaver';
 import Tiltak from './utfylling/tiltak/Tiltak';
 import SideOverskrift from '../oppfolgingsdialog/SideOverskrift';
@@ -26,7 +26,7 @@ import AvbruttGodkjentPlanVarsel from '../oppfolgingsdialog/AvbruttGodkjentPlanV
 import NavigasjonsBunn from '../oppfolgingsdialog/NavigasjonsBunn';
 import NavigasjonsTopp from '../oppfolgingsdialog/NavigasjonsTopp';
 import Samtykke from '../oppfolgingsdialog/godkjennplan/samtykke/Samtykke';
-import { BRUKERTYPE } from '../../konstanter';
+import Godkjenninger from './godkjennplan/godkjenninger/Godkjenninger';
 
 const manglerSamtykke = (oppfolgingsdialog) => {
     return oppfolgingsdialog.arbeidsgiver.naermesteLeder.samtykke === null;
@@ -137,11 +137,8 @@ class Oppfolgingsdialog extends Component {
                 avvisDialog={avvisDialogAg}
                 oppfolgingsdialog={oppfolgingsdialog}
                 godkjennPlan={godkjennDialogAg}
-                ledetekster={ledetekster}
                 toggleAvvisPlan={toggleAvvisPlan}
                 nullstillGodkjenning={nullstillGodkjenning}
-                brukerType={BRUKERTYPE.ARBEIDSGIVER}
-                rootUrl={`${getContextRoot()}`}
                 rootUrlPlaner={`${getContextRoot()}/${koblingId}`}
                 koblingId={koblingId}
             />);

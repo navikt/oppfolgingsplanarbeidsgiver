@@ -7,7 +7,7 @@ import {
     scrollTo,
 } from 'digisyfo-npm';
 import { sorterArbeidsoppgaverEtterOpprettet } from '../../../../utils/arbeidsoppgaveUtils';
-import { captitalizeFirstLetter } from '../../../../utils/tekstUtils';
+import { capitalizeFirstLetter } from '../../../../utils/tekstUtils';
 import * as opProptypes from '../../../../proptypes/opproptypes';
 import { getContextRoot } from '../../../../routers/paths';
 import { isEmpty } from '../../../../utils/oppfolgingsplanUtils';
@@ -78,7 +78,7 @@ class Arbeidsoppgaver extends Component {
             this.state.oppdatertArbeidsoppgave = true;
         }
         const nyeValues = Object.assign({}, values, {
-            arbeidsoppgavenavn: captitalizeFirstLetter(values.arbeidsoppgavenavn),
+            arbeidsoppgavenavn: capitalizeFirstLetter(values.arbeidsoppgavenavn),
         });
         this.props.lagreArbeidsoppgave(oppfolgingsdialog.id, nyeValues, oppfolgingsdialog.arbeidstaker.fnr);
         this.setState({

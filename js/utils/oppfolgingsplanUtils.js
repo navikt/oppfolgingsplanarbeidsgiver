@@ -28,6 +28,12 @@ export const finnNyesteGodkjenning = (godkjenninger) => {
     })[0];
 };
 
+export const hentGodkjenningsTidspunkt = (oppfolgingsdialog) => {
+    return oppfolgingsdialog.godkjenninger.filter((godkjenning) => {
+        return godkjenning.godkjent === true;
+    })[0].gyldighetstidspunkt;
+};
+
 export const sorterOppfolgingsdialogerEtterSluttdato = (oppfolgingsdialoger) => {
     return oppfolgingsdialoger.sort((o1, o2) => {
         return new Date(o2.godkjentPlan.gyldighetstidspunkt.tom) - new Date(o1.godkjentPlan.gyldighetstidspunkt.tom);
