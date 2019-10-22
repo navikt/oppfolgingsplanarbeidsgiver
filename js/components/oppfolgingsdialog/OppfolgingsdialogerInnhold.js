@@ -1,10 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Alertstripe from 'nav-frontend-alertstriper';
 import {
     getLedetekst,
     keyValue,
-    togglesPt,
 } from 'digisyfo-npm';
 import Sidetopp from '../Sidetopp';
 import {
@@ -31,7 +29,6 @@ const finnOppfolgingsplanMedFoersteInnloggingSidenNyNaermesteLeder = (oppfolging
 const OppfolgingsdialogerInnhold = ({
     ledetekster,
     oppfolgingsdialoger,
-    toggles,
     koblingId,
     kopierOppfolgingsdialog,
     opprettOppfolgingsdialog,
@@ -60,14 +57,6 @@ const OppfolgingsdialogerInnhold = ({
     }
     return (
         <div>
-            { toggles.data['syfotoggles.send.oppfoelgingsdialog.fastlege'] === 'false' &&
-            <Alertstripe
-                className="alertstripe--notifikasjonboks"
-                type="info"
-                solid>
-                {getLedetekst('oppfolgingsdialog.oppfolgingsdialoger.notifikasjonboks.generell-info')}
-            </Alertstripe>
-            }
             <Sidetopp tittel={getLedetekst('oppfolgingsdialoger.sidetittel')} />
             <OppfolgingsdialogerInfoPersonvern />
             {
@@ -81,7 +70,6 @@ const OppfolgingsdialogerInnhold = ({
 };
 OppfolgingsdialogerInnhold.propTypes = {
     ledetekster: keyValue,
-    toggles: togglesPt,
     bekreftetNyNaermesteLeder: PropTypes.bool,
     koblingId: PropTypes.string,
     oppfolgingsdialoger: PropTypes.arrayOf(oppfolgingsdialogPt),

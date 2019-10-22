@@ -1,11 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import {
-    keyValue,
-    togglesPt,
-    sykeforlopsPerioderReducerPt,
-} from 'digisyfo-npm';
-import { ReleasetPlan } from 'oppfolgingsdialog-npm';
+import { sykeforlopsPerioderReducerPt } from 'digisyfo-npm';
 import * as opProptypes from '../../proptypes/opproptypes';
 import {
     finnOgHentArbeidsforholdSomMangler,
@@ -15,7 +10,6 @@ import {
     finnOgHentVirksomheterSomMangler,
 } from '../../utils/reducerUtils';
 import { getContextRoot } from '../../routers/paths';
-import { BRUKERTYPE } from '../../konstanter';
 import Arbeidsoppgaver from './utfylling/arbeidsoppgaver/Arbeidsoppgaver';
 import Tiltak from './utfylling/tiltak/Tiltak';
 import SideOverskrift from '../oppfolgingsdialog/SideOverskrift';
@@ -25,6 +19,7 @@ import NavigasjonsTopp from '../oppfolgingsdialog/NavigasjonsTopp';
 import Samtykke from '../oppfolgingsdialog/godkjennplan/samtykke/Samtykke';
 import Godkjenn from './godkjennplan/Godkjenn';
 import Godkjenninger from './godkjennplan/godkjenninger/Godkjenninger';
+import ReleasetPlan from './godkjennplan/releasetplan/ReleasetPlan';
 
 const manglerSamtykke = (oppfolgingsdialog) => {
     return oppfolgingsdialog.arbeidsgiver.naermesteLeder.samtykke === null;
@@ -91,7 +86,6 @@ class Oppfolgingsdialog extends Component {
             arbeidsoppgaver,
             tiltak,
             oppfolgingsdialog,
-            ledetekster,
             settAktivtSteg,
             avvisDialogAg,
             avbrytDialog,
@@ -109,7 +103,6 @@ class Oppfolgingsdialog extends Component {
             lagreKommentar,
             slettKommentar,
             koblingId,
-            toggles,
             delMedNavFunc,
             delmednav,
             fastlegeDeling,
@@ -143,14 +136,11 @@ class Oppfolgingsdialog extends Component {
         } else if (inneholderGodkjentPlan(oppfolgingsdialog)) {
             disableNavigation = true;
             panel = (<ReleasetPlan
-                ledetekster={ledetekster}
-                toggles={toggles}
                 oppfolgingsdialog={oppfolgingsdialog}
                 hentPdfurler={hentPdfurler}
                 dokument={dokument}
                 giSamtykke={giSamtykke}
                 avbrytDialog={avbrytDialog}
-                brukerType={BRUKERTYPE.ARBEIDSGIVER}
                 rootUrl={`${getContextRoot()}`}
                 rootUrlPlaner={`${getContextRoot()}/${koblingId}`}
                 delMedNavFunc={delMedNavFunc}
@@ -164,7 +154,6 @@ class Oppfolgingsdialog extends Component {
                 if (navigasjontoggles.steg === 1) {
                     panel = (<Arbeidsoppgaver
                         arbeidsoppgaver={arbeidsoppgaver}
-                        ledetekster={ledetekster}
                         oppfolgingsdialog={oppfolgingsdialog}
                         lagreArbeidsoppgave={lagreArbeidsoppgave}
                         slettArbeidsoppgave={slettArbeidsoppgave}
@@ -227,10 +216,8 @@ Oppfolgingsdialog.propTypes = {
     navigasjontoggles: opProptypes.navigasjonstogglesReducerPt,
     oppfolgingsdialog: opProptypes.oppfolgingsdialogPt,
     koblingId: PropTypes.string,
-    ledetekster: keyValue,
     person: opProptypes.personReducerPt,
     tiltak: opProptypes.tiltakReducerPt,
-    toggles: togglesPt,
     virksomhet: opProptypes.virksomhetReducerPt,
     sykeforlopsPerioderReducer: sykeforlopsPerioderReducerPt,
     oppfolgingsdialoger: PropTypes.arrayOf(opProptypes.oppfolgingsdialogPt),
