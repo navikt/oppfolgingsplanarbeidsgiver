@@ -13,12 +13,9 @@ chai.use(chaiEnzyme());
 const expect = chai.expect;
 
 describe('OppfolgingsdialogerInnhold', () => {
-    let toggles;
     let component;
     beforeEach(() => {
-        toggles = { data: {} };
         component = shallow(<OppfolgingsdialogerInnhold
-            toggles={toggles}
             oppfolgingsdialoger={[]}
         />);
     });
@@ -48,7 +45,6 @@ describe('OppfolgingsdialogerInnhold', () => {
                 },
             })];
             component = shallow(<OppfolgingsdialogerInnhold
-                toggles={toggles}
                 oppfolgingsdialoger={oppfolgingsdialogListe}
                 bekreftetNyNaermesteLeder={false}
             />);
