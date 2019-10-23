@@ -1,5 +1,5 @@
 import { call, put, fork, takeEvery } from 'redux-saga/effects';
-import { get, log } from 'digisyfo-npm';
+import { get, log } from '@navikt/digisyfo-npm';
 import * as actions from '../../actions/oppfolgingsplan/person_actions';
 
 export function* hentPersonSaga(action) {

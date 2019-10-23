@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Field, formValueSelector } from 'redux-form';
 import { connect } from 'react-redux';
 import MaskedInput from 'react-maskedinput';
-import { toDatePrettyPrint } from 'digisyfo-npm';
+import { toDatePrettyPrint } from '@navikt/digisyfo-npm';
 import { DATOVELGERFELT_SKJEMA } from '../konstanter';
 import Feilmelding from './Feilmelding';
 import DayPickerComponent from './DayPicker';

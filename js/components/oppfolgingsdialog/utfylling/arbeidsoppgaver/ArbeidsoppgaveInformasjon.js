@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { getLedetekst, keyValue } from 'digisyfo-npm';
+import { getLedetekst, keyValue } from '@navikt/digisyfo-npm';
 import {
     BRUKERTYPE,
     KANGJENNOMFOERES,

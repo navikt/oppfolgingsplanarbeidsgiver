@@ -4,7 +4,7 @@ import { Fareknapp, Hovedknapp } from 'nav-frontend-knapper';
 import {
     getLedetekst,
     getHtmlLedetekst,
-} from 'digisyfo-npm';
+} from '@navikt/digisyfo-npm';
 import { oppfolgingsdialogPt } from '../../proptypes/opproptypes';
 import Lightbox from '../Lightbox';
 import OppfolgingsplanInfoboks from '../app/OppfolgingsplanInfoboks';

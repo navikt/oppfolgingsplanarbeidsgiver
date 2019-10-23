@@ -1,4 +1,4 @@
-import { setPerformOnHttpCalls } from 'digisyfo-npm';
+import { setPerformOnHttpCalls } from '@navikt/digisyfo-npm';
 import {
     BRUKERTYPE,
     MND_SIDEN_SYKMELDING_GRENSE_FOR_OPPFOELGING,

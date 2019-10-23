@@ -1,4 +1,4 @@
-import { parseSykmelding } from 'digisyfo-npm';
+import { parseSykmelding } from '@navikt/digisyfo-npm';
 import { MND_SIDEN_SYKMELDING_GRENSE_FOR_OPPFOELGING } from '../../js/konstanter';
 
 const MILLISEKUNDER_PER_DAG = 86400000;

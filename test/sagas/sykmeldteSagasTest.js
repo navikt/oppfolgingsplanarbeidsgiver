@@ -6,7 +6,7 @@ import {
 import {
     get,
     post,
-} from 'digisyfo-npm';
+} from '@navikt/digisyfo-npm';
 import {
     hentArbeidsgiversSykmeldte,
     berikSykmeldte,

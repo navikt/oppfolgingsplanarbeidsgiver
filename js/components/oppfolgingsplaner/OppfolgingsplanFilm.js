@@ -2,7 +2,7 @@ import React from 'react';
 import {
     getHtmlLedetekst,
     getLedetekst,
-} from 'digisyfo-npm';
+} from '@navikt/digisyfo-npm';
 import Video from '../app/Video';
 import { OPPFOLGINGSPLAN } from '../../enums/filmer';
 

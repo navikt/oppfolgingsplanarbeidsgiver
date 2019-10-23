@@ -1,7 +1,7 @@
 import {
     getLedetekst,
     getHtmlLedetekst,
-} from 'digisyfo-npm';
+} from '@navikt/digisyfo-npm';
 import { STATUS } from '../konstanter';
 import { finnSistEndretAvNavn } from './oppfolgingsplanUtils';
 import { toDateMedMaanedNavn } from './datoUtils';

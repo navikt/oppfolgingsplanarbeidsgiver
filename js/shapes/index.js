@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { sykmelding as sykmeldingPt } from 'digisyfo-npm';
+import { sykmelding as sykmeldingPt } from '@navikt/digisyfo-npm';
 
 export const sykmeldt = PropTypes.shape({
     fnr: PropTypes.string.isRequired,

@@ -1,5 +1,5 @@
 import React from 'react';
-import { getLedetekst, langtDatoFormat, sykeforloep as sykeforloepPt } from 'digisyfo-npm';
+import { getLedetekst, langtDatoFormat, sykeforloep as sykeforloepPt } from '@navikt/digisyfo-npm';
 
 const NyesteSykeforloepHosVirksomhet = ({ sykeforloep }) => {
     return (<div className="blokk">

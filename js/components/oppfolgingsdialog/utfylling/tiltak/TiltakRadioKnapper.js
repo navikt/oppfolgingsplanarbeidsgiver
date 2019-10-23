@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Field } from 'redux-form';
-import { getLedetekst } from 'digisyfo-npm';
+import { getLedetekst } from '@navikt/digisyfo-npm';
 import { STATUS_TILTAK } from '../../../../konstanter';
 import Radioknapper from '../../../../skjema/Radioknapper';
 import { tiltakPt } from '../../../../proptypes/opproptypes';

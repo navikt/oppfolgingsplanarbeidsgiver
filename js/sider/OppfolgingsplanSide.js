@@ -8,7 +8,7 @@ import {
     togglesPt,
     sykeforlopsPerioderReducerPt,
     hentSykeforlopsPerioder,
-} from 'digisyfo-npm';
+} from '@navikt/digisyfo-npm';
 import {
     sykmeldt as sykmeldtPt,
     brodsmule as brodsmulePt,

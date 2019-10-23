@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { getLedetekst } from 'digisyfo-npm';
+import { getLedetekst } from '@navikt/digisyfo-npm';
 import { getContextRoot } from '../../../routers/paths';
 import { oppfolgingsdialogPt } from '../../../proptypes/opproptypes';
 import OppfolgingsplanerIngenplanKnapper from './OppfolgingsplanerIngenplanKnapper';

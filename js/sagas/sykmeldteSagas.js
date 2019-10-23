@@ -9,7 +9,7 @@ import {
     get,
     post,
     log,
-} from 'digisyfo-npm';
+} from '@navikt/digisyfo-npm';
 import * as actions from '../actions/sykmeldte_actions';
 import * as sykmeldtActions from '../actions/sykmeldt_actions';
 import * as actiontyper from '../actions/actiontyper';

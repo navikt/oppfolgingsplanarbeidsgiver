@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {
     getLedetekst,
     keyValue,
-} from 'digisyfo-npm';
+} from '@navikt/digisyfo-npm';
 import { Field, reduxForm } from 'redux-form';
 import { OPPRETT_SKJEMANAVN, tekstfeltRegex } from '../../../../konstanter';
 import * as opProptypes from '../../../../proptypes/opproptypes';

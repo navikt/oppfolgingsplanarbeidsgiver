@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Alertstripe from 'nav-frontend-alertstriper';
-import { getLedetekst } from 'digisyfo-npm';
+import { getLedetekst } from '@navikt/digisyfo-npm';
 import { oppfolgingsdialogPt } from '../../../proptypes/opproptypes';
 
 const handleKeyPress = (settAktivtSteg, nesteSteg, e) => {
