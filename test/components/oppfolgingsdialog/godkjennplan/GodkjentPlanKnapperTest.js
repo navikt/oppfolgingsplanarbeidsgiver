@@ -3,9 +3,9 @@ import chai from 'chai';
 import { shallow } from 'enzyme';
 import chaiEnzyme from 'chai-enzyme';
 import sinon from 'sinon';
-import GodkjentPlanKnapper from '../../../../js/components/oppfolgingsdialog/godkjennplan/releasetPlan/GodkjentPlanKnapper';
-import InnholdboksPilDelplan from '../../../../js/components/oppfolgingsdialog/godkjennplan/releasetPlan/InnholdboksPilDelplan';
-import InnholdboksPilTidligerePlaner from '../../../../js/components/oppfolgingsdialog/godkjennplan/releasetPlan/InnholdboksPilTidligerePlaner';
+import GodkjentPlanKnapper from '../../../../js/components/oppfolgingsdialog/godkjennplan/releasetplan/GodkjentPlanKnapper';
+import InnholdboksPilDelplan from '../../../../js/components/oppfolgingsdialog/godkjennplan/releasetplan/InnholdboksPilDelplan';
+import InnholdboksPilTidligerePlaner from '../../../../js/components/oppfolgingsdialog/godkjennplan/releasetplan/InnholdboksPilTidligerePlaner';
 import { STATUS } from '../../../../js/konstanter';
 import getOppfolgingsdialog from '../../../mock/mockOppfolgingsdialog';
 

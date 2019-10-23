@@ -3,8 +3,8 @@ import chai from 'chai';
 import { shallow } from 'enzyme';
 import chaiEnzyme from 'chai-enzyme';
 import sinon from 'sinon';
-import InnholdboksPilDelplan from '../../../../../js/components/oppfolgingsdialog/godkjennplan/releasetPlan/InnholdboksPilDelplan';
-import GodkjentPlanDelKnapper from '../../../../../js/components/oppfolgingsdialog/godkjennplan/releasetPlan/GodkjentPlanDelKnapper';
+import InnholdboksPilDelplan from '../../../../../js/components/oppfolgingsdialog/godkjennplan/releasetplan/InnholdboksPilDelplan';
+import GodkjentPlanDelKnapper from '../../../../../js/components/oppfolgingsdialog/godkjennplan/releasetplan/GodkjentPlanDelKnapper';
 import getOppfolgingsdialog from '../../../../mock/mockOppfolgingsdialog';
 
 chai.use(chaiEnzyme());

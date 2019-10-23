@@ -5,9 +5,9 @@ import chaiEnzyme from 'chai-enzyme';
 import sinon from 'sinon';
 import GodkjentPlanAvbrutt, {
     GodkjentPlanUtvidbar,
-} from '../../../../../js/components/oppfolgingsdialog/godkjennplan/releasetPlan/GodkjentPlanAvbrutt';
-import GodkjentPlanDelKnapper from '../../../../../js/components/oppfolgingsdialog/godkjennplan/releasetPlan/GodkjentPlanDelKnapper';
-import GodkjentPlanAvbruttTidspunkt from '../../../../../js/components/oppfolgingsdialog/godkjennplan/releasetPlan/GodkjentPlanAvbruttTidspunkt';
+} from '../../../../../js/components/oppfolgingsdialog/godkjennplan/releasetplan/GodkjentPlanAvbrutt';
+import GodkjentPlanDelKnapper from '../../../../../js/components/oppfolgingsdialog/godkjennplan/releasetplan/GodkjentPlanDelKnapper';
+import GodkjentPlanAvbruttTidspunkt from '../../../../../js/components/oppfolgingsdialog/godkjennplan/releasetplan/GodkjentPlanAvbruttTidspunkt';
 import getOppfolgingsdialog from '../../../../mock/mockOppfolgingsdialog';
 import OppfolgingsplanInnholdboks from '../../../../../js/components/app/OppfolgingsplanInnholdboks';
 

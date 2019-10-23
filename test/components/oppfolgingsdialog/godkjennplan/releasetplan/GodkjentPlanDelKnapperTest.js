@@ -7,7 +7,7 @@ import Alertstripe from 'nav-frontend-alertstriper';
 import { Knapp, Hovedknapp } from 'nav-frontend-knapper';
 import GodkjentPlanDelKnapper, {
     delingFeiletNav, delingFeiletFastlege,
-} from '../../../../../js/components/oppfolgingsdialog/godkjennplan/releasetPlan/GodkjentPlanDelKnapper';
+} from '../../../../../js/components/oppfolgingsdialog/godkjennplan/releasetplan/GodkjentPlanDelKnapper';
 import getOppfolgingsdialog from '../../../../mock/mockOppfolgingsdialog';
 
 chai.use(chaiEnzyme());

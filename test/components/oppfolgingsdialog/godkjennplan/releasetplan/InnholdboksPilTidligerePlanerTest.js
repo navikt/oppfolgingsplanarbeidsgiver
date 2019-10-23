@@ -2,7 +2,7 @@ import React from 'react';
 import chai from 'chai';
 import { mount } from 'enzyme';
 import chaiEnzyme from 'chai-enzyme';
-import InnholdboksPilTidligerePlaner from '../../../../../js/components/oppfolgingsdialog/godkjennplan/releasetPlan/InnholdboksPilTidligerePlaner';
+import InnholdboksPilTidligerePlaner from '../../../../../js/components/oppfolgingsdialog/godkjennplan/releasetplan/InnholdboksPilTidligerePlaner';
 import TidligereAvbruttePlaner from '../../../../../js/components/oppfolgingsdialog/godkjennplan/TidligereAvbruttePlaner';
 import getOppfolgingsdialog from '../../../../mock/mockOppfolgingsdialog';
 

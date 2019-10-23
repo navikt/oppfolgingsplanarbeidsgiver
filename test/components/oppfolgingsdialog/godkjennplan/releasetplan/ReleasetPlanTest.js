@@ -2,12 +2,12 @@ import React from 'react';
 import chai from 'chai';
 import { shallow } from 'enzyme';
 import chaiEnzyme from 'chai-enzyme';
-import ReleasetPlan from '../../../../../js/components/oppfolgingsdialog/godkjennplan/releasetPlan/ReleasetPlan';
-import GodkjentPlanAvbrutt from '../../../../../js/components/oppfolgingsdialog/godkjennplan/releasetPlan/GodkjentPlanAvbrutt';
-import GodkjentPlan from '../../../../../js/components/oppfolgingsdialog/godkjennplan/releasetPlan/GodkjentPlan';
+import ReleasetPlan from '../../../../../js/components/oppfolgingsdialog/godkjennplan/releasetplan/ReleasetPlan';
+import GodkjentPlanAvbrutt from '../../../../../js/components/oppfolgingsdialog/godkjennplan/releasetplan/GodkjentPlanAvbrutt';
+import GodkjentPlan from '../../../../../js/components/oppfolgingsdialog/godkjennplan/releasetplan/GodkjentPlan';
 import Samtykke from '../../../../../js/components/oppfolgingsdialog/godkjennplan/samtykke/Samtykke';
 import getOppfolgingsdialog from '../../../../mock/mockOppfolgingsdialog';
-import OppfolgingsdialogPlanInfoboks from '../../../../../js/components/oppfolgingsdialog/godkjennplan/releasetPlan/OppfolgingsdialogPlanInfoboks';
+import OppfolgingsdialogPlanInfoboks from '../../../../../js/components/oppfolgingsdialog/godkjennplan/releasetplan/OppfolgingsdialogPlanInfoboks';
 
 chai.use(chaiEnzyme());
 const expect = chai.expect;
