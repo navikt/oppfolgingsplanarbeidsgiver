@@ -6,7 +6,7 @@ import {
     keyValue,
     hentToggles,
     togglesPt,
-} from 'digisyfo-npm';
+} from '@navikt/digisyfo-npm';
 import {
     sykmeldt as sykmeldtPt,
     brodsmule as brodsmulePt,

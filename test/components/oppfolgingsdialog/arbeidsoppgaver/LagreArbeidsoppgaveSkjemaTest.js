@@ -7,7 +7,7 @@ import { Field } from 'redux-form';
 import configureMockStore from 'redux-mock-store';
 import { Provider } from 'react-redux';
 import createSagaMiddleware from 'redux-saga';
-import { setLedetekster } from 'digisyfo-npm';
+import { setLedetekster } from '@navikt/digisyfo-npm';
 import LagreArbeidsoppgaveSkjema from '../../../../js/components/oppfolgingsdialog/utfylling/arbeidsoppgaver/LagreArbeidsoppgaveSkjema';
 
 chai.use(chaiEnzyme());

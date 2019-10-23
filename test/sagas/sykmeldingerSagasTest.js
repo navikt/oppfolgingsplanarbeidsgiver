@@ -1,6 +1,6 @@
 import { expect } from 'chai';
 import { put, call } from 'redux-saga/effects';
-import { get } from 'digisyfo-npm';
+import { get } from '@navikt/digisyfo-npm';
 import { hentSykmeldinger } from '../../js/sagas/sykmeldingerSagas';
 import * as actions from '../../js/actions/sykmeldinger_actions';
 

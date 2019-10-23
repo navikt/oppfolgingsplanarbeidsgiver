@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { getLedetekst } from 'digisyfo-npm';
+import { getLedetekst } from '@navikt/digisyfo-npm';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import { Field, reduxForm } from 'redux-form';
 import { tekstfeltRegex } from '../../../../../konstanter';

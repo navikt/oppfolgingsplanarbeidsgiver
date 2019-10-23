@@ -6,7 +6,7 @@ import {
     erSynligIViewport,
     getLedetekst,
     keyValue,
-} from 'digisyfo-npm';
+} from '@navikt/digisyfo-npm';
 import * as opProptypes from '../../../../proptypes/opproptypes';
 import ArbeidsoppgaveInformasjon from './ArbeidsoppgaveInformasjon';
 import ArbeidsoppgaveUtvidbarOverskrift from './ArbeidsoppgaveUtvidbarOverskrift';

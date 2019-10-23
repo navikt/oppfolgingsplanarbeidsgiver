@@ -1,5 +1,5 @@
-import Logger from 'nav-logger';
-import { getCookie } from 'digisyfo-npm';
+import { getCookie } from '@navikt/digisyfo-npm';
+import { Logger } from '../logging';
 
 export default new Logger({
     url: `${process.env.REACT_APP_OPPFOELGINGSDIALOGREST_ROOT}/logging`,

@@ -6,7 +6,7 @@ import chaiEnzyme from 'chai-enzyme';
 import { Field } from 'redux-form';
 import rewire from 'rewire';
 import { Knapp } from 'nav-frontend-knapper';
-import { setLedetekster } from 'digisyfo-npm';
+import { setLedetekster } from '@navikt/digisyfo-npm';
 import getTiltak from '../../../mock/mockTiltak';
 import TiltakKnapper from '../../../../js/components/oppfolgingsdialog/utfylling/tiltak/TiltakKnapper';
 import TiltakDatovelger from '../../../../js/components/oppfolgingsdialog/utfylling/tiltak/TiltakDatovelger';

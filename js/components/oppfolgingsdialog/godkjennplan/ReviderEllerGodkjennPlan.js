@@ -5,7 +5,7 @@ import { Knapp, Hovedknapp } from 'nav-frontend-knapper';
 import {
     getLedetekst,
     Bjorn,
-} from 'digisyfo-npm';
+} from '@navikt/digisyfo-npm';
 import {
     forespoerselRevideringPt,
     oppfolgingsdialogPt,

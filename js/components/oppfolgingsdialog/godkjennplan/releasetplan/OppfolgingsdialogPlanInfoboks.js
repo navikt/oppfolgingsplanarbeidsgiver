@@ -1,5 +1,5 @@
 import React from 'react';
-import { getLedetekst } from 'digisyfo-npm';
+import { getLedetekst } from '@navikt/digisyfo-npm';
 
 const OppfolgingsdialogPlanInfoboks = () => {
     const infoboksTittel = 'oppfolgingsdialog.arbeidsgiver.hvaskjernaa.tittel';

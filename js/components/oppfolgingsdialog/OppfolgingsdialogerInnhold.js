@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {
     getLedetekst,
     keyValue,
-} from 'digisyfo-npm';
+} from '@navikt/digisyfo-npm';
 import Sidetopp from '../Sidetopp';
 import {
     finnGodkjentedialogerAvbruttAvMotpartSidenSistInnlogging,

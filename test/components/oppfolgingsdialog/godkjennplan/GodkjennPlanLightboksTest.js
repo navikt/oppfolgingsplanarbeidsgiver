@@ -8,7 +8,7 @@ import Alertstripe from 'nav-frontend-alertstriper';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import {
     setLedetekster,
-} from 'digisyfo-npm';
+} from '@navikt/digisyfo-npm';
 import { GodkjennPlanLightboksComponent } from '../../../../js/components/oppfolgingsdialog/godkjennplan/GodkjennPlanLightboks';
 import GodkjennPlanSkjemaDatovelger from '../../../../js/components/oppfolgingsdialog/godkjennplan/GodkjennPlanSkjemaDatovelger';
 import getOppfolgingsdialog from '../../../mock/mockOppfolgingsdialog';

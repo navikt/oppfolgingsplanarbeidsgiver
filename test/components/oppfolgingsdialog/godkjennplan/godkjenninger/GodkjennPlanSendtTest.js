@@ -2,7 +2,7 @@ import React from 'react';
 import chai from 'chai';
 import { shallow } from 'enzyme';
 import chaiEnzyme from 'chai-enzyme';
-import { Utvidbar } from 'digisyfo-npm';
+import { Utvidbar } from '@navikt/digisyfo-npm';
 import GodkjennPlanSendt, {
     GodkjennPlanSendtInfoTekst,
     GodkjennPlanSendtUtvidbar,

@@ -5,7 +5,7 @@ import {
     select,
     takeEvery,
 } from 'redux-saga/effects';
-import { log } from 'digisyfo-npm';
+import { log } from '@navikt/digisyfo-npm';
 import {
     API_NAVN,
     hentSyfoapiUrl,

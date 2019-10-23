@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { getLedetekst, Utvidbar } from 'digisyfo-npm';
+import { getLedetekst, Utvidbar } from '@navikt/digisyfo-npm';
 import OppfolgingsplanInnholdboks from '../../../app/OppfolgingsplanInnholdboks';
 import { toDateMedMaanedNavn } from '../../../../utils/datoUtils';
 import {

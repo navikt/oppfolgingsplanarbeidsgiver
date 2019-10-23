@@ -8,7 +8,7 @@ import {
     Hovedknapp,
     Knapp,
 } from 'nav-frontend-knapper';
-import { Bjorn } from 'digisyfo-npm';
+import { Bjorn } from '@navikt/digisyfo-npm';
 import AppSpinner from '../../../../js/components/AppSpinner';
 import ReviderEllerGodkjennPlan, {
     ReviderEllerGodkjennPlanKnapperad,

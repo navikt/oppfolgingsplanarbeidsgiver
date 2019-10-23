@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Stegnavigasjon } from 'digisyfo-npm';
+import { Stegnavigasjon } from '@navikt/digisyfo-npm';
 
 const tekster = {
     steg: {

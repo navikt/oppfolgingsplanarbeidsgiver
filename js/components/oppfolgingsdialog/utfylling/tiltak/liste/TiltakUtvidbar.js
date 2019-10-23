@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import {
     erSynligIViewport,
     getLedetekst,
-} from 'digisyfo-npm';
+} from '@navikt/digisyfo-npm';
 import {
     kommentarReducerPt,
     tiltakPt,

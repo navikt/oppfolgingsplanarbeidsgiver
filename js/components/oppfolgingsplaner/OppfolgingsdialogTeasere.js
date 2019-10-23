@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { keyValue } from 'digisyfo-npm';
+import { keyValue } from '@navikt/digisyfo-npm';
 import * as opProptypes from '../../proptypes/opproptypes';
 import OppfolgingsdialogTeaser from './OppfolgingsdialogTeaser';
 import OppfolgingsdialogTidligereTeaser from './OppfolgingsdialogTidligereTeaser';

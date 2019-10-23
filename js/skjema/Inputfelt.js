@@ -7,7 +7,7 @@ import {
 import {
     getLedetekst,
     keyValue,
-} from 'digisyfo-npm';
+} from '@navikt/digisyfo-npm';
 import Feilmelding from './Feilmelding';
 import { ArbeidsoppgaveVarselFeil } from '../components/oppfolgingsdialog/utfylling/arbeidsoppgaver/ArbeidsoppgaveVarselFeil';
 import { fieldPropTypes } from '../proptypes/fieldproptypes';

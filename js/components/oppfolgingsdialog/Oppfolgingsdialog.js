@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { sykeforlopsPerioderReducerPt } from 'digisyfo-npm';
+import { sykeforlopsPerioderReducerPt } from '@navikt/digisyfo-npm';
 import * as opProptypes from '../../proptypes/opproptypes';
 import {
     finnOgHentArbeidsforholdSomMangler,

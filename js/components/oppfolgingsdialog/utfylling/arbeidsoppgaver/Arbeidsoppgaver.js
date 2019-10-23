@@ -5,7 +5,7 @@ import {
     getLedetekst,
     keyValue,
     scrollTo,
-} from 'digisyfo-npm';
+} from '@navikt/digisyfo-npm';
 import { sorterArbeidsoppgaverEtterOpprettet } from '../../../../utils/arbeidsoppgaveUtils';
 import { capitalizeFirstLetter } from '../../../../utils/tekstUtils';
 import * as opProptypes from '../../../../proptypes/opproptypes';

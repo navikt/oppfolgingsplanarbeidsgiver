@@ -1,5 +1,5 @@
 import React from 'react';
-import { getHtmlLedetekst } from 'digisyfo-npm';
+import { getHtmlLedetekst } from '@navikt/digisyfo-npm';
 
 const OppfolgingsdialogerInfoPersonvern = () => {
     return (<div

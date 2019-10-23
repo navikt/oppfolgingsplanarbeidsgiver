@@ -1,7 +1,7 @@
 import 'whatwg-fetch';
 import 'babel-polyfill';
 import { render } from 'react-dom';
-import { hentLedetekster, hentToggles, setPerformOnHttpCalls, forlengInnloggetSesjon, sjekkInnloggingssesjon } from 'digisyfo-npm';
+import { hentLedetekster, hentToggles, setPerformOnHttpCalls, forlengInnloggetSesjon, sjekkInnloggingssesjon } from '@navikt/digisyfo-npm';
 import { Provider } from 'react-redux';
 import React from 'react';
 import AppRouter from './routers/AppRouter';

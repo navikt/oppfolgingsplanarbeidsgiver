@@ -1,4 +1,4 @@
-import { parseSykepengesoknad } from 'digisyfo-npm';
+import { parseSykepengesoknad } from '@navikt/digisyfo-npm';
 
 const getSoknad = (soknad = {}) => {
     return Object.assign({}, {

@@ -1,4 +1,4 @@
-import { parseSykmelding } from 'digisyfo-npm';
+import { parseSykmelding } from '@navikt/digisyfo-npm';
 import * as actiontyper from '../actions/actiontyper';
 
 const initiellState = {};
