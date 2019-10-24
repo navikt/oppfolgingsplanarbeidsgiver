@@ -244,22 +244,6 @@ export const kontaktinfoReducerPt = PropTypes.shape({
     hentingFeilet: PropTypes.arrayOf(PropTypes.string),
 });
 
-export const oppfolgingsdialogerAtPt = PropTypes.shape({
-    henter: PropTypes.bool,
-    hentet: PropTypes.bool,
-    hentingFeilet: PropTypes.bool,
-    oppretter: PropTypes.bool,
-    opprettet: PropTypes.bool,
-    opprettingFeilet: PropTypes.bool,
-    godkjenner: PropTypes.bool,
-    godkjent: PropTypes.bool,
-    godkjenningFeilet: PropTypes.bool,
-    avviser: PropTypes.bool,
-    avvist: PropTypes.bool,
-    avvisFeilet: PropTypes.bool,
-    data: PropTypes.arrayOf(oppfolgingsdialogPt),
-});
-
 export const arbeidsoppgaverReducerPt = PropTypes.shape({
     slettet: PropTypes.bool,
     sletter: PropTypes.bool,
