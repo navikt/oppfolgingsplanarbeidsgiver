@@ -47,11 +47,3 @@ export const hentPlanStatus = (oppfolgingsdialog, ledetekster) => {
     }
     return status;
 };
-
-export const hentStatusUtenAktivSykmelding = (oppfolgingsdialog) => {
-    return {
-        tekst: oppfolgingsdialog && oppfolgingsdialog.godkjentPlan && oppfolgingsdialog.godkjentPlan.gyldighetstidspunkt ?
-            `${toDateMedMaanedNavn(oppfolgingsdialog.godkjentPlan.gyldighetstidspunkt.fom)} - ${toDateMedMaanedNavn(oppfolgingsdialog.godkjentPlan.gyldighetstidspunkt.tom)}` : '',
-        img: 'plan-ikke-aktiv-sykmelding--hake.svg',
-    };
-};
