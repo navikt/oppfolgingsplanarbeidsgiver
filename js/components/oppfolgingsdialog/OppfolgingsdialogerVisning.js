@@ -12,7 +12,6 @@ import {
     harAktivOppfolgingsdialog,
     harTidligereOppfolgingsdialoger,
 } from '../../utils/oppfolgingsplanUtils';
-import { BRUKERTYPE } from '../../konstanter';
 import OppfolgingsplanerOpprett from './opprett/OppfolgingsplanerOpprett';
 import OppfolgingsplanerIngenplan from './opprett/OppfolgingsplanerIngenplan';
 import OppfolgingsplanFilm from '../oppfolgingsplaner/OppfolgingsplanFilm';
@@ -56,7 +55,6 @@ class OppfolgingsdialogerVisning extends Component {
                 oppfolgingsdialoger={finnAktiveOppfolgingsdialoger(oppfolgingsdialoger)}
                 tittel={getLedetekst('oppfolgingsdialoger.oppfolgingsdialoger.header.tittel')}
                 id="OppfolgingsdialogTeasereAG"
-                brukerType={BRUKERTYPE.ARBEIDSGIVER}
                 rootUrlPlaner={`${getContextRoot()}/${koblingId}`}
                 rootUrl={getContextRoot()}
             />
@@ -81,7 +79,6 @@ class OppfolgingsdialogerVisning extends Component {
                     harTidligerOppfolgingsdialoger
                     tittel={getLedetekst('oppfolgingsdialoger.tidligereplaner.tittel')}
                     id="OppfolgingsdialogTeasereAG"
-                    brukerType={BRUKERTYPE.ARBEIDSGIVER}
                     rootUrlPlaner={`${getContextRoot()}/${koblingId}`}
                     rootUrl={getContextRoot()}
                     svgUrl={`${getContextRoot()}/img/svg/plan-godkjent.svg`}

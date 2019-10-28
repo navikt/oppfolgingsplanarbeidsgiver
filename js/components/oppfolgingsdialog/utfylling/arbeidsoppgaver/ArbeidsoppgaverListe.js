@@ -13,7 +13,6 @@ const ArbeidsoppgaverListe = (
         sendLagreKommentar,
         sendSlettKommentar,
         fnr,
-        brukerType,
         rootUrlImg,
         feilMelding,
         visFeilMelding,
@@ -28,7 +27,6 @@ const ArbeidsoppgaverListe = (
                             ledetekster={ledetekster}
                             element={element}
                             fnr={fnr}
-                            brukerType={brukerType}
                             sendSlett={sendSlett}
                             sendLagre={sendLagre}
                             sendSlettKommentar={sendSlettKommentar}
@@ -48,7 +46,6 @@ ArbeidsoppgaverListe.propTypes = {
     ledetekster: keyValue,
     liste: PropTypes.arrayOf(opProptypes.arbeidsoppgavePt),
     fnr: PropTypes.string,
-    brukerType: PropTypes.string,
     sendLagre: PropTypes.func,
     sendSlett: PropTypes.func,
     sendLagreKommentar: PropTypes.func,

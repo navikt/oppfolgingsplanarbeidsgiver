@@ -2,7 +2,6 @@ import chai from 'chai';
 import React from 'react';
 import { shallow } from 'enzyme';
 import chaiEnzyme from 'chai-enzyme';
-import { BRUKERTYPE } from '../../../../../js/konstanter';
 import kommentar from '../../../../../js/reducers/kommentar';
 import TiltakInformasjon, {
     TiltakInformasjonBeskrivelse,
@@ -94,7 +93,6 @@ describe('TiltakInformasjon', () => {
             },
         });
         komponent = shallow(<TiltakInformasjon
-            brukerType={BRUKERTYPE.ARBEIDSGIVER}
             element={oppfolgingsdialogPassert.tiltakListe}
             kommentarReducer={kommentar} />);
         expect(komponent.find(VarselTiltakVurdering)).to.have.length(1);

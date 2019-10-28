@@ -14,7 +14,6 @@ const OppfolgingsdialogTeasere = (
         id,
         rootUrl,
         rootUrlPlaner,
-        brukerType,
         harTidligerOppfolgingsdialoger,
     }) => {
     return (<div className="blokk--l">
@@ -29,7 +28,6 @@ const OppfolgingsdialogTeasere = (
                         ledetekster={ledetekster}
                         oppfolgingsdialog={oppfolgingsdialog}
                         key={idx}
-                        brukerType={brukerType}
                         rootUrl={rootUrl}
                         rootUrlPlaner={rootUrlPlaner}
                     />);
@@ -42,7 +40,6 @@ const OppfolgingsdialogTeasere = (
                         ledetekster={ledetekster}
                         oppfolgingsdialog={oppfolgingsdialog}
                         key={idx}
-                        brukerType={brukerType}
                         rootUrl={rootUrl}
                         rootUrlPlaner={rootUrlPlaner}
                     />);
@@ -59,7 +56,6 @@ OppfolgingsdialogTeasere.propTypes = {
     className: PropTypes.string,
     tittel: PropTypes.string,
     id: PropTypes.string,
-    brukerType: PropTypes.string,
     rootUrl: PropTypes.string,
     rootUrlPlaner: PropTypes.string,
 };

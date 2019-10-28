@@ -213,7 +213,6 @@ class ArbeidsoppgaveUtvidbar extends Component {
             ledetekster,
             element,
             fnr,
-            brukerType,
             sendSlettKommentar,
             sendLagreKommentar,
             arbeidsoppgaverReducer,
@@ -257,7 +256,6 @@ class ArbeidsoppgaveUtvidbar extends Component {
                                     ledetekster={ledetekster}
                                     element={element}
                                     fnr={fnr}
-                                    brukerType={brukerType}
                                     visLagreSkjema={this.visLagreSkjema}
                                     sendSlett={this.sendSlett}
                                     sendLagreKommentar={sendLagreKommentar}
@@ -293,7 +291,6 @@ ArbeidsoppgaveUtvidbar.propTypes = {
     ledetekster: keyValue,
     element: opProptypes.arbeidsoppgavePt,
     fnr: PropTypes.string,
-    brukerType: PropTypes.string,
     sendSlett: PropTypes.func,
     sendLagre: PropTypes.func,
     sendSlettKommentar: PropTypes.func,

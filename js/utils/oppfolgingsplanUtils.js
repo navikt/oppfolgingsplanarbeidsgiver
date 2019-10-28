@@ -1,6 +1,5 @@
 import { setPerformOnHttpCalls } from '@navikt/digisyfo-npm';
 import {
-    BRUKERTYPE,
     MND_SIDEN_SYKMELDING_GRENSE_FOR_OPPFOELGING,
     STATUS,
 } from '../konstanter';
@@ -148,13 +147,8 @@ export const finnGodkjentedialogerAvbruttAvMotpartSidenSistInnlogging = (oppfolg
     });
 };
 
-export const finnOppfolgingsdialogMotpartNavn = (oppfolgingsdialog, brukerType) => {
-    if (brukerType === BRUKERTYPE.ARBEIDSTAKER) {
-        return oppfolgingsdialog.virksomhet.navn;
-    } else if (brukerType === BRUKERTYPE.ARBEIDSGIVER) {
-        return oppfolgingsdialog.arbeidstaker.navn;
-    }
-    return '';
+export const finnOppfolgingsdialogMotpartNavn = (oppfolgingsdialog) => {
+    return oppfolgingsdialog.arbeidstaker.navn;
 };
 
 export const finnSistEndretAvNavn = (oppfolgingsdialog) => {

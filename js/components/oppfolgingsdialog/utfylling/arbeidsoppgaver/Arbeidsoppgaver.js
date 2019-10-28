@@ -16,7 +16,6 @@ import LeggTilElementKnapper from '../LeggTilElementKnapper';
 import ArbeidsoppgaverListe from './ArbeidsoppgaverListe';
 import ArbeidsoppgaverInfoboks from './ArbeidsoppgaverInfoboks';
 import LagreArbeidsoppgaveSkjema from './LagreArbeidsoppgaveSkjema';
-import { BRUKERTYPE } from '../../../../konstanter';
 
 class Arbeidsoppgaver extends Component {
     constructor(props) {
@@ -208,7 +207,6 @@ class Arbeidsoppgaver extends Component {
                             sendLagre={this.sendLagreArbeidsoppgave}
                             sendSlett={this.sendSlettArbeidsoppgave}
                             fnr={oppfolgingsdialog.arbeidsgiver.naermesteLeder.fnr}
-                            brukerType={BRUKERTYPE.ARBEIDSGIVER}
                             rootUrlImg={`${getContextRoot()}`}
                             visFeilMelding={this.visOppdateringFeilet}
                             feilMelding={this.state.oppdateringFeilet}

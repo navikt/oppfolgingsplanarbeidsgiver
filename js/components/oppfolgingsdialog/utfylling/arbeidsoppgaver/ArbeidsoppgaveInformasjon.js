@@ -1,10 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { getLedetekst, keyValue } from '@navikt/digisyfo-npm';
-import {
-    BRUKERTYPE,
-    KANGJENNOMFOERES,
-} from '../../../../konstanter';
+import { KANGJENNOMFOERES } from '../../../../konstanter';
 import { ArbeidsoppgaveVarselFeil } from './ArbeidsoppgaveVarselFeil';
 import * as opProptypes from '../../../../proptypes/opproptypes';
 
@@ -35,7 +32,7 @@ ArbeidsoppgaveInformasjonKnapper.propTypes = {
     sendSlett: PropTypes.func,
 };
 
-export const ArbeidsoppgaveInformasjonInnhold = ({ ledetekster, arbeidsoppgave, brukerType }) => {
+export const ArbeidsoppgaveInformasjonInnhold = ({ ledetekster, arbeidsoppgave }) => {
     let beskrivelseTekst = '';
     let hentPanelType;
     switch (arbeidsoppgave && arbeidsoppgave.gjennomfoering && arbeidsoppgave.gjennomfoering.kanGjennomfoeres) {
@@ -60,11 +57,8 @@ export const ArbeidsoppgaveInformasjonInnhold = ({ ledetekster, arbeidsoppgave, 
     }
     return (
         <div className={`arbeidsoppgaveInformasjonInnhold ${hentPanelType}`}>
-            {!arbeidsoppgave.gjennomfoering && brukerType === BRUKERTYPE.ARBEIDSGIVER &&
+            {!arbeidsoppgave.gjennomfoering &&
             <p>{getLedetekst('oppfolgingsdialoger.arbeidsoppgaveInformasjon.ikke-vurdert.arbeidsgiver', ledetekster)}</p>
-            }
-            {!arbeidsoppgave.gjennomfoering && brukerType === BRUKERTYPE.ARBEIDSTAKER &&
-            <p>{getLedetekst('oppfolgingsdialoger.arbeidsoppgaveInformasjon.ikke-vurdert.arbeidstaker', ledetekster)}</p>
             }
             { arbeidsoppgave.gjennomfoering &&
             <dl>
@@ -101,7 +95,6 @@ export const ArbeidsoppgaveInformasjonInnhold = ({ ledetekster, arbeidsoppgave, 
 ArbeidsoppgaveInformasjonInnhold.propTypes = {
     ledetekster: keyValue,
     arbeidsoppgave: opProptypes.arbeidsoppgavePt,
-    brukerType: PropTypes.string,
 };
 
 const ArbeidsoppgaveInformasjon = (
@@ -109,7 +102,6 @@ const ArbeidsoppgaveInformasjon = (
         ledetekster,
         element,
         fnr,
-        brukerType,
         sendSlett,
         oppdateringFeilet,
         varselTekst,
@@ -120,7 +112,6 @@ const ArbeidsoppgaveInformasjon = (
             <ArbeidsoppgaveInformasjonInnhold
                 ledetekster={ledetekster}
                 arbeidsoppgave={element}
-                brukerType={brukerType}
             />
 
             { oppdateringFeilet &&
@@ -144,7 +135,6 @@ ArbeidsoppgaveInformasjon.propTypes = {
     ledetekster: keyValue,
     element: opProptypes.arbeidsoppgavePt,
     fnr: PropTypes.string,
-    brukerType: PropTypes.string,
     sendSlett: PropTypes.func,
     oppdateringFeilet: PropTypes.bool,
     varselTekst: PropTypes.string,

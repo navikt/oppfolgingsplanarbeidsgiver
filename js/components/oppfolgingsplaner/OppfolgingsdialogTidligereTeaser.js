@@ -13,7 +13,6 @@ const OppfolgingsdialogTidligereTeaser = (
         oppfolgingsdialog,
         rootUrl,
         rootUrlPlaner,
-        brukerType,
         ledetekster,
     }) => {
     const planStatus = hentPlanStatus(oppfolgingsdialog, ledetekster);
@@ -26,7 +25,7 @@ const OppfolgingsdialogTidligereTeaser = (
                 <header className="inngangspanel__header">
                     <h3 className="js-title" id={`oppfolgingsdialog-header-${oppfolgingsdialog.id}`}>
                         <span className="inngangspanel__tittel">
-                            {finnOppfolgingsdialogMotpartNavn(oppfolgingsdialog, brukerType)}
+                            {finnOppfolgingsdialogMotpartNavn(oppfolgingsdialog)}
                         </span>
                     </h3>
                 </header>
@@ -40,7 +39,6 @@ const OppfolgingsdialogTidligereTeaser = (
 OppfolgingsdialogTidligereTeaser.propTypes = {
     ledetekster: keyValue,
     oppfolgingsdialog: opProptypes.oppfolgingsdialogPt,
-    brukerType: PropTypes.string,
     rootUrl: PropTypes.string,
     rootUrlPlaner: PropTypes.string,
 };
