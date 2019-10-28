@@ -6,7 +6,8 @@ import {
     finnOgHentArbeidsforholdSomMangler,
     finnOgHentKontaktinfoSomMangler,
     finnOgHentNaermesteLedereSomMangler,
-    finnOgHentPersonerSomMangler, finnOgHentSykeforlopsPerioderSomMangler,
+    finnOgHentPersonerSomMangler,
+    finnOgHentSykeforlopsPerioderSomMangler,
     finnOgHentVirksomheterSomMangler,
 } from '../../utils/reducerUtils';
 import { getContextRoot } from '../../routers/paths';
