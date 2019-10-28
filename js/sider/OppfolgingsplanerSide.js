@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {
     getLedetekst,
-    keyValue,
     hentToggles,
     togglesPt,
 } from '@navikt/digisyfo-npm';
@@ -225,7 +224,6 @@ OppfolgingsplanerSide.propTypes = {
     virksomhet: opproptypes.virksomhetReducerPt,
     oppfolgingsdialoger: PropTypes.arrayOf(opproptypes.oppfolgingsdialogPt),
     koblingId: PropTypes.string,
-    ledetekster: keyValue,
     sykmeldt: sykmeldtPt,
     toggles: togglesPt,
     bekreftetNyNaermesteLeder: PropTypes.bool,

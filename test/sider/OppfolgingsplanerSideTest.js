@@ -211,7 +211,6 @@ describe('OppfolgingsplanerSide', () => {
     describe('OppfolgingsplanerSide', () => {
         let clock;
         const dagensDato = new Date('2017-01-01');
-        let ledetekster;
         let sjekkTilgang;
         let hentOppfolgingsplaner;
         let hentSykmeldinger;
@@ -242,7 +241,6 @@ describe('OppfolgingsplanerSide', () => {
 
         beforeEach(() => {
             clock = sinon.useFakeTimers(dagensDato.getTime());
-            ledetekster = {};
             sykmeldinger = {};
             oppfolgingsdialogerReducer = {};
             alleOppfolgingsdialogerReducer = {};
@@ -301,7 +299,6 @@ describe('OppfolgingsplanerSide', () => {
 
         it('Skal vise feilmelding dersom hentingFeilet', () => {
             const component = shallow(<OppfolgingsplanerSide
-                ledetekster={ledetekster}
                 tilgang={tilgang}
                 toggles={toggles}
                 alleOppfolgingsdialogerReducer={alleOppfolgingsdialogerReducer}
@@ -323,7 +320,6 @@ describe('OppfolgingsplanerSide', () => {
 
         it('Skal vise feilmelding dersom sendingFeilet', () => {
             const component = shallow(<OppfolgingsplanerSide
-                ledetekster={ledetekster}
                 tilgang={tilgang}
                 toggles={toggles}
                 alleOppfolgingsdialogerReducer={alleOppfolgingsdialogerReducer}

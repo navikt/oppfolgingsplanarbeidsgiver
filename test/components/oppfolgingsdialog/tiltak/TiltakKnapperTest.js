@@ -19,9 +19,7 @@ describe('TiltakKnapper', () => {
             'oppfolgingsdialog.knapp.endre': 'endre',
         };
         setLedetekster(ledetekster);
-        komponent = shallow(<TiltakKnapper
-            ledetekster={ledetekster}
-        />);
+        komponent = shallow(<TiltakKnapper />);
     });
 
     it('Skal vise en div', () => {

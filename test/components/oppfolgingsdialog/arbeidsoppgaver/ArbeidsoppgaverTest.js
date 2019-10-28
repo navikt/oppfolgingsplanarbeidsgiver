@@ -86,7 +86,6 @@ describe('Arbeidsoppgaver', () => {
             arbeidsoppgaver={{
                 lagringFeilet: false,
             }}
-            ledetekster={ledetekster}
         />);
         component.setProps({ arbeidsoppgaver: { lagringFeilet: true } });
         expect(component.state().varselTekst).to.equal('Det oppsto en feil, og du fikk ikke lagret. Prøv igjen.');
@@ -101,7 +100,6 @@ describe('Arbeidsoppgaver', () => {
                 lagringFeilet: false,
                 feiletOppgaveId: 5,
             }}
-            ledetekster={ledetekster}
         />);
         component.setProps({ arbeidsoppgaver: { lagringFeilet: true, feiletOppgaveId: 5 } });
         expect(component.state().varselTekst).to.equal('');

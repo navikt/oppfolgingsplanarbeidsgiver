@@ -1,13 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { getLedetekst, keyValue } from '@navikt/digisyfo-npm';
+import { getLedetekst } from '@navikt/digisyfo-npm';
 import { KANGJENNOMFOERES } from '../../../../konstanter';
 import { ArbeidsoppgaveVarselFeil } from './ArbeidsoppgaveVarselFeil';
 import * as opProptypes from '../../../../proptypes/opproptypes';
 
 export const ArbeidsoppgaveInformasjonKnapper = (
     {
-        ledetekster,
         element,
         fnr,
         sendSlett,
@@ -20,19 +19,18 @@ export const ArbeidsoppgaveInformasjonKnapper = (
                 type="button"
                 onClick={() => { sendSlett(elementId); }}
                 className="knapperad__element knapp--slett">
-                {getLedetekst('oppfolgingsdialog.knapp.slett-element', ledetekster)}
+                {getLedetekst('oppfolgingsdialog.knapp.slett-element')}
             </button>
         </div>) : null
     );
 };
 ArbeidsoppgaveInformasjonKnapper.propTypes = {
-    ledetekster: keyValue,
     element: opProptypes.arbeidsoppgavePt,
     fnr: PropTypes.string,
     sendSlett: PropTypes.func,
 };
 
-export const ArbeidsoppgaveInformasjonInnhold = ({ ledetekster, arbeidsoppgave }) => {
+export const ArbeidsoppgaveInformasjonInnhold = ({ arbeidsoppgave }) => {
     let beskrivelseTekst = '';
     let hentPanelType;
     switch (arbeidsoppgave && arbeidsoppgave.gjennomfoering && arbeidsoppgave.gjennomfoering.kanGjennomfoeres) {
@@ -58,34 +56,34 @@ export const ArbeidsoppgaveInformasjonInnhold = ({ ledetekster, arbeidsoppgave }
     return (
         <div className={`arbeidsoppgaveInformasjonInnhold ${hentPanelType}`}>
             {!arbeidsoppgave.gjennomfoering &&
-            <p>{getLedetekst('oppfolgingsdialoger.arbeidsoppgaveInformasjon.ikke-vurdert.arbeidsgiver', ledetekster)}</p>
+            <p>{getLedetekst('oppfolgingsdialoger.arbeidsoppgaveInformasjon.ikke-vurdert.arbeidsgiver')}</p>
             }
             { arbeidsoppgave.gjennomfoering &&
             <dl>
                 { arbeidsoppgave.gjennomfoering && arbeidsoppgave.gjennomfoering.kanGjennomfoeres === KANGJENNOMFOERES.TILRETTELEGGING &&
-                <dt>{getLedetekst('oppfolgingsdialoger.arbeidsoppgaveInformasjon.tilrettelegging', ledetekster)}</dt>
+                <dt>{getLedetekst('oppfolgingsdialoger.arbeidsoppgaveInformasjon.tilrettelegging')}</dt>
                 }
                 { arbeidsoppgave.gjennomfoering && arbeidsoppgave.gjennomfoering.kanGjennomfoeres === KANGJENNOMFOERES.TILRETTELEGGING &&
                 <dd>
                     { arbeidsoppgave.gjennomfoering.paaAnnetSted &&
-                    <p>{getLedetekst('oppfolgingsdialoger.arbeidsoppgaveInformasjon.tilrettelegging.paaAnnetSted', ledetekster)}</p>
+                    <p>{getLedetekst('oppfolgingsdialoger.arbeidsoppgaveInformasjon.tilrettelegging.paaAnnetSted')}</p>
                     }
                     { arbeidsoppgave.gjennomfoering.medMerTid &&
-                    <p>{getLedetekst('oppfolgingsdialoger.arbeidsoppgaveInformasjon.tilrettelegging.medMerTid', ledetekster)}</p>
+                    <p>{getLedetekst('oppfolgingsdialoger.arbeidsoppgaveInformasjon.tilrettelegging.medMerTid')}</p>
                     }
                     { arbeidsoppgave.gjennomfoering.medHjelp &&
-                    <p>{getLedetekst('oppfolgingsdialoger.arbeidsoppgaveInformasjon.tilrettelegging.medHjelp', ledetekster)}</p>
+                    <p>{getLedetekst('oppfolgingsdialoger.arbeidsoppgaveInformasjon.tilrettelegging.medHjelp')}</p>
                     }
                 </dd>
                 }
 
                 { beskrivelseTekst.length > 0 && arbeidsoppgave.gjennomfoering.kanGjennomfoeres !== KANGJENNOMFOERES.KAN &&
-                <dt>{getLedetekst('oppfolgingsdialoger.arbeidsoppgaveInformasjon.beskrivelse', ledetekster)}</dt>
+                <dt>{getLedetekst('oppfolgingsdialoger.arbeidsoppgaveInformasjon.beskrivelse')}</dt>
                 }
                 { beskrivelseTekst.length > 0 && arbeidsoppgave.gjennomfoering.kanGjennomfoeres !== KANGJENNOMFOERES.KAN &&
                 <dd className="arbeidsoppgaveInformasjonInnhold__beskrivelse">{beskrivelseTekst}</dd>
                 }
-                <dt>{getLedetekst('oppfolgingsdialoger.arbeidsoppgaveInformasjon.opprettetAv', ledetekster)}</dt>
+                <dt>{getLedetekst('oppfolgingsdialoger.arbeidsoppgaveInformasjon.opprettetAv')}</dt>
                 <dd>{arbeidsoppgave.opprettetAv.navn}</dd>
             </dl>
             }
@@ -93,13 +91,11 @@ export const ArbeidsoppgaveInformasjonInnhold = ({ ledetekster, arbeidsoppgave }
     );
 };
 ArbeidsoppgaveInformasjonInnhold.propTypes = {
-    ledetekster: keyValue,
     arbeidsoppgave: opProptypes.arbeidsoppgavePt,
 };
 
 const ArbeidsoppgaveInformasjon = (
     {
-        ledetekster,
         element,
         fnr,
         sendSlett,
@@ -110,7 +106,6 @@ const ArbeidsoppgaveInformasjon = (
     return (
         <div className="arbeidsoppgaveInformasjon">
             <ArbeidsoppgaveInformasjonInnhold
-                ledetekster={ledetekster}
                 arbeidsoppgave={element}
             />
 
@@ -122,7 +117,6 @@ const ArbeidsoppgaveInformasjon = (
             }
 
             <ArbeidsoppgaveInformasjonKnapper
-                ledetekster={ledetekster}
                 element={element}
                 fnr={fnr}
                 sendSlett={sendSlett}
@@ -132,7 +126,6 @@ const ArbeidsoppgaveInformasjon = (
 };
 
 ArbeidsoppgaveInformasjon.propTypes = {
-    ledetekster: keyValue,
     element: opProptypes.arbeidsoppgavePt,
     fnr: PropTypes.string,
     sendSlett: PropTypes.func,

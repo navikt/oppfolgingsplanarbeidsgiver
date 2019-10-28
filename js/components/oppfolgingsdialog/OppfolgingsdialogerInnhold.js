@@ -1,9 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-    getLedetekst,
-    keyValue,
-} from '@navikt/digisyfo-npm';
+import { getLedetekst } from '@navikt/digisyfo-npm';
 import Sidetopp from '../Sidetopp';
 import {
     finnGodkjentedialogerAvbruttAvMotpartSidenSistInnlogging,
@@ -27,7 +24,6 @@ const finnOppfolgingsplanMedFoersteInnloggingSidenNyNaermesteLeder = (oppfolging
 };
 
 const OppfolgingsdialogerInnhold = ({
-    ledetekster,
     oppfolgingsdialoger,
     koblingId,
     kopierOppfolgingsdialog,
@@ -48,7 +44,6 @@ const OppfolgingsdialogerInnhold = ({
         />);
     } else {
         panel = (<OppfolgingsdialogVisning
-            ledetekster={ledetekster}
             koblingId={koblingId}
             oppfolgingsdialoger={oppfolgingsdialoger}
             kopierOppfolgingsdialog={kopierOppfolgingsdialog}
@@ -69,7 +64,6 @@ const OppfolgingsdialogerInnhold = ({
     );
 };
 OppfolgingsdialogerInnhold.propTypes = {
-    ledetekster: keyValue,
     bekreftetNyNaermesteLeder: PropTypes.bool,
     koblingId: PropTypes.string,
     oppfolgingsdialoger: PropTypes.arrayOf(oppfolgingsdialogPt),

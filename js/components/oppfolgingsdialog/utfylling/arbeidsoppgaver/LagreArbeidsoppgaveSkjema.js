@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import {
-    getLedetekst,
-    keyValue,
-} from '@navikt/digisyfo-npm';
+import { getLedetekst } from '@navikt/digisyfo-npm';
 import { Field, reduxForm } from 'redux-form';
 import { OPPRETT_SKJEMANAVN, tekstfeltRegex } from '../../../../konstanter';
 import * as opProptypes from '../../../../proptypes/opproptypes';
@@ -43,7 +40,6 @@ export class LagreArbeidsoppgaveSkjemaKomponent extends Component {
 
     render() {
         const {
-            ledetekster,
             handleSubmit,
             varselTekst,
             oppdateringFeilet,
@@ -52,7 +48,7 @@ export class LagreArbeidsoppgaveSkjemaKomponent extends Component {
         return (<form className="panel" onSubmit={handleSubmit}>
             <div className="skjemaelement">
                 <label className="skjemaelement__label" id="arbeidsoppgavenavn" htmlFor="arbeidsoppgavenavn-input">
-                    {getLedetekst('oppfolgingsdialog.arbeidstaker.arbeidsoppgave.opprett.skjema.navn', ledetekster)}
+                    {getLedetekst('oppfolgingsdialog.arbeidstaker.arbeidsoppgave.opprett.skjema.navn')}
                 </label>
                 <Field
                     className="skjemaelement__input input--fullbredde"
@@ -61,7 +57,6 @@ export class LagreArbeidsoppgaveSkjemaKomponent extends Component {
                     aria-labelledby="arbeidsoppgavenavn"
                     component={Inputfelt}
                     placeholder="Skriv inn tekst"
-                    ledetekster={ledetekster}
                     avbryt={this.avbryt}
                     oppdateringFeilet={oppdateringFeilet}
                     varselTekst={varselTekst}
@@ -76,7 +71,6 @@ export class LagreArbeidsoppgaveSkjemaKomponent extends Component {
 }
 
 LagreArbeidsoppgaveSkjemaKomponent.propTypes = {
-    ledetekster: keyValue,
     arbeidsoppgaverReducer: opProptypes.arbeidsoppgaverReducerPt,
     handleSubmit: PropTypes.func,
     avbryt: PropTypes.func,

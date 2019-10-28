@@ -1,12 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { keyValue } from '@navikt/digisyfo-npm';
 import * as opProptypes from '../../../../proptypes/opproptypes';
 import ArbeidsoppgaveUtvidbar from './ArbeidsoppgaveUtvidbar';
 
 const ArbeidsoppgaverListe = (
     {
-        ledetekster,
         liste,
         sendLagre,
         sendSlett,
@@ -24,7 +22,6 @@ const ArbeidsoppgaverListe = (
                     return (
                         <ArbeidsoppgaveUtvidbar
                             key={index}
-                            ledetekster={ledetekster}
                             element={element}
                             fnr={fnr}
                             sendSlett={sendSlett}
@@ -43,7 +40,6 @@ const ArbeidsoppgaverListe = (
 };
 
 ArbeidsoppgaverListe.propTypes = {
-    ledetekster: keyValue,
     liste: PropTypes.arrayOf(opProptypes.arbeidsoppgavePt),
     fnr: PropTypes.string,
     sendLagre: PropTypes.func,

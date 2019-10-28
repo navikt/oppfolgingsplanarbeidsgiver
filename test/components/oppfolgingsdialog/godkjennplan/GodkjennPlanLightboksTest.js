@@ -33,7 +33,6 @@ describe('GodkjennPlanLightboks', () => {
         initialize = sinon.spy(); // Veden: Lager en spy og sender den inn til GodkjennPlanSkjemaAG
         komponent = shallow(<GodkjennPlanLightboksComponent
             oppfolgingsdialog={getOppfolgingsdialog()}
-            ledetekster={ledetekster}
             GodkjennPlanSkjemaDatovelger={GodkjennPlanSkjemaDatovelger}
             handleSubmit={handleSubmit}
             initialize={initialize}

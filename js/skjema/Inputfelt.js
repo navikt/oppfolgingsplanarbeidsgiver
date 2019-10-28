@@ -4,10 +4,7 @@ import {
     Knapp,
     Hovedknapp,
 } from 'nav-frontend-knapper';
-import {
-    getLedetekst,
-    keyValue,
-} from '@navikt/digisyfo-npm';
+import { getLedetekst } from '@navikt/digisyfo-npm';
 import Feilmelding from './Feilmelding';
 import { ArbeidsoppgaveVarselFeil } from '../components/oppfolgingsdialog/utfylling/arbeidsoppgaver/ArbeidsoppgaveVarselFeil';
 import { fieldPropTypes } from '../proptypes/fieldproptypes';
@@ -25,7 +22,6 @@ const Inputfelt = (props) => {
         className,
         input,
         id,
-        ledetekster,
         avbryt,
         oppdateringFeilet,
         varselTekst,
@@ -61,7 +57,7 @@ const Inputfelt = (props) => {
                         mini
                         id="leggtillKnapp"
                         name="leggtillKnapp">
-                        {getLedetekst('oppfolgingsdialog.knapp.ny-arbeidsoppgave', ledetekster)}
+                        {getLedetekst('oppfolgingsdialog.knapp.ny-arbeidsoppgave')}
                     </Hovedknapp>
                 </div>
 
@@ -70,7 +66,7 @@ const Inputfelt = (props) => {
                         mini
                         onKeyPress={(e) => { handleKeyPress(avbryt, e); }}
                         onMouseDown={avbryt}>
-                        {getLedetekst('oppfolgingsdialog.knapp.avbryt', ledetekster)}
+                        {getLedetekst('oppfolgingsdialog.knapp.avbryt')}
                     </Knapp>
                 </div>
             </div>
@@ -85,7 +81,6 @@ Inputfelt.propTypes = {
     className: PropTypes.string,
     onKeyUp: PropTypes.func,
     placeholder: PropTypes.string,
-    ledetekster: keyValue,
     avbryt: PropTypes.func,
     oppdateringFeilet: PropTypes.bool,
     spinner: PropTypes.bool,

@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router';
-import { keyValue } from '@navikt/digisyfo-npm';
 import * as opProptypes from '../../proptypes/opproptypes';
 import {
     finnOppfolgingsdialogMotpartNavn,
@@ -13,9 +12,8 @@ const OppfolgingsdialogTidligereTeaser = (
         oppfolgingsdialog,
         rootUrl,
         rootUrlPlaner,
-        ledetekster,
     }) => {
-    const planStatus = hentPlanStatus(oppfolgingsdialog, ledetekster);
+    const planStatus = hentPlanStatus(oppfolgingsdialog);
     return (<article aria-labelledby={`oppfolgingsdialog-header-aktiv-${oppfolgingsdialog.id}`}>
         <Link className="inngangspanel oppfolgingsdialog" to={`${rootUrlPlaner}/oppfolgingsplaner/${oppfolgingsdialog.id}`}>
             <span className="oppfolgingsplanInnhold__ikon">
@@ -37,7 +35,6 @@ const OppfolgingsdialogTidligereTeaser = (
     </article>);
 };
 OppfolgingsdialogTidligereTeaser.propTypes = {
-    ledetekster: keyValue,
     oppfolgingsdialog: opProptypes.oppfolgingsdialogPt,
     rootUrl: PropTypes.string,
     rootUrlPlaner: PropTypes.string,

@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import {
-    getLedetekst,
-    keyValue,
-} from '@navikt/digisyfo-npm';
+import { getLedetekst } from '@navikt/digisyfo-npm';
 import * as opProptypes from '../../proptypes/opproptypes';
 import { getContextRoot } from '../../routers/paths';
 import {
@@ -33,7 +30,6 @@ class OppfolgingsdialogerVisning extends Component {
     }
     render() {
         const {
-            ledetekster,
             oppfolgingsdialoger,
             koblingId,
             kopierOppfolgingsdialog,
@@ -42,7 +38,6 @@ class OppfolgingsdialogerVisning extends Component {
         return (<div>
             { this.state.visOppfolgingsdialogOpprett &&
             <OppfolgingsplanerOpprett
-                ledetekster={ledetekster}
                 oppfolgingsdialoger={oppfolgingsdialoger}
                 opprett={opprettOppfolgingsdialog}
                 kopier={kopierOppfolgingsdialog}
@@ -51,7 +46,6 @@ class OppfolgingsdialogerVisning extends Component {
             }
             { oppfolgingsdialoger.length > 0 && harAktivOppfolgingsdialog(oppfolgingsdialoger) &&
             <OppfolgingsdialogTeasere
-                ledetekster={ledetekster}
                 oppfolgingsdialoger={finnAktiveOppfolgingsdialoger(oppfolgingsdialoger)}
                 tittel={getLedetekst('oppfolgingsdialoger.oppfolgingsdialoger.header.tittel')}
                 id="OppfolgingsdialogTeasereAG"
@@ -63,7 +57,6 @@ class OppfolgingsdialogerVisning extends Component {
             { (oppfolgingsdialoger.length === 0 || !harAktivOppfolgingsdialog(oppfolgingsdialoger)) &&
             <div className="blokk--l">
                 <OppfolgingsplanerIngenplan
-                    ledetekster={ledetekster}
                     oppfolgingsdialoger={oppfolgingsdialoger}
                     opprett={opprettOppfolgingsdialog}
                     visOppfolgingsdialogOpprett={this.visOppfolgingsdialogOpprett}
@@ -74,7 +67,6 @@ class OppfolgingsdialogerVisning extends Component {
             { oppfolgingsdialoger.length > 0 && harTidligereOppfolgingsdialoger(oppfolgingsdialoger) &&
             <div>
                 <OppfolgingsdialogTeasere
-                    ledetekster={ledetekster}
                     oppfolgingsdialoger={finnTidligereOppfolgingsdialoger(oppfolgingsdialoger)}
                     harTidligerOppfolgingsdialoger
                     tittel={getLedetekst('oppfolgingsdialoger.tidligereplaner.tittel')}
@@ -91,7 +83,6 @@ class OppfolgingsdialogerVisning extends Component {
     }
 }
 OppfolgingsdialogerVisning.propTypes = {
-    ledetekster: keyValue,
     koblingId: PropTypes.string,
     oppfolgingsdialoger: PropTypes.arrayOf(opProptypes.oppfolgingsdialogPt),
     kopierOppfolgingsdialog: PropTypes.func,

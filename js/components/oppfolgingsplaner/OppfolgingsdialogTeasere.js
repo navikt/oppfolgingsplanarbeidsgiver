@@ -1,13 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { keyValue } from '@navikt/digisyfo-npm';
 import * as opProptypes from '../../proptypes/opproptypes';
 import OppfolgingsdialogTeaser from './OppfolgingsdialogTeaser';
 import OppfolgingsdialogTidligereTeaser from './OppfolgingsdialogTidligereTeaser';
 
 const OppfolgingsdialogTeasere = (
     {
-        ledetekster,
         oppfolgingsdialoger,
         className,
         tittel = '',
@@ -25,7 +23,6 @@ const OppfolgingsdialogTeasere = (
             oppfolgingsdialoger.map((oppfolgingsdialog, idx) => {
                 return (
                     <OppfolgingsdialogTeaser
-                        ledetekster={ledetekster}
                         oppfolgingsdialog={oppfolgingsdialog}
                         key={idx}
                         rootUrl={rootUrl}
@@ -37,7 +34,6 @@ const OppfolgingsdialogTeasere = (
             oppfolgingsdialoger.map((oppfolgingsdialog, idx) => {
                 return (
                     <OppfolgingsdialogTidligereTeaser
-                        ledetekster={ledetekster}
                         oppfolgingsdialog={oppfolgingsdialog}
                         key={idx}
                         rootUrl={rootUrl}
@@ -50,7 +46,6 @@ const OppfolgingsdialogTeasere = (
 };
 
 OppfolgingsdialogTeasere.propTypes = {
-    ledetekster: keyValue,
     oppfolgingsdialoger: PropTypes.arrayOf(opProptypes.oppfolgingsdialogPt),
     harTidligerOppfolgingsdialoger: PropTypes.bool,
     className: PropTypes.string,

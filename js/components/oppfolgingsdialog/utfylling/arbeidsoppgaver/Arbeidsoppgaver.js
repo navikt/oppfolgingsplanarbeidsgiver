@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { findDOMNode } from 'react-dom';
 import {
     getLedetekst,
-    keyValue,
     scrollTo,
 } from '@navikt/digisyfo-npm';
 import { sorterArbeidsoppgaverEtterOpprettet } from '../../../../utils/arbeidsoppgaveUtils';
@@ -57,7 +56,7 @@ class Arbeidsoppgaver extends Component {
             this.setState({
                 lagreNyOppgaveFeilet: true,
                 visArbeidsoppgaveSkjema: true,
-                varselTekst: getLedetekst('oppfolgingsdialog.oppdatering.feilmelding', this.props.ledetekster),
+                varselTekst: getLedetekst('oppfolgingsdialog.oppdatering.feilmelding'),
             });
         }
     }
@@ -110,7 +109,6 @@ class Arbeidsoppgaver extends Component {
 
     render() {
         const {
-            ledetekster,
             oppfolgingsdialog,
             arbeidsoppgaver,
         } = this.props;
@@ -147,13 +145,11 @@ class Arbeidsoppgaver extends Component {
                                     tekst={getLedetekst('oppfolgingsdialog.arbeidsgiver.onboarding.arbeidsoppgave.tekst')}
                                 >
                                     <LeggTilElementKnapper
-                                        ledetekster={ledetekster}
                                         visSkjema={this.state.visArbeidsoppgaveSkjema}
                                         toggleSkjema={this.toggleArbeidsoppgaveSkjema}
                                     />
                                 </OppfolgingsplanInfoboks> :
                                 <LagreArbeidsoppgaveSkjema
-                                    ledetekster={ledetekster}
                                     toggleArbeidsoppgaveSkjema={this.toggleArbeidsoppgaveSkjema}
                                     varselTekst={this.state.varselTekst}
                                     oppdateringFeilet={this.state.lagreNyOppgaveFeilet}
@@ -189,7 +185,6 @@ class Arbeidsoppgaver extends Component {
                         {
                             this.state.visArbeidsoppgaveSkjema &&
                             <LagreArbeidsoppgaveSkjema
-                                ledetekster={ledetekster}
                                 onSubmit={this.sendLagreArbeidsoppgave}
                                 avbryt={this.skjulSkjema}
                                 ref={(lagreSkjema) => {
@@ -202,7 +197,6 @@ class Arbeidsoppgaver extends Component {
                             />
                         }
                         <ArbeidsoppgaverListe
-                            ledetekster={ledetekster}
                             liste={sorterArbeidsoppgaverEtterOpprettet(oppfolgingsdialog.arbeidsoppgaveListe)}
                             sendLagre={this.sendLagreArbeidsoppgave}
                             sendSlett={this.sendSlettArbeidsoppgave}
@@ -218,7 +212,6 @@ class Arbeidsoppgaver extends Component {
 }
 
 Arbeidsoppgaver.propTypes = {
-    ledetekster: keyValue,
     arbeidsoppgaver: opProptypes.arbeidsoppgaverReducerPt,
     oppfolgingsdialog: opProptypes.oppfolgingsdialogPt,
     lagreArbeidsoppgave: PropTypes.func,

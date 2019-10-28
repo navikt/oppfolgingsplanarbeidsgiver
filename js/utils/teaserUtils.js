@@ -6,7 +6,7 @@ import { STATUS } from '../konstanter';
 import { finnSistEndretAvNavn } from './oppfolgingsplanUtils';
 import { toDateMedMaanedNavn } from './datoUtils';
 
-export const hentPlanStatus = (oppfolgingsdialog, ledetekster) => {
+export const hentPlanStatus = (oppfolgingsdialog) => {
     const status = {
         tekst: '',
         img: '',
@@ -20,11 +20,11 @@ export const hentPlanStatus = (oppfolgingsdialog, ledetekster) => {
             status.img = 'plan-godkjent.svg';
             break;
         case STATUS.AVBRUTT:
-            status.tekst = getLedetekst('oppfolgingsdialoger.plan.status.avbrutt', ledetekster);
+            status.tekst = getLedetekst('oppfolgingsdialoger.plan.status.avbrutt');
             status.img = 'plan-avbrutt.svg';
             break;
         case STATUS.UNDER_ARBEID:
-            status.tekst = getHtmlLedetekst('oppfolgingsdialog.oppfolgingsdialogTeaser.underArbeid', ledetekster, {
+            status.tekst = getHtmlLedetekst('oppfolgingsdialog.oppfolgingsdialogTeaser.underArbeid', {
                 '%DATO%': toDateMedMaanedNavn(oppfolgingsdialog.sistEndretDato),
                 '%BRUKERNAVN%': finnSistEndretAvNavn(oppfolgingsdialog),
             });

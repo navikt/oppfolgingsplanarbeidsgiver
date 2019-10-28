@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import {
     erSynligIViewport,
     getLedetekst,
-    keyValue,
 } from '@navikt/digisyfo-npm';
 import * as opProptypes from '../../../../proptypes/opproptypes';
 import ArbeidsoppgaveInformasjon from './ArbeidsoppgaveInformasjon';
@@ -45,12 +44,12 @@ class ArbeidsoppgaveUtvidbar extends Component {
                 if (nextProps.arbeidsoppgaverReducer.slettingFeilet) {
                     this.visElementInformasjon();
                     this.props.visFeilMelding(true);
-                    this.visFeil(false, true, getLedetekst('oppfolgingsdialog.oppdatering.feilmelding', this.props.ledetekster));
+                    this.visFeil(false, true, getLedetekst('oppfolgingsdialog.oppdatering.feilmelding'));
                     this.apne();
                 } else if (nextProps.arbeidsoppgaverReducer.lagringFeilet) {
                     this.visLagreSkjema();
                     this.props.visFeilMelding(true);
-                    this.visFeil(true, false, getLedetekst('oppfolgingsdialog.oppdatering.feilmelding', this.props.ledetekster));
+                    this.visFeil(true, false, getLedetekst('oppfolgingsdialog.oppdatering.feilmelding'));
                     this.apne();
                 } else if (!nextProps.arbeidsoppgaverReducer.lagringFeilet && !nextProps.arbeidsoppgaverReducer.slettingFeilet) {
                     this.visFeil(false, false, '');
@@ -210,7 +209,6 @@ class ArbeidsoppgaveUtvidbar extends Component {
 
     render() {
         const {
-            ledetekster,
             element,
             fnr,
             sendSlettKommentar,
@@ -236,7 +234,6 @@ class ArbeidsoppgaveUtvidbar extends Component {
                         >
                             <div ref={(ref) => { this.utvidbar = ref; }} className="arbeidsoppgaverListe__utvidbarrad">
                                 <ArbeidsoppgaveUtvidbarOverskrift
-                                    ledetekster={ledetekster}
                                     erApen={this.state.erApen}
                                     arbeidsoppgave={element}
                                     rootUrlImg={rootUrlImg}
@@ -253,7 +250,6 @@ class ArbeidsoppgaveUtvidbar extends Component {
                             <div ref={(ref) => { this.innhold = ref; }}>
                                 { this.state.visInnhold && !this.state.visLagreSkjema &&
                                 <ArbeidsoppgaveInformasjon
-                                    ledetekster={ledetekster}
                                     element={element}
                                     fnr={fnr}
                                     visLagreSkjema={this.visLagreSkjema}
@@ -267,7 +263,6 @@ class ArbeidsoppgaveUtvidbar extends Component {
                                 }
                                 { this.state.visInnhold && this.state.visLagreSkjema &&
                                 <LagreArbeidsoppgaveSkjema
-                                    ledetekster={ledetekster}
                                     sendLagre={this.sendLagre}
                                     arbeidsoppgave={element}
                                     form={element.arbeidsoppgaveId.toString()}
@@ -288,7 +283,6 @@ class ArbeidsoppgaveUtvidbar extends Component {
 }
 
 ArbeidsoppgaveUtvidbar.propTypes = {
-    ledetekster: keyValue,
     element: opProptypes.arbeidsoppgavePt,
     fnr: PropTypes.string,
     sendSlett: PropTypes.func,
