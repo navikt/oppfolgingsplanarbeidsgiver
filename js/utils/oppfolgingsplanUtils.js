@@ -1,13 +1,8 @@
-import { setPerformOnHttpCalls } from '@navikt/digisyfo-npm';
 import {
     MND_SIDEN_SYKMELDING_GRENSE_FOR_OPPFOELGING,
     STATUS,
 } from '../konstanter';
 import { erGyldigDatoIFortiden } from './datoUtils';
-
-export const setPerformOnOppDialogHttpCalls = (someFunction) => {
-    setPerformOnHttpCalls(someFunction);
-};
 
 export const isEmpty = (array) => {
     return !array || array.length === 0;
