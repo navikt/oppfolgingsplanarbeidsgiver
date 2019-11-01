@@ -1,25 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Feilmelding from './Feilmelding';
+import { Textarea } from 'nav-frontend-skjema';
 import { fieldPropTypes } from '../proptypes/fieldproptypes';
 
 const Tekstomrade = (props) => {
-    const { meta, className, input, id } = props;
-    return (<div className="skjemaelement">
-        <textarea
-            className={`skjemaelement__input ${className}${meta.touched && meta.error
-                ? ' skjemaelement__input--harFeil'
-                : ''
-            }`}
-            {...input}
-            value={input.value}
-            autoComplete="off"
-            placeholder={props.placeholder}
-            id={id}
-            rows={props.rows}
-        />
-        <Feilmelding {...meta} />
-    </div>);
+    const {
+        meta,
+        input,
+        id,
+        maxLength,
+    } = props;
+
+    const feilmelding = meta.error
+        ? { feilmelding: meta.error }
+        : undefined;
+
+    return (<Textarea
+        maxLength={maxLength}
+        id={id}
+        feil={feilmelding}
+        {...input} />);
 };
 
 Tekstomrade.propTypes = {
@@ -30,6 +30,7 @@ Tekstomrade.propTypes = {
     className: PropTypes.string,
     placeholder: PropTypes.string,
     autoFocus: PropTypes.bool,
+    maxLength: PropTypes.number,
 };
 
 export default Tekstomrade;
