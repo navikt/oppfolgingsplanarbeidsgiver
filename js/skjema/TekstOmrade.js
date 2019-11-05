@@ -11,7 +11,7 @@ const Tekstomrade = (props) => {
         maxLength,
     } = props;
 
-    const feilmelding = meta.error
+    const feilmelding = meta.error && meta.touched
         ? { feilmelding: meta.error }
         : undefined;
 
