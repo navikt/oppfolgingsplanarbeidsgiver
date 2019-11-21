@@ -177,32 +177,32 @@ function mockForOpplaeringsmiljo(server) {
         res.send(JSON.stringify(mockData[VIRKSOMHET]));
     });
 
-    server.get('/restoppfoelgingsdialog/api/person/12121200100', (req, res) => {
+    server.get('/syfooprest/api/person/12121200100', (req, res) => {
         res.setHeader('Content-Type', 'application/json');
         res.send(JSON.stringify(mockData[PERSON_KARINA]));
     });
 
-    server.get('/restoppfoelgingsdialog/api/person/02020212345', (req, res) => {
+    server.get('/syfooprest/api/person/02020212345', (req, res) => {
         res.setHeader('Content-Type', 'application/json');
         res.send(JSON.stringify(mockData[PERSON_KJERSTI]));
     });
 
-    server.get('/restoppfoelgingsdialog/api/person/12121255555', (req, res) => {
+    server.get('/syfooprest/api/person/12121255555', (req, res) => {
         res.setHeader('Content-Type', 'application/json');
         res.send(JSON.stringify(mockData[PERSON_KRISTINA]));
     });
 
-    server.get('/restoppfoelgingsdialog/api/person/03040512345', (req, res) => {
+    server.get('/syfooprest/api/person/03040512345', (req, res) => {
         res.setHeader('Content-Type', 'application/json');
         res.send(JSON.stringify(mockData[PERSON_LILLI]));
     });
 
-    server.get('/restoppfoelgingsdialog/api/person/01010112345', (req, res) => {
+    server.get('/syfooprest/api/person/01010112345', (req, res) => {
         res.setHeader('Content-Type', 'application/json');
         res.send(JSON.stringify(mockData[PERSON_MARIANN]));
     });
 
-    server.get('/restoppfoelgingsdialog/api/person/*', (req, res) => {
+    server.get('/syfooprest/api/person/*', (req, res) => {
         res.setHeader('Content-Type', 'application/json');
         res.send(JSON.stringify(mockData[PERSON]));
     });

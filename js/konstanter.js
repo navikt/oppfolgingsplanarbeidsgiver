@@ -10,6 +10,10 @@ export const maanedListe = ['januar', 'februar', 'mars', 'april', 'mai', 'juni',
 export const TILBAKEMELDING_LENKE = 'https://www.survey-xact.no/LinkCollector?key=U3352LLZ1591';
 export const MND_SIDEN_SYKMELDING_GRENSE_FOR_OPPFOELGING = 4;
 
+export const HOST_NAMES = {
+    SYFOOPREST: 'syfooprest',
+};
+
 export const NOTIFIKASJONBOKS_TYPE = {
     ADVARSEL: 'ADVARSEL',
     SUKSESS: 'SUKSESS',
