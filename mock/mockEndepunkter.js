@@ -212,7 +212,7 @@ function mockForOpplaeringsmiljo(server) {
         res.send(JSON.stringify(mockData[NAERMESTELEDER]));
     });
 
-    server.get('/restoppfoelgingsdialog/api/kontaktinfo/*', (req, res) => {
+    server.get('/syfooprest/api/kontaktinfo/*', (req, res) => {
         res.setHeader('Content-Type', 'application/json');
         res.send(JSON.stringify(mockData[KONTAKTINFO]));
     });
