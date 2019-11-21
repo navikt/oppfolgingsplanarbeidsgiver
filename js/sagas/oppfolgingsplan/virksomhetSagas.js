@@ -1,11 +1,15 @@
 import { call, put, fork, takeEvery } from 'redux-saga/effects';
 import { get, log } from '@navikt/digisyfo-npm';
 import * as actions from '../../actions/oppfolgingsplan/virksomhet_actions';
+import { fullNaisUrl } from '../../utils/urlUtils';
+import { HOST_NAMES } from '../../konstanter';
 
 export function* hentVirksomhetSaga(action) {
     yield put(actions.henterVirksomhet(action.virksomhetsnummer));
     try {
-        const virksomhet = yield call(get, `${process.env.REACT_APP_OPPFOELGINGSDIALOGREST_ROOT}/virksomhet/${action.virksomhetsnummer}`);
+        const path = `${process.env.REACT_APP_SYFOOPREST_ROOT}/virksomhet/${action.virksomhetsnummer}`;
+        const url = fullNaisUrl(HOST_NAMES.SYFOOPREST, path);
+        const virksomhet = yield call(get, url);
         yield put(actions.virksomhetHentet(virksomhet, action.virksomhetsnummer));
     } catch (e) {
         log(e);
