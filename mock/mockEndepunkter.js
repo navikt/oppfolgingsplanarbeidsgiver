@@ -172,7 +172,7 @@ function mockForOpplaeringsmiljo(server) {
         res.send(JSON.stringify(mockData[TILGANG]));
     });
 
-    server.get('/restoppfoelgingsdialog/api/virksomhet/*', (req, res) => {
+    server.get('/syfooprest/api/virksomhet/*', (req, res) => {
         res.setHeader('Content-Type', 'application/json');
         res.send(JSON.stringify(mockData[VIRKSOMHET]));
     });
