@@ -36,8 +36,6 @@ const renderPage = (decoratorFragments, isFrontPage) => {
                     SYFOTEKSTER_URL: '/syfotekster/api',
                     LOGINSERVICE_URL: `${process.env.LOGINSERVICE_URL}`,
                     SYFOREST_URL: '/syforest',
-                    MOTEREST_URL: '/moterest/api',
-                    OPPFOLGINGSDIALOGREST_URL: '/restoppfoelgingsdialog/api',
                     spinnerMedTekst: isFrontPage,
                     spinnerUtenTekst: !isFrontPage,
                 },

@@ -214,7 +214,7 @@ function mockForOpplaeringsmiljo(server) {
         res.send(JSON.stringify(mockData[PERSON]));
     });
 
-    server.get('/restoppfoelgingsdialog/api/naermesteleder/*', (req, res) => {
+    server.get('/syfooprest/api/naermesteleder/*', (req, res) => {
         res.setHeader('Content-Type', 'application/json');
         res.send(JSON.stringify(mockData[NAERMESTELEDER]));
     });
@@ -224,8 +224,8 @@ function mockForOpplaeringsmiljo(server) {
         res.send(JSON.stringify(mockData[KONTAKTINFO]));
     });
 
-    server.post('/restoppfoelgingsdialog/api/logging', (req, res) => {
-        console.log('Logger i restoppfoelgingsdialog');
+    server.post('/setHeader/api/logging', (req, res) => {
+        console.log('Logger i syfooprest');
         res.send(200);
     });
 
