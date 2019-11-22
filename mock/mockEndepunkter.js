@@ -224,8 +224,8 @@ function mockForOpplaeringsmiljo(server) {
         res.send(JSON.stringify(mockData[KONTAKTINFO]));
     });
 
-    server.post('/restoppfoelgingsdialog/api/logging', (req, res) => {
-        console.log('Logger i restoppfoelgingsdialog');
+    server.post('/setHeader/api/logging', (req, res) => {
+        console.log('Logger i syfooprest');
         res.send(200);
     });
 
