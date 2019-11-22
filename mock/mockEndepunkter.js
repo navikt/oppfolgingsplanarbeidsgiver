@@ -23,6 +23,7 @@ const lastFilTilMinne = (filnavn) => {
     });
 };
 
+const ARBEIDSFORHOLD = 'arbeidsforhold';
 const BERIK = 'berik';
 const KONTAKTINFO = 'kontaktinfo';
 const NAERMESTELEDER = 'naermesteleder';
@@ -40,6 +41,7 @@ const TILGANG = 'tilgang';
 const TOGGLES = 'toggles';
 const VIRKSOMHET = 'virksomhet';
 
+lastFilTilMinne(ARBEIDSFORHOLD);
 lastFilTilMinne(SYKMELDTE);
 lastFilTilMinne(TOGGLES);
 lastFilTilMinne(SYKMELDINGER);
@@ -170,6 +172,11 @@ function mockForOpplaeringsmiljo(server) {
     server.get('/syfooppfolgingsplanservice/api/tilgang', (req, res) => {
         res.setHeader('Content-Type', 'application/json');
         res.send(JSON.stringify(mockData[TILGANG]));
+    });
+
+    server.get('/syfooprest/api/arbeidsforhold', (req, res) => {
+        res.setHeader('Content-Type', 'application/json');
+        res.send(JSON.stringify(mockData[ARBEIDSFORHOLD]));
     });
 
     server.get('/syfooprest/api/virksomhet/*', (req, res) => {
