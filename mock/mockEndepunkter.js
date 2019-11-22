@@ -214,7 +214,7 @@ function mockForOpplaeringsmiljo(server) {
         res.send(JSON.stringify(mockData[PERSON]));
     });
 
-    server.get('/restoppfoelgingsdialog/api/naermesteleder/*', (req, res) => {
+    server.get('/syfooprest/api/naermesteleder/*', (req, res) => {
         res.setHeader('Content-Type', 'application/json');
         res.send(JSON.stringify(mockData[NAERMESTELEDER]));
     });
