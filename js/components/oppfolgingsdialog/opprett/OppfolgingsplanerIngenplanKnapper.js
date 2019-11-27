@@ -1,8 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { getLedetekst } from '@navikt/digisyfo-npm';
 import { oppfolgingsdialogPt } from '../../../proptypes/opproptypes';
 import { erOppfolgingsdialogOpprettbarDirekte } from '../../../utils/oppfolgingsplanUtils';
+
+const texts = {
+    buttonCreate: 'Lag en ny plan',
+};
 
 const OppfolgingsplanerIngenplanKnapper = (
     {
@@ -12,19 +15,18 @@ const OppfolgingsplanerIngenplanKnapper = (
     }) => {
     return (
         <div className="knapperad knapperad--justervenstre">
-            { erOppfolgingsdialogOpprettbarDirekte(oppfolgingsdialoger) ?
-                <button
+            { erOppfolgingsdialogOpprettbarDirekte(oppfolgingsdialoger)
+                ? <button
                     className="knapp knapperad__element"
                     onClick={opprett}>
-                    {getLedetekst('oppfolgingsdialog.knapp.ny-oppfolgingsdialog')}
+                    {texts.buttonCreate}
                 </button>
-                :
-                <button
+                : <button
                     className="knapp knapperad__element"
                     onClick={() => {
                         visOppfolgingsdialogOpprett(true);
                     }}>
-                    {getLedetekst('oppfolgingsdialog.knapp.ny-oppfolgingsdialog')}
+                    {texts.buttonCreate}
                 </button>
             }
         </div>
