@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { findDOMNode } from 'react-dom';
-import {
-    getLedetekst,
-    scrollTo,
-} from '@navikt/digisyfo-npm';
+import { scrollTo } from '@navikt/digisyfo-npm';
 import { sorterArbeidsoppgaverEtterOpprettet } from '../../../../utils/arbeidsoppgaveUtils';
 import { capitalizeFirstLetter } from '../../../../utils/tekstUtils';
 import * as opProptypes from '../../../../proptypes/opproptypes';
@@ -15,6 +12,56 @@ import LeggTilElementKnapper from '../LeggTilElementKnapper';
 import ArbeidsoppgaverListe from './ArbeidsoppgaverListe';
 import ArbeidsoppgaverInfoboks from './ArbeidsoppgaverInfoboks';
 import LagreArbeidsoppgaveSkjema from './LagreArbeidsoppgaveSkjema';
+
+const texts = {
+    updateError: 'En midlertidig feil gjør at vi ikke kan lagre endringene dine akkurat nå. Prøv igjen senere.',
+    infoboks: {
+        title: 'Hva er den sykmeldtes arbeidsoppgaver?',
+        info: `
+            Det er en god start å lage en oversikt over arbeidsoppgavene.
+            Både du og arbeidstakeren kan legge inn oppgaver, men det er bare arbeidstakeren som kan ta stilling til om det er mulig å gjøre noen av dem i sykmeldingsperioden.
+            Oversikten skal gi deg et godt utgangspunkt for den videre oppfølgingen.
+        `,
+    },
+    arbeidsoppgaverInfoboksStilling: {
+        title: 'Lag en liste over de daglige arbeidsoppgavene',
+    },
+};
+
+const textStilling = (stilling) => {
+    return `Den sykmeldte jobber som  ${stilling.yrke.toLowerCase()} ${stilling.prosent} %`;
+};
+
+export const ArbeidsoppgaverInfoboksStilling = (
+    {
+        oppfolgingsplan,
+        visArbeidsoppgaveSkjema,
+        toggleArbeidsoppgaveSkjema,
+    }) => {
+    return (
+        <ArbeidsoppgaverInfoboks
+            tittel={texts.arbeidsoppgaverInfoboksStilling.title}
+            visSkjema={visArbeidsoppgaveSkjema}
+            toggleSkjema={toggleArbeidsoppgaveSkjema}
+        >
+            { oppfolgingsplan.arbeidstaker.stillinger.length > 0 &&
+            <div>
+                { oppfolgingsplan.arbeidstaker.stillinger.map((stilling, idx) => {
+                    return (<p key={idx}>
+                        {textStilling(stilling)}
+                    </p>);
+                })
+                }
+            </div>
+            }
+        </ArbeidsoppgaverInfoboks>);
+};
+
+ArbeidsoppgaverInfoboksStilling.propTypes = {
+    oppfolgingsplan: opProptypes.oppfolgingsdialogPt,
+    visArbeidsoppgaveSkjema: PropTypes.bool,
+    toggleArbeidsoppgaveSkjema: PropTypes.func,
+};
 
 class Arbeidsoppgaver extends Component {
     constructor(props) {
@@ -56,7 +103,7 @@ class Arbeidsoppgaver extends Component {
             this.setState({
                 lagreNyOppgaveFeilet: true,
                 visArbeidsoppgaveSkjema: true,
-                varselTekst: getLedetekst('oppfolgingsdialog.oppdatering.feilmelding'),
+                varselTekst: texts.updateError,
             });
         }
     }
@@ -116,33 +163,20 @@ class Arbeidsoppgaver extends Component {
             (() => {
                 return isEmpty(oppfolgingsdialog.arbeidsoppgaveListe) ?
                     <div>
-                        { this.state.visArbeidsoppgaveSkjema && <ArbeidsoppgaverInfoboks
-                            tittel={getLedetekst('oppfolgingsdialog.arbeidsoppgaverInfoboks.tittel.arbeidsgiver')}
-                            visSkjema={this.state.visArbeidsoppgaveSkjema}
-                            toggleSkjema={this.toggleArbeidsoppgaveSkjema}
-                        >
-                            { oppfolgingsdialog.arbeidstaker.stillinger.length > 0 &&
-                            <div>
-                                { oppfolgingsdialog.arbeidstaker.stillinger.map((stilling, idx) => {
-                                    return (<p key={idx}>
-                                        {getLedetekst('oppfolgingsdialog.arbeidsoppgaverInfoboks.arbeidsgiver.stilling', {
-                                            '%YRKE%': stilling.yrke.toLowerCase(),
-                                            '%PROSENT%': stilling.prosent,
-                                        })}
-                                    </p>);
-                                })
-                                }
-                            </div>
-                            }
-                        </ArbeidsoppgaverInfoboks>
+                        { this.state.visArbeidsoppgaveSkjema &&
+                        <ArbeidsoppgaverInfoboksStilling
+                            oppfolgingsplan={oppfolgingsdialog}
+                            visArbeidsoppgaveSkjema={this.state.visArbeidsoppgaveSkjema}
+                            toggleArbeidsoppgaveSkjema={this.toggleArbeidsoppgaveSkjema}
+                        />
                         }
                         {
                             !this.state.visArbeidsoppgaveSkjema ?
                                 <OppfolgingsplanInfoboks
                                     svgUrl={`${getContextRoot()}/img/svg/arbeidsoppgave-onboarding.svg`}
                                     svgAlt="nyArbeidsoppgave"
-                                    tittel={getLedetekst('oppfolgingsdialog.arbeidsgiver.onboarding.arbeidsoppgave.tittel')}
-                                    tekst={getLedetekst('oppfolgingsdialog.arbeidsgiver.onboarding.arbeidsoppgave.tekst')}
+                                    tittel={texts.infoboks.title}
+                                    tekst={texts.infoboks.info}
                                 >
                                     <LeggTilElementKnapper
                                         visSkjema={this.state.visArbeidsoppgaveSkjema}
@@ -163,25 +197,11 @@ class Arbeidsoppgaver extends Component {
                     </div>
                     :
                     <div>
-                        <ArbeidsoppgaverInfoboks
-                            tittel={getLedetekst('oppfolgingsdialog.arbeidsoppgaverInfoboks.tittel.arbeidsgiver')}
-                            visSkjema={this.state.visArbeidsoppgaveSkjema}
-                            toggleSkjema={this.toggleArbeidsoppgaveSkjema}
-                        >
-                            { oppfolgingsdialog.arbeidstaker.stillinger.length > 0 &&
-                            <div>
-                                { oppfolgingsdialog.arbeidstaker.stillinger.map((stilling, idx) => {
-                                    return (<p key={idx}>
-                                        {getLedetekst('oppfolgingsdialog.arbeidsoppgaverInfoboks.arbeidsgiver.stilling', {
-                                            '%YRKE%': stilling.yrke.toLowerCase(),
-                                            '%PROSENT%': stilling.prosent,
-                                        })}
-                                    </p>);
-                                })
-                                }
-                            </div>
-                            }
-                        </ArbeidsoppgaverInfoboks>
+                        <ArbeidsoppgaverInfoboksStilling
+                            oppfolgingsplan={oppfolgingsdialog}
+                            visArbeidsoppgaveSkjema={this.state.visArbeidsoppgaveSkjema}
+                            toggleArbeidsoppgaveSkjema={this.toggleArbeidsoppgaveSkjema}
+                        />
                         {
                             this.state.visArbeidsoppgaveSkjema &&
                             <LagreArbeidsoppgaveSkjema

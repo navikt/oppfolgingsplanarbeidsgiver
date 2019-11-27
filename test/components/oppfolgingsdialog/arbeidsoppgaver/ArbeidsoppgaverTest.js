@@ -3,13 +3,10 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import chaiEnzyme from 'chai-enzyme';
 import sinon from 'sinon';
-import { setLedetekster } from '@navikt/digisyfo-npm';
-import ledetekster from '../../../mock/ledetekster_mock';
-import Arbeidsoppgaver from '../../../../js/components/oppfolgingsdialog/utfylling/arbeidsoppgaver/Arbeidsoppgaver';
+import Arbeidsoppgaver, { ArbeidsoppgaverInfoboksStilling } from '../../../../js/components/oppfolgingsdialog/utfylling/arbeidsoppgaver/Arbeidsoppgaver';
 import ArbeidsoppgaverListe from '../../../../js/components/oppfolgingsdialog/utfylling/arbeidsoppgaver/ArbeidsoppgaverListe';
 import LagreArbeidsoppgaveSkjema from '../../../../js/components/oppfolgingsdialog/utfylling/arbeidsoppgaver/LagreArbeidsoppgaveSkjema';
 import LeggTilElementKnapper from '../../../../js/components/oppfolgingsdialog/utfylling/LeggTilElementKnapper';
-import ArbeidsoppgaverInfoboks from '../../../../js/components/oppfolgingsdialog/utfylling/arbeidsoppgaver/ArbeidsoppgaverInfoboks';
 import OppfolgingsplanInfoboks from '../../../../js/components/app/OppfolgingsplanInfoboks';
 import getOppfolgingsdialog from '../../../mock/mockOppfolgingsdialog';
 
@@ -51,7 +48,6 @@ describe('Arbeidsoppgaver', () => {
     beforeEach(() => {
         lagreArbeidsoppgave = sinon.spy();
         slettArbeidsoppgave = sinon.spy();
-        setLedetekster(ledetekster);
         arbeidsoppgaver = {};
         window.sessionStorage = storageMock();
 
@@ -88,7 +84,7 @@ describe('Arbeidsoppgaver', () => {
             }}
         />);
         component.setProps({ arbeidsoppgaver: { lagringFeilet: true } });
-        expect(component.state().varselTekst).to.equal('Det oppsto en feil, og du fikk ikke lagret. Prøv igjen.');
+        expect(component.state().varselTekst).to.equal('En midlertidig feil gjør at vi ikke kan lagre endringene dine akkurat nå. Prøv igjen senere.');
     });
 
     it('Skal ikke vise feilmelding dersom lagring av ny arbeidsoppgave ikke feilet', () => {
@@ -123,11 +119,11 @@ describe('Arbeidsoppgaver', () => {
             />);
         });
 
-        it('Skal vise ArbeidsoppgaverInfoboks', () => {
+        it('Skal vise ArbeidsoppgaverInfoboksStilling', () => {
             componentUtenArbeidsoppgaver.setState({
                 visArbeidsoppgaveSkjema: true,
             });
-            expect(componentUtenArbeidsoppgaver.find(ArbeidsoppgaverInfoboks)).to.have.length(1);
+            expect(componentUtenArbeidsoppgaver.find(ArbeidsoppgaverInfoboksStilling)).to.have.length(1);
         });
 
         it('Skal vise OppfolgingsplanInfoboks, om det ikke er arbeidsoppgaver', () => {
@@ -163,8 +159,8 @@ describe('Arbeidsoppgaver', () => {
             />);
         });
 
-        it('Skal vise ArbeidsoppgaverInfoboks', () => {
-            expect(componentMedArbeidsoppgaver.find(ArbeidsoppgaverInfoboks)).to.have.length(1);
+        it('Skal vise ArbeidsoppgaverInfoboksStilling', () => {
+            expect(componentMedArbeidsoppgaver.find(ArbeidsoppgaverInfoboksStilling)).to.have.length(1);
         });
 
         it('Skal vise ArbeidsoppgaverListe, om det er arbeidsoppgaver', () => {
