@@ -4,11 +4,7 @@ import {
     Knapp,
     Hovedknapp,
 } from 'nav-frontend-knapper';
-import {
-    getHtmlLedetekst,
-    getLedetekst,
-    Utvidbar,
-} from '@navikt/digisyfo-npm';
+import { Utvidbar } from '@navikt/digisyfo-npm';
 import GodkjennPlanOversiktInformasjon from '../GodkjennPlanOversiktInformasjon';
 import OppfolgingsplanInnholdboks from '../../../app/OppfolgingsplanInnholdboks';
 import GodkjennPlanTidspunkt from '../GodkjennPlanTidspunkt';
@@ -16,10 +12,33 @@ import TidligereAvbruttePlaner from '../TidligereAvbruttePlaner';
 import GodkjennPlanTilAltinnTekst from './GodkjennPlanTilAltinnTekst';
 import { oppfolgingsdialogPt } from '../../../../proptypes/opproptypes';
 
-export const GodkjennPlanMottattUtvidbar = ({ oppfolgingsdialog, rootUrl }) => {
-    const tittelNokkel = 'oppfolgingsdialog.arbeidstaker.godkjennplan.mottatt.utvidbar.tittel';
+const texts = {
+    godkjennPlanMottattUtvidbar: {
+        title: 'Se planen',
+    },
+    godkjennPlanMottattKnapper: {
+        buttonApprove: 'Godkjenn',
+        buttonDecline: 'Gjør endringer',
+    },
+    godkjennPlanMottatt: {
+        title: 'Ønsker du å godkjenne denne versjonen?',
+    },
+};
+
+const TextReceived = ({ arbeidstakerName }) => {
     return (
-        <Utvidbar className="utvidbar--oppfolgingsplan" tittel={getLedetekst(tittelNokkel)}>
+        <React.Fragment>
+            Du har mottatt en ny oppfølgingsplan fra din arbeidsgiver: <b>{arbeidstakerName}</b> for godkjenning.
+        </React.Fragment>
+    );
+};
+TextReceived.propTypes = {
+    arbeidstakerName: PropTypes.string,
+};
+
+export const GodkjennPlanMottattUtvidbar = ({ oppfolgingsdialog, rootUrl }) => {
+    return (
+        <Utvidbar className="utvidbar--oppfolgingsplan" tittel={texts.godkjennPlanMottattUtvidbar.title}>
             <GodkjennPlanOversiktInformasjon
                 oppfolgingsdialog={oppfolgingsdialog}
                 rootUrl={rootUrl}
@@ -41,7 +60,7 @@ export const GodkjennPlanMottattKnapper = ({ godkjennPlan, oppfolgingsdialog, av
                     id="godkjentKnapp"
                     autoFocus
                     onClick={() => { godkjennPlan(oppfolgingsdialog.id, null, true, oppfolgingsdialog.arbeidstaker.fnr); }}>
-                    {getLedetekst('oppfolgingsdialog.godkjennPlanMottatt.knapp.godkjenn')}
+                    {texts.godkjennPlanMottattKnapper.buttonApprove}
                 </Hovedknapp>
             </div>
             <div className="knapperad__element">
@@ -49,7 +68,7 @@ export const GodkjennPlanMottattKnapper = ({ godkjennPlan, oppfolgingsdialog, av
                     onClick={() => {
                         avvisDialog(oppfolgingsdialog.id, oppfolgingsdialog.arbeidstaker.fnr);
                     }}>
-                    {getLedetekst('oppfolgingsdialog.godkjennPlanMottatt.knapp.avslaa')}
+                    {texts.godkjennPlanMottattKnapper.buttonDecline}
                 </Knapp>
             </div>
         </div>
@@ -69,19 +88,17 @@ const GodkjennPlanMottatt = (
         godkjennPlan,
         avvisDialog,
     }) => {
-    const infoboksTittelNokkel = 'oppfolgingsdialog.godkjennPlanMottatt.tittel';
-    const infoboksTekst = getHtmlLedetekst('oppfolgingsdialog.godkjennPlanMottatt.tekst.arbeidsgiver', {
-        '%ARBEIDSTAKER%': oppfolgingsdialog.arbeidstaker.navn,
-    });
     return (
         <OppfolgingsplanInnholdboks
             svgUrl={`${rootUrl}/img/svg/plan-mottatt.svg`}
             svgAlt="mottatt"
-            tittel={getLedetekst(infoboksTittelNokkel)}
+            tittel={texts.godkjennPlanMottatt.title}
         >
             <div className="godkjennPlanMottatt">
                 <div className="blokk">
-                    <p dangerouslySetInnerHTML={infoboksTekst} />
+                    <p>
+                        <TextReceived arbeidstakerName={oppfolgingsdialog.arbeidstaker.navn} />
+                    </p>
                 </div>
 
                 <GodkjennPlanTidspunkt
