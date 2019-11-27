@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { getLedetekst } from '@navikt/digisyfo-npm';
 import DatovelgerTiltak from '../../../../skjema/DatovelgerTiltak';
 import { restdatoTildato } from '../../../../utils/datoUtils';
 import { tiltakPt } from '../../../../proptypes/opproptypes';
@@ -16,7 +15,7 @@ export const TiltakDatovelgerFelt = (
     }) => {
     return (
         <div className="tiltakSkjema__datovelger__felt">
-            <label htmlFor={felt.navn}>{getLedetekst(felt.tekst)}</label>
+            <label htmlFor={felt.navn}>{felt.tekst}</label>
             <DatovelgerTiltak
                 name={felt.navn}
                 id={felt.navn}

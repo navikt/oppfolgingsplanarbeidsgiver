@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form';
-import { getLedetekst } from '@navikt/digisyfo-npm';
 import {
     OPPRETT_TILTAK_NY,
     STATUS_TILTAK,
@@ -24,30 +23,43 @@ import {
 } from '../../../../proptypes/opproptypes';
 import { tiltakSkjemaFeltPt } from '../../../../proptypes/tiltakproptypes';
 
+const texts = {
+    felter: {
+        tiltaknavn: 'Lag en overskrift',
+        beskrivelseLabel: 'BESKRIVELSE',
+        beskrivelse: 'Beskriv hva som skal skje',
+        gjennomfoering: 'Hvordan skal dette følges opp underveis?',
+        beskrivelseIkkeAktuelt: 'Beskriv hvorfor tiltaket ikke er aktuelt akkurat nå',
+        startdato: 'Startdato',
+        sluttdato: 'Sluttdato',
+    },
+    beskrivelsePersonvern: 'Husk at arbeidstakeren din kan se det du skriver her. Du må ikke gi sensitive personopplysninger',
+};
+
 export const FELTER = {
     tiltaknavn: {
         navn: 'tiltaknavn',
-        tekst: 'oppfolgingsdialog.tiltak.opprett.navn',
+        tekst: texts.felter.tiltaknavn,
     },
     beskrivelse: {
         navn: 'beskrivelse',
-        tekst: 'oppfolgingsdialog.tiltak.opprett.beskrivelse',
+        tekst: texts.felter.beskrivelse,
     },
     gjennomfoering: {
         navn: 'gjennomfoering',
-        tekst: 'oppfolgingsdialog.tiltak.opprett.oppfoelging',
+        tekst: texts.felter.gjennomfoering,
     },
     beskrivelseIkkeAktuelt: {
         navn: 'beskrivelseIkkeAktuelt',
-        tekst: 'oppfolgingsdialog.tiltak.opprett.vurdering',
+        tekst: texts.felter.beskrivelseIkkeAktuelt,
     },
     startdato: {
         navn: 'fom',
-        tekst: 'oppfolgingsdialog.godkjennplanskjema.datovelger.startdato',
+        tekst: texts.felter.startdato,
     },
     sluttdato: {
         navn: 'tom',
-        tekst: 'oppfolgingsdialog.godkjennplanskjema.datovelger.sluttdato',
+        tekst: texts.felter.sluttdato,
     },
 };
 
@@ -61,7 +73,7 @@ export const TiltakNavn = ({ felt }) => {
             className="skjemaelement__label"
             id={felt.navn}
             htmlFor={`${felt.navn}-input`}>
-            {getLedetekst(felt.tekst)}
+            {felt.tekst}
         </label>
         <Field
             className="input--fullbredde"
@@ -90,7 +102,7 @@ export const TiltakBeskrivelse = (
             { tiltak && tiltak.beskrivelse &&
             [
                 <label key={`tiltak-besk-label-${tiltak.tiltakId}`} className="tiltaktabell--beskrivelse">
-                    {getLedetekst('oppfolgingsdialog.tiltak.beskrivelse')}
+                    {texts.felter.beskrivelseLabel}
                 </label>,
                 <p key={`tiltak-besk-p-${tiltak.tiltakId}`} >{tiltak.beskrivelse}</p>,
             ]
@@ -99,7 +111,7 @@ export const TiltakBeskrivelse = (
         :
         <div className="lagretiltakskjema__inputgruppe">
             <label className="skjemaelement__label" id={felt.navn} htmlFor={`${felt.navn}-input`}>
-                {getLedetekst(felt.tekst)}
+                {felt.tekst}
             </label>
             <Field
                 className="input__tiltak--beskrivelse"
@@ -127,7 +139,7 @@ export const Gjennomfoering = ({ felt, tiltak, tekst, fnr }) => {
                 className="skjemaelement__label"
                 id={felt.navn}
                 htmlFor={`${felt.navn}-input`}>
-                {getLedetekst(felt.tekst)}
+                {felt.tekst}
             </label>
             <Field
                 className="input__tiltak--gjennom"
@@ -156,7 +168,7 @@ export const BeskrivelseIkkeAktuelt = ({ felt, tiltak, tekst, fnr }) => {
                 className="skjemaelement__label"
                 id={felt.navn}
                 htmlFor={`${felt.navn}-input`}>
-                {getLedetekst(felt.tekst)}
+                {felt.tekst}
             </label>
             <Field
                 className="input__tiltak--gjennom"
@@ -257,7 +269,7 @@ export class TiltakSkjemaKomponent extends Component {
             visFeilMelding,
             tiltakReducer,
         } = this.props;
-        const personvernTekst = getLedetekst('oppfolgingsdialog.personvern.arbeidsgiver');
+        const personvernTekst = texts.beskrivelsePersonvern;
         return (
             <div className="utvidbar__innholdContainer">
                 <form onSubmit={handleSubmit(this.handleSubmit)} className={this.hentSkjemaClassName()} >

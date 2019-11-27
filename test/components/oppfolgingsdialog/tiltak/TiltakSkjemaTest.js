@@ -6,7 +6,6 @@ import chaiEnzyme from 'chai-enzyme';
 import { Field } from 'redux-form';
 import rewire from 'rewire';
 import { Knapp } from 'nav-frontend-knapper';
-import { setLedetekster } from '@navikt/digisyfo-npm';
 import getTiltak from '../../../mock/mockTiltak';
 import TiltakKnapper from '../../../../js/components/oppfolgingsdialog/utfylling/tiltak/TiltakKnapper';
 import TiltakDatovelger from '../../../../js/components/oppfolgingsdialog/utfylling/tiltak/TiltakDatovelger';
@@ -24,14 +23,9 @@ describe('TiltakSkjema', () => {
     let komponent;
     let handleSubmit;
     const tiltak = getTiltak();
-    let ledetekster;
     const fnr = '1010101010101';
 
     beforeEach(() => {
-        ledetekster = {
-            'oppfolgingsdialog.tiltak.beskrivelse': 'beskrivelse',
-        };
-        setLedetekster(ledetekster);
         handleSubmit = sinon.spy();
         komponent = shallow(<TiltakSkjemaKomponent
             initialize={sinon.spy()}
