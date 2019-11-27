@@ -1,10 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { getLedetekst } from '@navikt/digisyfo-npm';
 import { STATUS_TILTAK } from '../../../../../konstanter';
 import { tiltakPt } from '../../../../../proptypes/opproptypes';
 import { toDateMedMaanedNavn } from '../../../../../utils/datoUtils';
 import { skalVurdereTiltak } from '../../../../../utils/tiltakUtils';
+
+const texts = {
+    status: {
+        avtalt: 'Avtalt',
+        ikkAktuelt: 'Ikke aktuelt',
+        foreslatt: 'Foreslått',
+    },
+};
 
 const TiltakListeRad = (
     {
@@ -19,18 +26,17 @@ const TiltakListeRad = (
     switch (tiltak.status) {
         case STATUS_TILTAK.AVTALT:
             klasse = 'etikett--suksess';
-            status = 'oppfolgingsdialog.tiltak.status.godkjent';
+            status = texts.status.avtalt;
             break;
         case STATUS_TILTAK.IKKE_AKTUELT:
             klasse = 'etikett--advarsel';
-            status = 'oppfolgingsdialog.tiltak.status.ikke.aktuelt';
+            status = texts.status.ikkAktuelt;
             break;
         default:
             klasse = 'etikett--fokus';
-            status = 'oppfolgingsdialog.tiltak.status.foreslaatt';
+            status = texts.status.foreslatt;
             break;
     }
-
     return (
         <div className="tiltaktabell__rad__celle">
             { tiltak.fom && tiltak.tom && tiltak.status !== STATUS_TILTAK.IKKE_AKTUELT &&
@@ -48,7 +54,7 @@ const TiltakListeRad = (
             { tiltak.status &&
             <div className={`tiltaktabell__rad__status etikett ${klasse}`} >
                 <span className="typo-normal">
-                    {getLedetekst(status)}
+                    {status}
                 </span>
             </div>
             }
