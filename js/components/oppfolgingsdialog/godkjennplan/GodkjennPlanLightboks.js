@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form';
 import Alertstripe from 'nav-frontend-alertstriper';
 import { Hovedknapp } from 'nav-frontend-knapper';
-import { getLedetekst } from '@navikt/digisyfo-npm';
 import {
     fraInputdatoTilJSDato,
     sluttDatoSenereEnnStartDato,
@@ -14,6 +13,23 @@ import Radioknapper from '../../../skjema/Radioknapper';
 import CheckboxSelvstendig from '../../../skjema/CheckboxSelvstendig';
 import GodkjennPlanSkjemaDatovelger from './GodkjennPlanSkjemaDatovelger';
 import { oppfolgingsdialogPt } from '../../../proptypes/opproptypes';
+
+const texts = {
+    title: 'Du sender nå en oppfølgingsplan til arbeidstakeren for godkjenning',
+    info: `
+        Arbeidstakeren kan deretter gjøre endringer i oppfølgingsplanen. Da får du den til ny godkjenning.
+        Alle godkjente planer mellom deg og arbeidstakeren vil også bli tilgjengelige for de hos dere som har tilganger i Altinn.
+    `,
+    titleDatovelger: 'Når skal planen vare fra og til?',
+    checkboxLabel: 'Jeg er enig i denne oppfølgingsplanen',
+    approval: {
+        sendForApproval: 'Send planen til arbeidstakeren for godkjenning',
+        sendWithoutApproval: 'Opprett en utgave uten godkjenning fra arbeidstakeren',
+    },
+    infoWithoutApproval: 'En plan uten godkjenning fra den sykmeldte skal kun opprettes dersom den sykmeldte ikke kan eller ønsker å delta. Dette vil bli synlig i planen.',
+    buttonSend: 'Send til godkjenning',
+    buttonCancel: 'Avbryt',
+};
 
 export class GodkjennPlanLightboksComponent extends Component {
     constructor(props) {
@@ -72,7 +88,7 @@ export class GodkjennPlanLightboksComponent extends Component {
         } = this.props;
         return (<div className="panel godkjennPlanLightboks">
             <form onSubmit={handleSubmit(this.godkjennPlan)} className="godkjennPlanSkjema">
-                <h2>{getLedetekst('oppfolgingsdialog.godkjennPlanLightboksAG.tittel')}</h2>
+                <h2>{texts.title}</h2>
 
                 <div className="inputgruppe">
                     <Field
@@ -84,14 +100,14 @@ export class GodkjennPlanLightboksComponent extends Component {
                         <input
                             key="opprettplan-1"
                             value={'true'}
-                            label={getLedetekst('oppfolgingsdialog.arbeidsgiver.plan.godkjenning.radiobutton')}
+                            label={texts.approval.sendForApproval}
                             id="giGodkjenning"
                             disabled={this.state.visIkkeUtfyltFeilmelding}
                         />
                         <input
                             key="opprettplan-2"
                             value={'tvungenGodkjenning'}
-                            label={getLedetekst('oppfolgingsdialog.arbeidsgiver.plan.utengodkjenning.radiobutton')}
+                            label={texts.approval.sendWithoutApproval}
                             id="opprettUtenGodkjenning"
                             disabled={this.state.visIkkeUtfyltFeilmelding}
                         />
@@ -103,15 +119,15 @@ export class GodkjennPlanLightboksComponent extends Component {
                     className="alertstripe--notifikasjonboks"
                     type="info"
                     solid>
-                    {getLedetekst('oppfolgingsdialog.godkjennPlanLightboksAT.varselstripe.tvungenGodkjenning.tekst')}
+                    {texts.infoWithoutApproval}
                 </Alertstripe>
                 }
 
-                <p>{getLedetekst('oppfolgingsdialog.godkjennPlanLightboksAG.tekst')}</p>
+                <p>{texts.info}</p>
 
                 <hr />
 
-                <h3>{getLedetekst('oppfolgingsdialog.godkjennPlanLightboksAG.datovelger.tittel')}</h3>
+                <h3>{texts.titleDatovelger}</h3>
 
                 <GodkjennPlanSkjemaDatovelger />
 
@@ -124,7 +140,7 @@ export class GodkjennPlanLightboksComponent extends Component {
                             id="godkjennInput"
                             name="godkjennInput"
                             component={CheckboxSelvstendig}
-                            label={getLedetekst('oppfolgingsdialog.godkjennPlanLightboksAT.checkbox')}
+                            label={texts.checkboxLabel}
                         />
                     </div>
                 </div>
@@ -133,7 +149,7 @@ export class GodkjennPlanLightboksComponent extends Component {
                     <div className="knapperad__element">
                         <Hovedknapp
                             htmlType="submit">
-                            {getLedetekst('oppfolgingsdialog.knapp.send-godkjenning')}
+                            {texts.buttonSend}
                         </Hovedknapp>
                     </div>
                     <div className="knapperad__element">
@@ -143,7 +159,7 @@ export class GodkjennPlanLightboksComponent extends Component {
                             onClick={() => {
                                 avbryt();
                             }}>
-                            {getLedetekst('oppfolgingsdialog.knapp.avbryt')}
+                            {texts.buttonCancel}
                         </button>
                     </div>
                 </div>
