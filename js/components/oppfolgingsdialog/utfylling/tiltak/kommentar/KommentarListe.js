@@ -1,13 +1,17 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import cn from 'classnames';
-import { getLedetekst } from '@navikt/digisyfo-npm';
 import {
     kommentarPt,
     kommentarReducerPt,
 } from '../../../../../proptypes/opproptypes';
 import { toDateMedMaanedNavn } from '../../../../../utils/datoUtils';
 import TiltakVarselFeil from '../TiltakVarselFeil';
+
+const texts = {
+    buttonDelete: 'Slett',
+    saveError: 'En midlertidig feil gjør at vi ikke kan lagre endringene dine akkurat nå. Prøv igjen senere.',
+};
 
 export const hentAktoerNavnInitialer = (aktoerNavn) => {
     let initialer = '';
@@ -85,14 +89,14 @@ export class KommentarListeElement extends Component {
                     onClick={() => {
                         sendSlett(elementId, kommentar.id);
                     }}>
-                    {getLedetekst('oppfolgingsdialog.knapp.slett-element')}
+                    {texts.buttonDelete}
                 </button>)
             }
             {
                 this.state.visSlettingKommentarFeilet
                 && feilMelding
                 && <TiltakVarselFeil
-                    tekst={getLedetekst('oppfolgingsdialog.oppdatering.feilmelding')} />
+                    tekst={texts.saveError} />
             }
         </Snakkeboble>);
     }
