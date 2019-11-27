@@ -3,7 +3,6 @@ import chai from 'chai';
 import { shallow } from 'enzyme';
 import chaiEnzyme from 'chai-enzyme';
 import sinon from 'sinon';
-import { Hovedknapp } from 'nav-frontend-knapper';
 import Oppfolgingsdialoger, {
     AvkreftetLederInfoboks,
 } from '../../../js/components/oppfolgingsdialog/Oppfolgingsdialoger';
@@ -106,7 +105,7 @@ describe('Oppfolgingsdialoger', () => {
 
         it('Skal vise knapp', () => {
             component = shallow(<AvkreftetLederInfoboks />);
-            expect(component.find(Hovedknapp)).to.have.length(1);
+            expect(component.find('a')).to.have.length(1);
         });
     });
 });

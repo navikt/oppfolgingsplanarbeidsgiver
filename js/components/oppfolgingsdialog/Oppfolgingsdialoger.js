@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { getLedetekst } from '@navikt/digisyfo-npm';
-import { Hovedknapp } from 'nav-frontend-knapper';
 import {
     sykmeldt as sykmeldtPt,
 } from '../../shapes';
@@ -12,7 +10,6 @@ import {
     oppfolgingsdialogPt,
     virksomhetReducerPt,
 } from '../../proptypes/opproptypes';
-import history from '../../history';
 import {
     finnOgHentKontaktinfoSomMangler,
     finnOgHentNaermesteLedereSomMangler,
@@ -23,19 +20,27 @@ import OppfolgingsdialogerInnhold from './OppfolgingsdialogerInnhold';
 import SykmeldtIngenKontaktinformasjon from './SykmeldtIngenKontaktinformasjon';
 import AppSpinner from '../AppSpinner';
 import OppfolgingsplanInfoboks from '../app/OppfolgingsplanInfoboks';
-import { getContextRoot } from '../../routers/paths';
+import { getContextRoot, getDineSykmeldteRoot } from '../../routers/paths';
+
+const texts = {
+    avkreftetLederInfoboks: {
+        title: 'Takk for beskjeden!',
+        info: 'Bedriften din vil nå få beskjed om at de må melde inn en ny leder.',
+        buttonBack: 'Tilbake til forsiden',
+    },
+};
 
 export const AvkreftetLederInfoboks = () => {
     return (<OppfolgingsplanInfoboks
         svgUrl={`${getContextRoot()}/img/svg/ny-naermesteleder-slettet.svg`}
         svgAlt="Leder"
-        tittel={getLedetekst('oppfolgingsdialog.arbeidsgiver.avkreftetLederInfoboks.tittel')}
-        tekst={getLedetekst('oppfolgingsdialog.arbeidsgiver.avkreftetLederInfoboks.tekst')}
+        tittel={texts.avkreftetLederInfoboks.title}
+        tekst={texts.avkreftetLederInfoboks.info}
     >
         <div className="knapperad">
-            <Hovedknapp className="knapperad__element" onClick={() => { history.push(getContextRoot()); }}>
-                {getLedetekst('oppfolgingsdialog.knapp.tilbake-forsiden')}
-            </Hovedknapp>
+            <a className="knapp knapp--hoved knapperad__element" href={getDineSykmeldteRoot()}>
+                {texts.avkreftetLederInfoboks.buttonBack}
+            </a>
         </div>
     </OppfolgingsplanInfoboks>);
 };
