@@ -1,10 +1,23 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { getLedetekst } from '@navikt/digisyfo-npm';
-import { Field, reduxForm } from 'redux-form';
-import { OPPRETT_SKJEMANAVN, tekstfeltRegex } from '../../../../konstanter';
+import {
+    Field,
+    reduxForm,
+} from 'redux-form';
+import {
+    OPPRETT_SKJEMANAVN,
+    tekstfeltRegex,
+} from '../../../../konstanter';
 import * as opProptypes from '../../../../proptypes/opproptypes';
 import Inputfelt from '../../../../skjema/Inputfelt';
+
+const texts = {
+    felter: {
+        arbeidsoppgavenavn: {
+            label: 'Navn på arbeidsoppgave',
+        },
+    },
+};
 
 export class LagreArbeidsoppgaveSkjemaKomponent extends Component {
     constructor() {
@@ -48,7 +61,7 @@ export class LagreArbeidsoppgaveSkjemaKomponent extends Component {
         return (<form className="panel" onSubmit={handleSubmit}>
             <div className="skjemaelement">
                 <label className="skjemaelement__label" id="arbeidsoppgavenavn" htmlFor="arbeidsoppgavenavn-input">
-                    {getLedetekst('oppfolgingsdialog.arbeidstaker.arbeidsoppgave.opprett.skjema.navn')}
+                    {texts.felter.arbeidsoppgavenavn.label}
                 </label>
                 <Field
                     className="skjemaelement__input input--fullbredde"
