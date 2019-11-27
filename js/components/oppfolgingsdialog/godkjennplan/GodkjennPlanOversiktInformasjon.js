@@ -1,10 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { HjelpetekstUnderVenstre } from 'nav-frontend-hjelpetekst';
-import {
-    getLedetekst,
-    toDatePrettyPrint,
-} from '@navikt/digisyfo-npm';
+import { toDatePrettyPrint } from '@navikt/digisyfo-npm';
 import { KANGJENNOMFOERES, STATUS_TILTAK } from '../../../konstanter';
 import { toDateMedMaanedNavn } from '../../../utils/datoUtils';
 import { capitalizeFirstLetter } from '../../../utils/tekstUtils';
@@ -20,14 +17,86 @@ import {
 } from '../../../proptypes/opproptypes';
 import { periodePt } from '../../../proptypes/periodeProptypes';
 
+const texts = {
+    informasjonPanelOverskrift: {
+        title: 'Oppfølgingsplan',
+    },
+    informasjonPanelArbeidsgiver: {
+        title: 'Arbeidsgiverens kontaktinformasjon',
+        labels: {
+            virksomhetsnummer: 'Organisasjonsnummer',
+            name: 'Navn på nærmeste leder',
+            telephone: 'Telefonnummer',
+            email: 'E-post',
+        },
+    },
+    informasjonPanelTiltak: {
+        title: 'Tiltak',
+        status: {
+            avtalt: 'Avtalt',
+            ikkeAktuelt: 'Ikke aktuelt',
+            foreslatt: 'Foreslått',
+        },
+    },
+    informasjonPanelSykmeldt: {
+        title: 'Den sykmeldtes kontaktinformasjon',
+        labels: {
+            fnr: 'Fødselsnummer',
+            name: 'Navn',
+            telephone: 'Telefonnummer',
+            email: 'E-post',
+            stilling: 'Stilling',
+        },
+    },
+    informasjonPanelArbeidsoppgaverEtterGjennomfoering: {
+        titles: {
+            kan: 'Arbeidsoppgaver som kan gjøres',
+            tilrettelegging: 'Arbeidsoppgaver som kan gjøres med tilrettelegging',
+            kanIkke: 'Arbeidsoppgaver som ikke kan gjøres',
+            ikkeVurdert: 'Arbeidsoppgaver som ikke er blitt vurdert',
+        },
+        labels: {
+            sted: 'Fra annet sted',
+            tid: 'Med mer tid',
+            hjelp: 'Med hjelp/hjelpemiddel',
+        },
+    },
+    informasjonPanelSykeforlopsPerioder: {
+        title: 'Informasjon fra dette sykefraværet',
+        hjelpetekst: 'Ett sykefravær kan bestå av flere perioder hvis det er mindre enn 16 dager mellom dem. Har det gått mer enn 16 dager, regnes det som et nytt sykefravær.',
+        sykmeldingprosentLabel: 'Sykmeldingsprosent',
+    },
+    sykeforlopsPeriode: {
+        grad: 'sykmeldt',
+        gradReisetilskudd: 'sykmeldt med reisetilskudd',
+        behandlingsdager: 'Behandlingsdag(er)',
+        reisetilskudd: 'Reisetilskudd',
+        avventende: 'Avventende sykmelding',
+    },
+    tiltakBeskrivelse: {
+        label: 'Beskrivelse',
+    },
+    tiltakOppfoelging: {
+        label: 'OPPFØLGING OG GJENNOMFØRING',
+    },
+    tiltakBeskrivelseIkkeAktuelt: {
+        label: 'ARBEIDSGIVERS VURDERING',
+    },
+    tiltakForeslaattAv: {
+        label: 'FORESLÅTT AV',
+    },
+};
+const textInformasjonPanelOverskriftParagraph = (arbeidstaker, leader) => {
+    return `Mellom ${arbeidstaker} og ${leader}`;
+};
+
 export const InformasjonPanelOverskrift = ({ oppfolgingsdialog }) => {
     return (
         <div className="panel godkjennPlanOversiktInformasjon__panel">
-            <h2>{getLedetekst('oppfolgingsdialog.tittel')}</h2>
-            <p>{getLedetekst('oppfolgingsdialog.godkjennplanoversiktinformasjon.undertittel', {
-                '%ARBEIDSTAKER%': oppfolgingsdialog.arbeidstaker.navn,
-                '%ARBEIDSGIVER%': oppfolgingsdialog.arbeidsgiver.naermesteLeder.navn,
-            })}</p>
+            <h2>{texts.informasjonPanelOverskrift.title}</h2>
+            <p>
+                {textInformasjonPanelOverskriftParagraph(oppfolgingsdialog.arbeidstaker.navn, oppfolgingsdialog.arbeidsgiver.naermesteLeder.navn)}
+            </p>
         </div>
     );
 };
@@ -39,26 +108,26 @@ export const InformasjonPanelArbeidsgiver = ({ naermesteLeder, virksomhetsnummer
     return (
         <div className="panel godkjennPlanOversiktInformasjon__panel">
             <div className="godkjennPlanOversiktInformasjon__panel__header">
-                <h3>{getLedetekst('oppfolgingsdialog.godkjennplanoversiktinformasjon.arbeidsgiver.tittel')}</h3>
+                <h3>{texts.informasjonPanelArbeidsgiver.title}</h3>
             </div>
 
             <dl className="godkjennPlanOversiktInformasjon__panel__info">
-                <dt>{getLedetekst('oppfolgingsdialog.godkjennplanoversiktinformasjon.arbeidsgiver.orgnummer')}</dt>
+                <dt>{texts.informasjonPanelArbeidsgiver.labels.virksomhetsnummer}</dt>
                 <dd>{virksomhetsnummer}</dd>
 
                 {naermesteLeder && [
-                    <dt key={0}>{getLedetekst('oppfolgingsdialog.godkjennplanoversiktinformasjon.arbeidsgiver.navn')}</dt>,
+                    <dt key={0}>{texts.informasjonPanelArbeidsgiver.labels.name}</dt>,
                     <dd key={1}>{naermesteLeder.navn}</dd>,
 
                     naermesteLeder.tlf &&
                     <div key={2}>
-                        <dt>{getLedetekst('oppfolgingsdialog.godkjennplanoversiktinformasjon.arbeidsgiver.tlf')}</dt>
+                        <dt>{texts.informasjonPanelArbeidsgiver.labels.telephone}</dt>
                         <dd>{naermesteLeder.tlf}</dd>
                     </div>,
 
                     naermesteLeder.epost &&
                     <div key={3}>
-                        <dt>{getLedetekst('oppfolgingsdialog.godkjennplanoversiktinformasjon.arbeidsgiver.epost')}</dt>
+                        <dt>{texts.informasjonPanelArbeidsgiver.labels.email}</dt>
                         <dd>{naermesteLeder.epost}</dd>
                     </div>,
                 ]}
@@ -83,29 +152,29 @@ export const InformasjonPanelSykmeldt = ({ arbeidstaker }) => {
     return (
         <div className="panel godkjennPlanOversiktInformasjon__panel">
             <div className="godkjennPlanOversiktInformasjon__panel__header">
-                <h3>{getLedetekst('oppfolgingsdialog.godkjennplanoversiktinformasjon.arbeidstaker.tittel')}</h3>
+                <h3>{texts.informasjonPanelSykmeldt.title}</h3>
             </div>
             <dl className="godkjennPlanOversiktInformasjon__panel__info">
-                <dt>{getLedetekst('oppfolgingsdialog.godkjennplanoversiktinformasjon.arbeidstaker.fnr')}</dt>
+                <dt>{texts.informasjonPanelSykmeldt.labels.fnr}</dt>
                 <dd>{arbeidstaker.fnr}</dd>
 
-                <dt>{getLedetekst('oppfolgingsdialog.godkjennplanoversiktinformasjon.arbeidstaker.navn')}</dt>
+                <dt>{texts.informasjonPanelSykmeldt.labels.name}</dt>
                 <dd>{arbeidstaker.navn}</dd>
                 { arbeidstaker.tlf &&
                 <div>
-                    <dt>{getLedetekst('oppfolgingsdialog.godkjennplanoversiktinformasjon.arbeidstaker.tlf')}</dt>
+                    <dt>{texts.informasjonPanelSykmeldt.labels.telephone}</dt>
                     <dd>{arbeidstaker.tlf}</dd>
                 </div>
                 }
                 { arbeidstaker.epost &&
                 <div>
-                    <dt>{getLedetekst('oppfolgingsdialog.godkjennplanoversiktinformasjon.arbeidstaker.epost')}</dt>
+                    <dt>{texts.informasjonPanelSykmeldt.labels.email}</dt>
                     <dd>{arbeidstaker.epost}</dd>
                 </div>
                 }
                 { arbeidstaker.stillinger.length > 0 &&
                 <div>
-                    <dt>{getLedetekst('oppfolgingsdialog.godkjennplanoversiktinformasjon.arbeidstaker.stilling')}</dt>
+                    <dt>{texts.informasjonPanelSykmeldt.labels.stilling}</dt>
                     { arbeidstaker.stillinger.map((stilling, idx) => {
                         if (stilling.prosent > -1) {
                             return (<RenderStilling stilling={stilling} key={idx} />);
@@ -132,24 +201,24 @@ export const SykeforlopsPeriode = ({ periode, antallDager }) => {
             {
                 periode.grad ? <p>
                     {periode.grad} &#37; {' '}
-                    {periode.reisetilskudd && (periode.grad > 0 && periode.grad < 100) ?
-                        getLedetekst('oppfolgingsdialog.godkjennplanoversiktinformasjon.sykeforlop.sykmeldt_med_reisetilskudd')
-                        : getLedetekst('oppfolgingsdialog.godkjennplanoversiktinformasjon.sykeforlop.sykmeldt')}
+                    {periode.reisetilskudd && (periode.grad > 0 && periode.grad < 100)
+                        ? texts.sykeforlopsPeriode.gradReisetilskudd
+                        : texts.sykeforlopsPeriode.grad}
                 </p> : null
             }
             {
                 periode.behandlingsdager ? <p>
-                    {getLedetekst('oppfolgingsdialog.godkjennplanoversiktinformasjon.sykeforlop.behandlingsdag')}
+                    {texts.sykeforlopsPeriode.behandlingsdager}
                 </p> : null
             }
             {
                 (periode.reisetilskudd === true && periode.grad === 0) ? <p>
-                    {getLedetekst('oppfolgingsdialog.godkjennplanoversiktinformasjon.sykeforlop.reisetilskudd')}
+                    {texts.sykeforlopsPeriode.reisetilskudd}
                 </p> : null
             }
             {
                 periode.avventende !== null ? <p>
-                    {getLedetekst('oppfolgingsdialog.godkjennplanoversiktinformasjon.sykeforlop.avventende')}
+                    {texts.sykeforlopsPeriode.avventende}
                 </p> : null
             }
         </div>
@@ -164,13 +233,13 @@ export const InformasjonPanelSykeforlopsPerioder = ({ arbeidstaker }) => {
     return (
         <div className="panel godkjennPlanOversiktInformasjon__panel">
             <div className="godkjennPlanOversiktInformasjon__panel__header--sykeforlopsperioder">
-                <h3>{getLedetekst('oppfolgingsdialog.godkjennplanoversiktinformasjon.sykeforlop.tittel')}</h3>
+                <h3>{texts.informasjonPanelSykeforlopsPerioder.title}</h3>
                 <HjelpetekstUnderVenstre>
-                    {getLedetekst('oppfolgingsdialog.godkjennplanoversiktinformasjon.sykeforlop.hjelpetekst')}
+                    {texts.informasjonPanelSykeforlopsPerioder.hjelpetekst}
                 </HjelpetekstUnderVenstre>
             </div>
             <dl className="godkjennPlanOversiktInformasjon__panel__info">
-                <dt>{getLedetekst('oppfolgingsdialog.godkjennplanoversiktinformasjon.sykeforlop.prosent')}</dt>
+                <dt>{texts.informasjonPanelSykeforlopsPerioder.sykmeldingprosentLabel}</dt>
                 {
                     slaaSammenPerioder(arbeidstaker.sykeforlopsPerioder).map((periode, idx) => {
                         const antallDager = ((new Date(periode.tom) - new Date(periode.fom)) / 86400000) + 1;
@@ -230,17 +299,17 @@ export const InformasjonPanelArbeidsoppgaverEtterGjennomfoering = ({ oppfolgings
                             <div className="arbeidsoppgave__tilrettelegging">
                                 { arbeidsoppgave.gjennomfoering.paaAnnetSted &&
                                 <span>
-                                    {getLedetekst('oppfolgingsdialog.godkjennplanoversiktinformasjon.arbeidsoppgaver.gjennomfoering.tilrettelegging.paa-annet-sted')}
+                                    {texts.informasjonPanelArbeidsoppgaverEtterGjennomfoering.labels.sted}
                                 </span>
                                 }
                                 { arbeidsoppgave.gjennomfoering.medMerTid &&
                                 <span>
-                                    {getLedetekst('oppfolgingsdialog.godkjennplanoversiktinformasjon.arbeidsoppgaver.gjennomfoering.tilrettelegging.med-mer-tid')}
+                                    {texts.informasjonPanelArbeidsoppgaverEtterGjennomfoering.labels.tid}
                                 </span>
                                 }
                                 { arbeidsoppgave.gjennomfoering.medHjelp &&
                                 <span>
-                                    {getLedetekst('oppfolgingsdialog.godkjennplanoversiktinformasjon.arbeidsoppgaver.gjennomfoering.tilrettelegging.med-hjelp')}
+                                    {texts.informasjonPanelArbeidsoppgaverEtterGjennomfoering.labels.hjelp}
                                 </span>
                                 }
                             </div>
@@ -291,7 +360,7 @@ export const InformasjonPanelArbeidsoppgaver = ({ oppfolgingsdialog, arbeidsoppg
                 oppfolgingsdialog={oppfolgingsdialog}
                 arbeidsoppgaver={arbeidsoppgaverKanGjennomfoeres}
                 type={KANGJENNOMFOERES.KAN}
-                tittel={getLedetekst('oppfolgingsdialog.godkjennplanoversiktinformasjon.arbeidsoppgaver.gjennomfoering.kan')}
+                tittel={texts.informasjonPanelArbeidsoppgaverEtterGjennomfoering.titles.kan}
                 rootUrl={rootUrl}
             />
             }
@@ -300,7 +369,7 @@ export const InformasjonPanelArbeidsoppgaver = ({ oppfolgingsdialog, arbeidsoppg
                 oppfolgingsdialog={oppfolgingsdialog}
                 arbeidsoppgaver={arbeidsoppgaverMedTilrettelegging}
                 type={KANGJENNOMFOERES.TILRETTELEGGING}
-                tittel={getLedetekst('oppfolgingsdialog.godkjennplanoversiktinformasjon.arbeidsoppgaver.gjennomfoering.tilrettelegging')}
+                tittel={texts.informasjonPanelArbeidsoppgaverEtterGjennomfoering.titles.tilrettelegging}
                 rootUrl={rootUrl}
             />
             }
@@ -309,7 +378,7 @@ export const InformasjonPanelArbeidsoppgaver = ({ oppfolgingsdialog, arbeidsoppg
                 oppfolgingsdialog={oppfolgingsdialog}
                 arbeidsoppgaver={arbeidsoppgaverKanIkkeGjennomfoeres}
                 type={KANGJENNOMFOERES.KAN_IKKE}
-                tittel={getLedetekst('oppfolgingsdialog.godkjennplanoversiktinformasjon.arbeidsoppgaver.gjennomfoering.kan-ikke')}
+                tittel={texts.informasjonPanelArbeidsoppgaverEtterGjennomfoering.titles.kanIkke}
                 rootUrl={rootUrl}
             />
             }
@@ -318,7 +387,7 @@ export const InformasjonPanelArbeidsoppgaver = ({ oppfolgingsdialog, arbeidsoppg
                 oppfolgingsdialog={oppfolgingsdialog}
                 arbeidsoppgaver={arbeidsoppgaverIkkeVurdert}
                 type={KANGJENNOMFOERES.IKKE_VURDERT}
-                tittel={getLedetekst('oppfolgingsdialog.godkjennplanoversiktinformasjon.arbeidsoppgaver.ikke-vurdert.tittel')}
+                tittel={texts.informasjonPanelArbeidsoppgaverEtterGjennomfoering.titles.ikkeVurdert}
                 rootUrl={rootUrl}
             />
             }
@@ -334,11 +403,11 @@ InformasjonPanelArbeidsoppgaver.propTypes = {
 export const getTiltakStatus = (tiltak) => {
     switch (tiltak.status) {
         case STATUS_TILTAK.AVTALT:
-            return 'oppfolgingsdialog.tiltak.status.godkjent';
+            return texts.informasjonPanelTiltak.status.avtalt;
         case STATUS_TILTAK.IKKE_AKTUELT:
-            return 'oppfolgingsdialog.tiltak.status.ikke.aktuelt';
+            return texts.informasjonPanelTiltak.status.ikkeAktuelt;
         default:
-            return 'oppfolgingsdialog.tiltak.status.foreslaatt';
+            return texts.informasjonPanelTiltak.status.foreslatt;
     }
 };
 
@@ -357,7 +426,7 @@ export const TiltakBeskrivelse = ({ tiltak }) => {
     return (
         <div className="godkjennPlanOversiktInfo__panel__tiltak--beskrivelse">
             <label key={`tiltak-besk-label-${tiltak.tiltakId}`} >
-                {getLedetekst('oppfolgingsdialog.godkjennPlanOversiktInformasjon.tiltakBeskrivelse.label')}
+                {texts.tiltakBeskrivelse.label}
             </label>
             <q key={`tiltak-besk-p-${tiltak.tiltakId}`} >{tiltak.beskrivelse}</q>
         </div>
@@ -373,7 +442,7 @@ export const TiltakOppfoelging = ({ tiltak }) => {
             { tiltak.gjennomfoering &&
             [
                 <label key={`tiltak-gjenn-label-${tiltak.tiltakId}`} >
-                    {getLedetekst('oppfolgingsdialog.tiltak.oppfoelging')}
+                    {texts.tiltakOppfoelging.label}
                 </label>,
                 <q key={`tiltak-gjenn-p-${tiltak.tiltakId}`} >{tiltak.gjennomfoering}</q>,
             ]
@@ -390,7 +459,7 @@ export const TiltakBeskrivelseIkkeAktuelt = ({ tiltak }) => {
         { tiltak.beskrivelseIkkeAktuelt &&
         [
             <label key={`tiltak-gjenn-label-${tiltak.tiltakId}`} >
-                {getLedetekst('oppfolgingsdialog.arbeidstaker.tiltak.vurdering.tittel')}
+                {texts.tiltakBeskrivelseIkkeAktuelt.label}
             </label>,
             <q key={`tiltak-gjenn-p-${tiltak.tiltakId}`} >{tiltak.beskrivelseIkkeAktuelt}</q>,
         ]
@@ -406,7 +475,7 @@ export const TiltakForeslaattAv = ({ tiltak }) => {
         { tiltak.opprettetAv &&
         [
             <label key={`tiltak-gjenn-label-${tiltak.tiltakId}`} >
-                {getLedetekst('oppfolgingsdialog.tiltak.foreslaattav')}
+                {texts.tiltakForeslaattAv.label}
             </label>,
             <p key={`tiltak-gjenn-p-${tiltak.opprettetAv.navn}`} >{tiltak.opprettetAv.navn}</p>,
         ]
@@ -422,7 +491,7 @@ export const InformasjonPanelTiltak = ({ tiltakListe }) => {
     return (
         <div className="panel godkjennPlanOversiktInformasjon__panel">
             <div className="godkjennPlanOversiktInformasjon__panel__header--tiltak">
-                <h3>{getLedetekst('oppfolgingsdialog.godkjennplanoversiktinformasjon.tiltak.tittel')}</h3>
+                <h3>{texts.informasjonPanelTiltak.title}</h3>
             </div>
             {
                 tiltakListe.map((tiltak, idx) => {
@@ -436,7 +505,7 @@ export const InformasjonPanelTiltak = ({ tiltakListe }) => {
                         { tiltak.status &&
                         <div className={`etikett ${getTiltakStatusKlass(tiltak)}`} >
                             <span className="typo-normal">
-                                {getLedetekst(getTiltakStatus(tiltak))}
+                                {getTiltakStatus(tiltak)}
                             </span>
                         </div>
                         }
