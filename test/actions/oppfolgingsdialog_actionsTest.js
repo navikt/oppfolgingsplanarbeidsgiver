@@ -69,12 +69,13 @@ describe('oppfolgingsplan_actions', () => {
 
     describe('godkjenn', () => {
         it('Skal ha en godkjennPlan()-funksjon som returnerer riktig action', () => {
-            expect(actions.godkjennPlan(1, {}, '', fnr)).to.deep.equal({
+            expect(actions.godkjennPlan(1, {}, '', fnr, true)).to.deep.equal({
                 type: actions.GODKJENN_PLAN_FORESPURT,
                 id: 1,
                 gyldighetstidspunkt: {},
                 status: '',
                 fnr,
+                delMedNav: true,
             });
         });
 
@@ -86,12 +87,13 @@ describe('oppfolgingsplan_actions', () => {
         });
 
         it('Skal ha en planGodkjent()-funksjon som returnerer riktig action', () => {
-            expect(actions.planGodkjent(1, {}, '', fnr)).to.deep.equal({
+            expect(actions.planGodkjent(1, {}, '', fnr, true)).to.deep.equal({
                 type: actions.PLAN_GODKJENT,
                 id: 1,
                 gyldighetstidspunkt: {},
                 status: '',
                 fnr,
+                delMedNav: true,
             });
         });
 

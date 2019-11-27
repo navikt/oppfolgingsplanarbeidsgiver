@@ -29,6 +29,7 @@ const texts = {
     infoWithoutApproval: 'En plan uten godkjenning fra den sykmeldte skal kun opprettes dersom den sykmeldte ikke kan eller ønsker å delta. Dette vil bli synlig i planen.',
     buttonSend: 'Send til godkjenning',
     buttonCancel: 'Avbryt',
+    delMedNav: 'Del planen med NAV',
 };
 
 export class GodkjennPlanLightboksComponent extends Component {
@@ -70,7 +71,7 @@ export class GodkjennPlanLightboksComponent extends Component {
                 tom: new Date(fraInputdatoTilJSDato(values.sluttdato)),
                 evalueres: new Date(fraInputdatoTilJSDato(values.evalueringsdato)),
             };
-            this.props.godkjennPlan(gyldighetstidspunkt, this.state.opprettplan, oppfolgingsdialog.arbeidstaker.fnr);
+            this.props.godkjennPlan(gyldighetstidspunkt, this.state.opprettplan, values.delMedNav);
         }
     }
 
@@ -141,6 +142,13 @@ export class GodkjennPlanLightboksComponent extends Component {
                             name="godkjennInput"
                             component={CheckboxSelvstendig}
                             label={texts.checkboxLabel}
+                        />
+                        <Field
+                            className="checkboks"
+                            id="delMedNav"
+                            name="delMedNav"
+                            component={CheckboxSelvstendig}
+                            label={texts.delMedNav}
                         />
                     </div>
                 </div>

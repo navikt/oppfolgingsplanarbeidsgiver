@@ -37,9 +37,9 @@ class Godkjenn extends Component {
         });
     }
 
-    sendGodkjennPlan(gyldighetstidspunkt, status) {
+    sendGodkjennPlan(gyldighetstidspunkt, status, delMedNav) {
         const { oppfolgingsdialog } = this.props;
-        this.props.godkjennPlan(oppfolgingsdialog.id, gyldighetstidspunkt, status, oppfolgingsdialog.arbeidstaker.fnr);
+        this.props.godkjennPlan(oppfolgingsdialog.id, gyldighetstidspunkt, status, oppfolgingsdialog.arbeidstaker.fnr, delMedNav);
     }
 
     render() {

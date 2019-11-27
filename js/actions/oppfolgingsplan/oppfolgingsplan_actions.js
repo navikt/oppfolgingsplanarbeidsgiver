@@ -71,13 +71,14 @@ export const opprettOppfolgingsplan = (oppfolgingsplan, fnr) => {
     };
 };
 
-export const godkjennPlan = (id, gyldighetstidspunkt, status, fnr) => {
+export const godkjennPlan = (id, gyldighetstidspunkt, status, fnr, delMedNav) => {
     return {
         type: GODKJENN_PLAN_FORESPURT,
         id,
         gyldighetstidspunkt,
         status,
         fnr,
+        delMedNav,
     };
 };
 
@@ -88,13 +89,14 @@ export const godkjennerPlan = (fnr) => {
     };
 };
 
-export const planGodkjent = (id, gyldighetstidspunkt, status, fnr) => {
+export const planGodkjent = (id, gyldighetstidspunkt, status, fnr, delMedNav) => {
     return {
         type: PLAN_GODKJENT,
         id,
         gyldighetstidspunkt,
         status,
         fnr,
+        delMedNav,
     };
 };
 

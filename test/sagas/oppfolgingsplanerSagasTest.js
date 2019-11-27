@@ -95,6 +95,7 @@ describe('oppfolgingsplanerSagas', () => {
             gyldighetstidspunkt: {},
             status: 'TRUE',
             fnr,
+            delMedNav: true,
         };
 
         const generator = godkjennPlanSaga(action);
@@ -108,7 +109,7 @@ describe('oppfolgingsplanerSagas', () => {
         });
 
         it('Skal dernest sende postcall', () => {
-            const url = `${apiUrlBase}/oppfolgingsplan/actions/${action.id}/godkjenn?status=${action.status}&aktoer=arbeidsgiver`;
+            const url = `${apiUrlBase}/oppfolgingsplan/actions/${action.id}/godkjenn?status=${action.status}&aktoer=arbeidsgiver&delmednav=true`;
             const nextCall = call(post, url, action.gyldighetstidspunkt);
             expect(generator.next().value).to.deep.equal(nextCall);
         });
@@ -120,6 +121,7 @@ describe('oppfolgingsplanerSagas', () => {
                 status: action.status,
                 gyldighetstidspunkt: {},
                 fnr,
+                delMedNav: true,
             });
             expect(generator.next({}).value).to.deep.equal(nextPut);
         });

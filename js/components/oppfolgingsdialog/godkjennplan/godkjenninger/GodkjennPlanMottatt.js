@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import {
     Knapp,
     Hovedknapp,
 } from 'nav-frontend-knapper';
 import { Utvidbar } from '@navikt/digisyfo-npm';
+import { Checkbox } from 'nav-frontend-skjema';
 import GodkjennPlanOversiktInformasjon from '../GodkjennPlanOversiktInformasjon';
 import OppfolgingsplanInnholdboks from '../../../app/OppfolgingsplanInnholdboks';
 import GodkjennPlanTidspunkt from '../GodkjennPlanTidspunkt';
@@ -23,6 +24,7 @@ const texts = {
     godkjennPlanMottatt: {
         title: 'Ønsker du å godkjenne denne versjonen?',
     },
+    delMedNav: 'Del planen med NAV',
 };
 
 const TextReceived = ({ arbeidstakerName }) => {
@@ -52,14 +54,27 @@ GodkjennPlanMottattUtvidbar.propTypes = {
     rootUrl: PropTypes.string,
 };
 export const GodkjennPlanMottattKnapper = ({ godkjennPlan, oppfolgingsdialog, avvisDialog }) => {
+    const [delMedNav, setDelMedNav] = useState(false);
+
+    const handleChange = () => {
+        setDelMedNav(!delMedNav);
+    };
+
     return (
         <div className="knapperad knapperad--justervenstre">
+            <div>
+                <Checkbox
+                    checked={delMedNav}
+                    onChange={handleChange}
+                    label={texts.delMedNav}
+                />
+            </div>
             <div className="knapperad__element">
                 <Hovedknapp
                     name="godkjentKnapp"
                     id="godkjentKnapp"
                     autoFocus
-                    onClick={() => { godkjennPlan(oppfolgingsdialog.id, null, true, oppfolgingsdialog.arbeidstaker.fnr); }}>
+                    onClick={() => { godkjennPlan(oppfolgingsdialog.id, null, true, oppfolgingsdialog.arbeidstaker.fnr, delMedNav); }}>
                     {texts.godkjennPlanMottattKnapper.buttonApprove}
                 </Hovedknapp>
             </div>
