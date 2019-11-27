@@ -166,7 +166,6 @@ class Tiltak extends Component {
                             <NotifikasjonBoksVurdering
                                 navn={oppfolgingsdialog.arbeidstaker.navn}
                                 antallIkkeVurderte={antallIkkeVurderteTiltak}
-                                tekst="oppfolgingsdialog.notifikasjonboks.tiltak.vurderes.tekst"
                             />
                         }
                         {
