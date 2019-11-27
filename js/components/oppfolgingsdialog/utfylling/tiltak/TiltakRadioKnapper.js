@@ -1,10 +1,17 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Field } from 'redux-form';
-import { getLedetekst } from '@navikt/digisyfo-npm';
 import { STATUS_TILTAK } from '../../../../konstanter';
 import Radioknapper from '../../../../skjema/Radioknapper';
 import { tiltakPt } from '../../../../proptypes/opproptypes';
+
+const texts = {
+    options: {
+        forslag: 'Marker som forslag',
+        avtalt: 'Marker som avtalt',
+        ikkeAktuelt: 'Marker som ikke aktuelt',
+    },
+};
 
 export const getTiltakId = (tiltak) => {
     return tiltak ? tiltak.tiltakId : '';
@@ -47,17 +54,17 @@ class TiltakRadioKnapper extends Component {
 
                     <input
                         value={STATUS_TILTAK.FORSLAG}
-                        label={getLedetekst('oppfolgingsdialog.arbeidsgiver.tiltak.forslag.radiobutton')}
+                        label={texts.options.forslag}
                         id={`${getTiltakId(tiltak)}-forslag`}
                     />
                     <input
                         value={STATUS_TILTAK.AVTALT}
-                        label={getLedetekst('oppfolgingsdialog.arbeidsgiver.tiltak.godkjent.radiobutton')}
+                        label={texts.options.avtalt}
                         id={`${getTiltakId(tiltak)}-godkjent`}
                     />
                     <input
                         value={STATUS_TILTAK.IKKE_AKTUELT}
-                        label={getLedetekst('oppfolgingsdialog.arbeidsgiver.tiltak.ikke.aktuelt.radiobutton')}
+                        label={texts.options.ikkeAktuelt}
                         id={`${getTiltakId(tiltak)}-ikke-aktuelt`}
                     />
                 </Field>
