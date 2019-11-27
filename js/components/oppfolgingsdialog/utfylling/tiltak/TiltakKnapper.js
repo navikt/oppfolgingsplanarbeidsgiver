@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Knapp } from 'nav-frontend-knapper';
-import { getLedetekst } from '@navikt/digisyfo-npm';
 import {
     tiltakPt,
     tiltakReducerPt,
 } from '../../../../proptypes/opproptypes';
+
+const texts = {
+    buttonAbort: 'Avbryt',
+    buttonUpdate: 'Lagre',
+};
 
 const handleKeyPress = (avbryt, e) => {
     e.preventDefault();
@@ -44,7 +48,7 @@ class TiltakKnapper extends Component {
                         disabled={this.state.spinner}
                         spinner={this.state.spinner}
                         htmlType="submit">
-                        {getLedetekst('oppfolgingsdialog.knapp.lagre')}
+                        {texts.buttonUpdate}
                     </Knapp>
                 </div>
                 <div className="knapperad__element">
@@ -54,7 +58,7 @@ class TiltakKnapper extends Component {
                             handleKeyPress(avbryt, e);
                         }}
                         onMouseDown={avbryt}>
-                        {getLedetekst('oppfolgingsdialog.knapp.avbryt')}
+                        {texts.buttonAbort}
                     </Knapp>
                 </div>
             </div>
