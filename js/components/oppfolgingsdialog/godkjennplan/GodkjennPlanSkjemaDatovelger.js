@@ -1,20 +1,27 @@
 import React from 'react';
-import { getLedetekst } from '@navikt/digisyfo-npm';
 import Datovelger from '../../../skjema/Datovelger';
 import { datovelgerFeltPt } from '../../../proptypes/tiltakproptypes';
+
+const texts = {
+    felter: {
+        fom: 'Fra og med',
+        tom: 'Til og med',
+        evalueringinnen: 'Evalueres innen',
+    },
+};
 
 export const FELTER = {
     fom: {
         navn: 'startdato',
-        tekst: 'oppfolgingsdialog.godkjennplanskjema.datovelger.fom',
+        tekst: texts.felter.fom,
     },
     tom: {
         navn: 'sluttdato',
-        tekst: 'oppfolgingsdialog.godkjennplanskjema.datovelger.tom',
+        tekst: texts.felter.tom,
     },
     evalueringinnen: {
         navn: 'evalueringsdato',
-        tekst: 'oppfolgingsdialog.godkjennplanskjema.datovelger.evalueringInnen',
+        tekst: texts.felter.evalueringinnen,
     },
 };
 
@@ -24,7 +31,7 @@ export const GodkjennPlanSkjemaDatovelgerFelt = ({ felt }) => {
             <label
                 className="skjemaelement__label"
                 htmlFor={felt.navn}>
-                {getLedetekst(felt.tekst)}
+                {felt.tekst}
             </label>
             <Datovelger
                 name={felt.navn}
