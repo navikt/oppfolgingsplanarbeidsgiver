@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { getLedetekst } from '@navikt/digisyfo-npm';
 import Sidetopp from '../Sidetopp';
 import {
     finnGodkjentedialogerAvbruttAvMotpartSidenSistInnlogging,
@@ -12,6 +11,10 @@ import OppfolgingsdialogVisning from './OppfolgingsdialogerVisning';
 import OppfolgingsdialogerInfoPersonvern from './OppfolgingsdialogerInfoPersonvern';
 import AvbruttPlanNotifikasjonBoksAdvarsel from './godkjennplan/godkjentplan/AvbruttPlanNotifikasjonBoksAdvarsel';
 import NyNaermestelederInfoboks from '../oppfolgingsplaner/NyNaermestelederInfoboks';
+
+const texts = {
+    pageTitle: 'Oppfølgingsplaner',
+};
 
 const finnOppfolgingsplanMedFoersteInnloggingSidenNyNaermesteLeder = (oppfolgingsplaner) => {
     return oppfolgingsplaner.filter((oppfolgingsplan) => {
@@ -52,7 +55,7 @@ const OppfolgingsdialogerInnhold = ({
     }
     return (
         <div>
-            <Sidetopp tittel={getLedetekst('oppfolgingsdialoger.sidetittel')} />
+            <Sidetopp tittel={texts.pageTitle} />
             <OppfolgingsdialogerInfoPersonvern />
             {
                 planerAvbruttAvMotpartSidenSistInnlogging.length > 0 && <AvbruttPlanNotifikasjonBoksAdvarsel
