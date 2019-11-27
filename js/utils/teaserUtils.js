@@ -1,10 +1,19 @@
-import {
-    getLedetekst,
-    getHtmlLedetekst,
-} from '@navikt/digisyfo-npm';
 import { STATUS } from '../konstanter';
 import { finnSistEndretAvNavn } from './oppfolgingsplanUtils';
 import { toDateMedMaanedNavn } from './datoUtils';
+
+const texts = {
+    hentPlanStatus: {
+        avbrutt: 'Avbrutt',
+    },
+};
+
+const textStatusUnderArbeid = (date, personName) => {
+    return `
+        Sist endret: ${date}<br/>
+        Endret av: ${personName}
+    `;
+};
 
 export const hentPlanStatus = (oppfolgingsdialog) => {
     const status = {
@@ -20,14 +29,11 @@ export const hentPlanStatus = (oppfolgingsdialog) => {
             status.img = 'plan-godkjent.svg';
             break;
         case STATUS.AVBRUTT:
-            status.tekst = getLedetekst('oppfolgingsdialoger.plan.status.avbrutt');
+            status.tekst = texts.hentPlanStatus.avbrutt;
             status.img = 'plan-avbrutt.svg';
             break;
         case STATUS.UNDER_ARBEID:
-            status.tekst = getHtmlLedetekst('oppfolgingsdialog.oppfolgingsdialogTeaser.underArbeid', {
-                '%DATO%': toDateMedMaanedNavn(oppfolgingsdialog.sistEndretDato),
-                '%BRUKERNAVN%': finnSistEndretAvNavn(oppfolgingsdialog),
-            });
+            status.tekst = textStatusUnderArbeid(toDateMedMaanedNavn(oppfolgingsdialog.sistEndretDato), finnSistEndretAvNavn(oppfolgingsdialog));
             status.img = 'oppfolgingsdialog-tom.svg';
             break;
         case STATUS.AKTIV:
