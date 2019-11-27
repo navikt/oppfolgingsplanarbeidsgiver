@@ -1,9 +1,25 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { getLedetekst } from '@navikt/digisyfo-npm';
 import { KANGJENNOMFOERES } from '../../../../konstanter';
 import { ArbeidsoppgaveVarselFeil } from './ArbeidsoppgaveVarselFeil';
 import * as opProptypes from '../../../../proptypes/opproptypes';
+
+const texts = {
+    arbeidsoppgaveInformasjonKnapper: {
+        buttonDelete: 'Slett',
+    },
+    arbeidsoppgaveInformasjonInnhold: {
+        ikkeVurdert: 'Når den sykmeldte har gjort en vurdering på om denne arbeidsoppgaven kan gjennomføres vil dette bli synlig her.',
+        tilrettelegging: {
+            title: 'Hjelp/Hjelpemidler',
+            sted: 'På annet sted',
+            tid: 'Med mer tid',
+            hjelp: 'Med hjelp',
+        },
+        beskrivelseLabel: 'Beskrivelse',
+        createdByLabel: 'Lagt til av',
+    },
+};
 
 export const ArbeidsoppgaveInformasjonKnapper = (
     {
@@ -19,7 +35,7 @@ export const ArbeidsoppgaveInformasjonKnapper = (
                 type="button"
                 onClick={() => { sendSlett(elementId); }}
                 className="knapperad__element knapp--slett">
-                {getLedetekst('oppfolgingsdialog.knapp.slett-element')}
+                {texts.arbeidsoppgaveInformasjonKnapper.buttonDelete}
             </button>
         </div>) : null
     );
@@ -56,34 +72,34 @@ export const ArbeidsoppgaveInformasjonInnhold = ({ arbeidsoppgave }) => {
     return (
         <div className={`arbeidsoppgaveInformasjonInnhold ${hentPanelType}`}>
             {!arbeidsoppgave.gjennomfoering &&
-            <p>{getLedetekst('oppfolgingsdialoger.arbeidsoppgaveInformasjon.ikke-vurdert.arbeidsgiver')}</p>
+            <p>{texts.arbeidsoppgaveInformasjonInnhold.ikkeVurdert}</p>
             }
             { arbeidsoppgave.gjennomfoering &&
             <dl>
                 { arbeidsoppgave.gjennomfoering && arbeidsoppgave.gjennomfoering.kanGjennomfoeres === KANGJENNOMFOERES.TILRETTELEGGING &&
-                <dt>{getLedetekst('oppfolgingsdialoger.arbeidsoppgaveInformasjon.tilrettelegging')}</dt>
+                <dt>{texts.arbeidsoppgaveInformasjonInnhold.tilrettelegging.title}</dt>
                 }
                 { arbeidsoppgave.gjennomfoering && arbeidsoppgave.gjennomfoering.kanGjennomfoeres === KANGJENNOMFOERES.TILRETTELEGGING &&
                 <dd>
                     { arbeidsoppgave.gjennomfoering.paaAnnetSted &&
-                    <p>{getLedetekst('oppfolgingsdialoger.arbeidsoppgaveInformasjon.tilrettelegging.paaAnnetSted')}</p>
+                    <p>{texts.arbeidsoppgaveInformasjonInnhold.tilrettelegging.sted}</p>
                     }
                     { arbeidsoppgave.gjennomfoering.medMerTid &&
-                    <p>{getLedetekst('oppfolgingsdialoger.arbeidsoppgaveInformasjon.tilrettelegging.medMerTid')}</p>
+                    <p>{texts.arbeidsoppgaveInformasjonInnhold.tilrettelegging.tid}</p>
                     }
                     { arbeidsoppgave.gjennomfoering.medHjelp &&
-                    <p>{getLedetekst('oppfolgingsdialoger.arbeidsoppgaveInformasjon.tilrettelegging.medHjelp')}</p>
+                    <p>{texts.arbeidsoppgaveInformasjonInnhold.tilrettelegging.hjelp}</p>
                     }
                 </dd>
                 }
 
                 { beskrivelseTekst.length > 0 && arbeidsoppgave.gjennomfoering.kanGjennomfoeres !== KANGJENNOMFOERES.KAN &&
-                <dt>{getLedetekst('oppfolgingsdialoger.arbeidsoppgaveInformasjon.beskrivelse')}</dt>
+                <dt>{texts.arbeidsoppgaveInformasjonInnhold.beskrivelseLabel}</dt>
                 }
                 { beskrivelseTekst.length > 0 && arbeidsoppgave.gjennomfoering.kanGjennomfoeres !== KANGJENNOMFOERES.KAN &&
                 <dd className="arbeidsoppgaveInformasjonInnhold__beskrivelse">{beskrivelseTekst}</dd>
                 }
-                <dt>{getLedetekst('oppfolgingsdialoger.arbeidsoppgaveInformasjon.opprettetAv')}</dt>
+                <dt>{texts.arbeidsoppgaveInformasjonInnhold.createdByLabel}</dt>
                 <dd>{arbeidsoppgave.opprettetAv.navn}</dd>
             </dl>
             }
