@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { getLedetekst } from '@navikt/digisyfo-npm';
 import * as opProptypes from '../../proptypes/opproptypes';
 import { getContextRoot } from '../../routers/paths';
 import {
@@ -13,6 +12,15 @@ import OppfolgingsplanerOpprett from './opprett/OppfolgingsplanerOpprett';
 import OppfolgingsplanerIngenplan from './opprett/OppfolgingsplanerIngenplan';
 import OppfolgingsplanFilm from '../oppfolgingsplaner/OppfolgingsplanFilm';
 import OppfolgingsdialogTeasere from '../oppfolgingsplaner/OppfolgingsdialogTeasere';
+
+const texts = {
+    teaserActivePlan: {
+        title: 'Aktiv oppfølgingsplan',
+    },
+    teaserOutdatedPlaner: {
+        title: 'Tidligere oppfølgingsplaner',
+    },
+};
 
 class OppfolgingsdialogerVisning extends Component {
     constructor() {
@@ -47,7 +55,7 @@ class OppfolgingsdialogerVisning extends Component {
             { oppfolgingsdialoger.length > 0 && harAktivOppfolgingsdialog(oppfolgingsdialoger) &&
             <OppfolgingsdialogTeasere
                 oppfolgingsdialoger={finnAktiveOppfolgingsdialoger(oppfolgingsdialoger)}
-                tittel={getLedetekst('oppfolgingsdialoger.oppfolgingsdialoger.header.tittel')}
+                tittel={texts.teaserActivePlan.title}
                 id="OppfolgingsdialogTeasereAG"
                 rootUrlPlaner={`${getContextRoot()}/${koblingId}`}
                 rootUrl={getContextRoot()}
@@ -69,7 +77,7 @@ class OppfolgingsdialogerVisning extends Component {
                 <OppfolgingsdialogTeasere
                     oppfolgingsdialoger={finnTidligereOppfolgingsdialoger(oppfolgingsdialoger)}
                     harTidligerOppfolgingsdialoger
-                    tittel={getLedetekst('oppfolgingsdialoger.tidligereplaner.tittel')}
+                    tittel={texts.teaserOutdatedPlaner.title}
                     id="OppfolgingsdialogTeasereAG"
                     rootUrlPlaner={`${getContextRoot()}/${koblingId}`}
                     rootUrl={getContextRoot()}
