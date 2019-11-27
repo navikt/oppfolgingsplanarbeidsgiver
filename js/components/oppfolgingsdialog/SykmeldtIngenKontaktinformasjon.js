@@ -1,19 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { getLedetekst } from '@navikt/digisyfo-npm';
 import Knapp from 'nav-frontend-knapper';
+import { getContextRoot } from '../../routers/paths';
 import Sidetopp from '../Sidetopp';
 import Infomelding from '../Infomelding';
 
+const texts = {
+    title: 'Oppfølgingsplaner',
+    infomelding: {
+        title: 'Din sykmeldte arbeidstaker ønsker ikke digitale varsler',
+        info: 'Det betyr at de ikke vil motta varsler som tjenesten sender ut og derfor må kontaktes direkte av deg. Dere kan fortsatt bruke tjenesten.',
+    },
+};
+
 const SykmeldtIngenKontaktinformasjon = ({ meldingSett }) => {
     return (<div>
-        <Sidetopp tittel={getLedetekst('oppfolgingsdialoger.sidetittel')} />
+        <Sidetopp tittel={texts.title} />
         <div className="panel">
             <Infomelding
-                ikon="/oppfolgingsplanarbeidsgiver/img/svg/feilmelding_ingen_kontaktinformasjon.svg"
+                ikon={`${getContextRoot()}/img/svg/feilmelding_ingen_kontaktinformasjon.svg`}
                 ikonAlt="feilmelding ingen kontaktinformasjon"
-                tittel={getLedetekst('sykefravaerarbeidsgiver.sykmeldt-ingen-kontaktinformasjon.tittel')}
-                tekst={getLedetekst('sykefravaerarbeidsgiver.sykmeldt-ingen-kontaktinformasjon.tekst')}
+                tittel={texts.infomelding.title}
+                tekst={texts.infomelding.info}
             />
             <div className="knapperad">
                 <Knapp type="standard" onClick={meldingSett}>Jeg forstår</Knapp>
