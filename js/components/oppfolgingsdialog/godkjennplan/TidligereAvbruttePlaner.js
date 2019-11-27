@@ -1,14 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { getLedetekst } from '@navikt/digisyfo-npm';
 import { restdatoTildato } from '../../../utils/datoUtils';
 import { oppfolgingsdialogPt } from '../../../proptypes/opproptypes';
+
+const texts = {
+    title: 'Tidligere utgaver av denne planen',
+};
+
+const textLink = (date) => {
+    return `Oppfølgingsplanen endret ${date}`;
+};
 
 const TidligereAvbruttePlaner = ({ oppfolgingsdialog, rootUrlPlaner }) => {
     if (oppfolgingsdialog.avbruttPlanListe && oppfolgingsdialog.avbruttPlanListe.length > 0) {
         return (
             <div className="tidligereAvbruttePlaner">
-                <p>{getLedetekst('oppfolgingsdialog.tidligereAvbruttePlaner.tittel')}</p>
+                <p>{texts.title}</p>
                 <ul>
                     {
                         oppfolgingsdialog.avbruttPlanListe.map((avbruttPlan, idx) => {
@@ -17,9 +24,7 @@ const TidligereAvbruttePlaner = ({ oppfolgingsdialog, rootUrlPlaner }) => {
                                     className="lenke"
                                     href={`${rootUrlPlaner}/oppfolgingsplaner/${avbruttPlan.id}/`}
                                 >
-                                    {getLedetekst('oppfolgingsdialog.tidligereAvbruttePlaner.lenke.tekst', {
-                                        '%TIDSPUNKT%': restdatoTildato(avbruttPlan.tidspunkt),
-                                    })}
+                                    {textLink(restdatoTildato(avbruttPlan.tidspunkt))}
                                 </a>
                             </li>);
                         })
