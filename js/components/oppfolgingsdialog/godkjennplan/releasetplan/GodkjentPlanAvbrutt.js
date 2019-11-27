@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { getLedetekst, Utvidbar } from '@navikt/digisyfo-npm';
+import { Utvidbar } from '@navikt/digisyfo-npm';
 import OppfolgingsplanInnholdboks from '../../../app/OppfolgingsplanInnholdboks';
 import { toDateMedMaanedNavn } from '../../../../utils/datoUtils';
 import {
@@ -16,6 +16,21 @@ import {
     oppfolgingsdialogPt,
 } from '../../../../proptypes/opproptypes';
 
+const texts = {
+    godkjentPlanAvbrutt: {
+        linkActivePlan: 'Tilbake til den gjeldende utgave',
+        title: 'Tidligere oppfølgingsplan',
+    },
+    godkjentPlanUtvidbar: {
+        getDokumentFailed: 'Beklager, vi kunne ikke hente dokumentet på dette tidspunktet. Prøv igjen senere!',
+        utvidbarTitle: 'Se planen',
+    },
+};
+
+const textChangeBy = (personName, date) => {
+    return `Denne oppfølgingsplanen ble åpnet for endring av ${personName} ${date}`;
+};
+
 export const GodkjentPlanUtvidbar = ({ dokument }) => {
     let panel;
 
@@ -23,7 +38,7 @@ export const GodkjentPlanUtvidbar = ({ dokument }) => {
         panel = <div className="app-spinner" aria-label="Vent litt mens siden laster" />;
     } else if (dokument.hentingFeilet) {
         panel = (<div className="godkjentPlanPdf__feilmelding">
-            {getLedetekst('oppfolgingsdialog.godkjentplan.utvidbar.feilmelding')}
+            {texts.godkjentPlanUtvidbar.getDokumentFailed}
         </div>);
     } else {
         panel = dokument.data && dokument.data.map((url, idx) => {
@@ -33,7 +48,7 @@ export const GodkjentPlanUtvidbar = ({ dokument }) => {
         });
     }
     return (
-        <Utvidbar className="utvidbar--oppfolgingsplan" tittel={getLedetekst('oppfolgingsdialog.arbeidsgiver.godkjennplan.godkjent.utvidbar.tittel')}>
+        <Utvidbar className="utvidbar--oppfolgingsplan" tittel={texts.godkjentPlanUtvidbar.utvidbarTitle}>
             <div className="godkjentPlanPdf">
                 { panel }
             </div>
@@ -71,14 +86,14 @@ class GodkjentPlanAvbrutt extends Component {
                     <a
                         className="lenke"
                         href={`${rootUrlPlaner}/oppfolgingsplaner/${aktivPlan.id}`}>
-                        {getLedetekst('oppfolgingsdialog.releasetPlan.avbrutt.lenke')}
+                        {texts.godkjentPlanAvbrutt.linkActivePlan}
                     </a>
                     }
                 </div>
                 <OppfolgingsplanInnholdboks
                     svgUrl={`${rootUrl}/img/svg/plan-avbrutt.svg`}
                     svgAlt="avbrutt"
-                    tittel={getLedetekst('oppfolgingsdialog.godkjentPlanAvbrutt.tittel')}
+                    tittel={texts.godkjentPlanAvbrutt.title}
                 >
                     <div className="godkjentPlanAvbrutt">
                         <GodkjentPlanAvbruttTidspunkt
@@ -86,10 +101,9 @@ class GodkjentPlanAvbrutt extends Component {
                             oppfolgingsdialog={oppfolgingsdialog}
                             gyldighetstidspunkt={oppfolgingsdialog.godkjentPlan.gyldighetstidspunkt}
                         />
-                        <p>{getLedetekst('oppfolgingsdialog.releasetPlan.avbrutt.endret-av', {
-                            '%AKTOERNAVN%': finnSistEndretAvNavn(oppfolgingsdialog),
-                            '%DATO%': toDateMedMaanedNavn(oppfolgingsdialog.godkjentPlan.avbruttPlan.tidspunkt),
-                        })}</p>
+                        <p>
+                            {textChangeBy(finnSistEndretAvNavn(oppfolgingsdialog), toDateMedMaanedNavn(oppfolgingsdialog.godkjentPlan.avbruttPlan.tidspunkt))}
+                        </p>
                         <GodkjentPlanUtvidbar
                             dokument={dokument}
                         />
