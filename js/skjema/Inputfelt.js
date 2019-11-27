@@ -4,10 +4,14 @@ import {
     Knapp,
     Hovedknapp,
 } from 'nav-frontend-knapper';
-import { getLedetekst } from '@navikt/digisyfo-npm';
 import Feilmelding from './Feilmelding';
 import { ArbeidsoppgaveVarselFeil } from '../components/oppfolgingsdialog/utfylling/arbeidsoppgaver/ArbeidsoppgaveVarselFeil';
 import { fieldPropTypes } from '../proptypes/fieldproptypes';
+
+const texts = {
+    buttonSave: 'Lagre og legg til ny',
+    buttonCancel: 'Avbryt',
+};
 
 const handleKeyPress = (avbryt, e) => {
     e.preventDefault();
@@ -57,7 +61,7 @@ const Inputfelt = (props) => {
                         mini
                         id="leggtillKnapp"
                         name="leggtillKnapp">
-                        {getLedetekst('oppfolgingsdialog.knapp.ny-arbeidsoppgave')}
+                        {texts.buttonSave}
                     </Hovedknapp>
                 </div>
 
@@ -66,7 +70,7 @@ const Inputfelt = (props) => {
                         mini
                         onKeyPress={(e) => { handleKeyPress(avbryt, e); }}
                         onMouseDown={avbryt}>
-                        {getLedetekst('oppfolgingsdialog.knapp.avbryt')}
+                        {texts.buttonCancel}
                     </Knapp>
                 </div>
             </div>
