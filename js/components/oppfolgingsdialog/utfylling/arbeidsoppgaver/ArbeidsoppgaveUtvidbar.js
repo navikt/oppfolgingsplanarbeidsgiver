@@ -2,14 +2,15 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { findDOMNode } from 'react-dom';
 import { connect } from 'react-redux';
-import {
-    erSynligIViewport,
-    getLedetekst,
-} from '@navikt/digisyfo-npm';
+import { erSynligIViewport } from '@navikt/digisyfo-npm';
 import * as opProptypes from '../../../../proptypes/opproptypes';
 import ArbeidsoppgaveInformasjon from './ArbeidsoppgaveInformasjon';
 import ArbeidsoppgaveUtvidbarOverskrift from './ArbeidsoppgaveUtvidbarOverskrift';
 import LagreArbeidsoppgaveSkjema from './LagreArbeidsoppgaveSkjema';
+
+const texts = {
+    updateError: 'En midlertidig feil gjør at vi ikke kan lagre endringene dine akkurat nå. Prøv igjen senere.',
+};
 
 class ArbeidsoppgaveUtvidbar extends Component {
     constructor(props) {
@@ -44,12 +45,12 @@ class ArbeidsoppgaveUtvidbar extends Component {
                 if (nextProps.arbeidsoppgaverReducer.slettingFeilet) {
                     this.visElementInformasjon();
                     this.props.visFeilMelding(true);
-                    this.visFeil(false, true, getLedetekst('oppfolgingsdialog.oppdatering.feilmelding'));
+                    this.visFeil(false, true, texts.updateError);
                     this.apne();
                 } else if (nextProps.arbeidsoppgaverReducer.lagringFeilet) {
                     this.visLagreSkjema();
                     this.props.visFeilMelding(true);
-                    this.visFeil(true, false, getLedetekst('oppfolgingsdialog.oppdatering.feilmelding'));
+                    this.visFeil(true, false, texts.updateError);
                     this.apne();
                 } else if (!nextProps.arbeidsoppgaverReducer.lagringFeilet && !nextProps.arbeidsoppgaverReducer.slettingFeilet) {
                     this.visFeil(false, false, '');
