@@ -1,8 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Alertstripe from 'nav-frontend-alertstriper';
-import { getLedetekst } from '@navikt/digisyfo-npm';
 import { oppfolgingsdialogPt } from '../../../proptypes/opproptypes';
+
+const texts = {
+    description: 'Ups, her mangler det litt før du kan sende planen. Den må inneholde minst én oppgave og ett tiltak. Kanskje den ansatte kan hjelpe til?',
+    linkArbeidsoppgave: 'Legg til en arbeidsoppgave',
+    linkTiltak: 'Legg til et tiltak',
+};
 
 const handleKeyPress = (settAktivtSteg, nesteSteg, e) => {
     e.preventDefault();
@@ -16,11 +21,10 @@ const IkkeUtfyltPlanFeilmelding = (
         oppfolgingsdialog,
         settAktivtSteg,
     }) => {
-    const varseltripeTekst = getLedetekst('oppfolgingsdialog.ikkeUtfyltPlanFeilmelding.beskrivelse.ag');
     return (<Alertstripe
         className="ikkeUtfyltPlanFeilmelding"
         type="advarsel">
-        <p>{varseltripeTekst}</p>
+        <p>{texts.description}</p>
         <div className="ikkeUtfyltPlanFeilmelding__lenker">
             { oppfolgingsdialog.arbeidsoppgaveListe.length === 0 &&
             <button
@@ -31,7 +35,7 @@ const IkkeUtfyltPlanFeilmelding = (
                 onMouseDown={() => {
                     settAktivtSteg(1);
                 }}>
-                {getLedetekst('oppfolgingsdialog.ikkeUtfyltPlanFeilmelding.lenke.arbeidsoppgave')}
+                {texts.linkArbeidsoppgave}
             </button>
             }
             { oppfolgingsdialog.tiltakListe.length === 0 &&
@@ -43,7 +47,7 @@ const IkkeUtfyltPlanFeilmelding = (
                 onMouseDown={() => {
                     settAktivtSteg(2);
                 }}>
-                {getLedetekst('oppfolgingsdialog.ikkeUtfyltPlanFeilmelding.lenke.tiltak')}
+                {texts.linkTiltak}
             </button>
             }
         </div>
