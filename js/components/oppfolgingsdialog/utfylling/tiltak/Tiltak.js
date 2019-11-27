@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { findDOMNode } from 'react-dom';
-import {
-    getLedetekst,
-    scrollTo,
-} from '@navikt/digisyfo-npm';
+import { scrollTo } from '@navikt/digisyfo-npm';
 import * as opProptypes from '../../../../proptypes/opproptypes';
 import { capitalizeFirstLetter } from '../../../../utils/tekstUtils';
 import { sorterTiltakEtterNyeste } from '../../../../utils/tiltakUtils';
@@ -16,6 +13,17 @@ import NotifikasjonBoksVurdering from './NotifikasjonBoksVurdering';
 import TiltakInfoboks from './TiltakInfoboks';
 import TiltakSkjema from './TiltakSkjema';
 import TiltakListe from './liste/TiltakListe';
+
+const texts = {
+    updateError: 'En midlertidig feil gjør at vi ikke kan lagre endringene dine akkurat nå. Prøv igjen senere.',
+    infoboks: {
+        title: 'Hva kan gjøre det lettere for arbeidstakeren din å komme tilbake?',
+        info: `
+            Når du og arbeidstakeren din har fått et overblikk over oppgavene, kan dere fortsette med å se på hva slags tilrettelegging arbeidsplassen kan tilby.
+            Dere legger inn tiltakene sammen.
+        `,
+    },
+};
 
 const harArbeidsgiverKommentert = (tiltak, fnr) => {
     return tiltak.kommentarer.filter((kommentar) => {
@@ -58,7 +66,7 @@ class Tiltak extends Component {
             this.setState({
                 lagreNyTiltakFeilet: true,
                 visTiltakSkjema: true,
-                varselTekst: getLedetekst('oppfolgingsdialog.oppdatering.feilmelding'),
+                varselTekst: texts.updateError,
             });
         }
     }
@@ -133,8 +141,8 @@ class Tiltak extends Component {
                                 <OppfolgingsplanInfoboks
                                     svgUrl={`${getContextRoot()}/img/svg/tiltak-onboarding.svg`}
                                     svgAlt="nyttTiltak"
-                                    tittel={getLedetekst('oppfolgingsdialog.arbeidsgiver.onboarding.tiltak.tittel')}
-                                    tekst={getLedetekst('oppfolgingsdialog.arbeidsgiver.onboarding.tiltak.tekst')}
+                                    tittel={texts.infoboks.title}
+                                    tekst={texts.infoboks.info}
                                 >
                                     <LeggTilElementKnapper
                                         visSkjema={this.state.visTiltakSkjema}
