@@ -1,8 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { getLedetekst } from '@navikt/digisyfo-npm';
 import { KANGJENNOMFOERES } from '../../../../konstanter';
 import * as opProptypes from '../../../../proptypes/opproptypes';
+
+const texts = {
+    hentArbeidsoppgaveUnderTekst: {
+        kan: 'Kan gjennomføres som normalt',
+        tilrettelegging: 'Kan gjennomføres med hjelp/hjelpemiddel',
+        kanIkke: 'Kan ikke gjennomføres',
+        ikkeVurdert: 'Ikke vurdert',
+    },
+};
 
 export const hentArbeidsoppgaveIkon = (arbeidsoppgave, rootUrlImg) => {
     if (arbeidsoppgave.gjennomfoering) {
@@ -20,14 +28,14 @@ export const hentArbeidsoppgaveIkon = (arbeidsoppgave, rootUrlImg) => {
 export const hentArbeidsoppgaveUnderTekst = (arbeidsoppgave) => {
     if (arbeidsoppgave.gjennomfoering) {
         if (arbeidsoppgave.gjennomfoering.kanGjennomfoeres === KANGJENNOMFOERES.KAN) {
-            return getLedetekst('oppfolgingsdialog.arbeidstaker.arbeidsoppgave.vis.gjennomfoering.kan');
+            return texts.hentArbeidsoppgaveUnderTekst.kan;
         } else if (arbeidsoppgave.gjennomfoering.kanGjennomfoeres === KANGJENNOMFOERES.TILRETTELEGGING) {
-            return getLedetekst('oppfolgingsdialog.arbeidstaker.arbeidsoppgave.vis.gjennomfoering.tilrettelegging');
+            return texts.hentArbeidsoppgaveUnderTekst.tilrettelegging;
         } else if (arbeidsoppgave.gjennomfoering.kanGjennomfoeres === KANGJENNOMFOERES.KAN_IKKE) {
-            return getLedetekst('oppfolgingsdialog.arbeidstaker.arbeidsoppgave.vis.gjennomfoering.kanikke');
+            return texts.hentArbeidsoppgaveUnderTekst.kanIkke;
         }
     }
-    return getLedetekst('oppfolgingsdialog.godkjennplanoversiktinformasjon.arbeidsoppgaver.ikke-vurdert.tekst');
+    return texts.hentArbeidsoppgaveUnderTekst.ikkeVurdert;
 };
 
 const ArbeidsoppgaveUtvidbarOverskrift = (
