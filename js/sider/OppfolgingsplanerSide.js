@@ -331,7 +331,6 @@ export function mapStateToProps(state, ownProps) {
         virksomhet: state.virksomhet,
         bekreftetNyNaermesteLeder: state.nyNaermesteLeder.bekreftet,
         koblingId: ownProps.params.koblingId,
-        ledetekster: state.ledetekster.data,
         oppfolgingsdialoger,
         sykmeldt,
         kontaktinfo: state.kontaktinfo,

@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {
-    getLedetekst,
-    keyValue,
     hentToggles,
     togglesPt,
     sykeforlopsPerioderReducerPt,
@@ -65,6 +63,19 @@ import { getContextRoot } from '../routers/paths';
 import history from '../history';
 import { hentSykmeldteBerikelser as hentSykmeldteBerikelserAction } from '../actions/sykmeldte_actions';
 import { beregnSkalHenteSykmeldtBerikelse } from '../utils/sykmeldtUtils';
+
+const texts = {
+    pageTitle: 'Oppfølgingsplaner',
+    brodsmuler: {
+        dineSykmeldte: 'Dine sykmeldte',
+        oppfolgingsplaner: 'Oppfølgingsplaner',
+        oppfolgingsplan: 'Oppfølgingsplan',
+    },
+    infoboksNoAccess: {
+        title: 'Du har ikke tilgang til oppfølgingsplanen',
+        info: 'Du har ikke tilgang til oppfølgingsplanen for den sykmeldte arbeidstakeren.',
+    },
+};
 
 export class OppfolgingsplanSide extends Component {
     componentDidMount() {
@@ -158,7 +169,7 @@ export class OppfolgingsplanSide extends Component {
         } = this.props;
         return (
             <Side
-                tittel={getLedetekst('oppfolgingsdialoger.sidetittel')}
+                tittel={texts.pageTitle}
                 brodsmuler={brodsmuler}
                 laster={(henter || sender || !hentet) && !(sendingFeilet || hentingFeilet)}>
                 {
@@ -171,8 +182,8 @@ export class OppfolgingsplanSide extends Component {
                             return (<OppfolgingsplanInfoboks
                                 svgUrl={`${getContextRoot()}/img/svg/oppfolgingsdialogFeilmeldingAG.svg`}
                                 svgAlt="OppfølgingsdialogFeilmelding"
-                                tittel={getLedetekst('oppfolgingsdialog.infoboks.ikke-tilgang.tittel')}
-                                tekst={getLedetekst('oppfolgingsdialog.infoboks.ikke-tilgang.naermesteleder.tekst')}
+                                tittel={texts.infoboksNoAccess.title}
+                                tekst={texts.infoboksNoAccess.info}
                             />);
                         }
                         return (<Oppfolgingsdialog
@@ -212,7 +223,6 @@ OppfolgingsplanSide.propTypes = {
     sykeforlopsPerioder: sykeforlopsPerioderReducerPt,
     koblingId: PropTypes.string,
     harSykmeldtGyldigSykmelding: PropTypes.bool,
-    ledetekster: keyValue,
     oppfolgingsdialog: opProptypes.oppfolgingsdialogPt,
     oppfolgingsdialoger: PropTypes.arrayOf(opProptypes.oppfolgingsdialogPt),
     params: PropTypes.shape({
@@ -345,7 +355,7 @@ export function mapStateToProps(state, ownProps) {
         harSykmeldtGyldigSykmelding,
         skalHenteBerikelse,
         brodsmuler: [{
-            tittel: getLedetekst('sykefravaerarbeidsgiver.dinesykmeldte.sidetittel'),
+            tittel: texts.brodsmuler.dineSykmeldte,
             sti: '/sykefravaerarbeidsgiver',
             erKlikkbar: true,
         }, {
@@ -353,11 +363,11 @@ export function mapStateToProps(state, ownProps) {
             sti: sykmeldt ? `/sykefravaerarbeidsgiver/${sykmeldt.koblingId}` : '',
             erKlikkbar: true,
         }, {
-            tittel: getLedetekst('oppfolgingsdialoger.sidetittel.arbeidsgiver'),
+            tittel: texts.brodsmuler.oppfolgingsplaner,
             sti: sykmeldt ? `/${sykmeldt.koblingId}/oppfolgingsplaner` : '',
             erKlikkbar: true,
         }, {
-            tittel: getLedetekst('oppfolgingsdialog.sidetittel.arbeidsgiver'),
+            tittel: texts.brodsmuler.oppfolgingsplan,
         }],
     };
 }
