@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Alertstripe from 'nav-frontend-alertstriper';
 import { Knapp, Hovedknapp } from 'nav-frontend-knapper';
-import { getLedetekst } from '@navikt/digisyfo-npm';
 import { toDateMedMaanedNavn } from '../../../../utils/datoUtils';
 import {
     delMedFastlegePt,
@@ -11,6 +10,25 @@ import {
 } from '../../../../proptypes/opproptypes';
 import { hentSyfoapiUrl } from '../../../../gateway-api';
 import { API_NAVN } from '../../../../gateway-api/gatewayApi';
+
+const texts = {
+    shareWithNAVError: 'Noe gikk feil da du prøvde å dele planen. Prøv igjen om litt.',
+    shareWithFastlegeError: `
+        Du får dessverre ikke delt denne planen med legen herfra. Det kan hende legen ikke kan ta imot elektroniske meldinger.
+        I dette tilfellet må dere laste ned og skrive ut planen slik at dere får delt den med legen manuelt.   
+    `,
+    buttonShareWithNAV: 'Del med NAV',
+    buttonShareWithFastlege: 'Del med fastlegen',
+    buttonDownload: 'Last ned',
+};
+
+const textSharedWithNAV = (date) => {
+    return `Planen ble delt med NAV ${date}`;
+};
+
+const textSharedWitFastlege = (date) => {
+    return `Planen ble delt med fastlegen ${date}`;
+};
 
 export const delingFeiletNav = (delmednav) => {
     return delmednav.sendingFeilet;
@@ -22,9 +40,9 @@ export const delingFeiletFastlege = (fastlegeDeling) => {
 
 export const hentLedetekstDeltPlanFeilet = (delmednav) => {
     if (delingFeiletNav(delmednav)) {
-        return 'oppfolgingsdialog.godkjentPlan.delingFeilet';
+        return texts.shareWithNAVError;
     }
-    return 'oppfolgingsdialog.godkjentPlan.delingFeiletFastlegeArbeidsgiver';
+    return texts.shareWithFastlegeError;
 };
 
 const GodkjentPlanDelKnapper = (
@@ -43,19 +61,15 @@ const GodkjentPlanDelKnapper = (
             className="alertstripe--notifikasjonboks"
             type="advarsel"
             fylt>
-            {getLedetekst(hentLedetekstDeltPlanFeilet(delmednav))}
+            {hentLedetekstDeltPlanFeilet(delmednav)}
         </Alertstripe>
         }
-        { oppfolgingsdialog.godkjentPlan.deltMedNAV && <p>
-            {getLedetekst('oppfolgingsdialog.godkjentPlan.deling.delt-med-nav.tekst', {
-                '%TIDSPUNKT%': oppfolgingsdialog.godkjentPlan.deltMedNAVTidspunkt && toDateMedMaanedNavn(oppfolgingsdialog.godkjentPlan.deltMedNAVTidspunkt),
-            })}
+        { oppfolgingsdialog.godkjentPlan.deltMedNAV && oppfolgingsdialog.godkjentPlan.deltMedNAVTidspunkt && <p>
+            {textSharedWithNAV(toDateMedMaanedNavn(oppfolgingsdialog.godkjentPlan.deltMedNAVTidspunkt))}
         </p>
         }
-        { oppfolgingsdialog.godkjentPlan.deltMedFastlege && <p>
-            {getLedetekst('oppfolgingsdialog.godkjentPlan.deling.delt-med-fastlege.tekst', {
-                '%TIDSPUNKT%': oppfolgingsdialog.godkjentPlan.deltMedFastlegeTidspunkt && toDateMedMaanedNavn(oppfolgingsdialog.godkjentPlan.deltMedFastlegeTidspunkt),
-            })}
+        { oppfolgingsdialog.godkjentPlan.deltMedFastlege && oppfolgingsdialog.godkjentPlan.deltMedFastlegeTidspunkt && <p>
+            {textSharedWitFastlege(toDateMedMaanedNavn(oppfolgingsdialog.godkjentPlan.deltMedFastlegeTidspunkt))}
         </p>
         }
         <div className="knapperad knapperad--justervenstre">
@@ -66,7 +80,7 @@ const GodkjentPlanDelKnapper = (
                     onClick={() => {
                         delMedFastlege(oppfolgingsdialog.id, oppfolgingsdialog.arbeidstaker.fnr);
                     }}>
-                    {getLedetekst('oppfolgingsdialog.knapp.del-plan-fastlege')}
+                    {texts.buttonShareWithFastlege}
                 </Hovedknapp>
             </div>
             { !oppfolgingsdialog.godkjentPlan.deltMedNAV &&
@@ -77,7 +91,7 @@ const GodkjentPlanDelKnapper = (
                     onClick={() => {
                         delMedNavFunc(oppfolgingsdialog.id, oppfolgingsdialog.arbeidstaker.fnr);
                     }}>
-                    {getLedetekst('oppfolgingsdialog.knapp.del-plan-nav')}
+                    {texts.buttonShareWithNAV}
                 </Knapp>
             </div>
             }
@@ -86,7 +100,7 @@ const GodkjentPlanDelKnapper = (
                     href={`${hentSyfoapiUrl(API_NAVN.SYFOOPPFOLGINGSPLANSERVICE)}/dokument/${oppfolgingsdialog.id}/`}
                     download="oppfølgingsplan"
                 >
-                    {getLedetekst('oppfolgingsdialog.knapp.last-ned')}
+                    {texts.buttonDownload}
                 </a>
             </div>
         </div>
