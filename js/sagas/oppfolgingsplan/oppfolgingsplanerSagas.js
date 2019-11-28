@@ -45,9 +45,10 @@ export function* godkjennPlanSaga(action) {
 
     yield put(actions.godkjennerPlan(fnr));
     try {
-        const url = `${hentSyfoapiUrl(API_NAVN.SYFOOPPFOLGINGSPLANSERVICE)}/oppfolgingsplan/actions/${action.id}/godkjenn?status=${action.status}&aktoer=arbeidsgiver`;
+        const delMedNav = `&delmednav=${action.delMedNav}`;
+        const url = `${hentSyfoapiUrl(API_NAVN.SYFOOPPFOLGINGSPLANSERVICE)}/oppfolgingsplan/actions/${action.id}/godkjenn?status=${action.status}&aktoer=arbeidsgiver${delMedNav}`;
         const data = yield call(post, url, action.gyldighetstidspunkt);
-        yield put(actions.planGodkjent(action.id, data, action.status, fnr));
+        yield put(actions.planGodkjent(action.id, data, action.status, fnr, action.delMedNav));
     } catch (e) {
         if (e.message === '409') {
             window.location.reload();
