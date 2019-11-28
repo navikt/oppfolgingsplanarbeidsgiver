@@ -15,7 +15,10 @@ import { NULLSTILT_GODKJENNING } from '../actions/oppfolgingsplan/nullstillGodkj
 import { DELT_MED_NAV } from '../actions/oppfolgingsplan/delmednav_actions';
 import { DELT_MED_FASTLEGE } from '../actions/oppfolgingsplan/delMedFastlege_actions';
 import { SAMTYKKE_GITT } from '../actions/oppfolgingsplan/samtykke_actions';
-import { finnNyesteGodkjenning, skalDeleMedNav } from '../utils/oppfolgingsplanUtils';
+import {
+    finnNyesteGodkjenning,
+    skalDeleMedNav,
+} from '../utils/oppfolgingsplanUtils';
 
 const initiellState = {
     henter: false,
