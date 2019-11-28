@@ -41,8 +41,6 @@ spec:
       value: https://appres-q1.nav.no
     - name: LOGINSERVICE_URL
       value: https://loginservice-q.nav.no/login
-    - name: SYFOAPI_SYFOTEKSTERAPI_URL
-      value: https://syfoapi.nais.oera-q.local/syfotekster/api/tekster
     - name: SYKEFRAVAERAPI_URL
       value: https://tjenester-q1.nav.no/syforest
     - name: SYFOOPRESTAPI_URL

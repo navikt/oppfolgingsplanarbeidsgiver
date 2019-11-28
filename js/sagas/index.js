@@ -1,5 +1,8 @@
 import { all } from 'redux-saga/effects';
-import { ledeteksterSagas, togglesSagas, sykeforlopsPerioderSagas } from '@navikt/digisyfo-npm';
+import {
+    togglesSagas,
+    sykeforlopsPerioderSagas,
+} from '@navikt/digisyfo-npm';
 
 import arbeidsforholdSagas from './oppfolgingsplan/arbeidsforholdSagas';
 import arbeidsoppgaveSagas from './oppfolgingsplan/arbeidsoppgaveSagas';
@@ -26,7 +29,6 @@ import sykmeldingerSagas from './sykmeldingerSagas';
 
 export default function* rootSaga() {
     yield all([
-        ledeteksterSagas(),
         arbeidsforholdSagas(),
         sykmeldteSagas(),
         sykmeldingerSagas(),

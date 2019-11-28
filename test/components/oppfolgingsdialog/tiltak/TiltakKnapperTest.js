@@ -3,7 +3,6 @@ import chai from 'chai';
 import { shallow } from 'enzyme';
 import chaiEnzyme from 'chai-enzyme';
 import { Knapp } from 'nav-frontend-knapper';
-import { setLedetekster } from '@navikt/digisyfo-npm';
 import TiltakKnapper from '../../../../js/components/oppfolgingsdialog/utfylling/tiltak/TiltakKnapper';
 
 chai.use(chaiEnzyme());
@@ -11,14 +10,8 @@ const expect = chai.expect;
 
 describe('TiltakKnapper', () => {
     let komponent;
-    let ledetekster;
 
     beforeEach(() => {
-        ledetekster = {
-            'oppfolgingsdialog.knapp.lagre': 'lagre',
-            'oppfolgingsdialog.knapp.endre': 'endre',
-        };
-        setLedetekster(ledetekster);
         komponent = shallow(<TiltakKnapper />);
     });
 

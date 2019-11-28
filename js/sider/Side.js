@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { TimeoutBox } from '@navikt/digisyfo-npm';
 import Brodsmuler from '../components/Brodsmuler';
 import AppSpinner from '../components/AppSpinner';
 import { brodsmule as brodsmulePt } from '../shapes';
+import TimeoutBox from '../components/app/timeout/TimeoutBox';
 
 const DocumentTitle = require('react-document-title');
 

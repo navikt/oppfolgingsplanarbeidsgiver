@@ -33,7 +33,6 @@ const renderPage = (decoratorFragments, isFrontPage) => {
             'index.html',
             Object.assign(
                 {
-                    SYFOTEKSTER_URL: '/syfotekster/api',
                     LOGINSERVICE_URL: `${process.env.LOGINSERVICE_URL}`,
                     SYFOREST_URL: '/syforest',
                     spinnerMedTekst: isFrontPage,

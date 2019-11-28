@@ -7,7 +7,6 @@ import { Field } from 'redux-form';
 import configureMockStore from 'redux-mock-store';
 import { Provider } from 'react-redux';
 import createSagaMiddleware from 'redux-saga';
-import { setLedetekster } from '@navikt/digisyfo-npm';
 import LagreArbeidsoppgaveSkjema from '../../../../js/components/oppfolgingsdialog/utfylling/arbeidsoppgaver/LagreArbeidsoppgaveSkjema';
 
 chai.use(chaiEnzyme());
@@ -15,14 +14,6 @@ const expect = chai.expect;
 
 describe('LagreArbeidsoppgaveSkjemaTest', () => {
     describe('Ska vise rett komponent', () => {
-        const ledetekster = {
-            data: {
-                'oppfolgingsdialog.arbeidstaker.arbeidsoppgave.opprett.skjema.navn': 'Dette er en test',
-                'oppfolgingsdialog.arbeidsgiver.arbeidsoppgave.info': 'Dette er en test',
-            },
-        };
-        setLedetekster(ledetekster);
-
         const sagaMiddleware = createSagaMiddleware();
         const middlewares = [sagaMiddleware];
         const mockStore = configureMockStore(middlewares);
@@ -31,9 +22,6 @@ describe('LagreArbeidsoppgaveSkjemaTest', () => {
         let handleSubmit;
 
         const getState = {
-            ledetekster: {
-                data: ledetekster,
-            },
             arbeidsgivere: {
                 data: [],
             },

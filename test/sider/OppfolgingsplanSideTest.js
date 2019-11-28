@@ -50,11 +50,6 @@ describe('OppfolgingsplanSide', () => {
             },
         };
         const state = {
-            ledetekster: {
-                data: {
-                    'min.tekst': 'Dette er en test',
-                },
-            },
             sykmeldte: {
                 data: [sykmeldt1, sykmeldt2],
             },

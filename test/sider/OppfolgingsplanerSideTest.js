@@ -45,11 +45,6 @@ describe('OppfolgingsplanerSide', () => {
             },
         };
         const state = {
-            ledetekster: {
-                data: {
-                    'min.tekst': 'Dette er en test',
-                },
-            },
             sykmeldte: {
                 hentet: true,
                 data: [sykmeldt1, sykmeldt2],

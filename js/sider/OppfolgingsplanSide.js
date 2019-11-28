@@ -291,21 +291,18 @@ export function mapStateToProps(state, ownProps) {
     const skalHenteBerikelse = beregnSkalHenteSykmeldtBerikelse(sykmeldt, state);
 
     return {
-        henter: state.ledetekster.henter
-        || state.sykmeldte.henter
+        henter: state.sykmeldte.henter
         || alleOppfolgingsdialogerReducer.henter
         || tilgang.henter
         || sykmeldinger.henter
         || !harForsoektHentetAlt
         || (erSykmeldteHentet && sykmeldt && !tilgang.hentingForsokt)
         || (state.sykmeldte.henterBerikelser.length > 0 && !state.sykmeldte.hentingFeilet),
-        hentingFeilet: state.ledetekster.hentingFeilet
-        || state.sykmeldte.hentingFeilet
+        hentingFeilet: state.sykmeldte.hentingFeilet
         || alleOppfolgingsdialogerReducer.hentingFeilet
         || tilgang.hentingFeilet
         || sykmeldinger.hentingFeilet,
         hentet: oppfolgingsdialogerReducer.hentet
-        || state.ledetekster.hentet
         || state.tilgang.hentet
         || harForsoektHentetOppfolgingsdialoger
         || oppfolgingsdialogerReducer.avvist
@@ -348,7 +345,6 @@ export function mapStateToProps(state, ownProps) {
         tiltak: state.tiltak,
         virksomhet: state.virksomhet,
         koblingId: ownProps.params.koblingId,
-        ledetekster: state.ledetekster.data,
         oppfolgingsdialog,
         oppfolgingsdialoger,
         sykmeldt,

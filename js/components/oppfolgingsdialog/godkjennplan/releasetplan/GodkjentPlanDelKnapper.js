@@ -38,7 +38,7 @@ export const delingFeiletFastlege = (fastlegeDeling) => {
     return fastlegeDeling.sendingFeilet;
 };
 
-export const hentLedetekstDeltPlanFeilet = (delmednav) => {
+export const textSharePlanFailed = (delmednav) => {
     if (delingFeiletNav(delmednav)) {
         return texts.shareWithNAVError;
     }
@@ -61,7 +61,7 @@ const GodkjentPlanDelKnapper = (
             className="alertstripe--notifikasjonboks"
             type="advarsel"
             fylt>
-            {hentLedetekstDeltPlanFeilet(delmednav)}
+            {textSharePlanFailed(delmednav)}
         </Alertstripe>
         }
         { oppfolgingsdialog.godkjentPlan.deltMedNAV && oppfolgingsdialog.godkjentPlan.deltMedNAVTidspunkt && <p>

@@ -65,7 +65,6 @@ const texts = {
 
 export const hentHentingFeiletMapTekst = (hentingFeiletMap) => {
     return `
-    ledetekster: ${hentingFeiletMap.ledetekster};
     sykmeldte: ${hentingFeiletMap.sykmeldte};
     oppfolgingsdialoger: ${hentingFeiletMap.alleOppfolgingsdialogerReducer};
     tilgang: ${hentingFeiletMap.sykmeldinger};
@@ -74,7 +73,6 @@ export const hentHentingFeiletMapTekst = (hentingFeiletMap) => {
 };
 
 const hentingFeiletMapPt = PropTypes.shape({
-    ledetekster: PropTypes.bool,
     sykmeldte: PropTypes.bool,
     alleOppfolgingsdialogerReducer: PropTypes.bool,
     tilgang: PropTypes.bool,
@@ -285,7 +283,6 @@ export function mapStateToProps(state, ownProps) {
         && sykmeldinger.hentet;
     const erSykmeldteHentet = state.sykmeldte.hentet && !state.sykmeldte.hentingFeilet;
     const hentingFeiletMap = {
-        ledetekster: state.ledetekster.hentingFeilet,
         sykmeldte: state.sykmeldte.hentingFeilet,
         alleOppfolgingsdialogerReducer: alleOppfolgingsdialogerReducer.hentingFeilet,
         tilgang: tilgang.hentingFeilet,
@@ -294,21 +291,18 @@ export function mapStateToProps(state, ownProps) {
     const loggError = logger.error;
 
     return {
-        henter: state.ledetekster.henter
-        || state.sykmeldte.henter
+        henter: state.sykmeldte.henter
         || alleOppfolgingsdialogerReducer.henter
         || tilgang.henter
         || sykmeldinger.henter
         || !harForsoektHentetAlt
         || (erSykmeldteHentet && sykmeldt && !tilgang.hentingForsokt)
         || (state.sykmeldte.henterBerikelser.length > 0 && !state.sykmeldte.hentingFeilet),
-        hentingFeilet: state.ledetekster.hentingFeilet
-        || state.sykmeldte.hentingFeilet
+        hentingFeilet: state.sykmeldte.hentingFeilet
         || alleOppfolgingsdialogerReducer.hentingFeilet
         || tilgang.hentingFeilet
         || sykmeldinger.hentingFeilet,
-        hentet: state.ledetekster.hentet
-        || state.sykmeldte.hentet
+        hentet: state.sykmeldte.hentet
         || harForsoektHentetOppfolgingsdialoger
         || tilgang.hentet
         || oppfolgingsdialogerReducer.opprettet

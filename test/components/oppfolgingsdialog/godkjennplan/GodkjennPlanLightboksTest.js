@@ -6,9 +6,6 @@ import chaiEnzyme from 'chai-enzyme';
 import rewire from 'rewire';
 import Alertstripe from 'nav-frontend-alertstriper';
 import { Hovedknapp } from 'nav-frontend-knapper';
-import {
-    setLedetekster,
-} from '@navikt/digisyfo-npm';
 import { GodkjennPlanLightboksComponent } from '../../../../js/components/oppfolgingsdialog/godkjennplan/GodkjennPlanLightboks';
 import GodkjennPlanSkjemaDatovelger from '../../../../js/components/oppfolgingsdialog/godkjennplan/GodkjennPlanSkjemaDatovelger';
 import getOppfolgingsdialog from '../../../mock/mockOppfolgingsdialog';
@@ -17,13 +14,6 @@ chai.use(chaiEnzyme());
 const expect = chai.expect;
 
 describe('GodkjennPlanLightboks', () => {
-    const ledetekster = {
-        data: {
-            'oppfolgingsdialog.arbeidstaker.arbeidsoppgave.opprett.skjema.navn': 'Dette er en test',
-            'oppfolgingsdialog.arbeidsgiver.arbeidsoppgave.info': 'Dette er en test',
-        },
-    };
-    setLedetekster(ledetekster);
     let komponent;
     let handleSubmit;
     let initialize;
