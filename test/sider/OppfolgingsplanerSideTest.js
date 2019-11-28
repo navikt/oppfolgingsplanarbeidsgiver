@@ -210,12 +210,10 @@ describe('OppfolgingsplanerSide', () => {
         let hentOppfolgingsplaner;
         let hentSykmeldinger;
         let hentSykmeldte;
-        let hentToggles;
         let alleOppfolgingsdialogerReducer;
         let oppfolgingsdialogerReducer;
         let sykmeldinger;
         let tilgang;
-        let toggles;
         let loggError;
         let hentingFeiletMap;
         const sykmeldt = {
@@ -240,12 +238,10 @@ describe('OppfolgingsplanerSide', () => {
             oppfolgingsdialogerReducer = {};
             alleOppfolgingsdialogerReducer = {};
             tilgang = { data: {} };
-            toggles = { data: {} };
             sjekkTilgang = sinon.spy();
             hentOppfolgingsplaner = sinon.spy();
             hentSykmeldinger = sinon.spy();
             hentSykmeldte = sinon.spy();
-            hentToggles = sinon.spy();
             loggError = sinon.spy();
             hentingFeiletMap = {};
         });
@@ -257,7 +253,6 @@ describe('OppfolgingsplanerSide', () => {
         it('Skal vise spinner dersom data hentes', () => {
             const component = shallow(<OppfolgingsplanerSide
                 tilgang={tilgang}
-                toggles={toggles}
                 alleOppfolgingsdialogerReducer={alleOppfolgingsdialogerReducer}
                 oppfolgingsdialogerReducer={oppfolgingsdialogerReducer}
                 sykmeldinger={sykmeldinger}
@@ -265,7 +260,6 @@ describe('OppfolgingsplanerSide', () => {
                 henter
                 hentOppfolgingsplaner={hentOppfolgingsplaner}
                 hentSykmeldinger={hentSykmeldinger}
-                hentToggles={hentToggles}
                 sjekkTilgang={sjekkTilgang}
                 params={params}
                 hentSykmeldte={hentSykmeldte}
@@ -276,7 +270,6 @@ describe('OppfolgingsplanerSide', () => {
         it('Skal vise spinner dersom sender', () => {
             const component = shallow(<OppfolgingsplanerSide
                 tilgang={tilgang}
-                toggles={toggles}
                 alleOppfolgingsdialogerReducer={alleOppfolgingsdialogerReducer}
                 oppfolgingsdialogerReducer={oppfolgingsdialogerReducer}
                 sykmeldinger={sykmeldinger}
@@ -284,7 +277,6 @@ describe('OppfolgingsplanerSide', () => {
                 sender
                 hentOppfolgingsplaner={hentOppfolgingsplaner}
                 hentSykmeldinger={hentSykmeldinger}
-                hentToggles={hentToggles}
                 sjekkTilgang={sjekkTilgang}
                 params={params}
                 hentSykmeldte={hentSykmeldte}
@@ -295,7 +287,6 @@ describe('OppfolgingsplanerSide', () => {
         it('Skal vise feilmelding dersom hentingFeilet', () => {
             const component = shallow(<OppfolgingsplanerSide
                 tilgang={tilgang}
-                toggles={toggles}
                 alleOppfolgingsdialogerReducer={alleOppfolgingsdialogerReducer}
                 oppfolgingsdialogerReducer={oppfolgingsdialogerReducer}
                 sykmeldinger={sykmeldinger}
@@ -303,7 +294,6 @@ describe('OppfolgingsplanerSide', () => {
                 hentingFeilet
                 hentOppfolgingsplaner={hentOppfolgingsplaner}
                 hentSykmeldinger={hentSykmeldinger}
-                hentToggles={hentToggles}
                 sjekkTilgang={sjekkTilgang}
                 params={params}
                 hentSykmeldte={hentSykmeldte}
@@ -316,7 +306,6 @@ describe('OppfolgingsplanerSide', () => {
         it('Skal vise feilmelding dersom sendingFeilet', () => {
             const component = shallow(<OppfolgingsplanerSide
                 tilgang={tilgang}
-                toggles={toggles}
                 alleOppfolgingsdialogerReducer={alleOppfolgingsdialogerReducer}
                 oppfolgingsdialogerReducer={oppfolgingsdialogerReducer}
                 sykmeldinger={sykmeldinger}
@@ -324,7 +313,6 @@ describe('OppfolgingsplanerSide', () => {
                 oppfolgingsdialoger={[]}
                 hentOppfolgingsplaner={hentOppfolgingsplaner}
                 hentSykmeldinger={hentSykmeldinger}
-                hentToggles={hentToggles}
                 sjekkTilgang={sjekkTilgang}
                 params={params}
                 hentSykmeldte={hentSykmeldte}
@@ -341,10 +329,8 @@ describe('OppfolgingsplanerSide', () => {
                 sykmeldinger={sykmeldinger}
                 oppfolgingsdialoger={[]}
                 tilgang={{ data: ikkeTilgang }}
-                toggles={toggles}
                 hentOppfolgingsplaner={hentOppfolgingsplaner}
                 hentSykmeldinger={hentSykmeldinger}
-                hentToggles={hentToggles}
                 sjekkTilgang={sjekkTilgang}
                 params={params}
                 hentSykmeldte={hentSykmeldte}
@@ -361,10 +347,8 @@ describe('OppfolgingsplanerSide', () => {
                 sykmeldinger={sykmeldinger}
                 oppfolgingsdialoger={[]}
                 tilgang={{ data: harTilgang }}
-                toggles={toggles}
                 hentOppfolgingsplaner={hentOppfolgingsplaner}
                 hentSykmeldinger={hentSykmeldinger}
-                hentToggles={hentToggles}
                 sjekkTilgang={sjekkTilgang}
                 params={params}
                 hentSykmeldte={hentSykmeldte}
@@ -382,10 +366,8 @@ describe('OppfolgingsplanerSide', () => {
                 sykmeldinger={sykmeldinger}
                 oppfolgingsdialoger={[]}
                 tilgang={{ data: harTilgang }}
-                toggles={toggles}
                 hentOppfolgingsplaner={hentOppfolgingsplaner}
                 hentSykmeldinger={hentSykmeldinger}
-                hentToggles={hentToggles}
                 sjekkTilgang={sjekkTilgang}
                 params={params}
                 hentSykmeldte={hentSykmeldte}

@@ -2,8 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {
-    hentToggles,
-    togglesPt,
     sykeforlopsPerioderReducerPt,
     hentSykeforlopsPerioder,
 } from '@navikt/digisyfo-npm';
@@ -18,7 +16,6 @@ import {
     forsoektHentetSykmeldte,
     henterEllerHarHentetOppfolgingsdialoger,
     henterEllerHarHentetSykmeldinger,
-    henterEllerHarHentetToggles,
     oppfolgingsdialogHarBlittAvbrutt,
 } from '../utils/reducerUtils';
 import { populerDialogFraState } from '../utils/stateUtils';
@@ -83,16 +80,12 @@ export class OppfolgingsplanSide extends Component {
             koblingId,
             alleOppfolgingsdialogerReducer,
             sykmeldinger,
-            toggles,
         } = this.props;
         if (!henterEllerHarHentetOppfolgingsdialoger(alleOppfolgingsdialogerReducer)) {
             this.props.hentOppfolgingsplaner();
         }
         if (!henterEllerHarHentetSykmeldinger(sykmeldinger)) {
             this.props.hentSykmeldinger(koblingId);
-        }
-        if (!henterEllerHarHentetToggles(toggles)) {
-            this.props.hentToggles();
         }
         this.berikSykmeldt();
     }
@@ -203,7 +196,6 @@ OppfolgingsplanSide.propTypes = {
     hentet: PropTypes.bool,
     sender: PropTypes.bool,
     sendingFeilet: PropTypes.bool,
-    toggles: togglesPt,
     arbeidsforhold: opProptypes.arbeidsforholdReducerPt,
     arbeidsoppgaver: opProptypes.arbeidsoppgaverReducerPt,
     avbrytdialogReducer: opProptypes.avbrytdialogReducerPt,
@@ -248,7 +240,6 @@ OppfolgingsplanSide.propTypes = {
     hentPdfurler: PropTypes.func,
     hentPerson: PropTypes.func,
     hentNaermesteLeder: PropTypes.func,
-    hentToggles: PropTypes.func,
     hentVirksomhet: PropTypes.func,
     nullstillGodkjenning: PropTypes.func,
     settAktivtSteg: PropTypes.func,
@@ -340,7 +331,6 @@ export function mapStateToProps(state, ownProps) {
         sykeforlopsPerioderReducer: state.sykeforlopsPerioder,
         person: state.person,
         sykmeldte: state.sykmeldte,
-        toggles: state.toggles,
         tilgang,
         tiltak: state.tiltak,
         virksomhet: state.virksomhet,
@@ -387,7 +377,6 @@ const OppfolgingsdialogContainer = connect(mapStateToProps, {
     avbrytDialog,
     dialogAvbruttOgNyOpprettet,
     hentArbeidsforhold,
-    hentToggles,
     delMedFastlege,
     delMedNavFunc,
     forespoerRevidering,

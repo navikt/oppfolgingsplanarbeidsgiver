@@ -30,10 +30,6 @@ export const henterEllerHarHentetOppfolgingsdialoger = (oppfolgingsdialoger) => 
     return oppfolgingsdialoger.henter || oppfolgingsdialoger.hentet || oppfolgingsdialoger.hentingFeilet;
 };
 
-export const henterEllerHarHentetToggles = (toggles) => {
-    return toggles.henter || toggles.hentet || toggles.hentingFeilet;
-};
-
 export const henterEllerHarHentetVirksomhet = (virksomhetsnummer, virksomhet) => {
     return virksomhet.henter.filter((henter) => {
         return henter === virksomhetsnummer;

@@ -3,7 +3,6 @@ import { reducer as formReducer } from 'redux-form';
 import createSagaMiddleware from 'redux-saga';
 
 import {
-    toggles,
     timeout,
     sykeforlopsPerioder,
 } from '@navikt/digisyfo-npm';
@@ -59,7 +58,6 @@ const rootReducer = combineReducers({
     kontaktinfo,
     timeout,
     form: formReducer,
-    toggles,
     sykeforlopsPerioder,
 });
 

@@ -2,10 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {
-    hentToggles,
-    togglesPt,
-} from '@navikt/digisyfo-npm';
-import {
     sykmeldt as sykmeldtPt,
     brodsmule as brodsmulePt,
     sykmeldteReducerPt,
@@ -15,7 +11,6 @@ import {
     forsoektHentetSykmeldte,
     henterEllerHarHentetOppfolgingsdialoger,
     henterEllerHarHentetSykmeldinger,
-    henterEllerHarHentetToggles,
     oppfolgingsdialogHarBlittOpprettet,
     sykmeldtHarBlittSlettet,
 } from '../utils/reducerUtils';
@@ -96,16 +91,12 @@ export class OppfolgingsplanerSide extends Component {
             koblingId,
             alleOppfolgingsdialogerReducer,
             sykmeldinger,
-            toggles,
         } = this.props;
         if (!henterEllerHarHentetOppfolgingsdialoger(alleOppfolgingsdialogerReducer)) {
             this.props.hentOppfolgingsplaner();
         }
         if (!henterEllerHarHentetSykmeldinger(sykmeldinger)) {
             this.props.hentSykmeldinger(koblingId);
-        }
-        if (!henterEllerHarHentetToggles(toggles)) {
-            this.props.hentToggles();
         }
         this.berikSykmeldt();
     }
@@ -234,7 +225,6 @@ OppfolgingsplanerSide.propTypes = {
     oppfolgingsdialoger: PropTypes.arrayOf(opproptypes.oppfolgingsdialogPt),
     koblingId: PropTypes.string,
     sykmeldt: sykmeldtPt,
-    toggles: togglesPt,
     bekreftetNyNaermesteLeder: PropTypes.bool,
     harSykmeldtGyldigSykmelding: PropTypes.bool,
     slettetSykmeldt: PropTypes.bool,
@@ -246,7 +236,6 @@ OppfolgingsplanerSide.propTypes = {
     hentPerson: PropTypes.func,
     hentSykmeldinger: PropTypes.func,
     hentVirksomhet: PropTypes.func,
-    hentToggles: PropTypes.func,
     kopierOppfolgingsdialog: PropTypes.func,
     opprettOppfolgingsdialogAg: PropTypes.func,
     sjekkTilgang: PropTypes.func,
@@ -321,7 +310,6 @@ export function mapStateToProps(state, ownProps) {
         sykmeldte: state.sykmeldte,
         sykmeldinger,
         tilgang,
-        toggles: state.toggles,
         virksomhet: state.virksomhet,
         bekreftetNyNaermesteLeder: state.nyNaermesteLeder.bekreftet,
         koblingId: ownProps.params.koblingId,
@@ -360,7 +348,6 @@ const OppfolgingsdialogerContainer = connect(mapStateToProps, {
     hentPerson,
     hentKontaktinfo,
     hentSykmeldinger,
-    hentToggles,
     hentSykmeldteBerikelser: hentSykmeldteBerikelserAction,
 })(OppfolgingsplanerSide);
 

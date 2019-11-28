@@ -38,12 +38,10 @@ const PERSON_MARIANN = 'personMariann';
 const SYKMELDINGER = 'sykmeldinger';
 const SYKMELDTE = 'sykmeldte';
 const TILGANG = 'tilgang';
-const TOGGLES = 'toggles';
 const VIRKSOMHET = 'virksomhet';
 
 lastFilTilMinne(ARBEIDSFORHOLD);
 lastFilTilMinne(SYKMELDTE);
-lastFilTilMinne(TOGGLES);
 lastFilTilMinne(SYKMELDINGER);
 lastFilTilMinne(OPPFOLGINGSDIALOGER);
 lastFilTilMinne(BERIK);
@@ -119,11 +117,6 @@ function mockForOpplaeringsmiljo(server) {
     server.get('/syforest/arbeidsgiver/sykmeldte/berik', (req, res) => {
         res.setHeader('Content-Type', 'application/json');
         res.send(JSON.stringify(mockData[BERIK]));
-    });
-
-    server.get('/syforest/informasjon/toggles', (req, res) => {
-        res.setHeader('Content-Type', 'application/json');
-        res.send(JSON.stringify(mockData[TOGGLES]));
     });
 
     server.get('/syforest/arbeidsgiver/sykmeldinger', (req, res) => {

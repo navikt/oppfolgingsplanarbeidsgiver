@@ -2,7 +2,6 @@ import 'whatwg-fetch';
 import 'babel-polyfill';
 import { render } from 'react-dom';
 import {
-    hentToggles,
     setPerformOnHttpCalls,
     forlengInnloggetSesjon,
     sjekkInnloggingssesjon,
@@ -18,7 +17,6 @@ import './logging';
 
 store.dispatch(hentSykmeldte());
 store.dispatch(forlengInnloggetSesjon());
-store.dispatch(hentToggles());
 
 setPerformOnHttpCalls(() => { store.dispatch(forlengInnloggetSesjon()); });
 

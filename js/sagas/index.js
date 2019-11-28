@@ -1,8 +1,5 @@
 import { all } from 'redux-saga/effects';
-import {
-    togglesSagas,
-    sykeforlopsPerioderSagas,
-} from '@navikt/digisyfo-npm';
+import { sykeforlopsPerioderSagas } from '@navikt/digisyfo-npm';
 
 import arbeidsforholdSagas from './oppfolgingsplan/arbeidsforholdSagas';
 import arbeidsoppgaveSagas from './oppfolgingsplan/arbeidsoppgaveSagas';
@@ -35,7 +32,6 @@ export default function* rootSaga() {
         oppfolgingsdialogerSagas(),
         avbrytdialogSagas(),
         nullstillGodkjenningSagas(),
-        togglesSagas(),
         tilgangSagas(),
         arbeidsoppgaveSagas(),
         kommentarSagas(),
