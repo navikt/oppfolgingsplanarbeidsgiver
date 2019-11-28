@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { getLedetekst } from '@navikt/digisyfo-npm';
 import { Knapp } from 'nav-frontend-knapper';
 import {
     delMedFastlegePt,
@@ -11,6 +10,12 @@ import { erGyldigDatoIFortiden } from '../../../../utils/datoUtils';
 import { STATUS } from '../../../../konstanter';
 import InnholdboksPilTidligerePlaner from './InnholdboksPilTidligerePlaner';
 import InnholdboksPilDelplan from './InnholdboksPilDelplan';
+
+const texts = {
+    buttonEndre: 'Gjør endringer',
+    buttonUtgaver: 'Tidligere utgaver',
+    buttonDeling: 'Del planen',
+};
 
 class GodkjentPlanKnapper extends Component {
     constructor(props) {
@@ -53,7 +58,7 @@ class GodkjentPlanKnapper extends Component {
                         onClick={() => {
                             apneBekreftelse();
                         }}>
-                        {getLedetekst('oppfolgingsdialog.knapp.gjoer-endring')}
+                        {texts.buttonEndre}
                     </button>
                 </div>
             </li>
@@ -68,7 +73,7 @@ class GodkjentPlanKnapper extends Component {
                         onClick={() => {
                             this.toggleVisning('tidligereUtgaver');
                         }}>
-                        {getLedetekst('oppfolgingsdialog.knapp.tidligere-utgaver')}
+                        {texts.buttonUtgaver}
                     </button>
                 </div>
                 { this.state.visning === 'tidligereUtgaver' && <InnholdboksPilTidligerePlaner
@@ -83,7 +88,7 @@ class GodkjentPlanKnapper extends Component {
                     <Knapp onClick={() => {
                         this.toggleVisning('deling');
                     }}>
-                        {getLedetekst('oppfolgingsdialog.knapp.del-plan')}
+                        {texts.buttonDeling}
                     </Knapp>
                 </div>
                 { this.state.visning === 'deling' && <InnholdboksPilDelplan
