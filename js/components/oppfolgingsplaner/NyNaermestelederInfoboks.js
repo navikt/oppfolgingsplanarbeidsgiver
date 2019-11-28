@@ -1,14 +1,44 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Fareknapp, Hovedknapp } from 'nav-frontend-knapper';
-import {
-    getLedetekst,
-    getHtmlLedetekst,
-} from '@navikt/digisyfo-npm';
 import { oppfolgingsdialogPt } from '../../proptypes/opproptypes';
 import Lightbox from '../Lightbox';
 import OppfolgingsplanInfoboks from '../app/OppfolgingsplanInfoboks';
 import { getContextRoot } from '../../routers/paths';
+
+const texts = {
+    avkreftNyNaermestelederBekreftelse: {
+        title: 'Jeg er ikke denne personens leder',
+        buttonConfirm: 'Ja, jeg er sikker',
+    },
+    nyNaermestelederInfoboks: {
+        buttonConfirm: 'Start oppfølgingen',
+        buttonWrongLeader: 'Meld feil',
+    },
+};
+
+const TextWrongLeader = ({ oppfolgingsplan }) => {
+    return (
+        <React.Fragment>
+            Er du sikker på at du vil fjerne din status som nærmeste leder for <b>{oppfolgingsplan.arbeidstaker.navn}</b>?
+        </React.Fragment>
+    );
+};
+
+TextWrongLeader.propTypes = {
+    oppfolgingsplan: oppfolgingsdialogPt,
+};
+
+const textTitle = (sykmeldtName) => {
+    return `Velkommen til oppfølgingen av ${sykmeldtName}`;
+};
+
+const textInfo = (sykmeldtName) => {
+    return `
+        Som ny leder med personalansvar vil du kunne se oppfølgingsplaner som ${sykmeldtName} har laget sammen med sin forrige leder.
+        Du vil kunne fortsette på de planene som fortsatt gjelder, og det du gjør vil da bli merket med ditt navn.
+    `;
+};
 
 export const AvkreftNyNaermestelederBekreftelse = (
     {
@@ -16,17 +46,17 @@ export const AvkreftNyNaermestelederBekreftelse = (
         fjernNaermesteLederKobling,
         lukk,
     }) => {
-    const tittel = getLedetekst('oppfolgingsdialog.nyNaermestelederInfoboks.arbeidsgiver.bekreftelse.tittel');
-    const tekst = getHtmlLedetekst('oppfolgingsdialog.nyNaermestelederInfoboks.arbeidsgiver.bekreftelse.tekst', {
-        '%SYKMELDT%': oppfolgingsdialog.arbeidstaker.navn,
-    });
     return (<Lightbox lukkLightbox={lukk}>
         <div>
-            <h3>{tittel}</h3>
-            <p dangerouslySetInnerHTML={tekst} />
+            <h3>{texts.avkreftNyNaermestelederBekreftelse.title}</h3>
+            <p>
+                <TextWrongLeader
+                    oppfolgingsplan={oppfolgingsdialog}
+                />
+            </p>
             <div className="knapperad" onClick={fjernNaermesteLederKobling} role="button" tabIndex={0}>
                 <Fareknapp>
-                    {getLedetekst('oppfolgingsdialog.knapp.sikker')}
+                    {texts.avkreftNyNaermestelederBekreftelse.buttonConfirm}
                 </Fareknapp>
             </div>
         </div>
@@ -67,13 +97,6 @@ class NyNaermestelederInfoboks extends Component {
 
     render() {
         const { oppfolgingsdialog, bekreftNyNaermesteLeder } = this.props;
-        const tittel = getLedetekst('oppfolgingsdialog.nyNaermestelederInfoboks.arbeidsgiver.tittel', {
-            '%SYKMELDT%': oppfolgingsdialog.arbeidstaker.navn,
-        });
-        const tekst = getHtmlLedetekst('oppfolgingsdialog.nyNaermestelederInfoboks.arbeidsgiver.tekst', {
-            '%SYKMELDT%': oppfolgingsdialog.arbeidstaker.navn,
-        });
-        const bekreftKnappTekst = getLedetekst('oppfolgingsdialog.knapp.start-oppfolgingen');
         return (<div className="nyNaermestelederInfoboks">
             { this.state.visBekreftelse &&
             <AvkreftNyNaermestelederBekreftelse
@@ -83,22 +106,24 @@ class NyNaermestelederInfoboks extends Component {
             />
             }
             <OppfolgingsplanInfoboks
-                tittel={tittel}
+                tittel={textTitle(oppfolgingsdialog.arbeidstaker.navn)}
                 svgUrl={`${getContextRoot()}/img/svg/ny-naermesteleder.svg`}
                 svgAlt="Ny nærmeste leder"
             >
-                <p dangerouslySetInnerHTML={tekst} />
+                <p>
+                    {textInfo(oppfolgingsdialog.arbeidstaker.navn)}
+                </p>
                 <div className="knapperad">
                     <div className="knapperad__element">
                         <Hovedknapp onClick={() => { bekreftNyNaermesteLeder(); }}>
-                            {bekreftKnappTekst}
+                            {texts.nyNaermestelederInfoboks.buttonConfirm}
                         </Hovedknapp>
                     </div>
                     <div className="knapperad__element">
                         <button
                             className="lenke"
                             onClick={() => { this.apneBekreftelse(); }}>
-                            {getLedetekst('oppfolgingsdialog.knapp.meld-feil')}
+                            {texts.nyNaermestelederInfoboks.buttonWrongLeader}
                         </button>
                     </div>
                 </div>
