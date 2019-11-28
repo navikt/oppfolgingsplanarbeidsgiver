@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Fareknapp } from 'nav-frontend-knapper';
-import {
-    getLedetekst,
-    Utvidbar,
-} from '@navikt/digisyfo-npm';
+import { Utvidbar } from '@navikt/digisyfo-npm';
 import OppfolgingsplanInnholdboks from '../../../app/OppfolgingsplanInnholdboks';
 import {
     delMedFastlegePt,
@@ -16,13 +13,34 @@ import GodkjennPlanTidspunkt from '../GodkjennPlanTidspunkt';
 import Lightbox from '../../../Lightbox';
 import GodkjentPlanKnapper from './GodkjentPlanKnapper';
 
+
+const texts = {
+    godkjentPlan: {
+        title: 'Oppfølgingsplanen',
+    },
+    godkjentPlanUtvidbar: {
+        title: 'Se planen',
+        requestFeilet: 'Beklager, vi kunne ikke hente dokumentet på dette tidspunktet. Prøv igjen senere!',
+    },
+    avbrytPlanBekreftelse: {
+        title: 'Ønsker du å endre planen?',
+        info: 'Hvis du endrer planen, må du sende den til godkjenning hos den andre. Etter godkjenning blir den en gjeldende plan.',
+        button: 'Gjør endringer',
+    },
+};
+
+const textBothApprovedOppfolgingsplan = (arbeidstakerName) => {
+    return `Denne versjonen av planen er godkjent av ${arbeidstakerName} og deg.`;
+};
+
+
 export const GodkjentPlanUtvidbar = ({ dokument }) => {
     let panel;
     if (dokument.henter) {
         panel = <div className="app-spinner" aria-label="Vent litt mens siden laster" />;
     } else if (dokument.hentingFeilet) {
         panel = (<div className="godkjentPlanPdf__feilmelding">
-            {getLedetekst('oppfolgingsdialog.godkjentplan.utvidbar.feilmelding')}
+            {texts.godkjentPlanUtvidbar.requestFeilet}
         </div>);
     } else {
         panel = dokument.data && dokument.data.map((url, idx) => {
@@ -32,7 +50,7 @@ export const GodkjentPlanUtvidbar = ({ dokument }) => {
         });
     }
     return (
-        <Utvidbar className="utvidbar--oppfolgingsplan" tittel={getLedetekst('oppfolgingsdialog.arbeidsgiver.godkjennplan.godkjent.utvidbar.tittel')}>
+        <Utvidbar className="utvidbar--oppfolgingsplan" tittel={texts.godkjentPlanUtvidbar.title}>
             <div className="godkjentPlanPdf">
                 { panel }
             </div>
@@ -45,11 +63,11 @@ GodkjentPlanUtvidbar.propTypes = {
 export const AvbrytPlanBekreftelse = ({ oppfolgingsdialog, avbrytDialog }) => {
     return (
         <div className="avbrytPlanBekreftelse">
-            <h3 className="panel__tittel">{getLedetekst('oppfolgingsdialog.avbrytPlanBekreftelse.tittel')}</h3>
-            <p>{getLedetekst('oppfolgingsdialog.avbrytPlanBekreftelse.tekst')}</p>
+            <h3 className="panel__tittel">{texts.avbrytPlanBekreftelse.title}</h3>
+            <p>{texts.avbrytPlanBekreftelse.info}</p>
             <div className="knapperad">
                 <Fareknapp onClick={() => { avbrytDialog(oppfolgingsdialog.id); }}>
-                    {getLedetekst('oppfolgingsdialog.avbrytPlanBekreftelse.knapp.tekst')}
+                    {texts.avbrytPlanBekreftelse.button}
                 </Fareknapp>
             </div>
         </div>
@@ -96,17 +114,13 @@ class GodkjentPlan extends Component {
             fastlegeDeling,
             delMedFastlege,
         } = this.props;
-        const infoboksTittelNokkel = 'oppfolgingsdialog.arbeidsgiver.godkjennplan.godkjent.infoboks.tittel';
-        const infoboksTekst = getLedetekst('oppfolgingsdialog.arbeidsgiver.godkjennplan.godkjent.infoboks.tekst', {
-            '%ARBEIDSTAKER%': oppfolgingsdialog.arbeidstaker.navn,
-        });
         const godkjentPlan = oppfolgingsdialog.godkjentPlan;
 
         return (
             <OppfolgingsplanInnholdboks
                 svgUrl={`${rootUrl}/img/svg/plan-godkjent.svg`}
                 svgAlt="godkjent"
-                tittel={getLedetekst(infoboksTittelNokkel)}
+                tittel={texts.godkjentPlan.title}
             >
                 <div className="godkjentPlan">
                     {
@@ -118,7 +132,7 @@ class GodkjentPlan extends Component {
                         </Lightbox>
                     }
 
-                    { !godkjentPlan.tvungenGodkjenning && <p>{infoboksTekst}</p> }
+                    { !godkjentPlan.tvungenGodkjenning && <p>{textBothApprovedOppfolgingsplan(oppfolgingsdialog.arbeidstaker.navn)}</p> }
 
                     <GodkjennPlanTidspunkt
                         rootUrl={rootUrl}
