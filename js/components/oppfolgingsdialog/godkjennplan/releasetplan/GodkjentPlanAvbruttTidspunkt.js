@@ -1,9 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { getLedetekst } from '@navikt/digisyfo-npm';
 import { oppfolgingsdialogPt } from '../../../../proptypes/opproptypes';
 import { toDateMedMaanedNavn } from '../../../../utils/datoUtils';
 import BildeTekstLinje from '../../../app/BildeTekstLinje';
+
+const textOppfolgingsplanDuration = (dateFrom, dateTo) => {
+    return `Planens varighet: ${dateFrom} – ${dateTo}`;
+};
 
 const GodkjentPlanAvbruttTidspunkt = ({ oppfolgingsdialog, rootUrl }) => {
     return (
@@ -11,10 +14,10 @@ const GodkjentPlanAvbruttTidspunkt = ({ oppfolgingsdialog, rootUrl }) => {
             <BildeTekstLinje
                 imgUrl={`${rootUrl}/img/svg/calendar.svg`}
                 alt="bubble"
-                tekst={getLedetekst('oppfolgingsdialog.godkjentPlanAvbruttTidspunkt.varighet', {
-                    '%FOM%': toDateMedMaanedNavn(oppfolgingsdialog.godkjentPlan.gyldighetstidspunkt.fom),
-                    '%AVBRUTT%': toDateMedMaanedNavn(oppfolgingsdialog.godkjentPlan.avbruttPlan.tidspunkt),
-                })}
+                tekst={textOppfolgingsplanDuration(
+                    toDateMedMaanedNavn(oppfolgingsdialog.godkjentPlan.gyldighetstidspunkt.fom),
+                    toDateMedMaanedNavn(oppfolgingsdialog.godkjentPlan.avbruttPlan.tidspunkt),
+                )}
             />
         </div>
     );
