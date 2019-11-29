@@ -56,6 +56,7 @@ export class GodkjennPlanLightboksComponent extends Component {
         initData.sluttdato = window.sessionStorage.getItem('sluttdato');
         initData.evalueringsdato = window.sessionStorage.getItem('evalueringsdato');
         initData.opprettplan = true;
+        initData.delMedNav = false;
         this.props.initialize(initData);
     }
 
