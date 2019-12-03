@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Brodsmuler from '../components/Brodsmuler';
 import AppSpinner from '../components/AppSpinner';
 import { brodsmule as brodsmulePt } from '../shapes';
-import TimeoutBox from '../components/app/timeout/TimeoutBox';
+import TimeoutBox from '../timeout/TimeoutBox';
 
 const DocumentTitle = require('react-document-title');
 
