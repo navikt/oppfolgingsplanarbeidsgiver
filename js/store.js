@@ -2,10 +2,7 @@ import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { reducer as formReducer } from 'redux-form';
 import createSagaMiddleware from 'redux-saga';
 
-import {
-    timeout,
-    sykeforlopsPerioder,
-} from '@navikt/digisyfo-npm';
+import { sykeforlopsPerioder } from '@navikt/digisyfo-npm';
 import arbeidsoppgaver from './reducers/arbeidsoppgaver';
 import arbeidsforhold from './reducers/arbeidsforhold';
 import avbrytdialogReducer from './reducers/avbrytdialog';
@@ -25,6 +22,7 @@ import nyNaermesteLeder from './reducers/nyNaermesteLeder';
 import samtykke from './reducers/samtykke';
 import tilgang from './reducers/tilgang';
 import tiltak from './reducers/tiltak';
+import timeout from './timeout/timeout';
 import virksomhet from './reducers/virksomhet';
 
 import sykmeldte from './reducers/sykmeldte';
