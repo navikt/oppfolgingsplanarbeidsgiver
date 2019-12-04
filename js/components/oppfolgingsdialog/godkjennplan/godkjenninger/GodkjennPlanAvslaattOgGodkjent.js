@@ -25,6 +25,7 @@ const texts = {
         paragraphInfoWhen: 'Du sendte arbeidstakeren din en versjon av oppfølgingsplanen.',
         paragraphInfoWho: ' har foretatt noen endringer og sendt den tilbake til deg.',
     },
+    delMedNav: 'Del planen med NAV',
 };
 
 export const GodkjennPlanMottattUtvidbar = ({ oppfolgingsdialog, rootUrl }) => {
