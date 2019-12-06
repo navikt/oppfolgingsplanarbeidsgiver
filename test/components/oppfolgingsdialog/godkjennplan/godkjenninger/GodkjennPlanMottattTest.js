@@ -2,10 +2,7 @@ import React from 'react';
 import chai from 'chai';
 import { mount, shallow } from 'enzyme';
 import chaiEnzyme from 'chai-enzyme';
-import {
-    Knapp,
-    Hovedknapp,
-} from 'nav-frontend-knapper';
+import { Hovedknapp } from 'nav-frontend-knapper';
 import { Utvidbar } from '@navikt/digisyfo-npm';
 import OppfolgingsplanInnholdboks from '../../../../../js/components/app/OppfolgingsplanInnholdboks';
 import GodkjennPlanMottatt, {
@@ -71,10 +68,6 @@ describe('GodkjennPlanMottatt', () => {
 
         it('Skal vise en submit knapp', () => {
             expect(komponent.find(Hovedknapp)).to.have.length(1);
-        });
-
-        it('Skal vise en avbryt lenke', () => {
-            expect(komponent.find(Knapp)).to.have.length(1);
         });
     });
 });
