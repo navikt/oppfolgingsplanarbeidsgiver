@@ -12,6 +12,7 @@ import GodkjennPlanTidspunkt from '../GodkjennPlanTidspunkt';
 import TidligereAvbruttePlaner from '../TidligereAvbruttePlaner';
 import GodkjennPlanTilAltinnTekst from './GodkjennPlanTilAltinnTekst';
 import { oppfolgingsdialogPt } from '../../../../proptypes/opproptypes';
+import { EditButton } from './EditButton';
 
 const texts = {
     godkjennPlanMottattUtvidbar: {
@@ -116,10 +117,16 @@ const GodkjennPlanMottatt = (
                     </p>
                 </div>
 
-                <GodkjennPlanTidspunkt
-                    rootUrl={rootUrl}
-                    gyldighetstidspunkt={oppfolgingsdialog.godkjenninger[0].gyldighetstidspunkt}
-                />
+                <div className="blokk--xxs">
+                    <GodkjennPlanTidspunkt
+                        rootUrl={rootUrl}
+                        gyldighetstidspunkt={oppfolgingsdialog.godkjenninger[0].gyldighetstidspunkt}
+                    />
+                    <EditButton
+                        oppfolgingsdialog={oppfolgingsdialog}
+                        avvisDialog={avvisDialog}
+                    />
+                </div>
 
                 <GodkjennPlanMottattUtvidbar
                     oppfolgingsdialog={oppfolgingsdialog}
