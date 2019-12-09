@@ -11,7 +11,7 @@ import { getContextRoot } from '../../routers/paths';
 
 const tekster = {
     knapp: {
-        oversikt: 'Tilbake til oversikten',
+        oversikt: 'Tilbake til oppfølgingsplaner',
         neste: 'Neste',
         tilbake: 'Tilbake',
     },
