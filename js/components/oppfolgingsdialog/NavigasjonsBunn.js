@@ -30,14 +30,19 @@ const StyledLink = styled(Link)`
     align-items: center;
 `;
 
+const StyledNav = styled.nav`
+    display: flex;
+    justify-content: flex-start;
+`;
+
 const BackToOversikt = ({ koblingId }) => {
     return (
-        <nav>
+        <StyledNav>
             <StyledLink to={`${getContextRoot()}/${koblingId}/oppfolgingsplaner`}>
                 <VenstreChevron />
                 <span>{tekster.knapp.oversikt}</span>
             </StyledLink>
-        </nav>
+        </StyledNav>
     );
 };
 
