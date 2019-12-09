@@ -1,9 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import {
-    Knapp,
-    Hovedknapp,
-} from 'nav-frontend-knapper';
+import { Hovedknapp } from 'nav-frontend-knapper';
 import { Checkbox } from 'nav-frontend-skjema';
 import { Utvidbar } from '@navikt/digisyfo-npm';
 import { oppfolgingsdialogPt } from '../../../../proptypes/opproptypes';
@@ -11,6 +8,7 @@ import { hentGodkjenningsTidspunkt } from '../../../../utils/oppfolgingsplanUtil
 import GodkjennPlanOversiktInformasjon from '../GodkjennPlanOversiktInformasjon';
 import OppfolgingsplanInnholdboks from '../../../app/OppfolgingsplanInnholdboks';
 import GodkjennPlanTidspunkt from '../GodkjennPlanTidspunkt';
+import { EditButton } from './EditButton';
 
 const texts = {
     godkjennPlanMottattUtvidbar: {
@@ -43,7 +41,7 @@ GodkjennPlanMottattUtvidbar.propTypes = {
     rootUrl: PropTypes.string,
 };
 
-export const GodkjennPlanMottattKnapper = ({ godkjennPlan, oppfolgingsdialog, avvisDialog }) => {
+export const GodkjennPlanMottattKnapper = ({ godkjennPlan, oppfolgingsdialog }) => {
     const [delMedNav, setDelMedNav] = useState(false);
 
     const handleChange = () => {
@@ -68,21 +66,12 @@ export const GodkjennPlanMottattKnapper = ({ godkjennPlan, oppfolgingsdialog, av
                     {texts.godkjennPlanMottattKnapper.buttonApprove}
                 </Hovedknapp>
             </div>
-            <div className="knapperad__element">
-                <Knapp
-                    onClick={() => {
-                        avvisDialog(oppfolgingsdialog.id, oppfolgingsdialog.arbeidstaker.fnr);
-                    }}>
-                    {texts.godkjennPlanMottattKnapper.buttonDecline}
-                </Knapp>
-            </div>
         </div>
     );
 };
 GodkjennPlanMottattKnapper.propTypes = {
     oppfolgingsdialog: oppfolgingsdialogPt,
     godkjennPlan: PropTypes.func,
-    avvisDialog: PropTypes.func,
 };
 
 const GodkjennPlanAvslaattOgGodkjent = (
@@ -105,11 +94,17 @@ const GodkjennPlanAvslaattOgGodkjent = (
                     {`${oppfolgingsdialog.arbeidstaker.navn}${texts.godkjennPlanAvslaattOgGodkjent.paragraphInfoWho}`}
                 </p>
 
-                <GodkjennPlanTidspunkt
-                    rootUrl={rootUrl}
-                    gyldighetstidspunkt={sistOppfolgingsdialog}
-                />
+                <div className="blokk--xxs">
+                    <GodkjennPlanTidspunkt
+                        rootUrl={rootUrl}
+                        gyldighetstidspunkt={sistOppfolgingsdialog}
+                    />
 
+                    <EditButton
+                        oppfolgingsdialog={oppfolgingsdialog}
+                        avvisDialog={avvisDialog}
+                    />
+                </div>
                 <GodkjennPlanMottattUtvidbar
                     oppfolgingsdialog={oppfolgingsdialog}
                     rootUrl={rootUrl}
@@ -117,7 +112,6 @@ const GodkjennPlanAvslaattOgGodkjent = (
                 <GodkjennPlanMottattKnapper
                     oppfolgingsdialog={oppfolgingsdialog}
                     godkjennPlan={godkjennPlan}
-                    avvisDialog={avvisDialog}
                 />
             </div>
         </OppfolgingsplanInnholdboks>

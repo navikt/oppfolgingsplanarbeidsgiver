@@ -6,7 +6,7 @@ import BildeTekstLinje from '../../app/BildeTekstLinje';
 
 const GodkjennPlanTidspunkt = ({ rootUrl, gyldighetstidspunkt }) => {
     return (gyldighetstidspunkt &&
-        <div className="blokk">
+        <React.Fragment>
             {
                 <BildeTekstLinje
                     imgUrl={`${rootUrl}/img/svg/calendar.svg`}
@@ -19,7 +19,7 @@ const GodkjennPlanTidspunkt = ({ rootUrl, gyldighetstidspunkt }) => {
                 alt="calendar"
                 tekst={`Planen evalueres: ${toDateMedMaanedNavn(gyldighetstidspunkt.evalueres)}`}
             />
-        </div>
+        </React.Fragment>
     );
 };
 
