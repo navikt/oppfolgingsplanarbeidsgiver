@@ -1,15 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router';
+import styled from 'styled-components';
 import {
     Knapp,
     Hovedknapp,
 } from 'nav-frontend-knapper';
+import { VenstreChevron } from 'nav-frontend-chevron';
 import { getContextRoot } from '../../routers/paths';
 
 const tekster = {
     knapp: {
-        oversikt: 'Tilbake til oversikten',
+        oversikt: 'Tilbake til oppfølgingsplaner',
         neste: 'Neste',
         tilbake: 'Tilbake',
     },
@@ -22,6 +24,32 @@ const handleKeyPress = (settAktivtSteg, nesteSteg, e) => {
     }
 };
 
+const LinkStyled = styled(Link)`
+    display: flex;
+    font-weight: bold;
+    align-items: center;
+`;
+
+const NavBottom = styled.nav`
+    display: flex;
+    justify-content: flex-start;
+`;
+
+const BackToOversikt = ({ koblingId }) => {
+    return (
+        <NavBottom>
+            <LinkStyled to={`${getContextRoot()}/${koblingId}/oppfolgingsplaner`}>
+                <VenstreChevron />
+                <span>{tekster.knapp.oversikt}</span>
+            </LinkStyled>
+        </NavBottom>
+    );
+};
+
+BackToOversikt.propTypes = {
+    koblingId: PropTypes.string,
+};
+
 const NavigasjonsBunn = (
     {
         steg,
@@ -30,11 +58,7 @@ const NavigasjonsBunn = (
         koblingId,
     }) => {
     if (disabled) {
-        return (<nav className="navigasjonsBunn">
-            <Link className="knapp knapp--standard" to={`${getContextRoot()}/${koblingId}/oppfolgingsplaner`}>
-                {tekster.knapp.oversikt}
-            </Link>
-        </nav>);
+        return <BackToOversikt koblingId={koblingId} />;
     }
     return (
         <nav className="navigasjonsBunn">

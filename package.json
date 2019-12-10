@@ -44,6 +44,8 @@
     "mustache-express": "1.2.5",
     "nav-frontend-alertstriper": "1.0.14",
     "nav-frontend-alertstriper-style": "0.2.35",
+    "nav-frontend-chevron": "1.0.10",
+    "nav-frontend-chevron-style": "0.3.5",
     "nav-frontend-core": "4.0.5",
     "nav-frontend-etiketter": "0.2.15",
     "nav-frontend-etiketter-style": "0.3.4",
@@ -83,8 +85,8 @@
     "redux-saga": "0.16.0",
     "scroll-behavior": "0.3.2",
     "simple-ajax": "2.6.0",
-    "whatwg-fetch": "0.11.0",
-    "styled-components": "latest"
+    "styled-components": "4.4.1",
+    "whatwg-fetch": "0.11.0"
   },
   "devDependencies": {
     "autoprefixer": "7.0.1",
