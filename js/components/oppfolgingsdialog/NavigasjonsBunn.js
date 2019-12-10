@@ -24,25 +24,25 @@ const handleKeyPress = (settAktivtSteg, nesteSteg, e) => {
     }
 };
 
-const StyledLink = styled(Link)`
+const LinkStyled = styled(Link)`
     display: flex;
     font-weight: bold;
     align-items: center;
 `;
 
-const StyledNav = styled.nav`
+const NavBottom = styled.nav`
     display: flex;
     justify-content: flex-start;
 `;
 
 const BackToOversikt = ({ koblingId }) => {
     return (
-        <StyledNav>
-            <StyledLink to={`${getContextRoot()}/${koblingId}/oppfolgingsplaner`}>
+        <NavBottom>
+            <LinkStyled to={`${getContextRoot()}/${koblingId}/oppfolgingsplaner`}>
                 <VenstreChevron />
                 <span>{tekster.knapp.oversikt}</span>
-            </StyledLink>
-        </StyledNav>
+            </LinkStyled>
+        </NavBottom>
     );
 };
 
