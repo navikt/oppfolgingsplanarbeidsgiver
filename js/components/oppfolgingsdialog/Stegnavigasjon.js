@@ -34,7 +34,9 @@ Neste.propTypes = {
 };
 
 const Stegnavigasjon = ({ aktivtSteg, settAktivtSteg, disabled = false, stegliste }) => {
-    const LinkEl = disabled ? 'span' : 'a';
+    const LinkEl = disabled
+        ? 'span'
+        : 'a';
 
     const onClick = (steg, event) => {
         event.preventDefault();
@@ -65,9 +67,10 @@ const Stegnavigasjon = ({ aktivtSteg, settAktivtSteg, disabled = false, steglist
                             aria-disabled={disabled}
                             aria-selected={i === aktivtSteg - 1}
                             href={LinkEl === 'a' ? url : null}
-                            onClick={(e) => {
-                                onClick(i + 1, e);
-                            }}>{tekst}</LinkEl>
+                            onClick={(e) => { onClick(i + 1, e); }}
+                        >
+                            {tekst}
+                        </LinkEl>
                     </li>);
                 })
             }
