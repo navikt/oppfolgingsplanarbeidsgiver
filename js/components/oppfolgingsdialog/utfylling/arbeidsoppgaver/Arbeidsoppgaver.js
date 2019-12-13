@@ -82,11 +82,14 @@ class Arbeidsoppgaver extends Component {
         this.scrollToForm = this.scrollToForm.bind(this);
         this.visOppdateringFeilet = this.visOppdateringFeilet.bind(this);
         this.skjulSkjema = this.skjulSkjema.bind(this);
+        this.formRef = React.createRef();
     }
 
     componentDidMount() {
         if (this.state.visArbeidsoppgaveSkjema && this.lagreSkjema) {
             this.scrollToForm();
+        } else {
+            window.scrollTo(0, this.formRef.current.offsetTop);
         }
     }
 
@@ -162,7 +165,7 @@ class Arbeidsoppgaver extends Component {
         return (
             (() => {
                 return isEmpty(oppfolgingsdialog.arbeidsoppgaveListe) ?
-                    <div>
+                    <div ref={this.formRef}>
                         { this.state.visArbeidsoppgaveSkjema &&
                         <ArbeidsoppgaverInfoboksStilling
                             oppfolgingsplan={oppfolgingsdialog}
@@ -196,7 +199,7 @@ class Arbeidsoppgaver extends Component {
 
                     </div>
                     :
-                    <div>
+                    <div ref={this.formRef}>
                         <ArbeidsoppgaverInfoboksStilling
                             oppfolgingsplan={oppfolgingsdialog}
                             visArbeidsoppgaveSkjema={this.state.visArbeidsoppgaveSkjema}
