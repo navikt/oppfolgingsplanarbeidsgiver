@@ -3,8 +3,11 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const Hidden = styled.span`
-    position: absolute;
-    top: -9999px;
+    position: absolute; 
+    overflow: hidden; 
+    clip: rect(0 0 0 0); 
+    height: 1px; width: 1px; 
+    margin: -1px; padding: 0; border: 0; 
 `;
 
 const Forrige = ({ onClick, url }) => {
