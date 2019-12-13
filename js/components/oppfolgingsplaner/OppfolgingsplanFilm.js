@@ -4,12 +4,13 @@ import { OPPFOLGINGSPLAN } from '../../enums/filmer';
 
 const texts = {
     title: 'Om oppfølgingsplanen',
+    link: 'https://www.nav.no/no/bedrift/oppfolging/sykmeldt-arbeidstaker/relatert-informasjon/slik-folger-du-opp-sykmeldte/oppfolgingsplan_kap',
 };
 
 const TextLink = () => {
     return (
         <React.Fragment>
-            Har du noen spørsmål? <a className="lenke" target="_blank" rel="noopener noreferrer" href="https://nav.no/oppfølgingsplan">Les gjerne mer om oppfølgingsplanen her</a>.
+            Har du noen spørsmål? <a className="lenke" target="_blank" rel="noopener noreferrer" href={texts.link}>Les gjerne mer om oppfølgingsplanen her</a>.
         </React.Fragment>
     );
 };
