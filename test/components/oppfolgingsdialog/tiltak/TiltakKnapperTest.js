@@ -20,6 +20,7 @@ describe('TiltakKnapper', () => {
     });
 
     it('Skal vise en Knapp', () => {
-        expect(komponent.find(Knapp)).to.have.length(2);
+        expect(komponent.find(Knapp)).to.have.length(1);
+        expect(komponent.find('button.lenke')).to.have.length(1);
     });
 });

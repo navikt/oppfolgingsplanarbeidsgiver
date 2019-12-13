@@ -8,7 +8,8 @@ import {
 
 const texts = {
     buttonAbort: 'Avbryt',
-    buttonUpdate: 'Lagre',
+    buttonCreate: 'Legg til tiltak',
+    buttonUpdate: 'Lagre tiltak',
 };
 
 const handleKeyPress = (avbryt, e) => {
@@ -40,26 +41,34 @@ class TiltakKnapper extends Component {
     }
 
     render() {
-        const { avbryt } = this.props;
+        const {
+            avbryt,
+            tiltak,
+        } = this.props;
+        const submitButtonText = tiltak
+            ? texts.buttonUpdate
+            : texts.buttonCreate;
         return (
             <div className="knapperad knapperad--justervenstre">
                 <div className="knapperad__element">
                     <Knapp
+                        mini
                         disabled={this.state.spinner}
                         spinner={this.state.spinner}
                         htmlType="submit">
-                        {texts.buttonUpdate}
+                        {submitButtonText}
                     </Knapp>
                 </div>
                 <div className="knapperad__element">
-                    <Knapp
-                        htmlType="button"
+                    <button
+                        type="button"
+                        className="lenke"
                         onKeyPress={(e) => {
                             handleKeyPress(avbryt, e);
                         }}
                         onMouseDown={avbryt}>
                         {texts.buttonAbort}
-                    </Knapp>
+                    </button>
                 </div>
             </div>
         );

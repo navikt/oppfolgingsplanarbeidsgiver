@@ -1,15 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {
-    Knapp,
-    Hovedknapp,
-} from 'nav-frontend-knapper';
+import { Hovedknapp } from 'nav-frontend-knapper';
 import Feilmelding from './Feilmelding';
 import { ArbeidsoppgaveVarselFeil } from '../components/oppfolgingsdialog/utfylling/arbeidsoppgaver/ArbeidsoppgaveVarselFeil';
 import { fieldPropTypes } from '../proptypes/fieldproptypes';
 
 const texts = {
-    buttonSave: 'Lagre og legg til ny',
+    buttonSave: 'Legg til arbeidsoppgave',
     buttonCancel: 'Avbryt',
 };
 
@@ -66,12 +63,13 @@ const Inputfelt = (props) => {
                 </div>
 
                 <div className="knapperad__element">
-                    <Knapp
-                        mini
+                    <button
+                        type="button"
+                        className="lenke"
                         onKeyPress={(e) => { handleKeyPress(avbryt, e); }}
                         onMouseDown={avbryt}>
                         {texts.buttonCancel}
-                    </Knapp>
+                    </button>
                 </div>
             </div>
         </div>);
