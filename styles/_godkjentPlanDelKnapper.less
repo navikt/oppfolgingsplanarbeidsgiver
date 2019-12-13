@@ -1,42 +1,5 @@
 .godkjentPlanDelKnapper {
-    .varselstripe {
-        background-color: @white;
-        margin-bottom: 1.5em;
-        padding: 1em;
-        border: 1px solid @redError;
-        @media all and (min-width: @screen-sm-min) {
-            padding: 1.5em 0 1.5em 5em;
-        }
-        .varselstripe__ikon {
-            margin: 0.5em 0;
-            @media all and (min-width: @screen-sm-min) {
-                margin: 0 0 0 1em;
-            }
-        }
-        .varselstripe__innhold p {
-            font-weight: normal;
-            margin-top: 2em;
-            @media all and (min-width: @screen-sm-min) {
-                margin-top: 0;
-            }
-        }
-    }
-    p {
-        font-weight: 600;
-        @media all and (min-width: @screen-sm-min) {
-            margin-bottom: 2em;
-        }
-    }
-}
-
-.godkjentPlanDelKnapper__lastNed {
-    &::before {
-        content: "";
-        background: data-uri("./img/svg/last-ned.svg") no-repeat center center;
-        padding: 1em 1em;
-    }
-    a {
-        color: @navBla;
-        font-weight: 600;
+    .alertstripe {
+        margin: 1.5em 0 0 0;
     }
 }

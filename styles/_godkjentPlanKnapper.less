@@ -1,17 +1,18 @@
 .godkjentPlanKnapper {
+    &:extend(.panel);
+
     list-style-type: none;
-    margin: 2em 0 0 0;
-    padding: 0;
+    margin-top: 2px;
+    padding-top: 1em;
+    padding-bottom: 1em;
     button.lenke {
         font-weight: 600;
         border-bottom: none;
     }
-    .knapp--standard, .knapp--hoved {
-        text-transform: none;
-    }
     @media (min-width: @screen-sm-min) {
         display: flex;
         position: relative;
+        padding-bottom: 0;
 
         & > li {
             display: inline-block;
@@ -96,5 +97,17 @@
         width: 1.9em;
         background-color: #e7e9e9;
         transform: translateX(-50%) rotate(45deg);
+    }
+}
+
+.godkjentPlanDelKnapper__lastNed {
+    &::before {
+        content: "";
+        background: data-uri("./img/svg/last-ned.svg") no-repeat center center;
+        padding: 1em;
+    }
+    a {
+        color: @navBla;
+        font-weight: 600;
     }
 }
