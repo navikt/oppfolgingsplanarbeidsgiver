@@ -45,6 +45,7 @@ describe('Tiltak', () => {
             },
         };
     }
+
     beforeEach(() => {
         lagreTiltak = sinon.spy();
         slettTiltak = sinon.spy();
@@ -71,9 +72,11 @@ describe('Tiltak', () => {
             tiltak={{
                 lagringFeilet: false,
             }}
-        />);
+        />, { disableLifecycleMethods: true });
         component.setProps({ tiltak: { lagringFeilet: true } });
-        expect(component.state().varselTekst).to.equal('En midlertidig feil gjør at vi ikke kan lagre endringene dine akkurat nå. Prøv igjen senere.');
+        expect(component.state().varselTekst)
+            .to
+            .equal('En midlertidig feil gjør at vi ikke kan lagre endringene dine akkurat nå. Prøv igjen senere.');
     });
 
     it('Skal ikke vise feilmelding dersom lagring av ny tiltak ikke feilet', () => {
@@ -83,9 +86,11 @@ describe('Tiltak', () => {
                 lagringFeilet: false,
                 feiletTiltakId: 5,
             }}
-        />);
+        />, { disableLifecycleMethods: true });
         component.setProps({ tiltak: { lagringFeilet: true, feiletTiltakId: 5 } });
-        expect(component.state().varselTekst).to.equal('');
+        expect(component.state().varselTekst)
+            .to
+            .equal('');
     });
 
     describe('Oppfolgingsdialog uten Tiltak', () => {
@@ -94,7 +99,8 @@ describe('Tiltak', () => {
         let setItem;
         beforeEach(() => {
             setItem = sinon.stub();
-            setItem.onCall('hash', 'tiltak').returns(true);
+            setItem.onCall('hash', 'tiltak')
+                .returns(true);
             oppfolgingsdialogUtenTiltak = Object.assign({}, oppfolgingsdialog, {
                 arbeidstaker,
                 arbeidsgiver,
@@ -106,21 +112,30 @@ describe('Tiltak', () => {
                 lagreTiltak={lagreTiltak}
                 slettTiltak={slettTiltak}
                 tiltak={tiltak}
-            />);
+            />, { disableLifecycleMethods: true });
         });
         it('Skal vise OppfolgingsplanInfoboks, om det ikke er tiltak', () => {
-            expect(componentUtenTiltak.find(OppfolgingsplanInfoboks)).to.have.length(1);
+            expect(componentUtenTiltak.find(OppfolgingsplanInfoboks))
+                .to
+                .have
+                .length(1);
         });
 
         it('Skal vise LeggTilElementKnapper, om det ikke er tiltak', () => {
-            expect(componentUtenTiltak.find(LeggTilElementKnapper)).to.have.length(1);
+            expect(componentUtenTiltak.find(LeggTilElementKnapper))
+                .to
+                .have
+                .length(1);
         });
 
         it('Skal vise TiltakSkjema, om det ikke er tiltak og visTiltakSkjema er true', () => {
             componentUtenTiltak.setState({
                 visTiltakSkjema: true,
             });
-            expect(componentUtenTiltak.find(TiltakSkjema)).to.have.length(1);
+            expect(componentUtenTiltak.find(TiltakSkjema))
+                .to
+                .have
+                .length(1);
         });
     });
 
@@ -135,7 +150,7 @@ describe('Tiltak', () => {
                 lagreTiltak={lagreTiltak}
                 slettTiltak={slettTiltak}
                 tiltak={{ lagret: true }}
-            />);
+            />, { disableLifecycleMethods: true });
         });
 
         it('Skal vise NotifikasjonBoksVurdering, om nye Tiltak er lagt til av motpart, og oppfolgingsdialogAvbrutt er true', () => {
@@ -155,23 +170,35 @@ describe('Tiltak', () => {
                 lagreTiltak={lagreTiltak}
                 slettTiltak={slettTiltak}
                 tiltak={tiltak}
-            />);
-            expect(componentAvbrutt.find(NotifikasjonBoksVurdering)).to.have.length(1);
+            />, { disableLifecycleMethods: true });
+            expect(componentAvbrutt.find(NotifikasjonBoksVurdering))
+                .to
+                .have
+                .length(1);
         });
 
         it('Skal vise TiltakTabell, om det er tiltak', () => {
-            expect(componentMedTiltak.find(TiltakListe)).to.have.length(1);
+            expect(componentMedTiltak.find(TiltakListe))
+                .to
+                .have
+                .length(1);
         });
 
         it('Skal vise TiltakTabell, om det er tiltak og visTiltakSkjema er true', () => {
             componentMedTiltak.setState({
                 visTiltakSkjema: true,
             });
-            expect(componentMedTiltak.find(TiltakListe)).to.have.length(1);
+            expect(componentMedTiltak.find(TiltakListe))
+                .to
+                .have
+                .length(1);
         });
 
         it('Skal vise RenderOppfolgingsdialogTiltakTabell, om det er tiltak og visTiltakSkjema er false', () => {
-            expect(componentMedTiltak.find(TiltakListe)).to.have.length(1);
+            expect(componentMedTiltak.find(TiltakListe))
+                .to
+                .have
+                .length(1);
         });
     });
 });

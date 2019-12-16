@@ -18,11 +18,16 @@ class Godkjenn extends Component {
         this.sendGodkjennPlan = this.sendGodkjennPlan.bind(this);
         this.visGodkjenPlanSkjema = this.visGodkjenPlanSkjema.bind(this);
         this.lukkGodkjenPlanSkjema = this.lukkGodkjenPlanSkjema.bind(this);
+        this.formRef = React.createRef();
     }
 
     componentWillMount() {
         window.location.hash = 'godkjenn';
         window.sessionStorage.setItem('hash', 'godkjenn');
+    }
+
+    componentDidMount() {
+        window.scrollTo(0, this.formRef.current.offsetTop);
     }
 
     visGodkjenPlanSkjema() {
@@ -50,7 +55,7 @@ class Godkjenn extends Component {
             settAktivtSteg,
             rootUrl,
         } = this.props;
-        return (<div>
+        return (<div ref={this.formRef}>
             {
                 (() => {
                     if (this.state.visGodkjenPlanSkjema) {

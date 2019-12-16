@@ -26,7 +26,7 @@ describe('GodkjennPlanLightboks', () => {
             GodkjennPlanSkjemaDatovelger={GodkjennPlanSkjemaDatovelger}
             handleSubmit={handleSubmit}
             initialize={initialize}
-        />);
+        />, { disableLifecycleMethods: true });
     });
 
     it('Skal vise panel', () => {
@@ -70,7 +70,7 @@ describe('GodkjennPlanLightboks', () => {
             oppfolgingsdialog={getOppfolgingsdialog()}
             handleSubmit={handleSubmit}
             initialize={initialize}
-        />);
+        />, { disableLifecycleMethods: true });
         const validering = {
             startdato: '01.01.2018',
             sluttdato: '01.02.2018',
