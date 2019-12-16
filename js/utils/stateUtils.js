@@ -97,7 +97,7 @@ export const populerDialogFraState = (_oppfolgingsdialog, state) => {
     oppfolgingsdialog.arbeidsgiver.naermesteLeder.aktivFom = naermesteleder && naermesteleder.aktivFom;
     oppfolgingsdialog.arbeidsgiver.naermesteLeder.aktivTom = naermesteleder && naermesteleder.aktivTom;
     oppfolgingsdialog.arbeidsgiver.forrigeNaermesteLeder = finnForrigeNaermesteLeder(oppfolgingsdialog.arbeidstaker.fnr, oppfolgingsdialog.virksomhet.virksomhetsnummer, state);
-    oppfolgingsdialog.sistEndretAv.navn = finnNavn(oppfolgingsdialog.arbeidstaker.fnr, state);
+    oppfolgingsdialog.sistEndretAv.navn = finnNavn(oppfolgingsdialog.sistEndretAv.fnr, state);
     oppfolgingsdialog.arbeidsoppgaveListe.map((_arbeidsoppgave) => {
         const arbeidsoppgave = _arbeidsoppgave;
         arbeidsoppgave.opprettetAv.navn = finnNavn(arbeidsoppgave.opprettetAv.fnr, state);
