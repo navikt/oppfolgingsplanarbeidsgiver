@@ -1,6 +1,7 @@
 import React from 'react';
 import { oppfolgingsdialogPt } from '../../../../proptypes/opproptypes';
 import { toDateMedMaanedNavn } from '../../../../utils/datoUtils';
+import BildeTekstLinje from '../../../app/BildeTekstLinje';
 
 const textSharedWithNAV = (date) => {
     return `Planen ble delt med NAV ${date}`;
@@ -13,13 +14,17 @@ const textSharedWitFastlege = (date) => {
 const GodkjentPlanDeltBekreftelse = ({ oppfolgingsplan }) => {
     return (
         <React.Fragment>
-            { oppfolgingsplan.godkjentPlan.deltMedNAV && oppfolgingsplan.godkjentPlan.deltMedNAVTidspunkt && <p>
-                {textSharedWithNAV(toDateMedMaanedNavn(oppfolgingsplan.godkjentPlan.deltMedNAVTidspunkt))}
-            </p>
+            { oppfolgingsplan.godkjentPlan.deltMedNAV && oppfolgingsplan.godkjentPlan.deltMedNAVTidspunkt && <BildeTekstLinje
+                imgUrl={`${process.env.REACT_APP_CONTEXT_ROOT}/img/svg/nav-logo.svg`}
+                alt="NAV"
+                tekst={textSharedWithNAV(toDateMedMaanedNavn(oppfolgingsplan.godkjentPlan.deltMedNAVTidspunkt))}
+            />
             }
-            { oppfolgingsplan.godkjentPlan.deltMedFastlege && oppfolgingsplan.godkjentPlan.deltMedFastlegeTidspunkt && <p>
-                {textSharedWitFastlege(toDateMedMaanedNavn(oppfolgingsplan.godkjentPlan.deltMedFastlegeTidspunkt))}
-            </p>
+            { oppfolgingsplan.godkjentPlan.deltMedFastlege && oppfolgingsplan.godkjentPlan.deltMedFastlegeTidspunkt && <BildeTekstLinje
+                imgUrl={`${process.env.REACT_APP_CONTEXT_ROOT}/img/svg/medical-box.svg`}
+                alt="Lege"
+                tekst={textSharedWitFastlege(toDateMedMaanedNavn(oppfolgingsplan.godkjentPlan.deltMedFastlegeTidspunkt))}
+            />
             }
         </React.Fragment>
     );
