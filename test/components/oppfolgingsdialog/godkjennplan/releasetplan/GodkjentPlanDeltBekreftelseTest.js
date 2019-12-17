@@ -2,8 +2,9 @@ import React from 'react';
 import chai from 'chai';
 import { shallow } from 'enzyme';
 import chaiEnzyme from 'chai-enzyme';
-import GodkjentPlanDeltBekreftelse from '../../../../../js/components/oppfolgingsdialog/godkjennplan/releasetplan/GodkjentPlanDeltBekreftelse';
 import getOppfolgingsdialog from '../../../../mock/mockOppfolgingsdialog';
+import GodkjentPlanDeltBekreftelse from '../../../../../js/components/oppfolgingsdialog/godkjennplan/releasetplan/GodkjentPlanDeltBekreftelse';
+import BildeTekstLinje from '../../../../../js/components/app/BildeTekstLinje';
 
 chai.use(chaiEnzyme());
 const expect = chai.expect;
@@ -29,7 +30,7 @@ describe('GodkjentPlanDeltBekreftelse', () => {
         component = shallow(<GodkjentPlanDeltBekreftelse
             oppfolgingsplan={oppfolgingsplanDeltMedNav}
         />);
-        expect(component.find('p')).to.have.length(1);
+        expect(component.find(BildeTekstLinje)).to.have.length(1);
     });
 
     it('Skal vise tekst dersom godkjent plan er delt med fastlege', () => {
@@ -42,6 +43,6 @@ describe('GodkjentPlanDeltBekreftelse', () => {
         component = shallow(<GodkjentPlanDeltBekreftelse
             oppfolgingsplan={oppfolgingsplanDeltMedFastlege}
         />);
-        expect(component.find('p')).to.have.length(1);
+        expect(component.find(BildeTekstLinje)).to.have.length(1);
     });
 });
