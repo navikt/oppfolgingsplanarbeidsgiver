@@ -9,7 +9,6 @@ import avbrytdialogReducer from './reducers/avbrytdialog';
 import delmednav from './reducers/delmednav';
 import dokument from './reducers/dokument';
 import fastlegeDeling from './reducers/fastlegeDeling';
-import forespoerselRevidering from './reducers/forespoerselRevidering';
 import kommentar from './reducers/kommentar';
 import kontaktinfo from './reducers/kontaktinfo';
 import kopierDialogReducer from './reducers/kopierOppfolgingsdialog';
@@ -44,7 +43,6 @@ const rootReducer = combineReducers({
     samtykke,
     kommentar,
     dokument,
-    forespoerselRevidering,
     sykmeldte,
     sykmeldinger,
     tiltak,

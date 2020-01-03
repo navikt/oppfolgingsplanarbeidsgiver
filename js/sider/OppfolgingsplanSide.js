@@ -36,7 +36,6 @@ import { hentPdfurler } from '../actions/oppfolgingsplan/dokument_actions';
 import { hentPerson } from '../actions/oppfolgingsplan/person_actions';
 import { hentVirksomhet } from '../actions/oppfolgingsplan/virksomhet_actions';
 import { hentSykmeldinger } from '../actions/sykmeldinger_actions';
-import { forespoerRevidering } from '../actions/oppfolgingsplan/forespoerRevidering_actions';
 import { delMedNav as delMedNavFunc } from '../actions/oppfolgingsplan/delmednav_actions';
 import {
     avbrytDialog,
@@ -200,7 +199,6 @@ OppfolgingsplanSide.propTypes = {
     arbeidsoppgaver: opProptypes.arbeidsoppgaverReducerPt,
     avbrytdialogReducer: opProptypes.avbrytdialogReducerPt,
     dokument: opProptypes.dokumentReducerPt,
-    forespoerselRevidering: opProptypes.forespoerselRevideringPt,
     kontaktinfo: opProptypes.kontaktinfoReducerPt,
     navigasjontoggles: opProptypes.navigasjonstogglesReducerPt,
     alleOppfolgingsdialogerReducer: opProptypes.alleOppfolgingsdialogerAgPt,
@@ -232,7 +230,6 @@ OppfolgingsplanSide.propTypes = {
     dialogAvbruttOgNyOpprettet: PropTypes.func,
     delMedFastlege: PropTypes.func,
     delMedNavFunc: PropTypes.func,
-    forespoerRevidering: PropTypes.func,
     hentArbeidsforhold: PropTypes.func,
     godkjennDialogAg: PropTypes.func,
     hentKontaktinfo: PropTypes.func,
@@ -321,7 +318,6 @@ export function mapStateToProps(state, ownProps) {
         dokument: state.dokument,
         delmednav: state.delmednav,
         fastlegeDeling: state.fastlegeDeling,
-        forespoerselRevidering: state.forespoerselRevidering,
         arbeidsforhold: state.arbeidsforhold,
         kontaktinfo: state.kontaktinfo,
         navigasjontoggles: state.navigasjontoggles,
@@ -379,7 +375,6 @@ const OppfolgingsdialogContainer = connect(mapStateToProps, {
     hentArbeidsforhold,
     delMedFastlege,
     delMedNavFunc,
-    forespoerRevidering,
     hentVirksomhet,
     hentPerson,
     hentKontaktinfo,
