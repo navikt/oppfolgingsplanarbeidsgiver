@@ -16,6 +16,7 @@ export const ButtonDownload = ({ oppfolgingsplan }) => {
     return (
         <div className="knapperad__element godkjentPlanDelKnapper__lastNed">
             <a
+                className="lenke"
                 href={`${hentSyfoapiUrl(API_NAVN.SYFOOPPFOLGINGSPLANSERVICE)}/dokument/${oppfolgingsplan.id}/`}
                 download="oppfølgingsplan"
             >
