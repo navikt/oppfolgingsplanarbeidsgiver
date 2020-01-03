@@ -246,10 +246,6 @@ function mockForLokaltMiljo(server) {
         res.send();
     });
 
-    server.post('/syfooppfolgingsplanservice/api/oppfolgingsplan/actions/:id/foresporRevidering', (req, res) => {
-        res.send();
-    });
-
     server.post('/syfooppfolgingsplanservice/api/arbeidsgiver/oppfolgingsplaner', (req, res) => {
         mockOpprettetIdResultat(res);
     });

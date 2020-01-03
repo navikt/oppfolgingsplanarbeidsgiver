@@ -340,13 +340,3 @@ export const delmednavPt = PropTypes.shape({
     sender: PropTypes.bool,
     sendingFeilet: PropTypes.bool,
 });
-
-export const forespoerselRevideringPt = PropTypes.shape({
-    sender: PropTypes.bool,
-    sendt: PropTypes.bool,
-    sendingFeilet: PropTypes.bool,
-    data: PropTypes.oneOfType([
-        PropTypes.number,
-        PropTypes.object,
-    ]),
-});

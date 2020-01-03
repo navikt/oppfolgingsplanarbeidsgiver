@@ -3,13 +3,8 @@ import React from 'react';
 import sinon from 'sinon';
 import { shallow } from 'enzyme';
 import chaiEnzyme from 'chai-enzyme';
-import Alertstripe from 'nav-frontend-alertstriper';
-import {
-    Hovedknapp,
-    Knapp,
-} from 'nav-frontend-knapper';
+import { Hovedknapp } from 'nav-frontend-knapper';
 import { Bjorn } from '@navikt/digisyfo-npm';
-import AppSpinner from '../../../../js/components/AppSpinner';
 import ReviderEllerGodkjennPlan, {
     ReviderEllerGodkjennPlanKnapperad,
 } from '../../../../js/components/oppfolgingsdialog/godkjennplan/ReviderEllerGodkjennPlan';
@@ -20,43 +15,13 @@ const expect = chai.expect;
 
 describe('ReviderEllerGodkjennPlan', () => {
     let komponent;
-    let forespoerselRevidering;
-    let forespoerRevidering;
     let settAktivtSteg;
 
     beforeEach(() => {
-        forespoerselRevidering = {};
-        forespoerRevidering = sinon.spy();
         settAktivtSteg = sinon.spy();
         komponent = shallow(<ReviderEllerGodkjennPlan
-            forespoerselRevidering={forespoerselRevidering}
-            forespoerRevidering={forespoerRevidering}
             settAktivtSteg={settAktivtSteg}
         />);
-    });
-
-    it('Skal vise AppSpinner', () => {
-        const forespoerselRevideringSender = {
-            sender: true,
-        };
-        const komponentForespoerselSender = shallow(<ReviderEllerGodkjennPlan
-            forespoerselRevidering={forespoerselRevideringSender}
-            forespoerRevidering={forespoerRevidering}
-            settAktivtSteg={settAktivtSteg}
-        />);
-        expect(komponentForespoerselSender.find(AppSpinner)).to.have.length(1);
-    });
-
-    it('Skal vise Alertstripe', () => {
-        const forespoerselRevideringSendt = {
-            sendt: true,
-        };
-        const komponentForespoerselSendt = shallow(<ReviderEllerGodkjennPlan
-            forespoerselRevidering={forespoerselRevideringSendt}
-            forespoerRevidering={forespoerRevidering}
-            settAktivtSteg={settAktivtSteg}
-        />);
-        expect(komponentForespoerselSendt.find(Alertstripe)).to.have.length(1);
     });
 
     describe('Standard visning', () => {
@@ -82,10 +47,6 @@ describe('ReviderEllerGodkjennPlan', () => {
 
     describe('ReviderEllerGodkjennPlanKnapperad', () => {
         const komponentSub = shallow(<ReviderEllerGodkjennPlanKnapperad />);
-        it('Skal vise 1 Knapp', () => {
-            expect(komponentSub.find(Knapp)).to.have.length(1);
-        });
-
         it('Skal vise 1 Hovedknapp', () => {
             expect(komponentSub.find(Hovedknapp)).to.have.length(1);
         });

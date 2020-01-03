@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import {
-    forespoerselRevideringPt,
-    oppfolgingsdialogPt,
-} from '../../../proptypes/opproptypes';
+import { oppfolgingsdialogPt } from '../../../proptypes/opproptypes';
 import GodkjennPlanOversiktInformasjon from './GodkjennPlanOversiktInformasjon';
 import ReviderEllerGodkjennPlan from './ReviderEllerGodkjennPlan';
 import GodkjennPlanLightboks from './GodkjennPlanLightboks';
@@ -50,8 +47,6 @@ class Godkjenn extends Component {
     render() {
         const {
             oppfolgingsdialog,
-            forespoerselRevidering,
-            forespoerRevidering,
             settAktivtSteg,
             rootUrl,
         } = this.props;
@@ -77,8 +72,6 @@ class Godkjenn extends Component {
                             rootUrl={rootUrl}
                             settAktivtSteg={settAktivtSteg}
                             visSendTilGodkjenning={this.visGodkjenPlanSkjema}
-                            forespoerselRevidering={forespoerselRevidering}
-                            forespoerRevidering={forespoerRevidering}
                         />
                     </div>);
                 })()
@@ -88,8 +81,6 @@ class Godkjenn extends Component {
 }
 Godkjenn.propTypes = {
     oppfolgingsdialog: oppfolgingsdialogPt,
-    forespoerselRevidering: forespoerselRevideringPt,
-    forespoerRevidering: PropTypes.func,
     godkjennPlan: PropTypes.func,
     settAktivtSteg: PropTypes.func,
     rootUrl: PropTypes.string,
