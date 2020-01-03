@@ -4,10 +4,12 @@ import { shallow } from 'enzyme';
 import chaiEnzyme from 'chai-enzyme';
 import { Utvidbar } from '@navikt/digisyfo-npm';
 import GodkjennPlanSendt, {
+    CancelButton,
     GodkjennPlanSendtInfoTekst,
     GodkjennPlanSendtUtvidbar,
 } from '../../../../../js/components/oppfolgingsdialog/godkjennplan/godkjenninger/GodkjennPlanSendt';
 import GodkjennPlanOversiktInformasjon from '../../../../../js/components/oppfolgingsdialog/godkjennplan/GodkjennPlanOversiktInformasjon';
+import GodkjennPlanVenterInfo from '../../../../../js/components/oppfolgingsdialog/godkjennplan/GodkjennPlanVenterInfo';
 import OppfolgingsplanInnholdboks from '../../../../../js/components/app/OppfolgingsplanInnholdboks';
 import getOppfolgingsdialog from '../../../../mock/mockOppfolgingsdialog';
 
@@ -44,8 +46,8 @@ describe('GodkjennPlanSendt', () => {
         expect(komponentDefault.find(GodkjennPlanSendtUtvidbar)).to.have.length(1);
     });
 
-    it('Skal vise en knapp for aa trekke tilbake sendt godkjenning', () => {
-        expect(komponentDefault.find('button.lenke')).to.have.length(1);
+    it('Skal vise CancelButton', () => {
+        expect(komponentDefault.find(CancelButton)).to.have.length(1);
     });
 
     describe('GodkjennPlanSendtUtvidbar', () => {
@@ -63,7 +65,10 @@ describe('GodkjennPlanSendt', () => {
         it('Skal vise en GodkjennPlanSendtInfoTekst med overskrift og tekst', () => {
             expect(komponent.find('div.godkjennPlanSendt_infoTekst')).to.have.length(1);
             expect(komponent.find('h3')).to.have.length(1);
-            expect(komponent.find('p')).to.have.length(1);
+        });
+
+        it('Skal vise GodkjennPlanVenterInfo', () => {
+            expect(komponent.find(GodkjennPlanVenterInfo)).to.have.length(1);
         });
     });
 });

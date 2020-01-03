@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import { Utvidbar } from '@navikt/digisyfo-npm';
 import { oppfolgingsdialogPt } from '../../../../proptypes/opproptypes';
 import { finnNyesteGodkjenning } from '../../../../utils/oppfolgingsplanUtils';
@@ -7,14 +8,11 @@ import GodkjennPlanOversiktInformasjon from '../GodkjennPlanOversiktInformasjon'
 import OppfolgingsplanInnholdboks from '../../../app/OppfolgingsplanInnholdboks';
 import GodkjennPlanTidspunkt from '../GodkjennPlanTidspunkt';
 import TidligereAvbruttePlaner from '../TidligereAvbruttePlaner';
+import GodkjennPlanVenterInfo from '../GodkjennPlanVenterInfo';
 
 const texts = {
     godkjennPlanSendtInfoTekst: {
         title: 'Hva skjer nå?',
-        paragraph: `
-            Du har lagret en versjon av oppfølgingsplanen.
-            Når den ansatte har godkjent planen, kan du laste den ned. Planen er tilgjengelig her i fire måneder etter friskmelding.
-        `,
     },
     godkjennPlanSendtUtvidbar: {
         title: 'Se planen',
@@ -25,11 +23,34 @@ const texts = {
     },
 };
 
+const CancelButtonStyled = styled.button`
+    margin-top: 1em;
+`;
+export const CancelButton = (
+    {
+        nullstillGodkjenning,
+        oppfolgingsplan,
+    }) => {
+    return (
+        <CancelButtonStyled
+            className="lenke"
+            onClick={() => {
+                nullstillGodkjenning(oppfolgingsplan.id, oppfolgingsplan.arbeidstaker.fnr);
+            }}>
+            {texts.godkjennPlanSendt.buttonUndo}
+        </CancelButtonStyled>
+    );
+};
+CancelButton.propTypes = {
+    nullstillGodkjenning: PropTypes.func,
+    oppfolgingsplan: oppfolgingsdialogPt,
+};
+
 export const GodkjennPlanSendtInfoTekst = () => {
     return (
         <div className="godkjennPlanSendt_infoTekst">
             <h3 className="typo-element">{texts.godkjennPlanSendtInfoTekst.title}</h3>
-            <p>{texts.godkjennPlanSendtInfoTekst.paragraph}</p>
+            <GodkjennPlanVenterInfo />
         </div>
     );
 };
@@ -80,6 +101,10 @@ const GodkjennPlanSendt = ({ oppfolgingsdialog, nullstillGodkjenning, rootUrl, r
                     oppfolgingsdialog={oppfolgingsdialog}
                     rootUrl={rootUrl}
                 />
+                <CancelButton
+                    nullstillGodkjenning={nullstillGodkjenning}
+                    oppfolgingsplan={oppfolgingsdialog}
+                />
                 <TidligereAvbruttePlaner
                     oppfolgingsdialog={oppfolgingsdialog}
                     rootUrlPlaner={rootUrlPlaner}
@@ -87,13 +112,6 @@ const GodkjennPlanSendt = ({ oppfolgingsdialog, nullstillGodkjenning, rootUrl, r
                 <GodkjennPlanSendtInfoTekst
                     oppfolgingsdialog={oppfolgingsdialog}
                 />
-                <button
-                    className="lenke"
-                    onClick={() => {
-                        nullstillGodkjenning(oppfolgingsdialog.id, oppfolgingsdialog.arbeidstaker.fnr);
-                    }}>
-                    {texts.godkjennPlanSendt.buttonUndo}
-                </button>
             </div>
         </OppfolgingsplanInnholdboks>
     );
