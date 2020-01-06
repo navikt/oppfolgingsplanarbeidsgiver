@@ -40,10 +40,18 @@ describe('GodkjennPlanLightboks', () => {
     it('Skal vise overskrifter og tekster', () => {
         expect(komponent.find('h2')).to.have.length(1);
         expect(komponent.find('h3')).to.have.length(1);
-        expect(komponent.find('p')).to.have.length(1);
     });
 
-    it('Skal vise GodkjennPlanSkjemaDatovelger', () => {
+    it('Skal ikke vise Alertstripe, GodkjennPlanSkjemaDatovelger eller Hovedknapp i startilstand(radioSelected er true)', () => {
+        expect(komponent.find(Alertstripe)).to.have.length(0);
+        expect(komponent.find(GodkjennPlanSkjemaDatovelger)).to.have.length(0);
+        expect(komponent.find(Hovedknapp)).to.have.length(0);
+    });
+
+    it('Skal vise GodkjennPlanSkjemaDatovelger om radioSelected er true', () => {
+        komponent.setState({
+            radioSelected: true,
+        });
         expect(komponent.find(GodkjennPlanSkjemaDatovelger)).to.have.length(1);
     });
 
@@ -61,7 +69,24 @@ describe('GodkjennPlanLightboks', () => {
         expect(komponent.find(Alertstripe)).to.have.length(0);
     });
 
-    it('Skal vise en submit knapp', () => {
+    it('Skal vise Alertstripe, om tvungenGodkjenning er valgt', () => {
+        komponent.setState({
+            opprettplan: 'true',
+        });
+        expect(komponent.find(Alertstripe)).to.have.length(1);
+    });
+
+    it('Skal vise Alertstripe, om radioSelected er true', () => {
+        komponent.setState({
+            opprettplan: 'true',
+        });
+        expect(komponent.find(Alertstripe)).to.have.length(1);
+    });
+
+    it('Skal vise en submit knapp om radioSelected er true', () => {
+        komponent.setState({
+            radioSelected: true,
+        });
         expect(komponent.find(Hovedknapp)).to.have.length(1);
     });
 

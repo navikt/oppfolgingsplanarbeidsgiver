@@ -15,19 +15,20 @@ import GodkjennPlanSkjemaDatovelger from './GodkjennPlanSkjemaDatovelger';
 import { oppfolgingsdialogPt } from '../../../proptypes/opproptypes';
 
 const texts = {
-    title: 'Du sender nå en oppfølgingsplan til arbeidstakeren for godkjenning',
-    info: `
-        Arbeidstakeren kan deretter gjøre endringer i oppfølgingsplanen. Da får du den til ny godkjenning.
-        Alle godkjente planer mellom deg og arbeidstakeren vil også bli tilgjengelige for de hos dere som har tilganger i Altinn.
-    `,
+    title: 'Vurder ferdigstilling av plan',
+    info: 'Arbeidstakeren kan deretter enten godkjenne eller gjøre endringer i oppfølgingsplanen og sende planen tilbake til deg for ny godkjenning.',
     titleDatovelger: 'Når skal planen vare fra og til?',
     checkboxLabel: 'Jeg er enig i denne oppfølgingsplanen',
     approval: {
+        question: 'Ønsker du godkjenning av arbeidstaker eller å opprette plan på vegne av arbeidstakeren?',
         sendForApproval: 'Send planen til arbeidstakeren for godkjenning',
-        sendWithoutApproval: 'Opprett en utgave uten godkjenning fra arbeidstakeren',
+        sendWithoutApproval: 'Opprett planen på vegne av arbeidstakeren',
     },
     infoWithoutApproval: 'En plan uten godkjenning fra den sykmeldte skal kun opprettes dersom den sykmeldte ikke kan eller ønsker å delta. Dette vil bli synlig i planen.',
-    buttonSend: 'Send til godkjenning',
+    buttonSend: {
+        approval: 'Send til godkjenning',
+        noApproval: 'Opprett plan',
+    },
     buttonCancel: 'Avbryt',
 };
 
@@ -39,8 +40,10 @@ export class GodkjennPlanLightboksComponent extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            radioSelected: false,
+            createWithoutApproval: false,
             visIkkeUtfyltFeilmelding: false,
-            opprettplan: 'true',
+            opprettplan: '',
         };
         this.godkjennPlan = this.godkjennPlan.bind(this);
         this.handledChange = this.handledChange.bind(this);
@@ -60,7 +63,6 @@ export class GodkjennPlanLightboksComponent extends Component {
         initData.startdato = window.sessionStorage.getItem('startdato');
         initData.sluttdato = window.sessionStorage.getItem('sluttdato');
         initData.evalueringsdato = window.sessionStorage.getItem('evalueringsdato');
-        initData.opprettplan = true;
         initData.delMedNav = false;
         this.props.initialize(initData);
     }
@@ -82,7 +84,10 @@ export class GodkjennPlanLightboksComponent extends Component {
     }
 
     handledChange(e) {
+        const createWithoutApproval = e.target.value !== 'true';
         this.setState({
+            radioSelected: true,
+            createWithoutApproval,
             opprettplan: e.target.value,
             visIkkeUtfyltFeilmelding: false,
         });
@@ -97,6 +102,8 @@ export class GodkjennPlanLightboksComponent extends Component {
         return (<div ref={this.formRef} className="panel godkjennPlanLightboks">
             <form onSubmit={handleSubmit(this.godkjennPlan)} className="godkjennPlanSkjema">
                 <h2>{texts.title}</h2>
+
+                <h3>{texts.approval.question}</h3>
 
                 <div className="inputgruppe">
                     <Field
@@ -131,41 +138,60 @@ export class GodkjennPlanLightboksComponent extends Component {
                 </Alertstripe>
                 }
 
-                <p>{texts.info}</p>
+                { this.state.opprettplan === 'true' &&
+                <Alertstripe
+                    className="alertstripe--notifikasjonboks"
+                    type="info"
+                    solid>
+                    {texts.info}
+                </Alertstripe>
+                }
 
-                <hr />
+                { this.state.radioSelected &&
+                <React.Fragment>
+                    <hr />
 
-                <h3>{texts.titleDatovelger}</h3>
+                    <h3>{texts.titleDatovelger}</h3>
 
-                <GodkjennPlanSkjemaDatovelger />
+                    <GodkjennPlanSkjemaDatovelger />
+                </React.Fragment>
+                }
 
-                <hr />
+                { this.state.radioSelected &&
+                <React.Fragment>
+                    <hr />
 
-                <div className="inputgruppe">
-                    <div className="skjema__input">
-                        <Field
-                            className="checkboks"
-                            id="godkjennInput"
-                            name="godkjennInput"
-                            component={CheckboxSelvstendig}
-                            label={texts.checkboxLabel}
-                        />
-                        <Field
-                            className="checkboks"
-                            id="delMedNav"
-                            name="delMedNav"
-                            component={CheckboxSelvstendig}
-                            label={textDelMedNav(oppfolgingsdialog.arbeidstaker.navn)}
-                        />
+                    <div className="inputgruppe">
+                        <div className="skjema__input">
+                            <Field
+                                className="checkboks"
+                                id="godkjennInput"
+                                name="godkjennInput"
+                                component={CheckboxSelvstendig}
+                                label={texts.checkboxLabel}
+                            />
+                            <Field
+                                className="checkboks"
+                                id="delMedNav"
+                                name="delMedNav"
+                                component={CheckboxSelvstendig}
+                                label={textDelMedNav(oppfolgingsdialog.arbeidstaker.navn)}
+                            />
+                        </div>
                     </div>
-                </div>
-
+                </React.Fragment>
+                }
                 <div className="knapperad">
                     <div className="knapperad__element">
+                        { this.state.radioSelected &&
                         <Hovedknapp
                             htmlType="submit">
-                            {texts.buttonSend}
+                            {this.state.createWithoutApproval
+                                ? texts.buttonSend.noApproval
+                                : texts.buttonSend.approval
+                            }
                         </Hovedknapp>
+                        }
                     </div>
                     <div className="knapperad__element">
                         <button
