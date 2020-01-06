@@ -1,7 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { HjelpetekstUnderVenstre } from 'nav-frontend-hjelpetekst';
-import { toDatePrettyPrint } from '@navikt/digisyfo-npm';
+import {
+    toDatePrettyPrint,
+    Utvidbar,
+} from '@navikt/digisyfo-npm';
 import { KANGJENNOMFOERES, STATUS_TILTAK } from '../../../konstanter';
 import { toDateMedMaanedNavn } from '../../../utils/datoUtils';
 import { capitalizeFirstLetter } from '../../../utils/tekstUtils';
@@ -106,11 +109,7 @@ InformasjonPanelOverskrift.propTypes = {
 
 export const InformasjonPanelArbeidsgiver = ({ naermesteLeder, virksomhetsnummer }) => {
     return (
-        <div className="panel godkjennPlanOversiktInformasjon__panel">
-            <div className="godkjennPlanOversiktInformasjon__panel__header">
-                <h3>{texts.informasjonPanelArbeidsgiver.title}</h3>
-            </div>
-
+        <Utvidbar className="informasjonPanelUtvidbar" tittel={texts.informasjonPanelArbeidsgiver.title}>
             <dl className="godkjennPlanOversiktInformasjon__panel__info">
                 <dt>{texts.informasjonPanelArbeidsgiver.labels.virksomhetsnummer}</dt>
                 <dd>{virksomhetsnummer}</dd>
@@ -132,7 +131,7 @@ export const InformasjonPanelArbeidsgiver = ({ naermesteLeder, virksomhetsnummer
                     </div>,
                 ]}
             </dl>
-        </div>
+        </Utvidbar>
     );
 };
 InformasjonPanelArbeidsgiver.propTypes = {
@@ -150,10 +149,7 @@ RenderStilling.propTypes = {
 
 export const InformasjonPanelSykmeldt = ({ arbeidstaker }) => {
     return (
-        <div className="panel godkjennPlanOversiktInformasjon__panel">
-            <div className="godkjennPlanOversiktInformasjon__panel__header">
-                <h3>{texts.informasjonPanelSykmeldt.title}</h3>
-            </div>
+        <Utvidbar className="informasjonPanelUtvidbar" tittel={texts.informasjonPanelSykmeldt.title}>
             <dl className="godkjennPlanOversiktInformasjon__panel__info">
                 <dt>{texts.informasjonPanelSykmeldt.labels.fnr}</dt>
                 <dd>{arbeidstaker.fnr}</dd>
@@ -184,7 +180,7 @@ export const InformasjonPanelSykmeldt = ({ arbeidstaker }) => {
                 </div>
                 }
             </dl>
-        </div>
+        </Utvidbar>
     );
 };
 InformasjonPanelSykmeldt.propTypes = {
