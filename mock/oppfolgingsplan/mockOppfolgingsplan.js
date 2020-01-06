@@ -2,7 +2,28 @@ const defaultOppfolgingsplaner = require('./defaultOppfolgingsplaner');
 const dateUtil = require('../util/dateUtil');
 
 const TYPE_DEFAULT = 'default';
+const TYPE_GODKJENNING_RECEIVED = 'godkjenningReceived';
 const TYPE_GODKJENT = 'godkjent';
+
+function getOppfolgingsplanGodkjenningReceived(oppfolgingsplan) {
+    const today = new Date();
+    return {
+        ...oppfolgingsplan,
+        godkjenninger: [
+            {
+                godkjent: true,
+                godkjenningsTidspunkt: new Date(),
+                godkjentAv: oppfolgingsplan.arbeidstaker,
+                gyldighetstidspunkt: {
+                    fom: dateUtil.leggTilDagerPaDato(today, -7).toJSON(),
+                    tom: dateUtil.leggTilDagerPaDato(today, 7).toJSON(),
+                    evalueres: dateUtil.leggTilDagerPaDato(today, 14).toJSON(),
+                },
+                delMedNav: false,
+            },
+        ],
+    };
+}
 
 function getOppfolgingsplanGodkjent(oppfolgingsplan) {
     const today = new Date();
@@ -52,6 +73,10 @@ function getOppfolgingsplaner(type) {
         return [
             getOppfolgingsplanGodkjent(oppfolgingsplan),
         ];
+    } else if (type === TYPE_GODKJENNING_RECEIVED) {
+        return [
+            getOppfolgingsplanGodkjenningReceived(oppfolgingsplan),
+        ];
     }
     return [
         {
@@ -63,5 +88,6 @@ function getOppfolgingsplaner(type) {
 module.exports = {
     getOppfolgingsplaner,
     TYPE_DEFAULT,
+    TYPE_GODKJENNING_RECEIVED,
     TYPE_GODKJENT,
 };
