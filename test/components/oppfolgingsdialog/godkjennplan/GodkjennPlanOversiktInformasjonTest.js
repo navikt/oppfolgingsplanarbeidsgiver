@@ -2,6 +2,7 @@ import chai from 'chai';
 import React from 'react';
 import { shallow } from 'enzyme';
 import chaiEnzyme from 'chai-enzyme';
+import { Utvidbar } from '@navikt/digisyfo-npm';
 import GodkjennPlanOversiktInformasjon, {
     InformasjonPanelOverskrift,
     InformasjonPanelSykmeldt,
@@ -99,12 +100,8 @@ describe('GodkjennPlanOversiktInformasjon', () => {
             virksomhetsnummer={oppfolgingsdialog.virksomhetsnummer}
         />);
 
-        it('Skal vise en InformasjonPanelOverskrift', () => {
-            expect(komponent.find('div.godkjennPlanOversiktInformasjon__panel')).to.have.length(1);
-        });
-
-        it('Skal vise en Overskrift', () => {
-            expect(komponent.find('div.godkjennPlanOversiktInformasjon__panel__header')).to.have.length(1);
+        it('Skal vise Utvidbar', () => {
+            expect(komponent.find(Utvidbar)).to.have.length(1);
         });
 
         it('Skal vise Felter med informasjon', () => {
@@ -119,12 +116,8 @@ describe('GodkjennPlanOversiktInformasjon', () => {
             naermesteLeder={oppfolgingsdialog.arbeidsgiver.naermesteLeder}
         />);
 
-        it('Skal vise en InformasjonPanelOverskrift', () => {
-            expect(komponent.find('div.godkjennPlanOversiktInformasjon__panel')).to.have.length(1);
-        });
-
-        it('Skal vise en Overskrift', () => {
-            expect(komponent.find('div.godkjennPlanOversiktInformasjon__panel__header')).to.have.length(1);
+        it('Skal vise Utvidbar', () => {
+            expect(komponent.find(Utvidbar)).to.have.length(1);
         });
 
         it('Skal vise Felter med informasjon', () => {

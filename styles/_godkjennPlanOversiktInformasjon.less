@@ -7,6 +7,28 @@
     }
 }
 
+.informasjonPanelUtvidbar {
+    border: 0 !important;
+    border-bottom: 0.1em solid #efefef !important;
+
+    h3 {
+        margin: 0;
+    }
+
+    .utvidbar__header {
+        padding-left: 1em;
+        padding-right: 1em;
+        @media (min-width: @screen-sm-min) {
+            padding-left: 2em;
+            padding-right: 2em;
+        }
+    }
+
+    .utvidbar__tittel {
+        .typo-undertittel-mixin();
+    }
+}
+
 .godkjennPlanOversiktInformasjon__panel {
     margin-bottom: 0 !important;
     border-bottom: 0.1em solid #efefef;
