@@ -1,6 +1,13 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { Undertekst } from 'nav-frontend-typografi';
 import Datovelger from '../../../skjema/Datovelger';
 import { datovelgerFeltPt } from '../../../proptypes/tiltakproptypes';
+import { oppfolgingsdialogPt } from '../../../proptypes/opproptypes';
+import {
+    getEndDateFromTiltakListe,
+    getStartDateFromTiltakListe,
+} from '../../../utils/tiltakUtils';
 
 const texts = {
     felter: {
@@ -8,6 +15,7 @@ const texts = {
         tom: 'Til og med',
         evalueringinnen: 'Evalueres innen',
     },
+    suggestion: 'Start- og sluttdato er foreslått basert på tiltak i planen',
 };
 
 export const FELTER = {
@@ -25,7 +33,11 @@ export const FELTER = {
     },
 };
 
-export const GodkjennPlanSkjemaDatovelgerFelt = ({ felt }) => {
+export const GodkjennPlanSkjemaDatovelgerFelt = (
+    {
+        felt,
+        date,
+    }) => {
     return (
         <div className="skjemaelement godkjennPlanSkjema__datovelger__felt">
             <label
@@ -37,33 +49,45 @@ export const GodkjennPlanSkjemaDatovelgerFelt = ({ felt }) => {
                 name={felt.navn}
                 id={felt.navn}
                 tidligsteFom={null}
-                dato={window.sessionStorage.getItem(felt.navn)}
+                dato={date || window.sessionStorage.getItem(felt.navn)}
             />
         </div>
     );
 };
 GodkjennPlanSkjemaDatovelgerFelt.propTypes = {
     felt: datovelgerFeltPt,
+    date: PropTypes.string,
 };
 
-const GodkjennPlanSkjemaDatovelger = () => {
+const GodkjennPlanSkjemaDatovelger = ({ oppfolgingsplan }) => {
+    const suggestedStartDate = getStartDateFromTiltakListe(oppfolgingsplan.tiltakListe);
+    const suggestedEndDate = getEndDateFromTiltakListe(oppfolgingsplan.tiltakListe);
     return (
         <div>
+            { suggestedStartDate && suggestedEndDate &&
+                <Undertekst>{texts.suggestion}</Undertekst>
+            }
             <div className="godkjennPlanSkjema__datovelger__rad">
                 <GodkjennPlanSkjemaDatovelgerFelt
                     felt={FELTER.fom}
+                    date={suggestedStartDate}
                 />
 
                 <GodkjennPlanSkjemaDatovelgerFelt
                     felt={FELTER.tom}
+                    date={suggestedEndDate}
                 />
-
+            </div>
+            <div className="godkjennPlanSkjema__datovelger__rad">
                 <GodkjennPlanSkjemaDatovelgerFelt
                     felt={FELTER.evalueringinnen}
                 />
             </div>
         </div>
     );
+};
+GodkjennPlanSkjemaDatovelger.propTypes = {
+    oppfolgingsplan: oppfolgingsdialogPt,
 };
 
 export default GodkjennPlanSkjemaDatovelger;
