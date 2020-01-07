@@ -13,6 +13,10 @@ import Radioknapper from '../../../skjema/Radioknapper';
 import CheckboxSelvstendig from '../../../skjema/CheckboxSelvstendig';
 import GodkjennPlanSkjemaDatovelger from './GodkjennPlanSkjemaDatovelger';
 import { oppfolgingsdialogPt } from '../../../proptypes/opproptypes';
+import {
+    getEndDateFromTiltakListe,
+    getStartDateFromTiltakListe,
+} from '../../../utils/tiltakUtils';
 
 const texts = {
     title: 'Vurder ferdigstilling av plan',
@@ -54,14 +58,14 @@ export class GodkjennPlanLightboksComponent extends Component {
         this.props.initialize({
             opprettplan: 'true',
         });
-        this.handleInitialize();
+        this.handleInitialize(this.props.oppfolgingsdialog);
         window.scrollTo(0, this.formRef.current.offsetTop);
     }
 
-    handleInitialize() {
+    handleInitialize(oppfolgingsplan) {
         const initData = {};
-        initData.startdato = window.sessionStorage.getItem('startdato');
-        initData.sluttdato = window.sessionStorage.getItem('sluttdato');
+        initData.startdato = getStartDateFromTiltakListe(oppfolgingsplan.tiltakListe) || window.sessionStorage.getItem('startdato');
+        initData.sluttdato = getEndDateFromTiltakListe(oppfolgingsplan.tiltakListe) || window.sessionStorage.getItem('sluttdato');
         initData.evalueringsdato = window.sessionStorage.getItem('evalueringsdato');
         initData.delMedNav = false;
         this.props.initialize(initData);
