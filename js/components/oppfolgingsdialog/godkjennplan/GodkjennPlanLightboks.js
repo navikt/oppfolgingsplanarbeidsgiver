@@ -153,7 +153,9 @@ export class GodkjennPlanLightboksComponent extends Component {
 
                     <h3>{texts.titleDatovelger}</h3>
 
-                    <GodkjennPlanSkjemaDatovelger />
+                    <GodkjennPlanSkjemaDatovelger
+                        oppfolgingsplan={oppfolgingsdialog}
+                    />
                 </React.Fragment>
                 }
 
