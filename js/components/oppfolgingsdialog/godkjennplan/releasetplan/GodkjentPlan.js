@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Fareknapp } from 'nav-frontend-knapper';
 import { Utvidbar } from '@navikt/digisyfo-npm';
+import styled from 'styled-components';
 import OppfolgingsplanInnholdboks from '../../../app/OppfolgingsplanInnholdboks';
 import {
     delMedFastlegePt,
@@ -34,6 +35,10 @@ const textBothApprovedOppfolgingsplan = (arbeidstakerName) => {
     return `Denne versjonen av planen er godkjent av ${arbeidstakerName} og deg.`;
 };
 
+export const UtvidbarStyled = styled(Utvidbar)`
+    margin-top: 2.5em;
+`;
+
 export const GodkjentPlanUtvidbar = ({ dokument }) => {
     let panel;
     if (dokument.henter) {
@@ -50,11 +55,11 @@ export const GodkjentPlanUtvidbar = ({ dokument }) => {
         });
     }
     return (
-        <Utvidbar className="utvidbar--oppfolgingsplan" tittel={texts.godkjentPlanUtvidbar.title}>
+        <UtvidbarStyled tittel={texts.godkjentPlanUtvidbar.title}>
             <div className="godkjentPlanPdf">
                 { panel }
             </div>
-        </Utvidbar>
+        </UtvidbarStyled>
     );
 };
 GodkjentPlanUtvidbar.propTypes = {
@@ -120,9 +125,10 @@ class GodkjentPlan extends Component {
             <React.Fragment>
                 <OppfolgingsplanInnholdboks
                     classnames="godkjentPlanOppfolgingsplanInfoboks"
-                    svgUrl={`${rootUrl}/img/svg/plan-godkjent.svg`}
+                    svgUrl={`${rootUrl}/img/svg/hake-groenn--lys.svg`}
                     svgAlt="godkjent"
                     tittel={texts.godkjentPlan.title}
+                    mediumIcon
                 >
                     <div>
                         {
