@@ -3,9 +3,9 @@ import chai from 'chai';
 import { shallow } from 'enzyme';
 import chaiEnzyme from 'chai-enzyme';
 import sinon from 'sinon';
-import { Utvidbar } from '@navikt/digisyfo-npm';
 import GodkjentPlan, {
     GodkjentPlanUtvidbar,
+    UtvidbarStyled,
 } from '../../../../../js/components/oppfolgingsdialog/godkjennplan/releasetplan/GodkjentPlan';
 import GodkjentPlanDelKnapper from '../../../../../js/components/oppfolgingsdialog/godkjennplan/releasetplan/GodkjentPlanDelKnapper';
 import OppfolgingsplanInnholdboks from '../../../../../js/components/app/OppfolgingsplanInnholdboks';
@@ -116,8 +116,8 @@ describe('GodkjentPlan', () => {
     describe('GodkjentPlanUtvidbar', () => {
         const komponent = shallow(<GodkjentPlanUtvidbar dokument={dokument} />);
 
-        it('Skal vise en Utvidbar', () => {
-            expect(komponent.find(Utvidbar)).to.have.length(1);
+        it('Skal vise en UtvidbarStyled', () => {
+            expect(komponent.find(UtvidbarStyled)).to.have.length(1);
         });
 
         it('Skal vise plan som bestaar av 2 pdf sider', () => {
