@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { KANGJENNOMFOERES } from '../../../../konstanter';
-import { ArbeidsoppgaveVarselFeil } from './ArbeidsoppgaveVarselFeil';
-import * as opProptypes from '../../../../proptypes/opproptypes';
 import { getContextRoot } from '../../../../routers/paths';
+import * as opProptypes from '../../../../proptypes/opproptypes';
+import ArbeidsoppgaveVarselFeil from './ArbeidsoppgaveVarselFeil';
 
 const texts = {
     arbeidsoppgaveInformasjonKnapper: {
