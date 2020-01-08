@@ -42,7 +42,7 @@ class ReviderEllerGodkjennPlan extends Component {
     }
 
     godkjennPlan() {
-        if (erIkkeOppfolgingsdialogUtfylt(this.props.oppfolgingsdialog)) {
+        if (erIkkeOppfolgingsdialogUtfylt(this.props.oppfolgingsplan)) {
             this.setState({
                 visIkkeUtfyltFeilmelding: true,
             });
@@ -53,7 +53,7 @@ class ReviderEllerGodkjennPlan extends Component {
 
     render() {
         const {
-            oppfolgingsdialog,
+            oppfolgingsplan,
             settAktivtSteg,
             rootUrl,
         } = this.props;
@@ -66,7 +66,7 @@ class ReviderEllerGodkjennPlan extends Component {
                 </Bjorn>
                 { this.state.visIkkeUtfyltFeilmelding &&
                 <IkkeUtfyltPlanFeilmelding
-                    oppfolgingsdialog={oppfolgingsdialog}
+                    oppfolgingsplan={oppfolgingsplan}
                     settAktivtSteg={settAktivtSteg}
                 />
                 }
@@ -79,7 +79,7 @@ class ReviderEllerGodkjennPlan extends Component {
 }
 
 ReviderEllerGodkjennPlan.propTypes = {
-    oppfolgingsdialog: oppfolgingsplanPt,
+    oppfolgingsplan: oppfolgingsplanPt,
     settAktivtSteg: PropTypes.func,
     visSendTilGodkjenning: PropTypes.func,
     rootUrl: PropTypes.string,

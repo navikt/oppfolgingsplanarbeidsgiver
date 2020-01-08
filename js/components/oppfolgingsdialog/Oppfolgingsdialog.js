@@ -132,7 +132,7 @@ class Oppfolgingsdialog extends Component {
         } else if (inneholderGodkjentPlan(oppfolgingsdialog)) {
             disableNavigation = true;
             panel = (<ReleasetPlan
-                oppfolgingsdialog={oppfolgingsdialog}
+                oppfolgingsplan={oppfolgingsdialog}
                 hentPdfurler={hentPdfurler}
                 dokument={dokument}
                 giSamtykke={giSamtykke}
@@ -143,7 +143,7 @@ class Oppfolgingsdialog extends Component {
                 delmednav={delmednav}
                 fastlegeDeling={fastlegeDeling}
                 delMedFastlege={delMedFastlege}
-                oppfolgingsdialoger={oppfolgingsdialoger}
+                oppfolgingsplaner={oppfolgingsdialoger}
             />);
         } else {
             (() => {
@@ -165,7 +165,7 @@ class Oppfolgingsdialog extends Component {
                     />);
                 } else {
                     panel = (<Godkjenn
-                        oppfolgingsdialog={oppfolgingsdialog}
+                        oppfolgingsplan={oppfolgingsdialog}
                         godkjennPlan={godkjennDialogAg}
                         settAktivtSteg={settAktivtSteg}
                         rootUrl={`${getContextRoot()}`}

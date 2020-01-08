@@ -17,7 +17,7 @@ const manglerSamtykke = (oppfolgingsplan) => {
 
 const ReleasetPlan = (
     {
-        oppfolgingsdialog,
+        oppfolgingsplan,
         hentPdfurler,
         dokument,
         giSamtykke,
@@ -28,18 +28,18 @@ const ReleasetPlan = (
         delmednav,
         fastlegeDeling,
         delMedFastlege,
-        oppfolgingsdialoger,
+        oppfolgingsplaner,
     }) => {
-    if (manglerSamtykke(oppfolgingsdialog)) {
+    if (manglerSamtykke(oppfolgingsplan)) {
         return (<Samtykke
             sendSamtykke={giSamtykke}
-            oppfolgingsdialog={oppfolgingsdialog}
+            oppfolgingsdialog={oppfolgingsplan}
             rootUrl={rootUrl}
         />);
-    } else if (oppfolgingsdialog.godkjentPlan && oppfolgingsdialog.godkjentPlan.avbruttPlan) {
+    } else if (oppfolgingsplan.godkjentPlan && oppfolgingsplan.godkjentPlan.avbruttPlan) {
         return (<GodkjentPlanAvbrutt
-            oppfolgingsdialog={oppfolgingsdialog}
-            oppfolgingsdialoger={oppfolgingsdialoger}
+            oppfolgingsdialog={oppfolgingsplan}
+            oppfolgingsdialoger={oppfolgingsplaner}
             hentPdfurler={hentPdfurler}
             dokument={dokument}
             delMedNavFunc={delMedNavFunc}
@@ -53,7 +53,7 @@ const ReleasetPlan = (
     return (
         <div>
             <GodkjentPlan
-                oppfolgingsdialog={oppfolgingsdialog}
+                oppfolgingsplan={oppfolgingsplan}
                 avbrytDialog={avbrytDialog}
                 hentPdfurler={hentPdfurler}
                 dokument={dokument}
@@ -71,7 +71,7 @@ const ReleasetPlan = (
 
 ReleasetPlan.propTypes = {
     delmednav: delmednavPt,
-    oppfolgingsdialog: oppfolgingsplanPt,
+    oppfolgingsplan: oppfolgingsplanPt,
     fastlegeDeling: delMedFastlegePt,
     hentPdfurler: PropTypes.func,
     delMedNavFunc: PropTypes.func,
@@ -81,7 +81,7 @@ ReleasetPlan.propTypes = {
     dokument: dokumentReducerPt,
     rootUrl: PropTypes.string,
     rootUrlPlaner: PropTypes.string,
-    oppfolgingsdialoger: PropTypes.arrayOf(oppfolgingsplanPt),
+    oppfolgingsplaner: PropTypes.arrayOf(oppfolgingsplanPt),
 };
 
 export default ReleasetPlan;

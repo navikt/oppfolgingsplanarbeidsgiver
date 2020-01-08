@@ -11,12 +11,12 @@ const expect = chai.expect;
 
 describe('InnholdboksPilTidligerePlaner', () => {
     let komponent;
-    let oppfolgingsdialog;
+    let oppfolgingsplan;
 
     beforeEach(() => {
-        oppfolgingsdialog = getOppfolgingsplan({});
+        oppfolgingsplan = getOppfolgingsplan({});
         komponent = mount(<InnholdboksPilTidligerePlaner
-            oppfolgingsdialog={oppfolgingsdialog}
+            oppfolgingsplan={oppfolgingsplan}
         />);
     });
 

@@ -14,7 +14,7 @@ const expect = chai.expect;
 
 describe('ReleasetPlan', () => {
     let komponent;
-    const oppfolgingsdialog = getOppfolgingsplan({
+    const oppfolgingsplan = getOppfolgingsplan({
         godkjentPlan: {
             opprettetTidspunkt: '2017-09-26T09:20:10.72',
             gyldighetstidspunkt: {
@@ -28,7 +28,7 @@ describe('ReleasetPlan', () => {
             dokumentUuid: null,
         },
     });
-    const oppfolgingsdialogMedSamtykke = Object.assign({}, oppfolgingsdialog, {
+    const oppfolgingsplanMedSamtykke = Object.assign({}, oppfolgingsplan, {
         arbeidsgiver: {
             samtykke: true,
         },
@@ -36,7 +36,7 @@ describe('ReleasetPlan', () => {
             samtykke: true,
         },
     });
-    const oppfolgingsdialogMedSamtykkeOgAvbruttplan = getOppfolgingsplan({
+    const oppfolgingsplanMedSamtykkeOgAvbruttplan = getOppfolgingsplan({
         arbeidsgiver: {
             samtykke: true,
             naermesteLeder: {
@@ -69,10 +69,10 @@ describe('ReleasetPlan', () => {
             },
         },
     });
-    const oppfolgingsdialoger = [getOppfolgingsplan()];
+    const oppfolgingsplaner = [getOppfolgingsplan()];
 
     it('Skal vise en Samtykke når det savnes', () => {
-        komponent = shallow(<ReleasetPlan oppfolgingsdialog={getOppfolgingsplan({
+        komponent = shallow(<ReleasetPlan oppfolgingsplan={getOppfolgingsplan({
             arbeidsgiver: {
                 samtykke: null,
             },
@@ -81,17 +81,17 @@ describe('ReleasetPlan', () => {
     });
 
     it('Skal vise en GodkjentPlan med samtykke', () => {
-        komponent = shallow(<ReleasetPlan oppfolgingsdialog={oppfolgingsdialogMedSamtykke} />);
+        komponent = shallow(<ReleasetPlan oppfolgingsplan={oppfolgingsplanMedSamtykke} />);
         expect(komponent.find(GodkjentPlan)).to.have.length(1);
     });
 
     it('Skal vise en OppfolgingsdialogPlanInfoboks med samtykke', () => {
-        komponent = shallow(<ReleasetPlan oppfolgingsdialog={oppfolgingsdialogMedSamtykke} />);
+        komponent = shallow(<ReleasetPlan oppfolgingsplan={oppfolgingsplanMedSamtykke} />);
         expect(komponent.find(OppfolgingsdialogPlanInfoboks)).to.have.length(1);
     });
 
     it('Skal vise en GodkjentPlanAvbrutt med samtykke og avbruttplan', () => {
-        komponent = shallow(<ReleasetPlan oppfolgingsdialog={oppfolgingsdialogMedSamtykkeOgAvbruttplan} oppfolgingsdialoger={oppfolgingsdialoger} />);
+        komponent = shallow(<ReleasetPlan oppfolgingsplan={oppfolgingsplanMedSamtykkeOgAvbruttplan} oppfolgingsplaner={oppfolgingsplaner} />);
         expect(komponent.find(GodkjentPlanAvbrutt)).to.have.length(1);
     });
 });

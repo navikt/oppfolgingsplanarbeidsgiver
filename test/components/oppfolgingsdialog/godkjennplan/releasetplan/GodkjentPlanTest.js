@@ -40,7 +40,7 @@ describe('GodkjentPlan', () => {
         delmednav={delmednav}
         hentPdfurler={hentPdfurler}
         dokument={dokument}
-        oppfolgingsdialog={oppfolgingsdialog}
+        oppfolgingsplan={oppfolgingsdialog}
     />);
 
     it('Skal vise en GodkjentPlan', () => {

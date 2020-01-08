@@ -18,7 +18,7 @@ const handleKeyPress = (settAktivtSteg, nesteSteg, e) => {
 
 const IkkeUtfyltPlanFeilmelding = (
     {
-        oppfolgingsdialog,
+        oppfolgingsplan,
         settAktivtSteg,
     }) => {
     return (<Alertstripe
@@ -26,7 +26,7 @@ const IkkeUtfyltPlanFeilmelding = (
         type="advarsel">
         <p>{texts.description}</p>
         <div className="ikkeUtfyltPlanFeilmelding__lenker">
-            { oppfolgingsdialog.arbeidsoppgaveListe.length === 0 &&
+            { oppfolgingsplan.arbeidsoppgaveListe.length === 0 &&
             <button
                 className="lenke"
                 onKeyPress={(e) => {
@@ -38,7 +38,7 @@ const IkkeUtfyltPlanFeilmelding = (
                 {texts.linkArbeidsoppgave}
             </button>
             }
-            { oppfolgingsdialog.tiltakListe.length === 0 &&
+            { oppfolgingsplan.tiltakListe.length === 0 &&
             <button
                 className="lenke"
                 onKeyPress={(e) => {
@@ -54,7 +54,7 @@ const IkkeUtfyltPlanFeilmelding = (
     </Alertstripe>);
 };
 IkkeUtfyltPlanFeilmelding.propTypes = {
-    oppfolgingsdialog: oppfolgingsplanPt,
+    oppfolgingsplan: oppfolgingsplanPt,
     settAktivtSteg: PropTypes.func,
 };
 

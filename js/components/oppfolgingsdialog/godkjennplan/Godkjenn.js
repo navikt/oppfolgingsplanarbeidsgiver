@@ -40,25 +40,25 @@ class Godkjenn extends Component {
     }
 
     sendGodkjennPlan(gyldighetstidspunkt, status, delMedNav) {
-        const { oppfolgingsdialog } = this.props;
-        this.props.godkjennPlan(oppfolgingsdialog.id, gyldighetstidspunkt, status, oppfolgingsdialog.arbeidstaker.fnr, delMedNav);
+        const { oppfolgingsplan } = this.props;
+        this.props.godkjennPlan(oppfolgingsplan.id, gyldighetstidspunkt, status, oppfolgingsplan.arbeidstaker.fnr, delMedNav);
     }
 
     render() {
         const {
-            oppfolgingsdialog,
+            oppfolgingsplan,
             settAktivtSteg,
             rootUrl,
         } = this.props;
         return (<div ref={this.formRef} className="godkjennPlanOversikt">
             <GodkjennPlanOversiktInformasjon
-                oppfolgingsdialog={oppfolgingsdialog}
+                oppfolgingsdialog={oppfolgingsplan}
                 rootUrl={rootUrl}
             />
 
             {!this.state.visGodkjenPlanSkjema &&
             <ReviderEllerGodkjennPlan
-                oppfolgingsdialog={oppfolgingsdialog}
+                oppfolgingsplan={oppfolgingsplan}
                 rootUrl={rootUrl}
                 settAktivtSteg={settAktivtSteg}
                 visSendTilGodkjenning={this.visGodkjenPlanSkjema}
@@ -69,7 +69,7 @@ class Godkjenn extends Component {
             <GodkjennPlanLightboks
                 avbryt={this.lukkGodkjenPlanSkjema}
                 rootUrl={rootUrl}
-                oppfolgingsdialog={oppfolgingsdialog}
+                oppfolgingsdialog={oppfolgingsplan}
                 godkjennPlan={this.sendGodkjennPlan}
             />
             }
@@ -77,7 +77,7 @@ class Godkjenn extends Component {
     }
 }
 Godkjenn.propTypes = {
-    oppfolgingsdialog: oppfolgingsplanPt,
+    oppfolgingsplan: oppfolgingsplanPt,
     godkjennPlan: PropTypes.func,
     settAktivtSteg: PropTypes.func,
     rootUrl: PropTypes.string,

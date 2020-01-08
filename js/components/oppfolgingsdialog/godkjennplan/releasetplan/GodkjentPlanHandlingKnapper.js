@@ -73,7 +73,7 @@ class GodkjentPlanHandlingKnapper extends Component {
                             </button>
                         </div>
                         { this.state.visning === 'tidligereUtgaver' && <InnholdboksPilTidligerePlaner
-                            oppfolgingsdialog={oppfolgingsplan}
+                            oppfolgingsplan={oppfolgingsplan}
                             rootUrlPlaner={rootUrlPlaner}
                         />
                         }

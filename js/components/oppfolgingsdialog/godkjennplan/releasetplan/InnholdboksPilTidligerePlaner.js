@@ -3,17 +3,21 @@ import PropTypes from 'prop-types';
 import { oppfolgingsplanPt } from '../../../../proptypes/opproptypes';
 import TidligereAvbruttePlaner from '../TidligereAvbruttePlaner';
 
-const InnholdboksPilTidligerePlaner = ({ oppfolgingsdialog, rootUrlPlaner }) => {
+const InnholdboksPilTidligerePlaner = (
+    {
+        oppfolgingsplan,
+        rootUrlPlaner,
+    }) => {
     return (<div className="innholdboksPil">
         <TidligereAvbruttePlaner
-            oppfolgingsdialog={oppfolgingsdialog}
+            oppfolgingsdialog={oppfolgingsplan}
             rootUrlPlaner={rootUrlPlaner}
         />
     </div>);
 };
 
 InnholdboksPilTidligerePlaner.propTypes = {
-    oppfolgingsdialog: oppfolgingsplanPt,
+    oppfolgingsplan: oppfolgingsplanPt,
     rootUrlPlaner: PropTypes.string,
 };
 

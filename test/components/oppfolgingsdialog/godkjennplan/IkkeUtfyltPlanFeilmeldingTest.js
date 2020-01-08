@@ -10,7 +10,7 @@ chai.use(chaiEnzyme());
 const expect = chai.expect;
 
 describe('IkkeUtfyltPlanFeilmelding', () => {
-    const oppfolgingsdialog = getOppfolgingsplan({
+    const oppfolgingsplan = getOppfolgingsplan({
         arbeidsgiver: {
             navn: 'Test Testesen',
         },
@@ -21,7 +21,7 @@ describe('IkkeUtfyltPlanFeilmelding', () => {
         arbeidsoppgaveListe: [],
     });
 
-    const komponent = shallow(<IkkeUtfyltPlanFeilmelding oppfolgingsdialog={oppfolgingsdialog} />);
+    const komponent = shallow(<IkkeUtfyltPlanFeilmelding oppfolgingsplan={oppfolgingsplan} />);
 
     it('Skal vise en Alertstripe', () => {
         expect(komponent.find(Alertstripe)).to.have.length(1);

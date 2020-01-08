@@ -65,13 +65,17 @@ export const GodkjentPlanUtvidbar = ({ dokument }) => {
 GodkjentPlanUtvidbar.propTypes = {
     dokument: dokumentReducerPt,
 };
-export const AvbrytPlanBekreftelse = ({ oppfolgingsdialog, avbrytDialog }) => {
+export const AvbrytPlanBekreftelse = (
+    {
+        oppfolgingsplan,
+        avbrytDialog,
+    }) => {
     return (
         <div className="avbrytPlanBekreftelse">
             <h3 className="panel__tittel">{texts.avbrytPlanBekreftelse.title}</h3>
             <p>{texts.avbrytPlanBekreftelse.info}</p>
             <div className="knapperad">
-                <Fareknapp onClick={() => { avbrytDialog(oppfolgingsdialog.id); }}>
+                <Fareknapp onClick={() => { avbrytDialog(oppfolgingsplan.id); }}>
                     {texts.avbrytPlanBekreftelse.button}
                 </Fareknapp>
             </div>
@@ -79,7 +83,7 @@ export const AvbrytPlanBekreftelse = ({ oppfolgingsdialog, avbrytDialog }) => {
     );
 };
 AvbrytPlanBekreftelse.propTypes = {
-    oppfolgingsdialog: oppfolgingsplanPt,
+    oppfolgingsplan: oppfolgingsplanPt,
     avbrytDialog: PropTypes.func,
 };
 
@@ -94,8 +98,8 @@ class GodkjentPlan extends Component {
     }
 
     componentWillMount() {
-        if ((!this.props.dokument.hentet && !this.props.dokument.henter) || this.props.dokument.id !== this.props.oppfolgingsdialog.id) {
-            this.props.hentPdfurler(this.props.oppfolgingsdialog.id, 1);
+        if ((!this.props.dokument.hentet && !this.props.dokument.henter) || this.props.dokument.id !== this.props.oppfolgingsplan.id) {
+            this.props.hentPdfurler(this.props.oppfolgingsplan.id, 1);
         }
     }
 
@@ -109,7 +113,7 @@ class GodkjentPlan extends Component {
 
     render() {
         const {
-            oppfolgingsdialog,
+            oppfolgingsplan,
             avbrytDialog,
             dokument,
             rootUrl,
@@ -119,7 +123,7 @@ class GodkjentPlan extends Component {
             fastlegeDeling,
             delMedFastlege,
         } = this.props;
-        const godkjentPlan = oppfolgingsdialog.godkjentPlan;
+        const godkjentPlan = oppfolgingsplan.godkjentPlan;
 
         return (
             <React.Fragment>
@@ -134,27 +138,27 @@ class GodkjentPlan extends Component {
                         {
                             this.state.visBekreftelse && <Lightbox lukkLightbox={this.lukkBekreftelse}>
                                 <AvbrytPlanBekreftelse
-                                    oppfolgingsdialog={oppfolgingsdialog}
+                                    oppfolgingsplan={oppfolgingsplan}
                                     avbrytDialog={avbrytDialog}
                                 />
                             </Lightbox>
                         }
 
-                        { !godkjentPlan.tvungenGodkjenning && <p>{textBothApprovedOppfolgingsplan(oppfolgingsdialog.arbeidstaker.navn)}</p> }
+                        { !godkjentPlan.tvungenGodkjenning && <p>{textBothApprovedOppfolgingsplan(oppfolgingsplan.arbeidstaker.navn)}</p> }
 
                         <GodkjennPlanTidspunkt
-                            gyldighetstidspunkt={oppfolgingsdialog.godkjentPlan.gyldighetstidspunkt}
+                            gyldighetstidspunkt={oppfolgingsplan.godkjentPlan.gyldighetstidspunkt}
                         />
 
                         <GodkjentPlanDeltBekreftelse
-                            oppfolgingsplan={oppfolgingsdialog}
+                            oppfolgingsplan={oppfolgingsplan}
                         />
 
                         <GodkjentPlanUtvidbar
                             dokument={dokument}
                         />
-                        {isGodkjentPlanDelKnapperAvailable(oppfolgingsdialog) && <GodkjentPlanDelKnapper
-                            oppfolgingsplan={oppfolgingsdialog}
+                        {isGodkjentPlanDelKnapperAvailable(oppfolgingsplan) && <GodkjentPlanDelKnapper
+                            oppfolgingsplan={oppfolgingsplan}
                             delmednav={delmednav}
                             delMedNavFunc={delMedNavFunc}
                             fastlegeDeling={fastlegeDeling}
@@ -164,7 +168,7 @@ class GodkjentPlan extends Component {
                     </div>
                 </OppfolgingsplanInnholdboks>
                 <GodkjentPlanHandlingKnapper
-                    oppfolgingsplan={oppfolgingsdialog}
+                    oppfolgingsplan={oppfolgingsplan}
                     apneBekreftelse={this.apneBekreftelse}
                     rootUrlPlaner={rootUrlPlaner}
                 />
@@ -174,7 +178,7 @@ class GodkjentPlan extends Component {
 }
 
 GodkjentPlan.propTypes = {
-    oppfolgingsdialog: oppfolgingsplanPt,
+    oppfolgingsplan: oppfolgingsplanPt,
     delmednav: delmednavPt,
     fastlegeDeling: delMedFastlegePt,
     rootUrl: PropTypes.string,
