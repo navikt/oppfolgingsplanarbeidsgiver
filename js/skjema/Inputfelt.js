@@ -6,7 +6,7 @@ import { ArbeidsoppgaveVarselFeil } from '../components/oppfolgingsdialog/utfyll
 import { fieldPropTypes } from '../proptypes/fieldproptypes';
 
 const texts = {
-    buttonSave: 'Legg til arbeidsoppgave',
+    buttonSave: 'Lagre arbeidsoppgave',
     buttonCancel: 'Avbryt',
 };
 
