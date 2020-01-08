@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Hovedknapp } from 'nav-frontend-knapper';
-import { Checkbox } from 'nav-frontend-skjema';
 import { Utvidbar } from '@navikt/digisyfo-npm';
 import { oppfolgingsdialogPt } from '../../../../proptypes/opproptypes';
 import { hentGodkjenningsTidspunkt } from '../../../../utils/oppfolgingsplanUtils';
@@ -9,6 +8,7 @@ import GodkjennPlanOversiktInformasjon from '../GodkjennPlanOversiktInformasjon'
 import OppfolgingsplanInnholdboks from '../../../app/OppfolgingsplanInnholdboks';
 import GodkjennPlanTidspunkt from '../GodkjennPlanTidspunkt';
 import { EditButton } from './EditButton';
+import { SharingCheckbox } from './SharingCheckbox';
 
 const texts = {
     godkjennPlanMottattUtvidbar: {
