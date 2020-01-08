@@ -8,6 +8,7 @@ import {
     OPPRETT_SKJEMANAVN,
     tekstfeltRegex,
 } from '../../../../konstanter';
+import { getContextRoot } from '../../../../routers/paths';
 import * as opProptypes from '../../../../proptypes/opproptypes';
 import Inputfelt from '../../../../skjema/Inputfelt';
 
@@ -56,7 +57,6 @@ export class LagreArbeidsoppgaveSkjemaKomponent extends Component {
             handleSubmit,
             varselTekst,
             oppdateringFeilet,
-            rootUrlImg,
         } = this.props;
         return (<form className="panel" onSubmit={handleSubmit}>
             <div className="skjemaelement">
@@ -75,7 +75,7 @@ export class LagreArbeidsoppgaveSkjemaKomponent extends Component {
                     varselTekst={varselTekst}
                     spinner={this.state.spinner}
                     autoFocus
-                    rootUrlImg={rootUrlImg}
+                    rootUrlImg={getContextRoot()}
                 />
             </div>
         </form>
@@ -89,7 +89,6 @@ LagreArbeidsoppgaveSkjemaKomponent.propTypes = {
     avbryt: PropTypes.func,
     oppdateringFeilet: PropTypes.bool,
     varselTekst: PropTypes.string,
-    rootUrlImg: PropTypes.string,
     initialize: PropTypes.func,
 };
 

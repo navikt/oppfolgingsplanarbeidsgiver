@@ -193,7 +193,6 @@ class Arbeidsoppgaver extends Component {
                                     arbeidsoppgaverReducer={arbeidsoppgaver}
                                     avbryt={this.skjulSkjema}
                                     onSubmit={this.sendLagreArbeidsoppgave}
-                                    rootUrlImg={getContextRoot()}
                                 />
                         }
 
@@ -216,7 +215,6 @@ class Arbeidsoppgaver extends Component {
                                 varselTekst={this.state.varselTekst}
                                 oppdateringFeilet={this.state.lagreNyOppgaveFeilet}
                                 arbeidsoppgaverReducer={arbeidsoppgaver}
-                                rootUrlImg={getContextRoot()}
                             />
                         }
                         <ArbeidsoppgaverListe
@@ -224,7 +222,6 @@ class Arbeidsoppgaver extends Component {
                             sendLagre={this.sendLagreArbeidsoppgave}
                             sendSlett={this.sendSlettArbeidsoppgave}
                             fnr={oppfolgingsdialog.arbeidsgiver.naermesteLeder.fnr}
-                            rootUrlImg={`${getContextRoot()}`}
                             visFeilMelding={this.visOppdateringFeilet}
                             feilMelding={this.state.oppdateringFeilet}
                         />

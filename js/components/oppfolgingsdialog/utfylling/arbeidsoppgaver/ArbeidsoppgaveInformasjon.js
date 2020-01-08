@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { KANGJENNOMFOERES } from '../../../../konstanter';
 import { ArbeidsoppgaveVarselFeil } from './ArbeidsoppgaveVarselFeil';
 import * as opProptypes from '../../../../proptypes/opproptypes';
+import { getContextRoot } from '../../../../routers/paths';
 
 const texts = {
     arbeidsoppgaveInformasjonKnapper: {
@@ -91,7 +92,6 @@ const ArbeidsoppgaveInformasjon = (
         element,
         oppdateringFeilet,
         varselTekst,
-        rootUrlImg,
     }) => {
     return (
         <div className="arbeidsoppgaveInformasjon">
@@ -102,7 +102,7 @@ const ArbeidsoppgaveInformasjon = (
             { oppdateringFeilet &&
             <ArbeidsoppgaveVarselFeil
                 tekst={varselTekst}
-                rootUrlImg={rootUrlImg}
+                rootUrlImg={getContextRoot()}
             />
             }
         </div>
@@ -113,7 +113,6 @@ ArbeidsoppgaveInformasjon.propTypes = {
     element: opProptypes.arbeidsoppgavePt,
     oppdateringFeilet: PropTypes.bool,
     varselTekst: PropTypes.string,
-    rootUrlImg: PropTypes.string,
 };
 
 export default ArbeidsoppgaveInformasjon;

@@ -215,7 +215,6 @@ class ArbeidsoppgaveUtvidbar extends Component {
             sendSlettKommentar,
             sendLagreKommentar,
             arbeidsoppgaverReducer,
-            rootUrlImg,
             feilMelding,
         } = this.props;
         return (
@@ -239,7 +238,6 @@ class ArbeidsoppgaveUtvidbar extends Component {
                                     fnr={fnr}
                                     sendSlett={this.sendSlett}
                                     arbeidsoppgave={element}
-                                    rootUrlImg={rootUrlImg}
                                 />
                             </div>
                         </a>
@@ -259,7 +257,6 @@ class ArbeidsoppgaveUtvidbar extends Component {
                                     sendSlettKommentar={sendSlettKommentar}
                                     oppdateringFeilet={(this.state.visLagringFeilet || this.state.visSlettingFeilet) && feilMelding}
                                     varselTekst={this.state.varselTekst}
-                                    rootUrlImg={rootUrlImg}
                                 />
                                 }
                                 { this.state.visInnhold && this.state.visLagreSkjema &&
@@ -271,7 +268,6 @@ class ArbeidsoppgaveUtvidbar extends Component {
                                     oppdateringFeilet={(this.state.visLagringFeilet || this.state.visSlettingFeilet) && feilMelding}
                                     varselTekst={this.state.varselTekst}
                                     arbeidsoppgaverReducer={arbeidsoppgaverReducer}
-                                    rootUrlImg={rootUrlImg}
                                 />
                                 }
                             </div>
@@ -291,7 +287,6 @@ ArbeidsoppgaveUtvidbar.propTypes = {
     sendSlettKommentar: PropTypes.func,
     sendLagreKommentar: PropTypes.func,
     erApen: PropTypes.bool.isRequired,
-    rootUrlImg: PropTypes.string,
     visFeilMelding: PropTypes.func,
     feilMelding: PropTypes.bool,
     arbeidsoppgaverReducer: opProptypes.arbeidsoppgaverReducerPt,

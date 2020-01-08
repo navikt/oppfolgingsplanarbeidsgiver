@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { KANGJENNOMFOERES } from '../../../../konstanter';
 import * as opProptypes from '../../../../proptypes/opproptypes';
 import ArbeidsoppgaveInformasjonKnapper from './ArbeidsoppgaveInformasjonKnapper';
+import { getContextRoot } from '../../../../routers/paths';
 
 const texts = {
     hentArbeidsoppgaveUnderTekst: {
@@ -14,7 +15,8 @@ const texts = {
     },
 };
 
-export const hentArbeidsoppgaveIkon = (arbeidsoppgave, rootUrlImg) => {
+export const hentArbeidsoppgaveIkon = (arbeidsoppgave) => {
+    const rootUrlImg = getContextRoot();
     if (arbeidsoppgave.gjennomfoering) {
         if (arbeidsoppgave.gjennomfoering.kanGjennomfoeres === KANGJENNOMFOERES.KAN) {
             return `${rootUrlImg}/img/svg/hake-groenn--lys.svg`;
@@ -52,11 +54,10 @@ const ArbeidsoppgaveUtvidbarOverskrift = (
         fnr,
         sendSlett,
         arbeidsoppgave,
-        rootUrlImg,
     }) => {
     return (<div className="arbeidsoppgaveTabellUtvidbarOverskrift">
         <ArbeidsoppgaveUtvidbarOverskriftKolonneImg>
-            <img className="arbeidsoppgaveUtvidbarOverskrift__ikon" src={hentArbeidsoppgaveIkon(arbeidsoppgave, rootUrlImg)} alt="" />
+            <img className="arbeidsoppgaveUtvidbarOverskrift__ikon" src={hentArbeidsoppgaveIkon(arbeidsoppgave)} alt="" />
         </ArbeidsoppgaveUtvidbarOverskriftKolonneImg>
         <div className="arbeidsoppgaverListe__kol">
             <div className="arbeidsoppgaveUtvidbarOverskrift__tekst">
@@ -78,7 +79,6 @@ ArbeidsoppgaveUtvidbarOverskrift.propTypes = {
     sendSlett: PropTypes.func,
     fnr: PropTypes.string,
     arbeidsoppgave: opProptypes.arbeidsoppgavePt,
-    rootUrlImg: PropTypes.string,
 };
 
 export default ArbeidsoppgaveUtvidbarOverskrift;

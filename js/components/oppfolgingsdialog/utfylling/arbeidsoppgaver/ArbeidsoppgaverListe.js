@@ -11,7 +11,6 @@ const ArbeidsoppgaverListe = (
         sendLagreKommentar,
         sendSlettKommentar,
         fnr,
-        rootUrlImg,
         feilMelding,
         visFeilMelding,
     }) => {
@@ -29,7 +28,6 @@ const ArbeidsoppgaverListe = (
                             sendSlettKommentar={sendSlettKommentar}
                             sendLagreKommentar={sendLagreKommentar}
                             id={index}
-                            rootUrlImg={rootUrlImg}
                             visFeilMelding={visFeilMelding}
                             feilMelding={feilMelding}
                         />);
@@ -46,7 +44,6 @@ ArbeidsoppgaverListe.propTypes = {
     sendSlett: PropTypes.func,
     sendLagreKommentar: PropTypes.func,
     sendSlettKommentar: PropTypes.func,
-    rootUrlImg: PropTypes.string,
     visFeilMelding: PropTypes.func,
     feilMelding: PropTypes.bool,
 };
