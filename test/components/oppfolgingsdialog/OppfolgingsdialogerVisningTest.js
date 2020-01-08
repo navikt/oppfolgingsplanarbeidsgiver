@@ -6,14 +6,14 @@ import OppfolgingsdialogerVisning from '../../../js/components/oppfolgingsdialog
 import OppfolgingsplanerIngenplan from '../../../js/components/oppfolgingsdialog/opprett/OppfolgingsplanerIngenplan';
 import OppfolgingsplanFilm from '../../../js/components/oppfolgingsplaner/OppfolgingsplanFilm';
 import OppfolgingsdialogTeasere from '../../../js/components/oppfolgingsplaner/OppfolgingsdialogTeasere';
-import getOppfolgingsdialog from '../../mock/mockOppfolgingsdialog';
+import getOppfolgingsplan from '../../mock/mockOppfolgingsdialog';
 
 chai.use(chaiEnzyme());
 const expect = chai.expect;
 
 describe('OppfolgingsdialogerVisning', () => {
     let component;
-    const oppfolgingsdialoger = [getOppfolgingsdialog()];
+    const oppfolgingsdialoger = [getOppfolgingsplan()];
     beforeEach(() => {
         component = shallow(<OppfolgingsdialogerVisning
             oppfolgingsdialoger={[]}
@@ -41,7 +41,7 @@ describe('OppfolgingsdialogerVisning', () => {
         });
 
         it('Skal vise OppfolgingsplanerIngenplan, dersom det ikke er aktive oppfolgingsdialoger', () => {
-            const oppfolgingsdialogListe = [Object.assign({}, getOppfolgingsdialog(), {
+            const oppfolgingsdialogListe = [Object.assign({}, getOppfolgingsplan(), {
                 godkjentPlan: {
                     gyldighetstidspunkt: {
                         tom: '2017-01-01T00:00:00.000',

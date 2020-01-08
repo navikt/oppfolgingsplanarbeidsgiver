@@ -46,7 +46,7 @@ const OppfolgingsdialogTeasere = (
 };
 
 OppfolgingsdialogTeasere.propTypes = {
-    oppfolgingsdialoger: PropTypes.arrayOf(opProptypes.oppfolgingsdialogPt),
+    oppfolgingsdialoger: PropTypes.arrayOf(opProptypes.oppfolgingsplanPt),
     harTidligerOppfolgingsdialoger: PropTypes.bool,
     className: PropTypes.string,
     tittel: PropTypes.string,

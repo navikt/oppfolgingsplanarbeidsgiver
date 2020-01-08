@@ -11,13 +11,13 @@ import GodkjennPlanMottatt, {
 } from '../../../../../js/components/oppfolgingsdialog/godkjennplan/godkjenninger/GodkjennPlanMottatt';
 import GodkjennPlanOversiktInformasjon from '../../../../../js/components/oppfolgingsdialog/godkjennplan/GodkjennPlanOversiktInformasjon';
 import GodkjennPlanTilAltinnTekst from '../../../../../js/components/oppfolgingsdialog/godkjennplan/godkjenninger/GodkjennPlanTilAltinnTekst';
-import getOppfolgingsdialog from '../../../../mock/mockOppfolgingsdialog';
+import getOppfolgingsplan from '../../../../mock/mockOppfolgingsdialog';
 
 chai.use(chaiEnzyme());
 const expect = chai.expect;
 
 describe('GodkjennPlanMottatt', () => {
-    const oppfolgingsdialog = getOppfolgingsdialog({
+    const oppfolgingsplan = getOppfolgingsplan({
         godkjenninger: [{
             godkjent: false,
             beskrivelse: 'Ikke godkjent fordi...',
@@ -32,7 +32,7 @@ describe('GodkjennPlanMottatt', () => {
             navn: 'Test Testesen',
         },
     });
-    const komponentDefault = shallow(<GodkjennPlanMottatt oppfolgingsdialog={oppfolgingsdialog} />);
+    const komponentDefault = shallow(<GodkjennPlanMottatt oppfolgingsplan={oppfolgingsplan} />);
 
     it('Skal vise en GodkjennPlanMottatt', () => {
         expect(komponentDefault.find(OppfolgingsplanInnholdboks)).to.have.length(1);
@@ -64,7 +64,7 @@ describe('GodkjennPlanMottatt', () => {
     });
 
     describe('GodkjennPlanMottattKnapper', () => {
-        const komponent = mount(<GodkjennPlanMottattKnapper oppfolgingsdialog={oppfolgingsdialog} />);
+        const komponent = mount(<GodkjennPlanMottattKnapper oppfolgingsplan={oppfolgingsplan} />);
 
         it('Skal vise en submit knapp', () => {
             expect(komponent.find(Hovedknapp)).to.have.length(1);

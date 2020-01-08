@@ -8,7 +8,7 @@ import { Knapp } from 'nav-frontend-knapper';
 import GodkjentPlanDelKnapper, {
     delingFeiletNav, delingFeiletFastlege,
 } from '../../../../../js/components/oppfolgingsdialog/godkjennplan/releasetplan/GodkjentPlanDelKnapper';
-import getOppfolgingsdialog from '../../../../mock/mockOppfolgingsdialog';
+import getOppfolgingsplan from '../../../../mock/mockOppfolgingsdialog';
 
 chai.use(chaiEnzyme());
 const expect = chai.expect;
@@ -22,7 +22,7 @@ describe('GodkjentPlanDelKnapper', () => {
     let delMedFastlege;
 
     beforeEach(() => {
-        oppfolgingsplan = getOppfolgingsdialog({});
+        oppfolgingsplan = getOppfolgingsplan({});
         delmednav = {
             sender: false,
             sendingFeilet: false,

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { restdatoTildato } from '../../../utils/datoUtils';
-import { oppfolgingsdialogPt } from '../../../proptypes/opproptypes';
+import { oppfolgingsplanPt } from '../../../proptypes/opproptypes';
 
 const texts = {
     title: 'Tidligere utgaver av denne planen',
@@ -37,7 +37,7 @@ const TidligereAvbruttePlaner = ({ oppfolgingsdialog, rootUrlPlaner }) => {
 };
 
 TidligereAvbruttePlaner.propTypes = {
-    oppfolgingsdialog: oppfolgingsdialogPt,
+    oppfolgingsdialog: oppfolgingsplanPt,
     rootUrlPlaner: PropTypes.string,
 };
 

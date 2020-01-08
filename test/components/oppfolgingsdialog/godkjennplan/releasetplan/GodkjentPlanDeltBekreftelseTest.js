@@ -2,7 +2,7 @@ import React from 'react';
 import chai from 'chai';
 import { shallow } from 'enzyme';
 import chaiEnzyme from 'chai-enzyme';
-import getOppfolgingsdialog from '../../../../mock/mockOppfolgingsdialog';
+import getOppfolgingsplan from '../../../../mock/mockOppfolgingsdialog';
 import GodkjentPlanDeltBekreftelse from '../../../../../js/components/oppfolgingsdialog/godkjennplan/releasetplan/GodkjentPlanDeltBekreftelse';
 import BildeTekstLinje from '../../../../../js/components/app/BildeTekstLinje';
 
@@ -14,7 +14,7 @@ describe('GodkjentPlanDeltBekreftelse', () => {
     let oppfolgingsplan;
 
     beforeEach(() => {
-        oppfolgingsplan = getOppfolgingsdialog({});
+        oppfolgingsplan = getOppfolgingsplan({});
         component = shallow(<GodkjentPlanDeltBekreftelse
             oppfolgingsplan={oppfolgingsplan}
         />);

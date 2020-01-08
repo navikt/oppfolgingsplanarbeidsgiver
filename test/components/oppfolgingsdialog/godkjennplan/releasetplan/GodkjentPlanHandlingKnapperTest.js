@@ -4,7 +4,7 @@ import { shallow } from 'enzyme';
 import chaiEnzyme from 'chai-enzyme';
 import sinon from 'sinon';
 import GodkjentPlanHandlingKnapper, { ButtonDownload } from '../../../../../js/components/oppfolgingsdialog/godkjennplan/releasetplan/GodkjentPlanHandlingKnapper';
-import getOppfolgingsdialog from '../../../../mock/mockOppfolgingsdialog';
+import getOppfolgingsplan from '../../../../mock/mockOppfolgingsdialog';
 import { STATUS } from '../../../../../js/konstanter';
 import InnholdboksPilTidligerePlaner from '../../../../../js/components/oppfolgingsdialog/godkjennplan/releasetplan/InnholdboksPilTidligerePlaner';
 
@@ -20,7 +20,7 @@ describe('GodkjentPlanHandlingKnapper', () => {
 
     beforeEach(() => {
         clock = sinon.useFakeTimers(today.getTime());
-        oppfolgingsplan = getOppfolgingsdialog({
+        oppfolgingsplan = getOppfolgingsplan({
             status: STATUS.AKTIV,
             avbruttPlanListe: [],
             godkjentPlan: {
@@ -45,7 +45,7 @@ describe('GodkjentPlanHandlingKnapper', () => {
     });
 
     it('Skal kun vise 1 knapp aa laste ned plan, naar gyldighetstidspunkt er passert, det er ingen tidligere avbrutte planer, og ingen visning er valgt', () => {
-        const oppfolgingsplanPassert = getOppfolgingsdialog({
+        const oppfolgingsplanPassert = getOppfolgingsplan({
             godkjentPlan: {
                 gyldighetstidspunkt: {
                     tom: '2017-01-01',
@@ -61,7 +61,7 @@ describe('GodkjentPlanHandlingKnapper', () => {
     });
 
     it('Skal vise knapp for tidligere avbrutte planer, naar det eksisterer tidligere avbrutte planer', () => {
-        const oppfolgingsplanMedTidligere = getOppfolgingsdialog({
+        const oppfolgingsplanMedTidligere = getOppfolgingsplan({
             avbruttPlanListe: [
                 {}, {},
             ],
@@ -74,7 +74,7 @@ describe('GodkjentPlanHandlingKnapper', () => {
     });
 
     it('Skal vise knapp for endre plan, naar gyldighetstidspunkt er passert og plan ikke plan er avbrutt', () => {
-        const oppfolgingsplanMedTidligere = getOppfolgingsdialog({
+        const oppfolgingsplanMedTidligere = getOppfolgingsplan({
             godkjentPlan: {
                 gyldighetstidspunkt: {
                     tom: '2018-01-01',
@@ -90,7 +90,7 @@ describe('GodkjentPlanHandlingKnapper', () => {
     });
 
     it('Skal ikke vise knapp for endre plan, naar gyldighetstidspunkt er passert og plan er avbrutt', () => {
-        const oppfolgingsplanMedTidligere = getOppfolgingsdialog({
+        const oppfolgingsplanMedTidligere = getOppfolgingsplan({
             godkjentPlan: {
                 gyldighetstidspunkt: {
                     tom: '2018-01-01',
@@ -107,7 +107,7 @@ describe('GodkjentPlanHandlingKnapper', () => {
 
 
     it('Skal vise InnholdboksPilTidligerePlaner, dersom visning er tidligereUtgaver', () => {
-        const oppfolgingsplanMedTidligere = getOppfolgingsdialog({
+        const oppfolgingsplanMedTidligere = getOppfolgingsplan({
             avbruttPlanListe: [
                 {}, {},
             ],

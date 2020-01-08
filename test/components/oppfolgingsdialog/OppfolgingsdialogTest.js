@@ -14,7 +14,7 @@ import NavigasjonsTopp from '../../../js/components/oppfolgingsdialog/Navigasjon
 import Arbeidsoppgaver from '../../../js/components/oppfolgingsdialog/utfylling/arbeidsoppgaver/Arbeidsoppgaver';
 import Samtykke from '../../../js/components/oppfolgingsdialog/godkjennplan/samtykke/Samtykke';
 import Tiltak from '../../../js/components/oppfolgingsdialog/utfylling/tiltak/Tiltak';
-import getOppfolgingsdialog from '../../mock/mockOppfolgingsdialog';
+import getOppfolgingsplan from '../../mock/mockOppfolgingsdialog';
 
 chai.use(chaiEnzyme());
 const expect = chai.expect;
@@ -47,7 +47,7 @@ describe('Oppfolgingsdialog', () => {
     const sykmeldinger = [
         {
             identdato: new Date(2017, 12, 31),
-            orgnummer: getOppfolgingsdialog().virksomhet.virksomhetsnummer,
+            orgnummer: getOppfolgingsplan().virksomhet.virksomhetsnummer,
             mulighetForArbeid: {
                 perioder: [{
                     fom: new Date(2018, 1, 1),
@@ -69,7 +69,7 @@ describe('Oppfolgingsdialog', () => {
         hentKontaktinfo = sinon.spy();
         hentSykeforlopsPerioder = sinon.spy();
         navigasjontoggles = { steg: 1 };
-        oppfolgingsdialog = getOppfolgingsdialog();
+        oppfolgingsdialog = getOppfolgingsplan();
         component = shallow(<Oppfolgingsdialog
             avbrytdialogReducer={avbrytdialogReducer}
             settAktivtSteg={settAktivtSteg}
@@ -101,7 +101,7 @@ describe('Oppfolgingsdialog', () => {
     });
 
     it('Skal vise NavigasjonsTopp, dersom dialog er under arbeid(disabledNavigation er false)', () => {
-        const oppfolgingsdialogUnderArbeid = Object.assign({}, getOppfolgingsdialog(), {
+        const oppfolgingsdialogUnderArbeid = Object.assign({}, getOppfolgingsplan(), {
             godkjentPlan: null,
             godkjenninger: [],
         });
@@ -162,7 +162,7 @@ describe('Oppfolgingsdialog', () => {
     });
 
     it('Skal vise Samtykke, om arbeidstaker ikke har svart paa samtykke og visSamtykke er true', () => {
-        oppfolgingsdialog = Object.assign({}, getOppfolgingsdialog(), {
+        oppfolgingsdialog = Object.assign({}, getOppfolgingsplan(), {
             arbeidstaker: {
                 samtykke: null,
             },
@@ -192,7 +192,7 @@ describe('Oppfolgingsdialog', () => {
 
     it('Skal vise Godkjenninger, om oppfolgingsdialoger inneholder Godkjenninger og ikke er avvist av arbeidsgiver', () => {
         const fnr = '123456789';
-        oppfolgingsdialog = Object.assign({}, getOppfolgingsdialog(), {
+        oppfolgingsdialog = Object.assign({}, getOppfolgingsplan(), {
             godkjenninger: [{
                 godkjent: true,
                 godkjentAv: {
@@ -233,7 +233,7 @@ describe('Oppfolgingsdialog', () => {
     });
 
     it('Skal vise ReleasetPlan, om oppfolgingsdialoger inneholder GodkjentPlan og ikke er avvist av arbeidsgiver', () => {
-        oppfolgingsdialog = Object.assign({}, getOppfolgingsdialog(), {
+        oppfolgingsdialog = Object.assign({}, getOppfolgingsplan(), {
             godkjentPlan: {},
             arbeidsgiver: {
                 naermesteLeder: {
@@ -269,7 +269,7 @@ describe('Oppfolgingsdialog', () => {
     });
 
     it('Skal vise Arbeidsoppgaver, om steg er 1 ', () => {
-        oppfolgingsdialog = Object.assign({}, getOppfolgingsdialog(), {
+        oppfolgingsdialog = Object.assign({}, getOppfolgingsplan(), {
             godkjentPlan: null,
             godkjenninger: [],
             avbruttPlanListe: [],
@@ -299,7 +299,7 @@ describe('Oppfolgingsdialog', () => {
     });
 
     it('Skal vise Tiltak, om steg er 3 ', () => {
-        oppfolgingsdialog = Object.assign({}, getOppfolgingsdialog(), {
+        oppfolgingsdialog = Object.assign({}, getOppfolgingsplan(), {
             godkjentPlan: null,
             godkjenninger: [],
             avbruttPlanListe: [],
@@ -329,7 +329,7 @@ describe('Oppfolgingsdialog', () => {
     });
 
     it('Skal vise Godkjenn, om steg er 3 ', () => {
-        oppfolgingsdialog = Object.assign({}, getOppfolgingsdialog(), {
+        oppfolgingsdialog = Object.assign({}, getOppfolgingsplan(), {
             godkjentPlan: null,
             godkjenninger: [],
             avbruttPlanListe: [],
@@ -362,7 +362,7 @@ describe('Oppfolgingsdialog', () => {
         const arbeidstaker = { fnr: '123456789' };
         const naermesteLeder = { fnr: '123456788' };
         it('Skal returnere false, om plan er avvist og saa godkjent', () => {
-            oppfolgingsdialog = Object.assign({}, getOppfolgingsdialog(), {
+            oppfolgingsdialog = Object.assign({}, getOppfolgingsplan(), {
                 godkjenninger: [
                     {
                         godkjent: true,
@@ -388,7 +388,7 @@ describe('Oppfolgingsdialog', () => {
             expect(erAvvistAvArbeidsgiver(oppfolgingsdialog)).to.equal(false);
         });
         it('Skal returnere false, om plan er godkjent', () => {
-            oppfolgingsdialog = Object.assign({}, getOppfolgingsdialog(), {
+            oppfolgingsdialog = Object.assign({}, getOppfolgingsplan(), {
                 godkjenninger: [{
                     godkjent: true,
                     godkjentAv: {
@@ -407,7 +407,7 @@ describe('Oppfolgingsdialog', () => {
         });
 
         it('Skal returnere false, om plan er avvist av en annen enn Arbeidsgiver', () => {
-            oppfolgingsdialog = Object.assign({}, getOppfolgingsdialog(), {
+            oppfolgingsdialog = Object.assign({}, getOppfolgingsplan(), {
                 godkjenninger: [{
                     godkjent: false,
                     godkjentAv: {
@@ -426,7 +426,7 @@ describe('Oppfolgingsdialog', () => {
         });
 
         it('Skal returnere true, om plan er avvist av Arbeidsgiver', () => {
-            oppfolgingsdialog = Object.assign({}, getOppfolgingsdialog(), {
+            oppfolgingsdialog = Object.assign({}, getOppfolgingsplan(), {
                 godkjenninger: [{
                     godkjent: false,
                     godkjentAv: {

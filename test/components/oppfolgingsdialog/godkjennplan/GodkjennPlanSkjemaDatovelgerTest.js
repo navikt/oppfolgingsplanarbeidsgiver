@@ -8,7 +8,7 @@ import GodkjennPlanSkjemaDatovelger, {
     GodkjennPlanSkjemaDatovelgerFelt,
 } from '../../../../js/components/oppfolgingsdialog/godkjennplan/GodkjennPlanSkjemaDatovelger';
 import Datovelger from '../../../../js/skjema/Datovelger';
-import getOppfolgingsdialog from '../../../mock/mockOppfolgingsdialog';
+import getOppfolgingsplan from '../../../mock/mockOppfolgingsdialog';
 
 chai.use(chaiEnzyme());
 const expect = chai.expect;
@@ -18,7 +18,7 @@ describe('GodkjennPlanSkjemaDatovelger', () => {
     let oppfolgingsplan;
 
     beforeEach(() => {
-        oppfolgingsplan = getOppfolgingsdialog({});
+        oppfolgingsplan = getOppfolgingsplan({});
         komponentDefault = shallow(<GodkjennPlanSkjemaDatovelger
             oppfolgingsplan={oppfolgingsplan}
         />);

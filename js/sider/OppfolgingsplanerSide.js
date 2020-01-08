@@ -222,7 +222,7 @@ OppfolgingsplanerSide.propTypes = {
     sykmeldte: sykmeldteReducerPt,
     tilgang: opproptypes.tilgangReducerPt,
     virksomhet: opproptypes.virksomhetReducerPt,
-    oppfolgingsdialoger: PropTypes.arrayOf(opproptypes.oppfolgingsdialogPt),
+    oppfolgingsdialoger: PropTypes.arrayOf(opproptypes.oppfolgingsplanPt),
     koblingId: PropTypes.string,
     sykmeldt: sykmeldtPt,
     bekreftetNyNaermesteLeder: PropTypes.bool,

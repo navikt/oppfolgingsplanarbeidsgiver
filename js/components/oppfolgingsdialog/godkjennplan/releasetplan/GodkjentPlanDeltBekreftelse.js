@@ -1,5 +1,5 @@
 import React from 'react';
-import { oppfolgingsdialogPt } from '../../../../proptypes/opproptypes';
+import { oppfolgingsplanPt } from '../../../../proptypes/opproptypes';
 import { toDateMedMaanedNavn } from '../../../../utils/datoUtils';
 import BildeTekstLinje from '../../../app/BildeTekstLinje';
 
@@ -30,7 +30,7 @@ const GodkjentPlanDeltBekreftelse = ({ oppfolgingsplan }) => {
     );
 };
 GodkjentPlanDeltBekreftelse.propTypes = {
-    oppfolgingsplan: oppfolgingsdialogPt,
+    oppfolgingsplan: oppfolgingsplanPt,
 };
 
 export default GodkjentPlanDeltBekreftelse;

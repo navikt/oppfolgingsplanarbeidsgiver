@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { oppfolgingsdialogPt } from '../../../proptypes/opproptypes';
+import { oppfolgingsplanPt } from '../../../proptypes/opproptypes';
 import { erOppfolgingsdialogOpprettbarDirekte } from '../../../utils/oppfolgingsplanUtils';
 
 const texts = {
@@ -33,7 +33,7 @@ const OppfolgingsplanerIngenplanKnapper = (
     );
 };
 OppfolgingsplanerIngenplanKnapper.propTypes = {
-    oppfolgingsdialoger: PropTypes.arrayOf(oppfolgingsdialogPt),
+    oppfolgingsdialoger: PropTypes.arrayOf(oppfolgingsplanPt),
     opprett: PropTypes.func,
     visOppfolgingsdialogOpprett: PropTypes.func,
 };

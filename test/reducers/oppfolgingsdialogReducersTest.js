@@ -6,13 +6,13 @@ import * as samtykkeAction from '../../js/actions/oppfolgingsplan/samtykke_actio
 import * as arbeidsoppgaveAction from '../../js/actions/oppfolgingsplan/arbeidsoppgave_actions';
 import * as tiltakAction from '../../js/actions/oppfolgingsplan/tiltak_actions';
 import oppfolgingsdialoger from '../../js/reducers/oppfolgingsplaner';
-import getOppfolgingsdialog from '../mock/mockOppfolgingsdialog';
+import getOppfolgingsplan from '../mock/mockOppfolgingsdialog';
 
 describe('oppfolgingsdialoger', () => {
     const fnr = '12345678';
     const fnr2 = '12345670';
     const mockdata = {
-        oppfolgingsdialoger: [getOppfolgingsdialog()],
+        oppfolgingsdialoger: [getOppfolgingsplan()],
     };
     const initialStateUtenData = deepFreeze({
         henter: false,

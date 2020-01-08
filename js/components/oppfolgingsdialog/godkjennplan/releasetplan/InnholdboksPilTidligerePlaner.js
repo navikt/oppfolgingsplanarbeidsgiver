@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { oppfolgingsdialogPt } from '../../../../proptypes/opproptypes';
+import { oppfolgingsplanPt } from '../../../../proptypes/opproptypes';
 import TidligereAvbruttePlaner from '../TidligereAvbruttePlaner';
 
 const InnholdboksPilTidligerePlaner = ({ oppfolgingsdialog, rootUrlPlaner }) => {
@@ -13,7 +13,7 @@ const InnholdboksPilTidligerePlaner = ({ oppfolgingsdialog, rootUrlPlaner }) => 
 };
 
 InnholdboksPilTidligerePlaner.propTypes = {
-    oppfolgingsdialog: oppfolgingsdialogPt,
+    oppfolgingsdialog: oppfolgingsplanPt,
     rootUrlPlaner: PropTypes.string,
 };
 

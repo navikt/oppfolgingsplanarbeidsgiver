@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { oppfolgingsdialogPt } from '../../../proptypes/opproptypes';
+import { oppfolgingsplanPt } from '../../../proptypes/opproptypes';
 import GodkjennPlanOversiktInformasjon from './GodkjennPlanOversiktInformasjon';
 import ReviderEllerGodkjennPlan from './ReviderEllerGodkjennPlan';
 import GodkjennPlanLightboks from './GodkjennPlanLightboks';
@@ -77,7 +77,7 @@ class Godkjenn extends Component {
     }
 }
 Godkjenn.propTypes = {
-    oppfolgingsdialog: oppfolgingsdialogPt,
+    oppfolgingsdialog: oppfolgingsplanPt,
     godkjennPlan: PropTypes.func,
     settAktivtSteg: PropTypes.func,
     rootUrl: PropTypes.string,

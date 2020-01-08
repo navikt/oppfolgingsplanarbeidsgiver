@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import { Bjorn } from '@navikt/digisyfo-npm';
-import { oppfolgingsdialogPt } from '../../../proptypes/opproptypes';
+import { oppfolgingsplanPt } from '../../../proptypes/opproptypes';
 import { erHerokuApp } from '../../../utils/urlUtils';
 import { erIkkeOppfolgingsdialogUtfylt } from '../../../utils/oppfolgingsplanUtils';
 import IkkeUtfyltPlanFeilmelding from './IkkeUtfyltPlanFeilmelding';
@@ -79,7 +79,7 @@ class ReviderEllerGodkjennPlan extends Component {
 }
 
 ReviderEllerGodkjennPlan.propTypes = {
-    oppfolgingsdialog: oppfolgingsdialogPt,
+    oppfolgingsdialog: oppfolgingsplanPt,
     settAktivtSteg: PropTypes.func,
     visSendTilGodkjenning: PropTypes.func,
     rootUrl: PropTypes.string,

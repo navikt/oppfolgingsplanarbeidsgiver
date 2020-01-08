@@ -37,7 +37,7 @@ const OppfolgingsdialogTeaser = (
 };
 
 OppfolgingsdialogTeaser.propTypes = {
-    oppfolgingsdialog: opProptypes.oppfolgingsdialogPt,
+    oppfolgingsdialog: opProptypes.oppfolgingsplanPt,
     rootUrl: PropTypes.string,
     rootUrlPlaner: PropTypes.string,
 };

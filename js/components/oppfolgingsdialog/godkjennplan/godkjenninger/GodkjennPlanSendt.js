@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Utvidbar } from '@navikt/digisyfo-npm';
-import { oppfolgingsdialogPt } from '../../../../proptypes/opproptypes';
+import { oppfolgingsplanPt } from '../../../../proptypes/opproptypes';
 import { finnNyesteGodkjenning } from '../../../../utils/oppfolgingsplanUtils';
 import GodkjennPlanOversiktInformasjon from '../GodkjennPlanOversiktInformasjon';
 import OppfolgingsplanInnholdboks from '../../../app/OppfolgingsplanInnholdboks';
@@ -44,7 +44,7 @@ export const CancelButton = (
 };
 CancelButton.propTypes = {
     nullstillGodkjenning: PropTypes.func,
-    oppfolgingsplan: oppfolgingsdialogPt,
+    oppfolgingsplan: oppfolgingsplanPt,
 };
 
 export const GodkjennPlanSendtInfoTekst = () => {
@@ -79,12 +79,12 @@ export const GodkjennPlanSendtUtvidbar = ({ oppfolgingsdialog }) => {
     );
 };
 GodkjennPlanSendtUtvidbar.propTypes = {
-    oppfolgingsdialog: oppfolgingsdialogPt,
+    oppfolgingsdialog: oppfolgingsplanPt,
 };
 
 const GodkjennPlanSendt = (
     {
-        oppfolgingsdialog,
+        oppfolgingsplan,
         nullstillGodkjenning,
         rootUrlPlaner,
     }) => {
@@ -96,32 +96,32 @@ const GodkjennPlanSendt = (
             tittel={texts.godkjennPlanSendt.title}
         >
             <div className="godkjennPlanSendt">
-                {GodkjenPlanSentBlokk(oppfolgingsdialog.arbeidstaker.navn)}
+                {GodkjenPlanSentBlokk(oppfolgingsplan.arbeidstaker.navn)}
 
                 <GodkjennPlanTidspunkt
-                    gyldighetstidspunkt={finnNyesteGodkjenning(oppfolgingsdialog.godkjenninger).gyldighetstidspunkt}
+                    gyldighetstidspunkt={finnNyesteGodkjenning(oppfolgingsplan.godkjenninger).gyldighetstidspunkt}
                 />
 
                 <GodkjennPlanSendtUtvidbar
-                    oppfolgingsdialog={oppfolgingsdialog}
+                    oppfolgingsdialog={oppfolgingsplan}
                 />
                 <CancelButton
                     nullstillGodkjenning={nullstillGodkjenning}
-                    oppfolgingsplan={oppfolgingsdialog}
+                    oppfolgingsplan={oppfolgingsplan}
                 />
                 <TidligereAvbruttePlaner
-                    oppfolgingsdialog={oppfolgingsdialog}
+                    oppfolgingsdialog={oppfolgingsplan}
                     rootUrlPlaner={rootUrlPlaner}
                 />
                 <GodkjennPlanSendtInfoTekst
-                    oppfolgingsdialog={oppfolgingsdialog}
+                    oppfolgingsdialog={oppfolgingsplan}
                 />
             </div>
         </OppfolgingsplanInnholdboks>
     );
 };
 GodkjennPlanSendt.propTypes = {
-    oppfolgingsdialog: oppfolgingsdialogPt,
+    oppfolgingsplan: oppfolgingsplanPt,
     nullstillGodkjenning: PropTypes.func,
     rootUrlPlaner: PropTypes.string,
 };

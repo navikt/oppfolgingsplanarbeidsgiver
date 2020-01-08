@@ -5,8 +5,8 @@ import chaiEnzyme from 'chai-enzyme';
 import sinon from 'sinon';
 import OppfolgingsplanerIngenplan from '../../../../js/components/oppfolgingsdialog/opprett/OppfolgingsplanerIngenplan';
 import OppfolgingsplanerIngenplanKnapper from '../../../../js/components/oppfolgingsdialog/opprett/OppfolgingsplanerIngenplanKnapper';
-import getOppfolgingsdialog, {
-    hentOppfolgingsdialogTidligere,
+import getOppfolgingsplan, {
+    hentOppfolgingsplanTidligere,
 } from '../../../mock/mockOppfolgingsdialog';
 
 chai.use(chaiEnzyme());
@@ -53,11 +53,11 @@ describe('OppfolgingsplanerIngenplan', () => {
         beforeEach(() => {
             virksomhet = { virksomhetsnummer: arbeidsgiver.virksomhetsnummer };
             oppfolgingsdialogTidligere = {
-                ...hentOppfolgingsdialogTidligere(dagensDato),
+                ...hentOppfolgingsplanTidligere(dagensDato),
                 virksomhet,
             };
             oppfolgingsdialogIkkeTidligere = {
-                ...getOppfolgingsdialog(),
+                ...getOppfolgingsplan(),
                 virksomhet,
                 godkjentplan: null,
             };

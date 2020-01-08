@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Fareknapp, Hovedknapp } from 'nav-frontend-knapper';
-import { oppfolgingsdialogPt } from '../../proptypes/opproptypes';
+import { oppfolgingsplanPt } from '../../proptypes/opproptypes';
 import Lightbox from '../Lightbox';
 import OppfolgingsplanInfoboks from '../app/OppfolgingsplanInfoboks';
 import { getContextRoot } from '../../routers/paths';
@@ -26,7 +26,7 @@ const TextWrongLeader = ({ oppfolgingsplan }) => {
 };
 
 TextWrongLeader.propTypes = {
-    oppfolgingsplan: oppfolgingsdialogPt,
+    oppfolgingsplan: oppfolgingsplanPt,
 };
 
 const textTitle = (sykmeldtName) => {
@@ -63,7 +63,7 @@ export const AvkreftNyNaermestelederBekreftelse = (
     </Lightbox>);
 };
 AvkreftNyNaermestelederBekreftelse.propTypes = {
-    oppfolgingsdialog: oppfolgingsdialogPt,
+    oppfolgingsdialog: oppfolgingsplanPt,
     fjernNaermesteLederKobling: PropTypes.func,
     lukk: PropTypes.func,
 };
@@ -133,7 +133,7 @@ class NyNaermestelederInfoboks extends Component {
 }
 
 NyNaermestelederInfoboks.propTypes = {
-    oppfolgingsdialog: oppfolgingsdialogPt,
+    oppfolgingsdialog: oppfolgingsplanPt,
     avkreftNyNaermesteleder: PropTypes.func,
     bekreftNyNaermesteLeder: PropTypes.func,
 };

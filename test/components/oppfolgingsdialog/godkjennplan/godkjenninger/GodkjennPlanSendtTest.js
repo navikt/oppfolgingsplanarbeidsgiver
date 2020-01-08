@@ -11,13 +11,13 @@ import GodkjennPlanSendt, {
 import GodkjennPlanOversiktInformasjon from '../../../../../js/components/oppfolgingsdialog/godkjennplan/GodkjennPlanOversiktInformasjon';
 import GodkjennPlanVenterInfo from '../../../../../js/components/oppfolgingsdialog/godkjennplan/GodkjennPlanVenterInfo';
 import OppfolgingsplanInnholdboks from '../../../../../js/components/app/OppfolgingsplanInnholdboks';
-import getOppfolgingsdialog from '../../../../mock/mockOppfolgingsdialog';
+import getOppfolgingsplan from '../../../../mock/mockOppfolgingsdialog';
 
 chai.use(chaiEnzyme());
 const expect = chai.expect;
 
 describe('GodkjennPlanSendt', () => {
-    const oppfolgingsdialog = getOppfolgingsdialog({
+    const oppfolgingsplan = getOppfolgingsplan({
         godkjenninger: [{
             godkjent: false,
             beskrivelse: 'Ikke godkjent fordi...',
@@ -32,7 +32,7 @@ describe('GodkjennPlanSendt', () => {
             navn: 'Test Testesen',
         },
     });
-    const komponentDefault = shallow(<GodkjennPlanSendt oppfolgingsdialog={oppfolgingsdialog} />);
+    const komponentDefault = shallow(<GodkjennPlanSendt oppfolgingsplan={oppfolgingsplan} />);
 
     it('Skal vise en GodkjentPlan', () => {
         expect(komponentDefault.find(OppfolgingsplanInnholdboks)).to.have.length(1);

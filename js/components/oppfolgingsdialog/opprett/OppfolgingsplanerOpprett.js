@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { oppfolgingsdialogPt } from '../../../proptypes/opproptypes';
+import { oppfolgingsplanPt } from '../../../proptypes/opproptypes';
 import { finnNyesteTidligereOppfolgingsdialogMedVirksomhet } from '../../../utils/oppfolgingsplanUtils';
 import Lightbox from '../../Lightbox';
 import BaserTidligereSkjema from '../../oppfolgingsplaner/opprett/BaserTidligereSkjema';
@@ -36,7 +36,7 @@ class OppfolgingsplanerOpprett extends Component {
     }
 }
 OppfolgingsplanerOpprett.propTypes = {
-    oppfolgingsdialoger: PropTypes.arrayOf(oppfolgingsdialogPt),
+    oppfolgingsdialoger: PropTypes.arrayOf(oppfolgingsplanPt),
     visOppfolgingsdialogOpprett: PropTypes.func,
     opprett: PropTypes.func,
     kopier: PropTypes.func,

@@ -13,7 +13,7 @@ import {
     delMedFastlegePt,
     delmednavPt,
     dokumentReducerPt,
-    oppfolgingsdialogPt,
+    oppfolgingsplanPt,
 } from '../../../../proptypes/opproptypes';
 import GodkjentPlanDeltBekreftelse from './GodkjentPlanDeltBekreftelse';
 import { ButtonDownload } from './GodkjentPlanHandlingKnapper';
@@ -134,8 +134,8 @@ class GodkjentPlanAvbrutt extends Component {
 }
 
 GodkjentPlanAvbrutt.propTypes = {
-    oppfolgingsdialog: oppfolgingsdialogPt,
-    oppfolgingsdialoger: PropTypes.arrayOf(oppfolgingsdialogPt),
+    oppfolgingsdialog: oppfolgingsplanPt,
+    oppfolgingsdialoger: PropTypes.arrayOf(oppfolgingsplanPt),
     delmednav: delmednavPt,
     rootUrl: PropTypes.string,
     rootUrlPlaner: PropTypes.string,

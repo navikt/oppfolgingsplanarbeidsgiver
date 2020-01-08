@@ -8,7 +8,7 @@ import Alertstripe from 'nav-frontend-alertstriper';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import { GodkjennPlanLightboksComponent } from '../../../../js/components/oppfolgingsdialog/godkjennplan/GodkjennPlanLightboks';
 import GodkjennPlanSkjemaDatovelger from '../../../../js/components/oppfolgingsdialog/godkjennplan/GodkjennPlanSkjemaDatovelger';
-import getOppfolgingsdialog from '../../../mock/mockOppfolgingsdialog';
+import getOppfolgingsplan from '../../../mock/mockOppfolgingsdialog';
 
 chai.use(chaiEnzyme());
 const expect = chai.expect;
@@ -22,7 +22,7 @@ describe('GodkjennPlanLightboks', () => {
         handleSubmit = sinon.spy();
         initialize = sinon.spy(); // Veden: Lager en spy og sender den inn til GodkjennPlanSkjemaAG
         komponent = shallow(<GodkjennPlanLightboksComponent
-            oppfolgingsdialog={getOppfolgingsdialog()}
+            oppfolgingsdialog={getOppfolgingsplan()}
             GodkjennPlanSkjemaDatovelger={GodkjennPlanSkjemaDatovelger}
             handleSubmit={handleSubmit}
             initialize={initialize}
@@ -92,7 +92,7 @@ describe('GodkjennPlanLightboks', () => {
 
     it('Skal sjekke validate', () => {
         komponent = shallow(<GodkjennPlanLightboksComponent
-            oppfolgingsdialog={getOppfolgingsdialog()}
+            oppfolgingsdialog={getOppfolgingsplan()}
             handleSubmit={handleSubmit}
             initialize={initialize}
         />, { disableLifecycleMethods: true });

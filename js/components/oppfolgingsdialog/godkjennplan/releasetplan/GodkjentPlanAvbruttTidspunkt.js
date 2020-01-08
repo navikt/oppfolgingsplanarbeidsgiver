@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { oppfolgingsdialogPt } from '../../../../proptypes/opproptypes';
+import { oppfolgingsplanPt } from '../../../../proptypes/opproptypes';
 import { toDateMedMaanedNavn } from '../../../../utils/datoUtils';
 import BildeTekstLinje from '../../../app/BildeTekstLinje';
 
@@ -24,7 +24,7 @@ const GodkjentPlanAvbruttTidspunkt = ({ oppfolgingsdialog, rootUrl }) => {
 };
 
 GodkjentPlanAvbruttTidspunkt.propTypes = {
-    oppfolgingsdialog: oppfolgingsdialogPt,
+    oppfolgingsdialog: oppfolgingsplanPt,
     rootUrl: PropTypes.string,
 };
 

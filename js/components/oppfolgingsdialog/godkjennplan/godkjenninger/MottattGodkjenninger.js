@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import GodkjennPlanMottatt from './GodkjennPlanMottatt';
 import GodkjennPlanAvslaatt from './GodkjennPlanAvslaatt';
 import GodkjennPlanAvslaattOgGodkjent from './GodkjennPlanAvslaattOgGodkjent';
-import { oppfolgingsdialogPt } from '../../../../proptypes/opproptypes';
+import { oppfolgingsplanPt } from '../../../../proptypes/opproptypes';
 
 const harMangeGodkjenninger = (godkjenninger) => {
     return godkjenninger.length > 1;
@@ -11,37 +11,37 @@ const harMangeGodkjenninger = (godkjenninger) => {
 
 const MottattGodkjenninger = (
     {
-        oppfolgingsdialog,
+        oppfolgingsplan,
         godkjennPlan,
         nullstillGodkjenning,
         avvisDialog,
         rootUrlPlaner,
     }) => {
-    if (harMangeGodkjenninger(oppfolgingsdialog.godkjenninger)) {
+    if (harMangeGodkjenninger(oppfolgingsplan.godkjenninger)) {
         return (<GodkjennPlanAvslaattOgGodkjent
             avvisDialog={avvisDialog}
             godkjennPlan={godkjennPlan}
-            oppfolgingsdialog={oppfolgingsdialog}
+            oppfolgingsplan={oppfolgingsplan}
         />);
     }
 
-    const godkjenning = oppfolgingsdialog.godkjenninger[0];
+    const godkjenning = oppfolgingsplan.godkjenninger[0];
     if (godkjenning.godkjent) {
         return (<GodkjennPlanMottatt
             avvisDialog={avvisDialog}
             godkjennPlan={godkjennPlan}
-            oppfolgingsdialog={oppfolgingsdialog}
+            oppfolgingsplan={oppfolgingsplan}
             rootUrlPlaner={rootUrlPlaner}
         />);
     }
     return (<GodkjennPlanAvslaatt
         nullstillGodkjenning={nullstillGodkjenning}
-        oppfolgingsdialog={oppfolgingsdialog}
+        oppfolgingsplan={oppfolgingsplan}
     />);
 };
 
 MottattGodkjenninger.propTypes = {
-    oppfolgingsdialog: oppfolgingsdialogPt,
+    oppfolgingsplan: oppfolgingsplanPt,
     godkjennPlan: PropTypes.func,
     nullstillGodkjenning: PropTypes.func,
     avvisDialog: PropTypes.func,

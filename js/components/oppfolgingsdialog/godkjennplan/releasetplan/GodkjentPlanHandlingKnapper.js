@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { oppfolgingsdialogPt } from '../../../../proptypes/opproptypes';
+import { oppfolgingsplanPt } from '../../../../proptypes/opproptypes';
 import { erGyldigDatoIFortiden } from '../../../../utils/datoUtils';
 import { STATUS } from '../../../../konstanter';
 import { API_NAVN, hentSyfoapiUrl } from '../../../../gateway-api';
@@ -26,7 +26,7 @@ export const ButtonDownload = ({ oppfolgingsplan }) => {
     );
 };
 ButtonDownload.propTypes = {
-    oppfolgingsplan: oppfolgingsdialogPt,
+    oppfolgingsplan: oppfolgingsplanPt,
 };
 
 class GodkjentPlanHandlingKnapper extends Component {
@@ -104,7 +104,7 @@ class GodkjentPlanHandlingKnapper extends Component {
 }
 
 GodkjentPlanHandlingKnapper.propTypes = {
-    oppfolgingsplan: oppfolgingsdialogPt,
+    oppfolgingsplan: oppfolgingsplanPt,
     apneBekreftelse: PropTypes.func,
     rootUrlPlaner: PropTypes.string,
 };

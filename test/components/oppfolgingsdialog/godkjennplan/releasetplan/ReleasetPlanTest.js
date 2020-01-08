@@ -6,7 +6,7 @@ import ReleasetPlan from '../../../../../js/components/oppfolgingsdialog/godkjen
 import GodkjentPlanAvbrutt from '../../../../../js/components/oppfolgingsdialog/godkjennplan/releasetplan/GodkjentPlanAvbrutt';
 import GodkjentPlan from '../../../../../js/components/oppfolgingsdialog/godkjennplan/releasetplan/GodkjentPlan';
 import Samtykke from '../../../../../js/components/oppfolgingsdialog/godkjennplan/samtykke/Samtykke';
-import getOppfolgingsdialog from '../../../../mock/mockOppfolgingsdialog';
+import getOppfolgingsplan from '../../../../mock/mockOppfolgingsdialog';
 import OppfolgingsdialogPlanInfoboks from '../../../../../js/components/oppfolgingsdialog/godkjennplan/releasetplan/OppfolgingsdialogPlanInfoboks';
 
 chai.use(chaiEnzyme());
@@ -14,7 +14,7 @@ const expect = chai.expect;
 
 describe('ReleasetPlan', () => {
     let komponent;
-    const oppfolgingsdialog = getOppfolgingsdialog({
+    const oppfolgingsdialog = getOppfolgingsplan({
         godkjentPlan: {
             opprettetTidspunkt: '2017-09-26T09:20:10.72',
             gyldighetstidspunkt: {
@@ -36,7 +36,7 @@ describe('ReleasetPlan', () => {
             samtykke: true,
         },
     });
-    const oppfolgingsdialogMedSamtykkeOgAvbruttplan = getOppfolgingsdialog({
+    const oppfolgingsdialogMedSamtykkeOgAvbruttplan = getOppfolgingsplan({
         arbeidsgiver: {
             samtykke: true,
             naermesteLeder: {
@@ -69,10 +69,10 @@ describe('ReleasetPlan', () => {
             },
         },
     });
-    const oppfolgingsdialoger = [getOppfolgingsdialog()];
+    const oppfolgingsdialoger = [getOppfolgingsplan()];
 
     it('Skal vise en Samtykke når det savnes', () => {
-        komponent = shallow(<ReleasetPlan oppfolgingsdialog={getOppfolgingsdialog({
+        komponent = shallow(<ReleasetPlan oppfolgingsdialog={getOppfolgingsplan({
             arbeidsgiver: {
                 samtykke: null,
             },

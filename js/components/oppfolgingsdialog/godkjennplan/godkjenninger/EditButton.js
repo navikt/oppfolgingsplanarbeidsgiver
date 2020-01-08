@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import styled from 'styled-components';
-import { oppfolgingsdialogPt } from '../../../../proptypes/opproptypes';
+import { oppfolgingsplanPt } from '../../../../proptypes/opproptypes';
 
 const texts = {
     buttonDecline: 'Gjør endringer i oppfølgingsplanen',
@@ -28,6 +28,6 @@ export const EditButton = ({ oppfolgingsdialog, avvisDialog }) => {
 };
 
 EditButton.propTypes = {
-    oppfolgingsdialog: oppfolgingsdialogPt,
+    oppfolgingsdialog: oppfolgingsplanPt,
     avvisDialog: PropTypes.func,
 };

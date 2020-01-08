@@ -9,7 +9,7 @@ import GodkjentPlan, {
 } from '../../../../../js/components/oppfolgingsdialog/godkjennplan/releasetplan/GodkjentPlan';
 import GodkjentPlanDelKnapper from '../../../../../js/components/oppfolgingsdialog/godkjennplan/releasetplan/GodkjentPlanDelKnapper';
 import OppfolgingsplanInnholdboks from '../../../../../js/components/app/OppfolgingsplanInnholdboks';
-import getOppfolgingsdialog from '../../../../mock/mockOppfolgingsdialog';
+import getOppfolgingsplan from '../../../../mock/mockOppfolgingsdialog';
 import GodkjentPlanDeltBekreftelse from '../../../../../js/components/oppfolgingsdialog/godkjennplan/releasetplan/GodkjentPlanDeltBekreftelse';
 import GodkjentPlanHandlingKnapper from '../../../../../js/components/oppfolgingsdialog/godkjennplan/releasetplan/GodkjentPlanHandlingKnapper';
 
@@ -17,7 +17,7 @@ chai.use(chaiEnzyme());
 const expect = chai.expect;
 
 describe('GodkjentPlan', () => {
-    const oppfolgingsdialog = getOppfolgingsdialog({
+    const oppfolgingsdialog = getOppfolgingsplan({
         arbeidsgiver: {
             navn: 'Test Testesen',
         },
@@ -68,7 +68,7 @@ describe('GodkjentPlan', () => {
     });
 
     describe('Tvungen Godkjenning', () => {
-        const tvungenGodkjentDialog = getOppfolgingsdialog({
+        const tvungenGodkjentDialog = getOppfolgingsplan({
             arbeidsgiver: {
                 navn: 'Test Testesen',
             },
@@ -91,7 +91,7 @@ describe('GodkjentPlan', () => {
     });
 
     describe('Tvungen Godkjenning', () => {
-        const tvungenGodkjentDialog = getOppfolgingsdialog({
+        const tvungenGodkjentDialog = getOppfolgingsplan({
             arbeidsgiver: {
                 navn: 'Test Testesen',
             },

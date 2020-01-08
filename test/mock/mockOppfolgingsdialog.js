@@ -1,7 +1,7 @@
 import { leggTilDagerPaaDato } from './testUtils';
 import { STATUS_TILTAK } from '../../js/konstanter';
 
-export const getOppfolgingsdialoger = [
+export const getOppfolgingsplaner = [
     {
         id: 163,
         opprettetDato: '2017-06-12',
@@ -224,7 +224,7 @@ export const getOppfolgingsdialoger = [
     },
 ];
 
-const oppfolgingsdialog = {
+const oppfolgingsplan = {
     opprettetDato: '2017-06-12',
     sistEndretAv: {
         fnr: '1000000000000',
@@ -336,8 +336,8 @@ const oppfolgingsdialog = {
     },
 };
 
-export const hentOppfolgingsdialogTidligere = (dagensDato) => {
-    return Object.assign({}, oppfolgingsdialog, {
+export const hentOppfolgingsplanTidligere = (dagensDato) => {
+    return Object.assign({}, oppfolgingsplan, {
         godkjentPlan: {
             gyldighetstidspunkt: {
                 fom: leggTilDagerPaaDato(dagensDato, -5).toISOString(),
@@ -355,14 +355,14 @@ export const hentOppfolgingsdialogTidligere = (dagensDato) => {
     });
 };
 
-export const hentOppfolgingsdialogAktiv = (dagensDato) => {
-    return Object.assign({}, hentOppfolgingsdialogTidligere(dagensDato), {
+export const hentOppfolgingsplanAktiv = (dagensDato) => {
+    return Object.assign({}, hentOppfolgingsplanTidligere(dagensDato), {
         godkjentPlan: null,
     });
 };
 
-const getOppfolgingsdialog = (oppfolgingsplanId = {}) => {
-    return Object.assign({}, oppfolgingsdialog, oppfolgingsplanId);
+const getOppfolgingsplan = (oppfolgingsplanId = {}) => {
+    return Object.assign({}, oppfolgingsplan, oppfolgingsplanId);
 };
 
-export default getOppfolgingsdialog;
+export default getOppfolgingsplan;

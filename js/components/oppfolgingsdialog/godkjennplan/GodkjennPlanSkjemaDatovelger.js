@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Undertekst } from 'nav-frontend-typografi';
 import Datovelger from '../../../skjema/Datovelger';
 import { datovelgerFeltPt } from '../../../proptypes/tiltakproptypes';
-import { oppfolgingsdialogPt } from '../../../proptypes/opproptypes';
+import { oppfolgingsplanPt } from '../../../proptypes/opproptypes';
 import {
     getEndDateFromTiltakListe,
     getStartDateFromTiltakListe,
@@ -87,7 +87,7 @@ const GodkjennPlanSkjemaDatovelger = ({ oppfolgingsplan }) => {
     );
 };
 GodkjennPlanSkjemaDatovelger.propTypes = {
-    oppfolgingsplan: oppfolgingsdialogPt,
+    oppfolgingsplan: oppfolgingsplanPt,
 };
 
 export default GodkjennPlanSkjemaDatovelger;

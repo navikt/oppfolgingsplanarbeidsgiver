@@ -6,7 +6,7 @@ import {
     harForrigeNaermesteLeder,
     harNaermesteLeder,
 } from '../../utils/oppfolgingsplanUtils';
-import { oppfolgingsdialogPt } from '../../proptypes/opproptypes';
+import { oppfolgingsplanPt } from '../../proptypes/opproptypes';
 import OppfolgingsdialogVisning from './OppfolgingsdialogerVisning';
 import OppfolgingsdialogerInfoPersonvern from './OppfolgingsdialogerInfoPersonvern';
 import AvbruttPlanNotifikasjonBoksAdvarsel from './godkjennplan/godkjentplan/AvbruttPlanNotifikasjonBoksAdvarsel';
@@ -69,7 +69,7 @@ const OppfolgingsdialogerInnhold = ({
 OppfolgingsdialogerInnhold.propTypes = {
     bekreftetNyNaermesteLeder: PropTypes.bool,
     koblingId: PropTypes.string,
-    oppfolgingsdialoger: PropTypes.arrayOf(oppfolgingsdialogPt),
+    oppfolgingsdialoger: PropTypes.arrayOf(oppfolgingsplanPt),
     bekreftNyNaermesteLeder: PropTypes.func,
     kopierOppfolgingsdialog: PropTypes.func,
     opprettOppfolgingsdialog: PropTypes.func,

@@ -7,7 +7,7 @@ import {
     personReducerPt,
     kontaktinfoReducerPt,
     naermestelederReducerPt,
-    oppfolgingsdialogPt,
+    oppfolgingsplanPt,
     virksomhetReducerPt,
 } from '../../proptypes/opproptypes';
 import {
@@ -103,7 +103,7 @@ Oppfolgingsdialoger.propTypes = {
     kontaktinfo: kontaktinfoReducerPt,
     naermesteleder: naermestelederReducerPt,
     sykmeldt: sykmeldtPt,
-    oppfolgingsdialoger: PropTypes.arrayOf(oppfolgingsdialogPt),
+    oppfolgingsdialoger: PropTypes.arrayOf(oppfolgingsplanPt),
     hentNaermesteLeder: PropTypes.func,
     hentPerson: PropTypes.func,
     hentVirksomhet: PropTypes.func,

@@ -5,7 +5,7 @@ import { Knapp } from 'nav-frontend-knapper';
 import {
     delMedFastlegePt,
     delmednavPt,
-    oppfolgingsdialogPt,
+    oppfolgingsplanPt,
 } from '../../../../proptypes/opproptypes';
 
 const texts = {
@@ -87,7 +87,7 @@ const GodkjentPlanDelKnapper = (
 
 GodkjentPlanDelKnapper.propTypes = {
     className: PropTypes.string,
-    oppfolgingsplan: oppfolgingsdialogPt,
+    oppfolgingsplan: oppfolgingsplanPt,
     delmednav: delmednavPt,
     fastlegeDeling: delMedFastlegePt,
     delMedNavFunc: PropTypes.func,

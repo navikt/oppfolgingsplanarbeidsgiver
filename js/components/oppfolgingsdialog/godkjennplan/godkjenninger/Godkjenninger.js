@@ -2,25 +2,32 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import MottattGodkjenninger from './MottattGodkjenninger';
 import GodkjennPlanSendt from './GodkjennPlanSendt';
-import { oppfolgingsdialogPt } from '../../../../proptypes/opproptypes';
+import { oppfolgingsplanPt } from '../../../../proptypes/opproptypes';
 
-const harMottattGodkjenninger = (oppfolgingsdialog) => {
-    const godkjenninger = oppfolgingsdialog.godkjenninger;
-    const aktoer = oppfolgingsdialog.arbeidsgiver.naermesteLeder;
+const harMottattGodkjenninger = (oppfolgingsplan) => {
+    const godkjenninger = oppfolgingsplan.godkjenninger;
+    const aktoer = oppfolgingsplan.arbeidsgiver.naermesteLeder;
     return godkjenninger.length > 0 && godkjenninger[0].godkjentAv.fnr && godkjenninger[0].godkjentAv.fnr !== aktoer.fnr;
 };
 
-const Godkjenninger = ({ oppfolgingsdialog, godkjennPlan, nullstillGodkjenning, avvisDialog, rootUrlPlaner }) => {
-    if (harMottattGodkjenninger(oppfolgingsdialog)) {
+const Godkjenninger = (
+    {
+        oppfolgingsplan,
+        godkjennPlan,
+        nullstillGodkjenning,
+        avvisDialog,
+        rootUrlPlaner,
+    }) => {
+    if (harMottattGodkjenninger(oppfolgingsplan)) {
         return (<MottattGodkjenninger
-            oppfolgingsdialog={oppfolgingsdialog}
+            oppfolgingsplan={oppfolgingsplan}
             godkjennPlan={godkjennPlan}
             nullstillGodkjenning={nullstillGodkjenning}
             avvisDialog={avvisDialog}
         />);
     }
     return (<GodkjennPlanSendt
-        oppfolgingsdialog={oppfolgingsdialog}
+        oppfolgingsplan={oppfolgingsplan}
         nullstillGodkjenning={nullstillGodkjenning}
         rootUrlPlaner={rootUrlPlaner}
     />);
@@ -28,7 +35,7 @@ const Godkjenninger = ({ oppfolgingsdialog, godkjennPlan, nullstillGodkjenning, 
 
 
 Godkjenninger.propTypes = {
-    oppfolgingsdialog: oppfolgingsdialogPt,
+    oppfolgingsplan: oppfolgingsplanPt,
     avvisDialog: PropTypes.func,
     nullstillGodkjenning: PropTypes.func,
     godkjennPlan: PropTypes.func,

@@ -22,37 +22,37 @@ import Godkjenn from './godkjennplan/Godkjenn';
 import Godkjenninger from './godkjennplan/godkjenninger/Godkjenninger';
 import ReleasetPlan from './godkjennplan/releasetplan/ReleasetPlan';
 
-const manglerSamtykke = (oppfolgingsdialog) => {
-    return oppfolgingsdialog.arbeidsgiver.naermesteLeder.samtykke === null;
+const manglerSamtykke = (oppfolgingsplan) => {
+    return oppfolgingsplan.arbeidsgiver.naermesteLeder.samtykke === null;
 };
 
-const inneholderGodkjentPlan = (oppfolgingsdialog) => {
-    return oppfolgingsdialog.godkjentPlan;
+const inneholderGodkjentPlan = (oppfolgingsplan) => {
+    return oppfolgingsplan.godkjentPlan;
 };
 
-const inneholderGodkjenninger = (oppfolgingsdialog) => {
-    return oppfolgingsdialog && oppfolgingsdialog.godkjenninger.length > 0;
+const inneholderGodkjenninger = (oppfolgingsplan) => {
+    return oppfolgingsplan && oppfolgingsplan.godkjenninger.length > 0;
 };
 
-const inneholderGodkjenningerAvArbeidsgiver = (oppfolgingsdialog) => {
-    return oppfolgingsdialog.godkjenninger.length > 0
-        && oppfolgingsdialog.godkjenninger[0].godkjent
-        && oppfolgingsdialog.godkjenninger[0].godkjentAv.fnr === oppfolgingsdialog.arbeidsgiver.naermesteLeder.fnr;
+const inneholderGodkjenningerAvArbeidsgiver = (oppfolgingsplan) => {
+    return oppfolgingsplan.godkjenninger.length > 0
+        && oppfolgingsplan.godkjenninger[0].godkjent
+        && oppfolgingsplan.godkjenninger[0].godkjentAv.fnr === oppfolgingsplan.arbeidsgiver.naermesteLeder.fnr;
 };
 
-const skalViseSamtykke = (oppfolgingsdialog) => {
-    return manglerSamtykke(oppfolgingsdialog)
-        && (inneholderGodkjentPlan(oppfolgingsdialog) || inneholderGodkjenningerAvArbeidsgiver(oppfolgingsdialog));
+const skalViseSamtykke = (oppfolgingsplan) => {
+    return manglerSamtykke(oppfolgingsplan)
+        && (inneholderGodkjentPlan(oppfolgingsplan) || inneholderGodkjenningerAvArbeidsgiver(oppfolgingsplan));
 };
 
-export const erAvvistAvArbeidsgiver = (oppfolgingsdialog) => {
-    return oppfolgingsdialog.godkjenninger.length === 1
-        && !oppfolgingsdialog.godkjenninger[0].godkjent
-        && oppfolgingsdialog.arbeidsgiver.naermesteLeder.fnr === oppfolgingsdialog.godkjenninger[0].godkjentAv.fnr;
+export const erAvvistAvArbeidsgiver = (oppfolgingsplan) => {
+    return oppfolgingsplan.godkjenninger.length === 1
+        && !oppfolgingsplan.godkjenninger[0].godkjent
+        && oppfolgingsplan.arbeidsgiver.naermesteLeder.fnr === oppfolgingsplan.godkjenninger[0].godkjentAv.fnr;
 };
 
-export const erTvangsgodkjent = (oppfolgingsdialog) => {
-    return inneholderGodkjentPlan(oppfolgingsdialog) && oppfolgingsdialog.godkjentPlan.tvungenGodkjenning;
+export const erTvangsgodkjent = (oppfolgingsplan) => {
+    return inneholderGodkjentPlan(oppfolgingsplan) && oppfolgingsplan.godkjentPlan.tvungenGodkjenning;
 };
 
 class Oppfolgingsdialog extends Component {
@@ -124,7 +124,7 @@ class Oppfolgingsdialog extends Component {
             disableNavigation = true;
             panel = (<Godkjenninger
                 avvisDialog={avvisDialogAg}
-                oppfolgingsdialog={oppfolgingsdialog}
+                oppfolgingsplan={oppfolgingsdialog}
                 godkjennPlan={godkjennDialogAg}
                 nullstillGodkjenning={nullstillGodkjenning}
                 rootUrlPlaner={`${getContextRoot()}/${koblingId}`}
@@ -207,13 +207,13 @@ Oppfolgingsdialog.propTypes = {
     kontaktinfo: opProptypes.kontaktinfoReducerPt,
     naermesteleder: opProptypes.naermestelederReducerPt,
     navigasjontoggles: opProptypes.navigasjonstogglesReducerPt,
-    oppfolgingsdialog: opProptypes.oppfolgingsdialogPt,
+    oppfolgingsdialog: opProptypes.oppfolgingsplanPt,
     koblingId: PropTypes.string,
     person: opProptypes.personReducerPt,
     tiltak: opProptypes.tiltakReducerPt,
     virksomhet: opProptypes.virksomhetReducerPt,
     sykeforlopsPerioderReducer: sykeforlopsPerioderReducerPt,
-    oppfolgingsdialoger: PropTypes.arrayOf(opProptypes.oppfolgingsdialogPt),
+    oppfolgingsdialoger: PropTypes.arrayOf(opProptypes.oppfolgingsplanPt),
     lagreKommentar: PropTypes.func,
     slettKommentar: PropTypes.func,
     lagreArbeidsoppgave: PropTypes.func,

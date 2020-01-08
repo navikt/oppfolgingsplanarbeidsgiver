@@ -8,7 +8,7 @@ import GodkjentPlanAvbrutt, {
 } from '../../../../../js/components/oppfolgingsdialog/godkjennplan/releasetplan/GodkjentPlanAvbrutt';
 import GodkjentPlanDelKnapper from '../../../../../js/components/oppfolgingsdialog/godkjennplan/releasetplan/GodkjentPlanDelKnapper';
 import GodkjentPlanAvbruttTidspunkt from '../../../../../js/components/oppfolgingsdialog/godkjennplan/releasetplan/GodkjentPlanAvbruttTidspunkt';
-import getOppfolgingsdialog from '../../../../mock/mockOppfolgingsdialog';
+import getOppfolgingsplan from '../../../../mock/mockOppfolgingsdialog';
 import OppfolgingsplanInnholdboks from '../../../../../js/components/app/OppfolgingsplanInnholdboks';
 import { ButtonDownload } from '../../../../../js/components/oppfolgingsdialog/godkjennplan/releasetplan/GodkjentPlanHandlingKnapper';
 
@@ -27,7 +27,7 @@ describe('GodkjentPlanAvbrutt', () => {
 
     beforeEach(() => {
         clock = sinon.useFakeTimers(new Date('2017-02-01'));
-        oppfolgingsdialog = getOppfolgingsdialog({
+        oppfolgingsdialog = getOppfolgingsplan({
             id: 1,
             arbeidsgiver: {
                 navn: 'Test Testesen',

@@ -92,7 +92,7 @@ class OppfolgingsdialogerVisning extends Component {
 }
 OppfolgingsdialogerVisning.propTypes = {
     koblingId: PropTypes.string,
-    oppfolgingsdialoger: PropTypes.arrayOf(opProptypes.oppfolgingsdialogPt),
+    oppfolgingsdialoger: PropTypes.arrayOf(opProptypes.oppfolgingsplanPt),
     kopierOppfolgingsdialog: PropTypes.func,
     opprettOppfolgingsdialog: PropTypes.func,
 };

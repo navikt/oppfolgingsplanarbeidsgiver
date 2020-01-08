@@ -4,7 +4,7 @@ import { mount } from 'enzyme';
 import chaiEnzyme from 'chai-enzyme';
 import InnholdboksPilTidligerePlaner from '../../../../../js/components/oppfolgingsdialog/godkjennplan/releasetplan/InnholdboksPilTidligerePlaner';
 import TidligereAvbruttePlaner from '../../../../../js/components/oppfolgingsdialog/godkjennplan/TidligereAvbruttePlaner';
-import getOppfolgingsdialog from '../../../../mock/mockOppfolgingsdialog';
+import getOppfolgingsplan from '../../../../mock/mockOppfolgingsdialog';
 
 chai.use(chaiEnzyme());
 const expect = chai.expect;
@@ -14,7 +14,7 @@ describe('InnholdboksPilTidligerePlaner', () => {
     let oppfolgingsdialog;
 
     beforeEach(() => {
-        oppfolgingsdialog = getOppfolgingsdialog({});
+        oppfolgingsdialog = getOppfolgingsplan({});
         komponent = mount(<InnholdboksPilTidligerePlaner
             oppfolgingsdialog={oppfolgingsdialog}
         />);

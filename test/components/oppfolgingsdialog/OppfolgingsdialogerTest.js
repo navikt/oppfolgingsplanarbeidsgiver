@@ -9,14 +9,14 @@ import Oppfolgingsdialoger, {
 import OppfolgingsdialogerInnhold from '../../../js/components/oppfolgingsdialog/OppfolgingsdialogerInnhold';
 import SykmeldtIngenKontaktinformasjon from '../../../js/components/oppfolgingsdialog/SykmeldtIngenKontaktinformasjon';
 import OppfolgingsplanInfoboks from '../../../js/components/app/OppfolgingsplanInfoboks';
-import getOppfolgingsdialog from '../../mock/mockOppfolgingsdialog';
+import getOppfolgingsplan from '../../mock/mockOppfolgingsdialog';
 
 chai.use(chaiEnzyme());
 const expect = chai.expect;
 
 describe('Oppfolgingsdialoger', () => {
     let component;
-    const oppfolgingsdialoger = [getOppfolgingsdialog()];
+    const oppfolgingsdialoger = [getOppfolgingsplan()];
     let hentNaermesteLeder;
     let hentVirksomhet;
     let hentPerson;

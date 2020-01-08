@@ -166,7 +166,7 @@ export const virksomhetPt = PropTypes.shape({
     navn: PropTypes.string,
 });
 
-export const oppfolgingsdialogPt = PropTypes.shape({
+export const oppfolgingsplanPt = PropTypes.shape({
     id: PropTypes.number,
     sistEndretAv: personPt,
     sistEndretDato: PropTypes.oneOfType([
@@ -200,7 +200,7 @@ export const oppfolgingsdialogerAgPt = PropTypes.shape({
     avviser: PropTypes.bool,
     avvist: PropTypes.bool,
     avvisFeilet: PropTypes.bool,
-    data: PropTypes.arrayOf(oppfolgingsdialogPt),
+    data: PropTypes.arrayOf(oppfolgingsplanPt),
 });
 
 export const personReducerPt = PropTypes.shape({

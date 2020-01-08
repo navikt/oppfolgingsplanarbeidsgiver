@@ -16,7 +16,7 @@ import {
     finnOgHentNaermesteLedereSomMangler,
     finnOgHentForrigeNaermesteLedereSomMangler,
 } from '../../js/utils/reducerUtils';
-import getOppfolgingsdialog from '../mock/mockOppfolgingsdialog';
+import getOppfolgingsplan from '../mock/mockOppfolgingsdialog';
 
 const expect = chai.expect;
 
@@ -27,7 +27,7 @@ describe('reducerUtils', () => {
     beforeEach(() => {
         const today = new Date('2017-09-28');
         today.setHours(0, 0, 0, 0);
-        oppfolgingsdialog = getOppfolgingsdialog();
+        oppfolgingsdialog = getOppfolgingsplan();
         clock = sinon.useFakeTimers(today.getTime());
     });
 

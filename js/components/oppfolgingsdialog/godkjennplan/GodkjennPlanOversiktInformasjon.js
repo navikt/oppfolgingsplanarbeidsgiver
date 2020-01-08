@@ -13,7 +13,7 @@ import { sorterTiltakerEtterStatus } from '../../../utils/tiltakUtils';
 import { sorterArbeidsoppgaverEtterOpprettet } from '../../../utils/arbeidsoppgaveUtils';
 import {
     arbeidsoppgavePt,
-    oppfolgingsdialogPt,
+    oppfolgingsplanPt,
     personPt,
     stillingPt,
     tiltakPt,
@@ -104,7 +104,7 @@ export const InformasjonPanelOverskrift = ({ oppfolgingsdialog }) => {
     );
 };
 InformasjonPanelOverskrift.propTypes = {
-    oppfolgingsdialog: oppfolgingsdialogPt,
+    oppfolgingsdialog: oppfolgingsplanPt,
 };
 
 export const InformasjonPanelArbeidsgiver = ({ naermesteLeder, virksomhetsnummer }) => {
@@ -329,7 +329,7 @@ export const InformasjonPanelArbeidsoppgaverEtterGjennomfoering = ({ oppfolgings
     );
 };
 InformasjonPanelArbeidsoppgaverEtterGjennomfoering.propTypes = {
-    oppfolgingsdialog: oppfolgingsdialogPt,
+    oppfolgingsdialog: oppfolgingsplanPt,
     arbeidsoppgaver: personPt,
     type: PropTypes.string,
     tittel: PropTypes.string,
@@ -391,7 +391,7 @@ export const InformasjonPanelArbeidsoppgaver = ({ oppfolgingsdialog, arbeidsoppg
     );
 };
 InformasjonPanelArbeidsoppgaver.propTypes = {
-    oppfolgingsdialog: oppfolgingsdialogPt,
+    oppfolgingsdialog: oppfolgingsplanPt,
     arbeidsoppgaver: arbeidsoppgavePt,
     rootUrl: PropTypes.string,
 };
@@ -571,7 +571,7 @@ const GodkjennPlanOversiktInformasjon = ({ oppfolgingsdialog, rootUrl }) => {
     );
 };
 GodkjennPlanOversiktInformasjon.propTypes = {
-    oppfolgingsdialog: oppfolgingsdialogPt,
+    oppfolgingsdialog: oppfolgingsplanPt,
     rootUrl: PropTypes.string,
 };
 

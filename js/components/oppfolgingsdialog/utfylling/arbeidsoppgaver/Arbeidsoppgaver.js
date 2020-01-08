@@ -58,7 +58,7 @@ export const ArbeidsoppgaverInfoboksStilling = (
 };
 
 ArbeidsoppgaverInfoboksStilling.propTypes = {
-    oppfolgingsplan: opProptypes.oppfolgingsdialogPt,
+    oppfolgingsplan: opProptypes.oppfolgingsplanPt,
     visArbeidsoppgaveSkjema: PropTypes.bool,
     toggleArbeidsoppgaveSkjema: PropTypes.func,
 };
@@ -232,7 +232,7 @@ class Arbeidsoppgaver extends Component {
 
 Arbeidsoppgaver.propTypes = {
     arbeidsoppgaver: opProptypes.arbeidsoppgaverReducerPt,
-    oppfolgingsdialog: opProptypes.oppfolgingsdialogPt,
+    oppfolgingsdialog: opProptypes.oppfolgingsplanPt,
     lagreArbeidsoppgave: PropTypes.func,
     slettArbeidsoppgave: PropTypes.func,
 };

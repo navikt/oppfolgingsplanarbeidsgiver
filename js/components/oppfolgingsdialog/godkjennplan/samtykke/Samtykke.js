@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Hovedknapp } from 'nav-frontend-knapper';
-import { oppfolgingsdialogPt } from '../../../../proptypes/opproptypes';
+import { oppfolgingsplanPt } from '../../../../proptypes/opproptypes';
 import { getContextRoot } from '../../../../routers/paths';
 
 const texts = {
@@ -117,7 +117,7 @@ class Samtykke extends Component {
 }
 Samtykke.propTypes = {
     sendSamtykke: PropTypes.func,
-    oppfolgingsdialog: oppfolgingsdialogPt,
+    oppfolgingsdialog: oppfolgingsplanPt,
 };
 
 export default Samtykke;

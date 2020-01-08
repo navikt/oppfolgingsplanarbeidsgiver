@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import { Utvidbar } from '@navikt/digisyfo-npm';
 import { getContextRoot } from '../../../../routers/paths';
-import { oppfolgingsdialogPt } from '../../../../proptypes/opproptypes';
+import { oppfolgingsplanPt } from '../../../../proptypes/opproptypes';
 import { hentGodkjenningsTidspunkt } from '../../../../utils/oppfolgingsplanUtils';
 import GodkjennPlanOversiktInformasjon from '../GodkjennPlanOversiktInformasjon';
 import OppfolgingsplanInnholdboks from '../../../app/OppfolgingsplanInnholdboks';
@@ -38,7 +38,7 @@ export const GodkjennPlanMottattUtvidbar = ({ oppfolgingsdialog }) => {
     );
 };
 GodkjennPlanMottattUtvidbar.propTypes = {
-    oppfolgingsdialog: oppfolgingsdialogPt,
+    oppfolgingsdialog: oppfolgingsplanPt,
 };
 
 export const GodkjennPlanMottattKnapper = ({ godkjennPlan, oppfolgingsdialog }) => {
@@ -64,17 +64,17 @@ export const GodkjennPlanMottattKnapper = ({ godkjennPlan, oppfolgingsdialog }) 
     );
 };
 GodkjennPlanMottattKnapper.propTypes = {
-    oppfolgingsdialog: oppfolgingsdialogPt,
+    oppfolgingsdialog: oppfolgingsplanPt,
     godkjennPlan: PropTypes.func,
 };
 
 const GodkjennPlanAvslaattOgGodkjent = (
     {
-        oppfolgingsdialog,
+        oppfolgingsplan,
         godkjennPlan,
         avvisDialog,
     }) => {
-    const sistOppfolgingsdialog = oppfolgingsdialog && hentGodkjenningsTidspunkt(oppfolgingsdialog);
+    const sistOppfolgingsdialog = oppfolgingsplan && hentGodkjenningsTidspunkt(oppfolgingsplan);
     return (<div className="godkjennPlanAvslaattOgGodkjent">
         <OppfolgingsplanInnholdboks
             svgUrl={`${getContextRoot()}/img/svg/plan-mottatt-igjen.svg`}
@@ -84,7 +84,7 @@ const GodkjennPlanAvslaattOgGodkjent = (
             <div>
                 <p>
                     {texts.godkjennPlanAvslaattOgGodkjent.paragraphInfoWhen}<br />
-                    {`${oppfolgingsdialog.arbeidstaker.navn}${texts.godkjennPlanAvslaattOgGodkjent.paragraphInfoWho}`}
+                    {`${oppfolgingsplan.arbeidstaker.navn}${texts.godkjennPlanAvslaattOgGodkjent.paragraphInfoWho}`}
                 </p>
 
                 <div className="blokk--xxs">
@@ -93,15 +93,15 @@ const GodkjennPlanAvslaattOgGodkjent = (
                     />
 
                     <EditButton
-                        oppfolgingsdialog={oppfolgingsdialog}
+                        oppfolgingsdialog={oppfolgingsplan}
                         avvisDialog={avvisDialog}
                     />
                 </div>
                 <GodkjennPlanMottattUtvidbar
-                    oppfolgingsdialog={oppfolgingsdialog}
+                    oppfolgingsdialog={oppfolgingsplan}
                 />
                 <GodkjennPlanMottattKnapper
-                    oppfolgingsdialog={oppfolgingsdialog}
+                    oppfolgingsdialog={oppfolgingsplan}
                     godkjennPlan={godkjennPlan}
                 />
             </div>
@@ -110,7 +110,7 @@ const GodkjennPlanAvslaattOgGodkjent = (
 };
 
 GodkjennPlanAvslaattOgGodkjent.propTypes = {
-    oppfolgingsdialog: oppfolgingsdialogPt,
+    oppfolgingsplan: oppfolgingsplanPt,
     godkjennPlan: PropTypes.func,
     avvisDialog: PropTypes.func,
 };

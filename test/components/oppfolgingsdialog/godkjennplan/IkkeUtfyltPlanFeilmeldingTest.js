@@ -4,13 +4,13 @@ import { shallow } from 'enzyme';
 import chaiEnzyme from 'chai-enzyme';
 import Alertstripe from 'nav-frontend-alertstriper';
 import IkkeUtfyltPlanFeilmelding from '../../../../js/components/oppfolgingsdialog/godkjennplan/IkkeUtfyltPlanFeilmelding';
-import getOppfolgingsdialog from '../../../mock/mockOppfolgingsdialog';
+import getOppfolgingsplan from '../../../mock/mockOppfolgingsdialog';
 
 chai.use(chaiEnzyme());
 const expect = chai.expect;
 
 describe('IkkeUtfyltPlanFeilmelding', () => {
-    const oppfolgingsdialog = getOppfolgingsdialog({
+    const oppfolgingsdialog = getOppfolgingsplan({
         arbeidsgiver: {
             navn: 'Test Testesen',
         },

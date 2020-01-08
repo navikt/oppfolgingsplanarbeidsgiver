@@ -4,15 +4,15 @@ import {
     delMedFastlegePt,
     delmednavPt,
     dokumentReducerPt,
-    oppfolgingsdialogPt,
+    oppfolgingsplanPt,
 } from '../../../../proptypes/opproptypes';
 import GodkjentPlan from './GodkjentPlan';
 import GodkjentPlanAvbrutt from './GodkjentPlanAvbrutt';
 import Samtykke from '../samtykke/Samtykke';
 import OppfolgingsdialogPlanInfoboks from './OppfolgingsdialogPlanInfoboks';
 
-const manglerSamtykke = (oppfolgingsdialog) => {
-    return oppfolgingsdialog.arbeidsgiver.samtykke === null;
+const manglerSamtykke = (oppfolgingsplan) => {
+    return oppfolgingsplan.arbeidsgiver.samtykke === null;
 };
 
 const ReleasetPlan = (
@@ -71,7 +71,7 @@ const ReleasetPlan = (
 
 ReleasetPlan.propTypes = {
     delmednav: delmednavPt,
-    oppfolgingsdialog: oppfolgingsdialogPt,
+    oppfolgingsdialog: oppfolgingsplanPt,
     fastlegeDeling: delMedFastlegePt,
     hentPdfurler: PropTypes.func,
     delMedNavFunc: PropTypes.func,
@@ -81,7 +81,7 @@ ReleasetPlan.propTypes = {
     dokument: dokumentReducerPt,
     rootUrl: PropTypes.string,
     rootUrlPlaner: PropTypes.string,
-    oppfolgingsdialoger: PropTypes.arrayOf(oppfolgingsdialogPt),
+    oppfolgingsdialoger: PropTypes.arrayOf(oppfolgingsplanPt),
 };
 
 export default ReleasetPlan;

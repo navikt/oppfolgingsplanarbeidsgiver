@@ -6,8 +6,8 @@ import sinon from 'sinon';
 import Lightbox from '../../../../js/components/Lightbox';
 import OppfolgingsplanerOpprett from '../../../../js/components/oppfolgingsdialog/opprett/OppfolgingsplanerOpprett';
 import BaserTidligereSkjema from '../../../../js/components/oppfolgingsplaner/opprett/BaserTidligereSkjema';
-import getOppfolgingsdialog, {
-    hentOppfolgingsdialogTidligere,
+import getOppfolgingsplan, {
+    hentOppfolgingsplanTidligere,
 } from '../../../mock/mockOppfolgingsdialog';
 
 chai.use(chaiEnzyme());
@@ -24,7 +24,7 @@ describe('OppfolgingsplanerOpprett', () => {
     let visOppfolgingsdialogOpprett;
     let arbeidsgiver;
     let wrapper;
-    const oppfolgingsdialog = getOppfolgingsdialog();
+    const oppfolgingsdialog = getOppfolgingsplan();
     beforeEach(() => {
         klokke = sinon.useFakeTimers(dagensDato.getTime());
         kopier = sinon.spy();
@@ -58,7 +58,7 @@ describe('OppfolgingsplanerOpprett', () => {
     describe('opprett', () => {
         it('Skal kalle opprett dersom BaserTidligereSkjema blir utfylt med baserPaaTidligerePlan=true', () => {
             const oppfolgingsdialogTidligere = {
-                ...hentOppfolgingsdialogTidligere(dagensDato),
+                ...hentOppfolgingsplanTidligere(dagensDato),
                 virksomhet: {
                     virksomhetsnummer: arbeidsgiver.virksomhetsnummer,
                 },

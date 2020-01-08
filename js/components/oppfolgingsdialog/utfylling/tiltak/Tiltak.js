@@ -219,7 +219,7 @@ class Tiltak extends Component {
 
 Tiltak.propTypes = {
     tiltak: opProptypes.tiltakReducerPt,
-    oppfolgingsdialog: opProptypes.oppfolgingsdialogPt,
+    oppfolgingsdialog: opProptypes.oppfolgingsplanPt,
     lagreTiltak: PropTypes.func,
     slettTiltak: PropTypes.func,
     lagreKommentar: PropTypes.func,

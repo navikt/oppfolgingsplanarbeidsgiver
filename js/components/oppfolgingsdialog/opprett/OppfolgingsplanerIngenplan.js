@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { getContextRoot } from '../../../routers/paths';
-import { oppfolgingsdialogPt } from '../../../proptypes/opproptypes';
+import { oppfolgingsplanPt } from '../../../proptypes/opproptypes';
 import OppfolgingsplanerIngenplanKnapper from './OppfolgingsplanerIngenplanKnapper';
 
 const texts = {
@@ -46,7 +46,7 @@ const OppfolgingsplanerIngenplan = (
 };
 
 OppfolgingsplanerIngenplan.propTypes = {
-    oppfolgingsdialoger: PropTypes.arrayOf(oppfolgingsdialogPt),
+    oppfolgingsdialoger: PropTypes.arrayOf(oppfolgingsplanPt),
     opprett: PropTypes.func,
     visOppfolgingsdialogOpprett: PropTypes.func,
 };

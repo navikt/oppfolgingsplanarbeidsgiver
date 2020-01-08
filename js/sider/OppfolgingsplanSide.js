@@ -213,8 +213,8 @@ OppfolgingsplanSide.propTypes = {
     sykeforlopsPerioder: sykeforlopsPerioderReducerPt,
     koblingId: PropTypes.string,
     harSykmeldtGyldigSykmelding: PropTypes.bool,
-    oppfolgingsdialog: opProptypes.oppfolgingsdialogPt,
-    oppfolgingsdialoger: PropTypes.arrayOf(opProptypes.oppfolgingsdialogPt),
+    oppfolgingsdialog: opProptypes.oppfolgingsplanPt,
+    oppfolgingsdialoger: PropTypes.arrayOf(opProptypes.oppfolgingsplanPt),
     params: PropTypes.shape({
         koblingId: PropTypes.string,
     }),

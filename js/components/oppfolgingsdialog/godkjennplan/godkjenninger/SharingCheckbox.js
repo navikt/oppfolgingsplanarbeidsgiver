@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Checkbox } from 'nav-frontend-skjema';
-import { oppfolgingsdialogPt } from '../../../../proptypes/opproptypes';
+import { oppfolgingsplanPt } from '../../../../proptypes/opproptypes';
 
 const texts = {
     delMedNav: 'Del planen med NAV',
@@ -29,6 +29,6 @@ export const SharingCheckbox = ({ oppfolgingsplan, checked, onChange }) => {
 SharingCheckbox.propTypes = {
     checked: PropTypes.bool,
     onChange: PropTypes.func,
-    oppfolgingsplan: oppfolgingsdialogPt,
+    oppfolgingsplan: oppfolgingsplanPt,
 };
 

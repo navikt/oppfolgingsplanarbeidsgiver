@@ -8,7 +8,7 @@ import ArbeidsoppgaverListe from '../../../../js/components/oppfolgingsdialog/ut
 import LagreArbeidsoppgaveSkjema from '../../../../js/components/oppfolgingsdialog/utfylling/arbeidsoppgaver/LagreArbeidsoppgaveSkjema';
 import LeggTilElementKnapper from '../../../../js/components/oppfolgingsdialog/utfylling/LeggTilElementKnapper';
 import OppfolgingsplanInfoboks from '../../../../js/components/app/OppfolgingsplanInfoboks';
-import getOppfolgingsdialog from '../../../mock/mockOppfolgingsdialog';
+import getOppfolgingsplan from '../../../mock/mockOppfolgingsdialog';
 
 chai.use(chaiEnzyme());
 const expect = chai.expect;
@@ -22,7 +22,7 @@ describe('Arbeidsoppgaver', () => {
     let arbeidsforhold;
     let arbeidsoppgaver;
     let oppfolgingsdialogUtenArbeidsoppgaver;
-    const oppfolgingsdialog = getOppfolgingsdialog();
+    const oppfolgingsdialog = getOppfolgingsplan();
     function storageMock() {
         const storage = {};
 

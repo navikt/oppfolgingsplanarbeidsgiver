@@ -7,7 +7,7 @@ import OppfolgingsdialogerInnhold from '../../../js/components/oppfolgingsdialog
 import OppfolgingsdialogerVisning from '../../../js/components/oppfolgingsdialog/OppfolgingsdialogerVisning';
 import OppfolgingsdialogerInfoPersonvern from '../../../js/components/oppfolgingsdialog/OppfolgingsdialogerInfoPersonvern';
 import NyNaermestelederInfoboks from '../../../js/components/oppfolgingsplaner/NyNaermestelederInfoboks';
-import getOppfolgingsdialog from '../../mock/mockOppfolgingsdialog';
+import getOppfolgingsplan from '../../mock/mockOppfolgingsdialog';
 
 chai.use(chaiEnzyme());
 const expect = chai.expect;
@@ -31,7 +31,7 @@ describe('OppfolgingsdialogerInnhold', () => {
     describe('Ny NaermesteLeder', () => {
         it('Skal vise NyNaermestelederInfoboks, dersom det er en oppfolgingsdialog med ny naermeste leder siden sist ' +
             'innlogging av ny naermeste leder og bekreftetNyNaermesteLeder er false', () => {
-            const oppfolgingsdialogListe = [Object.assign({}, getOppfolgingsdialog(), {
+            const oppfolgingsdialogListe = [Object.assign({}, getOppfolgingsplan(), {
                 arbeidsgiver: {
                     naermesteLeder: {
                         aktivFom: '2017-01-01',

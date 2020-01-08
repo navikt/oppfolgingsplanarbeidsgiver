@@ -8,7 +8,7 @@ import {
     delMedFastlegePt,
     delmednavPt,
     dokumentReducerPt,
-    oppfolgingsdialogPt,
+    oppfolgingsplanPt,
 } from '../../../../proptypes/opproptypes';
 import Lightbox from '../../../Lightbox';
 import GodkjennPlanTidspunkt from '../GodkjennPlanTidspunkt';
@@ -79,7 +79,7 @@ export const AvbrytPlanBekreftelse = ({ oppfolgingsdialog, avbrytDialog }) => {
     );
 };
 AvbrytPlanBekreftelse.propTypes = {
-    oppfolgingsdialog: oppfolgingsdialogPt,
+    oppfolgingsdialog: oppfolgingsplanPt,
     avbrytDialog: PropTypes.func,
 };
 
@@ -174,7 +174,7 @@ class GodkjentPlan extends Component {
 }
 
 GodkjentPlan.propTypes = {
-    oppfolgingsdialog: oppfolgingsdialogPt,
+    oppfolgingsdialog: oppfolgingsplanPt,
     delmednav: delmednavPt,
     fastlegeDeling: delMedFastlegePt,
     rootUrl: PropTypes.string,

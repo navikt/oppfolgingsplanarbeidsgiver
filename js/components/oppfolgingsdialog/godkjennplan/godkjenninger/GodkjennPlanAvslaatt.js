@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import { getContextRoot } from '../../../../routers/paths';
-import { oppfolgingsdialogPt } from '../../../../proptypes/opproptypes';
+import { oppfolgingsplanPt } from '../../../../proptypes/opproptypes';
 import OppfolgingsplanInnholdboks from '../../../app/OppfolgingsplanInnholdboks';
 
 const texts = {
@@ -13,7 +13,7 @@ const texts = {
 
 const GodkjennPlanAvslaatt = (
     {
-        oppfolgingsdialog,
+        oppfolgingsplan,
         nullstillGodkjenning,
     }) => {
     return (
@@ -27,7 +27,7 @@ const GodkjennPlanAvslaatt = (
                     <p>{texts.paragraphInfo}</p>
                 </div>
                 <div className="knapperad">
-                    <Hovedknapp onClick={() => { nullstillGodkjenning(oppfolgingsdialog.id, oppfolgingsdialog.arbeidstaker.fnr); }}>
+                    <Hovedknapp onClick={() => { nullstillGodkjenning(oppfolgingsplan.id, oppfolgingsplan.arbeidstaker.fnr); }}>
                         {texts.buttonMakeChanges}
                     </Hovedknapp>
                 </div>
@@ -36,7 +36,7 @@ const GodkjennPlanAvslaatt = (
     );
 };
 GodkjennPlanAvslaatt.propTypes = {
-    oppfolgingsdialog: oppfolgingsdialogPt,
+    oppfolgingsplan: oppfolgingsplanPt,
     nullstillGodkjenning: PropTypes.func,
 };
 

@@ -12,13 +12,13 @@ import GodkjennPlanOversiktInformasjon, {
     InformasjonPanelTiltak,
     InformasjonPanelSykeforlopsPerioder,
 } from '../../../../js/components/oppfolgingsdialog/godkjennplan/GodkjennPlanOversiktInformasjon';
-import getOppfolgingsdialog from '../../../mock/mockOppfolgingsdialog';
+import getOppfolgingsplan from '../../../mock/mockOppfolgingsdialog';
 
 chai.use(chaiEnzyme());
 const expect = chai.expect;
 
 describe('GodkjennPlanOversiktInformasjon', () => {
-    const oppfolgingsdialog = getOppfolgingsdialog({
+    const oppfolgingsdialog = getOppfolgingsplan({
         arbeidsgiver: {
             naermesteLeder: {
                 navn: 'Test Testesen',

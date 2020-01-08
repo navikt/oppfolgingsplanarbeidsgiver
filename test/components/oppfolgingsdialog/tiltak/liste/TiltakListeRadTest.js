@@ -3,7 +3,7 @@ import chai from 'chai';
 import { shallow } from 'enzyme';
 import chaiEnzyme from 'chai-enzyme';
 import TiltakListeRad from '../../../../../js/components/oppfolgingsdialog/utfylling/tiltak/liste/TiltakListeRad';
-import getOppfolgingsdialog from '../../../../mock/mockOppfolgingsdialog';
+import getOppfolgingsplan from '../../../../mock/mockOppfolgingsdialog';
 
 chai.use(chaiEnzyme());
 const expect = chai.expect;
@@ -12,7 +12,7 @@ describe('TiltakListeRad', () => {
     let komponent;
     let oppfolgingsdialog;
     beforeEach(() => {
-        oppfolgingsdialog = getOppfolgingsdialog();
+        oppfolgingsdialog = getOppfolgingsplan();
         komponent = shallow(<TiltakListeRad
             tiltak={oppfolgingsdialog.tiltakListe[0]}
             erApen

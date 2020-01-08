@@ -12,7 +12,7 @@ import { erIkkeOppfolgingsdialogUtfylt } from '../../../utils/oppfolgingsplanUti
 import Radioknapper from '../../../skjema/Radioknapper';
 import CheckboxSelvstendig from '../../../skjema/CheckboxSelvstendig';
 import GodkjennPlanSkjemaDatovelger from './GodkjennPlanSkjemaDatovelger';
-import { oppfolgingsdialogPt } from '../../../proptypes/opproptypes';
+import { oppfolgingsplanPt } from '../../../proptypes/opproptypes';
 import {
     getEndDateFromTiltakListe,
     getStartDateFromTiltakListe,
@@ -216,7 +216,7 @@ export class GodkjennPlanLightboksComponent extends Component {
 }
 
 GodkjennPlanLightboksComponent.propTypes = {
-    oppfolgingsdialog: oppfolgingsdialogPt,
+    oppfolgingsdialog: oppfolgingsplanPt,
     avbryt: PropTypes.func,
     initialize: PropTypes.func,
     handleSubmit: PropTypes.func,

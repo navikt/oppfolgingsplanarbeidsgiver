@@ -12,7 +12,7 @@ import TiltakInformasjon, {
 } from '../../../../../js/components/oppfolgingsdialog/utfylling/tiltak/liste/TiltakInformasjon';
 import LagreKommentarSkjema from '../../../../../js/components/oppfolgingsdialog/utfylling/tiltak/kommentar/LagreKommentarSkjema';
 import KommentarListe from '../../../../../js/components/oppfolgingsdialog/utfylling/tiltak/kommentar/KommentarListe';
-import getOppfolgingsdialog from '../../../../mock/mockOppfolgingsdialog';
+import getOppfolgingsplan from '../../../../mock/mockOppfolgingsdialog';
 
 chai.use(chaiEnzyme());
 const expect = chai.expect;
@@ -22,7 +22,7 @@ describe('TiltakInformasjon', () => {
     let oppfolgingsdialog;
 
     beforeEach(() => {
-        oppfolgingsdialog = getOppfolgingsdialog();
+        oppfolgingsdialog = getOppfolgingsplan();
         komponent = shallow(<TiltakInformasjon
             element={oppfolgingsdialog.tiltakListe[0]}
             kommentarReducer={kommentar}
@@ -76,7 +76,7 @@ describe('TiltakInformasjon', () => {
     });
 
     it('Skal vise VarselTiltakVurdering', () => {
-        const oppfolgingsdialogPassert = getOppfolgingsdialog({
+        const oppfolgingsdialogPassert = getOppfolgingsplan({
             tiltakListe: {
                 tiltakId: '1',
                 tiltaknavn: 'Gå tur',

@@ -8,7 +8,7 @@ import Tiltak from '../../../../js/components/oppfolgingsdialog/utfylling/tiltak
 import TiltakSkjema from '../../../../js/components/oppfolgingsdialog/utfylling/tiltak/TiltakSkjema';
 import LeggTilElementKnapper from '../../../../js/components/oppfolgingsdialog/utfylling/LeggTilElementKnapper';
 import OppfolgingsplanInfoboks from '../../../../js/components/app/OppfolgingsplanInfoboks';
-import getOppfolgingsdialog from '../../../mock/mockOppfolgingsdialog';
+import getOppfolgingsplan from '../../../mock/mockOppfolgingsdialog';
 import TiltakListe from '../../../../js/components/oppfolgingsdialog/utfylling/tiltak/liste/TiltakListe';
 
 chai.use(chaiEnzyme());
@@ -21,7 +21,7 @@ describe('Tiltak', () => {
     let lagreTiltak;
     let slettTiltak;
     let tiltak;
-    const oppfolgingsdialog = getOppfolgingsdialog();
+    const oppfolgingsdialog = getOppfolgingsplan();
 
     function storageMock() {
         const storage = {};
