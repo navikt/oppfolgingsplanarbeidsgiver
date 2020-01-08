@@ -21,30 +21,6 @@ const texts = {
     },
 };
 
-export const ArbeidsoppgaveInformasjonKnapper = (
-    {
-        element,
-        fnr,
-        sendSlett,
-    }) => {
-    const elementId = element.arbeidsoppgaveId;
-    const aktoerHarOpprettetElement = fnr === (element.opprettetAv && element.opprettetAv.fnr);
-    return (
-        aktoerHarOpprettetElement ? (<div className="arbeidsoppgaveInformasjonKnapper knapperad knapperad--justervenstre">
-            <button
-                type="button"
-                onClick={() => { sendSlett(elementId); }}
-                className="knapperad__element knapp--slett">
-                {texts.arbeidsoppgaveInformasjonKnapper.buttonDelete}
-            </button>
-        </div>) : null
-    );
-};
-ArbeidsoppgaveInformasjonKnapper.propTypes = {
-    element: opProptypes.arbeidsoppgavePt,
-    fnr: PropTypes.string,
-    sendSlett: PropTypes.func,
-};
 
 export const ArbeidsoppgaveInformasjonInnhold = ({ arbeidsoppgave }) => {
     let beskrivelseTekst = '';
@@ -113,8 +89,6 @@ ArbeidsoppgaveInformasjonInnhold.propTypes = {
 const ArbeidsoppgaveInformasjon = (
     {
         element,
-        fnr,
-        sendSlett,
         oppdateringFeilet,
         varselTekst,
         rootUrlImg,
@@ -131,20 +105,12 @@ const ArbeidsoppgaveInformasjon = (
                 rootUrlImg={rootUrlImg}
             />
             }
-
-            <ArbeidsoppgaveInformasjonKnapper
-                element={element}
-                fnr={fnr}
-                sendSlett={sendSlett}
-            />
         </div>
     );
 };
 
 ArbeidsoppgaveInformasjon.propTypes = {
     element: opProptypes.arbeidsoppgavePt,
-    fnr: PropTypes.string,
-    sendSlett: PropTypes.func,
     oppdateringFeilet: PropTypes.bool,
     varselTekst: PropTypes.string,
     rootUrlImg: PropTypes.string,
