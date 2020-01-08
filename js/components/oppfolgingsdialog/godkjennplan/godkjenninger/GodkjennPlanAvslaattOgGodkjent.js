@@ -23,8 +23,6 @@ const texts = {
         paragraphInfoWhen: 'Du sendte arbeidstakeren din en versjon av oppfølgingsplanen.',
         paragraphInfoWho: ' har foretatt noen endringer og sendt den tilbake til deg.',
     },
-    delMedNav: 'Del planen med NAV',
-    preDelMedNav: 'Planen vil bli delt med NAV ved godkjenning',
 };
 
 export const GodkjennPlanMottattUtvidbar = ({ oppfolgingsdialog, rootUrl }) => {
@@ -51,17 +49,7 @@ export const GodkjennPlanMottattKnapper = ({ godkjennPlan, oppfolgingsdialog }) 
 
     return (
         <div className="knapperad knapperad--justervenstre">
-            <div>
-                {
-                    oppfolgingsdialog.godkjenninger.find((godkjenning) => { return godkjenning.delMedNav; })
-                        ? <p>{texts.preDelMedNav}</p>
-                        : <Checkbox
-                            checked={delMedNav}
-                            onChange={handleChange}
-                            label={texts.delMedNav}
-                        />
-                }
-            </div>
+            <SharingCheckbox checked={delMedNav} onChange={handleChange} oppfolgingsplan={oppfolgingsdialog} />
             <div className="knapperad__element">
                 <Hovedknapp
                     name="godkjentKnapp"
