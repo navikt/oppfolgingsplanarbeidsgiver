@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Hovedknapp } from 'nav-frontend-knapper';
-import OppfolgingsplanInnholdboks from '../../../app/OppfolgingsplanInnholdboks';
+import { getContextRoot } from '../../../../routers/paths';
 import { oppfolgingsdialogPt } from '../../../../proptypes/opproptypes';
+import OppfolgingsplanInnholdboks from '../../../app/OppfolgingsplanInnholdboks';
 
 const texts = {
     title: 'Medarbeideren din er visst ikke helt enig',
@@ -10,10 +11,14 @@ const texts = {
     buttonMakeChanges: 'Rediger planen',
 };
 
-const GodkjennPlanAvslaatt = ({ oppfolgingsdialog, rootUrl, nullstillGodkjenning }) => {
+const GodkjennPlanAvslaatt = (
+    {
+        oppfolgingsdialog,
+        nullstillGodkjenning,
+    }) => {
     return (
         <OppfolgingsplanInnholdboks
-            svgUrl={`${rootUrl}/img/svg/oppfolgingsplan-avslaatt.svg`}
+            svgUrl={`${getContextRoot()}/img/svg/oppfolgingsplan-avslaatt.svg`}
             svgAlt="avslaatt"
             tittel={texts.title}
         >
@@ -32,7 +37,6 @@ const GodkjennPlanAvslaatt = ({ oppfolgingsdialog, rootUrl, nullstillGodkjenning
 };
 GodkjennPlanAvslaatt.propTypes = {
     oppfolgingsdialog: oppfolgingsdialogPt,
-    rootUrl: PropTypes.string,
     nullstillGodkjenning: PropTypes.func,
 };
 

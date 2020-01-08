@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import { Utvidbar } from '@navikt/digisyfo-npm';
+import { getContextRoot } from '../../../../routers/paths';
 import { oppfolgingsdialogPt } from '../../../../proptypes/opproptypes';
 import { hentGodkjenningsTidspunkt } from '../../../../utils/oppfolgingsplanUtils';
 import GodkjennPlanOversiktInformasjon from '../GodkjennPlanOversiktInformasjon';
@@ -25,7 +26,8 @@ const texts = {
     },
 };
 
-export const GodkjennPlanMottattUtvidbar = ({ oppfolgingsdialog, rootUrl }) => {
+export const GodkjennPlanMottattUtvidbar = ({ oppfolgingsdialog }) => {
+    const rootUrl = getContextRoot();
     return (
         <Utvidbar className="utvidbar--oppfolgingsplan" tittel={texts.godkjennPlanMottattUtvidbar.title}>
             <GodkjennPlanOversiktInformasjon
@@ -37,7 +39,6 @@ export const GodkjennPlanMottattUtvidbar = ({ oppfolgingsdialog, rootUrl }) => {
 };
 GodkjennPlanMottattUtvidbar.propTypes = {
     oppfolgingsdialog: oppfolgingsdialogPt,
-    rootUrl: PropTypes.string,
 };
 
 export const GodkjennPlanMottattKnapper = ({ godkjennPlan, oppfolgingsdialog }) => {
@@ -70,14 +71,13 @@ GodkjennPlanMottattKnapper.propTypes = {
 const GodkjennPlanAvslaattOgGodkjent = (
     {
         oppfolgingsdialog,
-        rootUrl,
         godkjennPlan,
         avvisDialog,
     }) => {
     const sistOppfolgingsdialog = oppfolgingsdialog && hentGodkjenningsTidspunkt(oppfolgingsdialog);
     return (<div className="godkjennPlanAvslaattOgGodkjent">
         <OppfolgingsplanInnholdboks
-            svgUrl={`${rootUrl}/img/svg/plan-mottatt-igjen.svg`}
+            svgUrl={`${getContextRoot()}/img/svg/plan-mottatt-igjen.svg`}
             svgAlt="mottatt"
             tittel={texts.godkjennPlanAvslaattOgGodkjent.title}
         >
@@ -89,7 +89,6 @@ const GodkjennPlanAvslaattOgGodkjent = (
 
                 <div className="blokk--xxs">
                     <GodkjennPlanTidspunkt
-                        rootUrl={rootUrl}
                         gyldighetstidspunkt={sistOppfolgingsdialog}
                     />
 
@@ -100,7 +99,6 @@ const GodkjennPlanAvslaattOgGodkjent = (
                 </div>
                 <GodkjennPlanMottattUtvidbar
                     oppfolgingsdialog={oppfolgingsdialog}
-                    rootUrl={rootUrl}
                 />
                 <GodkjennPlanMottattKnapper
                     oppfolgingsdialog={oppfolgingsdialog}
@@ -113,7 +111,6 @@ const GodkjennPlanAvslaattOgGodkjent = (
 
 GodkjennPlanAvslaattOgGodkjent.propTypes = {
     oppfolgingsdialog: oppfolgingsdialogPt,
-    rootUrl: PropTypes.string,
     godkjennPlan: PropTypes.func,
     avvisDialog: PropTypes.func,
 };

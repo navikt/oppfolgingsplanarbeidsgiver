@@ -9,6 +9,7 @@ import OppfolgingsplanInnholdboks from '../../../app/OppfolgingsplanInnholdboks'
 import GodkjennPlanTidspunkt from '../GodkjennPlanTidspunkt';
 import TidligereAvbruttePlaner from '../TidligereAvbruttePlaner';
 import GodkjennPlanVenterInfo from '../GodkjennPlanVenterInfo';
+import { getContextRoot } from '../../../../routers/paths';
 
 const texts = {
     godkjennPlanSendtInfoTekst: {
@@ -66,7 +67,8 @@ const GodkjenPlanSentBlokk = (arbeidstakerName) => {
     );
 };
 
-export const GodkjennPlanSendtUtvidbar = ({ oppfolgingsdialog, rootUrl }) => {
+export const GodkjennPlanSendtUtvidbar = ({ oppfolgingsdialog }) => {
+    const rootUrl = getContextRoot();
     return (
         <Utvidbar tittel={texts.godkjennPlanSendtUtvidbar.title}>
             <GodkjennPlanOversiktInformasjon
@@ -78,13 +80,17 @@ export const GodkjennPlanSendtUtvidbar = ({ oppfolgingsdialog, rootUrl }) => {
 };
 GodkjennPlanSendtUtvidbar.propTypes = {
     oppfolgingsdialog: oppfolgingsdialogPt,
-    rootUrl: PropTypes.string,
 };
 
-const GodkjennPlanSendt = ({ oppfolgingsdialog, nullstillGodkjenning, rootUrl, rootUrlPlaner }) => {
+const GodkjennPlanSendt = (
+    {
+        oppfolgingsdialog,
+        nullstillGodkjenning,
+        rootUrlPlaner,
+    }) => {
     return (
         <OppfolgingsplanInnholdboks
-            svgUrl={`${rootUrl}/img/svg/hake-groenn--lys.svg`}
+            svgUrl={`${getContextRoot()}/img/svg/hake-groenn--lys.svg`}
             liteikon
             svgAlt="sendt"
             tittel={texts.godkjennPlanSendt.title}
@@ -93,13 +99,11 @@ const GodkjennPlanSendt = ({ oppfolgingsdialog, nullstillGodkjenning, rootUrl, r
                 {GodkjenPlanSentBlokk(oppfolgingsdialog.arbeidstaker.navn)}
 
                 <GodkjennPlanTidspunkt
-                    rootUrl={rootUrl}
                     gyldighetstidspunkt={finnNyesteGodkjenning(oppfolgingsdialog.godkjenninger).gyldighetstidspunkt}
                 />
 
                 <GodkjennPlanSendtUtvidbar
                     oppfolgingsdialog={oppfolgingsdialog}
-                    rootUrl={rootUrl}
                 />
                 <CancelButton
                     nullstillGodkjenning={nullstillGodkjenning}
@@ -119,7 +123,6 @@ const GodkjennPlanSendt = ({ oppfolgingsdialog, nullstillGodkjenning, rootUrl, r
 GodkjennPlanSendt.propTypes = {
     oppfolgingsdialog: oppfolgingsdialogPt,
     nullstillGodkjenning: PropTypes.func,
-    rootUrl: PropTypes.string,
     rootUrlPlaner: PropTypes.string,
 };
 

@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import { Utvidbar } from '@navikt/digisyfo-npm';
+import { getContextRoot } from '../../../../routers/paths';
+import { oppfolgingsdialogPt } from '../../../../proptypes/opproptypes';
 import GodkjennPlanOversiktInformasjon from '../GodkjennPlanOversiktInformasjon';
 import OppfolgingsplanInnholdboks from '../../../app/OppfolgingsplanInnholdboks';
 import GodkjennPlanTidspunkt from '../GodkjennPlanTidspunkt';
 import TidligereAvbruttePlaner from '../TidligereAvbruttePlaner';
 import GodkjennPlanTilAltinnTekst from './GodkjennPlanTilAltinnTekst';
-import { oppfolgingsdialogPt } from '../../../../proptypes/opproptypes';
 import { EditButton } from './EditButton';
 import { SharingCheckbox } from './SharingCheckbox';
 
@@ -80,11 +81,11 @@ GodkjennPlanMottattKnapper.propTypes = {
 const GodkjennPlanMottatt = (
     {
         oppfolgingsdialog,
-        rootUrl,
         rootUrlPlaner,
         godkjennPlan,
         avvisDialog,
     }) => {
+    const rootUrl = getContextRoot();
     return (
         <OppfolgingsplanInnholdboks
             svgUrl={`${rootUrl}/img/svg/plan-mottatt.svg`}
@@ -100,7 +101,6 @@ const GodkjennPlanMottatt = (
 
                 <div className="blokk--xxs">
                     <GodkjennPlanTidspunkt
-                        rootUrl={rootUrl}
                         gyldighetstidspunkt={oppfolgingsdialog.godkjenninger[0].gyldighetstidspunkt}
                     />
                     <EditButton
@@ -132,7 +132,6 @@ const GodkjennPlanMottatt = (
 
 GodkjennPlanMottatt.propTypes = {
     oppfolgingsdialog: oppfolgingsdialogPt,
-    rootUrl: PropTypes.string,
     rootUrlPlaner: PropTypes.string,
     avvisDialog: PropTypes.func,
     godkjennPlan: PropTypes.func,

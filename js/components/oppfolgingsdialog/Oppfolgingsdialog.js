@@ -95,7 +95,6 @@ class Oppfolgingsdialog extends Component {
             hentPdfurler,
             giSamtykke,
             navigasjontoggles,
-            toggleAvvisPlan,
             nullstillGodkjenning,
             lagreTiltak,
             slettTiltak,
@@ -127,10 +126,8 @@ class Oppfolgingsdialog extends Component {
                 avvisDialog={avvisDialogAg}
                 oppfolgingsdialog={oppfolgingsdialog}
                 godkjennPlan={godkjennDialogAg}
-                toggleAvvisPlan={toggleAvvisPlan}
                 nullstillGodkjenning={nullstillGodkjenning}
                 rootUrlPlaner={`${getContextRoot()}/${koblingId}`}
-                koblingId={koblingId}
             />);
         } else if (inneholderGodkjentPlan(oppfolgingsdialog)) {
             disableNavigation = true;
@@ -238,7 +235,6 @@ Oppfolgingsdialog.propTypes = {
     nullstillGodkjenning: PropTypes.func,
     settAktivtSteg: PropTypes.func,
     settDialog: PropTypes.func,
-    toggleAvvisPlan: PropTypes.func,
     hentSykeforlopsPerioder: PropTypes.func,
 };
 

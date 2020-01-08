@@ -9,13 +9,19 @@ const harMangeGodkjenninger = (godkjenninger) => {
     return godkjenninger.length > 1;
 };
 
-const MottattGodkjenninger = ({ oppfolgingsdialog, godkjennPlan, nullstillGodkjenning, avvisDialog, rootUrl, rootUrlPlaner }) => {
+const MottattGodkjenninger = (
+    {
+        oppfolgingsdialog,
+        godkjennPlan,
+        nullstillGodkjenning,
+        avvisDialog,
+        rootUrlPlaner,
+    }) => {
     if (harMangeGodkjenninger(oppfolgingsdialog.godkjenninger)) {
         return (<GodkjennPlanAvslaattOgGodkjent
             avvisDialog={avvisDialog}
             godkjennPlan={godkjennPlan}
             oppfolgingsdialog={oppfolgingsdialog}
-            rootUrl={rootUrl}
         />);
     }
 
@@ -25,14 +31,12 @@ const MottattGodkjenninger = ({ oppfolgingsdialog, godkjennPlan, nullstillGodkje
             avvisDialog={avvisDialog}
             godkjennPlan={godkjennPlan}
             oppfolgingsdialog={oppfolgingsdialog}
-            rootUrl={rootUrl}
             rootUrlPlaner={rootUrlPlaner}
         />);
     }
     return (<GodkjennPlanAvslaatt
         nullstillGodkjenning={nullstillGodkjenning}
         oppfolgingsdialog={oppfolgingsdialog}
-        rootUrl={rootUrl}
     />);
 };
 
@@ -41,7 +45,6 @@ MottattGodkjenninger.propTypes = {
     godkjennPlan: PropTypes.func,
     nullstillGodkjenning: PropTypes.func,
     avvisDialog: PropTypes.func,
-    rootUrl: PropTypes.string,
     rootUrlPlaner: PropTypes.string,
 };
 

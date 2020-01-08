@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import MottattGodkjenninger from './MottattGodkjenninger';
 import GodkjennPlanSendt from './GodkjennPlanSendt';
 import { oppfolgingsdialogPt } from '../../../../proptypes/opproptypes';
-import { getContextRoot } from '../../../../routers/paths';
 
 const harMottattGodkjenninger = (oppfolgingsdialog) => {
     const godkjenninger = oppfolgingsdialog.godkjenninger;
@@ -18,13 +17,11 @@ const Godkjenninger = ({ oppfolgingsdialog, godkjennPlan, nullstillGodkjenning, 
             godkjennPlan={godkjennPlan}
             nullstillGodkjenning={nullstillGodkjenning}
             avvisDialog={avvisDialog}
-            rootUrl={getContextRoot()}
         />);
     }
     return (<GodkjennPlanSendt
         oppfolgingsdialog={oppfolgingsdialog}
         nullstillGodkjenning={nullstillGodkjenning}
-        rootUrl={getContextRoot()}
         rootUrlPlaner={rootUrlPlaner}
     />);
 };

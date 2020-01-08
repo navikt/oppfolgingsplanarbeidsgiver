@@ -143,7 +143,6 @@ class GodkjentPlan extends Component {
                         { !godkjentPlan.tvungenGodkjenning && <p>{textBothApprovedOppfolgingsplan(oppfolgingsdialog.arbeidstaker.navn)}</p> }
 
                         <GodkjennPlanTidspunkt
-                            rootUrl={rootUrl}
                             gyldighetstidspunkt={oppfolgingsdialog.godkjentPlan.gyldighetstidspunkt}
                         />
 
