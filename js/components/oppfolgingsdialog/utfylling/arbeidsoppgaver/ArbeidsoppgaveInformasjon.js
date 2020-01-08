@@ -6,9 +6,6 @@ import * as opProptypes from '../../../../proptypes/opproptypes';
 import ArbeidsoppgaveVarselFeil from './ArbeidsoppgaveVarselFeil';
 
 const texts = {
-    arbeidsoppgaveInformasjonKnapper: {
-        buttonDelete: 'Slett',
-    },
     arbeidsoppgaveInformasjonInnhold: {
         ikkeVurdert: 'Når den sykmeldte har gjort en vurdering på om denne arbeidsoppgaven kan gjennomføres vil dette bli synlig her.',
         tilrettelegging: {
