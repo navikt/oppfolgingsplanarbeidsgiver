@@ -6,10 +6,7 @@ import ArbeidsoppgaveUtvidbar from './ArbeidsoppgaveUtvidbar';
 const ArbeidsoppgaverListe = (
     {
         liste,
-        sendLagre,
         sendSlett,
-        sendLagreKommentar,
-        sendSlettKommentar,
         fnr,
         feilMelding,
         visFeilMelding,
@@ -24,9 +21,6 @@ const ArbeidsoppgaverListe = (
                             element={element}
                             fnr={fnr}
                             sendSlett={sendSlett}
-                            sendLagre={sendLagre}
-                            sendSlettKommentar={sendSlettKommentar}
-                            sendLagreKommentar={sendLagreKommentar}
                             id={index}
                             visFeilMelding={visFeilMelding}
                             feilMelding={feilMelding}
@@ -40,10 +34,7 @@ const ArbeidsoppgaverListe = (
 ArbeidsoppgaverListe.propTypes = {
     liste: PropTypes.arrayOf(opProptypes.arbeidsoppgavePt),
     fnr: PropTypes.string,
-    sendLagre: PropTypes.func,
     sendSlett: PropTypes.func,
-    sendLagreKommentar: PropTypes.func,
-    sendSlettKommentar: PropTypes.func,
     visFeilMelding: PropTypes.func,
     feilMelding: PropTypes.bool,
 };

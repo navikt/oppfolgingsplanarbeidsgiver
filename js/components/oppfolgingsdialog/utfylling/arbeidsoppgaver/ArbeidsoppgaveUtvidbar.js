@@ -6,7 +6,6 @@ import { erSynligIViewport } from '@navikt/digisyfo-npm';
 import * as opProptypes from '../../../../proptypes/opproptypes';
 import ArbeidsoppgaveInformasjon from './ArbeidsoppgaveInformasjon';
 import ArbeidsoppgaveUtvidbarOverskrift from './ArbeidsoppgaveUtvidbarOverskrift';
-import LagreArbeidsoppgaveSkjema from './LagreArbeidsoppgaveSkjema';
 
 const texts = {
     updateError: 'En midlertidig feil gjør at vi ikke kan lagre endringene dine akkurat nå. Prøv igjen senere.',
@@ -22,44 +21,33 @@ class ArbeidsoppgaveUtvidbar extends Component {
             hoyde: !props.erApen ? '0' : 'auto',
             visInnhold: props.erApen,
             harTransisjon: false,
-            visLagreSkjema: false,
-            visLagringFeilet: false,
             visSlettingFeilet: false,
-            varselTekst: '',
         };
         this.setRef = this.setRef.bind(this);
-        this.visLagreSkjema = this.visLagreSkjema.bind(this);
         this.visElementInformasjon = this.visElementInformasjon.bind(this);
         this.scrollTilElement = this.scrollTilElement.bind(this);
         this.erUtvidbarApenStorreEnnSkjerm = this.erUtvidbarApenStorreEnnSkjerm.bind(this);
         this.visFeil = this.visFeil.bind(this);
         this.sendSlett = this.sendSlett.bind(this);
-        this.sendLagre = this.sendLagre.bind(this);
     }
 
     componentWillReceiveProps(nextProps) {
         if (this.props.element.arbeidsoppgaveId === nextProps.arbeidsoppgaverReducer.feiletOppgaveId) {
-            if (((nextProps.arbeidsoppgaverReducer.lagringFeilet && nextProps.arbeidsoppgaverReducer.lagringFeilet !== this.props.arbeidsoppgaverReducer.lagringFeilet) ||
-                (nextProps.arbeidsoppgaverReducer.slettingFeilet && nextProps.arbeidsoppgaverReducer.slettingFeilet !== this.props.arbeidsoppgaverReducer.slettingFeilet))
+            if (((nextProps.arbeidsoppgaverReducer.slettingFeilet && nextProps.arbeidsoppgaverReducer.slettingFeilet !== this.props.arbeidsoppgaverReducer.slettingFeilet))
                 && nextProps.arbeidsoppgaverReducer.feiletOppgaveId > 0) {
                 if (nextProps.arbeidsoppgaverReducer.slettingFeilet) {
                     this.visElementInformasjon();
                     this.props.visFeilMelding(true);
-                    this.visFeil(false, true, texts.updateError);
+                    this.visFeil(true);
                     this.apne();
-                } else if (nextProps.arbeidsoppgaverReducer.lagringFeilet) {
-                    this.visLagreSkjema();
-                    this.props.visFeilMelding(true);
-                    this.visFeil(true, false, texts.updateError);
-                    this.apne();
-                } else if (!nextProps.arbeidsoppgaverReducer.lagringFeilet && !nextProps.arbeidsoppgaverReducer.slettingFeilet) {
-                    this.visFeil(false, false, '');
+                } else if (!nextProps.arbeidsoppgaverReducer.slettingFeilet) {
+                    this.visFeil(false);
                 }
-            } else if (!nextProps.arbeidsoppgaverReducer.lagringFeilet && !nextProps.arbeidsoppgaverReducer.slettingFeilet) {
-                this.visFeil(false, false, '');
+            } else if (!nextProps.arbeidsoppgaverReducer.slettingFeilet) {
+                this.visFeil(false);
             }
-        } else if (!nextProps.arbeidsoppgaverReducer.lagringFeilet && !nextProps.arbeidsoppgaverReducer.slettingFeilet) {
-            this.visFeil(false, false, '');
+        } else if (!nextProps.arbeidsoppgaverReducer.slettingFeilet) {
+            this.visFeil(false);
         }
     }
 
@@ -107,11 +95,9 @@ class ArbeidsoppgaveUtvidbar extends Component {
         }, 0);
     }
 
-    visFeil(lagringFeilet, slettingFeilet, tekst) {
+    visFeil(slettingFeilet) {
         this.setState({
-            visLagringFeilet: lagringFeilet,
             visSlettingFeilet: slettingFeilet,
-            varselTekst: tekst,
         });
     }
 
@@ -179,17 +165,8 @@ class ArbeidsoppgaveUtvidbar extends Component {
         }
     }
 
-    visLagreSkjema() {
-        this.setState({
-            visLagreSkjema: true,
-            visInnhold: true,
-        });
-        this.props.visFeilMelding(false);
-    }
-
     visElementInformasjon() {
         this.setState({
-            visLagreSkjema: false,
             visInnhold: true,
         });
         this.props.visFeilMelding(false);
@@ -200,21 +177,10 @@ class ArbeidsoppgaveUtvidbar extends Component {
         this.props.sendSlett(id);
     }
 
-    sendLagre(nyeVerdier) {
-        this.props.sendLagre(nyeVerdier);
-        this.setState({
-            visLagreSkjema: false,
-            visInnhold: true,
-        });
-    }
-
     render() {
         const {
             element,
             fnr,
-            sendSlettKommentar,
-            sendLagreKommentar,
-            arbeidsoppgaverReducer,
             feilMelding,
         } = this.props;
         return (
@@ -249,25 +215,11 @@ class ArbeidsoppgaveUtvidbar extends Component {
                             }}
                         >
                             <div ref={(ref) => { this.innhold = ref; }}>
-                                { this.state.visInnhold && !this.state.visLagreSkjema &&
+                                { this.state.visInnhold &&
                                 <ArbeidsoppgaveInformasjon
                                     element={element}
-                                    visLagreSkjema={this.visLagreSkjema}
-                                    sendLagreKommentar={sendLagreKommentar}
-                                    sendSlettKommentar={sendSlettKommentar}
-                                    oppdateringFeilet={(this.state.visLagringFeilet || this.state.visSlettingFeilet) && feilMelding}
-                                    varselTekst={this.state.varselTekst}
-                                />
-                                }
-                                { this.state.visInnhold && this.state.visLagreSkjema &&
-                                <LagreArbeidsoppgaveSkjema
-                                    sendLagre={this.sendLagre}
-                                    arbeidsoppgave={element}
-                                    form={element.arbeidsoppgaveId.toString()}
-                                    avbryt={this.visElementInformasjon}
-                                    oppdateringFeilet={(this.state.visLagringFeilet || this.state.visSlettingFeilet) && feilMelding}
-                                    varselTekst={this.state.varselTekst}
-                                    arbeidsoppgaverReducer={arbeidsoppgaverReducer}
+                                    oppdateringFeilet={this.state.visSlettingFeilet && feilMelding}
+                                    varselTekst={texts.updateError}
                                 />
                                 }
                             </div>
@@ -283,9 +235,6 @@ ArbeidsoppgaveUtvidbar.propTypes = {
     element: opProptypes.arbeidsoppgavePt,
     fnr: PropTypes.string,
     sendSlett: PropTypes.func,
-    sendLagre: PropTypes.func,
-    sendSlettKommentar: PropTypes.func,
-    sendLagreKommentar: PropTypes.func,
     erApen: PropTypes.bool.isRequired,
     visFeilMelding: PropTypes.func,
     feilMelding: PropTypes.bool,

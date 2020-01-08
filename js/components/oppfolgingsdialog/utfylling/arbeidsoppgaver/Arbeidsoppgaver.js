@@ -219,7 +219,6 @@ class Arbeidsoppgaver extends Component {
                         }
                         <ArbeidsoppgaverListe
                             liste={sorterArbeidsoppgaverEtterOpprettet(oppfolgingsdialog.arbeidsoppgaveListe)}
-                            sendLagre={this.sendLagreArbeidsoppgave}
                             sendSlett={this.sendSlettArbeidsoppgave}
                             fnr={oppfolgingsdialog.arbeidsgiver.naermesteLeder.fnr}
                             visFeilMelding={this.visOppdateringFeilet}
