@@ -64,7 +64,7 @@ describe('GodkjennPlanMottatt', () => {
     });
 
     describe('GodkjennPlanMottattKnapper', () => {
-        const komponent = mount(<GodkjennPlanMottattKnapper />);
+        const komponent = mount(<GodkjennPlanMottattKnapper oppfolgingsdialog={oppfolgingsdialog} />);
 
         it('Skal vise en submit knapp', () => {
             expect(komponent.find(Hovedknapp)).to.have.length(1);
