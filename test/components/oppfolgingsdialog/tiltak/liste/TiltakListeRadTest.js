@@ -4,6 +4,7 @@ import { shallow } from 'enzyme';
 import chaiEnzyme from 'chai-enzyme';
 import TiltakListeRad from '../../../../../js/components/oppfolgingsdialog/utfylling/tiltak/liste/TiltakListeRad';
 import getOppfolgingsplan from '../../../../mock/mockOppfolgingsdialog';
+import TiltakInformasjonKnapper from '../../../../../js/components/oppfolgingsdialog/utfylling/tiltak/liste/TiltakInformasjonKnapper';
 
 chai.use(chaiEnzyme());
 const expect = chai.expect;
@@ -22,6 +23,10 @@ describe('TiltakListeRad', () => {
 
     it('Skal vise korrekt div', () => {
         expect(komponent.find('div.tiltaktabell__rad__celle')).to.have.length(1);
+    });
+
+    it('Skal vise TiltakInformasjonKnapper', () => {
+        expect(komponent.find(TiltakInformasjonKnapper)).to.have.length(1);
     });
 
     it('Skal vise <p> med info om f.o.m og t.o.m', () => {

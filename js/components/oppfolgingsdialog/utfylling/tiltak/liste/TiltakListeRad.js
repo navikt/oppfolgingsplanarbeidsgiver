@@ -4,6 +4,7 @@ import { STATUS_TILTAK } from '../../../../../konstanter';
 import { tiltakPt } from '../../../../../proptypes/opproptypes';
 import { toDateMedMaanedNavn } from '../../../../../utils/datoUtils';
 import { skalVurdereTiltak } from '../../../../../utils/tiltakUtils';
+import TiltakInformasjonKnapper from './TiltakInformasjonKnapper';
 
 const texts = {
     status: {
@@ -18,6 +19,11 @@ const TiltakListeRad = (
         tiltak,
         erApen,
         fnr,
+        sendSlett,
+        lagreSkjema,
+        visLagreSkjema,
+        lagreKommentarSkjema,
+        visLagreKommentarSkjema,
         rootUrlImg,
     }) => {
     let klasse = '';
@@ -58,6 +64,15 @@ const TiltakListeRad = (
                 </span>
             </div>
             }
+            <TiltakInformasjonKnapper
+                element={tiltak}
+                fnr={fnr}
+                lagreSkjema={lagreSkjema}
+                visLagreSkjema={visLagreSkjema}
+                sendSlett={sendSlett}
+                lagreKommentarSkjema={lagreKommentarSkjema}
+                visLagreKommentarSkjema={visLagreKommentarSkjema}
+            />
         </div>);
 };
 
@@ -65,6 +80,11 @@ TiltakListeRad.propTypes = {
     tiltak: tiltakPt,
     erApen: PropTypes.bool,
     fnr: PropTypes.string,
+    sendSlett: PropTypes.func,
+    lagreSkjema: PropTypes.bool,
+    visLagreSkjema: PropTypes.func,
+    lagreKommentarSkjema: PropTypes.bool,
+    visLagreKommentarSkjema: PropTypes.func,
     rootUrlImg: PropTypes.string,
 };
 

@@ -16,6 +16,7 @@ const TiltakInformasjonKnapper = (
     {
         element,
         fnr,
+        lagreSkjema,
         visLagreSkjema,
         sendSlett,
         lagreKommentarSkjema,
@@ -24,28 +25,28 @@ const TiltakInformasjonKnapper = (
     const aktoerHarOpprettetElement = fnr === (element.opprettetAv && element.opprettetAv.fnr);
     return (
         <div className="knapperad__tiltak knapperad--justervenstre">
-            { !lagreKommentarSkjema &&
-            <div className="knapperad__element">
-                <Knapp
-                    mini
-                    autoFocus={!skalVurdereTiltak(element, fnr)}
-                    onClick={visLagreKommentarSkjema}>
-                    {texts.tiltakInformasjonKnapper.buttonComment}
-                </Knapp>
-            </div>
-            }
-            { (aktoerHarOpprettetElement || !skalVurdereTiltak(element, fnr)) &&
+            { !lagreSkjema && (aktoerHarOpprettetElement || !skalVurdereTiltak(element, fnr)) &&
             <div className="knapperad__element">
                 <ButtonEditIcon
-                    click={visLagreSkjema}
+                    click={(event) => { visLagreSkjema(event); }}
                 />
             </div>
             }
             { aktoerHarOpprettetElement &&
             <div className="knapperad__element">
                 <ButtonDeleteIcon
-                    click={() => { sendSlett(element.tiltakId); }}
+                    click={(event) => { sendSlett(event, element.tiltakId); }}
                 />
+            </div>
+            }
+            { !lagreKommentarSkjema &&
+            <div className="knapperad__element">
+                <Knapp
+                    mini
+                    autoFocus={!skalVurdereTiltak(element, fnr)}
+                    onClick={(event) => { visLagreKommentarSkjema(event); }}>
+                    {texts.tiltakInformasjonKnapper.buttonComment}
+                </Knapp>
             </div>
             }
         </div>
@@ -54,6 +55,7 @@ const TiltakInformasjonKnapper = (
 TiltakInformasjonKnapper.propTypes = {
     element: tiltakPt,
     fnr: PropTypes.string,
+    lagreSkjema: PropTypes.bool,
     visLagreSkjema: PropTypes.func,
     sendSlett: PropTypes.func,
     lagreKommentarSkjema: PropTypes.bool,
