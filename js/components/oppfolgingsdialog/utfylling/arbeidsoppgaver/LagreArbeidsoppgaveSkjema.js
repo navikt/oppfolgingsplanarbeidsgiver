@@ -8,7 +8,6 @@ import {
     OPPRETT_SKJEMANAVN,
     tekstfeltRegex,
 } from '../../../../konstanter';
-import { getContextRoot } from '../../../../routers/paths';
 import * as opProptypes from '../../../../proptypes/opproptypes';
 import Inputfelt from '../../../../skjema/Inputfelt';
 
@@ -75,7 +74,6 @@ export class LagreArbeidsoppgaveSkjemaKomponent extends Component {
                     varselTekst={varselTekst}
                     spinner={this.state.spinner}
                     autoFocus
-                    rootUrlImg={getContextRoot()}
                 />
             </div>
         </form>

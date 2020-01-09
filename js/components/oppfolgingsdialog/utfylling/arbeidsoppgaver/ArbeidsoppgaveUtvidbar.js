@@ -2,14 +2,20 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { findDOMNode } from 'react-dom';
 import { connect } from 'react-redux';
+import styled from 'styled-components';
 import { erSynligIViewport } from '@navikt/digisyfo-npm';
 import * as opProptypes from '../../../../proptypes/opproptypes';
 import ArbeidsoppgaveInformasjon from './ArbeidsoppgaveInformasjon';
 import ArbeidsoppgaveUtvidbarOverskrift from './ArbeidsoppgaveUtvidbarOverskrift';
+import ArbeidsoppgaveVarselFeil from './ArbeidsoppgaveVarselFeil';
 
 const texts = {
     updateError: 'En midlertidig feil gjør at vi ikke kan lagre endringene dine akkurat nå. Prøv igjen senere.',
 };
+
+const ArbeidsoppgaveVarselFeilStyled = styled.div`
+    padding: 0 1em;
+`;
 
 class ArbeidsoppgaveUtvidbar extends Component {
     constructor(props) {
@@ -36,10 +42,8 @@ class ArbeidsoppgaveUtvidbar extends Component {
             if (((nextProps.arbeidsoppgaverReducer.slettingFeilet && nextProps.arbeidsoppgaverReducer.slettingFeilet !== this.props.arbeidsoppgaverReducer.slettingFeilet))
                 && nextProps.arbeidsoppgaverReducer.feiletOppgaveId > 0) {
                 if (nextProps.arbeidsoppgaverReducer.slettingFeilet) {
-                    this.visElementInformasjon();
                     this.props.visFeilMelding(true);
                     this.visFeil(true);
-                    this.apne();
                 } else if (!nextProps.arbeidsoppgaverReducer.slettingFeilet) {
                     this.visFeil(false);
                 }
@@ -215,13 +219,20 @@ class ArbeidsoppgaveUtvidbar extends Component {
                             <div ref={(ref) => { this.innhold = ref; }}>
                                 { this.state.visInnhold &&
                                 <ArbeidsoppgaveInformasjon
-                                    element={element}
+                                    arbeidsoppgave={element}
                                     oppdateringFeilet={this.state.visSlettingFeilet && feilMelding}
                                     varselTekst={texts.updateError}
                                 />
                                 }
                             </div>
                         </div>
+                        { this.state.visSlettingFeilet && feilMelding &&
+                        <ArbeidsoppgaveVarselFeilStyled>
+                            <ArbeidsoppgaveVarselFeil
+                                tekst={texts.updateError}
+                            />
+                        </ArbeidsoppgaveVarselFeilStyled>
+                        }
                     </article>
                 );
             })()
