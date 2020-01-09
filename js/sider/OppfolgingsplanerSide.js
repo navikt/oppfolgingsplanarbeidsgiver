@@ -15,7 +15,6 @@ import {
     sykmeldtHarBlittSlettet,
 } from '../utils/reducerUtils';
 import { populerDialogFraState } from '../utils/stateUtils';
-import logger from '../logg/logging';
 import {
     finnOppfolgingsplanerPaVirksomhet,
     sykmeldtHarGyldigSykmelding,
@@ -58,28 +57,9 @@ const texts = {
     },
 };
 
-export const hentHentingFeiletMapTekst = (hentingFeiletMap) => {
-    return `
-    sykmeldte: ${hentingFeiletMap.sykmeldte};
-    oppfolgingsdialoger: ${hentingFeiletMap.alleOppfolgingsdialogerReducer};
-    tilgang: ${hentingFeiletMap.sykmeldinger};
-    sykmeldinger: ${hentingFeiletMap.sykmeldinger};
-    `;
-};
-
-const hentingFeiletMapPt = PropTypes.shape({
-    sykmeldte: PropTypes.bool,
-    alleOppfolgingsdialogerReducer: PropTypes.bool,
-    tilgang: PropTypes.bool,
-    sykmeldinger: PropTypes.bool,
-});
-
 export class OppfolgingsplanerSide extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-            harloggetHentingFeilet: false,
-        };
         this.opprettdialog = this.opprettdialog.bind(this);
         window.sessionStorage.removeItem('startdato');
         window.sessionStorage.removeItem('sluttdato');
@@ -168,8 +148,6 @@ export class OppfolgingsplanerSide extends Component {
             sender,
             sendingFeilet,
             sykmeldt,
-            hentingFeiletMap,
-            loggError,
         } = this.props;
         return (
             <Side
@@ -181,12 +159,6 @@ export class OppfolgingsplanerSide extends Component {
                         if (henter || sender) {
                             return <AppSpinner />;
                         } else if (hentingFeilet || sendingFeilet) {
-                            if (!this.state.harloggetHentingFeilet) {
-                                loggError(`Henting eller sending feilet, hentingfeiletMap: ${hentHentingFeiletMapTekst(hentingFeiletMap)}`);
-                                this.setState({
-                                    harloggetHentingFeilet: true,
-                                });
-                            }
                             return (<Feilmelding />);
                         } else if (!tilgang.data.harTilgang || !sykmeldt || !harSykmeldtGyldigSykmelding) {
                             return (<OppfolgingsplanInfoboks
@@ -240,8 +212,6 @@ OppfolgingsplanerSide.propTypes = {
     opprettOppfolgingsdialogAg: PropTypes.func,
     sjekkTilgang: PropTypes.func,
     slettSykmeldt: PropTypes.func,
-    hentingFeiletMap: hentingFeiletMapPt,
-    loggError: PropTypes.func,
     skalHenteSykmeldtBerikelse: PropTypes.bool,
     hentSykmeldteBerikelser: PropTypes.func,
 };
@@ -271,13 +241,6 @@ export function mapStateToProps(state, ownProps) {
         && forsoektHentetSykmeldte(state.sykmeldte)
         && sykmeldinger.hentet;
     const erSykmeldteHentet = state.sykmeldte.hentet && !state.sykmeldte.hentingFeilet;
-    const hentingFeiletMap = {
-        sykmeldte: state.sykmeldte.hentingFeilet,
-        alleOppfolgingsdialogerReducer: alleOppfolgingsdialogerReducer.hentingFeilet,
-        tilgang: tilgang.hentingFeilet,
-        sykmeldinger: sykmeldinger.hentingFeilet,
-    };
-    const loggError = logger.error;
 
     return {
         henter: state.sykmeldte.henter
@@ -318,8 +281,6 @@ export function mapStateToProps(state, ownProps) {
         kontaktinfo: state.kontaktinfo,
         harSykmeldtGyldigSykmelding,
         slettetSykmeldt: state.sykmeldte.slettet,
-        hentingFeiletMap,
-        loggError,
         skalHenteSykmeldtBerikelse: beregnSkalHenteSykmeldtBerikelse(sykmeldt, state),
         brodsmuler: [{
             tittel: texts.brodsmuler.dineSykmeldte,

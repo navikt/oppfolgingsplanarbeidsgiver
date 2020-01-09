@@ -11,7 +11,6 @@ import {
     hentSyfoapiUrl,
     get,
 } from '../../gateway-api/gatewayApi';
-import logger from '../../logg/logging';
 import * as actions from '../../actions/oppfolgingsplan/sjekkTilgang_actions';
 import { skalHenteOPTilgang } from '../../selectors/tilgangSelectors';
 
@@ -29,7 +28,6 @@ export function* sjekkerTilgang(action) {
             return;
         }
         log(e);
-        logger.error(`Kunne ikke hente tilgang for arbeidsgiver. ${e.message}`);
         yield put(actions.sjekkTilgangFeilet(fnr));
     }
 }
