@@ -1,7 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const ButtonEditIcon = ({ click, text }) => {
+const texts = {
+    buttonEdit: 'Endre',
+};
+
+const ButtonEditIcon = (
+    {
+        click,
+        text = texts.buttonEdit,
+    }) => {
     return (
         <button
             className="knapp--endre"

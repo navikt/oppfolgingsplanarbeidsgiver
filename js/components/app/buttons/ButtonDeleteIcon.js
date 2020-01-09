@@ -1,10 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+const texts = {
+    buttonDelete: 'Slett',
+};
+
 const ButtonDeleteIcon = (
     {
         click,
-        text,
+        text = texts.buttonDelete,
     }) => {
     return (
         <button

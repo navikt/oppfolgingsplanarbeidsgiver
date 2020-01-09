@@ -4,10 +4,6 @@ import styled from 'styled-components';
 import * as opProptypes from '../../../../proptypes/opproptypes';
 import ButtonDeleteIcon from '../../../app/buttons/ButtonDeleteIcon';
 
-const texts = {
-    buttonDelete: 'Slett',
-};
-
 const ArbeidsoppgaveInformasjonKnapperStyled = styled.div`
     padding-top: 1em;
     text-align: left;
@@ -25,7 +21,6 @@ const ArbeidsoppgaveInformasjonKnapper = (
         aktoerHarOpprettetElement ? (<ArbeidsoppgaveInformasjonKnapperStyled className="arbeidsoppgaveInformasjonKnapper">
             <ButtonDeleteIcon
                 click={(event) => { sendSlett(event, arbeidsoppgaveId); }}
-                text={texts.buttonDelete}
             />
         </ArbeidsoppgaveInformasjonKnapperStyled>) : null
     );

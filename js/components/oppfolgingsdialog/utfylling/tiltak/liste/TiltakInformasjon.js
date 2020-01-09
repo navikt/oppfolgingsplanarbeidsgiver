@@ -20,8 +20,6 @@ import ButtonDeleteIcon from '../../../../app/buttons/ButtonDeleteIcon';
 const texts = {
     tiltakInformasjonKnapper: {
         buttonComment: 'Kommenter',
-        buttonDelete: 'Slett',
-        buttonEdit: 'Endre',
     },
     tiltakInformasjonBeskrivelse: {
         label: 'BESKRIVELSE',
@@ -67,7 +65,6 @@ export const TiltakInformasjonKnapper = (
             <div className="knapperad__element">
                 <ButtonEditIcon
                     click={visLagreSkjema}
-                    text={texts.tiltakInformasjonKnapper.buttonEdit}
                 />
             </div>
             }
@@ -75,7 +72,6 @@ export const TiltakInformasjonKnapper = (
             <div className="knapperad__element">
                 <ButtonDeleteIcon
                     click={() => { sendSlett(element.tiltakId); }}
-                    text={texts.tiltakInformasjonKnapper.buttonDelete}
                 />
             </div>
             }
