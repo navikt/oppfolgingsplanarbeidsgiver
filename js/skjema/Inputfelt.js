@@ -27,7 +27,6 @@ const Inputfelt = (props) => {
         oppdateringFeilet,
         varselTekst,
         spinner,
-        rootUrlImg,
     } = props;
     return (
         <div className="arbeidsgiveroppgave__rad">
@@ -46,7 +45,6 @@ const Inputfelt = (props) => {
             { oppdateringFeilet &&
             <ArbeidsoppgaveVarselFeil
                 tekst={varselTekst}
-                rootUrlImg={rootUrlImg}
             />
             }
             <div className="knapperad knapperad--justervenstre" >
@@ -87,7 +85,6 @@ Inputfelt.propTypes = {
     oppdateringFeilet: PropTypes.bool,
     spinner: PropTypes.bool,
     varselTekst: PropTypes.string,
-    rootUrlImg: PropTypes.string,
 };
 
 export default Inputfelt;

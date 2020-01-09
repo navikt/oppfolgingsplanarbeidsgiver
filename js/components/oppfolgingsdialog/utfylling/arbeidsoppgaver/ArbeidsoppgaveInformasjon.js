@@ -1,9 +1,6 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { KANGJENNOMFOERES } from '../../../../konstanter';
-import { getContextRoot } from '../../../../routers/paths';
 import * as opProptypes from '../../../../proptypes/opproptypes';
-import ArbeidsoppgaveVarselFeil from './ArbeidsoppgaveVarselFeil';
 
 const texts = {
     arbeidsoppgaveInformasjonInnhold: {
@@ -86,30 +83,19 @@ ArbeidsoppgaveInformasjonInnhold.propTypes = {
 
 const ArbeidsoppgaveInformasjon = (
     {
-        element,
-        oppdateringFeilet,
-        varselTekst,
+        arbeidsoppgave,
     }) => {
     return (
         <div className="arbeidsoppgaveInformasjon">
             <ArbeidsoppgaveInformasjonInnhold
-                arbeidsoppgave={element}
+                arbeidsoppgave={arbeidsoppgave}
             />
-
-            { oppdateringFeilet &&
-            <ArbeidsoppgaveVarselFeil
-                tekst={varselTekst}
-                rootUrlImg={getContextRoot()}
-            />
-            }
         </div>
     );
 };
 
 ArbeidsoppgaveInformasjon.propTypes = {
-    element: opProptypes.arbeidsoppgavePt,
-    oppdateringFeilet: PropTypes.bool,
-    varselTekst: PropTypes.string,
+    arbeidsoppgave: opProptypes.arbeidsoppgavePt,
 };
 
 export default ArbeidsoppgaveInformasjon;
