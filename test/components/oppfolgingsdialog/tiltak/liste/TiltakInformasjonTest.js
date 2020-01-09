@@ -6,10 +6,10 @@ import kommentar from '../../../../../js/reducers/kommentar';
 import TiltakInformasjon, {
     TiltakInformasjonBeskrivelse,
     TiltakInformasjonGjennomfoering,
-    TiltakInformasjonKnapper,
     TabellTiltakBeskrivelseIkkeAktuelt,
     VarselTiltakVurdering,
 } from '../../../../../js/components/oppfolgingsdialog/utfylling/tiltak/liste/TiltakInformasjon';
+import TiltakInformasjonKnapper from '../../../../../js/components/oppfolgingsdialog/utfylling/tiltak/liste/TiltakInformasjonKnapper';
 import LagreKommentarSkjema from '../../../../../js/components/oppfolgingsdialog/utfylling/tiltak/kommentar/LagreKommentarSkjema';
 import KommentarListe from '../../../../../js/components/oppfolgingsdialog/utfylling/tiltak/kommentar/KommentarListe';
 import getOppfolgingsplan from '../../../../mock/mockOppfolgingsdialog';
