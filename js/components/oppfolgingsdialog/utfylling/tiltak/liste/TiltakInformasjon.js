@@ -14,7 +14,7 @@ import {
     skalVurdereTiltak,
     sorterKommentarerEtterOpprettet,
 } from '../../../../../utils/tiltakUtils';
-
+import ButtonEditIcon from '../../../../app/buttons/ButtonEditIcon';
 
 const texts = {
     tiltakInformasjonKnapper: {
@@ -64,12 +64,10 @@ export const TiltakInformasjonKnapper = (
             }
             { (aktoerHarOpprettetElement || !skalVurdereTiltak(element, fnr)) &&
             <div className="knapperad__element">
-                <button
-                    className="knapp--endre knapp--tiltak--endre"
-                    type="button"
-                    onClick={visLagreSkjema}>
-                    {texts.tiltakInformasjonKnapper.buttonEdit}
-                </button>
+                <ButtonEditIcon
+                    click={visLagreSkjema}
+                    text={texts.tiltakInformasjonKnapper.buttonEdit}
+                />
             </div>
             }
             { aktoerHarOpprettetElement &&
