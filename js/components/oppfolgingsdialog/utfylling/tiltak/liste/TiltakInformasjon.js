@@ -15,6 +15,7 @@ import {
     sorterKommentarerEtterOpprettet,
 } from '../../../../../utils/tiltakUtils';
 import ButtonEditIcon from '../../../../app/buttons/ButtonEditIcon';
+import ButtonDeleteIcon from '../../../../app/buttons/ButtonDeleteIcon';
 
 const texts = {
     tiltakInformasjonKnapper: {
@@ -72,15 +73,10 @@ export const TiltakInformasjonKnapper = (
             }
             { aktoerHarOpprettetElement &&
             <div className="knapperad__element">
-                <button
-                    className="knapp--slett"
-                    type="button"
-                    onClick={() => {
-                        sendSlett(element.tiltakId);
-                    }}
-                    aria-pressed={visLagreSkjema}>
-                    {texts.tiltakInformasjonKnapper.buttonDelete}
-                </button>
+                <ButtonDeleteIcon
+                    click={() => { sendSlett(element.tiltakId); }}
+                    text={texts.tiltakInformasjonKnapper.buttonDelete}
+                />
             </div>
             }
         </div>
