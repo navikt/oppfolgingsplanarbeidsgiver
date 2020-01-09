@@ -1,3 +1,5 @@
+const arbeidsgiverFnr = '12121212345';
+
 function getDefaultOppfolgingsplaner() {
     return [
         {
@@ -145,6 +147,40 @@ function getDefaultOppfolgingsplaner() {
                     sistEndretAv: {
                         navn: ' ',
                         fnr: '01010112345',
+                        epost: null,
+                        tlf: null,
+                        sistInnlogget: null,
+                        samtykke: null,
+                        evaluering: null,
+                        stillinger: [],
+                    },
+                },
+                {
+                    tiltakId: 3675,
+                    tiltaknavn: 'Ikke aktuelt',
+                    knyttetTilArbeidsoppgaveId: null,
+                    fom: null,
+                    tom: null,
+                    beskrivelse: null,
+                    beskrivelseIkkeAktuelt: 'Ikke aktuelt med dette tiltaket',
+                    opprettetDato: '2018-12-08T12:58:32.744+01:00',
+                    sistEndretDato: '2018-12-08T12:58:32.744+01:00',
+                    kommentarer: [],
+                    status: 'IKKE_AKTUELT',
+                    gjennomfoering: null,
+                    opprettetAv: {
+                        navn: ' ',
+                        fnr: arbeidsgiverFnr,
+                        epost: null,
+                        tlf: null,
+                        sistInnlogget: null,
+                        samtykke: null,
+                        evaluering: null,
+                        stillinger: [],
+                    },
+                    sistEndretAv: {
+                        navn: ' ',
+                        fnr: arbeidsgiverFnr,
                         epost: null,
                         tlf: null,
                         sistInnlogget: null,
