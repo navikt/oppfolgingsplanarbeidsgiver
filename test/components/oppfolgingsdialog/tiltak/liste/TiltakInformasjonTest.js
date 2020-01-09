@@ -1,5 +1,5 @@
-import chai from 'chai';
 import React from 'react';
+import chai from 'chai';
 import { shallow } from 'enzyme';
 import chaiEnzyme from 'chai-enzyme';
 import kommentar from '../../../../../js/reducers/kommentar';
@@ -9,7 +9,6 @@ import TiltakInformasjon, {
     TabellTiltakBeskrivelseIkkeAktuelt,
     VarselTiltakVurdering,
 } from '../../../../../js/components/oppfolgingsdialog/utfylling/tiltak/liste/TiltakInformasjon';
-import TiltakInformasjonKnapper from '../../../../../js/components/oppfolgingsdialog/utfylling/tiltak/liste/TiltakInformasjonKnapper';
 import LagreKommentarSkjema from '../../../../../js/components/oppfolgingsdialog/utfylling/tiltak/kommentar/LagreKommentarSkjema';
 import KommentarListe from '../../../../../js/components/oppfolgingsdialog/utfylling/tiltak/kommentar/KommentarListe';
 import getOppfolgingsplan from '../../../../mock/mockOppfolgingsdialog';
@@ -26,6 +25,7 @@ describe('TiltakInformasjon', () => {
         komponent = shallow(<TiltakInformasjon
             element={oppfolgingsdialog.tiltakListe[0]}
             kommentarReducer={kommentar}
+            lagreKommentarSkjema
         />);
     });
 
@@ -62,12 +62,7 @@ describe('TiltakInformasjon', () => {
         expect(komponent.find(TabellTiltakBeskrivelseIkkeAktuelt)).to.have.length(1);
     });
 
-    it('Skal vise TiltakInformasjonKnapper', () => {
-        expect(komponent.find(TiltakInformasjonKnapper)).to.have.length(1);
-    });
-
     it('Skal vise LagreKommentarSkjema', () => {
-        komponent.setState({ lagreKommentarSkjema: true });
         expect(komponent.find(LagreKommentarSkjema)).to.have.length(1);
     });
 

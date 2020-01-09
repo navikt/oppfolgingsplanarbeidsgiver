@@ -14,7 +14,6 @@ import TiltakVarselFeil from './../TiltakVarselFeil';
 import KommentarListe from '../kommentar/KommentarListe';
 import LagreKommentarSkjema from '../kommentar/LagreKommentarSkjema';
 import TiltakForeslaattAv from '../TiltakForeslaattAv';
-import TiltakInformasjonKnapper from './TiltakInformasjonKnapper';
 
 const texts = {
     tiltakInformasjonKnapper: {
@@ -95,7 +94,7 @@ export const VarselTiltakVurdering = ({ visLagreSkjema }) => {
                     <div className="knapperad__element">
                         <Hovedknapp
                             autoFocus
-                            onClick={visLagreSkjema}>
+                            onClick={(event) => { visLagreSkjema(event); }}>
                             {texts.varselTiltakVurdering.button}
                         </Hovedknapp>
                     </div>
@@ -113,19 +112,12 @@ class TiltakInformasjon extends Component {
     constructor() {
         super();
         this.state = {
-            lagreKommentarSkjema: false,
             visLagringKommentarFeilet: false,
             varselTekst: '',
         };
-        this.visLagreKommentarSkjema = this.visLagreKommentarSkjema.bind(this);
-        this.skjulLagreKommentarSkjema = this.skjulLagreKommentarSkjema.bind(this);
     }
 
     componentWillReceiveProps(nextProps) {
-        if (this.props.element.tiltakId === nextProps.kommentarReducer.tiltakId &&
-            this.props.kommentarReducer.lagrer && nextProps.kommentarReducer.lagret) {
-            this.skjulLagreKommentarSkjema();
-        }
         if (this.props.element.tiltakId === nextProps.kommentarReducer.feiletTiltakId &&
             nextProps.kommentarReducer.lagringFeilet && nextProps.kommentarReducer.lagringFeilet !== this.props.kommentarReducer.lagringFeilet) {
             this.props.visFeilMelding(true);
@@ -141,23 +133,15 @@ class TiltakInformasjon extends Component {
         }
     }
 
-    skjulLagreKommentarSkjema() {
-        this.setState({ lagreKommentarSkjema: false });
-        this.props.visFeilMelding(false);
-    }
-
-    visLagreKommentarSkjema() {
-        this.setState({ lagreKommentarSkjema: true });
-    }
-
     render() {
         const {
             element,
             fnr,
             visLagreSkjema,
-            sendSlett,
+            lagreKommentarSkjema,
             sendSlettKommentar,
             sendLagreKommentar,
+            skjulLagreKommentarSkjema,
             oppdaterTiltakFeilet,
             varselTekst,
             kommentarReducer,
@@ -199,20 +183,11 @@ class TiltakInformasjon extends Component {
                     }}
                 />
                 }
-
-                <TiltakInformasjonKnapper
-                    element={element}
-                    fnr={fnr}
-                    visLagreSkjema={visLagreSkjema}
-                    sendSlett={sendSlett}
-                    lagreKommentarSkjema={this.state.lagreKommentarSkjema}
-                    visLagreKommentarSkjema={this.visLagreKommentarSkjema}
-                />
-                {this.state.lagreKommentarSkjema &&
+                {lagreKommentarSkjema &&
                 <LagreKommentarSkjema
                     elementId={element.tiltakId}
                     sendLagre={sendLagreKommentar}
-                    avbryt={this.skjulLagreKommentarSkjema}
+                    avbryt={skjulLagreKommentarSkjema}
                     kommentarReducer={kommentarReducer}
                     kommentarFeilet={this.state.visLagringKommentarFeilet && feilMelding}
                     feilMelding={this.state.varselTekst}
@@ -241,9 +216,10 @@ TiltakInformasjon.propTypes = {
     element: tiltakPt,
     fnr: PropTypes.string,
     visLagreSkjema: PropTypes.func,
-    sendSlett: PropTypes.func,
+    lagreKommentarSkjema: PropTypes.bool,
     sendLagreKommentar: PropTypes.func,
     sendSlettKommentar: PropTypes.func,
+    skjulLagreKommentarSkjema: PropTypes.func,
     oppdaterTiltakFeilet: PropTypes.bool,
     varselTekst: PropTypes.string,
     kommentarReducer: kommentarReducerPt,
