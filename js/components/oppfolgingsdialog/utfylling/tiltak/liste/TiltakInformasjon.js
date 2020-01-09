@@ -40,7 +40,15 @@ const texts = {
     },
 };
 
-export const TiltakInformasjonKnapper = ({ element, fnr, visLagreSkjema, sendSlett, lagreKommentarSkjema, visLagreKommentarSkjema }) => {
+export const TiltakInformasjonKnapper = (
+    {
+        element,
+        fnr,
+        visLagreSkjema,
+        sendSlett,
+        lagreKommentarSkjema,
+        visLagreKommentarSkjema,
+    }) => {
     const aktoerHarOpprettetElement = fnr === (element.opprettetAv && element.opprettetAv.fnr);
     return (
         <div className="knapperad__tiltak knapperad--justervenstre">
