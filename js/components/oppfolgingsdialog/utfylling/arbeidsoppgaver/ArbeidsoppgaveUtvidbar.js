@@ -23,7 +23,6 @@ class ArbeidsoppgaveUtvidbar extends Component {
         this.state = {
             erApen: props.erApen,
             containerClassName: '',
-            hindreToggle: false,
             hoyde: !props.erApen ? '0' : 'auto',
             visInnhold: props.erApen,
             harTransisjon: false,
@@ -64,13 +63,9 @@ class ArbeidsoppgaveUtvidbar extends Component {
             });
             if (this.state.erApen) {
                 this.scrollTilElement(this.utvidbar);
-                this.setState({
-                    hindreToggle: false,
-                });
                 this.setAutoHoyde();
             } else {
                 this.setState({
-                    hindreToggle: false,
                     visInnhold: false,
                 });
                 if (!erSynligIViewport(this.utvidbar)) {
@@ -108,7 +103,6 @@ class ArbeidsoppgaveUtvidbar extends Component {
     apne() {
         this.setState({
             hoyde: '0',
-            hindreToggle: true,
             containerClassName: ' utvidbar__innholdContainer--medAnimasjon',
             visInnhold: true,
             harTransisjon: true,
@@ -126,7 +120,6 @@ class ArbeidsoppgaveUtvidbar extends Component {
         const hoyde = this.innhold.offsetHeight;
         this.setState({
             hoyde,
-            hindreToggle: true,
             harTransisjon: true,
         });
         setTimeout(() => {
@@ -157,15 +150,10 @@ class ArbeidsoppgaveUtvidbar extends Component {
 
     toggle(e) {
         e.preventDefault();
-        if (!this.state.hindreToggle) {
-            /* hindreToggle for å hindre dobbelklikk,
-             eller at noen klikker mens animasjonen pågår.
-             Dobbelklikk vil skape kluss med logikken. */
-            if (this.state.erApen) {
-                this.lukk();
-            } else {
-                this.apne();
-            }
+        if (this.state.erApen) {
+            this.lukk();
+        } else {
+            this.apne();
         }
     }
 
