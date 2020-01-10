@@ -243,6 +243,7 @@ class TiltakUtvidbar extends Component {
     sendSlett(event, id) {
         event.stopPropagation();
         this.props.sendSlett(id);
+        this.lukk();
     }
 
     sendLagre(nyeVerdier) {
