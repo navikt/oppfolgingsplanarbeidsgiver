@@ -2,6 +2,7 @@ import * as actions from '../actions/oppfolgingsplan/delmednav_actions';
 
 const initiellState = {
     sender: false,
+    sendt: false,
     sendingFeilet: false,
     data: {},
 };
@@ -11,6 +12,7 @@ const delermednav = (state = initiellState, action = {}) => {
         case actions.DELER_MED_NAV: {
             return Object.assign({}, state, {
                 sender: true,
+                sendt: false,
                 sendingFeilet: false,
                 data: {},
             });
@@ -25,6 +27,7 @@ const delermednav = (state = initiellState, action = {}) => {
         case actions.DELT_MED_NAV: {
             return Object.assign({}, state, {
                 sender: false,
+                sendt: true,
                 sendingFeilet: false,
                 data: action.id,
             });

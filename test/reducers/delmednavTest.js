@@ -6,6 +6,7 @@ import delmednav from '../../js/reducers/delmednav';
 describe('avbrytdialog', () => {
     const initialState = deepFreeze({
         sender: false,
+        sendt: false,
         sendingFeilet: false,
         data: {},
     });
@@ -15,6 +16,7 @@ describe('avbrytdialog', () => {
         const nextState = delmednav(initialState, action);
         expect(nextState).to.deep.equal({
             sender: true,
+            sendt: false,
             sendingFeilet: false,
             data: {},
         });
@@ -26,6 +28,7 @@ describe('avbrytdialog', () => {
 
         expect(nextState).to.deep.equal({
             sender: false,
+            sendt: true,
             sendingFeilet: false,
             data: 1,
         });
@@ -36,6 +39,7 @@ describe('avbrytdialog', () => {
         const nextState = delmednav(initialState, action);
         expect(nextState).to.deep.equal({
             sender: false,
+            sendt: false,
             sendingFeilet: true,
             data: {},
         });
