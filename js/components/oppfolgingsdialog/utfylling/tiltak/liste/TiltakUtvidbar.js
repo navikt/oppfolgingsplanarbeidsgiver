@@ -28,7 +28,6 @@ class TiltakUtvidbar extends Component {
         this.state = {
             erApen: props.erApen,
             containerClassName: '',
-            hindreToggle: false,
             hoyde: !props.erApen ? '0' : 'auto',
             visInnhold: props.erApen,
             harTransisjon: false,
@@ -94,13 +93,9 @@ class TiltakUtvidbar extends Component {
             });
             if (this.state.erApen) {
                 this.scrollTilElement(this.utvidbar);
-                this.setState({
-                    hindreToggle: false,
-                });
                 this.setAutoHoyde();
             } else {
                 this.setState({
-                    hindreToggle: false,
                     visInnhold: false,
                 });
                 if (!erSynligIViewport(this.utvidbar)) {
@@ -140,7 +135,6 @@ class TiltakUtvidbar extends Component {
     apne() {
         this.setState({
             hoyde: '0',
-            hindreToggle: true,
             containerClassName: ' utvidbar__innholdContainer--medAnimasjon',
             visInnhold: true,
             harTransisjon: true,
@@ -158,7 +152,6 @@ class TiltakUtvidbar extends Component {
         const hoyde = this.innhold.offsetHeight;
         this.setState({
             hoyde,
-            hindreToggle: true,
             harTransisjon: true,
         });
         setTimeout(() => {
@@ -189,15 +182,10 @@ class TiltakUtvidbar extends Component {
 
     toggle(e) {
         e.preventDefault();
-        if (!this.state.hindreToggle) {
-            /* hindreToggle for å hindre dobbelklikk,
-             eller at noen klikker mens animasjonen pågår.
-             Dobbelklikk vil skape kluss med logikken. */
-            if (this.state.erApen) {
-                this.lukk();
-            } else {
-                this.apne();
-            }
+        if (this.state.erApen) {
+            this.lukk();
+        } else {
+            this.apne();
         }
     }
 
