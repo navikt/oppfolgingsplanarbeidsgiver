@@ -28,7 +28,7 @@ const texts = {
 const TextReceived = ({ arbeidstakerName }) => {
     return (
         <React.Fragment>
-            Du har mottatt en ny oppfølgingsplan fra din arbeidsgiver: <b>{arbeidstakerName}</b> for godkjenning.
+            Du har mottatt en ny oppfølgingsplan fra din arbeidstaker: <b>{arbeidstakerName}</b> for godkjenning.
         </React.Fragment>
     );
 };
