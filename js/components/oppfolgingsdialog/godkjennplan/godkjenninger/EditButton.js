@@ -21,6 +21,7 @@ export const EditButton = ({ oppfolgingsdialog, avvisDialog }) => {
         <StyledButton
             onClick={() => {
                 avvisDialog(oppfolgingsdialog.id, oppfolgingsdialog.arbeidstaker.fnr);
+                window.location.hash = 'arbeidsoppgaver';
             }}>
             {texts.buttonDecline}
         </StyledButton>
