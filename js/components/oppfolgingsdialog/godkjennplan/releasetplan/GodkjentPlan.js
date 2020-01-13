@@ -15,6 +15,8 @@ import GodkjennPlanTidspunkt from '../GodkjennPlanTidspunkt';
 import GodkjentPlanHandlingKnapper from './GodkjentPlanHandlingKnapper';
 import GodkjentPlanDelKnapper, { isGodkjentPlanDelKnapperAvailable } from './GodkjentPlanDelKnapper';
 import GodkjentPlanDeltBekreftelse from './GodkjentPlanDeltBekreftelse';
+import { getContextRoot } from '../../../../routers/paths';
+import GodkjennPlanOversiktInformasjon from '../GodkjennPlanOversiktInformasjon';
 
 const texts = {
     godkjentPlan: {
@@ -39,32 +41,20 @@ export const UtvidbarStyled = styled(Utvidbar)`
     margin-top: 2.5em;
 `;
 
-export const GodkjentPlanUtvidbar = ({ dokument }) => {
-    let panel;
-    if (dokument.henter) {
-        panel = <div className="app-spinner" aria-label="Vent litt mens siden laster" />;
-    } else if (dokument.hentingFeilet) {
-        panel = (<div className="godkjentPlanPdf__feilmelding">
-            {texts.godkjentPlanUtvidbar.requestFeilet}
-        </div>);
-    } else {
-        panel = dokument.data && dokument.data.map((url, idx) => {
-            return (<div key={idx} className="godkjentPlanPdf__dokument">
-                <img className="godkjentPlanPdf__side" src={url} alt="godkjentplan" type="application/pdf" />
-            </div>);
-        });
-    }
+export const GodkjentPlanUtvidbar = ({ oppfolgingsplan }) => {
     return (
         <UtvidbarStyled tittel={texts.godkjentPlanUtvidbar.title}>
-            <div className="godkjentPlanPdf">
-                { panel }
-            </div>
+            <GodkjennPlanOversiktInformasjon
+                oppfolgingsplan={oppfolgingsplan}
+                rootUrl={getContextRoot()}
+            />
         </UtvidbarStyled>
     );
 };
 GodkjentPlanUtvidbar.propTypes = {
-    dokument: dokumentReducerPt,
+    oppfolgingsplan: oppfolgingsplanPt,
 };
+
 export const AvbrytPlanBekreftelse = (
     {
         oppfolgingsplan,
@@ -115,7 +105,6 @@ class GodkjentPlan extends Component {
         const {
             oppfolgingsplan,
             avbrytDialog,
-            dokument,
             rootUrl,
             rootUrlPlaner,
             delMedNavFunc,
@@ -155,7 +144,7 @@ class GodkjentPlan extends Component {
                         />
 
                         <GodkjentPlanUtvidbar
-                            dokument={dokument}
+                            oppfolgingsplan={oppfolgingsplan}
                         />
                         {isGodkjentPlanDelKnapperAvailable(oppfolgingsplan) && <GodkjentPlanDelKnapper
                             oppfolgingsplan={oppfolgingsplan}
