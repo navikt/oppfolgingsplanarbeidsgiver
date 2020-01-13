@@ -4,9 +4,11 @@ import { shallow } from 'enzyme';
 import chaiEnzyme from 'chai-enzyme';
 import sinon from 'sinon';
 import Alertstripe from 'nav-frontend-alertstriper';
-import { Knapp } from 'nav-frontend-knapper';
 import GodkjentPlanDelKnapper, {
-    delingFeiletNav, delingFeiletFastlege,
+    delingFeiletNav,
+    delingFeiletFastlege,
+    ButtonStyled,
+    ButtonRow,
 } from '../../../../../js/components/oppfolgingsdialog/godkjennplan/releasetplan/GodkjentPlanDelKnapper';
 import getOppfolgingsplan from '../../../../mock/mockOppfolgingsdialog';
 
@@ -44,8 +46,8 @@ describe('GodkjentPlanDelKnapper', () => {
         />);
     });
 
-    it('Skal vise knapperad', () => {
-        expect(komponent.find('div.knapperad')).to.have.length(1);
+    it('Skal vise ButtonRow', () => {
+        expect(komponent.find(ButtonRow)).to.have.length(1);
     });
 
     it('Skal vise Alertstripe dersom delmednav sendingFeilet er true', () => {
@@ -92,7 +94,7 @@ describe('GodkjentPlanDelKnapper', () => {
             fastlegeDeling={fastlegeDeling}
             delMedFastlege={delMedFastlege}
         />);
-        expect(komponent.find(Knapp)).to.have.length(2);
+        expect(komponent.find(ButtonStyled)).to.have.length(2);
     });
 
     it('Skal vise 1 knapp dersom godkjent plan er delt med NAV, men ikke fastlege', () => {
@@ -111,7 +113,7 @@ describe('GodkjentPlanDelKnapper', () => {
             fastlegeDeling={fastlegeDeling}
             delMedFastlege={delMedFastlege}
         />);
-        expect(komponent.find(Knapp)).to.have.length(1);
+        expect(komponent.find(ButtonStyled)).to.have.length(1);
     });
 
     it('Skal vise 1 knapp dersom godkjent plan er delt med fastlege, men ikke NAV', () => {
@@ -130,7 +132,7 @@ describe('GodkjentPlanDelKnapper', () => {
             fastlegeDeling={fastlegeDeling}
             delMedFastlege={delMedFastlege}
         />);
-        expect(komponent.find(Knapp)).to.have.length(1);
+        expect(komponent.find(ButtonStyled)).to.have.length(1);
     });
 
     describe('delingFeiletNav', () => {
