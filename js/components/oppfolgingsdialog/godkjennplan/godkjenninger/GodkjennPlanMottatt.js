@@ -18,7 +18,6 @@ const texts = {
     },
     godkjennPlanMottattKnapper: {
         buttonApprove: 'Godkjenn',
-        buttonDecline: 'Gjør endringer',
     },
     godkjennPlanMottatt: {
         title: 'Ønsker du å godkjenne denne versjonen?',
