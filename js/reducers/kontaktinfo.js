@@ -13,27 +13,27 @@ const kontaktinfo = (state = initiellState, action = {}) => {
         case actions.HENTER_KONTAKTINFO: {
             return Object.assign({}, state, {
                 henter: state.henter.concat(action.fnr),
-                hentingFeilet: state.hentingFeilet.filter((hentingFeilet) => {
-                    return hentingFeilet.fnr !== action.fnr;
+                hentingFeilet: state.hentingFeilet.filter((fnr) => {
+                    return fnr !== action.fnr;
                 }),
             });
         }
         case actions.KONTAKTINFO_HENTET: {
             return Object.assign({}, state, {
-                henter: state.henter.filter((henter) => {
-                    return henter !== action.fnr;
+                henter: state.henter.filter((fnr) => {
+                    return fnr !== action.fnr;
                 }),
                 data: state.data.concat({ fnr: action.fnr, kontaktinfo: action.kontaktinfo }),
                 hentet: state.hentet.concat(action.fnr),
-                hentingFeilet: state.hentingFeilet.filter((hentingFeilet) => {
-                    return hentingFeilet.fnr !== action.fnr;
+                hentingFeilet: state.hentingFeilet.filter((fnr) => {
+                    return fnr !== action.fnr;
                 }),
             });
         }
         case actions.HENT_KONTAKTINFO_FEILET: {
             return Object.assign({}, state, {
-                henter: state.henter.filter((henter) => {
-                    return henter.fnr !== action.fnr;
+                henter: state.henter.filter((fnr) => {
+                    return fnr !== action.fnr;
                 }),
                 hentingFeilet: state.hentingFeilet.concat(action.fnr),
             });
