@@ -6,7 +6,7 @@ import { oppfolgingsplanPt } from '../../../../proptypes/opproptypes';
 import OppfolgingsplanInnholdboks from '../../../app/OppfolgingsplanInnholdboks';
 
 const texts = {
-    title: 'Medarbeideren din er visst ikke helt enig',
+    title: 'Arbeidstakeren din har noen forslag',
     paragraphInfo: 'Du kan gjøre endringer slik at dere får en god plan.',
     buttonMakeChanges: 'Rediger planen',
 };
