@@ -19,7 +19,6 @@ const texts = {
     buttonShareWithNAV: 'Del med NAV',
     sharedWithNAV: 'Planen er delt med NAV',
     buttonShareWithFastlege: 'Del med fastlegen',
-    buttonDownload: 'Last ned',
     sharedWithFastlege: 'Planen er delt med fastlegen',
 };
 
