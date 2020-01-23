@@ -1,7 +1,7 @@
 import React from 'react';
 
 const texts = {
-    text: 'Alle godkjente planer mellom deg og arbeidstakeren vil også bli tilgjengelige for de hos dere som har tilganger i Altinn.',
+    text: 'Alle godkjente planer kan også ses i Altinn av de hos dere som har tilgang.',
 };
 
 const GodkjennPlanTilAltinnTekst = () => {

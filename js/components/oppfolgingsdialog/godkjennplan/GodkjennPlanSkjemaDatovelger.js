@@ -15,7 +15,7 @@ const texts = {
         tom: 'Til og med',
         evalueringinnen: 'Evalueres innen',
     },
-    suggestion: 'Start- og sluttdato er foreslått basert på tiltak i planen',
+    suggestion: 'Vi har foreslått datoer basert på tiltakene dere har skrevet:',
 };
 
 export const FELTER = {

@@ -7,7 +7,7 @@ import { getContextRoot } from '../../../../routers/paths';
 
 const texts = {
     delMedNav: 'Del planen med NAV',
-    preDelMedNav: 'Planen vil bli delt med NAV ved godkjenning',
+    preDelMedNav: 'Planen vil bli delt med NAV når du godkjenner den.',
 };
 
 const Icon = styled.img`

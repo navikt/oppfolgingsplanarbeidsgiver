@@ -6,8 +6,8 @@ import OppfolgingsplanerIngenplanKnapper from './OppfolgingsplanerIngenplanKnapp
 
 const texts = {
     title: 'Aktiv oppfølgingsplan',
-    panelTitle: 'Du har ingen aktiv oppfølgingsplan',
-    panelInfo: 'Du kan når som helst lage en ny plan. Her legger du inn arbeidsoppgaver, de tiltakene som skal gjelde, og når de skal gjelde for.',
+    panelTitle: 'Det finnes ingen aktiv oppfølgingsplan',
+    panelInfo: 'Dere kan når som helst lage en ny plan. Da legger dere inn arbeidsoppgavene og noen forslag til hva som skal til for å klare dem.',
 };
 
 const OppfolgingsplanerIngenplan = (
