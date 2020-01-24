@@ -87,17 +87,14 @@ const GodkjennPlanAvslaattOgGodkjent = (
                 </p>
 
                 <div className="blokk--xxs">
-                    <GodkjennPlanTidspunkt
-                        gyldighetstidspunkt={sistOppfolgingsdialog}
-                    />
-
-                    <EditButton
-                        oppfolgingsdialog={oppfolgingsplan}
-                        avvisDialog={avvisDialog}
-                    />
+                    <GodkjennPlanTidspunkt gyldighetstidspunkt={sistOppfolgingsdialog} />
                 </div>
                 <GodkjennPlanMottattUtvidbar
                     oppfolgingsdialog={oppfolgingsplan}
+                />
+                <EditButton
+                    oppfolgingsdialog={oppfolgingsplan}
+                    avvisDialog={avvisDialog}
                 />
                 <GodkjennPlanMottattKnapper
                     oppfolgingsdialog={oppfolgingsplan}
