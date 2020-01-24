@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { oppfolgingsplanPt } from '../../../../proptypes/opproptypes';
 
 const texts = {
-    buttonDecline: 'Gjør endringer i oppfølgingsplanen',
+    buttonDecline: 'Gå inn i planen for å gjøre endringer',
 };
 
 const StyledButton = styled.button`
@@ -12,8 +12,8 @@ const StyledButton = styled.button`
     background: none;
     border: 0;
     padding: 0;
-    margin: 0;
-    margin-bottom: 0.5em;
+    margin: .5em 0 .5em 0;
+    text-decoration: underline;
 `;
 
 export const EditButton = ({ oppfolgingsdialog, avvisDialog }) => {

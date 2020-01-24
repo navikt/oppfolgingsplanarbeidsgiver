@@ -102,15 +102,16 @@ const GodkjennPlanMottatt = (
                     <GodkjennPlanTidspunkt
                         gyldighetstidspunkt={oppfolgingsplan.godkjenninger[0].gyldighetstidspunkt}
                     />
-                    <EditButton
-                        oppfolgingsdialog={oppfolgingsplan}
-                        avvisDialog={avvisDialog}
-                    />
+
                 </div>
 
                 <GodkjennPlanMottattUtvidbar
                     oppfolgingsplan={oppfolgingsplan}
                     rootUrl={rootUrl}
+                />
+                <EditButton
+                    oppfolgingsdialog={oppfolgingsplan}
+                    avvisDialog={avvisDialog}
                 />
                 <TidligereAvbruttePlaner
                     oppfolgingsdialog={oppfolgingsplan}
