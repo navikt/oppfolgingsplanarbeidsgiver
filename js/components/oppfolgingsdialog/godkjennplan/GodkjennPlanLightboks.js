@@ -19,16 +19,16 @@ import {
 } from '../../../utils/tiltakUtils';
 
 const texts = {
-    title: 'Vurder ferdigstilling av plan',
-    info: 'Arbeidstakeren kan deretter enten godkjenne eller gjøre endringer i oppfølgingsplanen og sende planen tilbake til deg for ny godkjenning.',
-    titleDatovelger: 'Når skal planen vare fra og til?',
+    title: 'Jeg er ferdig med planen',
+    info: 'Arbeidstakeren kan deretter godkjenne eller gjøre endringer og sende planen tilbake deg.',
+    titleDatovelger: 'Hvor lenge skal planen vare?',
     checkboxLabel: 'Jeg er enig i denne oppfølgingsplanen',
     approval: {
-        question: 'Ønsker du godkjenning av arbeidstaker eller å opprette plan på vegne av arbeidstakeren?',
+        question: 'Velg hva du vil gjøre:',
         sendForApproval: 'Send planen til arbeidstakeren for godkjenning',
-        sendWithoutApproval: 'Opprett planen på vegne av arbeidstakeren',
+        sendWithoutApproval: 'Opprett planen uten godkjenning fra arbeidstakeren',
     },
-    infoWithoutApproval: 'En plan uten godkjenning fra den sykmeldte skal kun opprettes dersom den sykmeldte ikke kan eller ønsker å delta. Dette vil bli synlig i planen.',
+    infoWithoutApproval: 'Du kan bare velge dette hvis arbeidstakeren ikke kan eller ønsker å delta. Dette vil bli synlig i planen.',
     buttonSend: {
         approval: 'Send til godkjenning',
         noApproval: 'Opprett plan',
@@ -37,7 +37,7 @@ const texts = {
 };
 
 export const textDelMedNav = (arbeidstakerName) => {
-    return <span>Jeg ønsker å dele planen med NAV når <b>{arbeidstakerName}</b> har godkjent planen</span>;
+    return <span>Jeg vil dele planen med NAV når {arbeidstakerName} har godkjent den</span>;
 };
 
 export class GodkjennPlanLightboksComponent extends Component {

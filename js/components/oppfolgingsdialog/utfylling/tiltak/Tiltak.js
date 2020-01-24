@@ -17,10 +17,9 @@ import TiltakListe from './liste/TiltakListe';
 const texts = {
     updateError: 'En midlertidig feil gjør at vi ikke kan lagre endringene dine akkurat nå. Prøv igjen senere.',
     infoboks: {
-        title: 'Hva kan gjøre det lettere for arbeidstakeren din å komme tilbake?',
+        title: 'Hva kan gjøre det lettere å jobbe?',
         info: `
-            Når du og arbeidstakeren din har fått et overblikk over oppgavene, kan dere fortsette med å se på hva slags tilrettelegging arbeidsplassen kan tilby.
-            Dere legger inn tiltakene sammen.
+            Når dere har fått oversikt over arbeidsoppgavene, kan dere se på hva slags tilrettelegging det er mulig å tilby.
         `,
     },
 };

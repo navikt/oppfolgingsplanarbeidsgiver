@@ -20,8 +20,7 @@ const texts = {
     },
     godkjennPlanAvslaattOgGodkjent: {
         title: 'Mottatt endring',
-        paragraphInfoWhen: 'Du sendte arbeidstakeren din en versjon av oppfølgingsplanen.',
-        paragraphInfoWho: ' har foretatt noen endringer og sendt den tilbake til deg.',
+        paragraphInfoWho: ' har gjort noen endringer i planen og sendt den tilbake til deg.',
     },
 };
 
@@ -82,7 +81,6 @@ const GodkjennPlanAvslaattOgGodkjent = (
         >
             <div>
                 <p>
-                    {texts.godkjennPlanAvslaattOgGodkjent.paragraphInfoWhen}<br />
                     {`${oppfolgingsplan.arbeidstaker.navn}${texts.godkjennPlanAvslaattOgGodkjent.paragraphInfoWho}`}
                 </p>
 

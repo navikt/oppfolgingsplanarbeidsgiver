@@ -16,15 +16,13 @@ import LagreArbeidsoppgaveSkjema from './LagreArbeidsoppgaveSkjema';
 const texts = {
     updateError: 'En midlertidig feil gjør at vi ikke kan lagre endringene dine akkurat nå. Prøv igjen senere.',
     infoboks: {
-        title: 'Hva er den sykmeldtes arbeidsoppgaver?',
+        title: 'Hva er arbeidsoppgavene?',
         info: `
-            Det er en god start å lage en oversikt over arbeidsoppgavene.
-            Både du og arbeidstakeren kan legge inn oppgaver, men det er bare arbeidstakeren som kan ta stilling til om det er mulig å gjøre noen av dem i sykmeldingsperioden.
-            Oversikten skal gi deg et godt utgangspunkt for den videre oppfølgingen.
+            Både du og arbeidstakeren kan legge inn oppgaver, men det er bare arbeidstakeren som kan ta stilling til om det er mulig å gjøre noen av dem underveis i sykefraværet.
         `,
     },
     arbeidsoppgaverInfoboksStilling: {
-        title: 'Lag en liste over de daglige arbeidsoppgavene',
+        title: 'Lag en liste over arbeidsoppgavene',
     },
 };
 
