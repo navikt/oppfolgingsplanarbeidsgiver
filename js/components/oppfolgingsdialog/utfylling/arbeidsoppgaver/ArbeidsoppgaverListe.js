@@ -14,14 +14,14 @@ const ArbeidsoppgaverListe = (
     return (
         <div className="oppfolgingsdialogtabell">
             {
-                liste.map((element, index) => {
+                liste.map((element) => {
                     return (
                         <ArbeidsoppgaveUtvidbar
-                            key={index}
+                            key={element.arbeidsoppgaveId}
                             element={element}
                             fnr={fnr}
                             sendSlett={sendSlett}
-                            id={index}
+                            id={element.arbeidsoppgaveId}
                             visFeilMelding={visFeilMelding}
                             feilMelding={feilMelding}
                         />);
