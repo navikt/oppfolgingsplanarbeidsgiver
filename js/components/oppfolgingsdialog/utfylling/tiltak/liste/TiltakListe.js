@@ -18,17 +18,17 @@ const TiltakListe = (
     return (
         <div className="oppfolgingsdialogtabell">
             {
-                liste.map((element, index) => {
+                liste.map((element) => {
                     return (
                         <TiltakUtvidbar
-                            key={index}
+                            key={element.tiltakId}
                             element={element}
                             fnr={fnr}
                             sendSlett={sendSlett}
                             sendLagre={sendLagre}
                             sendSlettKommentar={sendSlettKommentar}
                             sendLagreKommentar={sendLagreKommentar}
-                            id={index}
+                            id={element.tiltakId}
                             visFeilMelding={visFeilMelding}
                             feilMelding={feilMelding}
                             rootUrlImg={rootUrlImg}
