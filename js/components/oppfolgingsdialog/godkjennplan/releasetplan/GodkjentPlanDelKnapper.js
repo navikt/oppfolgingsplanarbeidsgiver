@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
 import Alertstripe from 'nav-frontend-alertstriper';
 import { Knapp } from 'nav-frontend-knapper';
 import {
@@ -8,7 +7,7 @@ import {
     delmednavPt,
     oppfolgingsplanPt,
 } from '../../../../proptypes/opproptypes';
-import { getContextRoot } from '../../../../routers/paths';
+import FadingIconWithText from './FadingIconWithText';
 
 const texts = {
     shareWithNAVError: 'Noe gikk feil da du prøvde å dele planen. Prøv igjen om litt.',
@@ -41,37 +40,6 @@ export const isGodkjentPlanDelKnapperAvailable = (oppfolgingsplan) => {
     return !(oppfolgingsplan.godkjentPlan.deltMedFastlege && oppfolgingsplan.godkjentPlan.deltMedNAV);
 };
 
-const ButtonColumn = styled.div`
-    display: flex;
-    flex-direction: column;
-    margin-top: 1em;
-`;
-
-export const ButtonRow = styled.div`
-    display: flex;
-    flex-wrap: wrap; 
-    margin-bottom: 1em;
-`;
-
-export const ButtonStyled = styled(Knapp)`
-    margin: .5em 1em .5em 0
-`;
-
-const IconAndText = styled.div`
-    display: flex;
-    align-items: center;
-    margin: .5em 0
-`;
-
-const Text = styled.p`
-    margin: 0;
-`;
-
-const Image = styled.img`
-    width: 1.5em;
-    margin-right: .5em;
-`;
-
 const GodkjentPlanDelKnapper = (
     {
         oppfolgingsplan,
@@ -80,10 +48,11 @@ const GodkjentPlanDelKnapper = (
         fastlegeDeling,
         delMedFastlege,
     }) => {
-    return (<ButtonColumn>
-        <ButtonRow>
-            {!oppfolgingsplan.godkjentPlan.deltMedNAV &&
-            <ButtonStyled
+    return (<div>
+        <div className="buttonColumn">
+            { !oppfolgingsplan.godkjentPlan.deltMedNAV &&
+            <Knapp
+                className="buttonElement"
                 mini
                 disabled={delmednav.sender}
                 spinner={delmednav.sender}
@@ -91,16 +60,12 @@ const GodkjentPlanDelKnapper = (
                     delMedNavFunc(oppfolgingsplan.id, oppfolgingsplan.arbeidstaker.fnr);
                 }}>
                 {texts.buttonShareWithNAV}
-            </ButtonStyled>
+            </Knapp>
             }
-            {delmednav.sendt &&
-            <IconAndText>
-                <Image src={`${getContextRoot()}/img/svg/hake-groenn.svg`} alt="hake" />
-                <Text>{texts.sharedWithNAV}</Text>
-            </IconAndText>
-            }
-            {!oppfolgingsplan.godkjentPlan.deltMedFastlege &&
-            <ButtonStyled
+            { delmednav.sendt && <FadingIconWithText text={texts.sharedWithNAV} /> }
+            { !oppfolgingsplan.godkjentPlan.deltMedFastlege &&
+            <Knapp
+                className="buttonElement"
                 mini
                 disabled={fastlegeDeling.sender}
                 spinner={fastlegeDeling.sender}
@@ -108,16 +73,12 @@ const GodkjentPlanDelKnapper = (
                     delMedFastlege(oppfolgingsplan.id, oppfolgingsplan.arbeidstaker.fnr);
                 }}>
                 {texts.buttonShareWithFastlege}
-            </ButtonStyled>
+            </Knapp>
             }
-            {fastlegeDeling.sendt &&
-            <IconAndText>
-                <Image src={`${getContextRoot()}/img/svg/hake-groenn.svg`} alt="hake" />
-                <Text>{texts.sharedWithFastlege}</Text>
-            </IconAndText>
-            }
-        </ButtonRow>
-        {(delingFeiletNav(delmednav) || delingFeiletFastlege(fastlegeDeling)) &&
+            { fastlegeDeling.sendt && <FadingIconWithText text={texts.sharedWithFastlege} /> }
+        </div>
+
+        { (delingFeiletNav(delmednav) || delingFeiletFastlege(fastlegeDeling)) &&
         <Alertstripe
             className="alertstripe--notifikasjonboks"
             type="advarsel"
@@ -125,7 +86,7 @@ const GodkjentPlanDelKnapper = (
             {textSharePlanFailed(delmednav)}
         </Alertstripe>
         }
-    </ButtonColumn>);
+    </div>);
 };
 
 GodkjentPlanDelKnapper.propTypes = {

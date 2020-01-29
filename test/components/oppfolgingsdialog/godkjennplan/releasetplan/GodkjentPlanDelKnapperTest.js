@@ -7,8 +7,6 @@ import Alertstripe from 'nav-frontend-alertstriper';
 import GodkjentPlanDelKnapper, {
     delingFeiletNav,
     delingFeiletFastlege,
-    ButtonStyled,
-    ButtonRow,
 } from '../../../../../js/components/oppfolgingsdialog/godkjennplan/releasetplan/GodkjentPlanDelKnapper';
 import getOppfolgingsplan from '../../../../mock/mockOppfolgingsdialog';
 
@@ -44,10 +42,6 @@ describe('GodkjentPlanDelKnapper', () => {
             fastlegeDeling={fastlegeDeling}
             delMedFastlege={delMedFastlege}
         />);
-    });
-
-    it('Skal vise ButtonRow', () => {
-        expect(komponent.find(ButtonRow)).to.have.length(1);
     });
 
     it('Skal vise Alertstripe dersom delmednav sendingFeilet er true', () => {
@@ -94,7 +88,7 @@ describe('GodkjentPlanDelKnapper', () => {
             fastlegeDeling={fastlegeDeling}
             delMedFastlege={delMedFastlege}
         />);
-        expect(komponent.find(ButtonStyled)).to.have.length(2);
+        expect(komponent.find('.buttonElement')).to.have.length(2);
     });
 
     it('Skal vise 1 knapp dersom godkjent plan er delt med NAV, men ikke fastlege', () => {
@@ -113,7 +107,7 @@ describe('GodkjentPlanDelKnapper', () => {
             fastlegeDeling={fastlegeDeling}
             delMedFastlege={delMedFastlege}
         />);
-        expect(komponent.find(ButtonStyled)).to.have.length(1);
+        expect(komponent.find('.buttonElement')).to.have.length(1);
     });
 
     it('Skal vise 1 knapp dersom godkjent plan er delt med fastlege, men ikke NAV', () => {
@@ -132,7 +126,7 @@ describe('GodkjentPlanDelKnapper', () => {
             fastlegeDeling={fastlegeDeling}
             delMedFastlege={delMedFastlege}
         />);
-        expect(komponent.find(ButtonStyled)).to.have.length(1);
+        expect(komponent.find('.buttonElement')).to.have.length(1);
     });
 
     describe('delingFeiletNav', () => {
