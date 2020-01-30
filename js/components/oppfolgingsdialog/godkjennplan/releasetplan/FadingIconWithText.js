@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { CSSTransition } from 'react-transition-group';
+import { Transition } from 'react-transition-group';
 import { getContextRoot } from '../../../../routers/paths';
+
+const duration = 1000;
+const opacityStates = { entering: '0', entered: '1', exiting: '1', exited: '0' };
 
 const IconAndText = styled.div`
     margin: 1em 0 0 0;
@@ -17,33 +20,37 @@ const Icon = styled.img`
     width: 1.5em;
 `;
 
-const fadeOutDelay = 6000;
-const DOMTimeoutDelay = 4000;
 
+const FadeAnimation = styled.div`
+    transition: opacity ${duration}ms ease-in-out;
+    opacity: ${({ state }) => {
+        return opacityStates[state];
+    }};
+`;
 
 const FadingIconWithText = (
     {
         text,
     }) => {
-    const [shouldShow, setShouldShow] = useState(true);
+    const [shouldShow, setShouldShow] = useState(false);
 
     useEffect(() => {
-        setTimeout(() => { setShouldShow(false); }, fadeOutDelay);
-    });
+        setShouldShow(true);
+        setTimeout(() => { setShouldShow(false); }, 4000);
+    }, []);
 
-    return (<CSSTransition
-        in={shouldShow}
-        classNames="iconTextFade"
-        appear
-        timeout={DOMTimeoutDelay}
-        unmountOnExit>
-        <div>
-            <IconAndText>
-                <Icon src={`${getContextRoot()}/img/svg/hake-groenn.svg`} alt="hake" />
-                <Text>{text}</Text>
-            </IconAndText>
-        </div>
-    </CSSTransition>);
+    return (
+        <Transition appear in={shouldShow} timeout={duration}>
+            {(state) => {
+                return (<FadeAnimation state={state}>
+                    <IconAndText>
+                        <Icon src={`${getContextRoot()}/img/svg/hake-groenn.svg`} alt="hake" />
+                        <Text>{text}</Text>
+                    </IconAndText>
+                </FadeAnimation>);
+            }}
+        </Transition>
+    );
 };
 
 FadingIconWithText.propTypes = {
