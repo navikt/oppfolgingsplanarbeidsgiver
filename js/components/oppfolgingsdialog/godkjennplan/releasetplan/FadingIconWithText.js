@@ -6,6 +6,7 @@ import { getContextRoot } from '../../../../routers/paths';
 
 const duration = 1000;
 const opacityStates = { entering: '0', entered: '1', exiting: '1', exited: '0' };
+const fadingTimeout = 4000;
 
 const IconAndText = styled.div`
     margin: 1em 0 0 0;
@@ -19,7 +20,6 @@ const Text = styled.p`
 const Icon = styled.img`
     width: 1.5em;
 `;
-
 
 const FadeAnimation = styled.div`
     transition: opacity ${duration}ms ease-in-out;
@@ -36,7 +36,7 @@ const FadingIconWithText = (
 
     useEffect(() => {
         setShouldShow(true);
-        setTimeout(() => { setShouldShow(false); }, 4000);
+        setTimeout(() => { setShouldShow(false); }, fadingTimeout);
     }, []);
 
     return (
