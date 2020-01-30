@@ -29,7 +29,7 @@ export const getNaisInfix = () => {
 };
 
 export const fullNaisUrl = (host, path) => {
-    if (isLocal()) {
+    if (isLocal() || erHerokuApp()) {
         return path;
     }
     return `https://${host}${getNaisInfix()}.nav.no${path}`;
