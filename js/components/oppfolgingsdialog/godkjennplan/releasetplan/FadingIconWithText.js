@@ -22,7 +22,7 @@ const Icon = styled.img`
 `;
 
 const FadeAnimation = styled.div`
-    transition: opacity ${duration}ms ease-in-out;
+    transition: opacity ${fadeDuration}ms ease-in-out;
     opacity: ${({ state }) => {
         return opacityStates[state];
     }};
@@ -36,11 +36,11 @@ const FadingIconWithText = (
 
     useEffect(() => {
         setShouldShow(true);
-        setTimeout(() => { setShouldShow(false); }, fadingTimeout);
+        setTimeout(() => { setShouldShow(false); }, fadeOutDelay);
     }, []);
 
     return (
-        <Transition appear in={shouldShow} timeout={duration}>
+        <Transition appear in={shouldShow} timeout={fadeDuration}>
             {(state) => {
                 return (<FadeAnimation state={state}>
                     <IconAndText>
