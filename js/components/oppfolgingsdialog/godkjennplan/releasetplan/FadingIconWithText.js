@@ -4,9 +4,9 @@ import styled from 'styled-components';
 import { Transition } from 'react-transition-group';
 import { getContextRoot } from '../../../../routers/paths';
 
-const duration = 1000;
 const opacityStates = { entering: '0', entered: '1', exiting: '1', exited: '0' };
-const fadingTimeout = 4000;
+const fadeDuration = 1000;
+const fadeOutDelay = 4000;
 
 const IconAndText = styled.div`
     margin: 1em 0 0 0;
