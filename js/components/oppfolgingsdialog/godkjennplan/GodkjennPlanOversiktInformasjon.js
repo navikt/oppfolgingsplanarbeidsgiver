@@ -330,7 +330,7 @@ export const InformasjonPanelArbeidsoppgaverEtterGjennomfoering = ({ oppfolgings
 };
 InformasjonPanelArbeidsoppgaverEtterGjennomfoering.propTypes = {
     oppfolgingsdialog: oppfolgingsplanPt,
-    arbeidsoppgaver: personPt,
+    arbeidsoppgaver: PropTypes.arrayOf(arbeidsoppgavePt),
     type: PropTypes.string,
     tittel: PropTypes.string,
     rootUrl: PropTypes.string,
@@ -392,7 +392,7 @@ export const InformasjonPanelArbeidsoppgaver = ({ oppfolgingsdialog, arbeidsoppg
 };
 InformasjonPanelArbeidsoppgaver.propTypes = {
     oppfolgingsdialog: oppfolgingsplanPt,
-    arbeidsoppgaver: arbeidsoppgavePt,
+    arbeidsoppgaver: PropTypes.arrayOf(arbeidsoppgavePt),
     rootUrl: PropTypes.string,
 };
 
