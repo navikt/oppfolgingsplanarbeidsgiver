@@ -7,7 +7,6 @@ import {
     henterEllerHarHentetNaermesteLeder,
     henterEllerHarHentetVirksomhet,
     henterEllerHarHentetArbeidsforhold,
-    finnFodselsnumreKnyttetTilDialog,
     finnUnikeElementer,
     finnOgHentArbeidsforholdSomMangler,
     finnOgHentVirksomheterSomMangler,
@@ -19,7 +18,6 @@ import {
 import getOppfolgingsplan from '../mock/mockOppfolgingsdialog';
 
 const expect = chai.expect;
-
 
 describe('reducerUtils', () => {
     let clock;
@@ -33,15 +31,6 @@ describe('reducerUtils', () => {
 
     afterEach(() => {
         clock.restore();
-    });
-
-
-    describe('finnFodselsnumreKnyttetTilDialog', () => {
-        it('Finner alle fødselsnumre fra dialogen', () => {
-            const fnrSet = new Set();
-            fnrSet.add('1000000000000');
-            expect(finnFodselsnumreKnyttetTilDialog(oppfolgingsdialog)).to.deep.equal(fnrSet);
-        });
     });
 
     describe('finnOgHentVirksomheterSomMangler', () => {
