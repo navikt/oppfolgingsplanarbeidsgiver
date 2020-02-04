@@ -45,7 +45,7 @@ export const GodkjentPlanUtvidbar = ({ oppfolgingsplan }) => {
     return (
         <UtvidbarStyled tittel={texts.godkjentPlanUtvidbar.title}>
             <GodkjennPlanOversiktInformasjon
-                oppfolgingsplan={oppfolgingsplan}
+                oppfolgingsdialog={oppfolgingsplan}
                 rootUrl={getContextRoot()}
             />
         </UtvidbarStyled>
