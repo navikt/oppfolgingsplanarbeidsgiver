@@ -12,13 +12,8 @@
 	&:extend(.knapp--ikon);
 	&::before {
 		content: "";
-		background: data-uri("./img/svg/endreTiltak.svg") no-repeat center center;
+		background: data-uri("./img/svg/endreTiltak--hover.svg") no-repeat center center;
 		padding: 1em 1em;
-	}
-	&:hover {
-		&::before {
-			background: data-uri("./img/svg/endreTiltak--hover.svg") no-repeat center center;
-		}
 	}
 	&:focus {
 		outline: 3px @orangeFocus solid;
@@ -28,13 +23,19 @@
 	&:extend(.knapp--ikon);
 	&::before {
 		content: "";
-		background: data-uri("./img/svg/slettTiltak.svg") no-repeat center center;
+		background: data-uri("./img/svg/slettTiltak--hover.svg") no-repeat center center;
 		padding: 1em 1em;
 	}
-	&:hover {
-		&::before {
-			background: data-uri("./img/svg/slettTiltak--hover.svg") no-repeat center center;
-		}
+	&:focus {
+		outline: 3px @orangeFocus solid;
+	}
+}
+.knapp--kommenter {
+	&:extend(.knapp--ikon);
+	&::before {
+		content: "";
+		background: data-uri("./img/svg/bubbles.svg") no-repeat center center;
+		padding: 1em 1em;
 	}
 	&:focus {
 		outline: 3px @orangeFocus solid;
