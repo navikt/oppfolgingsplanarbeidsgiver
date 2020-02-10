@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Knapp } from 'nav-frontend-knapper';
+import { Hovedknapp } from 'nav-frontend-knapper';
 import {
     tiltakPt,
     tiltakReducerPt,
@@ -8,7 +8,7 @@ import {
 
 const texts = {
     buttonAbort: 'Avbryt',
-    buttonCreate: 'Lagre tiltak',
+    buttonCreate: 'Lagg til nytt tiltak',
     buttonUpdate: 'Lagre tiltak',
 };
 
@@ -51,13 +51,13 @@ class TiltakKnapper extends Component {
         return (
             <div className="knapperad knapperad--justervenstre">
                 <div className="knapperad__element">
-                    <Knapp
+                    <Hovedknapp
                         mini
                         disabled={this.state.spinner}
                         spinner={this.state.spinner}
                         htmlType="submit">
                         {submitButtonText}
-                    </Knapp>
+                    </Hovedknapp>
                 </div>
                 <div className="knapperad__element">
                     <button

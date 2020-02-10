@@ -2,7 +2,7 @@ import React from 'react';
 import chai from 'chai';
 import { shallow } from 'enzyme';
 import chaiEnzyme from 'chai-enzyme';
-import { Knapp } from 'nav-frontend-knapper';
+import { Hovedknapp } from 'nav-frontend-knapper';
 import TiltakKnapper from '../../../../js/components/oppfolgingsdialog/utfylling/tiltak/TiltakKnapper';
 
 chai.use(chaiEnzyme());
@@ -20,7 +20,7 @@ describe('TiltakKnapper', () => {
     });
 
     it('Skal vise en Knapp', () => {
-        expect(komponent.find(Knapp)).to.have.length(1);
+        expect(komponent.find(Hovedknapp)).to.have.length(1);
         expect(komponent.find('button.lenke')).to.have.length(1);
     });
 });
