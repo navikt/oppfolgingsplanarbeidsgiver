@@ -5,9 +5,9 @@ const texts = {
     title: 'Kommenter',
 };
 
-const ButtonComment = ({ count, click }) => {
+const ButtonComment = ({ count, onClick }) => {
     return (
-        <button className="knapp--kommenter" onClick={click}>
+        <button className="knapp--kommenter" onClick={onClick}>
             {`${texts.title} ${count ? `(${count})` : ''}`}
         </button>
     );
@@ -15,7 +15,7 @@ const ButtonComment = ({ count, click }) => {
 
 ButtonComment.propTypes = {
     count: PropTypes.number,
-    click: PropTypes.func,
+    onClick: PropTypes.func,
 };
 
 export default ButtonComment;
