@@ -19,4 +19,3 @@ ButtonComment.propTypes = {
 };
 
 export default ButtonComment;
-La
