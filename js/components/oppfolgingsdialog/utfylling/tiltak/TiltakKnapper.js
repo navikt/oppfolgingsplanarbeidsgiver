@@ -8,7 +8,7 @@ import {
 
 const texts = {
     buttonAbort: 'Avbryt',
-    buttonCreate: 'Legg til nytt tiltak',
+    buttonCreate: 'Lagre tiltak',
     buttonUpdate: 'Lagre tiltak',
 };
 
