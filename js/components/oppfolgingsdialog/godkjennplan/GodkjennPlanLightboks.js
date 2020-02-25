@@ -123,6 +123,11 @@ export class GodkjennPlanLightboksComponent extends Component {
                             label={texts.approval.sendForApproval}
                             id="giGodkjenning"
                             disabled={this.state.visIkkeUtfyltFeilmelding}
+                            onClick={(e) => {
+                                if (erHerokuApp()) {
+                                    e.preventDefault();
+                                }
+                            }}
                         />
                         <input
                             key="opprettplan-2"
@@ -130,6 +135,11 @@ export class GodkjennPlanLightboksComponent extends Component {
                             label={texts.approval.sendWithoutApproval}
                             id="opprettUtenGodkjenning"
                             disabled={this.state.visIkkeUtfyltFeilmelding}
+                            onClick={(e) => {
+                                if (erHerokuApp()) {
+                                    e.preventDefault();
+                                }
+                            }}
                         />
                     </Field>
                 </div>
@@ -193,11 +203,6 @@ export class GodkjennPlanLightboksComponent extends Component {
                         { this.state.radioSelected &&
                         <Hovedknapp
                             htmlType="submit"
-                            onClick={(e) => {
-                                if (erHerokuApp()) {
-                                    e.preventDefault();
-                                }
-                            }}
                         >
                             {this.state.createWithoutApproval
                                 ? texts.buttonSend.noApproval
