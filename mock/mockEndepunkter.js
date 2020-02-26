@@ -36,7 +36,7 @@ const PERSON_KARINA = 'personKarina';
 const PERSON_KJERSTI = 'personKjersti';
 const PERSON_KRISTINA = 'personKristina';
 const PERSON_LILLI = 'personLilli';
-const PERSON_MARIANN = 'personMariann';
+const PERSON_SEVERUS = 'personSeverus';
 const SYKMELDINGER = 'sykmeldinger';
 const SYKMELDTE = 'sykmeldte';
 const TILGANG = 'tilgang';
@@ -52,7 +52,7 @@ lastFilTilMinne(PERSON_KARINA);
 lastFilTilMinne(PERSON_KJERSTI);
 lastFilTilMinne(PERSON_KRISTINA);
 lastFilTilMinne(PERSON_LILLI);
-lastFilTilMinne(PERSON_MARIANN);
+lastFilTilMinne(PERSON_SEVERUS);
 lastFilTilMinne(BERIK);
 lastFilTilMinne(KONTAKTINFO);
 lastFilTilMinne(NAERMESTELEDER);
@@ -166,7 +166,7 @@ function mockForOpplaeringsmiljo(server) {
 
     server.get('/syfooprest/api/person/01010112345', (req, res) => {
         res.setHeader('Content-Type', 'application/json');
-        res.send(JSON.stringify(mockData[PERSON_MARIANN]));
+        res.send(JSON.stringify(mockData[PERSON_SEVERUS]));
     });
 
     server.get('/syfooprest/api/person/*', (req, res) => {

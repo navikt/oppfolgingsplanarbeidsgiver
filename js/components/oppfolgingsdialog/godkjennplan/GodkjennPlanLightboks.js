@@ -17,6 +17,7 @@ import {
     getEndDateFromTiltakListe,
     getStartDateFromTiltakListe,
 } from '../../../utils/tiltakUtils';
+import { erHerokuApp } from '../../../utils/urlUtils';
 
 const texts = {
     title: 'Jeg er ferdig med planen',
@@ -122,6 +123,11 @@ export class GodkjennPlanLightboksComponent extends Component {
                             label={texts.approval.sendForApproval}
                             id="giGodkjenning"
                             disabled={this.state.visIkkeUtfyltFeilmelding}
+                            onClick={(e) => {
+                                if (erHerokuApp()) {
+                                    e.preventDefault();
+                                }
+                            }}
                         />
                         <input
                             key="opprettplan-2"
@@ -129,6 +135,11 @@ export class GodkjennPlanLightboksComponent extends Component {
                             label={texts.approval.sendWithoutApproval}
                             id="opprettUtenGodkjenning"
                             disabled={this.state.visIkkeUtfyltFeilmelding}
+                            onClick={(e) => {
+                                if (erHerokuApp()) {
+                                    e.preventDefault();
+                                }
+                            }}
                         />
                     </Field>
                 </div>
@@ -191,7 +202,8 @@ export class GodkjennPlanLightboksComponent extends Component {
                     <div className="knapperad__element">
                         { this.state.radioSelected &&
                         <Hovedknapp
-                            htmlType="submit">
+                            htmlType="submit"
+                        >
                             {this.state.createWithoutApproval
                                 ? texts.buttonSend.noApproval
                                 : texts.buttonSend.approval
