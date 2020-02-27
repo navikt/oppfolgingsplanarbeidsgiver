@@ -35,10 +35,13 @@ const texts = {
         noApproval: 'Opprett plan',
     },
     buttonCancel: 'Avbryt',
+    shareWithNAV: 'Jeg vil dele planen med NAV',
 };
 
-export const textDelMedNav = (arbeidstakerName) => {
-    return <span>Jeg vil dele planen med NAV når {arbeidstakerName} har godkjent den</span>;
+export const textDelMedNav = (arbeidstakerName, tvangsgodkjent) => {
+    return tvangsgodkjent
+        ? texts.shareWithNAV
+        : `${texts.shareWithNAV} når ${arbeidstakerName} har godkjent den`;
 };
 
 export class GodkjennPlanLightboksComponent extends Component {
@@ -188,7 +191,7 @@ export class GodkjennPlanLightboksComponent extends Component {
                                 id="delMedNav"
                                 name="delMedNav"
                                 component={CheckboxSelvstendig}
-                                label={textDelMedNav(oppfolgingsdialog.arbeidstaker.navn)}
+                                label={textDelMedNav(oppfolgingsdialog.arbeidstaker.navn, this.state.createWithoutApproval)}
                             />
                         </div>
                     </div>
