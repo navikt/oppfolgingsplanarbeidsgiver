@@ -41,7 +41,7 @@ export const textDelMedNav = (arbeidstakerName, tvangsgodkjent) => {
     if (tvangsgodkjent) {
         return 'Jeg vil dele planen med NAV';
     }
-    return <span>Jeg vil dele planen med NAV når {arbeidstakerName} har godkjent den</span>;
+    return `Jeg vil dele planen med NAV når ${arbeidstakerName} har godkjent den`;
 };
 
 export class GodkjennPlanLightboksComponent extends Component {
