@@ -37,7 +37,10 @@ const texts = {
     buttonCancel: 'Avbryt',
 };
 
-export const textDelMedNav = (arbeidstakerName) => {
+export const textDelMedNav = (arbeidstakerName, tvangsgodkjent) => {
+    if (tvangsgodkjent) {
+        return 'Jeg vil dele planen med NAV';
+    }
     return <span>Jeg vil dele planen med NAV når {arbeidstakerName} har godkjent den</span>;
 };
 
@@ -188,7 +191,7 @@ export class GodkjennPlanLightboksComponent extends Component {
                                 id="delMedNav"
                                 name="delMedNav"
                                 component={CheckboxSelvstendig}
-                                label={textDelMedNav(oppfolgingsdialog.arbeidstaker.navn)}
+                                label={textDelMedNav(oppfolgingsdialog.arbeidstaker.navn, this.state.createWithoutApproval)}
                             />
                         </div>
                     </div>
