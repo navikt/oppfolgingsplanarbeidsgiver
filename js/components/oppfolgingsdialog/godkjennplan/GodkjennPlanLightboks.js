@@ -135,7 +135,7 @@ export class GodkjennPlanLightboksComponent extends Component {
                             label={texts.approval.sendWithoutApproval}
                             id="opprettUtenGodkjenning"
                             disabled={this.state.visIkkeUtfyltFeilmelding}
-                      
+
                         />
                     </Field>
                 </div>
