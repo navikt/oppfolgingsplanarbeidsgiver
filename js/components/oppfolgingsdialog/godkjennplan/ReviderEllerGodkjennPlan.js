@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import { Bjorn } from '@navikt/digisyfo-npm';
 import { oppfolgingsplanPt } from '../../../proptypes/opproptypes';
-import { erHerokuApp } from '../../../utils/urlUtils';
 import { erIkkeOppfolgingsdialogUtfylt } from '../../../utils/oppfolgingsplanUtils';
 import IkkeUtfyltPlanFeilmelding from './IkkeUtfyltPlanFeilmelding';
 
@@ -20,9 +19,7 @@ export const ReviderEllerGodkjennPlanKnapperad = (
         <div className="knapperad__element">
             <Hovedknapp
                 mini
-                onClick={erHerokuApp()
-                    ? undefined
-                    : godkjennPlan}>
+                onClick={godkjennPlan}>
                 {texts.buttonGodkjenn}
             </Hovedknapp>
         </div>

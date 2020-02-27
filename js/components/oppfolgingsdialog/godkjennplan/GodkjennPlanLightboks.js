@@ -135,11 +135,7 @@ export class GodkjennPlanLightboksComponent extends Component {
                             label={texts.approval.sendWithoutApproval}
                             id="opprettUtenGodkjenning"
                             disabled={this.state.visIkkeUtfyltFeilmelding}
-                            onClick={(e) => {
-                                if (erHerokuApp()) {
-                                    e.preventDefault();
-                                }
-                            }}
+
                         />
                     </Field>
                 </div>
@@ -203,6 +199,11 @@ export class GodkjennPlanLightboksComponent extends Component {
                         { this.state.radioSelected &&
                         <Hovedknapp
                             htmlType="submit"
+                            onClick={(e) => {
+                                if (erHerokuApp()) {
+                                    e.preventDefault();
+                                }
+                            }}
                         >
                             {this.state.createWithoutApproval
                                 ? texts.buttonSend.noApproval
