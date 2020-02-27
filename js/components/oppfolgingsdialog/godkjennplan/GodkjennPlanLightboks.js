@@ -35,12 +35,13 @@ const texts = {
         noApproval: 'Opprett plan',
     },
     buttonCancel: 'Avbryt',
+    shareWithNAV: 'Jeg vil dele planen med NAV',
 };
 
 export const textDelMedNav = (arbeidstakerName, tvangsgodkjent) => {
     return tvangsgodkjent
-        ? 'Jeg vil dele planen med NAV'
-        : `Jeg vil dele planen med NAV når ${arbeidstakerName} har godkjent den`;
+        ? texts.shareWithNAV
+        : `${texts.shareWithNAV} når ${arbeidstakerName} har godkjent den`;
 };
 
 export class GodkjennPlanLightboksComponent extends Component {
