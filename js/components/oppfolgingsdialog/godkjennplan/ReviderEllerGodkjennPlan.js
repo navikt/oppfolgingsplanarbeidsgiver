@@ -20,9 +20,7 @@ export const ReviderEllerGodkjennPlanKnapperad = (
         <div className="knapperad__element">
             <Hovedknapp
                 mini
-                onClick={erHerokuApp()
-                    ? undefined
-                    : godkjennPlan}>
+                onClick={godkjennPlan}>
                 {texts.buttonGodkjenn}
             </Hovedknapp>
         </div>
