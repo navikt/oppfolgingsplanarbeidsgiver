@@ -8,7 +8,6 @@ import {
 import {
     sykmeldt as sykmeldtPt,
     brodsmule as brodsmulePt,
-    sykmeldteReducerPt,
     sykmeldingerReducerPt,
 } from '../shapes';
 import * as opProptypes from '../proptypes/opproptypes';
@@ -205,7 +204,6 @@ OppfolgingsplanSide.propTypes = {
     oppfolgingsdialogerReducer: opProptypes.oppfolgingsdialogerAgPt,
     naermesteleder: opProptypes.naermestelederReducerPt,
     sykmeldinger: sykmeldingerReducerPt,
-    sykmeldte: sykmeldteReducerPt,
     tilgang: opProptypes.tilgangReducerPt,
     tiltak: opProptypes.tiltakReducerPt,
     person: opProptypes.personReducerPt,
@@ -326,7 +324,6 @@ export function mapStateToProps(state, ownProps) {
         oppfolgingsdialogerReducer,
         sykeforlopsPerioderReducer: state.sykeforlopsPerioder,
         person: state.person,
-        sykmeldte: state.sykmeldte,
         tilgang,
         tiltak: state.tiltak,
         virksomhet: state.virksomhet,

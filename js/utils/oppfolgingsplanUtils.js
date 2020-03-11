@@ -8,14 +8,6 @@ export const isEmpty = (array) => {
     return !array || array.length === 0;
 };
 
-export const harForrigeNaermesteLeder = (oppfolgingsdialog) => {
-    return oppfolgingsdialog.arbeidsgiver.forrigeNaermesteLeder;
-};
-
-export const harNaermesteLeder = (oppfolgingsdialog) => {
-    return oppfolgingsdialog.arbeidsgiver.naermesteLeder.fnr;
-};
-
 export const erIkkeOppfolgingsdialogUtfylt = (oppfolgingsdialog) => {
     return oppfolgingsdialog.arbeidsoppgaveListe.length === 0 || oppfolgingsdialog.tiltakListe.length === 0;
 };

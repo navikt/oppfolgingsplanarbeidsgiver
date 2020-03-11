@@ -220,12 +220,6 @@ export const fnrvirksomhetsnummerPt = PropTypes.shape({
     virksomhetsnummer: PropTypes.string,
 });
 
-export const forrigenaermestelederReducerPt = PropTypes.shape({
-    henter: PropTypes.arrayOf(fnrvirksomhetsnummerPt),
-    hentet: PropTypes.arrayOf(fnrvirksomhetsnummerPt),
-    hentingFeilet: PropTypes.arrayOf(fnrvirksomhetsnummerPt),
-});
-
 export const naermestelederReducerPt = PropTypes.shape({
     henter: PropTypes.arrayOf(fnrvirksomhetsnummerPt),
     hentet: PropTypes.arrayOf(fnrvirksomhetsnummerPt),

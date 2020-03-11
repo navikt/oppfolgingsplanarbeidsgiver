@@ -43,10 +43,7 @@ describe('ReleasetPlan', () => {
                 fnr: '1000042179824',
                 navn: 'Arbeidsgiver navn',
             },
-            forrigeNaermesteLeder: {
-                fnr: '1000042179824',
-                navn: 'Arbeidsgiver navn',
-            },
+            forrigeNaermesteLeder: null,
         },
         arbeidstaker: {
             samtykke: true,
@@ -54,10 +51,7 @@ describe('ReleasetPlan', () => {
                 fnr: '1000042179824',
                 navn: 'Arbeidsgiver navn',
             },
-            forrigeNaermesteLeder: {
-                fnr: '1000042179824',
-                navn: 'Arbeidsgiver navn',
-            },
+            forrigeNaermesteLeder: null,
         },
         godkjentPlan: {
             avbruttPlan: {

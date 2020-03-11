@@ -70,7 +70,7 @@ describe('OppfolgingsplanSide', () => {
                         },
                         arbeidsgiver: {
                             naermesteLeder: {},
-                            forrigeNaermesteLeder: {},
+                            forrigeNaermesteLeder: null,
                         },
                         sistEndretAv: {},
                         arbeidsoppgaveListe: [],

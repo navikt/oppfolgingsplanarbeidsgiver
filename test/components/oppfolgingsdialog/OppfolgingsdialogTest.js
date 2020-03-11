@@ -203,10 +203,7 @@ describe('Oppfolgingsdialog', () => {
                 naermesteLeder: {
                     fnr,
                 },
-                forrigeNaermesteLeder: {
-                    fnr: '1000000000000',
-                    navn: 'Arbeidsgiver navn',
-                },
+                forrigeNaermesteLeder: null,
             },
         });
         component = shallow(<Oppfolgingsdialog
@@ -239,10 +236,7 @@ describe('Oppfolgingsdialog', () => {
                 naermesteLeder: {
                     samtykke: true,
                 },
-                forrigeNaermesteLeder: {
-                    fnr: '1000000000000',
-                    navn: 'Arbeidsgiver navn',
-                },
+                forrigeNaermesteLeder: null,
             },
         });
         component = shallow(<Oppfolgingsdialog
@@ -379,10 +373,7 @@ describe('Oppfolgingsdialog', () => {
                 ],
                 arbeidsgiver: {
                     naermesteLeder,
-                    forrigeNaermesteLeder: {
-                        fnr: '1000000000000',
-                        navn: 'Arbeidsgiver navn',
-                    },
+                    forrigeNaermesteLeder: null,
                 },
             });
             expect(erAvvistAvArbeidsgiver(oppfolgingsdialog)).to.equal(false);
@@ -397,10 +388,7 @@ describe('Oppfolgingsdialog', () => {
                 }],
                 arbeidsgiver: {
                     naermesteLeder,
-                    forrigeNaermesteLeder: {
-                        fnr: '1000000000000',
-                        navn: 'Arbeidsgiver navn',
-                    },
+                    forrigeNaermesteLeder: null,
                 },
             });
             expect(erAvvistAvArbeidsgiver(oppfolgingsdialog)).to.equal(false);
@@ -416,10 +404,7 @@ describe('Oppfolgingsdialog', () => {
                 }],
                 arbeidsgiver: {
                     naermesteLeder,
-                    forrigeNaermesteLeder: {
-                        fnr: '1000000000000',
-                        navn: 'Arbeidsgiver navn',
-                    },
+                    forrigeNaermesteLeder: null,
                 },
             });
             expect(erAvvistAvArbeidsgiver(oppfolgingsdialog)).to.equal(false);
@@ -435,10 +420,7 @@ describe('Oppfolgingsdialog', () => {
                 }],
                 arbeidsgiver: {
                     naermesteLeder,
-                    forrigeNaermesteLeder: {
-                        fnr: '1000000000000',
-                        navn: 'Arbeidsgiver navn',
-                    },
+                    forrigeNaermesteLeder: null,
                 },
             });
             expect(erAvvistAvArbeidsgiver(oppfolgingsdialog)).to.equal(true);

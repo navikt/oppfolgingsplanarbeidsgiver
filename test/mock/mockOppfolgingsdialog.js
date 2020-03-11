@@ -121,10 +121,7 @@ export const getOppfolgingsplaner = [
                 godkjent: null,
                 aktivFom: '2017-01-01T00:00:00.000',
             },
-            forrigeNaermesteLeder: {
-                fnr: '1000000000000',
-                navn: 'Arbeidsgiver navn',
-            },
+            forrigeNaermesteLeder: null,
         },
         arbeidstaker: {
             navn: 'Test Testesen',
@@ -165,10 +162,7 @@ export const getOppfolgingsplaner = [
                 godkjent: null,
                 aktivFom: '2017-01-01T00:00:00.000',
             },
-            forrigeNaermesteLeder: {
-                fnr: '1000000000000',
-                navn: 'Arbeidsgiver navn',
-            },
+            forrigeNaermesteLeder: null,
         },
         arbeidstaker: {
             navn: 'Test Testesen',
@@ -209,10 +203,7 @@ export const getOppfolgingsplaner = [
                 godkjent: null,
                 aktivFom: '2017-01-01T00:00:00.000',
             },
-            forrigeNaermesteLeder: {
-                fnr: '1000000000000',
-                navn: 'Arbeidsgiver navn',
-            },
+            forrigeNaermesteLeder: null,
         },
         arbeidstaker: {
             navn: 'Test Testesen',
@@ -322,10 +313,7 @@ const oppfolgingsplan = {
             godkjent: null,
             aktivFom: '2017-01-01T00:00:00.000',
         },
-        forrigeNaermesteLeder: {
-            fnr: '1000000000000',
-            navn: 'Arbeidsgiver navn',
-        },
+        forrigeNaermesteLeder: null,
     },
     arbeidstaker: {
         navn: 'Test Testesen',

@@ -17,7 +17,6 @@ import navigasjontoggles from './reducers/navigasjontoggles';
 import naermesteleder from './reducers/naermesteleder';
 import nullstill from './reducers/nullstillGodkjenning';
 import person from './reducers/person';
-import nyNaermesteLeder from './reducers/nyNaermesteLeder';
 import samtykke from './reducers/samtykke';
 import tilgang from './reducers/tilgang';
 import tiltak from './reducers/tiltak';
@@ -38,7 +37,6 @@ const rootReducer = combineReducers({
     kopierDialogReducer,
     navigasjontoggles,
     nullstill,
-    nyNaermesteLeder,
     tilgang,
     samtykke,
     kommentar,

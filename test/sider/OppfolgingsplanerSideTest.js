@@ -95,9 +95,6 @@ describe('OppfolgingsplanerSide', () => {
                     },
                 },
             },
-            nyNaermesteLeder: {
-                bekreftet: false,
-            },
             kontaktinfo: {
                 data: [{ fnr: sykmeldt1.fnr, kontaktinfo: { skalHaVarsel: true, epost: 'test@nav.no', tlf: '22229999' } }],
             },

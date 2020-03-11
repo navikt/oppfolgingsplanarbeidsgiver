@@ -15,16 +15,6 @@ export const brodsmule = PropTypes.shape({
     erKlikkbar: PropTypes.bool,
 });
 
-export const sykmeldteReducerPt = PropTypes.shape({
-    henter: PropTypes.bool,
-    hentet: PropTypes.bool,
-    hentingFeilet: PropTypes.bool,
-    sletter: PropTypes.bool,
-    slettet: PropTypes.bool,
-    slettingFeilet: PropTypes.bool,
-    sykmeldte: PropTypes.arrayOf(sykmeldt),
-});
-
 export const sykmeldingerReducerPt = PropTypes.shape({
     henter: PropTypes.bool,
     hentingFeilet: PropTypes.bool,
