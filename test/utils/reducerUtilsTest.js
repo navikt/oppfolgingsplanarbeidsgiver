@@ -2,7 +2,6 @@ import chai from 'chai';
 import sinon from 'sinon';
 import {
     henterEllerHarHentetKontaktinfo,
-    henterEllerHarHentetForrigeNaermesteLeder,
     henterEllerHarHentetPerson,
     henterEllerHarHentetNaermesteLeder,
     henterEllerHarHentetVirksomhet,
@@ -13,7 +12,6 @@ import {
     finnOgHentPersonerSomMangler,
     finnOgHentKontaktinfoSomMangler,
     finnOgHentNaermesteLedereSomMangler,
-    finnOgHentForrigeNaermesteLedereSomMangler,
 } from '../../js/utils/reducerUtils';
 import getOppfolgingsplan from '../mock/mockOppfolgingsdialog';
 
@@ -85,20 +83,7 @@ describe('reducerUtils', () => {
         });
     });
 
-    describe('finnOgHentForrigeNaermesteLedereSomMangler', () => {
-        it('Finner forrige naermesteledere som skal hentes og kaller hentForrigeNaermesteLeder', () => {
-            const hentForrigeNaermesteLeder = sinon.spy();
-            const forrigenaermesteleder = {
-                henter: [],
-                hentet: [],
-            };
-            finnOgHentForrigeNaermesteLedereSomMangler([oppfolgingsdialog], forrigenaermesteleder, hentForrigeNaermesteLeder);
-            sinon.assert.calledOnce(hentForrigeNaermesteLeder);
-            sinon.assert.calledWith(hentForrigeNaermesteLeder, '1000000000000', '123456789');
-        });
-    });
-
-    describe('finnOgHentForrigeNaermesteLedereSomMangler', () => {
+    describe('finnOgHentArbeidsforholdSomMangler', () => {
         it('Finner arbeidsforhold som skal hentes og kaller hentArbeidsforhold', () => {
             const hentArbeidsforhold = sinon.spy();
             const arbeidsforhold = {
@@ -181,30 +166,6 @@ describe('reducerUtils', () => {
                 hentet: [],
             };
             expect(henterEllerHarHentetPerson('123', person)).to.deep.equal(false);
-        });
-    });
-
-    describe('henterEllerHarHentetForrigeNaermesteLeder', () => {
-        it('Finner forrigenaermesteleder når det hentes', () => {
-            const forrigenaermesteleder = {
-                henter: [{ fnr: '123', virksomhetsnummer: 'virksomhetsnummer' }],
-                hentet: [{ fnr: '321', virksomhetsnummer: 'virksomhetsnummer' }],
-            };
-            expect(henterEllerHarHentetForrigeNaermesteLeder('123', 'virksomhetsnummer', forrigenaermesteleder)).to.deep.equal(true);
-        });
-        it('Finner forrigenaermesteleder når det er hentet', () => {
-            const forrigenaermesteleder = {
-                henter: [{ fnr: '321', virksomhetsnummer: 'virksomhetsnummer' }],
-                hentet: [{ fnr: '123', virksomhetsnummer: 'virksomhetsnummer' }],
-            };
-            expect(henterEllerHarHentetForrigeNaermesteLeder('123', 'virksomhetsnummer', forrigenaermesteleder)).to.deep.equal(true);
-        });
-        it('Finner forrigenaermesteleder når det ikke er hentet eller hentes', () => {
-            const forrigenaermesteleder = {
-                henter: [{ fnr: '321', virksomhetsnummer: 'virksomhetsnummer' }],
-                hentet: [],
-            };
-            expect(henterEllerHarHentetForrigeNaermesteLeder('123', 'virksomhetsnummer', forrigenaermesteleder)).to.deep.equal(false);
         });
     });
 

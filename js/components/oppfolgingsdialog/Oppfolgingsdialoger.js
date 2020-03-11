@@ -19,31 +19,6 @@ import {
 import OppfolgingsdialogerInnhold from './OppfolgingsdialogerInnhold';
 import SykmeldtIngenKontaktinformasjon from './SykmeldtIngenKontaktinformasjon';
 import AppSpinner from '../AppSpinner';
-import OppfolgingsplanInfoboks from '../app/OppfolgingsplanInfoboks';
-import { getContextRoot, getDineSykmeldteRoot } from '../../routers/paths';
-
-const texts = {
-    avkreftetLederInfoboks: {
-        title: 'Takk for beskjeden!',
-        info: 'Bedriften din vil nå få beskjed om at de må melde inn en ny leder.',
-        buttonBack: 'Tilbake til forsiden',
-    },
-};
-
-export const AvkreftetLederInfoboks = () => {
-    return (<OppfolgingsplanInfoboks
-        svgUrl={`${getContextRoot()}/img/svg/ny-naermesteleder-slettet.svg`}
-        svgAlt="Leder"
-        tittel={texts.avkreftetLederInfoboks.title}
-        tekst={texts.avkreftetLederInfoboks.info}
-    >
-        <div className="knapperad">
-            <a className="knapp knapp--hoved knapperad__element" href={getDineSykmeldteRoot()}>
-                {texts.avkreftetLederInfoboks.buttonBack}
-            </a>
-        </div>
-    </OppfolgingsplanInfoboks>);
-};
 
 const erBrukerReservertMotKontakt = (kontaktinfo, fnr) => {
     return kontaktinfo.data.filter((data) => {
@@ -79,12 +54,9 @@ class Oppfolgingsdialoger extends Component {
         hentKontaktinfo(sykmeldt.fnr);
     }
     render() {
-        const { kontaktinfo, sykmeldt, slettetSykmeldt } = this.props;
+        const { kontaktinfo, sykmeldt } = this.props;
         if (kontaktinfo.henter.includes(sykmeldt.fnr)) {
             return <AppSpinner />;
-        }
-        if (slettetSykmeldt) {
-            return <AvkreftetLederInfoboks />;
         }
         if (erBrukerReservertMotKontakt(kontaktinfo, sykmeldt.fnr) && !this.state.settReservertVarsel) {
             return (<SykmeldtIngenKontaktinformasjon
@@ -110,7 +82,6 @@ Oppfolgingsdialoger.propTypes = {
     hentKontaktinfo: PropTypes.func,
     virksomhet: virksomhetReducerPt,
     person: personReducerPt,
-    slettetSykmeldt: PropTypes.bool,
 };
 
 export default Oppfolgingsdialoger;

@@ -28,7 +28,6 @@ describe('OppfolgingsdialogerVisning', () => {
         it('Skal ikke vise OppfolgingsdialogerTeasere dersom man ikke har oppfolgingsdialoger', () => {
             component = shallow(<OppfolgingsdialogerVisning
                 oppfolgingsdialoger={[]}
-                bekreftetNyNaermesteLeder={false}
             />);
             expect(component.find(OppfolgingsdialogTeasere)).to.have.length(0);
         });

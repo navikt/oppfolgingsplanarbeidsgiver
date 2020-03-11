@@ -26,15 +26,6 @@ const finnNaermesteLeder = (fnr, virksomhetsnummer, state) => {
         })[0] || null;
 };
 
-const finnForrigeNaermesteLeder = (fnr, virksomhetsnummer, state) => {
-    return (state.forrigenaermesteleder && state.forrigenaermesteleder.data
-        .filter((naermesteleder) => {
-            return naermesteleder.fnr === fnr && naermesteleder.virksomhetsnummer === virksomhetsnummer;
-        }).map((naermesteleder) => {
-            return naermesteleder.forrigeNaermesteLeder;
-        })[0]) || null;
-};
-
 const finnVirksomhetsnavn = (virksomhetsnummer, state) => {
     return state.virksomhet.data
         .filter((virksomhet) => {
@@ -96,7 +87,6 @@ export const populerDialogFraState = (_oppfolgingsdialog, state) => {
     oppfolgingsdialog.arbeidsgiver.naermesteLeder.erAktiv = naermesteleder && naermesteleder.erAktiv;
     oppfolgingsdialog.arbeidsgiver.naermesteLeder.aktivFom = naermesteleder && naermesteleder.aktivFom;
     oppfolgingsdialog.arbeidsgiver.naermesteLeder.aktivTom = naermesteleder && naermesteleder.aktivTom;
-    oppfolgingsdialog.arbeidsgiver.forrigeNaermesteLeder = finnForrigeNaermesteLeder(oppfolgingsdialog.arbeidstaker.fnr, oppfolgingsdialog.virksomhet.virksomhetsnummer, state);
     oppfolgingsdialog.sistEndretAv.navn = finnNavn(oppfolgingsdialog.sistEndretAv.fnr, state);
     oppfolgingsdialog.arbeidsoppgaveListe.map((_arbeidsoppgave) => {
         const arbeidsoppgave = _arbeidsoppgave;

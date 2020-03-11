@@ -3,12 +3,9 @@ import chai from 'chai';
 import { shallow } from 'enzyme';
 import chaiEnzyme from 'chai-enzyme';
 import sinon from 'sinon';
-import Oppfolgingsdialoger, {
-    AvkreftetLederInfoboks,
-} from '../../../js/components/oppfolgingsdialog/Oppfolgingsdialoger';
+import Oppfolgingsdialoger from '../../../js/components/oppfolgingsdialog/Oppfolgingsdialoger';
 import OppfolgingsdialogerInnhold from '../../../js/components/oppfolgingsdialog/OppfolgingsdialogerInnhold';
 import SykmeldtIngenKontaktinformasjon from '../../../js/components/oppfolgingsdialog/SykmeldtIngenKontaktinformasjon';
-import OppfolgingsplanInfoboks from '../../../js/components/app/OppfolgingsplanInfoboks';
 import getOppfolgingsplan from '../../mock/mockOppfolgingsdialog';
 
 chai.use(chaiEnzyme());
@@ -54,24 +51,6 @@ describe('Oppfolgingsdialoger', () => {
         expect(component.find(OppfolgingsdialogerInnhold)).to.have.length(1);
     });
 
-    it('Skal vise AvkreftetLederInfoboks, dersom det ikke er oppfolgingsdialoger og naermeste leder er avkreftet', () => {
-        component = shallow(<Oppfolgingsdialoger
-            sykmeldt={{ fnr: 'fnr', koblingId: 1 }}
-            oppfolgingsdialoger={oppfolgingsdialoger}
-            naermesteleder={naermesteleder}
-            person={person}
-            virksomhet={virksomhet}
-            kontaktinfo={kontaktinfo}
-            hentNaermesteLeder={hentNaermesteLeder}
-            hentPerson={hentPerson}
-            hentVirksomhet={hentVirksomhet}
-            hentKontaktinfo={hentKontaktinfo}
-            slettetSykmeldt
-        />);
-
-        expect(component.find(AvkreftetLederInfoboks)).to.have.length(1);
-    });
-
     it('Skal vise Ingenkontaktinformasjon-melding dersom ingen kontaktinformasjon', () => {
         component = shallow(<Oppfolgingsdialoger
             sykmeldt={{ fnr: 'fnr', koblingId: 1 }}
@@ -95,17 +74,5 @@ describe('Oppfolgingsdialoger', () => {
             hentKontaktinfo={hentKontaktinfo}
         />);
         expect(component.find(SykmeldtIngenKontaktinformasjon)).to.have.length(1);
-    });
-
-    describe('AvkreftetLederInfoboks', () => {
-        it('Skal vise OppfolgingsplanInfoboks', () => {
-            component = shallow(<AvkreftetLederInfoboks />);
-            expect(component.find(OppfolgingsplanInfoboks)).to.have.length(1);
-        });
-
-        it('Skal vise knapp', () => {
-            component = shallow(<AvkreftetLederInfoboks />);
-            expect(component.find('a')).to.have.length(1);
-        });
     });
 });

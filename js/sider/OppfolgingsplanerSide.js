@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import {
     sykmeldt as sykmeldtPt,
     brodsmule as brodsmulePt,
-    sykmeldteReducerPt,
     sykmeldingerReducerPt,
 } from '../shapes';
 import {
@@ -12,7 +11,6 @@ import {
     henterEllerHarHentetOppfolgingsdialoger,
     henterEllerHarHentetSykmeldinger,
     oppfolgingsdialogHarBlittOpprettet,
-    sykmeldtHarBlittSlettet,
 } from '../utils/reducerUtils';
 import { populerDialogFraState } from '../utils/stateUtils';
 import {
@@ -34,11 +32,9 @@ import { kopierOppfolgingsdialog } from '../actions/oppfolgingsplan/kopierOppfol
 import { giSamtykke } from '../actions/oppfolgingsplan/samtykke_actions';
 import { hentKontaktinfo } from '../actions/oppfolgingsplan/kontaktinfo_actions';
 import { hentNaermesteLeder } from '../actions/oppfolgingsplan/naermesteLeder_actions';
-import { bekreftNyNaermesteLeder } from '../actions/oppfolgingsplan/nyNaermesteleder_actions';
 import { hentPerson } from '../actions/oppfolgingsplan/person_actions';
 import { hentVirksomhet } from '../actions/oppfolgingsplan/virksomhet_actions';
 import { sjekkTilgang } from '../actions/oppfolgingsplan/sjekkTilgang_actions';
-import { slettSykmeldt } from '../actions/sykmeldt_actions';
 import { hentSykmeldinger } from '../actions/sykmeldinger_actions';
 import Oppfolgingsdialoger from '../components/oppfolgingsdialog/Oppfolgingsdialoger';
 import { getContextRoot } from '../routers/paths';
@@ -88,7 +84,6 @@ export class OppfolgingsplanerSide extends Component {
             alleOppfolgingsdialogerReducer,
             kopierDialogReducer,
             oppfolgingsdialogerReducer,
-            sykmeldte,
         } = this.props;
         const {
             sykmeldt,
@@ -96,9 +91,6 @@ export class OppfolgingsplanerSide extends Component {
 
         this.props.sjekkTilgang(sykmeldt);
 
-        if (sykmeldtHarBlittSlettet(sykmeldte, nextProps.sykmeldte)) {
-            this.props.hentOppfolgingsplaner();
-        }
         if (oppfolgingsdialogHarBlittOpprettet(oppfolgingsdialogerReducer, nextProps.oppfolgingsdialogerReducer)) {
             this.props.hentOppfolgingsplaner();
         }
@@ -191,17 +183,13 @@ OppfolgingsplanerSide.propTypes = {
     naermesteleder: opproptypes.naermestelederReducerPt,
     person: opproptypes.personReducerPt,
     sykmeldinger: sykmeldingerReducerPt,
-    sykmeldte: sykmeldteReducerPt,
     tilgang: opproptypes.tilgangReducerPt,
     virksomhet: opproptypes.virksomhetReducerPt,
     oppfolgingsdialoger: PropTypes.arrayOf(opproptypes.oppfolgingsplanPt),
     koblingId: PropTypes.string,
     sykmeldt: sykmeldtPt,
-    bekreftetNyNaermesteLeder: PropTypes.bool,
     harSykmeldtGyldigSykmelding: PropTypes.bool,
-    slettetSykmeldt: PropTypes.bool,
     brodsmuler: PropTypes.arrayOf(brodsmulePt),
-    bekreftNyNaermesteLeder: PropTypes.func,
     giSamtykke: PropTypes.func,
     hentNaermesteLeder: PropTypes.func,
     hentOppfolgingsplaner: PropTypes.func,
@@ -211,7 +199,6 @@ OppfolgingsplanerSide.propTypes = {
     kopierOppfolgingsdialog: PropTypes.func,
     opprettOppfolgingsdialogAg: PropTypes.func,
     sjekkTilgang: PropTypes.func,
-    slettSykmeldt: PropTypes.func,
     skalHenteSykmeldtBerikelse: PropTypes.bool,
     hentSykmeldteBerikelser: PropTypes.func,
 };
@@ -270,17 +257,14 @@ export function mapStateToProps(state, ownProps) {
         kopierDialogReducer: state.kopierDialogReducer,
         alleOppfolgingsdialogerReducer,
         oppfolgingsdialogerReducer,
-        sykmeldte: state.sykmeldte,
         sykmeldinger,
         tilgang,
         virksomhet: state.virksomhet,
-        bekreftetNyNaermesteLeder: state.nyNaermesteLeder.bekreftet,
         koblingId: ownProps.params.koblingId,
         oppfolgingsdialoger,
         sykmeldt,
         kontaktinfo: state.kontaktinfo,
         harSykmeldtGyldigSykmelding,
-        slettetSykmeldt: state.sykmeldte.slettet,
         skalHenteSykmeldtBerikelse: beregnSkalHenteSykmeldtBerikelse(sykmeldt, state),
         brodsmuler: [{
             tittel: texts.brodsmuler.dineSykmeldte,
@@ -302,8 +286,6 @@ const OppfolgingsdialogerContainer = connect(mapStateToProps, {
     opprettOppfolgingsdialogAg: opprettOppfolgingsplan,
     sjekkTilgang,
     giSamtykke,
-    bekreftNyNaermesteLeder,
-    slettSykmeldt,
     hentNaermesteLeder,
     hentVirksomhet,
     hentPerson,
