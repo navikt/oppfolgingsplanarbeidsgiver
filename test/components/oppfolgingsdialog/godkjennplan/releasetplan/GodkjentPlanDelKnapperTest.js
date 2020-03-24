@@ -1,6 +1,6 @@
 import React from 'react';
 import chai from 'chai';
-import { shallow } from 'enzyme';
+import { mount } from 'enzyme';
 import chaiEnzyme from 'chai-enzyme';
 import sinon from 'sinon';
 import Alertstripe from 'nav-frontend-alertstriper';
@@ -35,7 +35,7 @@ describe('GodkjentPlanDelKnapper', () => {
         delMedNavFunc = sinon.spy();
         delMedFastlege = sinon.spy();
 
-        komponent = shallow(<GodkjentPlanDelKnapper
+        komponent = mount(<GodkjentPlanDelKnapper
             oppfolgingsplan={oppfolgingsplan}
             delmednav={delmednav}
             delMedNavFunc={delMedNavFunc}
@@ -48,7 +48,7 @@ describe('GodkjentPlanDelKnapper', () => {
         const delmednavFeilet = Object.assign({}, delmednav, {
             sendingFeilet: true,
         });
-        komponent = shallow(<GodkjentPlanDelKnapper
+        komponent = mount(<GodkjentPlanDelKnapper
             oppfolgingsplan={oppfolgingsplan}
             delmednav={delmednavFeilet}
             delMedNavFunc={delMedNavFunc}
@@ -62,7 +62,7 @@ describe('GodkjentPlanDelKnapper', () => {
         const fastlegeDelingFeilet = Object.assign({}, fastlegeDeling, {
             sendingFeilet: true,
         });
-        komponent = shallow(<GodkjentPlanDelKnapper
+        komponent = mount(<GodkjentPlanDelKnapper
             oppfolgingsplan={oppfolgingsplan}
             delmednav={delmednav}
             delMedNavFunc={delMedNavFunc}
@@ -81,14 +81,14 @@ describe('GodkjentPlanDelKnapper', () => {
                 deltMedFastlegeTidspunkt: null,
             },
         });
-        komponent = shallow(<GodkjentPlanDelKnapper
+        komponent = mount(<GodkjentPlanDelKnapper
             oppfolgingsplan={oppfolgingsplanIkkeDeltMedNavEllerFastlege}
             delmednav={delmednav}
             delMedNavFunc={delMedNavFunc}
             fastlegeDeling={fastlegeDeling}
             delMedFastlege={delMedFastlege}
         />);
-        expect(komponent.find('.buttonElement')).to.have.length(2);
+        expect(komponent.find('.buttonElement')).to.have.length(6);
     });
 
     it('Skal vise 1 knapp dersom godkjent plan er delt med NAV, men ikke fastlege', () => {
@@ -100,14 +100,14 @@ describe('GodkjentPlanDelKnapper', () => {
                 deltMedFastlegeTidspunkt: null,
             },
         });
-        komponent = shallow(<GodkjentPlanDelKnapper
+        komponent = mount(<GodkjentPlanDelKnapper
             oppfolgingsplan={oppfolgingsplanIkkeDeltMedFastlege}
             delmednav={delmednav}
             delMedNavFunc={delMedNavFunc}
             fastlegeDeling={fastlegeDeling}
             delMedFastlege={delMedFastlege}
         />);
-        expect(komponent.find('.buttonElement')).to.have.length(1);
+        expect(komponent.find('.buttonElement')).to.have.length(3);
     });
 
     it('Skal vise 1 knapp dersom godkjent plan er delt med fastlege, men ikke NAV', () => {
@@ -119,14 +119,14 @@ describe('GodkjentPlanDelKnapper', () => {
                 deltMedFastlegeTidspunkt: null,
             },
         });
-        komponent = shallow(<GodkjentPlanDelKnapper
+        komponent = mount(<GodkjentPlanDelKnapper
             oppfolgingsplan={oppfolgingsplanIkkeDeltMedFastlege}
             delmednav={delmednav}
             delMedNavFunc={delMedNavFunc}
             fastlegeDeling={fastlegeDeling}
             delMedFastlege={delMedFastlege}
         />);
-        expect(komponent.find('.buttonElement')).to.have.length(1);
+        expect(komponent.find('.buttonElement')).to.have.length(3);
     });
 
     describe('delingFeiletNav', () => {

@@ -1,4 +1,8 @@
-import React from 'react';
+import React, {
+    useEffect,
+    useRef,
+    useState,
+} from 'react';
 import PropTypes from 'prop-types';
 import Alertstripe from 'nav-frontend-alertstriper';
 import { Knapp } from 'nav-frontend-knapper';
@@ -40,6 +44,14 @@ export const isGodkjentPlanDelKnapperAvailable = (oppfolgingsplan) => {
     return !(oppfolgingsplan.godkjentPlan.deltMedFastlege && oppfolgingsplan.godkjentPlan.deltMedNAV);
 };
 
+function usePrevious(value) {
+    const ref = useRef();
+    useEffect(() => {
+        ref.current = value;
+    });
+    return ref.current;
+}
+
 const GodkjentPlanDelKnapper = (
     {
         oppfolgingsplan,
@@ -48,6 +60,16 @@ const GodkjentPlanDelKnapper = (
         fastlegeDeling,
         delMedFastlege,
     }) => {
+    const [showFadingIconWithText, setShowFadingIconWithText] = useState(false);
+
+    const prevProp = usePrevious(delmednav.sendt);
+
+    useEffect(() => {
+        if (prevProp === false && delmednav.sendt) {
+            setShowFadingIconWithText(true);
+        }
+    }, [delmednav.sendt]);
+
     return (<div>
         <div className="buttonColumn">
             { !oppfolgingsplan.godkjentPlan.deltMedNAV &&
@@ -62,7 +84,7 @@ const GodkjentPlanDelKnapper = (
                 {texts.buttonShareWithNAV}
             </Knapp>
             }
-            { delmednav.sendt && <FadingIconWithText text={texts.sharedWithNAV} /> }
+            { showFadingIconWithText && <FadingIconWithText text={texts.sharedWithNAV} /> }
             { !oppfolgingsplan.godkjentPlan.deltMedFastlege &&
             <Knapp
                 className="buttonElement"
