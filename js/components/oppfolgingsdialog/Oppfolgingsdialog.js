@@ -11,7 +11,6 @@ import {
     finnOgHentSykeforlopsPerioderSomMangler,
     finnOgHentVirksomheterSomMangler,
 } from '../../utils/reducerUtils';
-import { utenSamtykke } from '../../utils/oppfolgingsplanUtils';
 import { getContextRoot } from '../../routers/paths';
 import Arbeidsoppgaver from './utfylling/arbeidsoppgaver/Arbeidsoppgaver';
 import Tiltak from './utfylling/tiltak/Tiltak';
@@ -187,13 +186,10 @@ class Oppfolgingsdialog extends Component {
                 }
             })();
         }
-
         return (
             <div className="oppfolgingsdialog">
                 { oppfolgingsdialogAvbruttOgNyOpprettet && <AvbruttGodkjentPlanVarsel /> }
-                { !utenSamtykke(oppfolgingsdialog) &&
-                    <MidlertidigAlertStripeFastlegedeling />
-                }
+                <MidlertidigAlertStripeFastlegedeling />
                 <SideOverskrift tittel={oppfolgingsdialog.arbeidstaker.navn} />
                 { !disableNavigation && <NavigasjonsTopp
                     disabled={disableNavigation}
