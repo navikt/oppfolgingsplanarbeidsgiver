@@ -5,28 +5,10 @@ import { finnGodkjentedialogerAvbruttAvMotpartSidenSistInnlogging } from '../../
 import { oppfolgingsplanPt } from '../../proptypes/opproptypes';
 import OppfolgingsdialogVisning from './OppfolgingsdialogerVisning';
 import OppfolgingsdialogerInfoPersonvern from './OppfolgingsdialogerInfoPersonvern';
-import NotifikasjonBoksAdvarsel from './godkjennplan/godkjentplan/NotifikasjonBoksAdvarsel';
+import AvbruttPlanNotifikasjonBoksAdvarsel from './godkjennplan/godkjentplan/AvbruttPlanNotifikasjonBoksAdvarsel';
 
 const texts = {
     pageTitle: 'Oppfølgingsplaner',
-    alertstripeDelMedNAVInfo: 'Det er for tiden ikke mulig å dele oppfølgingsplaner med fastlegen ' +
-        'på grunn av endringer i registre utenfor NAV som ikke er varslet. Vi jobber med å tilpasse våre systemer.',
-};
-
-const textAlertstripeCancelledPlan = (counterPart) => {
-    return `${counterPart} har startet en ny oppfølgingsplan. Den gamle er arkivert.`;
-};
-
-const alertstripeTexts = (cancelledPlaner) => {
-    const alertTexts = [];
-
-    alertTexts.push(texts.alertstripeDelMedNAVInfo);
-
-    if (cancelledPlaner.length > 0) {
-        alertTexts.push(textAlertstripeCancelledPlan(cancelledPlaner[0].arbeidstaker.navn));
-    }
-
-    return alertTexts;
 };
 
 const OppfolgingsdialogerInnhold = ({
@@ -36,17 +18,16 @@ const OppfolgingsdialogerInnhold = ({
     opprettOppfolgingsdialog,
 }) => {
     const planerAvbruttAvMotpartSidenSistInnlogging = finnGodkjentedialogerAvbruttAvMotpartSidenSistInnlogging(oppfolgingsdialoger);
-    const allAlertstripeTexts = alertstripeTexts(planerAvbruttAvMotpartSidenSistInnlogging);
 
     return (
         <div>
-            {
-                allAlertstripeTexts.length > 0 && <NotifikasjonBoksAdvarsel
-                    texts={allAlertstripeTexts}
-                />
-            }
             <Sidetopp tittel={texts.pageTitle} />
             <OppfolgingsdialogerInfoPersonvern />
+            {
+                planerAvbruttAvMotpartSidenSistInnlogging.length > 0 && <AvbruttPlanNotifikasjonBoksAdvarsel
+                    motpartnavn={planerAvbruttAvMotpartSidenSistInnlogging[0].arbeidstaker.navn}
+                />
+            }
             <OppfolgingsdialogVisning
                 koblingId={koblingId}
                 oppfolgingsdialoger={oppfolgingsdialoger}

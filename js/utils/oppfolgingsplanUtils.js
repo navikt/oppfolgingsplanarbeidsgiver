@@ -146,6 +146,3 @@ export const skalDeleMedNav = (delMedNav, oppfolgingsdialog) => {
     return delMedNav || oppfolgingsdialog.godkjenninger.find((godkjenning) => { return godkjenning.delMedNav; });
 };
 
-export const utenSamtykke = (oppfolgingsdialog) => {
-    return oppfolgingsdialog.arbeidsgiver.naermesteLeder.samtykke === null;
-};
