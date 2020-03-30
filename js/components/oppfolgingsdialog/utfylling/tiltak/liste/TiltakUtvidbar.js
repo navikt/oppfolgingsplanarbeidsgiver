@@ -221,7 +221,7 @@ class TiltakUtvidbar extends Component {
         event.stopPropagation();
         this.setState({
             visLagreSkjema: false,
-            lagreKommentarSkjema: true,
+            lagreKommentarSkjema: !this.state.lagreKommentarSkjema,
         });
         if (!this.state.erApen) {
             this.apne();

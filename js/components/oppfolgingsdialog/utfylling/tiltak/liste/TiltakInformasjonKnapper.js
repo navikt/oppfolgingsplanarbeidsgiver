@@ -20,7 +20,6 @@ const TiltakInformasjonKnapper = (
         lagreSkjema,
         visLagreSkjema,
         sendSlett,
-        lagreKommentarSkjema,
         visLagreKommentarSkjema,
     }) => {
     const aktoerHarOpprettetElement = fnr === (element.opprettetAv && element.opprettetAv.fnr);
@@ -43,14 +42,12 @@ const TiltakInformasjonKnapper = (
                 }
             </div>
             <div>
-                {!lagreKommentarSkjema &&
                 <ButtonComment
                     count={element.kommentarer.length}
                     onClick={(event) => {
                         visLagreKommentarSkjema(event);
                     }}
                 />
-                }
             </div>
         </TiltakButtonsRow>
     );
@@ -61,7 +58,6 @@ TiltakInformasjonKnapper.propTypes = {
     lagreSkjema: PropTypes.bool,
     visLagreSkjema: PropTypes.func,
     sendSlett: PropTypes.func,
-    lagreKommentarSkjema: PropTypes.bool,
     visLagreKommentarSkjema: PropTypes.func,
 };
 
