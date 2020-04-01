@@ -35,7 +35,7 @@ spec:
       memory: 256Mi
   ingresses:
     - "https://tjenester.nav.no/oppfolgingsplanarbeidsgiver"
-    - "https://oppfolgingsplanarbeidsgiver.nais.oera.local"
+    - "https://oppfolgingsplanarbeidsgiver.nais.oera.no"
   env:
     - name: APPRES_CMS_URL
       value: https://appres.nav.no
