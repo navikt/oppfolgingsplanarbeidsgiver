@@ -18,7 +18,7 @@ import {
 
 Sentry.init({
     dsn: 'https://0a85ce6fefed42a49d44a727614d6b97@sentry.gc.nav.no/25',
-    environment: window.location.hostname
+    environment: window.location.hostname,
 });
 
 store.dispatch(hentSykmeldte());
