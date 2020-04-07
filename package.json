@@ -31,7 +31,7 @@
   "license": "ISC",
   "dependencies": {
     "@navikt/digisyfo-npm": "17.2.0",
-    "@sentry/browser": "^5.15.4",
+    "@sentry/browser": "5.15.4",
     "babel-loader": "7.1.5",
     "babel-polyfill": "6.26.0",
     "classnames": "2.2.5",
