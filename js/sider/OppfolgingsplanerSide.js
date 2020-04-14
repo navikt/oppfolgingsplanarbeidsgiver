@@ -92,15 +92,15 @@ export class OppfolgingsplanerSide extends Component {
         this.props.sjekkTilgang(sykmeldt);
 
         if (oppfolgingsdialogHarBlittOpprettet(oppfolgingsdialogerReducer, nextProps.oppfolgingsdialogerReducer)) {
+            window.sessionStorage.setItem('hash', 'arbeidsoppgaver');
             this.props.hentOppfolgingsplaner();
         }
         if (kopierDialogReducer.sender && nextProps.kopierDialogReducer.sendt) {
+            window.sessionStorage.setItem('hash', 'arbeidsoppgaver');
             this.props.hentOppfolgingsplaner();
         }
         if (oppfolgingsdialogerReducer.opprettet && !alleOppfolgingsdialogerReducer.hentet && nextProps.alleOppfolgingsdialogerReducer.hentet) {
             history.push(`${getContextRoot()}/${koblingId}/oppfolgingsplaner/${oppfolgingsdialogerReducer.opprettetId}`);
-            window.location.hash = 'arbeidsoppgaver';
-            window.sessionStorage.setItem('hash', 'arbeidsoppgaver');
         }
         if (kopierDialogReducer.sendt && !alleOppfolgingsdialogerReducer.hentet && nextProps.alleOppfolgingsdialogerReducer.hentet) {
             history.push(`${getContextRoot()}/${koblingId}/oppfolgingsplaner/${kopierDialogReducer.data}`);
