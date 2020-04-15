@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import * as opProptypes from '../../../../proptypes/opproptypes';
 import ButtonDeleteIcon from '../../../app/buttons/ButtonDeleteIcon';
+import MiniSpinner from '../../../MiniSpinner';
 
 const ArbeidsoppgaveInformasjonKnapperStyled = styled.div`
     padding-top: 1em;
@@ -15,14 +16,23 @@ const ArbeidsoppgaveInformasjonKnapper = (
         fnr,
         sendSlett,
     }) => {
+    const [sletter, setSletter] = useState(false);
     const arbeidsoppgaveId = arbeidsoppgave.arbeidsoppgaveId;
     const aktoerHarOpprettetElement = fnr === (arbeidsoppgave.opprettetAv && arbeidsoppgave.opprettetAv.fnr);
     return (
-        aktoerHarOpprettetElement ? (<ArbeidsoppgaveInformasjonKnapperStyled className="arbeidsoppgaveInformasjonKnapper">
-            <ButtonDeleteIcon
-                click={(event) => { sendSlett(event, arbeidsoppgaveId); }}
-            />
-        </ArbeidsoppgaveInformasjonKnapperStyled>) : null
+        aktoerHarOpprettetElement ? (
+            <ArbeidsoppgaveInformasjonKnapperStyled className="arbeidsoppgaveInformasjonKnapper">
+                {sletter
+                    ? <MiniSpinner />
+                    : <ButtonDeleteIcon
+                        click={(event) => {
+                            setSletter(true);
+                            sendSlett(event, arbeidsoppgaveId);
+                        }}
+                    />
+                }
+            </ArbeidsoppgaveInformasjonKnapperStyled>
+        ) : null
     );
 };
 ArbeidsoppgaveInformasjonKnapper.propTypes = {
