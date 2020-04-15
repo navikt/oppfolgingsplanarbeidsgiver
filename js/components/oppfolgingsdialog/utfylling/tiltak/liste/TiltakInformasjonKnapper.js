@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { tiltakPt } from '../../../../../proptypes/opproptypes';
@@ -6,6 +6,7 @@ import { skalVurdereTiltak } from '../../../../../utils/tiltakUtils';
 import ButtonEditIcon from '../../../../app/buttons/ButtonEditIcon';
 import ButtonDeleteIcon from '../../../../app/buttons/ButtonDeleteIcon';
 import ButtonComment from '../../../../app/buttons/ButtonComment';
+import MiniSpinner from '../../../../MiniSpinner';
 
 const TiltakButtonsRow = styled.div`
     display: grid;
@@ -23,6 +24,7 @@ const TiltakInformasjonKnapper = (
         lagreKommentarSkjema,
         visLagreKommentarSkjema,
     }) => {
+    const [sletter, setSletter] = useState(false);
     const aktoerHarOpprettetElement = fnr === (element.opprettetAv && element.opprettetAv.fnr);
     return (
         <TiltakButtonsRow>
@@ -35,11 +37,17 @@ const TiltakInformasjonKnapper = (
             </div>
             <div>
                 {aktoerHarOpprettetElement &&
-                <ButtonDeleteIcon
-                    click={(event) => {
-                        sendSlett(event, element.tiltakId);
-                    }}
-                />
+                    <div>
+                        {sletter
+                            ? <MiniSpinner />
+                            : <ButtonDeleteIcon
+                                click={(event) => {
+                                    setSletter(true);
+                                    sendSlett(event, element.tiltakId);
+                                }}
+                            />
+                        }
+                    </div>
                 }
             </div>
             <div>
