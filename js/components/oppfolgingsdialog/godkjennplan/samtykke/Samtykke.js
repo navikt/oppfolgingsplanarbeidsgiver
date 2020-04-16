@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import { oppfolgingsplanPt } from '../../../../proptypes/opproptypes';
 import { getContextRoot } from '../../../../routers/paths';
+import { erArbeidstakerEgenLeder } from '../../../../utils/oppfolgingsplanUtils';
 
 const texts = {
     title: 'Vil du gjøre det lettere for andre som skal fylle ut?',
@@ -52,7 +53,7 @@ class Samtykke extends Component {
 
     sendSamtykke() {
         const { oppfolgingsdialog } = this.props;
-        this.props.sendSamtykke(oppfolgingsdialog.id, this.state.samtykke, oppfolgingsdialog.arbeidstaker.fnr);
+        this.props.sendSamtykke(oppfolgingsdialog.id, this.state.samtykke, oppfolgingsdialog.arbeidstaker.fnr, erArbeidstakerEgenLeder(oppfolgingsdialog));
     }
 
     render() {

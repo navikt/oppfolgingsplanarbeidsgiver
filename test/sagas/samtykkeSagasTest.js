@@ -21,6 +21,7 @@ describe('samtykkeSagas', () => {
             id: 1,
             samtykke: true,
             fnr,
+            erEgenLeder: false,
         });
 
         it(`Skal dispatche ${actions.GIR_SAMTYKKE}`, () => {
@@ -43,6 +44,7 @@ describe('samtykkeSagas', () => {
                 id: 1,
                 samtykke: true,
                 fnr,
+                erEgenLeder: false,
             });
             expect(generator.next().value).to.deep.equal(nextPut);
         });

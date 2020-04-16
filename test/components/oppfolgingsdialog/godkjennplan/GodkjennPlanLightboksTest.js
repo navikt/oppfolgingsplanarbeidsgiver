@@ -4,11 +4,13 @@ import { shallow } from 'enzyme';
 import sinon from 'sinon';
 import chaiEnzyme from 'chai-enzyme';
 import rewire from 'rewire';
+import { Field } from 'redux-form';
 import Alertstripe from 'nav-frontend-alertstriper';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import { GodkjennPlanLightboksComponent } from '../../../../js/components/oppfolgingsdialog/godkjennplan/GodkjennPlanLightboks';
 import GodkjennPlanSkjemaDatovelger from '../../../../js/components/oppfolgingsdialog/godkjennplan/GodkjennPlanSkjemaDatovelger';
 import getOppfolgingsplan from '../../../mock/mockOppfolgingsdialog';
+import Radioknapper from '../../../../js/skjema/Radioknapper';
 
 chai.use(chaiEnzyme());
 const expect = chai.expect;
@@ -17,12 +19,19 @@ describe('GodkjennPlanLightboks', () => {
     let komponent;
     let handleSubmit;
     let initialize;
+    const oppfolgingsplan = getOppfolgingsplan();
 
     beforeEach(() => {
         handleSubmit = sinon.spy();
         initialize = sinon.spy(); // Veden: Lager en spy og sender den inn til GodkjennPlanSkjemaAG
         komponent = shallow(<GodkjennPlanLightboksComponent
-            oppfolgingsdialog={getOppfolgingsplan()}
+            oppfolgingsdialog={{
+                ...oppfolgingsplan,
+                arbeidstaker: {
+                    ...oppfolgingsplan.arbeidstaker,
+                    fnr: `${oppfolgingsplan.arbeidsgiver.naermesteLeder.fnr}1`,
+                },
+            }}
             GodkjennPlanSkjemaDatovelger={GodkjennPlanSkjemaDatovelger}
             handleSubmit={handleSubmit}
             initialize={initialize}
@@ -88,6 +97,42 @@ describe('GodkjennPlanLightboks', () => {
             radioSelected: true,
         });
         expect(komponent.find(Hovedknapp)).to.have.length(1);
+    });
+
+    it('Skal vise Radioknapper', () => {
+        expect(komponent.find(Field)).to.have.length(1);
+    });
+
+    describe('Visning for Leder som er leder for seg selv(Arbeidstaker og leder er samme person)', () => {
+        let komponentLederArbeidstakerSammePerson;
+        const oppfolgingsplanLederArbeidstakerSammePerson = {
+            ...getOppfolgingsplan(),
+            arbeidstaker: {
+                ...oppfolgingsplan.arbeidstaker,
+                fnr: `${oppfolgingsplan.arbeidsgiver.naermesteLeder.fnr}`,
+            },
+        };
+        beforeEach(() => {
+            komponentLederArbeidstakerSammePerson = shallow(<GodkjennPlanLightboksComponent
+                oppfolgingsdialog={oppfolgingsplanLederArbeidstakerSammePerson}
+                GodkjennPlanSkjemaDatovelger={GodkjennPlanSkjemaDatovelger}
+                handleSubmit={handleSubmit}
+                initialize={initialize}
+            />, { disableLifecycleMethods: true });
+        });
+
+        it('Skal vise Alertstripe', () => {
+            expect(komponentLederArbeidstakerSammePerson.find(Alertstripe)).to.have.length(1);
+        });
+
+        it('Skal vise overskrifter', () => {
+            expect(komponentLederArbeidstakerSammePerson.find('h2')).to.have.length(1);
+            expect(komponentLederArbeidstakerSammePerson.find('h3')).to.have.length(1);
+        });
+
+        it('Skal ikke vise Radioknapper', () => {
+            expect(komponentLederArbeidstakerSammePerson.find(Radioknapper)).to.have.length(0);
+        });
     });
 
     it('Skal sjekke validate', () => {

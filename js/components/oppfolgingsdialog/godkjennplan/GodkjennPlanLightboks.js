@@ -8,7 +8,10 @@ import {
     sluttDatoSenereEnnStartDato,
 } from '../../../utils/datoUtils';
 import { GODKJENN_OPPFOLGINGSPLAN_SKJEMANAVN } from '../../../konstanter';
-import { erIkkeOppfolgingsdialogUtfylt } from '../../../utils/oppfolgingsplanUtils';
+import {
+    erArbeidstakerEgenLeder,
+    erIkkeOppfolgingsdialogUtfylt,
+} from '../../../utils/oppfolgingsplanUtils';
 import Radioknapper from '../../../skjema/Radioknapper';
 import CheckboxSelvstendig from '../../../skjema/CheckboxSelvstendig';
 import GodkjennPlanSkjemaDatovelger from './GodkjennPlanSkjemaDatovelger';
@@ -36,6 +39,9 @@ const texts = {
     },
     buttonCancel: 'Avbryt',
     shareWithNAV: 'Jeg vil dele planen med NAV',
+    arbeidstakerLeaderSamePerson: {
+        info: 'Fordi du er din egen leder, kan du opprette planen nå.',
+    },
 };
 
 export const textDelMedNav = (arbeidstakerName, tvangsgodkjent) => {
@@ -47,12 +53,14 @@ export const textDelMedNav = (arbeidstakerName, tvangsgodkjent) => {
 export class GodkjennPlanLightboksComponent extends Component {
     constructor(props) {
         super(props);
+        const erSendTilGodkjenningTillatt = !erArbeidstakerEgenLeder(props.oppfolgingsdialog);
         this.state = {
-            radioSelected: false,
-            createWithoutApproval: false,
+            radioSelected: !erSendTilGodkjenningTillatt,
+            createWithoutApproval: !erSendTilGodkjenningTillatt,
             visIkkeUtfyltFeilmelding: false,
-            opprettplan: '',
+            opprettplan: erSendTilGodkjenningTillatt ? '' : 'tvungenGodkjenning',
             submitting: false,
+            erSendTilGodkjenningTillatt,
         };
         this.godkjennPlan = this.godkjennPlan.bind(this);
         this.handledChange = this.handledChange.bind(this);
@@ -113,53 +121,65 @@ export class GodkjennPlanLightboksComponent extends Component {
             <form onSubmit={handleSubmit(this.godkjennPlan)} className="godkjennPlanSkjema">
                 <h2>{texts.title}</h2>
 
-                <h3>{texts.approval.question}</h3>
+                {this.state.erSendTilGodkjenningTillatt &&
+                <React.Fragment>
+                    <h3>{texts.approval.question}</h3>
 
-                <div className="inputgruppe">
-                    <Field
-                        name="opprettplan"
-                        id="opprettplan"
-                        component={Radioknapper}
-                        onChange={(e) => { this.handledChange(e); }}
-                    >
-                        <input
-                            key="opprettplan-1"
-                            value={'true'}
-                            label={texts.approval.sendForApproval}
-                            id="giGodkjenning"
-                            disabled={this.state.visIkkeUtfyltFeilmelding}
-                            onClick={(e) => {
-                                if (erHerokuApp()) {
-                                    e.preventDefault();
-                                }
-                            }}
-                        />
-                        <input
-                            key="opprettplan-2"
-                            value={'tvungenGodkjenning'}
-                            label={texts.approval.sendWithoutApproval}
-                            id="opprettUtenGodkjenning"
-                            disabled={this.state.visIkkeUtfyltFeilmelding}
+                    <div className="inputgruppe">
+                        <Field
+                            name="opprettplan"
+                            id="opprettplan"
+                            component={Radioknapper}
+                            onChange={(e) => { this.handledChange(e); }}
+                        >
+                            <input
+                                key="opprettplan-1"
+                                value={'true'}
+                                label={texts.approval.sendForApproval}
+                                id="giGodkjenning"
+                                disabled={this.state.visIkkeUtfyltFeilmelding}
+                                onClick={(e) => {
+                                    if (erHerokuApp()) {
+                                        e.preventDefault();
+                                    }
+                                }}
+                            />
+                            <input
+                                key="opprettplan-2"
+                                value={'tvungenGodkjenning'}
+                                label={texts.approval.sendWithoutApproval}
+                                id="opprettUtenGodkjenning"
+                                disabled={this.state.visIkkeUtfyltFeilmelding}
 
-                        />
-                    </Field>
-                </div>
+                            />
+                        </Field>
+                    </div>
 
-                { this.state.opprettplan === 'tvungenGodkjenning' &&
-                <Alertstripe
-                    className="alertstripe--notifikasjonboks"
-                    type="info"
-                    solid>
-                    {texts.infoWithoutApproval}
-                </Alertstripe>
+                    { this.state.opprettplan === 'tvungenGodkjenning' &&
+                    <Alertstripe
+                        className="alertstripe--notifikasjonboks"
+                        type="info"
+                        solid>
+                        {texts.infoWithoutApproval}
+                    </Alertstripe>
+                    }
+
+                    { this.state.opprettplan === 'true' &&
+                    <Alertstripe
+                        className="alertstripe--notifikasjonboks"
+                        type="info"
+                        solid>
+                        {texts.info}
+                    </Alertstripe>
+                    }
+                </React.Fragment>
                 }
-
-                { this.state.opprettplan === 'true' &&
+                {!this.state.erSendTilGodkjenningTillatt &&
                 <Alertstripe
                     className="alertstripe--notifikasjonboks"
                     type="info"
                     solid>
-                    {texts.info}
+                    {texts.arbeidstakerLeaderSamePerson.info}
                 </Alertstripe>
                 }
 

@@ -9,11 +9,12 @@ describe('samtykke_actions', () => {
     });
 
     it('Skal ha en giSamtykke()-funksjon som returnerer riktig action', () => {
-        expect(actions.giSamtykke('123', true, fnr)).to.deep.equal({
+        expect(actions.giSamtykke('123', true, fnr, false)).to.deep.equal({
             type: actions.GI_SAMTYKKE_FORESPURT,
             id: '123',
             samtykke: true,
             fnr,
+            erEgenLeder: false,
         });
     });
 
@@ -25,11 +26,12 @@ describe('samtykke_actions', () => {
     });
 
     it('har en samtykkeGitt()-funksjon som returnerer riktig action', () => {
-        expect(actions.samtykkeGitt(12345, true, fnr)).to.deep.equal({
+        expect(actions.samtykkeGitt(12345, true, fnr, false)).to.deep.equal({
             type: actions.SAMTYKKE_GITT,
             id: 12345,
             samtykke: true,
             fnr,
+            erEgenLeder: false,
         });
     });
 

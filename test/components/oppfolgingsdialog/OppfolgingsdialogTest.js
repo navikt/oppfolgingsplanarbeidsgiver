@@ -161,10 +161,53 @@ describe('Oppfolgingsdialog', () => {
         expect(component.find(AvbruttGodkjentPlanVarsel)).to.have.length(1);
     });
 
-    it('Skal vise Samtykke, om arbeidstaker ikke har svart paa samtykke og visSamtykke er true', () => {
+    it('Skal vise Samtykke, om arbeidstaker ikke har svart paa samtykke og visSamtykke er true og er ikke egen leder', () => {
         oppfolgingsdialog = Object.assign({}, getOppfolgingsplan(), {
             arbeidstaker: {
+                fnr: '101',
+                samtykke: true,
+            },
+            arbeidsgiver: {
+                naermesteLeder: {
+                    fnr: '102',
+                    samtykke: null,
+                },
+            },
+        });
+        component = shallow(<Oppfolgingsdialog
+            avbrytdialogReducer={avbrytdialogReducer}
+            settAktivtSteg={settAktivtSteg}
+            oppfolgingsdialog={oppfolgingsdialog}
+            navigasjontoggles={navigasjontoggles}
+            settDialog={settDialog}
+            hentNaermesteLeder={hentNaermesteLeder}
+            naermesteleder={naermesteleder}
+            hentVirksomhet={hentVirksomhet}
+            hentPerson={hentPerson}
+            hentKontaktinfo={hentKontaktinfo}
+            hentSykeforlopsPerioder={hentSykeforlopsPerioder}
+            virksomhet={virksomhet}
+            person={person}
+            kontaktinfo={kontaktinfo}
+            arbeidsforhold={arbeidsforhold}
+            hentArbeidsforhold={hentArbeidsforhold}
+            sykmeldinger={sykmeldinger}
+            sykeforlopsPerioderReducer={sykeforlopsPerioderReducer}
+        />);
+        expect(component.find(Samtykke)).to.have.length(1);
+    });
+
+    it('Skal vise Samtykke, om arbeidstaker ikke har svart paa samtykke og visSamtykke er true og er egen leder', () => {
+        oppfolgingsdialog = Object.assign({}, getOppfolgingsplan(), {
+            arbeidstaker: {
+                fnr: '102',
                 samtykke: null,
+            },
+            arbeidsgiver: {
+                naermesteLeder: {
+                    fnr: '102',
+                    samtykke: true,
+                },
             },
         });
         component = shallow(<Oppfolgingsdialog
@@ -202,6 +245,7 @@ describe('Oppfolgingsdialog', () => {
             arbeidsgiver: {
                 naermesteLeder: {
                     fnr,
+                    samtykke: true,
                 },
                 forrigeNaermesteLeder: null,
             },
