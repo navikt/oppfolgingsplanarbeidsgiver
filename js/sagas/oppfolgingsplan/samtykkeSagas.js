@@ -14,7 +14,7 @@ export function* giSamtykke(action) {
     try {
         const url = `${hentSyfoapiUrl(API_NAVN.SYFOOPPFOLGINGSPLANSERVICE)}/oppfolgingsplan/actions/${action.id}/samtykk?samtykke=${action.samtykke}`;
         yield call(post, url);
-        yield put(actions.samtykkeGitt(action.id, action.samtykke, fnr));
+        yield put(actions.samtykkeGitt(action.id, action.samtykke, fnr, action.erEgenLeder));
     } catch (e) {
         log(e);
         yield put(actions.giSamtykkeFeilet(fnr));

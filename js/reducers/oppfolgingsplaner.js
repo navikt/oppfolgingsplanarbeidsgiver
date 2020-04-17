@@ -424,6 +424,13 @@ const oppfolgingsplaner = (state = initiellState, action = {}) => {
         case SAMTYKKE_GITT: {
             const data = state[fnr].data.map((oppfolgingsdialog) => {
                 if (Number(action.id) === oppfolgingsdialog.id) {
+                    if (action.erEgenLeder) {
+                        return Object.assign({}, oppfolgingsdialog, {
+                            arbeidstaker: Object.assign({}, oppfolgingsdialog.arbeidstaker, {
+                                samtykke: action.samtykke,
+                            }),
+                        });
+                    }
                     return Object.assign({}, oppfolgingsdialog, {
                         arbeidsgiver: Object.assign({}, oppfolgingsdialog.arbeidsgiver, {
                             naermesteLeder: Object.assign({}, oppfolgingsdialog.arbeidsgiver.naermesteLeder, {

@@ -6,14 +6,11 @@ import {
     dokumentReducerPt,
     oppfolgingsplanPt,
 } from '../../../../proptypes/opproptypes';
+import { manglerSamtykke } from '../../../../utils/oppfolgingsplanUtils';
 import GodkjentPlan from './GodkjentPlan';
 import GodkjentPlanAvbrutt from './GodkjentPlanAvbrutt';
 import Samtykke from '../samtykke/Samtykke';
 import OppfolgingsdialogPlanInfoboks from './OppfolgingsdialogPlanInfoboks';
-
-const manglerSamtykke = (oppfolgingsplan) => {
-    return oppfolgingsplan.arbeidsgiver.samtykke === null;
-};
 
 const ReleasetPlan = (
     {

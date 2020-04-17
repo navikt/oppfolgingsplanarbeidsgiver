@@ -146,3 +146,15 @@ export const skalDeleMedNav = (delMedNav, oppfolgingsdialog) => {
     return delMedNav || oppfolgingsdialog.godkjenninger.find((godkjenning) => { return godkjenning.delMedNav; });
 };
 
+export const erArbeidstakerEgenLeder = (oppfolgingsdialog) => {
+    return oppfolgingsdialog.arbeidstaker
+     && oppfolgingsdialog.arbeidsgiver.naermesteLeder
+     && oppfolgingsdialog.arbeidstaker.fnr === oppfolgingsdialog.arbeidsgiver.naermesteLeder.fnr;
+};
+
+export const manglerSamtykke = (oppfolgingsplan) => {
+    if (erArbeidstakerEgenLeder(oppfolgingsplan)) {
+        return oppfolgingsplan.arbeidstaker.samtykke === null;
+    }
+    return oppfolgingsplan.arbeidsgiver.naermesteLeder.samtykke === null;
+};

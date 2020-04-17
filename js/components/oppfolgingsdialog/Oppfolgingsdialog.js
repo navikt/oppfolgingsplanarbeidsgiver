@@ -10,6 +10,7 @@ import {
     finnOgHentSykeforlopsPerioderSomMangler,
     finnOgHentVirksomheterSomMangler,
 } from '../../utils/reducerUtils';
+import { manglerSamtykke } from '../../utils/oppfolgingsplanUtils';
 import { getContextRoot } from '../../routers/paths';
 import Arbeidsoppgaver from './utfylling/arbeidsoppgaver/Arbeidsoppgaver';
 import Tiltak from './utfylling/tiltak/Tiltak';
@@ -21,10 +22,6 @@ import Samtykke from '../oppfolgingsdialog/godkjennplan/samtykke/Samtykke';
 import Godkjenn from './godkjennplan/Godkjenn';
 import Godkjenninger from './godkjennplan/godkjenninger/Godkjenninger';
 import ReleasetPlan from './godkjennplan/releasetplan/ReleasetPlan';
-
-const manglerSamtykke = (oppfolgingsplan) => {
-    return oppfolgingsplan.arbeidsgiver.naermesteLeder.samtykke === null;
-};
 
 const inneholderGodkjentPlan = (oppfolgingsplan) => {
     return oppfolgingsplan.godkjentPlan;
