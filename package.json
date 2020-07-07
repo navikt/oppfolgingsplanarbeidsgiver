@@ -21,6 +21,7 @@
     "filmer": "cp -R filmer ./dist/resources/",
     "filmtekster": "cp -R filmtekster ./dist/resources/",
     "nais-build": "npm-run-all clean deploy images filmtekster filmer",
+    "sec-audit": "npm audit --audit-level=moderate",
     "start": "node ./server.js",
     "start-local": "node ./server.js local",
     "start-opplaering": "node ./server.js opplaering",
