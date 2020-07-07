@@ -1,10 +1,6 @@
-name: feature
+name: main
 
-on:
-  push:
-    branches:
-      - '*'
-      - '!master'
+on: push
 
 env:
   APP_NAME: oppfolgingsplanarbeidsgiver
@@ -34,9 +30,6 @@ jobs:
       - name: Install deps
         run: |
           npm install
-      - name: Lint check
-        run: |
-          npm run lint
       - name: Run tests
         run: |
           npm run test
@@ -57,3 +50,40 @@ jobs:
           docker login docker.pkg.github.com -u ${GITHUB_REPOSITORY} -p ${GITHUB_TOKEN}
           docker push ${IMAGE}
           echo ${IMAGE}
+
+  deploy-dev:
+    if: github.ref == 'refs/heads/master'
+    name: Deploy to NAIS Dev-sbs
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: nais/deploy/actions/deploy@v1
+        env:
+          APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
+          CLUSTER: dev-sbs
+          RESOURCE: naiserator-dev.yaml
+
+  deploy-prod:
+    if: github.ref == 'refs/heads/master'
+    name: Deploy to NAIS Prod-sbs
+    needs: deploy-dev
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: nais/deploy/actions/deploy@v1
+        env:
+          APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
+          CLUSTER: prod-sbs
+          RESOURCE: naiserator-prod.yaml
+
+  pling:
+    if: github.ref == 'refs/heads/master'
+    name: Pling!
+    needs: deploy-prod
+    runs-on: ubuntu-latest
+    steps:
+      - name: Pling
+        run: |
+          curl -s "https://syfoping.herokuapp.com/regDeploy?deployedBy=${COMMITER_NAME}&app=${APP_NAME}"
+
