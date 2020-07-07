@@ -97,24 +97,6 @@ export class OppfolgingsplanSide extends Component {
         this.berikSykmeldt();
     }
 
-    componentDidUpdate() {
-        if (window.location.hash === '' && window.sessionStorage.getItem('hash')) {
-            window.location.hash = window.sessionStorage.getItem('hash');
-        }
-
-        if (window.location.hash === '#arbeidsoppgaver' && this.props.navigasjontoggles.steg !== 1) {
-            this.props.settAktivtSteg(1);
-        }
-
-        if (window.location.hash === '#tiltak' && this.props.navigasjontoggles.steg !== 2) {
-            this.props.settAktivtSteg(2);
-        }
-
-        if (window.location.hash === '#godkjenn' && this.props.navigasjontoggles.steg !== 3) {
-            this.props.settAktivtSteg(3);
-        }
-    }
-
     // eslint-disable-next-line camelcase
     UNSAFE_componentWillReceiveProps(nextProps) {
         const {
@@ -141,6 +123,24 @@ export class OppfolgingsplanSide extends Component {
             }
         }
         this.berikSykmeldt();
+    }
+
+    componentDidUpdate() {
+        if (window.location.hash === '' && window.sessionStorage.getItem('hash')) {
+            window.location.hash = window.sessionStorage.getItem('hash');
+        }
+
+        if (window.location.hash === '#arbeidsoppgaver' && this.props.navigasjontoggles.steg !== 1) {
+            this.props.settAktivtSteg(1);
+        }
+
+        if (window.location.hash === '#tiltak' && this.props.navigasjontoggles.steg !== 2) {
+            this.props.settAktivtSteg(2);
+        }
+
+        if (window.location.hash === '#godkjenn' && this.props.navigasjontoggles.steg !== 3) {
+            this.props.settAktivtSteg(3);
+        }
     }
 
     berikSykmeldt() {

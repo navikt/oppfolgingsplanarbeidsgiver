@@ -57,13 +57,6 @@ class Tiltak extends Component {
         window.scrollTo(0, this.formRef.current.offsetTop);
     }
 
-    componentDidUpdate(prevProps, prevState) {
-        if (!prevState.visTiltakSkjema && this.state.visTiltakSkjema && this.lagreSkjema) {
-            const form = findDOMNode(this.lagreSkjema);
-            scrollTo(form, 300);
-        }
-    }
-
     // eslint-disable-next-line camelcase
     UNSAFE_componentWillReceiveProps(nextProps) {
         if (!nextProps.tiltak.feiletTiltakId && nextProps.tiltak.lagringFeilet && this.props.tiltak.lagringFeilet !== nextProps.tiltak.lagringFeilet) {
@@ -72,6 +65,13 @@ class Tiltak extends Component {
                 visTiltakSkjema: true,
                 varselTekst: texts.updateError,
             });
+        }
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        if (!prevState.visTiltakSkjema && this.state.visTiltakSkjema && this.lagreSkjema) {
+            const form = findDOMNode(this.lagreSkjema);
+            scrollTo(form, 300);
         }
     }
 
