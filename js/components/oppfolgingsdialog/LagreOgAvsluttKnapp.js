@@ -4,7 +4,7 @@ import { Link } from 'react-router';
 import { getContextRoot } from '../../routers/paths';
 
 const tekster = {
-    knapp: 'Lagre og avslutt',
+    knapp: 'Fortsett senere',
 };
 
 const LagreOgAvsluttKnapp = ({ koblingId }) => {
