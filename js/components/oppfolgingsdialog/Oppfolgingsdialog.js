@@ -16,6 +16,7 @@ import Arbeidsoppgaver from './utfylling/arbeidsoppgaver/Arbeidsoppgaver';
 import Tiltak from './utfylling/tiltak/Tiltak';
 import SideOverskrift from '../oppfolgingsdialog/SideOverskrift';
 import AvbruttGodkjentPlanVarsel from '../oppfolgingsdialog/AvbruttGodkjentPlanVarsel';
+import LagreOgAvsluttKnapp from './LagreOgAvsluttKnapp';
 import NavigasjonsBunn from '../oppfolgingsdialog/NavigasjonsBunn';
 import NavigasjonsTopp from '../oppfolgingsdialog/NavigasjonsTopp';
 import Samtykke from '../oppfolgingsdialog/godkjennplan/samtykke/Samtykke';
@@ -111,6 +112,7 @@ class Oppfolgingsdialog extends Component {
             && !(inneholderGodkjenninger(oppfolgingsdialog) || erTvangsgodkjent(oppfolgingsdialog));
         let panel;
         let disableNavigation = false;
+        const skalViseAvsluttOgLagre = navigasjontoggles.steg === 1 || navigasjontoggles.steg === 2;
         if (skalViseSamtykke(oppfolgingsdialog)) {
             disableNavigation = true;
             panel = (<Samtykke
@@ -189,6 +191,7 @@ class Oppfolgingsdialog extends Component {
                     steg={navigasjontoggles.steg}
                     koblingId={koblingId}
                 />
+                {skalViseAvsluttOgLagre && <LagreOgAvsluttKnapp koblingId={koblingId} />}
             </div>
         );
     }
