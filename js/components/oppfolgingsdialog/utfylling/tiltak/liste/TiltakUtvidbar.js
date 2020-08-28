@@ -167,6 +167,7 @@ class TiltakUtvidbar extends Component {
                 containerClassName: ' utvidbar__innholdContainer--medAnimasjon',
                 hoyde: '0',
                 erApen: false,
+                lagreKommentarSkjema: false,
             });
         }, 0);
     }
