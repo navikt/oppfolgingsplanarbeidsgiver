@@ -190,11 +190,11 @@ function mockForOpplaeringsmiljo(server) {
     });
 
     server.get('/esso/logout', (req, res) => {
-        res.send('<p>Du har blitt sendt til utlogging.</p><p><a href="/oppfolgingsplanarbeidsgiver/26890/">Gå til Dine Sykmeldtes Oppfølgingplaner</a></p>');
+        res.send('<p>Du har blitt sendt til utlogging.</p><p><a href="/oppfolgingsplanarbeidsgiver/28790/">Gå til Dine Sykmeldtes Oppfølgingplaner</a></p>');
     });
 
     server.get('/dittnav', (req, res) => {
-        res.send('<p>Ditt Nav er ikke tilgjengelig - dette er en testside som kun viser Ditt sykefravær.</p><p><a href="/oppfolgingsplanarbeidsgiver/26890">Gå til Dine Sykmeldtes Oppfølgingplaner</a></p>');
+        res.send('<p>Ditt Nav er ikke tilgjengelig - dette er en testside som kun viser Ditt sykefravær.</p><p><a href="/oppfolgingsplanarbeidsgiver/28790">Gå til Dine Sykmeldtes Oppfølgingplaner</a></p>');
     });
 }
 
