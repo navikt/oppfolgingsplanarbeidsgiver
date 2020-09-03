@@ -40,7 +40,7 @@ describe('tiltak', () => {
                 lagrer: false,
                 lagret: true,
                 lagringFeilet: false,
-                tiltakId: '1345',
+                tiltakId: 1345,
                 tiltak: null,
             });
         });

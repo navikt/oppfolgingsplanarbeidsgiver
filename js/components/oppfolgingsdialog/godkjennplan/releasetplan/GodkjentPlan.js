@@ -17,6 +17,7 @@ import GodkjentPlanDelKnapper, { isGodkjentPlanDelKnapperAvailable } from './God
 import GodkjentPlanDeltBekreftelse from './GodkjentPlanDeltBekreftelse';
 import { getContextRoot } from '../../../../routers/paths';
 import GodkjennPlanOversiktInformasjon from '../GodkjennPlanOversiktInformasjon';
+import BildeTekstLinje from '../../../app/BildeTekstLinje';
 
 const texts = {
     godkjentPlan: {
@@ -31,10 +32,27 @@ const texts = {
         info: 'Hvis du endrer planen, må du sende den til godkjenning hos den andre. Etter godkjenning blir den en gjeldende plan.',
         button: 'Gjør endringer',
     },
+    tvungenGodkjenning: {
+        info: 'Du har ferdigstilt planen uten godkjenning fra',
+    },
 };
 
 const textBothApprovedOppfolgingsplan = (arbeidstakerName) => {
     return `Denne versjonen av planen er godkjent av ${arbeidstakerName} og deg.`;
+};
+
+export const TextForcedApprovedOppfolgingsplan = ({ rootUrl, oppfolgingsplan }) => {
+    return (
+        <BildeTekstLinje
+            imgUrl={`${rootUrl}/img/svg/report-problem-circle.svg`}
+            alt="info"
+            tekst={`${texts.tvungenGodkjenning.info} ${oppfolgingsplan.arbeidstaker.navn}`}
+        />
+    );
+};
+TextForcedApprovedOppfolgingsplan.propTypes = {
+    rootUrl: PropTypes.string,
+    oppfolgingsplan: oppfolgingsplanPt,
 };
 
 export const UtvidbarStyled = styled(Utvidbar)`
@@ -55,11 +73,7 @@ GodkjentPlanUtvidbar.propTypes = {
     oppfolgingsplan: oppfolgingsplanPt,
 };
 
-export const AvbrytPlanBekreftelse = (
-    {
-        oppfolgingsplan,
-        avbrytDialog,
-    }) => {
+export const AvbrytPlanBekreftelse = ({ oppfolgingsplan, avbrytDialog, }) => {
     return (
         <div className="avbrytPlanBekreftelse">
             <h3 className="panel__tittel">{texts.avbrytPlanBekreftelse.title}</h3>
@@ -134,7 +148,12 @@ class GodkjentPlan extends Component {
                         }
 
                         { !godkjentPlan.tvungenGodkjenning && <p>{textBothApprovedOppfolgingsplan(oppfolgingsplan.arbeidstaker.navn)}</p> }
-
+                        { godkjentPlan.tvungenGodkjenning &&
+                            <TextForcedApprovedOppfolgingsplan
+                                rootUrl={rootUrl}
+                                oppfolgingsplan={oppfolgingsplan}
+                            />
+                        }
                         <GodkjennPlanTidspunkt
                             gyldighetstidspunkt={oppfolgingsplan.godkjentPlan.gyldighetstidspunkt}
                         />

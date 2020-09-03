@@ -1,6 +1,6 @@
 export const TiltakListe = [
     {
-        tiltakId: '1345',
+        tiltakId: 1345,
         tiltaknavn: 'Tiltak1',
         knyttetTilArbeidsoppgaveId: 'null',
         fom: null,
@@ -52,9 +52,9 @@ export const TiltakListe = [
 ];
 
 const tiltak = {
-    tiltakId: '1345',
+    tiltakId: 1345,
     tiltaknavn: 'Tiltak1',
-    knyttetTilArbeidsoppgaveId: 'null',
+    knyttetTilArbeidsoppgaveId: null,
     fom: null,
     tom: null,
     beskrivelse: 'beskrivelse',
