@@ -5,6 +5,7 @@ import chaiEnzyme from 'chai-enzyme';
 import sinon from 'sinon';
 import GodkjentPlan, {
     GodkjentPlanUtvidbar,
+    TextForcedApprovedOppfolgingsplan,
     UtvidbarStyled,
 } from '../../../../../js/components/oppfolgingsdialog/godkjennplan/releasetplan/GodkjentPlan';
 import GodkjentPlanDelKnapper from '../../../../../js/components/oppfolgingsdialog/godkjennplan/releasetplan/GodkjentPlanDelKnapper';
@@ -69,48 +70,48 @@ describe('GodkjentPlan', () => {
     });
 
     describe('Tvungen Godkjenning', () => {
-        const tvungenGodkjentDialog = getOppfolgingsplan({
+        const tvungenGodkjentPlan = getOppfolgingsplan({
             arbeidsgiver: {
-                navn: 'Test Testesen',
+                naermesteLeder: {
+                    navn: 'Test Testesen',
+                },
             },
             arbeidstaker: {
                 navn: 'Test Testesen',
             },
-            godkjentPlan: [{
+            godkjentPlan: {
                 tvungenGodkjenning: true,
                 gyldighetstidspunkt: {
-                    fom: '', tom: '', evalueres: '',
+                    fom: '',
+                    tom: '',
+                    evalueres: '',
                 },
             },
-            ],
         });
-        const k2 = shallow(<GodkjentPlanUtvidbar hentPdfurler={hentPdfurler} dokument={dokument} oppfolgingsdialog={tvungenGodkjentDialog} />);
+
+        const k2 = shallow(<GodkjentPlan
+            delmednav={delmednav}
+            hentPdfurler={hentPdfurler}
+            dokument={dokument}
+            oppfolgingsplan={tvungenGodkjentPlan}
+        />);
 
         it('Skal ikke vise infotekst', () => {
             expect(k2.find('p')).to.have.length(0);
         });
-    });
 
-    describe('Tvungen Godkjenning', () => {
-        const tvungenGodkjentDialog = getOppfolgingsplan({
-            arbeidsgiver: {
-                navn: 'Test Testesen',
-            },
-            arbeidstaker: {
-                navn: 'Test Testesen',
-            },
-            godkjentPlan: [{
-                tvungenGodkjenning: true,
-                gyldighetstidspunkt: {
-                    fom: '', tom: '', evalueres: '',
-                },
-            },
-            ],
+        it('Skal vise infotekst om tvungen godkjenning', () => {
+            expect(k2.find(TextForcedApprovedOppfolgingsplan)).to.have.length(1);
         });
-        const k2 = shallow(<GodkjentPlanUtvidbar hentPdfurler={hentPdfurler} dokument={dokument} oppfolgingsdialog={tvungenGodkjentDialog} />);
+
+        const k3 = shallow(<GodkjentPlanUtvidbar
+            hentPdfurler={hentPdfurler}
+            dokument={dokument}
+            oppfolgingsplan={tvungenGodkjentPlan}
+        />);
 
         it('Skal ikke vise infotekst', () => {
-            expect(k2.find('p')).to.have.length(0);
+            expect(k3.find('p')).to.have.length(0);
         });
     });
 
