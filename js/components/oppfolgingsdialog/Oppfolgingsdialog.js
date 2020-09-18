@@ -10,7 +10,11 @@ import {
     finnOgHentSykeforlopsPerioderSomMangler,
     finnOgHentVirksomheterSomMangler,
 } from '../../utils/reducerUtils';
-import { manglerSamtykke } from '../../utils/oppfolgingsplanUtils';
+import {
+    inneholderGodkjenninger,
+    inneholderGodkjenningerAvArbeidsgiver,
+    manglerSamtykke,
+} from '../../utils/oppfolgingsplanUtils';
 import { getContextRoot } from '../../routers/paths';
 import Arbeidsoppgaver from './utfylling/arbeidsoppgaver/Arbeidsoppgaver';
 import Tiltak from './utfylling/tiltak/Tiltak';
@@ -26,16 +30,6 @@ import ReleasetPlan from './godkjennplan/releasetplan/ReleasetPlan';
 
 const inneholderGodkjentPlan = (oppfolgingsplan) => {
     return oppfolgingsplan.godkjentPlan;
-};
-
-const inneholderGodkjenninger = (oppfolgingsplan) => {
-    return oppfolgingsplan && oppfolgingsplan.godkjenninger.length > 0;
-};
-
-const inneholderGodkjenningerAvArbeidsgiver = (oppfolgingsplan) => {
-    return oppfolgingsplan.godkjenninger.length > 0
-        && oppfolgingsplan.godkjenninger[0].godkjent
-        && oppfolgingsplan.godkjenninger[0].godkjentAv.fnr === oppfolgingsplan.arbeidsgiver.naermesteLeder.fnr;
 };
 
 const skalViseSamtykke = (oppfolgingsplan) => {
@@ -176,16 +170,16 @@ class Oppfolgingsdialog extends Component {
         }
         return (
             <div className="oppfolgingsdialog">
-                { oppfolgingsdialogAvbruttOgNyOpprettet && <AvbruttGodkjentPlanVarsel /> }
+                {oppfolgingsdialogAvbruttOgNyOpprettet && <AvbruttGodkjentPlanVarsel />}
                 <SideOverskrift tittel={oppfolgingsdialog.arbeidstaker.navn} />
-                { !disableNavigation && <NavigasjonsTopp
+                {!disableNavigation && <NavigasjonsTopp
                     disabled={disableNavigation}
                     settAktivtSteg={settAktivtSteg}
                     steg={navigasjontoggles.steg}
                 />
                 }
                 <div id="oppfolgingsdialogpanel">
-                    { panel }
+                    {panel}
                 </div>
                 <NavigasjonsBunn
                     disabled={disableNavigation}

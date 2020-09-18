@@ -12,6 +12,16 @@ export const erIkkeOppfolgingsdialogUtfylt = (oppfolgingsdialog) => {
     return oppfolgingsdialog.arbeidsoppgaveListe.length === 0 || oppfolgingsdialog.tiltakListe.length === 0;
 };
 
+export const inneholderGodkjenninger = (oppfolgingsplan) => {
+    return oppfolgingsplan && oppfolgingsplan.godkjenninger.length > 0;
+};
+
+export const inneholderGodkjenningerAvArbeidsgiver = (oppfolgingsplan) => {
+    return oppfolgingsplan.godkjenninger.length > 0
+        && oppfolgingsplan.godkjenninger[0].godkjent
+        && oppfolgingsplan.godkjenninger[0].godkjentAv.fnr === oppfolgingsplan.arbeidsgiver.naermesteLeder.fnr;
+};
+
 export const finnNyesteGodkjenning = (godkjenninger) => {
     return godkjenninger.sort((g1, g2) => {
         return new Date(g2.godkjenningsTidspunkt) - new Date(g1.godkjenningsTidspunkt);
