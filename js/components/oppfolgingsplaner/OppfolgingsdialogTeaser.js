@@ -1,11 +1,29 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router';
+import { EtikettFokus } from 'nav-frontend-etiketter';
 import * as opProptypes from '../../proptypes/opproptypes';
 import {
     finnOppfolgingsdialogMotpartNavn,
+    inneholderGodkjenninger,
+    inneholderGodkjenningerAvArbeidsgiver,
 } from '../../utils/oppfolgingsplanUtils';
 import { hentPlanStatus } from '../../utils/teaserUtils';
+
+const texts = {
+    etiketter: {
+        tilGodkjenning: 'Til godkjenning',
+    },
+};
+
+export const TilGodkjenningStatus = ({ oppfolgingsplan }) => {
+    return (inneholderGodkjenninger(oppfolgingsplan) &&
+        !inneholderGodkjenningerAvArbeidsgiver(oppfolgingsplan) &&
+        <EtikettFokus mini>{texts.etiketter.tilGodkjenning}</EtikettFokus>);
+};
+TilGodkjenningStatus.propTypes = {
+    oppfolgingsplan: opProptypes.oppfolgingsplanPt,
+};
 
 const OppfolgingsdialogTeaser = (
     {
@@ -27,10 +45,11 @@ const OppfolgingsdialogTeaser = (
                         </span>
                     </h3>
                 </header>
-                { typeof planStatus.tekst === 'object'
+                {typeof planStatus.tekst === 'object'
                     ? <p className="inngangspanel__tekst" dangerouslySetInnerHTML={planStatus.tekst} />
                     : <p className="inngangspanel__tekst" dangerouslySetInnerHTML={{ __html: planStatus.tekst }} />
                 }
+                <TilGodkjenningStatus oppfolgingsplan={oppfolgingsdialog} />
             </div>
         </Link>
     </article>);
