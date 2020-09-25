@@ -206,6 +206,7 @@ export class TiltakSkjemaKomponent extends Component {
         this.hentSkjemaClassName = this.hentSkjemaClassName.bind(this);
         this.visFeiletTiltak = this.visFeiletTiltak.bind(this);
         this.avbryt = this.avbryt.bind(this);
+        this.border = this.border.bind(this);
     }
     componentDidMount() {
         this.handleInitialize();
@@ -260,6 +261,10 @@ export class TiltakSkjemaKomponent extends Component {
         this.props.avbryt();
     }
 
+    border() {
+        return !this.props.tiltak;
+    }
+
     render() {
         const {
             tiltak,
@@ -272,7 +277,7 @@ export class TiltakSkjemaKomponent extends Component {
         } = this.props;
         const personvernTekst = texts.beskrivelsePersonvern;
         return (
-            <Panel border>
+            <Panel border={this.border()}>
                 <div className="utvidbar__innholdContainer">
                     <form onSubmit={handleSubmit(this.handleSubmit)} className={this.hentSkjemaClassName()} >
 
@@ -337,7 +342,6 @@ export class TiltakSkjemaKomponent extends Component {
                     </form>
                 </div>
             </Panel>
-
         );
     }
 }
