@@ -12,7 +12,7 @@ const StyledButton = styled.button`
     background: none;
     border: 0;
     padding: 0;
-    margin: .5em 0;
+    margin: 1em 0;
     text-decoration: underline;
 `;
 

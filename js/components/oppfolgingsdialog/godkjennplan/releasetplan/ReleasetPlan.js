@@ -11,6 +11,7 @@ import GodkjentPlan from './GodkjentPlan';
 import GodkjentPlanAvbrutt from './GodkjentPlanAvbrutt';
 import Samtykke from '../samtykke/Samtykke';
 import OppfolgingsdialogPlanInfoboks from './OppfolgingsdialogPlanInfoboks';
+import TidligereAvbruttePlaner from '../TidligereAvbruttePlaner';
 
 const ReleasetPlan = (
     {
@@ -62,6 +63,10 @@ const ReleasetPlan = (
                 rootUrlPlaner={rootUrlPlaner}
             />
             <OppfolgingsdialogPlanInfoboks />
+            <TidligereAvbruttePlaner
+                oppfolgingsdialog={oppfolgingsplan}
+                rootUrlPlaner={rootUrlPlaner}
+            />
         </div>
     );
 };
