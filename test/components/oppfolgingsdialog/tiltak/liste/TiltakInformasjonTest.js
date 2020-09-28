@@ -7,7 +7,6 @@ import TiltakInformasjon, {
     TiltakInformasjonBeskrivelse,
     TiltakInformasjonGjennomfoering,
     TabellTiltakBeskrivelseIkkeAktuelt,
-    VarselTiltakVurdering,
 } from '../../../../../js/components/oppfolgingsdialog/utfylling/tiltak/liste/TiltakInformasjon';
 import LagreKommentarSkjema from '../../../../../js/components/oppfolgingsdialog/utfylling/tiltak/kommentar/LagreKommentarSkjema';
 import KommentarListe from '../../../../../js/components/oppfolgingsdialog/utfylling/tiltak/kommentar/KommentarListe';
@@ -68,28 +67,5 @@ describe('TiltakInformasjon', () => {
 
     it('Skal vise KommentarListe', () => {
         expect(komponent.find(KommentarListe)).to.have.length(1);
-    });
-
-    it('Skal vise VarselTiltakVurdering', () => {
-        const oppfolgingsdialogPassert = getOppfolgingsplan({
-            tiltakListe: {
-                tiltakId: '1',
-                tiltaknavn: 'Gå tur',
-                fom: '2017-05-07',
-                tom: '2017-05-09',
-                beskrivelse: 'Gå tur med hunden på fredag kl 16.00',
-                opprettetAv: {
-                    navn: 'Test Testesen',
-                    fnr: '1000028253764',
-                },
-                sistEndretAv: {
-                    fnr: '1000028253764',
-                },
-            },
-        });
-        komponent = shallow(<TiltakInformasjon
-            element={oppfolgingsdialogPassert.tiltakListe}
-            kommentarReducer={kommentar} />);
-        expect(komponent.find(VarselTiltakVurdering)).to.have.length(1);
     });
 });

@@ -299,7 +299,6 @@ class TiltakUtvidbar extends Component {
                                 <TiltakInformasjon
                                     element={element}
                                     fnr={fnr}
-                                    visLagreSkjema={this.visLagreSkjema}
                                     lagreKommentarSkjema={this.state.lagreKommentarSkjema}
                                     skjulLagreKommentarSkjema={this.skjulLagreKommentarSkjema}
                                     sendLagreKommentar={sendLagreKommentar}

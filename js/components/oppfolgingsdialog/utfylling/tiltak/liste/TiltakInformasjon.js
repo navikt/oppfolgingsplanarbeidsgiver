@@ -1,15 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Hovedknapp } from 'nav-frontend-knapper';
 import { STATUS_TILTAK } from '../../../../../konstanter';
 import {
     kommentarReducerPt,
     tiltakPt,
 } from '../../../../../proptypes/opproptypes';
-import {
-    skalVurdereTiltak,
-    sorterKommentarerEtterOpprettet,
-} from '../../../../../utils/tiltakUtils';
+import { sorterKommentarerEtterOpprettet } from '../../../../../utils/tiltakUtils';
 import TiltakVarselFeil from './../TiltakVarselFeil';
 import KommentarListe from '../kommentar/KommentarListe';
 import LagreKommentarSkjema from '../kommentar/LagreKommentarSkjema';
@@ -27,10 +23,6 @@ const texts = {
     },
     tabellTiltakBeskrivelseIkkeAktuelt: {
         label: 'DIN VURDERING',
-    },
-    varselTiltakVurdering: {
-        info: 'Du må vurdere tiltaket som er foreslått',
-        button: 'Vurder tiltaket',
     },
     tiltakInformasjon: {
         updateError: 'En midlertidig feil gjør at vi ikke kan lagre endringene dine akkurat nå. Prøv igjen senere.',
@@ -85,29 +77,6 @@ TabellTiltakBeskrivelseIkkeAktuelt.propTypes = {
     tiltak: tiltakPt,
 };
 
-export const VarselTiltakVurdering = ({ visLagreSkjema }) => {
-    return (
-        <div className="knapperad__tiltak--justervenstre">
-            {<div className="tiltaktabell__rad__boks" >
-                <p>{texts.varselTiltakVurdering.info}</p>
-                <div className="tiltaktabell__rad__button">
-                    <div className="knapperad__element">
-                        <Hovedknapp
-                            autoFocus
-                            onClick={(event) => { visLagreSkjema(event); }}>
-                            {texts.varselTiltakVurdering.button}
-                        </Hovedknapp>
-                    </div>
-                </div>
-            </div>
-            }
-        </div>
-    );
-};
-VarselTiltakVurdering.propTypes = {
-    visLagreSkjema: PropTypes.func,
-};
-
 class TiltakInformasjon extends Component {
     constructor() {
         super();
@@ -137,7 +106,6 @@ class TiltakInformasjon extends Component {
         const {
             element,
             fnr,
-            visLagreSkjema,
             lagreKommentarSkjema,
             sendSlettKommentar,
             sendLagreKommentar,
@@ -169,10 +137,6 @@ class TiltakInformasjon extends Component {
                 <TabellTiltakBeskrivelseIkkeAktuelt
                     tiltak={element}
                 />
-                }
-
-                { skalVurdereTiltak(element, fnr) &&
-                <VarselTiltakVurdering visLagreSkjema={visLagreSkjema} />
                 }
 
                 { oppdaterTiltakFeilet && feilMelding &&
@@ -215,7 +179,6 @@ class TiltakInformasjon extends Component {
 TiltakInformasjon.propTypes = {
     element: tiltakPt,
     fnr: PropTypes.string,
-    visLagreSkjema: PropTypes.func,
     lagreKommentarSkjema: PropTypes.bool,
     sendLagreKommentar: PropTypes.func,
     sendSlettKommentar: PropTypes.func,
