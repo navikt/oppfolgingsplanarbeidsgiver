@@ -19,14 +19,14 @@ export const hentArbeidsoppgaveIkon = (arbeidsoppgave) => {
     const rootUrlImg = getContextRoot();
     if (arbeidsoppgave.gjennomfoering) {
         if (arbeidsoppgave.gjennomfoering.kanGjennomfoeres === KANGJENNOMFOERES.KAN) {
-            return `${rootUrlImg}/img/svg/hake-groenn--lys.svg`;
+            return `${rootUrlImg}/img/svg/hake-groenn.svg`;
         } else if (arbeidsoppgave.gjennomfoering.kanGjennomfoeres === KANGJENNOMFOERES.TILRETTELEGGING) {
             return `${rootUrlImg}/img/svg/hake-oransje.svg`;
         } else if (arbeidsoppgave.gjennomfoering.kanGjennomfoeres === KANGJENNOMFOERES.KAN_IKKE) {
             return `${rootUrlImg}/img/svg/kryss-roed.svg`;
         }
     }
-    return `${rootUrlImg}/img/svg/varseltrekant.svg`;
+    return `${rootUrlImg}/img/svg/advarsel.svg`;
 };
 
 export const hentArbeidsoppgaveUnderTekst = (arbeidsoppgave) => {
