@@ -171,7 +171,8 @@ export class OppfolgingsplanSide extends Component {
             <Side
                 tittel={texts.pageTitle}
                 brodsmuler={brodsmuler}
-                laster={(henter || sender || !hentet) && !(sendingFeilet || hentingFeilet)}>
+                laster={(henter || sender || !hentet) && !(sendingFeilet || hentingFeilet)}
+                hvitBakgrunn>
                 {
                     (() => {
                         if (henter || sender) {

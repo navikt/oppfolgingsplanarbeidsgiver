@@ -17,10 +17,6 @@ describe('TiltakInfoboks', () => {
         component = shallow(<TiltakInfoboks />);
     });
 
-    it('Skal vise div', () => {
-        expect(component.find('div.tiltakInfoboks')).to.have.length(1);
-    });
-
     it('Skal vise h3', () => {
         const tittel = component.find('h3');
         expect(tittel).to.have.length(1);
