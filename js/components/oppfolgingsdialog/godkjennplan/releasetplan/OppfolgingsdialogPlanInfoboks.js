@@ -1,4 +1,5 @@
 import React from 'react';
+import AlertStripe from 'nav-frontend-alertstriper';
 
 const texts = {
     title: 'Hva skjer nå?',
@@ -12,7 +13,9 @@ const texts = {
 
 const OppfolgingsdialogPlanInfoboks = () => {
     return (
-        <div className="panel">
+        <AlertStripe
+            className="alertstripe--notifikasjonboks"
+            type="info">
             <h3 className="panel__tittel">{texts.title}</h3>
             <p>
                 {texts.info.paragraph1}
@@ -20,7 +23,7 @@ const OppfolgingsdialogPlanInfoboks = () => {
                 <br />
                 {texts.info.paragraph2}
             </p>
-        </div>);
+        </AlertStripe>);
 };
 
 export default OppfolgingsdialogPlanInfoboks;

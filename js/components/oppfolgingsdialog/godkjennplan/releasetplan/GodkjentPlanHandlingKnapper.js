@@ -4,7 +4,6 @@ import { oppfolgingsplanPt } from '../../../../proptypes/opproptypes';
 import { erGyldigDatoIFortiden } from '../../../../utils/datoUtils';
 import { STATUS } from '../../../../konstanter';
 import { API_NAVN, hentSyfoapiUrl } from '../../../../gateway-api';
-import InnholdboksPilTidligerePlaner from './InnholdboksPilTidligerePlaner';
 
 const texts = {
     buttonEndre: 'Gjør endringer',
@@ -54,31 +53,10 @@ class GodkjentPlanHandlingKnapper extends Component {
         const {
             oppfolgingsplan,
             apneBekreftelse,
-            rootUrlPlaner,
         } = this.props;
         return (
             <div>
                 <ul className="godkjentPlanKnapper">
-                    { oppfolgingsplan.avbruttPlanListe.length > 0 && <li>
-                        <div
-                            className={`godkjentPlanKnapper__knapp godkjentPlanKnapper__knapp--tidligere ${this.state.visning === 'tidligereUtgaver'
-                                ? 'godkjentPlanKnapper__knapp--aktiv'
-                                : ''}`}>
-                            <button
-                                className="lenke"
-                                onClick={() => {
-                                    this.toggleVisning('tidligereUtgaver');
-                                }}>
-                                {texts.buttonUtgaver}
-                            </button>
-                        </div>
-                        { this.state.visning === 'tidligereUtgaver' && <InnholdboksPilTidligerePlaner
-                            oppfolgingsplan={oppfolgingsplan}
-                            rootUrlPlaner={rootUrlPlaner}
-                        />
-                        }
-                    </li>
-                    }
                     { !erGyldigDatoIFortiden(oppfolgingsplan.godkjentPlan.gyldighetstidspunkt.tom)
                     && oppfolgingsplan.status !== STATUS.AVBRUTT &&
                         <li>
@@ -106,7 +84,6 @@ class GodkjentPlanHandlingKnapper extends Component {
 GodkjentPlanHandlingKnapper.propTypes = {
     oppfolgingsplan: oppfolgingsplanPt,
     apneBekreftelse: PropTypes.func,
-    rootUrlPlaner: PropTypes.string,
 };
 
 export default GodkjentPlanHandlingKnapper;
