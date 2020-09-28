@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Panel } from 'nav-frontend-paneler';
 import { getContextRoot } from '../../../routers/paths';
 import { oppfolgingsplanPt } from '../../../proptypes/opproptypes';
 import OppfolgingsplanerIngenplanKnapper from './OppfolgingsplanerIngenplanKnapper';
@@ -20,28 +21,30 @@ const OppfolgingsplanerIngenplan = (
         <header className="oppfolgingsdialogerIngenplan__header">
             <h2>{texts.title}</h2>
         </header>
-        <div className="oppfolgingsdialogerIngenplan__blokk">
-            <img alt="tom-plan" src={`${getContextRoot()}/img/svg/oppfolgingsdialog-tom.svg`} />
-            <div className="inngangspanel__innhold">
-                <header className="inngangspanel__header">
-                    <h3 className="js-title">
-                        <span className="inngangspanel__tittel">
-                            {texts.panelTitle}
-                        </span>
-                    </h3>
-                </header>
-                <div>
-                    <p className="oppfolgingsdialoger__start_tekst">
-                        {texts.panelInfo}
-                    </p>
-                    <OppfolgingsplanerIngenplanKnapper
-                        oppfolgingsdialoger={oppfolgingsdialoger}
-                        opprett={opprett}
-                        visOppfolgingsdialogOpprett={visOppfolgingsdialogOpprett}
-                    />
+        <Panel border>
+            <div className="oppfolgingsdialogerIngenplan__blokk">
+                <img alt="tom-plan" src={`${getContextRoot()}/img/svg/oppfolgingsdialog-tom.svg`} />
+                <div className="inngangspanel__innhold">
+                    <header className="inngangspanel__header">
+                        <h3 className="js-title">
+                            <span className="inngangspanel__tittel">
+                                {texts.panelTitle}
+                            </span>
+                        </h3>
+                    </header>
+                    <div>
+                        <p className="oppfolgingsdialoger__start_tekst">
+                            {texts.panelInfo}
+                        </p>
+                        <OppfolgingsplanerIngenplanKnapper
+                            oppfolgingsdialoger={oppfolgingsdialoger}
+                            opprett={opprett}
+                            visOppfolgingsdialogOpprett={visOppfolgingsdialogOpprett}
+                        />
+                    </div>
                 </div>
             </div>
-        </div>
+        </Panel>
     </div>);
 };
 
