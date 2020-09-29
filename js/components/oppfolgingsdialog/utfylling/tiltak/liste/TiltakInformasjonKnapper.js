@@ -6,6 +6,7 @@ import { skalVurdereTiltak } from '../../../../../utils/tiltakUtils';
 import ButtonEditIcon from '../../../../app/buttons/ButtonEditIcon';
 import ButtonDeleteIcon from '../../../../app/buttons/ButtonDeleteIcon';
 import ButtonComment from '../../../../app/buttons/ButtonComment';
+import ButtonVurdering from '../../../../app/buttons/ButtonVurdering';
 import MiniSpinner from '../../../../MiniSpinner';
 
 const TiltakButtonsRow = styled.div`
@@ -29,10 +30,9 @@ const TiltakInformasjonKnapper = (
     return (
         <TiltakButtonsRow>
             <div>
-                {!lagreSkjema && (aktoerHarOpprettetElement || !skalVurdereTiltak(element, fnr)) &&
-                <ButtonEditIcon
-                    click={(event) => { visLagreSkjema(event); }}
-                />
+                {!lagreSkjema && (aktoerHarOpprettetElement || !skalVurdereTiltak(element, fnr))
+                    ? <ButtonEditIcon click={(event) => { visLagreSkjema(event); }} />
+                    : <ButtonVurdering click={(event) => { visLagreSkjema(event); }} />
                 }
             </div>
             <div>
