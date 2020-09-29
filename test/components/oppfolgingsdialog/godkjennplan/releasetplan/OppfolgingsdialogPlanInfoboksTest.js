@@ -1,6 +1,7 @@
 import React from 'react';
 import chai from 'chai';
 import { shallow } from 'enzyme';
+import AlertStripe from 'nav-frontend-alertstriper';
 import chaiEnzyme from 'chai-enzyme';
 import OppfolgingsdialogPlanInfoboks from '../../../../../js/components/oppfolgingsdialog/godkjennplan/releasetplan/OppfolgingsdialogPlanInfoboks';
 
@@ -10,8 +11,8 @@ const expect = chai.expect;
 describe('OppfolgingsdialogInfoboks', () => {
     const komponent = shallow(<OppfolgingsdialogPlanInfoboks />);
 
-    it('Viser en div', () => {
-        expect(komponent.find('div.panel')).to.have.length(1);
+    it('Viser en AlertStripe', () => {
+        expect(komponent.find(AlertStripe)).to.have.length(1);
     });
 
     it('Viser en h3', () => {

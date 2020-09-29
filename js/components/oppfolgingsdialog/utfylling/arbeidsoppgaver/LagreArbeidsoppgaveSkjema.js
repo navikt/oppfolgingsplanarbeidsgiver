@@ -4,6 +4,7 @@ import {
     Field,
     reduxForm,
 } from 'redux-form';
+import { Panel } from 'nav-frontend-paneler';
 import {
     OPPRETT_SKJEMANAVN,
     tekstfeltRegex,
@@ -57,26 +58,29 @@ export class LagreArbeidsoppgaveSkjemaKomponent extends Component {
             varselTekst,
             oppdateringFeilet,
         } = this.props;
-        return (<form className="panel" onSubmit={handleSubmit}>
-            <div className="skjemaelement">
-                <label className="skjemaelement__label" id="arbeidsoppgavenavn" htmlFor="arbeidsoppgavenavn-input">
-                    {texts.felter.arbeidsoppgavenavn.label}
-                </label>
-                <Field
-                    className="skjemaelement__input input--fullbredde"
-                    name="arbeidsoppgavenavn"
-                    id="arbeidsoppgavenavn-input"
-                    aria-labelledby="arbeidsoppgavenavn"
-                    component={Inputfelt}
-                    placeholder="Skriv inn tekst"
-                    avbryt={this.avbryt}
-                    oppdateringFeilet={oppdateringFeilet}
-                    varselTekst={varselTekst}
-                    spinner={this.state.spinner}
-                    autoFocus
-                />
-            </div>
-        </form>
+        return (
+            <Panel border>
+                <form className="panel" onSubmit={handleSubmit}>
+                    <div className="skjemaelement">
+                        <label className="skjemaelement__label" id="arbeidsoppgavenavn" htmlFor="arbeidsoppgavenavn-input">
+                            {texts.felter.arbeidsoppgavenavn.label}
+                        </label>
+                        <Field
+                            className="skjemaelement__input input--fullbredde"
+                            name="arbeidsoppgavenavn"
+                            id="arbeidsoppgavenavn-input"
+                            aria-labelledby="arbeidsoppgavenavn"
+                            component={Inputfelt}
+                            placeholder="Skriv inn tekst"
+                            avbryt={this.avbryt}
+                            oppdateringFeilet={oppdateringFeilet}
+                            varselTekst={varselTekst}
+                            spinner={this.state.spinner}
+                            autoFocus
+                        />
+                    </div>
+                </form>
+            </Panel>
         );
     }
 }

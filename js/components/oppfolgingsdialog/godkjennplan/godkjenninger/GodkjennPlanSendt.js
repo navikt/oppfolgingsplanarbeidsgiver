@@ -12,9 +12,6 @@ import GodkjennPlanVenterInfo from '../GodkjennPlanVenterInfo';
 import { getContextRoot } from '../../../../routers/paths';
 
 const texts = {
-    godkjennPlanSendtInfoTekst: {
-        title: 'Hva skjer nå?',
-    },
     godkjennPlanSendtUtvidbar: {
         title: 'Se planen',
     },
@@ -34,7 +31,7 @@ export const CancelButton = (
     }) => {
     return (
         <CancelButtonStyled
-            className="lenke"
+            className="lenke lenke--avbryt"
             onClick={() => {
                 nullstillGodkjenning(oppfolgingsplan.id, oppfolgingsplan.arbeidstaker.fnr);
             }}>
@@ -45,15 +42,6 @@ export const CancelButton = (
 CancelButton.propTypes = {
     nullstillGodkjenning: PropTypes.func,
     oppfolgingsplan: oppfolgingsplanPt,
-};
-
-export const GodkjennPlanSendtInfoTekst = () => {
-    return (
-        <div className="godkjennPlanSendt_infoTekst">
-            <h3 className="typo-element">{texts.godkjennPlanSendtInfoTekst.title}</h3>
-            <GodkjennPlanVenterInfo />
-        </div>
-    );
 };
 
 const GodkjenPlanSentBlokk = (arbeidstakerName) => {
@@ -109,12 +97,10 @@ const GodkjennPlanSendt = (
                     nullstillGodkjenning={nullstillGodkjenning}
                     oppfolgingsplan={oppfolgingsplan}
                 />
+                <GodkjennPlanVenterInfo />
                 <TidligereAvbruttePlaner
                     oppfolgingsdialog={oppfolgingsplan}
                     rootUrlPlaner={rootUrlPlaner}
-                />
-                <GodkjennPlanSendtInfoTekst
-                    oppfolgingsdialog={oppfolgingsplan}
                 />
             </div>
         </OppfolgingsplanInnholdboks>

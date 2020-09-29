@@ -6,7 +6,6 @@ import sinon from 'sinon';
 import GodkjentPlanHandlingKnapper, { ButtonDownload } from '../../../../../js/components/oppfolgingsdialog/godkjennplan/releasetplan/GodkjentPlanHandlingKnapper';
 import getOppfolgingsplan from '../../../../mock/mockOppfolgingsdialog';
 import { STATUS } from '../../../../../js/konstanter';
-import InnholdboksPilTidligerePlaner from '../../../../../js/components/oppfolgingsdialog/godkjennplan/releasetplan/InnholdboksPilTidligerePlaner';
 
 chai.use(chaiEnzyme());
 const expect = chai.expect;
@@ -60,19 +59,6 @@ describe('GodkjentPlanHandlingKnapper', () => {
         expect(komponentDefault.find('div.godkjentPlanKnapper__knapp')).to.have.length(0);
     });
 
-    it('Skal vise knapp for tidligere avbrutte planer, naar det eksisterer tidligere avbrutte planer', () => {
-        const oppfolgingsplanMedTidligere = getOppfolgingsplan({
-            avbruttPlanListe: [
-                {}, {},
-            ],
-        });
-        const komponent = shallow(<GodkjentPlanHandlingKnapper
-            oppfolgingsplan={oppfolgingsplanMedTidligere}
-            apneBekreftelse={apneBekreftelse}
-        />);
-        expect(komponent.find('div.godkjentPlanKnapper__knapp--tidligere')).to.have.length(1);
-    });
-
     it('Skal vise knapp for endre plan, naar gyldighetstidspunkt er passert og plan ikke plan er avbrutt', () => {
         const oppfolgingsplanMedTidligere = getOppfolgingsplan({
             godkjentPlan: {
@@ -103,20 +89,5 @@ describe('GodkjentPlanHandlingKnapper', () => {
             apneBekreftelse={apneBekreftelse}
         />);
         expect(komponent.find('div.godkjentPlanKnapper__knapp--endre')).to.have.length(0);
-    });
-
-
-    it('Skal vise InnholdboksPilTidligerePlaner, dersom visning er tidligereUtgaver', () => {
-        const oppfolgingsplanMedTidligere = getOppfolgingsplan({
-            avbruttPlanListe: [
-                {}, {},
-            ],
-        });
-        const komponent = shallow(<GodkjentPlanHandlingKnapper
-            oppfolgingsplan={oppfolgingsplanMedTidligere}
-            apneBekreftelse={apneBekreftelse}
-        />);
-        komponent.setState({ visning: 'tidligereUtgaver' });
-        expect(komponent.find(InnholdboksPilTidligerePlaner)).to.have.length(1);
     });
 });

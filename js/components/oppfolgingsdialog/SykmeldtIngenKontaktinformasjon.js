@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Knapp from 'nav-frontend-knapper';
+import { Panel } from 'nav-frontend-paneler';
 import { getContextRoot } from '../../routers/paths';
 import Sidetopp from '../Sidetopp';
 import Infomelding from '../Infomelding';
@@ -16,7 +17,7 @@ const texts = {
 const SykmeldtIngenKontaktinformasjon = ({ meldingSett }) => {
     return (<div>
         <Sidetopp tittel={texts.title} />
-        <div className="panel">
+        <Panel border>
             <Infomelding
                 ikon={`${getContextRoot()}/img/svg/feilmelding_ingen_kontaktinformasjon.svg`}
                 ikonAlt="feilmelding ingen kontaktinformasjon"
@@ -26,7 +27,7 @@ const SykmeldtIngenKontaktinformasjon = ({ meldingSett }) => {
             <div className="knapperad">
                 <Knapp type="standard" onClick={meldingSett}>Jeg forstår</Knapp>
             </div>
-        </div>
+        </Panel>
     </div>);
 };
 
