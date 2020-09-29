@@ -303,6 +303,32 @@ const oppfolgingsplan = {
                 },
             ],
         },
+        {
+            tiltakId: 1461,
+            tiltaknavn: 'Tiltak',
+            knyttetTilArbeidsoppgaveId: null,
+            fom: '2017-05-07',
+            tom: '2017-05-09',
+            beskrivelse: 'Dette er et tiltak',
+            ansvarlig: null,
+            maal: null,
+            godkjentAvArbeidsgiver: false,
+            godkjentAvArbeidstaker: false,
+            opprettetDato: '2017-06-21',
+            sistEndretAv: {
+                fnr: '1000000000000',
+            },
+            sistEndretDato: '2017-06-21',
+            opprettetAv: {
+                navn: 'Test Testesen',
+                fnr: '1000000000000',
+                samtykke: null,
+                godkjent: null,
+            },
+            status: STATUS_TILTAK.AVTALT,
+            gjennomfoering: 'Gjennomfoering',
+            kommentarer: [],
+        },
     ],
     arbeidsgiver: {
         naermesteLeder: {

@@ -358,7 +358,6 @@ TiltakUtvidbar.propTypes = {
     visFeilMelding: PropTypes.func,
     feilMelding: PropTypes.bool,
     rootUrlImg: PropTypes.string,
-
 };
 
 TiltakUtvidbar.defaultProps = {

@@ -13,9 +13,9 @@ const ButtonVurdering = (
     }) => {
     return (
         <Knapp
+            mini
             autoFocus
             type="standard"
-            className="knapp--gi-vurdering"
             onClick={click}>
             {text}
         </Knapp>
