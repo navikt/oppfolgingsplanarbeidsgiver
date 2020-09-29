@@ -31,7 +31,6 @@ describe('TiltakUtvidbar', () => {
 
     beforeEach(() => {
         store = mockStore(getState);
-
         oppfolgingsdialog = getOppfolgingsplan();
         komponent = mount(<Provider store={store}>
             <TiltakUtvidbarContainer
@@ -61,9 +60,19 @@ describe('TiltakUtvidbar', () => {
     });
 
     it('Skal vise ButtonVurdering', () => {
+        const tiltakElement = {
+            opprettetAv: {
+                navn: 'Test Testesen',
+                fnr: '1000028253764',
+            },
+            sistEndretAv: {
+                fnr: '1000028253764',
+            },
+            kommentarer: [],
+        };
         komponent = mount(<Provider store={store}>
             <TiltakUtvidbarContainer
-                element={oppfolgingsdialog.tiltakListe[1]}
+                element={tiltakElement}
                 fnr={'1000000000001'}
                 kommentarReducer={kommentar}
                 tiltakReducer={tiltak}
