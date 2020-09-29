@@ -340,7 +340,8 @@ class TiltakUtvidbar extends Component {
                             />
                         </TiltakVarselFeilStyled>
                         }
-                    </article>);
+                    </article>
+                );
             })()
         );
     }

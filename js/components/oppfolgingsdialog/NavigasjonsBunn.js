@@ -33,6 +33,7 @@ const LinkStyled = styled(Link)`
 const NavBottom = styled.nav`
     display: flex;
     justify-content: flex-start;
+    margin-top: 2rem;
 `;
 
 const BackToOversikt = ({ koblingId }) => {

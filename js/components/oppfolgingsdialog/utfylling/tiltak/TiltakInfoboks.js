@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import cn from 'classnames';
 import { Knapp } from 'nav-frontend-knapper';
+import { Panel } from 'nav-frontend-paneler';
 
 export const tekster = {
     tittel: 'Hva kan dere gjøre som arbeidsgiver?',
@@ -24,7 +25,7 @@ const TiltakInfoboks = (
         blokk: !visTiltakSkjema,
     });
     return (
-        <div className="tiltakInfoboks">
+        <Panel className="tiltakInfoboks" border>
             <h3 className={classNames}>{tekster.tittel}</h3>
             {!visTiltakSkjema && <Wrapper>
                 <Knapp
@@ -36,7 +37,7 @@ const TiltakInfoboks = (
                 </Knapp>
             </Wrapper>
             }
-        </div>);
+        </Panel>);
 };
 
 TiltakInfoboks.propTypes = {

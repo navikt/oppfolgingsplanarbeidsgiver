@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Hovedknapp } from 'nav-frontend-knapper';
+import { Panel } from 'nav-frontend-paneler';
 import { oppfolgingsplanPt } from '../../../../proptypes/opproptypes';
 import { getContextRoot } from '../../../../routers/paths';
 import { erArbeidstakerEgenLeder } from '../../../../utils/oppfolgingsplanUtils';
@@ -70,7 +71,7 @@ class Samtykke extends Component {
             <div className="inputgruppe inputgruppe--samtykke">
                 <div tabIndex="-1" id="samtykkeGitt" className="skjema__feilomrade">
                     <div className="inputgruppe">
-                        <div className="skjemaelement">
+                        <Panel border>
                             <input
                                 type="radio"
                                 className="skjemaelement__input radioknapp"
@@ -84,8 +85,8 @@ class Samtykke extends Component {
                                 htmlFor="giSamtykke">
                                 {texts.approve.yes}
                             </label>
-                        </div>
-                        <div className="skjemaelement">
+                        </Panel>
+                        <Panel border>
                             <input
                                 type="radio"
                                 className="skjemaelement__input radioknapp"
@@ -99,7 +100,7 @@ class Samtykke extends Component {
                                 htmlFor="ikkeGiSamtykke">
                                 {texts.approve.no}
                             </label>
-                        </div>
+                        </Panel>
                     </div>
                 </div>
             </div>

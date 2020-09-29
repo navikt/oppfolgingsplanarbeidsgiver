@@ -22,7 +22,7 @@ const texts = {
         `,
     },
     arbeidsoppgaverInfoboksStilling: {
-        title: 'Lag en liste over arbeidsoppgavene',
+        title: 'Legg til arbeidsoppgaver',
     },
 };
 

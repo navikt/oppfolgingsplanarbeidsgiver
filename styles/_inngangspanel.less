@@ -21,9 +21,9 @@
     .typo-normal-mixin();
 }
 
-.inngangspanel:extend(.panel) {
-    margin-bottom: 1px;
+.inngangspanel {
     padding-right: 3em;
+    background-image: data-uri("../img/svg/pil-videre-graa.svg");
     background-repeat: no-repeat;
     background-position: 97% 2em;
     background-size: 1em 1em;
@@ -32,8 +32,8 @@
     display: flex;
     width: 100%;
     color: @navMorkGra;
-    border: 0;
     text-align: left;
+    margin-top: -1px;
 
     &:hover, &:focus {
         position: relative;
@@ -50,6 +50,7 @@
     }
 
     &:hover {
+        background-image: data-uri("../img/svg/pil-videre-blaa.svg");
         box-shadow: #ccc 0 0 4px 2px; /* hentet fra saksoversikt */
     }
 
@@ -59,20 +60,16 @@
     }
 
     .inngangspanel__tekst {
-        margin-bottom: 1.25em;
+        margin-bottom: 1.25rem;
+    }
+
+    .inngangspanel__tekst:last-child {
+        margin-bottom: 0;
     }
 
     @media(min-width: @screen-sm-min) {
         background-position: 97% 35px;
     }
-}
-
-a.inngangspanel {
-    background-image: url("/oppfolgingsplanarbeidsgiver/img/svg/pil-videre-graa.svg");
-}
-
-a.inngangspanel:hover {
-    background-image: url("/oppfolgingsplanarbeidsgiver/img/svg/pil-videre-blaa.svg");
 }
 
 .inngangspanel__innhold .mute {
