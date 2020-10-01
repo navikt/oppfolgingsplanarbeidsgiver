@@ -1,10 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { HjelpetekstUnderVenstre } from 'nav-frontend-hjelpetekst';
-import {
-    toDatePrettyPrint,
-    Utvidbar,
-} from '@navikt/digisyfo-npm';
+import { toDatePrettyPrint } from '@navikt/digisyfo-npm';
 import { KANGJENNOMFOERES, STATUS_TILTAK } from '../../../konstanter';
 import { toDateMedMaanedNavn } from '../../../utils/datoUtils';
 import { capitalizeFirstLetter } from '../../../utils/tekstUtils';
@@ -17,6 +14,7 @@ import {
     personPt,
     stillingPt,
     tiltakPt,
+    virksomhetPt,
 } from '../../../proptypes/opproptypes';
 import { periodePt } from '../../../proptypes/periodeProptypes';
 
@@ -25,12 +23,16 @@ const texts = {
         title: 'Oppfølgingsplan',
     },
     informasjonPanelArbeidsgiver: {
-        title: 'Arbeidsgiverens kontaktinformasjon',
+        title: 'Arbeidsgivers kontaktinformasjon',
         labels: {
-            virksomhetsnummer: 'Organisasjonsnummer',
-            name: 'Navn på nærmeste leder',
-            telephone: 'Telefonnummer',
-            email: 'E-post',
+            virksomhetsnavn: 'Bedriftens navn:',
+            virksomhetsnummer: 'Org.nr:',
+            naermesteLeder: {
+                heading: 'Nærmeste leder',
+                name: 'Navn:',
+                telephone: 'Tlf:',
+                email: 'Epost:',
+            },
         },
     },
     informasjonPanelTiltak: {
@@ -44,11 +46,10 @@ const texts = {
     informasjonPanelSykmeldt: {
         title: 'Den sykmeldtes kontaktinformasjon',
         labels: {
-            fnr: 'Fødselsnummer',
-            name: 'Navn',
-            telephone: 'Telefonnummer',
-            email: 'E-post',
-            stilling: 'Stilling',
+            name: 'Navn:',
+            fnr: 'F.nr:',
+            telephone: 'Tlf:',
+            email: 'Epost:',
         },
     },
     informasjonPanelArbeidsoppgaverEtterGjennomfoering: {
@@ -65,7 +66,7 @@ const texts = {
         },
     },
     informasjonPanelSykeforlopsPerioder: {
-        title: 'Informasjon fra dette sykefraværet',
+        title: 'Informasjon om dette sykefraværet',
         hjelpetekst: 'Ett sykefravær kan bestå av flere perioder hvis det er mindre enn 16 dager mellom dem. Har det gått mer enn 16 dager, regnes det som et nytt sykefravær.',
         sykmeldingprosentLabel: 'Sykmeldingsprosent',
     },
@@ -107,40 +108,56 @@ InformasjonPanelOverskrift.propTypes = {
     oppfolgingsdialog: oppfolgingsplanPt,
 };
 
-export const InformasjonPanelArbeidsgiver = ({ naermesteLeder, virksomhetsnummer }) => {
+export const InformasjonPanelArbeidsgiver = ({ naermesteLeder, virksomhet }) => {
     return (
-        <Utvidbar className="informasjonPanelUtvidbar" tittel={texts.informasjonPanelArbeidsgiver.title}>
+        <div className="informasjonPanel">
+            <h3>{texts.informasjonPanelArbeidsgiver.title}</h3>
             <dl className="godkjennPlanOversiktInformasjon__panel__info">
-                <dt>{texts.informasjonPanelArbeidsgiver.labels.virksomhetsnummer}</dt>
-                <dd>{virksomhetsnummer}</dd>
-
-                {naermesteLeder && [
-                    <dt key={0}>{texts.informasjonPanelArbeidsgiver.labels.name}</dt>,
-                    <dd key={1}>{naermesteLeder.navn}</dd>,
-
-                    naermesteLeder.tlf &&
-                    <div key={2}>
-                        <dt>{texts.informasjonPanelArbeidsgiver.labels.telephone}</dt>
+                <div>
+                    <dt>{texts.informasjonPanelArbeidsgiver.labels.virksomhetsnavn}</dt>
+                    <dd>{virksomhet.navn}</dd>
+                </div>
+                <div>
+                    <dt>{texts.informasjonPanelArbeidsgiver.labels.virksomhetsnummer}</dt>
+                    <dd>{virksomhet.virksomhetsnummer}</dd>
+                </div>
+                <br />
+                <br />
+                {naermesteLeder && <b>{texts.informasjonPanelArbeidsgiver.labels.naermesteLeder.heading}</b>}
+                {naermesteLeder && naermesteLeder.navn &&
+                    <div>
+                        <dt>{texts.informasjonPanelArbeidsgiver.labels.naermesteLeder.name}</dt>
+                        <dd>{naermesteLeder.navn}</dd>
+                    </div>
+                }
+                {naermesteLeder && naermesteLeder.tlf &&
+                    <div>
+                        <dt>{texts.informasjonPanelArbeidsgiver.labels.naermesteLeder.telephone}</dt>
                         <dd>{naermesteLeder.tlf}</dd>
-                    </div>,
-
-                    naermesteLeder.epost &&
-                    <div key={3}>
-                        <dt>{texts.informasjonPanelArbeidsgiver.labels.email}</dt>
+                    </div>
+                }
+                {naermesteLeder && naermesteLeder.epost &&
+                    <div>
+                        <dt>{texts.informasjonPanelArbeidsgiver.labels.naermesteLeder.email}</dt>
                         <dd>{naermesteLeder.epost}</dd>
-                    </div>,
-                ]}
+                    </div>
+                }
             </dl>
-        </Utvidbar>
+        </div>
     );
 };
 InformasjonPanelArbeidsgiver.propTypes = {
     naermesteLeder: personPt,
-    virksomhetsnummer: PropTypes.string,
+    virksomhet: virksomhetPt,
 };
 
 export const RenderStilling = ({ stilling }) => {
-    return (<p>{capitalizeFirstLetter(stilling.yrke.toLowerCase())}: {stilling.prosent}%</p>);
+    return (
+        <div>
+            <dt>{capitalizeFirstLetter(stilling.yrke.toLowerCase())}:</dt>
+            <dd>{stilling.prosent}%</dd>
+        </div>
+    );
 };
 
 RenderStilling.propTypes = {
@@ -149,24 +166,28 @@ RenderStilling.propTypes = {
 
 export const InformasjonPanelSykmeldt = ({ arbeidstaker }) => {
     return (
-        <Utvidbar className="informasjonPanelUtvidbar" tittel={texts.informasjonPanelSykmeldt.title}>
+        <div className="informasjonPanel">
+            <h3>{texts.informasjonPanelSykmeldt.title}</h3>
             <dl className="godkjennPlanOversiktInformasjon__panel__info">
-                <dt>{texts.informasjonPanelSykmeldt.labels.fnr}</dt>
-                <dd>{arbeidstaker.fnr}</dd>
-
-                <dt>{texts.informasjonPanelSykmeldt.labels.name}</dt>
-                <dd>{arbeidstaker.navn}</dd>
-                { arbeidstaker.tlf &&
                 <div>
-                    <dt>{texts.informasjonPanelSykmeldt.labels.telephone}</dt>
-                    <dd>{arbeidstaker.tlf}</dd>
+                    <dt>{texts.informasjonPanelSykmeldt.labels.name}</dt>
+                    <dd>{arbeidstaker.navn}</dd>
                 </div>
+                <div>
+                    <dt>{texts.informasjonPanelSykmeldt.labels.fnr}</dt>
+                    <dd>{arbeidstaker.fnr}</dd>
+                </div>
+                { arbeidstaker.tlf &&
+                    <div>
+                        <dt>{texts.informasjonPanelSykmeldt.labels.telephone}</dt>
+                        <dd>{arbeidstaker.tlf}</dd>
+                    </div>
                 }
                 { arbeidstaker.epost &&
-                <div>
-                    <dt>{texts.informasjonPanelSykmeldt.labels.email}</dt>
-                    <dd>{arbeidstaker.epost}</dd>
-                </div>
+                    <div>
+                        <dt>{texts.informasjonPanelSykmeldt.labels.email}</dt>
+                        <dd>{arbeidstaker.epost}</dd>
+                    </div>
                 }
                 { arbeidstaker.stillinger.length > 0 &&
                 <div>
@@ -174,13 +195,14 @@ export const InformasjonPanelSykmeldt = ({ arbeidstaker }) => {
                     { arbeidstaker.stillinger.map((stilling, idx) => {
                         if (stilling.prosent > -1) {
                             return (<RenderStilling stilling={stilling} key={idx} />);
-                        } return (null);
+                        }
+                        return (null);
                     })
                     }
                 </div>
                 }
             </dl>
-        </Utvidbar>
+        </div>
     );
 };
 InformasjonPanelSykmeldt.propTypes = {
@@ -234,18 +256,20 @@ export const InformasjonPanelSykeforlopsPerioder = ({ arbeidstaker }) => {
                     {texts.informasjonPanelSykeforlopsPerioder.hjelpetekst}
                 </HjelpetekstUnderVenstre>
             </div>
-            <dl className="godkjennPlanOversiktInformasjon__panel__info">
-                <dt>{texts.informasjonPanelSykeforlopsPerioder.sykmeldingprosentLabel}</dt>
-                {
-                    slaaSammenPerioder(arbeidstaker.sykeforlopsPerioder).map((periode, idx) => {
-                        const antallDager = ((new Date(periode.tom) - new Date(periode.fom)) / 86400000) + 1;
-                        return (
-                            <dd key={idx}>
-                                <SykeforlopsPeriode periode={periode} antallDager={antallDager} />
-                            </dd>
-                        );
-                    })
-                }
+            <dl className="godkjennPlanOversiktInformasjon__panel__info__sykmeldingsprosent">
+                <div>
+                    <dt>{texts.informasjonPanelSykeforlopsPerioder.sykmeldingprosentLabel}</dt>
+                    {
+                        slaaSammenPerioder(arbeidstaker.sykeforlopsPerioder).map((periode, idx) => {
+                            const antallDager = ((new Date(periode.tom) - new Date(periode.fom)) / 86400000) + 1;
+                            return (
+                                <dd key={idx}>
+                                    <SykeforlopsPeriode periode={periode} antallDager={antallDager} />
+                                </dd>
+                            );
+                        })
+                    }
+                </div>
             </dl>
         </div>
     );
@@ -545,7 +569,7 @@ const GodkjennPlanOversiktInformasjon = ({ oppfolgingsdialog, rootUrl }) => {
 
             <InformasjonPanelArbeidsgiver
                 naermesteLeder={oppfolgingsdialog.arbeidsgiver.naermesteLeder}
-                virksomhetsnummer={oppfolgingsdialog.virksomhet.virksomhetsnummer}
+                virksomhet={oppfolgingsdialog.virksomhet}
             />
 
             {oppfolgingsdialog.arbeidstaker.sykeforlopsPerioder.length > 0 &&
