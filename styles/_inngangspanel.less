@@ -22,18 +22,10 @@
 }
 
 .inngangspanel {
-    padding-right: 3em;
-    background-image: data-uri("../img/svg/pil-videre-graa.svg");
-    background-repeat: no-repeat;
-    background-position: 97% 2em;
-    background-size: 1em 1em;
-    transition: background-position ease-in-out .1s;
-    transform: translate3d(0, 0, 0);
+    padding: 1em;
     display: flex;
-    width: 100%;
     color: @navMorkGra;
     text-align: left;
-    margin-top: -1px;
 
     &:hover, &:focus {
         position: relative;
@@ -49,11 +41,6 @@
         outline: 3px solid @orangeFocus;
     }
 
-    &:hover {
-        background-image: data-uri("../img/svg/pil-videre-blaa.svg");
-        box-shadow: #ccc 0 0 4px 2px; /* hentet fra saksoversikt */
-    }
-
     .inngangspanel__undertekst {
         .typo-normal-mixin();
         margin-bottom: 0;
@@ -65,10 +52,6 @@
 
     .inngangspanel__tekst:last-child {
         margin-bottom: 0;
-    }
-
-    @media(min-width: @screen-sm-min) {
-        background-position: 97% 35px;
     }
 }
 

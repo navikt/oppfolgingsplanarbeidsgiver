@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router';
 import { EtikettFokus } from 'nav-frontend-etiketter';
-import { Panel } from 'nav-frontend-paneler';
+import LenkepanelBase from 'nav-frontend-lenkepanel';
 import * as opProptypes from '../../proptypes/opproptypes';
 import {
     finnOppfolgingsdialogMotpartNavn,
@@ -33,9 +32,11 @@ const OppfolgingsdialogTeaser = (
         rootUrlPlaner,
     }) => {
     const planStatus = hentPlanStatus(oppfolgingsdialog);
-    return (<article aria-labelledby={`oppfolgingsdialog-header-${oppfolgingsdialog.id}`}>
-        <Link to={`${rootUrlPlaner}/oppfolgingsplaner/${oppfolgingsdialog.id}`}>
-            <Panel border className="inngangspanel oppfolgingsdialog">
+    return (
+        <LenkepanelBase
+            href={`${rootUrlPlaner}/oppfolgingsplaner/${oppfolgingsdialog.id}`}
+            border>
+            <div className="inngangspanel">
                 <span className="oppfolgingsplanInnhold__ikon">
                     <img alt="plan" src={`${rootUrl}/img/svg/${planStatus.img}`} />
                 </span>
@@ -53,9 +54,8 @@ const OppfolgingsdialogTeaser = (
                     }
                     <TilGodkjenningStatus oppfolgingsplan={oppfolgingsdialog} />
                 </div>
-            </Panel>
-        </Link>
-    </article>);
+            </div>
+        </LenkepanelBase>);
 };
 
 OppfolgingsdialogTeaser.propTypes = {
