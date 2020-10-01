@@ -100,8 +100,8 @@ describe('GodkjennPlanOversiktInformasjon', () => {
             virksomhetsnummer={oppfolgingsdialog.virksomhetsnummer}
         />);
 
-        it('Skal vise Utvidbar', () => {
-            expect(komponent.find(Utvidbar)).to.have.length(1);
+        it('Skal vise en div', () => {
+            expect(komponent.find('div.informasjonPanel')).to.have.length(1);
         });
 
         it('Skal vise Felter med informasjon', () => {
@@ -114,16 +114,17 @@ describe('GodkjennPlanOversiktInformasjon', () => {
     describe('InformasjonPanelArbeidsgiver', () => {
         const komponent = shallow(<InformasjonPanelArbeidsgiver
             naermesteLeder={oppfolgingsdialog.arbeidsgiver.naermesteLeder}
+            virksomhet={oppfolgingsdialog.virksomhet}
         />);
 
-        it('Skal vise Utvidbar', () => {
-            expect(komponent.find(Utvidbar)).to.have.length(1);
+        it('Skal vise en div', () => {
+            expect(komponent.find('div.informasjonPanel')).to.have.length(1);
         });
 
         it('Skal vise Felter med informasjon', () => {
             expect(komponent.find('dl.godkjennPlanOversiktInformasjon__panel__info')).to.have.length(1);
-            expect(komponent.find('dt')).to.have.length(4);
-            expect(komponent.find('dd')).to.have.length(4);
+            expect(komponent.find('dt')).to.have.length(5);
+            expect(komponent.find('dd')).to.have.length(5);
         });
     });
 

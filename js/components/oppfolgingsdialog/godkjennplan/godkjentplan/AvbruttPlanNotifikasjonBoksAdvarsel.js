@@ -9,8 +9,7 @@ const textAlertstripe = (counterPart) => {
 const AvbruttPlanNotifikasjonBoksAdvarsel = ({ motpartnavn }) => {
     return (<Alertstripe
         className="alertstripe--notifikasjonboks"
-        type="info"
-        solid>
+        type="info">
         {textAlertstripe(motpartnavn)}
     </Alertstripe>);
 };

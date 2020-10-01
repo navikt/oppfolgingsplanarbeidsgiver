@@ -16,8 +16,7 @@ const NotifikasjonBoksVurdering = (
         : 'foreslått';
     return (<Alertstripe
         className="alertstripe--notifikasjonboks"
-        type="advarsel"
-        solid>
+        type="advarsel">
         {textInfo(navn, antallIkkeVurderte, status)}
     </Alertstripe>);
 };
