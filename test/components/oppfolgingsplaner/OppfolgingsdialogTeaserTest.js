@@ -2,7 +2,7 @@ import React from 'react';
 import chai from 'chai';
 import { shallow } from 'enzyme';
 import { EtikettFokus } from 'nav-frontend-etiketter';
-import LenkepanelBase from 'nav-frontend-lenkepanel/lib/Lenkepanel-base';
+import { LenkepanelBase } from 'nav-frontend-lenkepanel';
 import chaiEnzyme from 'chai-enzyme';
 import OppfolgingsdialogTeaser, {
     TilGodkjenningStatus,

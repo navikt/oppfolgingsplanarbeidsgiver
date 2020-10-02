@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { EtikettFokus } from 'nav-frontend-etiketter';
-import LenkepanelBase from 'nav-frontend-lenkepanel';
+import { LenkepanelBase } from 'nav-frontend-lenkepanel';
 import * as opProptypes from '../../proptypes/opproptypes';
 import {
     finnOppfolgingsdialogMotpartNavn,
