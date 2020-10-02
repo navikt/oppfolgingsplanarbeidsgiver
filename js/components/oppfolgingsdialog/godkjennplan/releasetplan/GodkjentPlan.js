@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Fareknapp } from 'nav-frontend-knapper';
-import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 import OppfolgingsplanInnholdboks from '../../../app/OppfolgingsplanInnholdboks';
 import {
     delMedFastlegePt,
@@ -14,9 +13,8 @@ import GodkjennPlanTidspunkt from '../GodkjennPlanTidspunkt';
 import GodkjentPlanHandlingKnapper from './GodkjentPlanHandlingKnapper';
 import GodkjentPlanDelKnapper, { isGodkjentPlanDelKnapperAvailable } from './GodkjentPlanDelKnapper';
 import GodkjentPlanDeltBekreftelse from './GodkjentPlanDeltBekreftelse';
-import { getContextRoot } from '../../../../routers/paths';
-import GodkjennPlanOversiktInformasjon from '../GodkjennPlanOversiktInformasjon';
 import BildeTekstLinje from '../../../app/BildeTekstLinje';
+import PlanEkspanderbar from '../PlanEkspanderbar';
 
 const texts = {
     godkjentPlan: {
@@ -51,20 +49,6 @@ export const TextForcedApprovedOppfolgingsplan = ({ rootUrl, oppfolgingsplan }) 
 };
 TextForcedApprovedOppfolgingsplan.propTypes = {
     rootUrl: PropTypes.string,
-    oppfolgingsplan: oppfolgingsplanPt,
-};
-
-export const GodkjentPlanEkspanderbar = ({ oppfolgingsplan }) => {
-    return (
-        <Ekspanderbartpanel border tittel={texts.godkjentPlanUtvidbar.title}>
-            <GodkjennPlanOversiktInformasjon
-                oppfolgingsdialog={oppfolgingsplan}
-                rootUrl={getContextRoot()}
-            />
-        </Ekspanderbartpanel>
-    );
-};
-GodkjentPlanEkspanderbar.propTypes = {
     oppfolgingsplan: oppfolgingsplanPt,
 };
 
@@ -157,7 +141,7 @@ class GodkjentPlan extends Component {
                             oppfolgingsplan={oppfolgingsplan}
                         />
 
-                        <GodkjentPlanEkspanderbar
+                        <PlanEkspanderbar
                             oppfolgingsplan={oppfolgingsplan}
                         />
                         {isGodkjentPlanDelKnapperAvailable(oppfolgingsplan) && <GodkjentPlanDelKnapper

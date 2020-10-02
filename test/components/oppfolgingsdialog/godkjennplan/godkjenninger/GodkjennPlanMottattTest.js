@@ -12,6 +12,7 @@ import GodkjennPlanMottatt, {
 import GodkjennPlanOversiktInformasjon from '../../../../../js/components/oppfolgingsdialog/godkjennplan/GodkjennPlanOversiktInformasjon';
 import GodkjennPlanTilAltinnTekst from '../../../../../js/components/oppfolgingsdialog/godkjennplan/godkjenninger/GodkjennPlanTilAltinnTekst';
 import getOppfolgingsplan from '../../../../mock/mockOppfolgingsdialog';
+import PlanEkspanderbar from '../../../../../js/components/oppfolgingsdialog/godkjennplan/PlanEkspanderbar';
 
 chai.use(chaiEnzyme());
 const expect = chai.expect;
@@ -42,8 +43,8 @@ describe('GodkjennPlanMottatt', () => {
         expect(komponentDefault.find('p')).to.have.length(1);
     });
 
-    it('Skal vise en GodkjennPlanMottattUtvidbar', () => {
-        expect(komponentDefault.find(GodkjennPlanMottattEkspanderbar)).to.have.length(1);
+    it('Skal vise en PlanEkspanderbar ', () => {
+        expect(komponentDefault.find(PlanEkspanderbar)).to.have.length(1);
     });
 
     it('Skal vise GodkjennPlanTilAltinnTekst', () => {
@@ -52,15 +53,6 @@ describe('GodkjennPlanMottatt', () => {
 
     it('Skal vise et GodkjennPlanMottattKnapper', () => {
         expect(komponentDefault.find(GodkjennPlanMottattKnapper)).to.have.length(1);
-    });
-
-    describe('GodkjennPlanMottattEskpanderbar', () => {
-        const komponent = shallow(<GodkjennPlanMottattEkspanderbar />);
-
-        it('Skal vise et Ekspanderbartpanel med en GodkjennPlanOversiktInformasjon', () => {
-            expect(komponent.find(Ekspanderbartpanel)).to.have.length(1);
-            expect(komponent.find(GodkjennPlanOversiktInformasjon)).to.have.length(1);
-        });
     });
 
     describe('GodkjennPlanMottattKnapper', () => {

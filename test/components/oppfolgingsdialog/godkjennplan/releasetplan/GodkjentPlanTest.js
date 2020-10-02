@@ -5,7 +5,6 @@ import chaiEnzyme from 'chai-enzyme';
 import sinon from 'sinon';
 import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 import GodkjentPlan, {
-    GodkjentPlanEkspanderbar,
     TextForcedApprovedOppfolgingsplan,
 } from '../../../../../js/components/oppfolgingsdialog/godkjennplan/releasetplan/GodkjentPlan';
 import GodkjentPlanDelKnapper from '../../../../../js/components/oppfolgingsdialog/godkjennplan/releasetplan/GodkjentPlanDelKnapper';
@@ -14,6 +13,8 @@ import getOppfolgingsplan from '../../../../mock/mockOppfolgingsdialog';
 import GodkjentPlanDeltBekreftelse from '../../../../../js/components/oppfolgingsdialog/godkjennplan/releasetplan/GodkjentPlanDeltBekreftelse';
 import GodkjentPlanHandlingKnapper from '../../../../../js/components/oppfolgingsdialog/godkjennplan/releasetplan/GodkjentPlanHandlingKnapper';
 import GodkjennPlanOversiktInformasjon from '../../../../../js/components/oppfolgingsdialog/godkjennplan/GodkjennPlanOversiktInformasjon';
+import PlanEkspanderbar from '../../../../../js/components/oppfolgingsdialog/godkjennplan/PlanEkspanderbar';
+import { GodkjentPlanEkspanderbar } from '../../../../../js/components/oppfolgingsdialog/godkjennplan/releasetplan/GodkjentPlanAvbrutt';
 
 chai.use(chaiEnzyme());
 const expect = chai.expect;
@@ -57,8 +58,8 @@ describe('GodkjentPlan', () => {
         expect(komponentDefault.find(GodkjentPlanDeltBekreftelse)).to.have.length(1);
     });
 
-    it('Skal vise en GodkjentPlanUtvidbar', () => {
-        expect(komponentDefault.find(GodkjentPlanEkspanderbar)).to.have.length(1);
+    it('Skal vise en PlanEkspanderbar ', () => {
+        expect(komponentDefault.find(PlanEkspanderbar)).to.have.length(1);
     });
 
     it('Skal vise en GodkjentPlanDelKnapper', () => {
@@ -105,25 +106,11 @@ describe('GodkjentPlan', () => {
         });
 
         const k3 = shallow(<GodkjentPlanEkspanderbar
-            hentPdfurler={hentPdfurler}
             dokument={dokument}
-            oppfolgingsplan={tvungenGodkjentPlan}
         />);
 
         it('Skal ikke vise infotekst', () => {
             expect(k3.find('p')).to.have.length(0);
-        });
-    });
-
-    describe('GodkjentPlanEkspanderbar', () => {
-        const komponent = shallow(<GodkjentPlanEkspanderbar dokument={dokument} />);
-
-        it('Skal vise et Ekspanderbartpanel', () => {
-            expect(komponent.find(Ekspanderbartpanel)).to.have.length(1);
-        });
-
-        it('Skal vise en GodkjennPlanOversiktInformasjon', () => {
-            expect(komponent.find(GodkjennPlanOversiktInformasjon)).to.have.length(1);
         });
     });
 });
