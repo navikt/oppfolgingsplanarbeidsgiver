@@ -1,20 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Utvidbar } from '@navikt/digisyfo-npm';
 import { oppfolgingsplanPt } from '../../../../proptypes/opproptypes';
 import { finnNyesteGodkjenning } from '../../../../utils/oppfolgingsplanUtils';
-import GodkjennPlanOversiktInformasjon from '../GodkjennPlanOversiktInformasjon';
 import OppfolgingsplanInnholdboks from '../../../app/OppfolgingsplanInnholdboks';
 import GodkjennPlanTidspunkt from '../GodkjennPlanTidspunkt';
 import TidligereAvbruttePlaner from '../TidligereAvbruttePlaner';
 import GodkjennPlanVenterInfo from '../GodkjennPlanVenterInfo';
 import { getContextRoot } from '../../../../routers/paths';
+import PlanEkspanderbar from '../PlanEkspanderbar';
 
 const texts = {
-    godkjennPlanSendtUtvidbar: {
-        title: 'Se planen',
-    },
     godkjennPlanSendt: {
         title: 'Sendt til godkjenning',
         buttonUndo: 'Avbryt planen',
@@ -55,21 +51,6 @@ const GodkjenPlanSentBlokk = (arbeidstakerName) => {
     );
 };
 
-export const GodkjennPlanSendtUtvidbar = ({ oppfolgingsdialog }) => {
-    const rootUrl = getContextRoot();
-    return (
-        <Utvidbar tittel={texts.godkjennPlanSendtUtvidbar.title}>
-            <GodkjennPlanOversiktInformasjon
-                oppfolgingsdialog={oppfolgingsdialog}
-                rootUrl={rootUrl}
-            />
-        </Utvidbar>
-    );
-};
-GodkjennPlanSendtUtvidbar.propTypes = {
-    oppfolgingsdialog: oppfolgingsplanPt,
-};
-
 const GodkjennPlanSendt = (
     {
         oppfolgingsplan,
@@ -90,8 +71,8 @@ const GodkjennPlanSendt = (
                     gyldighetstidspunkt={finnNyesteGodkjenning(oppfolgingsplan.godkjenninger).gyldighetstidspunkt}
                 />
 
-                <GodkjennPlanSendtUtvidbar
-                    oppfolgingsdialog={oppfolgingsplan}
+                <PlanEkspanderbar
+                    oppfolgingsplan={oppfolgingsplan}
                 />
                 <CancelButton
                     nullstillGodkjenning={nullstillGodkjenning}

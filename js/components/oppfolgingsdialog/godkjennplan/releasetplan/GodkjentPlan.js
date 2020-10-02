@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Fareknapp } from 'nav-frontend-knapper';
-import { Utvidbar } from '@navikt/digisyfo-npm';
-import styled from 'styled-components';
 import OppfolgingsplanInnholdboks from '../../../app/OppfolgingsplanInnholdboks';
 import {
     delMedFastlegePt,
@@ -15,9 +13,8 @@ import GodkjennPlanTidspunkt from '../GodkjennPlanTidspunkt';
 import GodkjentPlanHandlingKnapper from './GodkjentPlanHandlingKnapper';
 import GodkjentPlanDelKnapper, { isGodkjentPlanDelKnapperAvailable } from './GodkjentPlanDelKnapper';
 import GodkjentPlanDeltBekreftelse from './GodkjentPlanDeltBekreftelse';
-import { getContextRoot } from '../../../../routers/paths';
-import GodkjennPlanOversiktInformasjon from '../GodkjennPlanOversiktInformasjon';
 import BildeTekstLinje from '../../../app/BildeTekstLinje';
+import PlanEkspanderbar from '../PlanEkspanderbar';
 
 const texts = {
     godkjentPlan: {
@@ -55,25 +52,7 @@ TextForcedApprovedOppfolgingsplan.propTypes = {
     oppfolgingsplan: oppfolgingsplanPt,
 };
 
-export const UtvidbarStyled = styled(Utvidbar)`
-    margin-top: 2.5em;
-`;
-
-export const GodkjentPlanUtvidbar = ({ oppfolgingsplan }) => {
-    return (
-        <UtvidbarStyled tittel={texts.godkjentPlanUtvidbar.title}>
-            <GodkjennPlanOversiktInformasjon
-                oppfolgingsdialog={oppfolgingsplan}
-                rootUrl={getContextRoot()}
-            />
-        </UtvidbarStyled>
-    );
-};
-GodkjentPlanUtvidbar.propTypes = {
-    oppfolgingsplan: oppfolgingsplanPt,
-};
-
-export const AvbrytPlanBekreftelse = ({ oppfolgingsplan, avbrytDialog, }) => {
+export const AvbrytPlanBekreftelse = ({ oppfolgingsplan, avbrytDialog }) => {
     return (
         <div className="avbrytPlanBekreftelse">
             <h3 className="panel__tittel">{texts.avbrytPlanBekreftelse.title}</h3>
@@ -162,7 +141,7 @@ class GodkjentPlan extends Component {
                             oppfolgingsplan={oppfolgingsplan}
                         />
 
-                        <GodkjentPlanUtvidbar
+                        <PlanEkspanderbar
                             oppfolgingsplan={oppfolgingsplan}
                         />
                         {isGodkjentPlanDelKnapperAvailable(oppfolgingsplan) && <GodkjentPlanDelKnapper

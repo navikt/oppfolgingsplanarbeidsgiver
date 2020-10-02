@@ -1,20 +1,16 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Hovedknapp } from 'nav-frontend-knapper';
-import { Utvidbar } from '@navikt/digisyfo-npm';
 import { getContextRoot } from '../../../../routers/paths';
 import { oppfolgingsplanPt } from '../../../../proptypes/opproptypes';
 import { hentGodkjenningsTidspunkt } from '../../../../utils/oppfolgingsplanUtils';
-import GodkjennPlanOversiktInformasjon from '../GodkjennPlanOversiktInformasjon';
 import OppfolgingsplanInnholdboks from '../../../app/OppfolgingsplanInnholdboks';
 import GodkjennPlanTidspunkt from '../GodkjennPlanTidspunkt';
 import { EditButton } from './EditButton';
 import { SharingCheckbox } from './SharingCheckbox';
+import PlanEkspanderbar from '../PlanEkspanderbar';
 
 const texts = {
-    godkjennPlanMottattUtvidbar: {
-        title: 'Se planen',
-    },
     godkjennPlanMottattKnapper: {
         buttonApprove: 'Godkjenn',
     },
@@ -22,21 +18,6 @@ const texts = {
         title: 'Mottatt endring',
         paragraphInfoWho: ' har gjort noen endringer i planen og sendt den tilbake til deg.',
     },
-};
-
-export const GodkjennPlanMottattUtvidbar = ({ oppfolgingsdialog }) => {
-    const rootUrl = getContextRoot();
-    return (
-        <Utvidbar className="utvidbar--oppfolgingsplan" tittel={texts.godkjennPlanMottattUtvidbar.title}>
-            <GodkjennPlanOversiktInformasjon
-                oppfolgingsdialog={oppfolgingsdialog}
-                rootUrl={rootUrl}
-            />
-        </Utvidbar>
-    );
-};
-GodkjennPlanMottattUtvidbar.propTypes = {
-    oppfolgingsdialog: oppfolgingsplanPt,
 };
 
 export const GodkjennPlanMottattKnapper = ({ godkjennPlan, oppfolgingsdialog }) => {
@@ -87,8 +68,8 @@ const GodkjennPlanAvslaattOgGodkjent = (
                 <div className="blokk--xxs">
                     <GodkjennPlanTidspunkt gyldighetstidspunkt={sistOppfolgingsdialog} />
                 </div>
-                <GodkjennPlanMottattUtvidbar
-                    oppfolgingsdialog={oppfolgingsplan}
+                <PlanEkspanderbar
+                    oppfolgingsplan={oppfolgingsplan}
                 />
                 <EditButton
                     oppfolgingsdialog={oppfolgingsplan}
