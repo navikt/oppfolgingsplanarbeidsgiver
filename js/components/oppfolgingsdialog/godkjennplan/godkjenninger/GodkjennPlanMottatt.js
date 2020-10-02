@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Hovedknapp } from 'nav-frontend-knapper';
-import { Utvidbar } from '@navikt/digisyfo-npm';
+import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 import { getContextRoot } from '../../../../routers/paths';
 import { oppfolgingsplanPt } from '../../../../proptypes/opproptypes';
 import GodkjennPlanOversiktInformasjon from '../GodkjennPlanOversiktInformasjon';
@@ -35,18 +35,18 @@ TextReceived.propTypes = {
     arbeidstakerName: PropTypes.string,
 };
 
-export const GodkjennPlanMottattUtvidbar = ({ oppfolgingsplan, rootUrl }) => {
+export const GodkjennPlanMottattEkspanderbar = ({ oppfolgingsplan, rootUrl }) => {
     return (
-        <Utvidbar className="utvidbar--oppfolgingsplan" tittel={texts.godkjennPlanMottattUtvidbar.title}>
+        <Ekspanderbartpanel border tittel={texts.godkjennPlanMottattUtvidbar.title}>
             <GodkjennPlanOversiktInformasjon
                 oppfolgingsdialog={oppfolgingsplan}
                 rootUrl={rootUrl}
             />
-        </Utvidbar>
+        </Ekspanderbartpanel>
     );
 };
 
-GodkjennPlanMottattUtvidbar.propTypes = {
+GodkjennPlanMottattEkspanderbar.propTypes = {
     oppfolgingsplan: oppfolgingsplanPt,
     rootUrl: PropTypes.string,
 };
@@ -105,7 +105,7 @@ const GodkjennPlanMottatt = (
 
                 </div>
 
-                <GodkjennPlanMottattUtvidbar
+                <GodkjennPlanMottattEkspanderbar
                     oppfolgingsplan={oppfolgingsplan}
                     rootUrl={rootUrl}
                 />

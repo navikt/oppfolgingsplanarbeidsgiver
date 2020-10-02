@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Hovedknapp } from 'nav-frontend-knapper';
-import { Utvidbar } from '@navikt/digisyfo-npm';
+import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 import { getContextRoot } from '../../../../routers/paths';
 import { oppfolgingsplanPt } from '../../../../proptypes/opproptypes';
 import { hentGodkjenningsTidspunkt } from '../../../../utils/oppfolgingsplanUtils';
@@ -27,12 +27,12 @@ const texts = {
 export const GodkjennPlanMottattUtvidbar = ({ oppfolgingsdialog }) => {
     const rootUrl = getContextRoot();
     return (
-        <Utvidbar className="utvidbar--oppfolgingsplan" tittel={texts.godkjennPlanMottattUtvidbar.title}>
+        <Ekspanderbartpanel tittel={texts.godkjennPlanMottattUtvidbar.title}>
             <GodkjennPlanOversiktInformasjon
                 oppfolgingsdialog={oppfolgingsdialog}
                 rootUrl={rootUrl}
             />
-        </Utvidbar>
+        </Ekspanderbartpanel>
     );
 };
 GodkjennPlanMottattUtvidbar.propTypes = {

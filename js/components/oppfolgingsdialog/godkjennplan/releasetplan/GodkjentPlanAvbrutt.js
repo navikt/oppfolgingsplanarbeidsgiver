@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Utvidbar } from '@navikt/digisyfo-npm';
+import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 import OppfolgingsplanInnholdboks from '../../../app/OppfolgingsplanInnholdboks';
 import { toDateMedMaanedNavn } from '../../../../utils/datoUtils';
 import {
@@ -33,7 +33,7 @@ const textChangeBy = (personName, date) => {
     return `Denne oppfølgingsplanen ble åpnet for endring av ${personName} ${date}`;
 };
 
-export const GodkjentPlanUtvidbar = ({ dokument }) => {
+export const GodkjentPlanEkspanderbar = ({ dokument }) => {
     let panel;
 
     if (dokument.henter) {
@@ -50,14 +50,14 @@ export const GodkjentPlanUtvidbar = ({ dokument }) => {
         });
     }
     return (
-        <Utvidbar className="utvidbar--oppfolgingsplan" tittel={texts.godkjentPlanUtvidbar.utvidbarTitle}>
+        <Ekspanderbartpanel border tittel={texts.godkjentPlanUtvidbar.utvidbarTitle}>
             <div className="godkjentPlanPdf">
                 { panel }
             </div>
-        </Utvidbar>
+        </Ekspanderbartpanel>
     );
 };
-GodkjentPlanUtvidbar.propTypes = {
+GodkjentPlanEkspanderbar.propTypes = {
     dokument: dokumentReducerPt,
 };
 
@@ -109,7 +109,7 @@ class GodkjentPlanAvbrutt extends Component {
                         <p>
                             {textChangeBy(finnSistEndretAvNavn(oppfolgingsdialog), toDateMedMaanedNavn(oppfolgingsdialog.godkjentPlan.avbruttPlan.tidspunkt))}
                         </p>
-                        <GodkjentPlanUtvidbar
+                        <GodkjentPlanEkspanderbar
                             dokument={dokument}
                         />
                         {isGodkjentPlanDelKnapperAvailable(oppfolgingsdialog) && <GodkjentPlanDelKnapper

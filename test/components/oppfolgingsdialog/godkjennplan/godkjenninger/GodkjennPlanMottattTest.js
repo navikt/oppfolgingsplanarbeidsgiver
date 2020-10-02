@@ -3,10 +3,10 @@ import chai from 'chai';
 import { mount, shallow } from 'enzyme';
 import chaiEnzyme from 'chai-enzyme';
 import { Hovedknapp } from 'nav-frontend-knapper';
-import { Utvidbar } from '@navikt/digisyfo-npm';
+import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 import OppfolgingsplanInnholdboks from '../../../../../js/components/app/OppfolgingsplanInnholdboks';
 import GodkjennPlanMottatt, {
-    GodkjennPlanMottattUtvidbar,
+    GodkjennPlanMottattEkspanderbar,
     GodkjennPlanMottattKnapper,
 } from '../../../../../js/components/oppfolgingsdialog/godkjennplan/godkjenninger/GodkjennPlanMottatt';
 import GodkjennPlanOversiktInformasjon from '../../../../../js/components/oppfolgingsdialog/godkjennplan/GodkjennPlanOversiktInformasjon';
@@ -43,7 +43,7 @@ describe('GodkjennPlanMottatt', () => {
     });
 
     it('Skal vise en GodkjennPlanMottattUtvidbar', () => {
-        expect(komponentDefault.find(GodkjennPlanMottattUtvidbar)).to.have.length(1);
+        expect(komponentDefault.find(GodkjennPlanMottattEkspanderbar)).to.have.length(1);
     });
 
     it('Skal vise GodkjennPlanTilAltinnTekst', () => {
@@ -54,11 +54,11 @@ describe('GodkjennPlanMottatt', () => {
         expect(komponentDefault.find(GodkjennPlanMottattKnapper)).to.have.length(1);
     });
 
-    describe('GodkjennPlanMottattUtvidbar', () => {
-        const komponent = shallow(<GodkjennPlanMottattUtvidbar />);
+    describe('GodkjennPlanMottattEskpanderbar', () => {
+        const komponent = shallow(<GodkjennPlanMottattEkspanderbar />);
 
-        it('Skal vise en Utvidbar med en GodkjennPlanOversiktInformasjon', () => {
-            expect(komponent.find(Utvidbar)).to.have.length(1);
+        it('Skal vise et Ekspanderbartpanel med en GodkjennPlanOversiktInformasjon', () => {
+            expect(komponent.find(Ekspanderbartpanel)).to.have.length(1);
             expect(komponent.find(GodkjennPlanOversiktInformasjon)).to.have.length(1);
         });
     });

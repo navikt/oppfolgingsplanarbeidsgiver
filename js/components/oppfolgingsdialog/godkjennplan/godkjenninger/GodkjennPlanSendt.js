@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { Utvidbar } from '@navikt/digisyfo-npm';
+import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 import { oppfolgingsplanPt } from '../../../../proptypes/opproptypes';
 import { finnNyesteGodkjenning } from '../../../../utils/oppfolgingsplanUtils';
 import GodkjennPlanOversiktInformasjon from '../GodkjennPlanOversiktInformasjon';
@@ -55,18 +55,18 @@ const GodkjenPlanSentBlokk = (arbeidstakerName) => {
     );
 };
 
-export const GodkjennPlanSendtUtvidbar = ({ oppfolgingsdialog }) => {
+export const GodkjennPlanSendtEkspanderbar = ({ oppfolgingsdialog }) => {
     const rootUrl = getContextRoot();
     return (
-        <Utvidbar tittel={texts.godkjennPlanSendtUtvidbar.title}>
+        <Ekspanderbartpanel border tittel={texts.godkjennPlanSendtUtvidbar.title}>
             <GodkjennPlanOversiktInformasjon
                 oppfolgingsdialog={oppfolgingsdialog}
                 rootUrl={rootUrl}
             />
-        </Utvidbar>
+        </Ekspanderbartpanel>
     );
 };
-GodkjennPlanSendtUtvidbar.propTypes = {
+GodkjennPlanSendtEkspanderbar.propTypes = {
     oppfolgingsdialog: oppfolgingsplanPt,
 };
 
@@ -90,7 +90,7 @@ const GodkjennPlanSendt = (
                     gyldighetstidspunkt={finnNyesteGodkjenning(oppfolgingsplan.godkjenninger).gyldighetstidspunkt}
                 />
 
-                <GodkjennPlanSendtUtvidbar
+                <GodkjennPlanSendtEkspanderbar
                     oppfolgingsdialog={oppfolgingsplan}
                 />
                 <CancelButton

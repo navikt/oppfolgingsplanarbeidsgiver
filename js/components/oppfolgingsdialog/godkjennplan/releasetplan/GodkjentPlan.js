@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Fareknapp } from 'nav-frontend-knapper';
-import { Utvidbar } from '@navikt/digisyfo-npm';
-import styled from 'styled-components';
+import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 import OppfolgingsplanInnholdboks from '../../../app/OppfolgingsplanInnholdboks';
 import {
     delMedFastlegePt,
@@ -55,25 +54,21 @@ TextForcedApprovedOppfolgingsplan.propTypes = {
     oppfolgingsplan: oppfolgingsplanPt,
 };
 
-export const UtvidbarStyled = styled(Utvidbar)`
-    margin-top: 2.5em;
-`;
-
-export const GodkjentPlanUtvidbar = ({ oppfolgingsplan }) => {
+export const GodkjentPlanEkspanderbar = ({ oppfolgingsplan }) => {
     return (
-        <UtvidbarStyled tittel={texts.godkjentPlanUtvidbar.title}>
+        <Ekspanderbartpanel border tittel={texts.godkjentPlanUtvidbar.title}>
             <GodkjennPlanOversiktInformasjon
                 oppfolgingsdialog={oppfolgingsplan}
                 rootUrl={getContextRoot()}
             />
-        </UtvidbarStyled>
+        </Ekspanderbartpanel>
     );
 };
-GodkjentPlanUtvidbar.propTypes = {
+GodkjentPlanEkspanderbar.propTypes = {
     oppfolgingsplan: oppfolgingsplanPt,
 };
 
-export const AvbrytPlanBekreftelse = ({ oppfolgingsplan, avbrytDialog, }) => {
+export const AvbrytPlanBekreftelse = ({ oppfolgingsplan, avbrytDialog }) => {
     return (
         <div className="avbrytPlanBekreftelse">
             <h3 className="panel__tittel">{texts.avbrytPlanBekreftelse.title}</h3>
@@ -162,7 +157,7 @@ class GodkjentPlan extends Component {
                             oppfolgingsplan={oppfolgingsplan}
                         />
 
-                        <GodkjentPlanUtvidbar
+                        <GodkjentPlanEkspanderbar
                             oppfolgingsplan={oppfolgingsplan}
                         />
                         {isGodkjentPlanDelKnapperAvailable(oppfolgingsplan) && <GodkjentPlanDelKnapper
