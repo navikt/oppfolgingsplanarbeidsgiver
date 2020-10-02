@@ -1,11 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { HjelpetekstUnderVenstre } from 'nav-frontend-hjelpetekst';
-import { toDatePrettyPrint } from '@navikt/digisyfo-npm';
 import { KANGJENNOMFOERES, STATUS_TILTAK } from '../../../konstanter';
 import { toDateMedMaanedNavn } from '../../../utils/datoUtils';
 import { capitalizeFirstLetter } from '../../../utils/tekstUtils';
-import { slaaSammenPerioder } from '../../../utils/periodeUtils';
 import { sorterTiltakerEtterStatus } from '../../../utils/tiltakUtils';
 import { sorterArbeidsoppgaverEtterOpprettet } from '../../../utils/arbeidsoppgaveUtils';
 import {
@@ -16,7 +13,6 @@ import {
     tiltakPt,
     virksomhetPt,
 } from '../../../proptypes/opproptypes';
-import { periodePt } from '../../../proptypes/periodeProptypes';
 
 const texts = {
     informasjonPanelOverskrift: {
@@ -64,18 +60,6 @@ const texts = {
             tid: 'Med mer tid',
             hjelp: 'Med hjelp/hjelpemiddel',
         },
-    },
-    informasjonPanelSykeforlopsPerioder: {
-        title: 'Informasjon om dette sykefraværet',
-        hjelpetekst: 'Ett sykefravær kan bestå av flere perioder hvis det er mindre enn 16 dager mellom dem. Har det gått mer enn 16 dager, regnes det som et nytt sykefravær.',
-        sykmeldingprosentLabel: 'Sykmeldingsprosent',
-    },
-    sykeforlopsPeriode: {
-        grad: 'sykmeldt',
-        gradReisetilskudd: 'sykmeldt med reisetilskudd',
-        behandlingsdager: 'Behandlingsdag(er)',
-        reisetilskudd: 'Reisetilskudd',
-        avventende: 'Avventende sykmelding',
     },
     tiltakBeskrivelse: {
         label: 'Beskrivelse',
@@ -206,75 +190,6 @@ export const InformasjonPanelSykmeldt = ({ arbeidstaker }) => {
     );
 };
 InformasjonPanelSykmeldt.propTypes = {
-    arbeidstaker: personPt,
-};
-
-export const SykeforlopsPeriode = ({ periode, antallDager }) => {
-    return (
-        <div>
-            <p>
-                <strong>{toDatePrettyPrint(periode.fom)} &ndash; {toDatePrettyPrint(periode.tom)} &bull; </strong>
-                {antallDager} dager
-            </p>
-            {
-                periode.grad ? <p>
-                    {periode.grad} &#37; {' '}
-                    {periode.reisetilskudd && (periode.grad > 0 && periode.grad < 100)
-                        ? texts.sykeforlopsPeriode.gradReisetilskudd
-                        : texts.sykeforlopsPeriode.grad}
-                </p> : null
-            }
-            {
-                periode.behandlingsdager ? <p>
-                    {texts.sykeforlopsPeriode.behandlingsdager}
-                </p> : null
-            }
-            {
-                (periode.reisetilskudd === true && periode.grad === 0) ? <p>
-                    {texts.sykeforlopsPeriode.reisetilskudd}
-                </p> : null
-            }
-            {
-                periode.avventende !== null ? <p>
-                    {texts.sykeforlopsPeriode.avventende}
-                </p> : null
-            }
-        </div>
-    );
-};
-SykeforlopsPeriode.propTypes = {
-    periode: periodePt,
-    antallDager: PropTypes.number,
-};
-
-export const InformasjonPanelSykeforlopsPerioder = ({ arbeidstaker }) => {
-    return (
-        <div className="panel godkjennPlanOversiktInformasjon__panel">
-            <div className="godkjennPlanOversiktInformasjon__panel__header--sykeforlopsperioder">
-                <h3>{texts.informasjonPanelSykeforlopsPerioder.title}</h3>
-                <HjelpetekstUnderVenstre>
-                    {texts.informasjonPanelSykeforlopsPerioder.hjelpetekst}
-                </HjelpetekstUnderVenstre>
-            </div>
-            <dl className="godkjennPlanOversiktInformasjon__panel__info__sykmeldingsprosent">
-                <div>
-                    <dt>{texts.informasjonPanelSykeforlopsPerioder.sykmeldingprosentLabel}</dt>
-                    {
-                        slaaSammenPerioder(arbeidstaker.sykeforlopsPerioder).map((periode, idx) => {
-                            const antallDager = ((new Date(periode.tom) - new Date(periode.fom)) / 86400000) + 1;
-                            return (
-                                <dd key={idx}>
-                                    <SykeforlopsPeriode periode={periode} antallDager={antallDager} />
-                                </dd>
-                            );
-                        })
-                    }
-                </div>
-            </dl>
-        </div>
-    );
-};
-InformasjonPanelSykeforlopsPerioder.propTypes = {
     arbeidstaker: personPt,
 };
 
@@ -571,12 +486,6 @@ const GodkjennPlanOversiktInformasjon = ({ oppfolgingsdialog, rootUrl }) => {
                 naermesteLeder={oppfolgingsdialog.arbeidsgiver.naermesteLeder}
                 virksomhet={oppfolgingsdialog.virksomhet}
             />
-
-            {oppfolgingsdialog.arbeidstaker.sykeforlopsPerioder.length > 0 &&
-            <InformasjonPanelSykeforlopsPerioder
-                arbeidstaker={oppfolgingsdialog.arbeidstaker}
-            />
-            }
 
             { oppfolgingsdialog.arbeidsoppgaveListe.length > 0 &&
             <InformasjonPanelArbeidsoppgaver
