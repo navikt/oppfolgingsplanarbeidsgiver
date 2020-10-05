@@ -2,6 +2,7 @@ import React from 'react';
 import chai from 'chai';
 import { shallow } from 'enzyme';
 import { EtikettFokus } from 'nav-frontend-etiketter';
+import { LenkepanelBase } from 'nav-frontend-lenkepanel';
 import chaiEnzyme from 'chai-enzyme';
 import OppfolgingsdialogTeaser, {
     TilGodkjenningStatus,
@@ -44,8 +45,8 @@ describe('OppfolgingsdialogTeasere', () => {
 
     const tilGodkjenningStatus = shallow(<TilGodkjenningStatus oppfolgingsplan={oppfolgingsdialog} />);
 
-    it('Viser en article', () => {
-        expect(komponent.find('article')).to.have.length(1);
+    it('Viser en Lenkepanel', () => {
+        expect(komponent.find(LenkepanelBase)).to.have.length(1);
     });
 
     it('Skal vise EtikettFokus på plan til godkjenning', () => {
