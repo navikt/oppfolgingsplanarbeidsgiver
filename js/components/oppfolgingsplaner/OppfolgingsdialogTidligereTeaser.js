@@ -17,7 +17,6 @@ const OppfolgingsdialogTidligereTeaser = (
     return (
         <LenkepanelBase
             href={`${rootUrlPlaner}/oppfolgingsplaner/${oppfolgingsdialog.id}`}
-            className="inngangspanel--lenkepanel"
             border>
             <div className="inngangspanel">
                 <span className="oppfolgingsplanInnhold__ikon">
