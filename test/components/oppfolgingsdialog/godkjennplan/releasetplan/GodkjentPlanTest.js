@@ -3,10 +3,9 @@ import chai from 'chai';
 import { shallow } from 'enzyme';
 import chaiEnzyme from 'chai-enzyme';
 import sinon from 'sinon';
+import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 import GodkjentPlan, {
-    GodkjentPlanUtvidbar,
     TextForcedApprovedOppfolgingsplan,
-    UtvidbarStyled,
 } from '../../../../../js/components/oppfolgingsdialog/godkjennplan/releasetplan/GodkjentPlan';
 import GodkjentPlanDelKnapper from '../../../../../js/components/oppfolgingsdialog/godkjennplan/releasetplan/GodkjentPlanDelKnapper';
 import OppfolgingsplanInnholdboks from '../../../../../js/components/app/OppfolgingsplanInnholdboks';
@@ -14,6 +13,8 @@ import getOppfolgingsplan from '../../../../mock/mockOppfolgingsdialog';
 import GodkjentPlanDeltBekreftelse from '../../../../../js/components/oppfolgingsdialog/godkjennplan/releasetplan/GodkjentPlanDeltBekreftelse';
 import GodkjentPlanHandlingKnapper from '../../../../../js/components/oppfolgingsdialog/godkjennplan/releasetplan/GodkjentPlanHandlingKnapper';
 import GodkjennPlanOversiktInformasjon from '../../../../../js/components/oppfolgingsdialog/godkjennplan/GodkjennPlanOversiktInformasjon';
+import PlanEkspanderbar from '../../../../../js/components/oppfolgingsdialog/godkjennplan/PlanEkspanderbar';
+import { GodkjentPlanEkspanderbar } from '../../../../../js/components/oppfolgingsdialog/godkjennplan/releasetplan/GodkjentPlanAvbrutt';
 
 chai.use(chaiEnzyme());
 const expect = chai.expect;
@@ -57,8 +58,8 @@ describe('GodkjentPlan', () => {
         expect(komponentDefault.find(GodkjentPlanDeltBekreftelse)).to.have.length(1);
     });
 
-    it('Skal vise en GodkjentPlanUtvidbar', () => {
-        expect(komponentDefault.find(GodkjentPlanUtvidbar)).to.have.length(1);
+    it('Skal vise en PlanEkspanderbar ', () => {
+        expect(komponentDefault.find(PlanEkspanderbar)).to.have.length(1);
     });
 
     it('Skal vise en GodkjentPlanDelKnapper', () => {
@@ -104,26 +105,12 @@ describe('GodkjentPlan', () => {
             expect(k2.find(TextForcedApprovedOppfolgingsplan)).to.have.length(1);
         });
 
-        const k3 = shallow(<GodkjentPlanUtvidbar
-            hentPdfurler={hentPdfurler}
+        const k3 = shallow(<GodkjentPlanEkspanderbar
             dokument={dokument}
-            oppfolgingsplan={tvungenGodkjentPlan}
         />);
 
         it('Skal ikke vise infotekst', () => {
             expect(k3.find('p')).to.have.length(0);
-        });
-    });
-
-    describe('GodkjentPlanUtvidbar', () => {
-        const komponent = shallow(<GodkjentPlanUtvidbar dokument={dokument} />);
-
-        it('Skal vise en UtvidbarStyled', () => {
-            expect(komponent.find(UtvidbarStyled)).to.have.length(1);
-        });
-
-        it('Skal vise en GodkjennPlanOversiktInformasjon', () => {
-            expect(komponent.find(GodkjennPlanOversiktInformasjon)).to.have.length(1);
         });
     });
 });

@@ -2,15 +2,13 @@ import React from 'react';
 import chai from 'chai';
 import { shallow } from 'enzyme';
 import chaiEnzyme from 'chai-enzyme';
-import { Utvidbar } from '@navikt/digisyfo-npm';
 import GodkjennPlanSendt, {
     CancelButton,
-    GodkjennPlanSendtUtvidbar,
 } from '../../../../../js/components/oppfolgingsdialog/godkjennplan/godkjenninger/GodkjennPlanSendt';
-import GodkjennPlanOversiktInformasjon from '../../../../../js/components/oppfolgingsdialog/godkjennplan/GodkjennPlanOversiktInformasjon';
 import GodkjennPlanVenterInfo from '../../../../../js/components/oppfolgingsdialog/godkjennplan/GodkjennPlanVenterInfo';
 import OppfolgingsplanInnholdboks from '../../../../../js/components/app/OppfolgingsplanInnholdboks';
 import getOppfolgingsplan from '../../../../mock/mockOppfolgingsdialog';
+import PlanEkspanderbar from '../../../../../js/components/oppfolgingsdialog/godkjennplan/PlanEkspanderbar';
 
 chai.use(chaiEnzyme());
 const expect = chai.expect;
@@ -41,8 +39,8 @@ describe('GodkjennPlanSendt', () => {
         expect(komponentDefault.find('p')).to.have.length(1);
     });
 
-    it('Skal vise en GodkjentPlanUtvidbar', () => {
-        expect(komponentDefault.find(GodkjennPlanSendtUtvidbar)).to.have.length(1);
+    it('Skal vise en PlanEkspanderbar ', () => {
+        expect(komponentDefault.find(PlanEkspanderbar)).to.have.length(1);
     });
 
     it('Skal vise CancelButton', () => {
@@ -51,14 +49,5 @@ describe('GodkjennPlanSendt', () => {
 
     it('Skal vise GodkjennPlanVenterInfo', () => {
         expect(komponentDefault.find(GodkjennPlanVenterInfo)).to.have.length(1);
-    });
-
-    describe('GodkjennPlanSendtUtvidbar', () => {
-        const komponent = shallow(<GodkjennPlanSendtUtvidbar />);
-
-        it('Skal vise en Utvidbar med en GodkjennPlanOversiktInformasjon', () => {
-            expect(komponent.find(Utvidbar)).to.have.length(1);
-            expect(komponent.find(GodkjennPlanOversiktInformasjon)).to.have.length(1);
-        });
     });
 });
