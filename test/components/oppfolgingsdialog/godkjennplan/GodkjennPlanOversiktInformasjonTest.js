@@ -10,7 +10,6 @@ import GodkjennPlanOversiktInformasjon, {
     InformasjonPanelArbeidsoppgaver,
     InformasjonPanelArbeidsoppgaverEtterGjennomfoering,
     InformasjonPanelTiltak,
-    InformasjonPanelSykeforlopsPerioder,
 } from '../../../../js/components/oppfolgingsdialog/godkjennplan/GodkjennPlanOversiktInformasjon';
 import getOppfolgingsplan from '../../../mock/mockOppfolgingsdialog';
 
@@ -37,12 +36,6 @@ describe('GodkjennPlanOversiktInformasjon', () => {
             epost: 'test@testesen.no',
             tlf: '81549300',
             stillinger: [],
-            sykeforlopsPerioder: [{
-                fom: '1.1.2017',
-                tom: '2.1.2017',
-                grad: 100,
-                aktivitet: 'Test aktivitet',
-            }],
         },
     });
 
@@ -72,10 +65,6 @@ describe('GodkjennPlanOversiktInformasjon', () => {
 
     it('Skal vise et InformasjonPanelTiltak', () => {
         expect(komponentDefault.find(InformasjonPanelTiltak)).to.have.length(1);
-    });
-
-    it('Skal vise et InformasjonPanelSykeforlopsPerioder', () => {
-        expect(komponentDefault.find(InformasjonPanelSykeforlopsPerioder)).to.have.length(1);
     });
 
     describe('InformasjonPanelOverskrift', () => {
