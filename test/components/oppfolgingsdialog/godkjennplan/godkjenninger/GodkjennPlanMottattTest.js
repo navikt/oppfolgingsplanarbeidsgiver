@@ -3,13 +3,10 @@ import chai from 'chai';
 import { mount, shallow } from 'enzyme';
 import chaiEnzyme from 'chai-enzyme';
 import { Hovedknapp } from 'nav-frontend-knapper';
-import Ekspanderbartpanel from 'nav-frontend-ekspanderbartpanel';
 import OppfolgingsplanInnholdboks from '../../../../../js/components/app/OppfolgingsplanInnholdboks';
 import GodkjennPlanMottatt, {
-    GodkjennPlanMottattEkspanderbar,
     GodkjennPlanMottattKnapper,
 } from '../../../../../js/components/oppfolgingsdialog/godkjennplan/godkjenninger/GodkjennPlanMottatt';
-import GodkjennPlanOversiktInformasjon from '../../../../../js/components/oppfolgingsdialog/godkjennplan/GodkjennPlanOversiktInformasjon';
 import GodkjennPlanTilAltinnTekst from '../../../../../js/components/oppfolgingsdialog/godkjennplan/godkjenninger/GodkjennPlanTilAltinnTekst';
 import getOppfolgingsplan from '../../../../mock/mockOppfolgingsdialog';
 import PlanEkspanderbar from '../../../../../js/components/oppfolgingsdialog/godkjennplan/PlanEkspanderbar';
