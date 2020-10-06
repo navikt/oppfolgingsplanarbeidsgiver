@@ -2,7 +2,6 @@ import chai from 'chai';
 import React from 'react';
 import { shallow } from 'enzyme';
 import chaiEnzyme from 'chai-enzyme';
-import { Utvidbar } from '@navikt/digisyfo-npm';
 import GodkjennPlanOversiktInformasjon, {
     InformasjonPanelOverskrift,
     InformasjonPanelSykmeldt,
