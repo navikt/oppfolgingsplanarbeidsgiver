@@ -16,8 +16,7 @@ import FadingIconWithText from './FadingIconWithText';
 const texts = {
     shareWithNAVError: 'Noe gikk feil da du prøvde å dele planen. Prøv igjen om litt.',
     shareWithFastlegeError: `
-        Du får dessverre ikke delt denne planen med legen herfra. Det kan hende legen ikke kan ta imot elektroniske meldinger.
-        I dette tilfellet må dere laste ned og skrive ut planen slik at dere får delt den med legen manuelt.   
+        Vi har en feil som gjør at det for tiden ikke er mulig å dele planen med legen. Hvis du ønsker å dele planen, må du laste den ned og skrive den ut.
     `,
     buttonShareWithNAV: 'Del med NAV',
     sharedWithNAV: 'Planen er delt med NAV',
