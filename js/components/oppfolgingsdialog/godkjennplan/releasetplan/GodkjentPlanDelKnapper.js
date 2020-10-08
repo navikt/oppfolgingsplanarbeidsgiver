@@ -16,7 +16,7 @@ import FadingIconWithText from './FadingIconWithText';
 const texts = {
     shareWithNAVError: 'Noe gikk feil da du prøvde å dele planen. Prøv igjen om litt.',
     shareWithFastlegeError: `
-        Vi har en feil som gjør at det for tiden ikke er mulig å dele planen med legen. Hvis du ønsker å dele planen, må du laste den ned og skrive den ut.
+        Vi har en feil som gjør at det ikke er mulig å dele planen med legen akkurat nå. Prøv igjen senere.
     `,
     buttonShareWithNAV: 'Del med NAV',
     sharedWithNAV: 'Planen er delt med NAV',
