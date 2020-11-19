@@ -21,7 +21,7 @@ const OppfolgingsdialogerInfoPersonvern = () => {
             <li><a
                 target="_blank"
                 rel="noopener noreferrer"
-                href="https://www.nav.no/no/Person/Arbeid/Sykmeldt%2C+arbeidsavklaringspenger+og+yrkesskade/Relatert+informasjon/hva-er-en-oppf%C3%B8lgingsplan">
+                href="https://www.nav.no/no/person/arbeid/sykmeldt-arbeidsavklaringspenger-og-yrkesskade/sykmeldt/hva-er-en-oppfolgingsplan">
                 {texts.readMore.linkLover}
             </a></li>
             <li><a
