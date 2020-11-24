@@ -56,17 +56,6 @@ const finnArbeidsforhold = (fnr, virksomhetsnummer, opprettetDato, state) => {
         });
 };
 
-const finnSykeforlopsPerioder = (fnr, virksomhetsnummer, state) => {
-    const sykeforlopsPerioder = state.sykeforlopsPerioder.data
-        .filter((_sykeforlopsPerioder) => {
-            return _sykeforlopsPerioder.virksomhetsnummer === virksomhetsnummer && _sykeforlopsPerioder.fnr === fnr;
-        })[0] || null;
-    if (!sykeforlopsPerioder) {
-        return [];
-    }
-    return sykeforlopsPerioder.periodeListe;
-};
-
 export const populerDialogFraState = (_oppfolgingsdialog, state) => {
     const oppfolgingsdialog = _oppfolgingsdialog;
     oppfolgingsdialog.arbeidstaker.navn = finnNavn(oppfolgingsdialog.arbeidstaker.fnr, state);
@@ -76,7 +65,6 @@ export const populerDialogFraState = (_oppfolgingsdialog, state) => {
     oppfolgingsdialog.arbeidstaker.skalHaVarsel = kontaktinfo.skalHaVarsel;
     // eslint-disable-next-line max-len
     oppfolgingsdialog.arbeidstaker.stillinger = finnArbeidsforhold(oppfolgingsdialog.arbeidstaker.fnr, oppfolgingsdialog.virksomhet.virksomhetsnummer, oppfolgingsdialog.opprettetDato, state);
-    oppfolgingsdialog.arbeidstaker.sykeforlopsPerioder = finnSykeforlopsPerioder(oppfolgingsdialog.arbeidstaker.fnr, oppfolgingsdialog.virksomhet.virksomhetsnummer, state);
     oppfolgingsdialog.virksomhet.navn = finnVirksomhetsnavn(oppfolgingsdialog.virksomhet.virksomhetsnummer, state);
     const naermesteleder = finnNaermesteLeder(oppfolgingsdialog.arbeidstaker.fnr, oppfolgingsdialog.virksomhet.virksomhetsnummer, state);
     oppfolgingsdialog.arbeidsgiver.naermesteLeder.virksomhetsnummer = naermesteleder && naermesteleder.virksomhetsnummer;

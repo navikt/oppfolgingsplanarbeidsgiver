@@ -113,9 +113,6 @@ describe('OppfolgingsplanerSide', () => {
             virksomhet: {
                 data: [{ virksomhetsnummer: '123456789', navn: 'DigiTech Consulting AS' }],
             },
-            sykeforlopsPerioder: {
-                data: [],
-            },
         };
 
         it('Skal returnere props', () => {
@@ -129,7 +126,6 @@ describe('OppfolgingsplanerSide', () => {
                         stillinger: [],
                         epost: 'test@nav.no',
                         tlf: '22229999',
-                        sykeforlopsPerioder: [],
                         skalHaVarsel: true,
                     },
                     virksomhet: {

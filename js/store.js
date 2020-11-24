@@ -2,7 +2,6 @@ import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { reducer as formReducer } from 'redux-form';
 import createSagaMiddleware from 'redux-saga';
 
-import { sykeforlopsPerioder } from '@navikt/digisyfo-npm';
 import arbeidsoppgaver from './reducers/arbeidsoppgaver';
 import arbeidsforhold from './reducers/arbeidsforhold';
 import avbrytdialogReducer from './reducers/avbrytdialog';
@@ -52,7 +51,6 @@ const rootReducer = combineReducers({
     kontaktinfo,
     timeout,
     form: formReducer,
-    sykeforlopsPerioder,
 });
 
 const store = createStore(rootReducer,

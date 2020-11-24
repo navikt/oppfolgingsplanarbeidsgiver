@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { sykeforlopsPerioderReducerPt } from '@navikt/digisyfo-npm';
 import * as opProptypes from '../../proptypes/opproptypes';
 import {
     finnOgHentArbeidsforholdSomMangler,
     finnOgHentKontaktinfoSomMangler,
     finnOgHentNaermesteLedereSomMangler,
     finnOgHentPersonerSomMangler,
-    finnOgHentSykeforlopsPerioderSomMangler,
     finnOgHentVirksomheterSomMangler,
 } from '../../utils/reducerUtils';
 import {
@@ -61,8 +59,6 @@ class Oppfolgingsdialog extends Component {
             hentNaermesteLeder,
             hentKontaktinfo,
             hentArbeidsforhold,
-            sykeforlopsPerioderReducer,
-            hentSykeforlopsPerioder,
         } = this.props;
 
         this.props.settDialog(oppfolgingsdialog.id);
@@ -71,7 +67,6 @@ class Oppfolgingsdialog extends Component {
         finnOgHentNaermesteLedereSomMangler([oppfolgingsdialog], naermesteleder, hentNaermesteLeder);
         finnOgHentKontaktinfoSomMangler([oppfolgingsdialog], kontaktinfo, hentKontaktinfo);
         finnOgHentArbeidsforholdSomMangler([oppfolgingsdialog], arbeidsforhold, hentArbeidsforhold);
-        finnOgHentSykeforlopsPerioderSomMangler([oppfolgingsdialog], sykeforlopsPerioderReducer, hentSykeforlopsPerioder);
     }
 
     render() {
@@ -208,7 +203,6 @@ Oppfolgingsdialog.propTypes = {
     person: opProptypes.personReducerPt,
     tiltak: opProptypes.tiltakReducerPt,
     virksomhet: opProptypes.virksomhetReducerPt,
-    sykeforlopsPerioderReducer: sykeforlopsPerioderReducerPt,
     oppfolgingsdialoger: PropTypes.arrayOf(opProptypes.oppfolgingsplanPt),
     lagreKommentar: PropTypes.func,
     slettKommentar: PropTypes.func,
@@ -231,7 +225,6 @@ Oppfolgingsdialog.propTypes = {
     nullstillGodkjenning: PropTypes.func,
     settAktivtSteg: PropTypes.func,
     settDialog: PropTypes.func,
-    hentSykeforlopsPerioder: PropTypes.func,
 };
 
 export default Oppfolgingsdialog;
