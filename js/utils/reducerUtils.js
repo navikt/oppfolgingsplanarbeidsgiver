@@ -48,12 +48,6 @@ export const henterEllerHarHentetKontaktinfo = (fnr, kontaktinfo) => {
     }).length > 0;
 };
 
-export const henterEllerHarHentetSykeforlopsPerioder = (fnr, virksomhetsnummer, sykeforlopsperioder) => {
-    return sykeforlopsperioder.henter.filter((henter) => {
-        return henter.fnr === fnr && henter.virksomhetsnummer === virksomhetsnummer;
-    }).length > 0;
-};
-
 export const henterEllerHarHentetNaermesteLeder = (fnr, virksomhetsnummer, naermesteleder) => {
     return naermesteleder.henter.filter((henter) => {
         return henter.virksomhetsnummer === virksomhetsnummer && henter.fnr === fnr;
@@ -106,22 +100,6 @@ export const finnOgHentKontaktinfoSomMangler = (oppfolgingsdialoger, kontaktinfo
     kontaktinfoSet.forEach((fnr) => {
         if (!henterEllerHarHentetKontaktinfo(fnr, kontaktinfo)) {
             hentKontaktinfo(fnr);
-        }
-    });
-};
-
-export const finnOgHentSykeforlopsPerioderSomMangler = (oppfolgingsdialoger, sykeforlopsPerioder, hentSykeforlopsPerioder) => {
-    const sykeforlopsPerioderListe = [];
-    oppfolgingsdialoger.forEach((oppfolgingsdialog) => {
-        sykeforlopsPerioderListe.push({
-            fnr: oppfolgingsdialog.arbeidstaker.fnr,
-            virksomhetsnummer: oppfolgingsdialog.virksomhet.virksomhetsnummer,
-        });
-    });
-    const unikeSykeforlopsPerioder = finnUnikeElementer(sykeforlopsPerioderListe);
-    unikeSykeforlopsPerioder.forEach((sykeforlopsPeriode) => {
-        if (!henterEllerHarHentetSykeforlopsPerioder(sykeforlopsPeriode.fnr, sykeforlopsPeriode.virksomhetsnummer, sykeforlopsPerioder)) {
-            hentSykeforlopsPerioder(sykeforlopsPeriode.fnr, sykeforlopsPeriode.virksomhetsnummer);
         }
     });
 };

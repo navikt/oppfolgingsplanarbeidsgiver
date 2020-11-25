@@ -30,7 +30,6 @@ const ARBEIDSFORHOLD = 'arbeidsforhold';
 const BERIK = 'berik';
 const KONTAKTINFO = 'kontaktinfo';
 const NAERMESTELEDER = 'naermesteleder';
-const PERIODER = 'perioder';
 const PERSON = 'person';
 const PERSON_KARINA = 'personKarina';
 const PERSON_KJERSTI = 'personKjersti';
@@ -46,7 +45,6 @@ lastFilTilMinne(ARBEIDSFORHOLD);
 lastFilTilMinne(SYKMELDTE);
 lastFilTilMinne(SYKMELDINGER);
 lastFilTilMinne(BERIK);
-lastFilTilMinne(PERIODER);
 lastFilTilMinne(PERSON);
 lastFilTilMinne(PERSON_KARINA);
 lastFilTilMinne(PERSON_KJERSTI);
@@ -122,11 +120,6 @@ function mockForOpplaeringsmiljo(server) {
     server.get('/syfooppfolgingsplanservice/api/arbeidsgiver/oppfolgingsplaner', (req, res) => {
         res.setHeader('Content-Type', 'application/json');
         res.send(mockOppfolgingsplan.getOppfolgingsplaner(mockOppfolgingsplan.TYPE_DEFAULT));
-    });
-
-    server.get('/syforest/sykeforloep/siste/perioder', (req, res) => {
-        res.setHeader('Content-Type', 'application/json');
-        res.send(JSON.stringify(mockData[PERIODER]));
     });
 
     server.get('/syfooppfolgingsplanservice/api/tilgang', (req, res) => {

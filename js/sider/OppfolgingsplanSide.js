@@ -2,10 +2,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import {
-    sykeforlopsPerioderReducerPt,
-    hentSykeforlopsPerioder,
-} from '@navikt/digisyfo-npm';
-import {
     sykmeldt as sykmeldtPt,
     brodsmule as brodsmulePt,
     sykmeldingerReducerPt,
@@ -217,7 +213,6 @@ OppfolgingsplanSide.propTypes = {
     tiltak: opProptypes.tiltakReducerPt,
     person: opProptypes.personReducerPt,
     virksomhet: opProptypes.virksomhetReducerPt,
-    sykeforlopsPerioder: sykeforlopsPerioderReducerPt,
     koblingId: PropTypes.string,
     harSykmeldtGyldigSykmelding: PropTypes.bool,
     oppfolgingsdialog: opProptypes.oppfolgingsplanPt,
@@ -251,7 +246,6 @@ OppfolgingsplanSide.propTypes = {
     sjekkTilgang: PropTypes.func,
     oppfolgingsplanId: PropTypes.string,
     hentSykmeldinger: PropTypes.func,
-    hentSykeforlopsPerioder: PropTypes.func,
     skalHenteBerikelse: PropTypes.bool,
     hentSykmeldteBerikelser: PropTypes.func,
 };
@@ -331,7 +325,6 @@ export function mapStateToProps(state, ownProps) {
         naermesteleder: state.naermesteleder,
         alleOppfolgingsdialogerReducer,
         oppfolgingsdialogerReducer,
-        sykeforlopsPerioderReducer: state.sykeforlopsPerioder,
         person: state.person,
         tilgang,
         tiltak: state.tiltak,
@@ -386,7 +379,6 @@ const OppfolgingsdialogContainer = connect(mapStateToProps, {
     hentKontaktinfo,
     hentSykmeldinger,
     hentNaermesteLeder,
-    hentSykeforlopsPerioder,
     hentSykmeldteBerikelser: hentSykmeldteBerikelserAction,
 })(OppfolgingsplanSide);
 

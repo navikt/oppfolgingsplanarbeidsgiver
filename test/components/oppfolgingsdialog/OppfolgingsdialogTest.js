@@ -29,7 +29,6 @@ describe('Oppfolgingsdialog', () => {
     let hentNaermesteLeder;
     let hentKontaktinfo;
     let hentArbeidsforhold;
-    let hentSykeforlopsPerioder;
     let settDialog;
     const data = {
         henter: [],
@@ -42,7 +41,6 @@ describe('Oppfolgingsdialog', () => {
     const kontaktinfo = data;
     const arbeidsforhold = data;
     const naermesteleder = data;
-    const sykeforlopsPerioderReducer = data;
     const avbrytdialogReducer = {};
     const sykmeldinger = [
         {
@@ -67,7 +65,6 @@ describe('Oppfolgingsdialog', () => {
         hentArbeidsforhold = sinon.spy();
         hentNaermesteLeder = sinon.spy();
         hentKontaktinfo = sinon.spy();
-        hentSykeforlopsPerioder = sinon.spy();
         navigasjontoggles = { steg: 1 };
         oppfolgingsdialog = getOppfolgingsplan();
         component = shallow(<Oppfolgingsdialog
@@ -81,14 +78,12 @@ describe('Oppfolgingsdialog', () => {
             hentVirksomhet={hentVirksomhet}
             hentPerson={hentPerson}
             hentKontaktinfo={hentKontaktinfo}
-            hentSykeforlopsPerioder={hentSykeforlopsPerioder}
             virksomhet={virksomhet}
             person={person}
             kontaktinfo={kontaktinfo}
             arbeidsforhold={arbeidsforhold}
             hentArbeidsforhold={hentArbeidsforhold}
             sykmeldinger={sykmeldinger}
-            sykeforlopsPerioderReducer={sykeforlopsPerioderReducer}
         />);
     });
 
@@ -116,14 +111,12 @@ describe('Oppfolgingsdialog', () => {
             hentVirksomhet={hentVirksomhet}
             hentPerson={hentPerson}
             hentKontaktinfo={hentKontaktinfo}
-            hentSykeforlopsPerioder={hentSykeforlopsPerioder}
             virksomhet={virksomhet}
             person={person}
             kontaktinfo={kontaktinfo}
             arbeidsforhold={arbeidsforhold}
             hentArbeidsforhold={hentArbeidsforhold}
             sykmeldinger={sykmeldinger}
-            sykeforlopsPerioderReducer={sykeforlopsPerioderReducer}
         />);
         expect(componentUnderArbeid.find(NavigasjonsTopp)).to.have.length(1);
     });
@@ -148,7 +141,6 @@ describe('Oppfolgingsdialog', () => {
             hentVirksomhet={hentVirksomhet}
             hentPerson={hentPerson}
             hentKontaktinfo={hentKontaktinfo}
-            hentSykeforlopsPerioder={hentSykeforlopsPerioder}
             virksomhet={virksomhet}
             person={person}
             kontaktinfo={kontaktinfo}
@@ -156,7 +148,6 @@ describe('Oppfolgingsdialog', () => {
             arbeidsforhold={arbeidsforhold}
             hentArbeidsforhold={hentArbeidsforhold}
             sykmeldinger={sykmeldinger}
-            sykeforlopsPerioderReducer={sykeforlopsPerioderReducer}
         />);
         expect(component.find(AvbruttGodkjentPlanVarsel)).to.have.length(1);
     });
@@ -185,14 +176,12 @@ describe('Oppfolgingsdialog', () => {
             hentVirksomhet={hentVirksomhet}
             hentPerson={hentPerson}
             hentKontaktinfo={hentKontaktinfo}
-            hentSykeforlopsPerioder={hentSykeforlopsPerioder}
             virksomhet={virksomhet}
             person={person}
             kontaktinfo={kontaktinfo}
             arbeidsforhold={arbeidsforhold}
             hentArbeidsforhold={hentArbeidsforhold}
             sykmeldinger={sykmeldinger}
-            sykeforlopsPerioderReducer={sykeforlopsPerioderReducer}
         />);
         expect(component.find(Samtykke)).to.have.length(1);
     });
@@ -221,14 +210,12 @@ describe('Oppfolgingsdialog', () => {
             hentVirksomhet={hentVirksomhet}
             hentPerson={hentPerson}
             hentKontaktinfo={hentKontaktinfo}
-            hentSykeforlopsPerioder={hentSykeforlopsPerioder}
             virksomhet={virksomhet}
             person={person}
             kontaktinfo={kontaktinfo}
             arbeidsforhold={arbeidsforhold}
             hentArbeidsforhold={hentArbeidsforhold}
             sykmeldinger={sykmeldinger}
-            sykeforlopsPerioderReducer={sykeforlopsPerioderReducer}
         />);
         expect(component.find(Samtykke)).to.have.length(1);
     });
@@ -261,14 +248,12 @@ describe('Oppfolgingsdialog', () => {
             hentVirksomhet={hentVirksomhet}
             hentPerson={hentPerson}
             hentKontaktinfo={hentKontaktinfo}
-            hentSykeforlopsPerioder={hentSykeforlopsPerioder}
             virksomhet={virksomhet}
             person={person}
             kontaktinfo={kontaktinfo}
             arbeidsforhold={arbeidsforhold}
             hentArbeidsforhold={hentArbeidsforhold}
             sykmeldinger={sykmeldinger}
-            sykeforlopsPerioderReducer={sykeforlopsPerioderReducer}
         />);
         expect(component.find(Godkjenninger)).to.have.length(1);
     });
@@ -294,14 +279,12 @@ describe('Oppfolgingsdialog', () => {
             hentVirksomhet={hentVirksomhet}
             hentPerson={hentPerson}
             hentKontaktinfo={hentKontaktinfo}
-            hentSykeforlopsPerioder={hentSykeforlopsPerioder}
             virksomhet={virksomhet}
             person={person}
             kontaktinfo={kontaktinfo}
             arbeidsforhold={arbeidsforhold}
             hentArbeidsforhold={hentArbeidsforhold}
             sykmeldinger={sykmeldinger}
-            sykeforlopsPerioderReducer={sykeforlopsPerioderReducer}
         />);
         expect(component.find(ReleasetPlan)).to.have.length(1);
     });
@@ -324,14 +307,12 @@ describe('Oppfolgingsdialog', () => {
             hentVirksomhet={hentVirksomhet}
             hentPerson={hentPerson}
             hentKontaktinfo={hentKontaktinfo}
-            hentSykeforlopsPerioder={hentSykeforlopsPerioder}
             virksomhet={virksomhet}
             person={person}
             kontaktinfo={kontaktinfo}
             arbeidsforhold={arbeidsforhold}
             hentArbeidsforhold={hentArbeidsforhold}
             sykmeldinger={sykmeldinger}
-            sykeforlopsPerioderReducer={sykeforlopsPerioderReducer}
         />);
         expect(component.find(Arbeidsoppgaver)).to.have.length(1);
     });
@@ -354,14 +335,12 @@ describe('Oppfolgingsdialog', () => {
             hentVirksomhet={hentVirksomhet}
             hentPerson={hentPerson}
             hentKontaktinfo={hentKontaktinfo}
-            hentSykeforlopsPerioder={hentSykeforlopsPerioder}
             virksomhet={virksomhet}
             person={person}
             kontaktinfo={kontaktinfo}
             arbeidsforhold={arbeidsforhold}
             hentArbeidsforhold={hentArbeidsforhold}
             sykmeldinger={sykmeldinger}
-            sykeforlopsPerioderReducer={sykeforlopsPerioderReducer}
         />);
         expect(component.find(Tiltak)).to.have.length(1);
     });
@@ -384,14 +363,12 @@ describe('Oppfolgingsdialog', () => {
             hentVirksomhet={hentVirksomhet}
             hentPerson={hentPerson}
             hentKontaktinfo={hentKontaktinfo}
-            hentSykeforlopsPerioder={hentSykeforlopsPerioder}
             virksomhet={virksomhet}
             person={person}
             kontaktinfo={kontaktinfo}
             arbeidsforhold={arbeidsforhold}
             hentArbeidsforhold={hentArbeidsforhold}
             sykmeldinger={sykmeldinger}
-            sykeforlopsPerioderReducer={sykeforlopsPerioderReducer}
         />);
         expect(component.find(Godkjenn)).to.have.length(1);
     });
