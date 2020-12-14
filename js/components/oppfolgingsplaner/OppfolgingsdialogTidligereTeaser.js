@@ -20,7 +20,7 @@ const OppfolgingsdialogTidligereTeaser = (
             border>
             <div className="inngangspanel">
                 <span className="oppfolgingsplanInnhold__ikon">
-                    <img alt="plan" src={`${rootUrl}/img/svg/${planStatus.img}`} />
+                    <img alt="" src={`${rootUrl}/img/svg/${planStatus.img}`} />
                 </span>
                 <div className="inngangspanel__innhold">
                     <header className="inngangspanel__header">
