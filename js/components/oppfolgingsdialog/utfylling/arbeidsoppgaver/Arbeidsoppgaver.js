@@ -12,8 +12,10 @@ import LeggTilElementKnapper from '../LeggTilElementKnapper';
 import ArbeidsoppgaverListe from './ArbeidsoppgaverListe';
 import ArbeidsoppgaverInfoboks from './ArbeidsoppgaverInfoboks';
 import LagreArbeidsoppgaveSkjema from './LagreArbeidsoppgaveSkjema';
+import StegTittel from "../StegTittel";
 
 const texts = {
+    tittel: 'Arbeidsoppgaver',
     updateError: 'En midlertidig feil gjør at vi ikke kan lagre endringene dine akkurat nå. Prøv igjen senere.',
     infoboks: {
         title: 'Hva er arbeidsoppgavene?',
@@ -37,22 +39,25 @@ export const ArbeidsoppgaverInfoboksStilling = (
         toggleArbeidsoppgaveSkjema,
     }) => {
     return (
-        <ArbeidsoppgaverInfoboks
-            tittel={texts.arbeidsoppgaverInfoboksStilling.title}
-            visSkjema={visArbeidsoppgaveSkjema}
-            toggleSkjema={toggleArbeidsoppgaveSkjema}
-        >
-            { oppfolgingsplan.arbeidstaker.stillinger.length > 0 &&
-            <div>
-                { oppfolgingsplan.arbeidstaker.stillinger.map((stilling, idx) => {
-                    return (<p key={idx}>
-                        {textStilling(stilling)}
-                    </p>);
-                })
+        <div>
+            <StegTittel tittel={texts.tittel}/>
+            <ArbeidsoppgaverInfoboks
+                tittel={texts.arbeidsoppgaverInfoboksStilling.title}
+                visSkjema={visArbeidsoppgaveSkjema}
+                toggleSkjema={toggleArbeidsoppgaveSkjema}
+            >
+                {oppfolgingsplan.arbeidstaker.stillinger.length > 0 &&
+                <div>
+                    {oppfolgingsplan.arbeidstaker.stillinger.map((stilling, idx) => {
+                        return (<p key={idx}>
+                            {textStilling(stilling)}
+                        </p>);
+                    })
+                    }
+                </div>
                 }
-            </div>
-            }
-        </ArbeidsoppgaverInfoboks>);
+            </ArbeidsoppgaverInfoboks>
+        </div>);
 };
 
 ArbeidsoppgaverInfoboksStilling.propTypes = {
@@ -103,6 +108,7 @@ class Arbeidsoppgaver extends Component {
             });
         }
     }
+
     componentDidUpdate(prevProps, prevState) {
         if (!prevState.visArbeidsoppgaveSkjema && this.state.visArbeidsoppgaveSkjema && this.lagreSkjema) {
             this.scrollToForm();
