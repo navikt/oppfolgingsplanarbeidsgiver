@@ -26,6 +26,10 @@ import Godkjenn from './godkjennplan/Godkjenn';
 import Godkjenninger from './godkjennplan/godkjenninger/Godkjenninger';
 import ReleasetPlan from './godkjennplan/releasetplan/ReleasetPlan';
 
+const textOverskrift = (arbeidstaker) => {
+    return `Oppfølgingsplan for ${arbeidstaker}`;
+};
+
 const inneholderGodkjentPlan = (oppfolgingsplan) => {
     return oppfolgingsplan.godkjentPlan;
 };
@@ -166,7 +170,7 @@ class Oppfolgingsdialog extends Component {
         return (
             <div className="oppfolgingsdialog">
                 {oppfolgingsdialogAvbruttOgNyOpprettet && <AvbruttGodkjentPlanVarsel />}
-                <SideOverskrift tittel={oppfolgingsdialog.arbeidstaker.navn} />
+                <SideOverskrift tittel={textOverskrift(oppfolgingsdialog.arbeidstaker.navn)} />
                 {!disableNavigation && <NavigasjonsTopp
                     disabled={disableNavigation}
                     settAktivtSteg={settAktivtSteg}
