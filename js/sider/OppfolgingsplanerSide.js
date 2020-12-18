@@ -42,7 +42,7 @@ import { hentSykmeldteBerikelser as hentSykmeldteBerikelserAction } from '../act
 import { beregnSkalHenteSykmeldtBerikelse } from '../utils/sykmeldtUtils';
 
 const texts = {
-    pageTitle: 'Oppfølgingsplaner',
+    pageTitle: 'Oppfølgingsplaner - Oversikt',
     brodsmuler: {
         dineSykmeldte: 'Dine sykmeldte',
         oppfolgingsplaner: 'Oppfølgingsplaner',
