@@ -54,6 +54,8 @@ class Samtykke extends Component {
 
     sendSamtykke() {
         const { oppfolgingsdialog } = this.props;
+        window.sessionStorage.removeItem('hash');
+        window.location.hash = '';
         this.props.sendSamtykke(oppfolgingsdialog.id, this.state.samtykke, oppfolgingsdialog.arbeidstaker.fnr, erArbeidstakerEgenLeder(oppfolgingsdialog));
     }
 
