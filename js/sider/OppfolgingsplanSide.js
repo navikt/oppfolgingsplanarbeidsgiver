@@ -57,10 +57,11 @@ import { beregnSkalHenteSykmeldtBerikelse } from '../utils/sykmeldtUtils';
 
 const pageTitleArbeidsoppgaver = 'Oppfølgingsplan - Arbeidsoppgaver';
 const pageTitleTiltak = 'Oppfølgingsplan - Tiltak';
+const pageTitleSePlanen = 'Oppfølgingsplan - Se planen';
 const pageTitleOppsummering = 'Oppfølgingsplan - Oppsummering';
 
 const texts = {
-    pageTitles: [ pageTitleArbeidsoppgaver, pageTitleTiltak, pageTitleOppsummering ],
+    pageTitles: [ pageTitleArbeidsoppgaver, pageTitleTiltak, pageTitleSePlanen ],
     brodsmuler: {
         dineSykmeldte: 'Dine sykmeldte',
         oppfolgingsplaner: 'Oppfølgingsplaner',
