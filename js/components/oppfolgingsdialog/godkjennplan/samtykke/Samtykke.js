@@ -62,7 +62,7 @@ class Samtykke extends Component {
     render() {
         return (<div className="panel blokk">
             <div className="illustrertTittel">
-                <img className="illustrertTittel__img" src={`${getContextRoot()}/img/svg/samtykke-illustrasjon.svg`} alt="samtykke" />
+                <img className="illustrertTittel__img" src={`${getContextRoot()}/img/svg/samtykke-illustrasjon.svg`} alt="" />
                 <h2 className="illustrertTittel__tittel">
                     {texts.title}
                 </h2>
