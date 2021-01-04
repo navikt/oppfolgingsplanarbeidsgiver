@@ -23,7 +23,7 @@ const OppfolgingsplanerIngenplan = (
         </header>
         <Panel border>
             <div className="oppfolgingsdialogerIngenplan__blokk">
-                <img alt="tom-plan" src={`${getContextRoot()}/img/svg/oppfolgingsdialog-tom.svg`} />
+                <img alt="" src={`${getContextRoot()}/img/svg/oppfolgingsdialog-tom.svg`} />
                 <div className="inngangspanel__innhold">
                     <header className="inngangspanel__header">
                         <h3 className="js-title">
