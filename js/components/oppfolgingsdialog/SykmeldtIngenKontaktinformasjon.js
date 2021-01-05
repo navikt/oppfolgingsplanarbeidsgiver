@@ -20,7 +20,7 @@ const SykmeldtIngenKontaktinformasjon = ({ meldingSett }) => {
         <Panel border>
             <Infomelding
                 ikon={`${getContextRoot()}/img/svg/feilmelding_ingen_kontaktinformasjon.svg`}
-                ikonAlt="feilmelding ingen kontaktinformasjon"
+                ikonAlt=""
                 tittel={texts.infomelding.title}
                 tekst={texts.infomelding.info}
             />
