@@ -51,7 +51,7 @@ const TiltakListeRad = (
             <div className="tiltaktabell__rad__navn">
                 <span className="tiltak__rad__navn--tittel">
                     { skalVurdereTiltak(tiltak, fnr) &&
-                    <img alt="varseltrekant" className="tiltaktabell__rad__img" src={`${rootUrlImg}/img/svg/varseltrekant.svg`} />
+                    <img alt="" className="tiltaktabell__rad__img" src={`${rootUrlImg}/img/svg/varseltrekant.svg`} />
                     }
                     {tiltak.tiltaknavn}
                 </span>
