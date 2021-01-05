@@ -44,7 +44,7 @@ const FadingIconWithText = (
             {(state) => {
                 return (<FadeAnimation state={state}>
                     <IconAndText>
-                        <Icon src={`${getContextRoot()}/img/svg/hake-groenn.svg`} alt="hake" />
+                        <Icon src={`${getContextRoot()}/img/svg/hake-groenn.svg`} alt="" />
                         <Text>{text}</Text>
                     </IconAndText>
                 </FadeAnimation>);

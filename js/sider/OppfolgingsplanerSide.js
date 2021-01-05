@@ -155,7 +155,7 @@ export class OppfolgingsplanerSide extends Component {
                         } else if (!tilgang.data.harTilgang || !sykmeldt || !harSykmeldtGyldigSykmelding) {
                             return (<OppfolgingsplanInfoboks
                                 svgUrl={`${getContextRoot()}/img/svg/oppfolgingsdialogFeilmeldingAG.svg`}
-                                svgAlt="OppfølgingsdialogFeilmelding"
+                                svgAlt=""
                                 tittel={texts.infoboksNoAccess.title}
                                 tekst={texts.infoboksNoAccess.info}
                             />);

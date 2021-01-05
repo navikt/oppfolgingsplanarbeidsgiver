@@ -51,7 +51,7 @@ ToggleLink.propTypes = {
 
 const Brodsmuler = ({ brodsmuler }) => {
     return (<nav className="brodsmuler" aria-label="Du er her: ">
-        <img src={`${process.env.REACT_APP_CONTEXT_ROOT}/img/svg/person.svg`} alt="Du" className="brodsmuler__ikon" />
+        <img src={`${process.env.REACT_APP_CONTEXT_ROOT}/img/svg/person.svg`} alt="" className="brodsmuler__ikon" />
         <div className="brodsmuler__smuler">
             {
                 brodsmuler

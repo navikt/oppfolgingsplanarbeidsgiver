@@ -94,7 +94,7 @@ class GodkjentPlanAvbrutt extends Component {
                 </div>
                 <OppfolgingsplanInnholdboks
                     svgUrl={`${rootUrl}/img/svg/plan-avbrutt.svg`}
-                    svgAlt="avbrutt"
+                    svgAlt=""
                     tittel={texts.godkjentPlanAvbrutt.title}
                 >
                     <div className="godkjentPlanAvbrutt">
