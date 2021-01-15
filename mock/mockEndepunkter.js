@@ -31,10 +31,6 @@ const BERIK = 'berik';
 const KONTAKTINFO = 'kontaktinfo';
 const NAERMESTELEDER = 'naermesteleder';
 const PERSON = 'person';
-const PERSON_KARINA = 'personKarina';
-const PERSON_KJERSTI = 'personKjersti';
-const PERSON_KRISTINA = 'personKristina';
-const PERSON_LILLI = 'personLilli';
 const PERSON_SEVERUS = 'personSeverus';
 const SYKMELDINGER = 'sykmeldinger';
 const SYKMELDTE = 'sykmeldte';
@@ -46,10 +42,6 @@ lastFilTilMinne(SYKMELDTE);
 lastFilTilMinne(SYKMELDINGER);
 lastFilTilMinne(BERIK);
 lastFilTilMinne(PERSON);
-lastFilTilMinne(PERSON_KARINA);
-lastFilTilMinne(PERSON_KJERSTI);
-lastFilTilMinne(PERSON_KRISTINA);
-lastFilTilMinne(PERSON_LILLI);
 lastFilTilMinne(PERSON_SEVERUS);
 lastFilTilMinne(BERIK);
 lastFilTilMinne(KONTAKTINFO);
@@ -135,26 +127,6 @@ function mockForOpplaeringsmiljo(server) {
     server.get('/syfooprest/api/virksomhet/*', (req, res) => {
         res.setHeader('Content-Type', 'application/json');
         res.send(JSON.stringify(mockData[VIRKSOMHET]));
-    });
-
-    server.get('/syfooprest/api/person/12121200100', (req, res) => {
-        res.setHeader('Content-Type', 'application/json');
-        res.send(JSON.stringify(mockData[PERSON_KARINA]));
-    });
-
-    server.get('/syfooprest/api/person/02020212345', (req, res) => {
-        res.setHeader('Content-Type', 'application/json');
-        res.send(JSON.stringify(mockData[PERSON_KJERSTI]));
-    });
-
-    server.get('/syfooprest/api/person/12121255555', (req, res) => {
-        res.setHeader('Content-Type', 'application/json');
-        res.send(JSON.stringify(mockData[PERSON_KRISTINA]));
-    });
-
-    server.get('/syfooprest/api/person/03040512345', (req, res) => {
-        res.setHeader('Content-Type', 'application/json');
-        res.send(JSON.stringify(mockData[PERSON_LILLI]));
     });
 
     server.get('/syfooprest/api/person/01010112345', (req, res) => {
