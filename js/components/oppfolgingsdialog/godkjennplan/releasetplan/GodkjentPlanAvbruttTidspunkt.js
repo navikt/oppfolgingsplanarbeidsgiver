@@ -13,7 +13,7 @@ const GodkjentPlanAvbruttTidspunkt = ({ oppfolgingsdialog, rootUrl }) => {
         <div className="blokk godkjentPlanAvbruttTidspunkt">
             <BildeTekstLinje
                 imgUrl={`${rootUrl}/img/svg/calendar.svg`}
-                alt="bubble"
+                imgAlt=""
                 tekst={textOppfolgingsplanDuration(
                     toDateMedMaanedNavn(oppfolgingsdialog.godkjentPlan.gyldighetstidspunkt.fom),
                     toDateMedMaanedNavn(oppfolgingsdialog.godkjentPlan.avbruttPlan.tidspunkt),

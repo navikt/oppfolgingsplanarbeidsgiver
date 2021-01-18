@@ -16,13 +16,13 @@ const GodkjentPlanDeltBekreftelse = ({ oppfolgingsplan }) => {
         <React.Fragment>
             { oppfolgingsplan.godkjentPlan.deltMedNAV && oppfolgingsplan.godkjentPlan.deltMedNAVTidspunkt && <BildeTekstLinje
                 imgUrl={`${process.env.REACT_APP_CONTEXT_ROOT}/img/svg/nav-logo.svg`}
-                alt="NAV"
+                imgAlt=""
                 tekst={textSharedWithNAV(toDateMedMaanedNavn(oppfolgingsplan.godkjentPlan.deltMedNAVTidspunkt))}
             />
             }
             { oppfolgingsplan.godkjentPlan.deltMedFastlege && oppfolgingsplan.godkjentPlan.deltMedFastlegeTidspunkt && <BildeTekstLinje
                 imgUrl={`${process.env.REACT_APP_CONTEXT_ROOT}/img/svg/medical-box.svg`}
-                alt="Lege"
+                imgAlt=""
                 tekst={textSharedWitFastlege(toDateMedMaanedNavn(oppfolgingsplan.godkjentPlan.deltMedFastlegeTidspunkt))}
             />
             }

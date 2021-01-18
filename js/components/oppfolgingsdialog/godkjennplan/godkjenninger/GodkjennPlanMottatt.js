@@ -69,7 +69,7 @@ const GodkjennPlanMottatt = (
     return (
         <OppfolgingsplanInnholdboks
             svgUrl={`${rootUrl}/img/svg/plan-mottatt.svg`}
-            svgAlt="mottatt"
+            svgAlt=""
             tittel={texts.godkjennPlanMottatt.title}
         >
             <div className="godkjennPlanMottatt">

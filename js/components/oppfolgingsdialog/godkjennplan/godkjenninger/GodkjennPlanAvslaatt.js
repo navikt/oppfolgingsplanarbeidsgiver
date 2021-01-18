@@ -19,7 +19,7 @@ const GodkjennPlanAvslaatt = (
     return (
         <OppfolgingsplanInnholdboks
             svgUrl={`${getContextRoot()}/img/svg/oppfolgingsplan-avslaatt.svg`}
-            svgAlt="avslaatt"
+            svgAlt=""
             tittel={texts.title}
         >
             <div className="godkjennPlanAvslaatt">

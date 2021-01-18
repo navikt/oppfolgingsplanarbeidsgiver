@@ -152,7 +152,7 @@ class Tiltak extends Component {
                                 !this.state.visTiltakSkjema ?
                                     <OppfolgingsplanInfoboks
                                         svgUrl={`${getContextRoot()}/img/svg/tiltak-onboarding.svg`}
-                                        svgAlt="nyttTiltak"
+                                        svgAlt=""
                                         tittel={texts.infoboks.title}
                                         tekst={texts.infoboks.info}
                                     >
