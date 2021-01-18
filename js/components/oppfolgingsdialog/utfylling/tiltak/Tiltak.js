@@ -14,6 +14,7 @@ import TiltakInfoboks from './TiltakInfoboks';
 import TiltakSkjema from './TiltakSkjema';
 import TiltakListe from './liste/TiltakListe';
 import StegTittel from "../StegTittel";
+import ObligatoriskeFelterInfotekst from "../ObligatoriskeFelterInfotekst";
 
 const texts = {
     tittel: 'Tiltak',
@@ -144,7 +145,7 @@ class Tiltak extends Component {
                 return (
                     <div>
                         <StegTittel tittel={texts.tittel}/>
-
+                        <ObligatoriskeFelterInfotekst/>
                         {isEmpty(oppfolgingsdialog.tiltakListe) ?
                         <div ref={this.formRef}>
                             {

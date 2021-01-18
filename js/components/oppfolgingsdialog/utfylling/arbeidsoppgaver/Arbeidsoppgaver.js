@@ -13,6 +13,7 @@ import ArbeidsoppgaverListe from './ArbeidsoppgaverListe';
 import ArbeidsoppgaverInfoboks from './ArbeidsoppgaverInfoboks';
 import LagreArbeidsoppgaveSkjema from './LagreArbeidsoppgaveSkjema';
 import StegTittel from "../StegTittel";
+import ObligatoriskeFelterInfotekst from "../ObligatoriskeFelterInfotekst";
 
 const texts = {
     tittel: 'Arbeidsoppgaver',
@@ -168,6 +169,7 @@ class Arbeidsoppgaver extends Component {
                 return (
                     <div>
                         <StegTittel tittel={texts.tittel}/>
+                        <ObligatoriskeFelterInfotekst/>
                         {isEmpty(oppfolgingsdialog.arbeidsoppgaveListe) ?
                             <div ref={this.formRef}>
                                 {this.state.visArbeidsoppgaveSkjema &&
