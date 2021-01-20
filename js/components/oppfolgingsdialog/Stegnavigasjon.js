@@ -63,7 +63,7 @@ const Stegnavigasjon = ({ aktivtSteg, settAktivtSteg, disabled = false, steglist
                     if (i === aktivtSteg - 1) {
                         classNames.push('stegnavigasjon__trinn--aktivt');
                     }
-                    return (<li className={classNames.join(' ')} key={`steg-${i}`}>
+                    return (<li role="presentation" className={classNames.join(' ')} key={`steg-${i}`}>
                         <LinkEl
                             className="stegnavigasjon__lenke"
                             role="tab"
