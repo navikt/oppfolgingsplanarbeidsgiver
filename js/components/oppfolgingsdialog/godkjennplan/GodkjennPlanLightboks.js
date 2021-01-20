@@ -21,6 +21,7 @@ import {
     getStartDateFromTiltakListe,
 } from '../../../utils/tiltakUtils';
 import { erHerokuApp } from '../../../utils/urlUtils';
+import ObligatoriskeFelterInfotekst from "../utfylling/ObligatoriskeFelterInfotekst";
 
 const texts = {
     title: 'Jeg er ferdig med planen',
@@ -45,9 +46,9 @@ const texts = {
 };
 
 export const textDelMedNav = (arbeidstakerName, tvangsgodkjent) => {
-    return tvangsgodkjent
-        ? texts.shareWithNAV
-        : `${texts.shareWithNAV} når ${arbeidstakerName} har godkjent den`;
+    return texts.shareWithNAV +
+        (tvangsgodkjent ? `` : ` når ${arbeidstakerName} har godkjent den`) +
+        ' (valgfritt)';
 };
 
 export class GodkjennPlanLightboksComponent extends Component {
@@ -185,6 +186,8 @@ export class GodkjennPlanLightboksComponent extends Component {
 
                 { this.state.radioSelected &&
                 <React.Fragment>
+                    <ObligatoriskeFelterInfotekst/>
+
                     <hr />
 
                     <h3>{texts.titleDatovelger}</h3>
