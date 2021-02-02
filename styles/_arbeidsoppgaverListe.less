@@ -4,12 +4,6 @@
 .arbeidsoppgaverListe {
   width: 100%;
   color: @navMorkGra;
-  .utvidbar__toggle {
-    color: inherit;
-    &:visited, &:hover, &:active, &:focus {
-      color: inherit;
-    }
-  }
 }
 .arbeidsoppgaverListe__rad {
   background: @white;
@@ -26,11 +20,6 @@
   border: 1px solid @navGra20;
   border-radius: 4px;
 }
-.arbeidsoppgaverListe__toggle {
-  padding: 0;
-  border: none;
-  background: transparent;
-}
 .arbeidsoppgaveTabellUtvidbarOverskrift {
   display: flex;
 }
@@ -45,19 +34,10 @@
     width: 100%;
   }
 }
-.arbeidsoppgaveUtvidbarOverskrift__pil {
-  width: 1.2em;
-  @media all and (min-width: @screen-sm-min){
-    width: 1.5em;
-  }
-  &:focus {
-    outline: none;
-  }
-}
 .arbeidsoppgaverListe__rad__advarsel {
   margin-right: 1em;
 }
-.arbeidsoppgaverListe__utvidbarrad {
+.arbeidsoppgaverListe__radoverskrift {
   &:extend(.panel--oppfoelging);
   overflow: auto;
   font-weight: 600;
@@ -67,13 +47,13 @@
   .arbeidsoppgaverListe__rad__ikon, .arbeidsoppgaverListe__rad__tekst {
     display: inline-block;
   }
-  .arbeidsoppgaveUtvidbarOverskrift__ikon {
-    width: @arbeidsoppgaveUtvibarOverskriftIkonBredde;
+  .arbeidsoppgaveOverskrift__ikon {
+    width: @arbeidsoppgaveOverskriftIkonBredde;
     height: 2.4375em;
     margin-right: 1em;
     padding-top: 0.4em;
   }
-  .arbeidsoppgaveUtvidbarOverskrift__tekst {
+  .arbeidsoppgaveOverskrift__tekst {
     text-align: left;
     flex-grow: 1;
     p {

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import * as opProptypes from '../../../../proptypes/opproptypes';
-import ArbeidsoppgaveUtvidbar from './ArbeidsoppgaveUtvidbar';
+import Arbeidsoppgave from './Arbeidsoppgave';
 
 const ArbeidsoppgaverListe = (
     {
@@ -16,7 +16,7 @@ const ArbeidsoppgaverListe = (
             {
                 liste.map((element) => {
                     return (
-                        <ArbeidsoppgaveUtvidbar
+                        <Arbeidsoppgave
                             key={element.arbeidsoppgaveId}
                             element={element}
                             fnr={fnr}

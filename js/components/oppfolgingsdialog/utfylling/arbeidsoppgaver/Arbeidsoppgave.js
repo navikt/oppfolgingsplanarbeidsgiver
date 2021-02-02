@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 import * as opProptypes from '../../../../proptypes/opproptypes';
 import ArbeidsoppgaveInformasjon from './ArbeidsoppgaveInformasjon';
-import ArbeidsoppgaveUtvidbarOverskrift from './ArbeidsoppgaveUtvidbarOverskrift';
+import ArbeidsoppgaveOverskrift from './ArbeidsoppgaveOverskrift';
 import ArbeidsoppgaveVarselFeil from './ArbeidsoppgaveVarselFeil';
 
 const texts = {
@@ -15,7 +15,7 @@ const ArbeidsoppgaveVarselFeilStyled = styled.div`
     padding: 0 1em;
 `;
 
-class ArbeidsoppgaveUtvidbar extends Component {
+class Arbeidsoppgave extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -75,8 +75,8 @@ class ArbeidsoppgaveUtvidbar extends Component {
                         className="arbeidsoppgaverListe__rad arbeidsoppgaverListe__rad--element"
                         aria-label={element.arbeidsoppgavenavn}>
                         <div>
-                            <div className="arbeidsoppgaverListe__utvidbarrad">
-                                <ArbeidsoppgaveUtvidbarOverskrift
+                            <div className="arbeidsoppgaverListe__radoverskrift">
+                                <ArbeidsoppgaveOverskrift
                                     erApen={this.state.erApen}
                                     fnr={fnr}
                                     sendSlett={this.sendSlett}
@@ -103,7 +103,7 @@ class ArbeidsoppgaveUtvidbar extends Component {
     }
 }
 
-ArbeidsoppgaveUtvidbar.propTypes = {
+Arbeidsoppgave.propTypes = {
     element: opProptypes.arbeidsoppgavePt,
     fnr: PropTypes.string,
     sendSlett: PropTypes.func,
@@ -112,7 +112,7 @@ ArbeidsoppgaveUtvidbar.propTypes = {
     arbeidsoppgaverReducer: opProptypes.arbeidsoppgaverReducerPt,
 };
 
-ArbeidsoppgaveUtvidbar.defaultProps = {
+Arbeidsoppgave.defaultProps = {
     Overskrift: 'H3',
 };
 
@@ -122,6 +122,6 @@ export const mapStateToProps = (state) => {
     };
 };
 
-const ArbeidsoppgaveUtvidbarContainer = connect(mapStateToProps)(ArbeidsoppgaveUtvidbar);
+const ArbeidsoppgaveContainer = connect(mapStateToProps)(Arbeidsoppgave);
 
-export default ArbeidsoppgaveUtvidbarContainer;
+export default ArbeidsoppgaveContainer;
