@@ -43,10 +43,6 @@ describe('TiltakUtvidbar', () => {
         </Provider>);
     });
 
-    it('uvidbar--button', () => {
-        expect(komponent.find('button.utvidbar__toggle')).to.have.length(1);
-    });
-
     it('Skal vise ButtonComment', () => {
         expect(komponent.find(ButtonComment)).to.have.length(1);
     });
