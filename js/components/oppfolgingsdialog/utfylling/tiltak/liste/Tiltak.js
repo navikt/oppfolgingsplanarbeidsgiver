@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { findDOMNode } from 'react-dom';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import { erSynligIViewport } from '@navikt/digisyfo-npm';
 import {
     kommentarReducerPt,
     tiltakPt,
@@ -22,7 +20,7 @@ const TiltakVarselFeilStyled = styled.div`
     padding: 0 1em;
 `;
 
-class TiltakUtvidbar extends Component {
+class Tiltak extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -147,7 +145,7 @@ class TiltakUtvidbar extends Component {
                     <article
                         className="oppfolgingsdialogtabell__rad oppfolgingsdialogtabell__rad--element"
                         aria-label={element.tiltaknavn}>
-                        <div className="oppfolgingsdialogtabell__utvidbarrad">
+                        <div className="oppfolgingsdialogtabell__radoverskrift">
                             <TiltakListeRad
                                 tiltak={element}
                                 fnr={fnr}
@@ -210,7 +208,7 @@ class TiltakUtvidbar extends Component {
     }
 }
 
-TiltakUtvidbar.propTypes = {
+Tiltak.propTypes = {
     element: tiltakPt,
     fnr: PropTypes.string,
     sendSlett: PropTypes.func,
@@ -224,7 +222,7 @@ TiltakUtvidbar.propTypes = {
     rootUrlImg: PropTypes.string,
 };
 
-TiltakUtvidbar.defaultProps = {
+Tiltak.defaultProps = {
     Overskrift: 'H3',
 };
 
@@ -235,6 +233,6 @@ export const mapStateToProps = (state) => {
     };
 };
 
-const TiltakUtvidbarContainer = connect(mapStateToProps)(TiltakUtvidbar);
+const TiltakContainer = connect(mapStateToProps)(Tiltak);
 
-export default TiltakUtvidbarContainer;
+export default TiltakContainer;

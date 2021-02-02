@@ -10,7 +10,7 @@ import ButtonComment from '../../../../js/components/app/buttons/ButtonComment';
 import ButtonDeleteIcon from '../../../../js/components/app/buttons/ButtonDeleteIcon';
 import ButtonEditIcon from '../../../../js/components/app/buttons/ButtonEditIcon';
 import ButtonVurdering from '../../../../js/components/app/buttons/ButtonVurdering';
-import TiltakUtvidbarContainer from '../../../../js/components/oppfolgingsdialog/utfylling/tiltak/liste/TiltakUtvidbar';
+import TiltakContainer from '../../../../js/components/oppfolgingsdialog/utfylling/tiltak/liste/Tiltak';
 import kommentar from '../../../../js/reducers/kommentar';
 import tiltak from '../../../../js/reducers/tiltak';
 
@@ -33,7 +33,7 @@ describe('TiltakUtvidbar', () => {
         store = mockStore(getState);
         oppfolgingsdialog = getOppfolgingsplan();
         komponent = mount(<Provider store={store}>
-            <TiltakUtvidbarContainer
+            <TiltakContainer
                 element={oppfolgingsdialog.tiltakListe[0]}
                 fnr={'1000000000000'}
                 kommentarReducer={kommentar}
@@ -71,7 +71,7 @@ describe('TiltakUtvidbar', () => {
             kommentarer: [],
         };
         komponent = mount(<Provider store={store}>
-            <TiltakUtvidbarContainer
+            <TiltakContainer
                 element={tiltakElement}
                 fnr={'1000000000001'}
                 kommentarReducer={kommentar}
