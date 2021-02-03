@@ -11,8 +11,6 @@ import ButtonDeleteIcon from '../../../../js/components/app/buttons/ButtonDelete
 import ButtonEditIcon from '../../../../js/components/app/buttons/ButtonEditIcon';
 import ButtonVurdering from '../../../../js/components/app/buttons/ButtonVurdering';
 import TiltakContainer from '../../../../js/components/oppfolgingsdialog/utfylling/tiltak/liste/Tiltak';
-import kommentar from '../../../../js/reducers/kommentar';
-import tiltak from '../../../../js/reducers/tiltak';
 
 chai.use(chaiEnzyme());
 const expect = chai.expect;
@@ -27,6 +25,8 @@ describe('TiltakUtvidbar', () => {
 
     const getState = {
         visLagreSkjema: true,
+        kommentar: {},
+        tiltak: {}
     };
 
     beforeEach(() => {
@@ -36,8 +36,6 @@ describe('TiltakUtvidbar', () => {
             <TiltakContainer
                 element={oppfolgingsdialog.tiltakListe[0]}
                 fnr={'1000000000000'}
-                kommentarReducer={kommentar}
-                tiltakReducer={tiltak}
                 feilMelding={false}
             />
         </Provider>);
@@ -70,8 +68,6 @@ describe('TiltakUtvidbar', () => {
             <TiltakContainer
                 element={tiltakElement}
                 fnr={'1000000000001'}
-                kommentarReducer={kommentar}
-                tiltakReducer={tiltak}
                 feilMelding={false}
             />
         </Provider>);
