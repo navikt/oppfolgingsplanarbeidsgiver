@@ -233,6 +233,6 @@ export const mapStateToProps = (state) => {
     };
 };
 
-const TiltakContainer = connect(mapStateToProps)(Tiltak);
+const TiltakContainer = connect(mapStateToProps, null, null, {pure: false})(Tiltak);
 
 export default TiltakContainer;
