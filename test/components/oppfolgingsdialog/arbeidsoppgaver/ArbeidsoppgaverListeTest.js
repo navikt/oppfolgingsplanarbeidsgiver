@@ -4,7 +4,7 @@ import { shallow } from 'enzyme';
 import chaiEnzyme from 'chai-enzyme';
 import sinon from 'sinon';
 import ArbeidsoppgaverListe from '../../../../js/components/oppfolgingsdialog/utfylling/arbeidsoppgaver/ArbeidsoppgaverListe';
-import ArbeidsoppgaveUtvidbar from '../../../../js/components/oppfolgingsdialog/utfylling/arbeidsoppgaver/ArbeidsoppgaveUtvidbar';
+import Arbeidsoppgave from '../../../../js/components/oppfolgingsdialog/utfylling/arbeidsoppgaver/Arbeidsoppgave';
 import getArbeidsoppgave from '../../../mock/mockArbeidsoppgave';
 
 chai.use(chaiEnzyme());
@@ -28,6 +28,6 @@ describe('ArbeidsoppgaverListe', () => {
     });
 
     it('Skal vise antall TabellRadUtvidbar lik antall arbeidsoppgaver', () => {
-        expect(komponent.find(ArbeidsoppgaveUtvidbar)).to.have.length(liste.length);
+        expect(komponent.find(Arbeidsoppgave)).to.have.length(liste.length);
     });
 });

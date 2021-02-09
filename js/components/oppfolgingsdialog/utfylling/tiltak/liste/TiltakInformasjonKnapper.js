@@ -30,9 +30,11 @@ const TiltakInformasjonKnapper = (
     return (
         <TiltakButtonsRow>
             <div>
-                {!lagreSkjema && (aktoerHarOpprettetElement || !skalVurdereTiltak(element, fnr))
-                    ? <ButtonEditIcon click={(event) => { visLagreSkjema(event); }} />
-                    : <ButtonVurdering click={(event) => { visLagreSkjema(event); }} />
+                {!lagreSkjema && (aktoerHarOpprettetElement || !skalVurdereTiltak(element, fnr)) &&
+                    <ButtonEditIcon click={(event) => { visLagreSkjema(event); }} />
+                }
+                {!lagreSkjema && (!aktoerHarOpprettetElement && skalVurdereTiltak(element, fnr)) &&
+                    <ButtonVurdering click={(event) => { visLagreSkjema(event); }} />
                 }
             </div>
             <div>

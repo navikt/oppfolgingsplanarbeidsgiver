@@ -42,25 +42,24 @@ export const hentArbeidsoppgaveUnderTekst = (arbeidsoppgave) => {
     return texts.hentArbeidsoppgaveUnderTekst.ikkeVurdert;
 };
 
-const ArbeidsoppgaveUtvidbarOverskriftKolonneImg = styled.div`
+const ArbeidsoppgaveOverskriftImg = styled.div`
     display: flex;
     align-self: flex-start;
     flex-grow: 0;
 `;
 
-const ArbeidsoppgaveUtvidbarOverskrift = (
+const ArbeidsoppgaveOverskrift = (
     {
-        erApen,
         fnr,
         sendSlett,
         arbeidsoppgave,
     }) => {
     return (<div className="arbeidsoppgaveTabellUtvidbarOverskrift">
-        <ArbeidsoppgaveUtvidbarOverskriftKolonneImg>
-            <img className="arbeidsoppgaveUtvidbarOverskrift__ikon" src={hentArbeidsoppgaveIkon(arbeidsoppgave)} alt="" />
-        </ArbeidsoppgaveUtvidbarOverskriftKolonneImg>
+        <ArbeidsoppgaveOverskriftImg>
+            <img className="arbeidsoppgaveOverskrift__ikon" src={hentArbeidsoppgaveIkon(arbeidsoppgave)} alt="" />
+        </ArbeidsoppgaveOverskriftImg>
         <div className="arbeidsoppgaverListe__kol">
-            <div className="arbeidsoppgaveUtvidbarOverskrift__tekst">
+            <div className="arbeidsoppgaveOverskrift__tekst">
                 <p>{arbeidsoppgave.arbeidsoppgavenavn}</p>
                 <p>{hentArbeidsoppgaveUnderTekst(arbeidsoppgave)}</p>
                 <ArbeidsoppgaveInformasjonKnapper
@@ -69,16 +68,14 @@ const ArbeidsoppgaveUtvidbarOverskrift = (
                     sendSlett={sendSlett}
                 />
             </div>
-            <i className={`nav-frontend-chevron ${erApen ? 'chevron--opp' : 'chevron--ned'} chevron--stor`} />
         </div>
     </div>);
 };
 
-ArbeidsoppgaveUtvidbarOverskrift.propTypes = {
-    erApen: PropTypes.bool,
+ArbeidsoppgaveOverskrift.propTypes = {
     sendSlett: PropTypes.func,
     fnr: PropTypes.string,
     arbeidsoppgave: opProptypes.arbeidsoppgavePt,
 };
 
-export default ArbeidsoppgaveUtvidbarOverskrift;
+export default ArbeidsoppgaveOverskrift;

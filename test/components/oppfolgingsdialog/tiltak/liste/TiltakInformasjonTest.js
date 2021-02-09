@@ -2,7 +2,6 @@ import React from 'react';
 import chai from 'chai';
 import { shallow } from 'enzyme';
 import chaiEnzyme from 'chai-enzyme';
-import kommentar from '../../../../../js/reducers/kommentar';
 import TiltakInformasjon, {
     TiltakInformasjonBeskrivelse,
     TiltakInformasjonGjennomfoering,
@@ -23,7 +22,6 @@ describe('TiltakInformasjon', () => {
         oppfolgingsdialog = getOppfolgingsplan();
         komponent = shallow(<TiltakInformasjon
             element={oppfolgingsdialog.tiltakListe[0]}
-            kommentarReducer={kommentar}
             lagreKommentarSkjema
         />);
     });
@@ -56,7 +54,6 @@ describe('TiltakInformasjon', () => {
 
         komponent = shallow(<TiltakInformasjon
             element={tiltak}
-            kommentarReducer={kommentar}
         />);
         expect(komponent.find(TabellTiltakBeskrivelseIkkeAktuelt)).to.have.length(1);
     });
