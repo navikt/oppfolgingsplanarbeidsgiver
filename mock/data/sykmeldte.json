@@ -1,86 +1,9 @@
 [
   {
     "fnr": "",
-    "aktoerId": "1",
-    "orgnummer": "000111222",
-    "koblingId": 26029,
-    "navn": null
-  },
-  {
-    "fnr": "",
     "aktoerId": "2",
     "orgnummer": "333444555",
     "koblingId": 28790,
-    "navn": null
-  },
-  {
-    "fnr": "",
-    "aktoerId": "3",
-    "orgnummer": "333999555",
-    "koblingId": 28559,
-    "navn": null
-  },
-  {
-    "fnr": "",
-    "aktoerId": "4",
-    "orgnummer": "333444555",
-    "koblingId": 28780,
-    "navn": null
-  },
-  {
-    "fnr": "",
-    "aktoerId": "5",
-    "orgnummer": "012345678",
-    "koblingId": 30265,
-    "navn": null
-  },
-  {
-    "fnr": "",
-    "aktoerId": "6",
-    "orgnummer": "000111222",
-    "koblingId": 30266,
-    "navn": null
-  },
-  {
-    "fnr": "",
-    "aktoerId": "7",
-    "orgnummer": "333999555",
-    "koblingId": 30267,
-    "navn": null
-  },
-  {
-    "fnr": "",
-    "aktoerId": "8",
-    "orgnummer": "000333999",
-    "koblingId": 30268,
-    "navn": null
-  },
-  {
-    "fnr": "",
-    "aktoerId": "9",
-    "orgnummer": "000111222",
-    "koblingId": 30269,
-    "navn": null
-  },
-  {
-    "fnr": "",
-    "aktoerId": "10",
-    "orgnummer": "666333777",
-    "koblingId": 30270,
-    "navn": null
-  },
-  {
-    "fnr": "",
-    "aktoerId": "11",
-    "orgnummer": "333999555",
-    "koblingId": 30271,
-    "navn": null
-  },
-  {
-    "fnr": "",
-    "aktoerId": "12",
-    "orgnummer": "333999555",
-    "koblingId": 30273,
     "navn": null
   }
 ]

@@ -10,9 +10,7 @@ import ButtonComment from '../../../../js/components/app/buttons/ButtonComment';
 import ButtonDeleteIcon from '../../../../js/components/app/buttons/ButtonDeleteIcon';
 import ButtonEditIcon from '../../../../js/components/app/buttons/ButtonEditIcon';
 import ButtonVurdering from '../../../../js/components/app/buttons/ButtonVurdering';
-import TiltakUtvidbarContainer from '../../../../js/components/oppfolgingsdialog/utfylling/tiltak/liste/TiltakUtvidbar';
-import kommentar from '../../../../js/reducers/kommentar';
-import tiltak from '../../../../js/reducers/tiltak';
+import TiltakContainer from '../../../../js/components/oppfolgingsdialog/utfylling/tiltak/liste/Tiltak';
 
 chai.use(chaiEnzyme());
 const expect = chai.expect;
@@ -27,24 +25,20 @@ describe('TiltakUtvidbar', () => {
 
     const getState = {
         visLagreSkjema: true,
+        kommentar: {},
+        tiltak: {}
     };
 
     beforeEach(() => {
         store = mockStore(getState);
         oppfolgingsdialog = getOppfolgingsplan();
         komponent = mount(<Provider store={store}>
-            <TiltakUtvidbarContainer
+            <TiltakContainer
                 element={oppfolgingsdialog.tiltakListe[0]}
                 fnr={'1000000000000'}
-                kommentarReducer={kommentar}
-                tiltakReducer={tiltak}
                 feilMelding={false}
             />
         </Provider>);
-    });
-
-    it('uvidbar--button', () => {
-        expect(komponent.find('button.utvidbar__toggle')).to.have.length(1);
     });
 
     it('Skal vise ButtonComment', () => {
@@ -71,11 +65,9 @@ describe('TiltakUtvidbar', () => {
             kommentarer: [],
         };
         komponent = mount(<Provider store={store}>
-            <TiltakUtvidbarContainer
+            <TiltakContainer
                 element={tiltakElement}
                 fnr={'1000000000001'}
-                kommentarReducer={kommentar}
-                tiltakReducer={tiltak}
                 feilMelding={false}
             />
         </Provider>);

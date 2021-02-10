@@ -295,6 +295,7 @@ const oppfolgingsplan = {
                 {
                     tekst: 'En kommentar',
                     opprettetAv: {
+                        navn: 'Test Testesen',
                         fnr: '1000000000000',
                     },
                     sistEndretAv: {

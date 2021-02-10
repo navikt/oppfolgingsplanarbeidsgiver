@@ -46,7 +46,4 @@ describe('TiltakListeRad', () => {
         expect(navn.text()).to.contain(oppfolgingsdialog.tiltakListe[0].tiltaknavn);
     });
 
-    it('Skal vise chevron', () => {
-        expect(komponent.find('i')).to.have.length(1);
-    });
 });

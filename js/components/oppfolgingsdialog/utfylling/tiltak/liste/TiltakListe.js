@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import TiltakUtvidbar from './TiltakUtvidbar';
+import Tiltak from './Tiltak';
 import { tiltakPt } from '../../../../../proptypes/opproptypes';
 
 const TiltakListe = (
@@ -20,7 +20,7 @@ const TiltakListe = (
             {
                 liste.map((element) => {
                     return (
-                        <TiltakUtvidbar
+                        <Tiltak
                             key={element.tiltakId}
                             element={element}
                             fnr={fnr}
