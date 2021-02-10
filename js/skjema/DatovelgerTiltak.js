@@ -102,11 +102,13 @@ export class DatoField extends Component {
                             e.preventDefault();
                             this.toggle();
                         }}
+
                         aria-pressed={this.erApen}>
                         {this.state.erApen ? 'Skjul datovelger' : 'Vis datovelger'}
                     </button>
                 </div>
-                { this.state.erApen && <DayPickerComponent
+                { this.state.erApen &&
+                <DayPickerComponent
                     {...this.props}
                     ariaControlledBy={`toggle-${id}`}
                     tidligsteFom={tidligsteFom}
@@ -147,6 +149,7 @@ const mapStateToProps = (state, ownProps) => {
     const inputValue = selector(state, inputName);
     return {
         inputValue,
+        isFormSubmitted: ownProps.isFormSubmitted,
     };
 };
 
@@ -167,9 +170,7 @@ const DatovelgerTiltak = (props) => {
     return (<Field
         component={ConnectedDatoField}
         skjemanavn={DATOVELGERFELT_SKJEMA}
-        validate={(input) => {
-            return validerDatoField(input);
-        }}
+        validate={props.isFormSubmitted ? props.validateDato : undefined}
         {...props} />);
 };
 
@@ -177,6 +178,8 @@ DatovelgerTiltak.propTypes = {
     tidligsteFom: PropTypes.instanceOf(Date),
     senesteTom: PropTypes.instanceOf(Date),
     initialize: PropTypes.func,
+    validateDato: PropTypes.func,
+    isFormSubmitted: PropTypes.bool,
 };
 
 export default DatovelgerTiltak;

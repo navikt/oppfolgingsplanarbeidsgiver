@@ -6,7 +6,7 @@ const Feilmelding = (
         touched,
         error,
     }) => {
-    return (<p className="skjemaelement__feilmelding" aria-live="polite">
+    return (<p className="skjemaelement__feilmelding typo-feilmelding" aria-live="polite">
         { touched && error }
     </p>);
 };

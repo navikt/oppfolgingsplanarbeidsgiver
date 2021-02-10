@@ -12,6 +12,8 @@ export const TiltakDatovelgerFelt = (
     {
         felt,
         dato,
+        validateDato,
+        isFormSubmitted,
     }) => {
     return (
         <div className="tiltakSkjema__datovelger__felt">
@@ -20,6 +22,8 @@ export const TiltakDatovelgerFelt = (
                 name={felt.navn}
                 id={felt.navn}
                 dato={dato ? restdatoTildato(dato) : null}
+                validateDato={validateDato}
+                isFormSubmitted={isFormSubmitted}
             />
         </div>
     );
@@ -27,12 +31,17 @@ export const TiltakDatovelgerFelt = (
 TiltakDatovelgerFelt.propTypes = {
     felt: tiltakSkjemaFeltPt,
     dato: PropTypes.string,
+    validateDato: PropTypes.func,
+    isFormSubmitted: PropTypes.bool,
 };
 
 const TiltakDatovelger = (
     {
         tiltak,
         felter,
+        validateStartdato,
+        validateSluttdato,
+        isFormSubmitted,
     }) => {
     return (
         <div className="tiltakSkjema__datovelger">
@@ -40,11 +49,15 @@ const TiltakDatovelger = (
                 <TiltakDatovelgerFelt
                     felt={felter.startdato}
                     dato={tiltak && tiltak.fom ? tiltak.fom : null}
+                    validateDato={validateStartdato}
+                    isFormSubmitted={isFormSubmitted}
                 />
 
                 <TiltakDatovelgerFelt
                     felt={felter.sluttdato}
                     dato={tiltak && tiltak.tom ? tiltak.tom : null}
+                    validateDato={validateSluttdato}
+                    isFormSubmitted={isFormSubmitted}
                 />
             </div>
         </div>
@@ -53,6 +66,9 @@ const TiltakDatovelger = (
 TiltakDatovelger.propTypes = {
     felter: tiltakSkjemaFelterPt,
     tiltak: tiltakPt,
+    validateStartdato: PropTypes.func,
+    validateSluttdato: PropTypes.func,
+    isFormSubmitted: PropTypes.bool,
 };
 
 export default TiltakDatovelger;

@@ -1,46 +1,62 @@
 .alertstripe--notifikasjonboks {
-    margin-bottom: 1em;
+  margin-bottom: 1em;
+
+
+  &--top-padded {
+    margin-top: 2em;
+  }
 }
 
 .notifikasjonboks {
-    margin-bottom: 1em;
-    padding: @panelOppfoelgingPaddingMini;
-    @media (min-width: @screen-sm-min) {
-        padding: 1em 2em 1em 2em;;
-    }
-    div {
-        float: left;
-        min-height: 1px;
-    }
+  margin-bottom: 1em;
+  padding: @panelOppfoelgingPaddingMini;
+  @media (min-width: @screen-sm-min) {
+    padding: 1em 2em 1em 2em;;
+  }
+
+  div {
+    float: left;
+    min-height: 1px;
+  }
 }
+
 .notifikasjonboks:before,
 .notifikasjonboks:after {
-    content: "";
-    display: table;
-    clear: both;
+  content: "";
+  display: table;
+  clear: both;
 }
+
 .notifikasjonboks__img {
-    width: 10%;
+  width: 10%;
+  @media all and (max-width: @screen-xs-max) {
+    width: 100%;
+  }
+
+  img {
+    width: 2em;
+    height: 2em;
     @media all and (max-width: @screen-xs-max) {
-        width: 100%;
+      display: block;
+      margin: auto;
+      margin-bottom: 1em;
     }
-    img {
-        width: 2em;
-        height: 2em;
-        @media all and (max-width: @screen-xs-max) {
-            display: block;
-            margin: auto;
-            margin-bottom: 1em;
-        }
-    }
+  }
 }
+
 .notifikasjonboks__tekst {
-    width: 90%;
-    p {
-        margin-bottom: 0;
-        margin-top: .3em;
-    }
-    @media all and (max-width: @screen-xs-max) {
-        width: 100%
-    }
+  width: 90%;
+
+  p {
+    margin-bottom: 0;
+    margin-top: .3em;
+  }
+
+  @media all and (max-width: @screen-xs-max) {
+    width: 100%
+  }
+}
+
+.skjema__input-container {
+    padding-bottom: 0.7em;
 }
