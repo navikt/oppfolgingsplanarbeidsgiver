@@ -155,17 +155,6 @@ const mapStateToProps = (state, ownProps) => {
 
 const ConnectedDatoField = connect(mapStateToProps)(DatoField);
 
-export const validerDatoField = (input) => {
-    if (!input) {
-        return 'Du må oppgi en dato';
-    } else if (!erGyldigDatoformat(input)) {
-        return 'Datoen må være på formatet dd.mm.åååå';
-    } else if (!erGyldigDato(input)) {
-        return 'Datoen er ikke gyldig';
-    }
-    return undefined;
-};
-
 const DatovelgerTiltak = (props) => {
     return (<Field
         component={ConnectedDatoField}
