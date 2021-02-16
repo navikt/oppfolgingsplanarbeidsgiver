@@ -54,7 +54,6 @@ class Tiltak extends Component {
                     this.visElementInformasjon();
                     this.props.visFeilMelding(true);
                     this.visFeil(false, true, texts.updateError);
-                    this.apne();
                 } else if (nextProps.tiltakReducer.lagringFeilet) {
                     this.props.visFeilMelding(true);
                     this.visFeil(true, false, texts.updateError);
@@ -70,6 +69,7 @@ class Tiltak extends Component {
             this.visFeil(false, false, '');
         }
     }
+
 
     visFeil(lagringFeilet, slettingFeilet, tekst) {
         this.setState({
@@ -102,9 +102,6 @@ class Tiltak extends Component {
             visLagreSkjema: false,
             lagreKommentarSkjema: true,
         });
-        if (!this.state.erApen) {
-            this.apne();
-        }
     }
 
     skjulLagreKommentarSkjema() {
@@ -233,6 +230,6 @@ export const mapStateToProps = (state) => {
     };
 };
 
-const TiltakContainer = connect(mapStateToProps, null, null, {pure: false})(Tiltak);
+const TiltakContainer = connect(mapStateToProps, null, null, { pure: false })(Tiltak);
 
 export default TiltakContainer;
