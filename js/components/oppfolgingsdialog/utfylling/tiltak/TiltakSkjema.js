@@ -73,7 +73,7 @@ export const aktoerHarOpprettetElement = (fnr, tiltak) => {
     return fnr === tiltak.opprettetAv.fnr;
 };
 
-export const TiltakNavn = ({ felt, isFormSubmitted, validate }) => {
+export const TiltakNavn = ({felt, isFormSubmitted, validate}) => {
     return (<div className="lagretiltakskjema__inputgruppe">
         <label
             className="skjemaelement__label"
@@ -110,7 +110,7 @@ export const TiltakBeskrivelse = (
     }) => {
     return (tiltak && tiltak.opprettetAv && !aktoerHarOpprettetElement(fnr, tiltak) ?
         <div className="lagretiltakskjema__inputgruppe">
-            { tiltak && tiltak.beskrivelse &&
+            {tiltak && tiltak.beskrivelse &&
             [
                 <label key={`tiltak-besk-label-${tiltak.tiltakId}`} className="tiltaktabell--beskrivelse">
                     {texts.felter.beskrivelseLabel}
@@ -133,7 +133,7 @@ export const TiltakBeskrivelse = (
                 placeholder="Skriv her"
                 validate={isFormSubmitted ? validate : undefined}
             />
-            <TiltakInfoVarsel tekst={tekst} />
+            <TiltakInfoVarsel tekst={tekst}/>
         </div>);
 };
 
@@ -146,7 +146,7 @@ TiltakBeskrivelse.propTypes = {
     validate: PropTypes.func,
 };
 
-export const Gjennomfoering = ({ felt, tiltak, tekst, fnr, isFormSubmitted, validate }) => {
+export const Gjennomfoering = ({felt, tiltak, tekst, fnr, isFormSubmitted, validate}) => {
     return (
         <div className="skjemaelement lagretiltakskjema__inputgruppe">
             <label
@@ -164,8 +164,8 @@ export const Gjennomfoering = ({ felt, tiltak, tekst, fnr, isFormSubmitted, vali
                 placeholder="Skriv her"
                 validate={isFormSubmitted ? validate : undefined}
             />
-            { tiltak && !aktoerHarOpprettetElement(fnr, tiltak) &&
-            <TiltakInfoVarsel tekst={tekst} />
+            {tiltak && !aktoerHarOpprettetElement(fnr, tiltak) &&
+            <TiltakInfoVarsel tekst={tekst}/>
             }
         </div>);
 };
@@ -179,7 +179,7 @@ Gjennomfoering.propTypes = {
     validate: PropTypes.func,
 };
 
-export const BeskrivelseIkkeAktuelt = ({ felt, tiltak, tekst, fnr, isFormSubmitted, validate }) => {
+export const BeskrivelseIkkeAktuelt = ({felt, tiltak, tekst, fnr, isFormSubmitted, validate}) => {
     return (
         <div className="skjemaelement lagretiltakskjema__inputgruppe">
             <label
@@ -197,7 +197,7 @@ export const BeskrivelseIkkeAktuelt = ({ felt, tiltak, tekst, fnr, isFormSubmitt
                 placeholder="Skriv her"
                 validate={isFormSubmitted ? validate : undefined}
             />
-            { tiltak && !aktoerHarOpprettetElement(fnr, tiltak) &&
+            {tiltak && !aktoerHarOpprettetElement(fnr, tiltak) &&
             <TiltakInfoVarsel
                 tekst={tekst}
             />
@@ -245,7 +245,7 @@ export class TiltakSkjemaKomponent extends Component {
         this.setState({
             errorList: errors,
         });
-    }
+    };
 
     touchAllFields() {
         this.props.touch('tiltaknavn');
@@ -258,7 +258,7 @@ export class TiltakSkjemaKomponent extends Component {
 
     // eslint-disable-next-line camelcase
     UNSAFE_componentWillReceiveProps(nextProps) {
-        const { status, tiltaknavn, beskrivelse, beskrivelseIkkeAktuelt, gjennomfoering, fom, tom } = nextProps;
+        const {status, tiltaknavn, beskrivelse, beskrivelseIkkeAktuelt, gjennomfoering, fom, tom} = nextProps;
 
         if (status !== this.props.status && this.state.isFormSubmitted) {
             if (nextProps.status === STATUS_TILTAK.IKKE_AKTUELT) {
@@ -354,12 +354,12 @@ export class TiltakSkjemaKomponent extends Component {
 
         if (feilmeldingerObject.tiltaknavn) {
             errorObject.tiltaknavn = feilmeldingerObject.tiltaknavn;
-            errorList.push({ skjemaelementId: FELTER.tiltaknavn.id, feilmelding: feilmeldingerObject.tiltaknavn });
+            errorList.push({skjemaelementId: FELTER.tiltaknavn.id, feilmelding: feilmeldingerObject.tiltaknavn});
         }
 
         if (feilmeldingerObject.beskrivelse) {
             errorObject.beskrivelse = feilmeldingerObject.beskrivelse;
-            errorList.push({ skjemaelementId: FELTER.beskrivelse.id, feilmelding: feilmeldingerObject.beskrivelse });
+            errorList.push({skjemaelementId: FELTER.beskrivelse.id, feilmelding: feilmeldingerObject.beskrivelse});
         }
 
         if (feilmeldingerObject.gjennomfoering) {
@@ -380,12 +380,12 @@ export class TiltakSkjemaKomponent extends Component {
 
         if (feilmeldingerObject.fom) {
             errorObject.fom = feilmeldingerObject.fom;
-            errorList.push({ skjemaelementId: FELTER.startdato.id, feilmelding: feilmeldingerObject.fom });
+            errorList.push({skjemaelementId: FELTER.startdato.id, feilmelding: feilmeldingerObject.fom});
         }
 
         if (feilmeldingerObject.tom) {
             errorObject.tom = feilmeldingerObject.tom;
-            errorList.push({ skjemaelementId: FELTER.sluttdato.id, feilmelding: feilmeldingerObject.tom });
+            errorList.push({skjemaelementId: FELTER.sluttdato.id, feilmelding: feilmeldingerObject.tom});
         }
 
         if (feilmeldingerObject.tiltaknavn
@@ -435,9 +435,9 @@ export class TiltakSkjemaKomponent extends Component {
                 errorlist: errorList,
             });
         } else if (i === -1 && feilmelding !== undefined) {
-            errorList.push({ skjemaelementId: elementId, feilmelding });
+            errorList.push({skjemaelementId: elementId, feilmelding});
         }
-    }
+    };
 
     validateTiltaknavnFelt = (value) => {
         let feilmelding;
@@ -458,7 +458,7 @@ export class TiltakSkjemaKomponent extends Component {
         this.updateFeilOppsummeringState(feilmelding, FELTER.tiltaknavn.id);
 
         return feilmelding;
-    }
+    };
 
     validateBeskrivelseFelt = (value) => {
         let feilmelding;
@@ -479,7 +479,7 @@ export class TiltakSkjemaKomponent extends Component {
         this.updateFeilOppsummeringState(feilmelding, FELTER.beskrivelse.id);
 
         return feilmelding;
-    }
+    };
 
     validateBeskrivelseIkkeAktueltFelt = (value) => {
         let feilmelding;
@@ -500,7 +500,7 @@ export class TiltakSkjemaKomponent extends Component {
         this.updateFeilOppsummeringState(feilmelding, FELTER.beskrivelseIkkeAktuelt.id);
 
         return feilmelding;
-    }
+    };
 
     validateGjennomfoeringFelt = (value) => {
         let feilmelding;
@@ -521,7 +521,7 @@ export class TiltakSkjemaKomponent extends Component {
         this.updateFeilOppsummeringState(feilmelding, FELTER.gjennomfoering.id);
 
         return feilmelding;
-    }
+    };
 
     validateDatoFelt = (value) => {
         let feilmelding;
@@ -548,7 +548,7 @@ export class TiltakSkjemaKomponent extends Component {
         }
 
         return feilmelding;
-    }
+    };
 
     validateSluttDato = (value) => {
         this.props.touch(OPPRETT_TILTAK_NY, 'tom');
@@ -564,7 +564,7 @@ export class TiltakSkjemaKomponent extends Component {
         }
 
         return feilmelding;
-    }
+    };
 
     validateAllFields = (values) => {
         const tiltaknavnValue = values.tiltaknavn;
@@ -598,7 +598,7 @@ export class TiltakSkjemaKomponent extends Component {
         }
 
         return undefined;
-    }
+    };
 
     render() {
         const {
@@ -614,9 +614,9 @@ export class TiltakSkjemaKomponent extends Component {
         return (
             <Panel border={this.border()}>
                 <div className="utvidbar__innholdContainer">
-                    <form onSubmit={handleSubmit(this.handleSubmit)} className={this.hentSkjemaClassName()} >
+                    <form onSubmit={handleSubmit(this.handleSubmit)} className={this.hentSkjemaClassName()}>
 
-                        { (!tiltak || !tiltak.opprettetAv || aktoerHarOpprettetElement(fnr, tiltak)) &&
+                        {(!tiltak || !tiltak.opprettetAv || aktoerHarOpprettetElement(fnr, tiltak)) &&
                         <TiltakNavn
                             felt={FELTER.tiltaknavn}
                             validate={this.validateTiltaknavnFelt}
@@ -641,7 +641,7 @@ export class TiltakSkjemaKomponent extends Component {
                             setStatus={this.setStatus}
                         />
 
-                        { this.state.status === STATUS_TILTAK.IKKE_AKTUELT &&
+                        {this.state.status === STATUS_TILTAK.IKKE_AKTUELT &&
                         <BeskrivelseIkkeAktuelt
                             felt={FELTER.beskrivelseIkkeAktuelt}
                             tiltak={tiltak}
@@ -652,7 +652,7 @@ export class TiltakSkjemaKomponent extends Component {
                         />
                         }
 
-                        { this.state.status === STATUS_TILTAK.AVTALT &&
+                        {this.state.status === STATUS_TILTAK.AVTALT &&
                         <Gjennomfoering
                             felt={FELTER.gjennomfoering}
                             tekst={personvernTekst}
@@ -663,7 +663,7 @@ export class TiltakSkjemaKomponent extends Component {
                         />
                         }
 
-                        { this.state.status !== STATUS_TILTAK.IKKE_AKTUELT &&
+                        {this.state.status !== STATUS_TILTAK.IKKE_AKTUELT &&
                         <TiltakDatovelger
                             felter={FELTER}
                             tiltak={this.visFeiletTiltak() ? tiltakReducer.tiltak : tiltak}
@@ -673,13 +673,13 @@ export class TiltakSkjemaKomponent extends Component {
                         />
                         }
 
-                        { oppdateringFeilet &&
+                        {oppdateringFeilet &&
                         <TiltakVarselFeil
                             tekst={varselTekst}
                         />
                         }
 
-                        { this.state.errorList.length > 0 &&
+                        {this.state.errorList.length > 0 &&
                         <Feiloppsummering
                             tittel="For å gå videre må du rette opp følgende:"
                             feil={this.state.errorList}
