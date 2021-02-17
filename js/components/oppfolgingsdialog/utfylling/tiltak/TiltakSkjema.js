@@ -235,8 +235,8 @@ export class TiltakSkjemaKomponent extends Component {
     }
 
     removeError = (id) => {
-        let errors = Object.assign(this.state.errorList)
-        const i = errors.findIndex((e => e.skjemaelementId === id));
+        const errors = Object.assign(this.state.errorList);
+        const i = errors.findIndex(((e) => { return e.skjemaelementId === id; }));
 
         if (i !== -1) {
             errors.splice(i, 1);
@@ -244,7 +244,7 @@ export class TiltakSkjemaKomponent extends Component {
 
         this.setState({
             errorList: errors,
-        })
+        });
     }
 
     touchAllFields() {
@@ -424,8 +424,8 @@ export class TiltakSkjemaKomponent extends Component {
     }
 
     updateFeilOppsummeringState = (feilmelding, elementId) => {
-        const i = this.state.errorList.findIndex((obj => obj.skjemaelementId === elementId));
-        let errorList = this.state.errorList;
+        const i = this.state.errorList.findIndex(((obj) => { return obj.skjemaelementId === elementId; }));
+        const errorList = this.state.errorList;
 
         if (i > -1 && feilmelding !== undefined) {
             errorList[i].feilmelding = feilmelding;
@@ -433,17 +433,17 @@ export class TiltakSkjemaKomponent extends Component {
             errorList.splice(i, 1);
             this.setState({
                 errorlist: errorList,
-            })
+            });
         } else if (i === -1 && feilmelding !== undefined) {
-            errorList.push({skjemaelementId: elementId, feilmelding: feilmelding})
+            errorList.push({ skjemaelementId: elementId, feilmelding });
         }
     }
 
     validateTiltaknavnFelt = (value) => {
-        let feilmelding = undefined;
+        let feilmelding;
 
         if (!value || value.trim().length === 0) {
-            feilmelding = 'Fyll inn tiltak';
+            feilmelding = 'Fyll inn overskrift';
         } else if (value.match(tekstfeltRegex)) {
             feilmelding = 'Ugyldig spesialtegn er oppgitt';
         }
@@ -461,7 +461,7 @@ export class TiltakSkjemaKomponent extends Component {
     }
 
     validateBeskrivelseFelt = (value) => {
-        let feilmelding = undefined;
+        let feilmelding;
 
         if (!value || value.trim().length === 0) {
             feilmelding = 'Fyll inn beskrivelse';
@@ -482,7 +482,7 @@ export class TiltakSkjemaKomponent extends Component {
     }
 
     validateBeskrivelseIkkeAktueltFelt = (value) => {
-        let feilmelding = undefined;
+        let feilmelding;
 
         if (!value || value.trim().length === 0) {
             feilmelding = 'Fyll inn beskrivelse';
@@ -503,7 +503,7 @@ export class TiltakSkjemaKomponent extends Component {
     }
 
     validateGjennomfoeringFelt = (value) => {
-        let feilmelding = undefined;
+        let feilmelding;
 
         if (!value || value.trim().length === 0) {
             feilmelding = 'Fyll inn oppfølging og gjennomføring';
@@ -524,7 +524,7 @@ export class TiltakSkjemaKomponent extends Component {
     }
 
     validateDatoFelt = (value) => {
-        let feilmelding = undefined;
+        let feilmelding;
 
         if (!value || value.trim().length === 0) {
             feilmelding = 'Du må oppgi en dato';
@@ -713,7 +713,7 @@ TiltakSkjemaKomponent.propTypes = {
 
 const valueSelector = formValueSelector(OPPRETT_TILTAK_NY);
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
     return {
         tiltaknavn: valueSelector(state, 'tiltaknavn'),
         beskrivelse: valueSelector(state, 'beskrivelse'),
@@ -722,13 +722,13 @@ const mapStateToProps = state => {
         fom: valueSelector(state, 'fom'),
         tom: valueSelector(state, 'tom'),
         status: valueSelector(state, 'status'),
-    }
-}
+    };
+};
 
 let ReduxSkjema = reduxForm({
     form: OPPRETT_TILTAK_NY,
 })(TiltakSkjemaKomponent);
 
-ReduxSkjema = connect(mapStateToProps)(ReduxSkjema)
+ReduxSkjema = connect(mapStateToProps)(ReduxSkjema);
 
 export default ReduxSkjema;
