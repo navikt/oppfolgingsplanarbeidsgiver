@@ -3,7 +3,6 @@ import chai from 'chai';
 import { shallow } from 'enzyme';
 import sinon from 'sinon';
 import chaiEnzyme from 'chai-enzyme';
-import rewire from 'rewire';
 import { Field } from 'redux-form';
 import Alertstripe from 'nav-frontend-alertstriper';
 import { Hovedknapp } from 'nav-frontend-knapper';
@@ -133,38 +132,5 @@ describe('GodkjennPlanLightboks', () => {
         it('Skal ikke vise Radioknapper', () => {
             expect(komponentLederArbeidstakerSammePerson.find(Radioknapper)).to.have.length(0);
         });
-    });
-
-    it('Skal sjekke validate', () => {
-        komponent = shallow(<GodkjennPlanLightboksComponent
-            oppfolgingsdialog={getOppfolgingsplan()}
-            handleSubmit={handleSubmit}
-            initialize={initialize}
-        />, { disableLifecycleMethods: true });
-        const validering = {
-            startdato: '01.01.2018',
-            sluttdato: '01.02.2018',
-            godkjennInput: true,
-        };
-        const validerMedFeilsluttDato = {
-            startdato: '01.02.2018',
-            sluttdato: '01.01.2018',
-            godkjennInput: true,
-        };
-        const vvalideringMedFeilEvalueringsdato = {
-            startdato: '01.01.2018',
-            sluttdato: '01.02.2018',
-            evalueringsdato: '01.01.2018',
-            godkjennInput: true,
-        };
-        const vvalideringIkkeGodk = {
-            godkjennInput: false,
-        };
-        const re = rewire('../../../../js/components/oppfolgingsdialog/godkjennplan/GodkjennPlanLightboks');
-        const test = re.__get__('validate');
-        expect(test(validering)).to.deep.equal({});
-        expect(test(validerMedFeilsluttDato).sluttdato).to.deep.equal('Sluttdato må være etter startdato');
-        expect(test(vvalideringMedFeilEvalueringsdato).evalueringsdato).to.deep.equal('Evalueringsdato må være etter startdato');
-        expect(test(vvalideringIkkeGodk).godkjennInput).to.deep.equal('Du må godkjenne planen for å komme videre');
     });
 });
