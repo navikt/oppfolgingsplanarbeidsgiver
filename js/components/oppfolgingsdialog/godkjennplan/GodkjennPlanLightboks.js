@@ -21,7 +21,7 @@ import {
     getStartDateFromTiltakListe,
 } from '../../../utils/tiltakUtils';
 import { erHerokuApp } from '../../../utils/urlUtils';
-import ObligatoriskeFelterInfotekst from "../utfylling/ObligatoriskeFelterInfotekst";
+import ObligatoriskeFelterInfotekst from '../utfylling/ObligatoriskeFelterInfotekst';
 
 const texts = {
     title: 'Jeg er ferdig med planen',
@@ -204,20 +204,24 @@ export class GodkjennPlanLightboksComponent extends Component {
 
                     <div className="inputgruppe">
                         <div className="skjema__input">
-                            <Field
-                                className="checkboks"
-                                id="godkjennInput"
-                                name="godkjennInput"
-                                component={CheckboxSelvstendig}
-                                label={texts.checkboxLabel}
-                            />
-                            <Field
-                                className="checkboks"
-                                id="delMedNav"
-                                name="delMedNav"
-                                component={CheckboxSelvstendig}
-                                label={textDelMedNav(oppfolgingsdialog.arbeidstaker.navn, this.state.createWithoutApproval)}
-                            />
+                            <div className="skjema__checkbox-container">
+                                <Field
+                                    className="checkboks"
+                                    id="godkjennInput"
+                                    name="godkjennInput"
+                                    component={CheckboxSelvstendig}
+                                    label={texts.checkboxLabel}
+                                />
+                            </div>
+                            <div className="skjema__checkbox-container">
+                                <Field
+                                    className="checkboks"
+                                    id="delMedNav"
+                                    name="delMedNav"
+                                    component={CheckboxSelvstendig}
+                                    label={textDelMedNav(oppfolgingsdialog.arbeidstaker.navn, this.state.createWithoutApproval)}
+                                />
+                            </div>
                         </div>
                     </div>
                 </React.Fragment>
