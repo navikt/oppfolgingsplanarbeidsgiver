@@ -37,6 +37,7 @@ export const GodkjennPlanSkjemaDatovelgerFelt = (
     {
         felt,
         date,
+        validate,
     }) => {
     return (
         <div className="skjemaelement godkjennPlanSkjema__datovelger__felt">
@@ -50,6 +51,7 @@ export const GodkjennPlanSkjemaDatovelgerFelt = (
                 id={felt.navn}
                 tidligsteFom={null}
                 dato={date || window.sessionStorage.getItem(felt.navn)}
+                validate={validate}
             />
         </div>
     );
@@ -57,9 +59,10 @@ export const GodkjennPlanSkjemaDatovelgerFelt = (
 GodkjennPlanSkjemaDatovelgerFelt.propTypes = {
     felt: datovelgerFeltPt,
     date: PropTypes.string,
+    validate: PropTypes.func,
 };
 
-const GodkjennPlanSkjemaDatovelger = ({ oppfolgingsplan }) => {
+const GodkjennPlanSkjemaDatovelger = ({ oppfolgingsplan, isFormSubmitted, validateStartdato, validateSluttDato, validateEvalueringsdatoDato }) => {
     const suggestedStartDate = getStartDateFromTiltakListe(oppfolgingsplan.tiltakListe);
     const suggestedEndDate = getEndDateFromTiltakListe(oppfolgingsplan.tiltakListe);
     return (
@@ -71,16 +74,19 @@ const GodkjennPlanSkjemaDatovelger = ({ oppfolgingsplan }) => {
                 <GodkjennPlanSkjemaDatovelgerFelt
                     felt={FELTER.fom}
                     date={suggestedStartDate}
+                    validate={isFormSubmitted ? validateStartdato : undefined}
                 />
 
                 <GodkjennPlanSkjemaDatovelgerFelt
                     felt={FELTER.tom}
                     date={suggestedEndDate}
+                    validate={isFormSubmitted ? validateSluttDato : undefined}
                 />
             </div>
             <div className="godkjennPlanSkjema__datovelger__rad">
                 <GodkjennPlanSkjemaDatovelgerFelt
                     felt={FELTER.evalueringinnen}
+                    validate={isFormSubmitted ? validateEvalueringsdatoDato : undefined}
                 />
             </div>
         </div>
@@ -88,6 +94,10 @@ const GodkjennPlanSkjemaDatovelger = ({ oppfolgingsplan }) => {
 };
 GodkjennPlanSkjemaDatovelger.propTypes = {
     oppfolgingsplan: oppfolgingsplanPt,
+    isFormSubmitted: PropTypes.bool,
+    validateStartdato: PropTypes.func,
+    validateSluttDato: PropTypes.func,
+    validateEvalueringsdatoDato: PropTypes.func,
 };
 
 export default GodkjennPlanSkjemaDatovelger;
