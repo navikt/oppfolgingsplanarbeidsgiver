@@ -7,7 +7,6 @@ import { toDatePrettyPrint } from '@navikt/digisyfo-npm';
 import { DATOVELGERFELT_SKJEMA } from '../konstanter';
 import Feilmelding from './Feilmelding';
 import DayPickerComponent from './DayPicker';
-import { erGyldigDato, erGyldigDatoformat } from '../utils/datoUtils';
 import { fieldPropTypes } from '../proptypes/fieldproptypes';
 
 export class DatoField extends Component {
@@ -155,24 +154,11 @@ const mapStateToProps = (state, ownProps) => {
 
 const ConnectedDatoField = connect(mapStateToProps)(DatoField);
 
-export const validerDatoField = (input) => {
-    if (!input) {
-        return 'Du må oppgi en dato';
-    } else if (!erGyldigDatoformat(input)) {
-        return 'Datoen må være på formatet dd.mm.åååå';
-    } else if (!erGyldigDato(input)) {
-        return 'Datoen er ikke gyldig';
-    }
-    return undefined;
-};
-
 const Datovelger = (props) => {
     return (<Field
         component={ConnectedDatoField}
         skjemanavn={DATOVELGERFELT_SKJEMA}
-        validate={(input) => {
-            return validerDatoField(input);
-        }}
+        validate={props.validate}
         {...props} />);
 };
 
@@ -180,6 +166,7 @@ Datovelger.propTypes = {
     tidligsteFom: PropTypes.instanceOf(Date),
     senesteTom: PropTypes.instanceOf(Date),
     initialize: PropTypes.func,
+    validate: PropTypes.func,
 };
 
 export default Datovelger;
