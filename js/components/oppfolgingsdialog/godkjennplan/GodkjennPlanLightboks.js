@@ -202,8 +202,6 @@ export class GodkjennPlanLightboksComponent extends Component {
         } else if (i === -1 && feilmelding !== undefined) {
             errorList.push({ skjemaelementId: elementId, feilmelding });
         }
-
-        console.log(this.state.errorList);
     };
 
     validateGodkjennInput = (value) => {
