@@ -22,18 +22,13 @@ const MAX_LENGTH = 1000;
 export const KommentarBeskrivelse = ({ felt, elementId }) => {
     return (
         <div className="skjemaelement lagreKommentarSkjema__inputgruppe">
-            <label
-                className="skjemaelement__label"
-                id={`${elementId}`}
-                htmlFor={`${elementId}`}>
-                {texts.kommentarBeskrivelse.title}
-            </label>
             <Field
                 className="tiltak_input--kommenter input--fullbredde"
                 name={felt}
                 id={`${elementId}`}
                 aria-labelledby={felt}
                 maxLength={MAX_LENGTH}
+                label={texts.kommentarBeskrivelse.title}
                 component={TekstOmrade}
                 placeholder="Skriv inn tekst"
                 rows="6"

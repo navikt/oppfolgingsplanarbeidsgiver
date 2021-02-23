@@ -121,14 +121,12 @@ export const TiltakBeskrivelse = (
         </div>
         :
         <div className="lagretiltakskjema__inputgruppe">
-            <label className="skjemaelement__label" id={felt.navn} htmlFor={`${felt.navn}-input`}>
-                <b>{felt.tekst}</b>
-            </label>
             <Field
                 className="input__tiltak--beskrivelse"
                 name={felt.navn}
                 id={`${felt.id}`}
                 aria-labelledby={felt.navn}
+                label={felt.tekst}
                 component={TekstOmrade}
                 placeholder="Skriv her"
                 validate={isFormSubmitted ? validate : undefined}
@@ -149,17 +147,12 @@ TiltakBeskrivelse.propTypes = {
 export const Gjennomfoering = ({felt, tiltak, tekst, fnr, isFormSubmitted, validate}) => {
     return (
         <div className="skjemaelement lagretiltakskjema__inputgruppe">
-            <label
-                className="skjemaelement__label"
-                id={felt.navn}
-                htmlFor={`${felt.navn}-input`}>
-                {felt.tekst}
-            </label>
             <Field
                 className="input__tiltak--gjennom"
                 name={felt.navn}
                 id={`${felt.id}`}
                 aria-labelledby={felt.navn}
+                label={felt.tekst}
                 component={TekstOmrade}
                 placeholder="Skriv her"
                 validate={isFormSubmitted ? validate : undefined}
@@ -182,17 +175,12 @@ Gjennomfoering.propTypes = {
 export const BeskrivelseIkkeAktuelt = ({felt, tiltak, tekst, fnr, isFormSubmitted, validate}) => {
     return (
         <div className="skjemaelement lagretiltakskjema__inputgruppe">
-            <label
-                className="skjemaelement__label"
-                id={felt.navn}
-                htmlFor={`${felt.navn}-input`}>
-                {felt.tekst}
-            </label>
             <Field
                 className="input__tiltak--gjennom"
                 name={felt.navn}
                 id={`${felt.id}`}
                 aria-labelledby={felt.navn}
+                label={felt.tekst}
                 component={TekstOmrade}
                 placeholder="Skriv her"
                 validate={isFormSubmitted ? validate : undefined}

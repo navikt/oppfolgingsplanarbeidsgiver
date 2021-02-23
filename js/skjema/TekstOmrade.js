@@ -9,6 +9,7 @@ const Tekstomrade = (props) => {
         input,
         id,
         maxLength,
+        label,
     } = props;
 
     const feilmelding = meta.error && meta.touched
@@ -19,6 +20,7 @@ const Tekstomrade = (props) => {
         maxLength={maxLength}
         id={id}
         feil={feilmelding ? feilmelding.feilmelding : undefined}
+        label={label}
         {...input} />);
 };
 
@@ -31,6 +33,7 @@ Tekstomrade.propTypes = {
     placeholder: PropTypes.string,
     autoFocus: PropTypes.bool,
     maxLength: PropTypes.number,
+    label: PropTypes.string,
 };
 
 export default Tekstomrade;

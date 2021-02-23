@@ -3,7 +3,7 @@ import React from 'react';
 import { mount, shallow } from 'enzyme';
 import sinon from 'sinon';
 import chaiEnzyme from 'chai-enzyme';
-import { Field } from 'redux-form';
+import { Field, reduxForm } from 'redux-form';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import getTiltak from '../../../mock/mockTiltak';
 import TiltakKnapper from '../../../../js/components/oppfolgingsdialog/utfylling/tiltak/TiltakKnapper';
@@ -14,6 +14,8 @@ import {
     TiltakSkjemaKomponent,
     FELTER,
 } from '../../../../js/components/oppfolgingsdialog/utfylling/tiltak/TiltakSkjema';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
 
 chai.use(chaiEnzyme());
 const expect = chai.expect;
@@ -51,7 +53,7 @@ describe('TiltakSkjema', () => {
 
     describe('TiltakNavn', () => {
         const felt = FELTER.tiltaknavn;
-        const komponent1 = shallow(<TiltakNavn felt={felt} />);
+        const komponent1 = shallow(<TiltakNavn felt={felt}/>);
 
         it('Skal vise en label', () => {
             expect(komponent1.find('label')).to.have.length(1);
@@ -65,11 +67,17 @@ describe('TiltakSkjema', () => {
 
     describe('TiltakBeskrivelse', () => {
         const felt = FELTER.beskrivelse;
-        const komponent1 = shallow(<TiltakBeskrivelse
-            felt={felt}
-            tiltak={tiltak}
-            fnr={fnr}
-        />);
+        const store = createStore(() => ({}));
+        const Form = reduxForm({form: 'testForm'})(TiltakBeskrivelse);
+        const komponent1 = mount(
+            <Provider store={store}>
+                <Form
+                    felt={felt}
+                    tiltak={tiltak}
+                    fnr={fnr}
+                />
+            </Provider>,
+        );
 
         it('Skal vise en label', () => {
             expect(komponent1.find('label')).to.have.length(1);
@@ -83,7 +91,7 @@ describe('TiltakSkjema', () => {
 
     describe('TiltakKnapper', () => {
         it('Skal vise rett submit knapp og avbryt lenke,', () => {
-            komponent = mount(<TiltakKnapper tiltak={tiltak} />);
+            komponent = mount(<TiltakKnapper tiltak={tiltak}/>);
             expect(komponent.find(Hovedknapp)).to.have.length(1);
             expect(komponent.find('button.lenke')).to.have.length(1);
         });
