@@ -19,7 +19,7 @@ const Tekstomrade = (props) => {
     return (<Textarea
         maxLength={maxLength}
         id={id}
-        feil={feilmelding}
+        feil={feilmelding ? feilmelding.feilmelding : undefined}
         label={label}
         {...input} />);
 };

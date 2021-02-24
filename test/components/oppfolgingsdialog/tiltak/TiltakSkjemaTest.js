@@ -4,7 +4,6 @@ import { mount, shallow } from 'enzyme';
 import sinon from 'sinon';
 import chaiEnzyme from 'chai-enzyme';
 import { Field, reduxForm } from 'redux-form';
-import rewire from 'rewire';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import getTiltak from '../../../mock/mockTiltak';
 import TiltakKnapper from '../../../../js/components/oppfolgingsdialog/utfylling/tiltak/TiltakKnapper';
@@ -15,8 +14,8 @@ import {
     TiltakSkjemaKomponent,
     FELTER,
 } from '../../../../js/components/oppfolgingsdialog/utfylling/tiltak/TiltakSkjema';
-import { createStore } from "redux";
-import { Provider } from "react-redux";
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
 
 chai.use(chaiEnzyme());
 const expect = chai.expect;
@@ -52,28 +51,9 @@ describe('TiltakSkjema', () => {
         expect(komponent.find(TiltakKnapper)).to.have.length(1);
     });
 
-    it('skal validate funksjonen returnere korrekt melding ved feil', () => {
-        const tiltaknavn = 'Det er en long tekst! Eller hur?';
-        const values = {
-            tiltaknavn: '',
-            beskrivelse: '',
-        };
-        const re = rewire('../../../../js/components/oppfolgingsdialog/utfylling/tiltak/TiltakSkjema');
-        const test = re.__get__('validate');
-
-        expect(test(values).tiltaknavn).to.equal('Fyll inn tiltak');
-        expect(test(values).beskrivelse).to.equal('Fyll inn beskrivelse');
-        const longValues = {
-            tiltaknavn: tiltaknavn.repeat(100),
-            beskrivelse: tiltaknavn.repeat(200),
-        };
-        expect(test(longValues).tiltaknavn).to.equal('Maks 100 tegn tillatt');
-        expect(test(longValues).beskrivelse).to.equal('Maks 2000 tegn tillatt');
-    });
-
     describe('TiltakNavn', () => {
         const felt = FELTER.tiltaknavn;
-        const komponent1 = shallow(<TiltakNavn felt={felt} />);
+        const komponent1 = shallow(<TiltakNavn felt={felt}/>);
 
         it('Skal vise en label', () => {
             expect(komponent1.find('label')).to.have.length(1);
@@ -88,7 +68,7 @@ describe('TiltakSkjema', () => {
     describe('TiltakBeskrivelse', () => {
         const felt = FELTER.beskrivelse;
         const store = createStore(() => ({}));
-        const Form = reduxForm({form:'testForm'})(TiltakBeskrivelse);
+        const Form = reduxForm({form: 'testForm'})(TiltakBeskrivelse);
         const komponent1 = mount(
             <Provider store={store}>
                 <Form
@@ -96,7 +76,7 @@ describe('TiltakSkjema', () => {
                     tiltak={tiltak}
                     fnr={fnr}
                 />
-            </Provider>
+            </Provider>,
         );
 
         it('Skal vise en label', () => {
@@ -111,7 +91,7 @@ describe('TiltakSkjema', () => {
 
     describe('TiltakKnapper', () => {
         it('Skal vise rett submit knapp og avbryt lenke,', () => {
-            komponent = mount(<TiltakKnapper tiltak={tiltak} />);
+            komponent = mount(<TiltakKnapper tiltak={tiltak}/>);
             expect(komponent.find(Hovedknapp)).to.have.length(1);
             expect(komponent.find('button.lenke')).to.have.length(1);
         });

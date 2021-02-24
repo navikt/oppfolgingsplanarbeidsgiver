@@ -41,7 +41,7 @@ export const GodkjennPlanMottattKnapper = ({ godkjennPlan, oppfolgingsplan }) =>
     return (
         <div className="knapperad knapperad--justervenstre">
             <SharingCheckbox checked={delMedNav} onChange={handleChange} oppfolgingsplan={oppfolgingsplan} />
-            <div className="knapperad__element">
+            <div className="knapperad__element godkjent-knapp">
                 <Hovedknapp
                     name="godkjentKnapp"
                     id="godkjentKnapp"

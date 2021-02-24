@@ -1,11 +1,15 @@
+import { Feiloppsummering } from 'nav-frontend-skjema';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Field, reduxForm } from 'redux-form';
+import { connect } from 'react-redux';
+import { Field, formValueSelector, reduxForm, SubmissionError } from 'redux-form';
 import Alertstripe from 'nav-frontend-alertstriper';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import {
     fraInputdatoTilJSDato,
     sluttDatoSenereEnnStartDato,
+    erGyldigDato,
+    erGyldigDatoformat,
 } from '../../../utils/datoUtils';
 import { GODKJENN_OPPFOLGINGSPLAN_SKJEMANAVN } from '../../../konstanter';
 import {
@@ -21,7 +25,7 @@ import {
     getStartDateFromTiltakListe,
 } from '../../../utils/tiltakUtils';
 import { erHerokuApp } from '../../../utils/urlUtils';
-import ObligatoriskeFelterInfotekst from "../utfylling/ObligatoriskeFelterInfotekst";
+import ObligatoriskeFelterInfotekst from '../utfylling/ObligatoriskeFelterInfotekst';
 
 const texts = {
     title: 'Jeg er ferdig med planen',
@@ -46,9 +50,9 @@ const texts = {
 };
 
 export const textDelMedNav = (arbeidstakerName, tvangsgodkjent) => {
-    return texts.shareWithNAV +
-        (tvangsgodkjent ? `` : ` når ${arbeidstakerName} har godkjent den`) +
-        ' (valgfritt)';
+    return `${texts.shareWithNAV +
+        (tvangsgodkjent ? '' : ` når ${arbeidstakerName} har godkjent den`)
+    } (valgfritt)`;
 };
 
 export class GodkjennPlanLightboksComponent extends Component {
@@ -62,6 +66,7 @@ export class GodkjennPlanLightboksComponent extends Component {
             opprettplan: erSendTilGodkjenningTillatt ? '' : 'tvungenGodkjenning',
             submitting: false,
             erSendTilGodkjenningTillatt,
+            errorList: [],
         };
         this.godkjennPlan = this.godkjennPlan.bind(this);
         this.handledChange = this.handledChange.bind(this);
@@ -76,6 +81,45 @@ export class GodkjennPlanLightboksComponent extends Component {
         window.scrollTo(0, this.formRef.current.offsetTop);
     }
 
+    removeError = (id) => {
+        const errors = Object.assign(this.state.errorList);
+        const i = errors.findIndex(((e) => { return e.skjemaelementId === id; }));
+
+        if (i !== -1) {
+            errors.splice(i, 1);
+        }
+
+        this.setState({
+            errorList: errors,
+        });
+    };
+
+    touchAllFields() {
+        this.props.touch('godkjennInput');
+        this.props.touch('startdato');
+        this.props.touch('sluttdato');
+        this.props.touch('evalueringsdato');
+    }
+
+    // eslint-disable-next-line camelcase
+    UNSAFE_componentWillReceiveProps(nextProps) {
+        const { godkjennInput, startdato, sluttdato, evalueringsdato } = nextProps;
+
+        if (this.state.isFormSubmitted) {
+            if (godkjennInput !== this.props.godkjennInput
+                || startdato !== this.props.startdato
+                || sluttdato !== this.props.sluttdato
+                || evalueringsdato !== this.props.evalueringsdato) {
+                this.touchAllFields();
+
+                this.validateGodkjennInput(godkjennInput);
+                this.validateStartDato(startdato);
+                this.validateSluttDato(sluttdato);
+                this.validateEvalueringsdatoDato(evalueringsdato);
+            }
+        }
+    }
+
     handleInitialize(oppfolgingsplan) {
         const initData = {};
         initData.startdato = getStartDateFromTiltakListe(oppfolgingsplan.tiltakListe) || window.sessionStorage.getItem('startdato');
@@ -87,6 +131,48 @@ export class GodkjennPlanLightboksComponent extends Component {
 
     godkjennPlan(values) {
         const { oppfolgingsdialog } = this.props;
+
+        const errorObject = {
+            godkjennInput: '',
+            startdato: '',
+            sluttdato: '',
+            evalueringsdato: '',
+            _error: 'Validering av skjema feilet',
+        };
+
+        this.setState({
+            isFormSubmitted: true,
+        });
+
+        const errorList = [];
+        const feilmeldingerObject = this.validateAllFields(values);
+
+        if (feilmeldingerObject.godkjennInput) {
+            errorObject.godkjennInput = feilmeldingerObject.godkjennInput;
+            errorList.push({ skjemaelementId: 'godkjennInput', feilmelding: feilmeldingerObject.godkjennInput });
+        }
+
+        if (feilmeldingerObject.startdato) {
+            errorObject.startdato = feilmeldingerObject.startdato;
+            errorList.push({ skjemaelementId: 'startdato', feilmelding: feilmeldingerObject.startdato });
+        }
+        if (feilmeldingerObject.sluttdato) {
+            errorObject.sluttdato = feilmeldingerObject.sluttdato;
+            errorList.push({ skjemaelementId: 'sluttdato', feilmelding: feilmeldingerObject.sluttdato });
+        }
+        if (feilmeldingerObject.evalueringsdato) {
+            errorObject.evalueringsdato = feilmeldingerObject.evalueringsdato;
+            errorList.push({ skjemaelementId: 'evalueringsdato', feilmelding: feilmeldingerObject.evalueringsdato });
+        }
+
+        if (feilmeldingerObject.godkjennInput || feilmeldingerObject.startdato || feilmeldingerObject.sluttdato || feilmeldingerObject.evalueringsdato) {
+            this.setState({
+                errorList,
+            });
+
+            throw new SubmissionError(errorObject);
+        }
+
         if (erIkkeOppfolgingsdialogUtfylt(oppfolgingsdialog)) {
             this.setState({
                 visIkkeUtfyltFeilmelding: true,
@@ -101,6 +187,103 @@ export class GodkjennPlanLightboksComponent extends Component {
             this.setState({ submitting: true });
         }
     }
+
+    updateFeilOppsummeringState = (feilmelding, elementId) => {
+        const i = this.state.errorList.findIndex(((obj) => { return obj.skjemaelementId === elementId; }));
+        const errorList = this.state.errorList;
+
+        if (i > -1 && feilmelding !== undefined) {
+            errorList[i].feilmelding = feilmelding;
+        } else if (i > -1 && feilmelding === undefined) {
+            errorList.splice(i, 1);
+            this.setState({
+                errorlist: errorList,
+            });
+        } else if (i === -1 && feilmelding !== undefined) {
+            errorList.push({ skjemaelementId: elementId, feilmelding });
+        }
+    };
+
+    validateGodkjennInput = (value) => {
+        let feilmelding;
+
+        if (value !== true) {
+            feilmelding = 'Du må godkjenne planen for å komme videre';
+        }
+
+        this.updateFeilOppsummeringState(feilmelding, 'godkjennInput');
+        return feilmelding;
+    }
+
+    validateDato = (value) => {
+        let feilmelding;
+
+        if (!value || value.trim().length === 0) {
+            feilmelding = 'Du må oppgi en dato';
+        } else if (!erGyldigDatoformat(value)) {
+            feilmelding = 'Datoen må være på formatet dd.mm.åååå';
+        } else if (!erGyldigDato(value)) {
+            feilmelding = 'Datoen er ikke gyldig';
+        }
+
+        return feilmelding;
+    }
+
+    validateStartDato = (value) => {
+        this.state.startdato = value;
+        const feilmelding = this.validateDato(value);
+
+        this.updateFeilOppsummeringState(feilmelding, 'startdato');
+
+        if (feilmelding === undefined) {
+            this.props.untouch(GODKJENN_OPPFOLGINGSPLAN_SKJEMANAVN, 'startdato');
+        }
+
+        return feilmelding;
+    };
+
+    validateSluttDato = (value) => {
+        this.props.touch(GODKJENN_OPPFOLGINGSPLAN_SKJEMANAVN, 'sluttdato');
+        let feilmelding = this.validateDato(value);
+
+        if ((this.state.startdato && value) && !sluttDatoSenereEnnStartDato(this.state.startdato, value)) {
+            feilmelding = 'Sluttdato må være etter startdato';
+        }
+
+        this.updateFeilOppsummeringState(feilmelding, 'sluttdato');
+
+        if (feilmelding === undefined) {
+            this.props.untouch(GODKJENN_OPPFOLGINGSPLAN_SKJEMANAVN, 'sluttdato');
+        }
+
+        return feilmelding;
+    }
+
+    validateEvalueringsdatoDato = (value) => {
+        this.props.touch(GODKJENN_OPPFOLGINGSPLAN_SKJEMANAVN, 'evalueringsdato');
+        let feilmelding = this.validateDato(value);
+
+        if ((this.state.startdato && value) && !sluttDatoSenereEnnStartDato(this.state.startdato, value)) {
+            feilmelding = 'Evalueringsdato må være etter startdato';
+        }
+
+        this.updateFeilOppsummeringState(feilmelding, 'evalueringsdato');
+
+        if (feilmelding === undefined) {
+            this.props.untouch(GODKJENN_OPPFOLGINGSPLAN_SKJEMANAVN, 'evalueringsdato');
+        }
+
+        return feilmelding;
+    };
+
+    validateAllFields = (values) => {
+        return {
+            godkjennInput: this.validateGodkjennInput(values.godkjennInput),
+            startdato: this.validateStartDato(values.startdato),
+            sluttdato: this.validateSluttDato(values.sluttdato),
+            evalueringsdato: this.validateEvalueringsdatoDato(values.evalueringsdato),
+        };
+    };
 
     handledChange(e) {
         const createWithoutApproval = e.target.value !== 'true';
@@ -186,7 +369,7 @@ export class GodkjennPlanLightboksComponent extends Component {
 
                 { this.state.radioSelected &&
                 <React.Fragment>
-                    <ObligatoriskeFelterInfotekst/>
+                    <ObligatoriskeFelterInfotekst />
 
                     <hr />
 
@@ -194,6 +377,10 @@ export class GodkjennPlanLightboksComponent extends Component {
 
                     <GodkjennPlanSkjemaDatovelger
                         oppfolgingsplan={oppfolgingsdialog}
+                        isFormSubmitted={this.state.isFormSubmitted}
+                        validateStartdato={this.validateStartDato}
+                        validateSluttDato={this.validateSluttDato}
+                        validateEvalueringsdatoDato={this.validateEvalueringsdatoDato}
                     />
                 </React.Fragment>
                 }
@@ -204,23 +391,34 @@ export class GodkjennPlanLightboksComponent extends Component {
 
                     <div className="inputgruppe">
                         <div className="skjema__input">
-                            <Field
-                                className="checkboks"
-                                id="godkjennInput"
-                                name="godkjennInput"
-                                component={CheckboxSelvstendig}
-                                label={texts.checkboxLabel}
-                            />
-                            <Field
-                                className="checkboks"
-                                id="delMedNav"
-                                name="delMedNav"
-                                component={CheckboxSelvstendig}
-                                label={textDelMedNav(oppfolgingsdialog.arbeidstaker.navn, this.state.createWithoutApproval)}
-                            />
+                            <div className="skjema__checkbox-container">
+                                <Field
+                                    className="checkboks"
+                                    id="godkjennInput"
+                                    name="godkjennInput"
+                                    component={CheckboxSelvstendig}
+                                    label={texts.checkboxLabel}
+                                    validate={this.state.isFormSubmitted ? this.validateGodkjennInput : undefined}
+                                />
+                            </div>
+                            <div className="skjema__checkbox-container">
+                                <Field
+                                    className="checkboks"
+                                    id="delMedNav"
+                                    name="delMedNav"
+                                    component={CheckboxSelvstendig}
+                                    label={textDelMedNav(oppfolgingsdialog.arbeidstaker.navn, this.state.createWithoutApproval)}
+                                />
+                            </div>
                         </div>
                     </div>
                 </React.Fragment>
+                }
+                {this.state.errorList.length > 0 &&
+                <Feiloppsummering
+                    tittel="For å gå videre må du rette opp følgende:"
+                    feil={this.state.errorList}
+                />
                 }
                 <div className="knapperad">
                     <div className="knapperad__element">
@@ -265,24 +463,21 @@ GodkjennPlanLightboksComponent.propTypes = {
     godkjennPlan: PropTypes.func,
 };
 
-const validate = (values) => {
-    const feilmeldinger = {};
+const valueSelector = formValueSelector(GODKJENN_OPPFOLGINGSPLAN_SKJEMANAVN);
 
-    if (values.startdato && values.sluttdato && !sluttDatoSenereEnnStartDato(values.startdato, values.sluttdato)) {
-        feilmeldinger.sluttdato = 'Sluttdato må være etter startdato';
-    }
-    if (values.startdato && values.evalueringsdato && !sluttDatoSenereEnnStartDato(values.startdato, values.evalueringsdato)) {
-        feilmeldinger.evalueringsdato = 'Evalueringsdato må være etter startdato';
-    }
-    if (!values.godkjennInput === true) {
-        feilmeldinger.godkjennInput = 'Du må godkjenne planen for å komme videre';
-    }
-    return feilmeldinger;
+const mapStateToProps = (state) => {
+    return {
+        godkjennInput: valueSelector(state, 'godkjennInput'),
+        startdato: valueSelector(state, 'startdato'),
+        sluttdato: valueSelector(state, 'sluttdato'),
+        evalueringsdato: valueSelector(state, 'evalueringsdato'),
+    };
 };
 
-const ReduxSkjema = reduxForm({
+let ReduxSkjema = reduxForm({
     form: GODKJENN_OPPFOLGINGSPLAN_SKJEMANAVN,
-    validate,
 })(GodkjennPlanLightboksComponent);
+
+ReduxSkjema = connect(mapStateToProps)(ReduxSkjema);
 
 export default ReduxSkjema;
