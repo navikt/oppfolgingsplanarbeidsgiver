@@ -12,7 +12,6 @@ import getOppfolgingsplan from '../../../../mock/mockOppfolgingsdialog';
 import GodkjentPlanDeltBekreftelse from '../../../../../js/components/oppfolgingsdialog/godkjennplan/releasetplan/GodkjentPlanDeltBekreftelse';
 import GodkjentPlanHandlingKnapper from '../../../../../js/components/oppfolgingsdialog/godkjennplan/releasetplan/GodkjentPlanHandlingKnapper';
 import PlanEkspanderbar from '../../../../../js/components/oppfolgingsdialog/godkjennplan/PlanEkspanderbar';
-import { GodkjentPlanEkspanderbar } from '../../../../../js/components/oppfolgingsdialog/godkjennplan/releasetplan/GodkjentPlanAvbrutt';
 
 chai.use(chaiEnzyme());
 const expect = chai.expect;
@@ -26,21 +25,12 @@ describe('GodkjentPlan', () => {
             navn: 'Test Testesen',
         },
     });
-    const hentPdfurler = sinon.spy();
-    const dokument = {
-        hentet: true,
-        henter: false,
-        hentingFeilet: false,
-        data: ['enUrl', 'toUrl'],
-    };
     const delmednav = {
         sendingFeilet: false,
     };
 
     const komponentDefault = shallow(<GodkjentPlan
         delmednav={delmednav}
-        hentPdfurler={hentPdfurler}
-        dokument={dokument}
         oppfolgingsplan={oppfolgingsdialog}
     />);
 
@@ -90,8 +80,6 @@ describe('GodkjentPlan', () => {
 
         const k2 = shallow(<GodkjentPlan
             delmednav={delmednav}
-            hentPdfurler={hentPdfurler}
-            dokument={dokument}
             oppfolgingsplan={tvungenGodkjentPlan}
         />);
 
@@ -101,14 +89,6 @@ describe('GodkjentPlan', () => {
 
         it('Skal vise infotekst om tvungen godkjenning', () => {
             expect(k2.find(TextForcedApprovedOppfolgingsplan)).to.have.length(1);
-        });
-
-        const k3 = shallow(<GodkjentPlanEkspanderbar
-            dokument={dokument}
-        />);
-
-        it('Skal ikke vise infotekst', () => {
-            expect(k3.find('p')).to.have.length(0);
         });
     });
 });
