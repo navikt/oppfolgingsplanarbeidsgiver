@@ -27,7 +27,6 @@ import { settAktivtSteg } from '../actions/oppfolgingsplan/toggle_actions';
 import { hentArbeidsforhold } from '../actions/oppfolgingsplan/arbeidsforhold_actions';
 import { hentKontaktinfo } from '../actions/oppfolgingsplan/kontaktinfo_actions';
 import { hentNaermesteLeder } from '../actions/oppfolgingsplan/naermesteLeder_actions';
-import { hentPdfurler } from '../actions/oppfolgingsplan/dokument_actions';
 import { hentPerson } from '../actions/oppfolgingsplan/person_actions';
 import { hentVirksomhet } from '../actions/oppfolgingsplan/virksomhet_actions';
 import { hentSykmeldinger } from '../actions/sykmeldinger_actions';
@@ -225,7 +224,6 @@ OppfolgingsplanSide.propTypes = {
     arbeidsforhold: opProptypes.arbeidsforholdReducerPt,
     arbeidsoppgaver: opProptypes.arbeidsoppgaverReducerPt,
     avbrytdialogReducer: opProptypes.avbrytdialogReducerPt,
-    dokument: opProptypes.dokumentReducerPt,
     kontaktinfo: opProptypes.kontaktinfoReducerPt,
     navigasjontoggles: opProptypes.navigasjonstogglesReducerPt,
     alleOppfolgingsdialogerReducer: opProptypes.alleOppfolgingsdialogerAgPt,
@@ -259,7 +257,6 @@ OppfolgingsplanSide.propTypes = {
     godkjennDialogAg: PropTypes.func,
     hentKontaktinfo: PropTypes.func,
     hentOppfolgingsplaner: PropTypes.func,
-    hentPdfurler: PropTypes.func,
     hentPerson: PropTypes.func,
     hentNaermesteLeder: PropTypes.func,
     hentVirksomhet: PropTypes.func,
@@ -339,7 +336,6 @@ export function mapStateToProps(state, ownProps) {
         || state.samtykke.sendingFeilet,
         arbeidsoppgaver: state.arbeidsoppgaver,
         avbrytdialogReducer: state.avbrytdialogReducer,
-        dokument: state.dokument,
         delmednav: state.delmednav,
         fastlegeDeling: state.fastlegeDeling,
         arbeidsforhold: state.arbeidsforhold,
@@ -384,7 +380,6 @@ const OppfolgingsdialogContainer = connect(mapStateToProps, {
     nullstillGodkjenning,
     settAktivtSteg,
     settDialog,
-    hentPdfurler,
     giSamtykke,
     slettArbeidsoppgave,
     lagreArbeidsoppgave,
