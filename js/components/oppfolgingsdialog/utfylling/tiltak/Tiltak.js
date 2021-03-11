@@ -13,8 +13,8 @@ import NotifikasjonBoksVurdering from './NotifikasjonBoksVurdering';
 import TiltakInfoboks from './TiltakInfoboks';
 import TiltakSkjema from './TiltakSkjema';
 import TiltakListe from './liste/TiltakListe';
-import StegTittel from "../StegTittel";
-import ObligatoriskeFelterInfotekst from "../ObligatoriskeFelterInfotekst";
+import StegTittel from '../StegTittel';
+import ObligatoriskeFelterInfotekst from '../ObligatoriskeFelterInfotekst';
 
 const texts = {
     tittel: 'Tiltak',
@@ -144,81 +144,81 @@ class Tiltak extends Component {
             (() => {
                 return (
                     <div>
-                        <StegTittel tittel={texts.tittel}/>
-                        <ObligatoriskeFelterInfotekst/>
+                        <StegTittel tittel={texts.tittel} />
+                        <ObligatoriskeFelterInfotekst />
                         {isEmpty(oppfolgingsdialog.tiltakListe) ?
-                        <div ref={this.formRef}>
-                            {
-                                !this.state.visTiltakSkjema ?
-                                    <OppfolgingsplanInfoboks
-                                        svgUrl={`${getContextRoot()}/img/svg/tiltak-onboarding.svg`}
-                                        svgAlt=""
-                                        tittel={texts.infoboks.title}
-                                        tekst={texts.infoboks.info}
-                                    >
-                                        <LeggTilElementKnapper
-                                            visSkjema={this.state.visTiltakSkjema}
-                                            toggleSkjema={this.toggleTiltakSkjema}
-                                        />
-                                    </OppfolgingsplanInfoboks> :
-                                    <div>
-                                        <TiltakInfoboks
-                                            visTiltakSkjema={this.state.visTiltakSkjema}
-                                            toggleSkjema={this.toggleTiltakSkjema}
-                                        />
+                            <div ref={this.formRef}>
+                                {
+                                    !this.state.visTiltakSkjema ?
+                                        <OppfolgingsplanInfoboks
+                                            svgUrl={`${getContextRoot()}/img/svg/tiltak-onboarding.svg`}
+                                            svgAlt=""
+                                            tittel={texts.infoboks.title}
+                                            tekst={texts.infoboks.info}
+                                        >
+                                            <LeggTilElementKnapper
+                                                visSkjema={this.state.visTiltakSkjema}
+                                                toggleSkjema={this.toggleTiltakSkjema}
+                                            />
+                                        </OppfolgingsplanInfoboks> :
+                                        <div>
+                                            <TiltakInfoboks
+                                                visTiltakSkjema={this.state.visTiltakSkjema}
+                                                toggleSkjema={this.toggleTiltakSkjema}
+                                            />
 
-                                        <TiltakSkjema
-                                            sendLagre={this.sendLagreTiltak}
-                                            avbryt={this.skjulSkjema}
-                                            fnr={oppfolgingsdialog.arbeidsgiver.naermesteLeder.fnr}
-                                            varselTekst={this.state.varselTekst}
-                                            oppdateringFeilet={this.state.lagreNyTiltakFeilet}
-                                            tiltakReducer={tiltak}
-                                        />
-                                    </div>
-                            }
+                                            <TiltakSkjema
+                                                sendLagre={this.sendLagreTiltak}
+                                                avbryt={this.skjulSkjema}
+                                                fnr={oppfolgingsdialog.arbeidsgiver.naermesteLeder.fnr}
+                                                varselTekst={this.state.varselTekst}
+                                                oppdateringFeilet={this.state.lagreNyTiltakFeilet}
+                                                tiltakReducer={tiltak}
+                                            />
+                                        </div>
+                                }
 
-                        </div>
-                        :
-                        <div ref={this.formRef}>
-                            {
-                                antallIkkeVurderteTiltak > 0 &&
-                                <NotifikasjonBoksVurdering
-                                    navn={oppfolgingsdialog.arbeidstaker.navn}
-                                    antallIkkeVurderte={antallIkkeVurderteTiltak}
+                            </div>
+                            :
+                            <div ref={this.formRef}>
+                                {
+                                    antallIkkeVurderteTiltak > 0 &&
+                                    <NotifikasjonBoksVurdering
+                                        navn={oppfolgingsdialog.arbeidstaker.navn}
+                                        antallIkkeVurderte={antallIkkeVurderteTiltak}
+                                    />
+                                }
+                                {
+                                    <TiltakInfoboks
+                                        visTiltakSkjema={this.state.visTiltakSkjema}
+                                        toggleSkjema={this.toggleTiltakSkjema}
+                                    />
+                                }
+                                {this.state.visTiltakSkjema &&
+                                <TiltakSkjema
+                                    sendLagre={this.sendLagreTiltak}
+                                    avbryt={this.skjulSkjema}
+                                    fnr={oppfolgingsdialog.arbeidsgiver.naermesteLeder.fnr}
+                                    ref={(lagreSkjema) => {
+                                        this.lagreSkjema = lagreSkjema;
+                                    }}
+                                    varselTekst={this.state.varselTekst}
+                                    oppdateringFeilet={this.state.lagreNyTiltakFeilet}
+                                    tiltakReducer={tiltak}
                                 />
-                            }
-                            {
-                                <TiltakInfoboks
-                                    visTiltakSkjema={this.state.visTiltakSkjema}
-                                    toggleSkjema={this.toggleTiltakSkjema}
+                                }
+                                <TiltakListe
+                                    liste={sorterTiltakEtterNyeste(oppfolgingsdialog.tiltakListe)}
+                                    sendLagre={this.sendLagreTiltak}
+                                    sendSlett={this.sendSlettTiltak}
+                                    sendLagreKommentar={this.sendLagreKommentar}
+                                    sendSlettKommentar={this.sendSlettKommentar}
+                                    fnr={oppfolgingsdialog.arbeidsgiver.naermesteLeder.fnr}
+                                    visFeilMelding={this.visOppdateringFeilet}
+                                    feilMelding={this.state.oppdateringFeilet}
+                                    rootUrlImg={getContextRoot()}
                                 />
-                            }
-                            {this.state.visTiltakSkjema &&
-                            <TiltakSkjema
-                                sendLagre={this.sendLagreTiltak}
-                                avbryt={this.skjulSkjema}
-                                fnr={oppfolgingsdialog.arbeidsgiver.naermesteLeder.fnr}
-                                ref={(lagreSkjema) => {
-                                    this.lagreSkjema = lagreSkjema;
-                                }}
-                                varselTekst={this.state.varselTekst}
-                                oppdateringFeilet={this.state.lagreNyTiltakFeilet}
-                                tiltakReducer={tiltak}
-                            />
-                            }
-                            <TiltakListe
-                                liste={sorterTiltakEtterNyeste(oppfolgingsdialog.tiltakListe)}
-                                sendLagre={this.sendLagreTiltak}
-                                sendSlett={this.sendSlettTiltak}
-                                sendLagreKommentar={this.sendLagreKommentar}
-                                sendSlettKommentar={this.sendSlettKommentar}
-                                fnr={oppfolgingsdialog.arbeidsgiver.naermesteLeder.fnr}
-                                visFeilMelding={this.visOppdateringFeilet}
-                                feilMelding={this.state.oppdateringFeilet}
-                                rootUrlImg={getContextRoot()}
-                            />
-                        </div>}
+                            </div>}
                     </div>);
             })()
         );

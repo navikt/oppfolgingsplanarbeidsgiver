@@ -73,7 +73,7 @@ export const aktoerHarOpprettetElement = (fnr, tiltak) => {
     return fnr === tiltak.opprettetAv.fnr;
 };
 
-export const TiltakNavn = ({felt, isFormSubmitted, validate}) => {
+export const TiltakNavn = ({ felt, isFormSubmitted, validate }) => {
     return (<div className="lagretiltakskjema__inputgruppe">
         <label
             className="skjemaelement__label"
@@ -131,7 +131,7 @@ export const TiltakBeskrivelse = (
                 placeholder="Skriv her"
                 validate={isFormSubmitted ? validate : undefined}
             />
-            <TiltakInfoVarsel tekst={tekst}/>
+            <TiltakInfoVarsel tekst={tekst} />
         </div>);
 };
 
@@ -144,7 +144,7 @@ TiltakBeskrivelse.propTypes = {
     validate: PropTypes.func,
 };
 
-export const Gjennomfoering = ({felt, tiltak, tekst, fnr, isFormSubmitted, validate}) => {
+export const Gjennomfoering = ({ felt, tiltak, tekst, fnr, isFormSubmitted, validate }) => {
     return (
         <div className="skjemaelement lagretiltakskjema__inputgruppe">
             <Field
@@ -158,7 +158,7 @@ export const Gjennomfoering = ({felt, tiltak, tekst, fnr, isFormSubmitted, valid
                 validate={isFormSubmitted ? validate : undefined}
             />
             {tiltak && !aktoerHarOpprettetElement(fnr, tiltak) &&
-            <TiltakInfoVarsel tekst={tekst}/>
+            <TiltakInfoVarsel tekst={tekst} />
             }
         </div>);
 };
@@ -172,7 +172,7 @@ Gjennomfoering.propTypes = {
     validate: PropTypes.func,
 };
 
-export const BeskrivelseIkkeAktuelt = ({felt, tiltak, tekst, fnr, isFormSubmitted, validate}) => {
+export const BeskrivelseIkkeAktuelt = ({ felt, tiltak, tekst, fnr, isFormSubmitted, validate }) => {
     return (
         <div className="skjemaelement lagretiltakskjema__inputgruppe">
             <Field
@@ -246,7 +246,7 @@ export class TiltakSkjemaKomponent extends Component {
 
     // eslint-disable-next-line camelcase
     UNSAFE_componentWillReceiveProps(nextProps) {
-        const {status, tiltaknavn, beskrivelse, beskrivelseIkkeAktuelt, gjennomfoering, fom, tom} = nextProps;
+        const { status, tiltaknavn, beskrivelse, beskrivelseIkkeAktuelt, gjennomfoering, fom, tom } = nextProps;
 
         if (status !== this.props.status && this.state.isFormSubmitted) {
             if (nextProps.status === STATUS_TILTAK.IKKE_AKTUELT) {
@@ -342,12 +342,12 @@ export class TiltakSkjemaKomponent extends Component {
 
         if (feilmeldingerObject.tiltaknavn) {
             errorObject.tiltaknavn = feilmeldingerObject.tiltaknavn;
-            errorList.push({skjemaelementId: FELTER.tiltaknavn.id, feilmelding: feilmeldingerObject.tiltaknavn});
+            errorList.push({ skjemaelementId: FELTER.tiltaknavn.id, feilmelding: feilmeldingerObject.tiltaknavn });
         }
 
         if (feilmeldingerObject.beskrivelse) {
             errorObject.beskrivelse = feilmeldingerObject.beskrivelse;
-            errorList.push({skjemaelementId: FELTER.beskrivelse.id, feilmelding: feilmeldingerObject.beskrivelse});
+            errorList.push({ skjemaelementId: FELTER.beskrivelse.id, feilmelding: feilmeldingerObject.beskrivelse });
         }
 
         if (feilmeldingerObject.gjennomfoering) {
@@ -368,12 +368,12 @@ export class TiltakSkjemaKomponent extends Component {
 
         if (feilmeldingerObject.fom) {
             errorObject.fom = feilmeldingerObject.fom;
-            errorList.push({skjemaelementId: FELTER.startdato.id, feilmelding: feilmeldingerObject.fom});
+            errorList.push({ skjemaelementId: FELTER.startdato.id, feilmelding: feilmeldingerObject.fom });
         }
 
         if (feilmeldingerObject.tom) {
             errorObject.tom = feilmeldingerObject.tom;
-            errorList.push({skjemaelementId: FELTER.sluttdato.id, feilmelding: feilmeldingerObject.tom});
+            errorList.push({ skjemaelementId: FELTER.sluttdato.id, feilmelding: feilmeldingerObject.tom });
         }
 
         if (feilmeldingerObject.tiltaknavn
@@ -423,7 +423,7 @@ export class TiltakSkjemaKomponent extends Component {
                 errorlist: errorList,
             });
         } else if (i === -1 && feilmelding !== undefined) {
-            errorList.push({skjemaelementId: elementId, feilmelding});
+            errorList.push({ skjemaelementId: elementId, feilmelding });
         }
     };
 
