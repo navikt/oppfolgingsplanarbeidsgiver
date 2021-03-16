@@ -122,6 +122,6 @@ export const mapStateToProps = (state) => {
     };
 };
 
-const ArbeidsoppgaveContainer = connect(mapStateToProps, null, null, {pure: false})(Arbeidsoppgave);
+const ArbeidsoppgaveContainer = connect(mapStateToProps, null, null, { pure: false })(Arbeidsoppgave);
 
 export default ArbeidsoppgaveContainer;

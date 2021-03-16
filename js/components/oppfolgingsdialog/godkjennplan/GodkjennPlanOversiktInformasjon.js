@@ -1,3 +1,5 @@
+import EtikettBase from 'nav-frontend-etiketter';
+
 import React from 'react';
 import PropTypes from 'prop-types';
 import { KANGJENNOMFOERES, STATUS_TILTAK } from '../../../konstanter';
@@ -346,14 +348,14 @@ export const getTiltakStatus = (tiltak) => {
     }
 };
 
-export const getTiltakStatusKlass = (tiltak) => {
+export const getEtikettType = (tiltak) => {
     switch (tiltak.status) {
         case STATUS_TILTAK.AVTALT:
-            return 'etikett--suksess';
+            return 'suksess';
         case STATUS_TILTAK.IKKE_AKTUELT:
-            return 'etikett--advarsel';
+            return 'advarsel';
         default:
-            return 'etikett--fokus';
+            return 'fokus';
     }
 };
 
@@ -438,11 +440,7 @@ export const InformasjonPanelTiltak = ({ tiltakListe }) => {
                             <h4>{tiltak.tiltaknavn}</h4>
                         </div>
                         { tiltak.status &&
-                        <div className={`etikett ${getTiltakStatusKlass(tiltak)}`} >
-                            <span className="typo-normal">
-                                {getTiltakStatus(tiltak)}
-                            </span>
-                        </div>
+                        <EtikettBase mini type={getEtikettType(tiltak)}>{getTiltakStatus(tiltak)}</EtikettBase>
                         }
                         <TiltakBeskrivelse
                             tiltak={tiltak}

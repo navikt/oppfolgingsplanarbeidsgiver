@@ -21,10 +21,6 @@ describe('TiltakListeRad', () => {
         />);
     });
 
-    it('Skal vise korrekt div', () => {
-        expect(komponent.find('div.tiltaktabell__rad__celle')).to.have.length(1);
-    });
-
     it('Skal vise TiltakInformasjonKnapper', () => {
         expect(komponent.find(TiltakInformasjonKnapper)).to.have.length(1);
     });
@@ -45,5 +41,4 @@ describe('TiltakListeRad', () => {
         expect(navn).to.have.length(1);
         expect(navn.text()).to.contain(oppfolgingsdialog.tiltakListe[0].tiltaknavn);
     });
-
 });
