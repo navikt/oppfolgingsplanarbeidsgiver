@@ -228,7 +228,9 @@ export function mapStateToProps(state, ownProps) {
         && forsoektHentetSykmeldte(state.sykmeldte)
         && sykmeldinger.hentet;
     const erSykmeldteHentet = state.sykmeldte.hentet && !state.sykmeldte.hentingFeilet;
-
+    const sykmeldtPerson = state.person.data && state.person.data.filter((s) => {
+        return `${s.fnr}` === sykmeldt.fnr;
+    })[0];
     return {
         henter: state.sykmeldte.henter
         || alleOppfolgingsdialogerReducer.henter
@@ -271,7 +273,7 @@ export function mapStateToProps(state, ownProps) {
             sti: '/sykefravaerarbeidsgiver',
             erKlikkbar: true,
         }, {
-            tittel: sykmeldt ? sykmeldt.navn : '',
+            tittel: sykmeldtPerson ? sykmeldtPerson.navn : '',
             sti: sykmeldt ? `/sykefravaerarbeidsgiver/${sykmeldt.koblingId}` : '',
             erKlikkbar: true,
         }, {

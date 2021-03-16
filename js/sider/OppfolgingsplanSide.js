@@ -128,7 +128,6 @@ export class OppfolgingsplanSide extends Component {
     }
 
     componentDidUpdate() {
-        const { oppfolgingsdialog } = this.props;
         const navigasjonSteg = this.props.navigasjontoggles.steg;
         const utfyllingssideHashes = ['#arbeidsoppgaver', '#tiltak', '#godkjenn'];
 
@@ -301,7 +300,9 @@ export function mapStateToProps(state, ownProps) {
         && sykmeldinger.hentet;
     const erSykmeldteHentet = state.sykmeldte.hentet && !state.sykmeldte.hentingFeilet;
     const skalHenteBerikelse = beregnSkalHenteSykmeldtBerikelse(sykmeldt, state);
-
+    const sykmeldtPerson = state.person.data && state.person.data.filter((s) => {
+        return `${s.fnr}` === sykmeldt.fnr;
+    })[0];
     return {
         henter: state.sykmeldte.henter
         || alleOppfolgingsdialogerReducer.henter
@@ -363,7 +364,7 @@ export function mapStateToProps(state, ownProps) {
             sti: '/sykefravaerarbeidsgiver',
             erKlikkbar: true,
         }, {
-            tittel: sykmeldt ? sykmeldt.navn : '',
+            tittel: sykmeldtPerson ? sykmeldtPerson.navn : '',
             sti: sykmeldt ? `/sykefravaerarbeidsgiver/${sykmeldt.koblingId}` : '',
             erKlikkbar: true,
         }, {
