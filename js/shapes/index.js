@@ -4,7 +4,6 @@ import { sykmelding as sykmeldingPt } from '@navikt/digisyfo-npm';
 export const sykmeldt = PropTypes.shape({
     fnr: PropTypes.string.isRequired,
     koblingId: PropTypes.number.isRequired,
-    navn: PropTypes.string,
     orgnr: PropTypes.string,
 });
 
