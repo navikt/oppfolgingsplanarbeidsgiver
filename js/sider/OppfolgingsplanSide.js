@@ -300,9 +300,9 @@ export function mapStateToProps(state, ownProps) {
         && sykmeldinger.hentet;
     const erSykmeldteHentet = state.sykmeldte.hentet && !state.sykmeldte.hentingFeilet;
     const skalHenteBerikelse = beregnSkalHenteSykmeldtBerikelse(sykmeldt, state);
-    const sykmeldtPerson = state.person.data && state.person.data.filter((s) => {
+    const sykmeldtPerson = state.person.data && state.person.data.find((s) => {
         return `${s.fnr}` === sykmeldt.fnr;
-    })[0];
+    });
     return {
         henter: state.sykmeldte.henter
         || alleOppfolgingsdialogerReducer.henter
