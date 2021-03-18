@@ -56,14 +56,6 @@ export const sykmeldtHarGyldigSykmelding = (sykmeldinger) => {
     }).length > 0;
 };
 
-export const erOppfolgingsdialogKnyttetTilGyldigSykmelding = (oppfolgingsdialog, sykmeldinger) => {
-    const dagensDato = new Date();
-    return sykmeldinger.filter((sykmelding) => {
-        return oppfolgingsdialog.virksomhet.virksomhetsnummer === sykmelding.orgnummer
-            && erSykmeldingGyldigForOppfolgingMedGrensedato(sykmelding, dagensDato);
-    }).length > 0;
-};
-
 export const erOppfolgingsdialogAktiv = (oppfolgingsdialog) => {
     return !oppfolgingsdialog.godkjentPlan ||
         (oppfolgingsdialog.status !== STATUS.AVBRUTT && !erGyldigDatoIFortiden(oppfolgingsdialog.godkjentPlan.gyldighetstidspunkt.tom));
