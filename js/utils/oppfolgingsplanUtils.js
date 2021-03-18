@@ -99,20 +99,14 @@ export const erOppfolgingsdialogOpprettbarDirekte = (oppfolgingsdialoger) => {
     return !harTidligereOppfolgingsdialoger(oppfolgingsdialoger);
 };
 
-export const finnAktiveOppfolgingsdialoger = (oppfolgingsdialoger, sykmeldinger) => {
-    if (!sykmeldinger) {
-        return oppfolgingsdialoger.filter((oppfolgingsdialog) => {
-            return !oppfolgingsdialog.godkjentPlan || erOppfolgingsdialogAktiv(oppfolgingsdialog);
-        });
-    }
+export const finnAktiveOppfolgingsdialoger = (oppfolgingsdialoger) => {
     return oppfolgingsdialoger.filter((oppfolgingsdialog) => {
-        return erOppfolgingsdialogKnyttetTilGyldigSykmelding(oppfolgingsdialog, sykmeldinger) &&
-            (!oppfolgingsdialog.godkjentPlan || (oppfolgingsdialog.status !== STATUS.AVBRUTT && !erGyldigDatoIFortiden(oppfolgingsdialog.godkjentPlan.gyldighetstidspunkt.tom)));
+        return !oppfolgingsdialog.godkjentPlan || erOppfolgingsdialogAktiv(oppfolgingsdialog);
     });
 };
 
-export const harAktivOppfolgingsdialog = (oppfolgingsdialoger, sykmeldinger) => {
-    return finnAktiveOppfolgingsdialoger(oppfolgingsdialoger, sykmeldinger).length > 0;
+export const harAktivOppfolgingsdialog = (oppfolgingsdialoger) => {
+    return finnAktiveOppfolgingsdialoger(oppfolgingsdialoger).length > 0;
 };
 
 export const finnNyOppfolgingsplanMedVirkshomhetEtterAvbrutt = (oppfolgingsdialoger, virksomhetsnummer) => {
@@ -158,8 +152,8 @@ export const skalDeleMedNav = (delMedNav, oppfolgingsdialog) => {
 
 export const erArbeidstakerEgenLeder = (oppfolgingsdialog) => {
     return oppfolgingsdialog.arbeidstaker
-     && oppfolgingsdialog.arbeidsgiver.naermesteLeder
-     && oppfolgingsdialog.arbeidstaker.fnr === oppfolgingsdialog.arbeidsgiver.naermesteLeder.fnr;
+        && oppfolgingsdialog.arbeidsgiver.naermesteLeder
+        && oppfolgingsdialog.arbeidstaker.fnr === oppfolgingsdialog.arbeidsgiver.naermesteLeder.fnr;
 };
 
 export const manglerSamtykke = (oppfolgingsplan) => {
