@@ -110,7 +110,7 @@ class GodkjentPlan extends Component {
                         { godkjentPlan.tvungenGodkjenning &&
                             <TextForcedApprovedOppfolgingsplan
                                 rootUrl={rootUrl}
-                                texts={tvungenGodkjenningText(arbeidstakerNavn)}
+                                text={tvungenGodkjenningText(arbeidstakerNavn)}
                             />
                         }
                         <GodkjennPlanTidspunkt
