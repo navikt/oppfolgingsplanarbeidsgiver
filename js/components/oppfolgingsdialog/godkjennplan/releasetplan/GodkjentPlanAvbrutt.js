@@ -6,6 +6,7 @@ import {
     finnNyOppfolgingsplanMedVirkshomhetEtterAvbrutt,
     finnSistEndretAvNavn,
 } from '../../../../utils/oppfolgingsplanUtils';
+import { textBothApprovedOppfolgingsplan } from '../../../../utils/tekstUtils';
 import GodkjentPlanAvbruttTidspunkt from './GodkjentPlanAvbruttTidspunkt';
 import GodkjentPlanDelKnapper, { isGodkjentPlanDelKnapperAvailable } from './GodkjentPlanDelKnapper';
 import PlanEkspanderbar from '../PlanEkspanderbar';
@@ -15,15 +16,13 @@ import {
     oppfolgingsplanPt,
 } from '../../../../proptypes/opproptypes';
 import GodkjentPlanDeltBekreftelse from './GodkjentPlanDeltBekreftelse';
+import TextForcedApprovedOppfolgingsplan from './TextForcedApprovedOppfolgingsplan';
 import { ButtonDownload } from './GodkjentPlanHandlingKnapper';
 
 const texts = {
     linkActivePlan: 'Tilbake til den gjeldende utgave',
     title: 'Tidligere oppfølgingsplan',
-};
-
-const textChangeBy = (personName, date) => {
-    return `Denne oppfølgingsplanen ble åpnet for endring av ${personName} ${date}`;
+    tvungenGodkjenning: 'Denne oppfølgingsplanen ble ferdigstilt uten godkjenning fra arbeidstakeren'
 };
 
 class GodkjentPlanAvbrutt extends Component {
@@ -39,6 +38,9 @@ class GodkjentPlanAvbrutt extends Component {
             rootUrlPlaner,
         } = this.props;
         const aktivPlan = finnNyOppfolgingsplanMedVirkshomhetEtterAvbrutt(oppfolgingsdialoger, oppfolgingsdialog.virksomhet.virksomhetsnummer);
+        const godkjentPlan = oppfolgingsdialog.godkjentPlan;
+        const arbeidstakerNavn = oppfolgingsdialog.arbeidstaker.navn
+
         return (
             <div className="godkjentPlanAvbrutt">
                 <div className="godkjentPlanAvbrutt_lenke">
@@ -56,6 +58,14 @@ class GodkjentPlanAvbrutt extends Component {
                     tittel={texts.title}
                 >
                     <div className="godkjentPlanAvbrutt">
+                        { !godkjentPlan.tvungenGodkjenning && <p>{textBothApprovedOppfolgingsplan(arbeidstakerNavn)}</p> }
+                        { godkjentPlan.tvungenGodkjenning &&
+                            <TextForcedApprovedOppfolgingsplan
+                                rootUrl={rootUrl}
+                                text={texts.tvungenGodkjenning}
+                            />
+                        }
+
                         <GodkjentPlanAvbruttTidspunkt
                             rootUrl={rootUrl}
                             oppfolgingsdialog={oppfolgingsdialog}
@@ -64,9 +74,7 @@ class GodkjentPlanAvbrutt extends Component {
                         <GodkjentPlanDeltBekreftelse
                             oppfolgingsplan={oppfolgingsdialog}
                         />
-                        <p>
-                            {textChangeBy(finnSistEndretAvNavn(oppfolgingsdialog), toDateMedMaanedNavn(oppfolgingsdialog.godkjentPlan.avbruttPlan.tidspunkt))}
-                        </p>
+
                         <PlanEkspanderbar
                             oppfolgingsplan={oppfolgingsdialog}
                         />
