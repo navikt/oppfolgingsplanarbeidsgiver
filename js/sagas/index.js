@@ -5,7 +5,6 @@ import arbeidsoppgaveSagas from './oppfolgingsplan/arbeidsoppgaveSagas';
 import avbrytdialogSagas from './oppfolgingsplan/avbrytdialogSagas';
 import delMedFastlegeSagas from './oppfolgingsplan/delMedFastlegeSagas';
 import delMedNavSagas from './oppfolgingsplan/delMedNavSagas';
-import dokumentSagas from './oppfolgingsplan/dokumentSagas';
 import kommentarSagas from './oppfolgingsplan/kommentarSagas';
 import kontaktinfoSagas from './oppfolgingsplan/kontaktinfoSagas';
 import kopierOppfolgingsplanSagas from './oppfolgingsplan/kopierOppfolgingsplanSagas';
@@ -36,7 +35,6 @@ export default function* rootSaga() {
         kopierOppfolgingsplanSagas(),
         samtykkeSagas(),
         tiltakSagas(),
-        dokumentSagas(),
         settDialogSagas(),
         delMedFastlegeSagas(),
         delMedNavSagas(),

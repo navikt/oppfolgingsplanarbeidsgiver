@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import {
     delMedFastlegePt,
     delmednavPt,
-    dokumentReducerPt,
     oppfolgingsplanPt,
 } from '../../../../proptypes/opproptypes';
 import { manglerSamtykke } from '../../../../utils/oppfolgingsplanUtils';
@@ -16,8 +15,7 @@ import TidligereAvbruttePlaner from '../TidligereAvbruttePlaner';
 const ReleasetPlan = (
     {
         oppfolgingsplan,
-        hentPdfurler,
-        dokument,
+        oppfolgingsplaner,
         giSamtykke,
         avbrytDialog,
         rootUrl,
@@ -26,7 +24,6 @@ const ReleasetPlan = (
         delmednav,
         fastlegeDeling,
         delMedFastlege,
-        oppfolgingsplaner,
     }) => {
     if (manglerSamtykke(oppfolgingsplan)) {
         return (<Samtykke
@@ -38,8 +35,6 @@ const ReleasetPlan = (
         return (<GodkjentPlanAvbrutt
             oppfolgingsdialog={oppfolgingsplan}
             oppfolgingsdialoger={oppfolgingsplaner}
-            hentPdfurler={hentPdfurler}
-            dokument={dokument}
             delMedNavFunc={delMedNavFunc}
             delmednav={delmednav}
             fastlegeDeling={fastlegeDeling}
@@ -53,8 +48,6 @@ const ReleasetPlan = (
             <GodkjentPlan
                 oppfolgingsplan={oppfolgingsplan}
                 avbrytDialog={avbrytDialog}
-                hentPdfurler={hentPdfurler}
-                dokument={dokument}
                 delMedNavFunc={delMedNavFunc}
                 delmednav={delmednav}
                 fastlegeDeling={fastlegeDeling}
@@ -72,18 +65,16 @@ const ReleasetPlan = (
 };
 
 ReleasetPlan.propTypes = {
-    delmednav: delmednavPt,
     oppfolgingsplan: oppfolgingsplanPt,
-    fastlegeDeling: delMedFastlegePt,
-    hentPdfurler: PropTypes.func,
-    delMedNavFunc: PropTypes.func,
+    oppfolgingsplaner: PropTypes.arrayOf(oppfolgingsplanPt),
     giSamtykke: PropTypes.func,
     avbrytDialog: PropTypes.func,
-    delMedFastlege: PropTypes.func,
-    dokument: dokumentReducerPt,
     rootUrl: PropTypes.string,
     rootUrlPlaner: PropTypes.string,
-    oppfolgingsplaner: PropTypes.arrayOf(oppfolgingsplanPt),
+    delMedNavFunc: PropTypes.func,
+    delmednav: delmednavPt,
+    delMedFastlege: PropTypes.func,
+    fastlegeDeling: delMedFastlegePt,
 };
 
 export default ReleasetPlan;

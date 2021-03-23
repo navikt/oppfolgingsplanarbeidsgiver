@@ -81,9 +81,7 @@ class Oppfolgingsdialog extends Component {
             settAktivtSteg,
             avvisDialogAg,
             avbrytDialog,
-            dokument,
             godkjennDialogAg,
-            hentPdfurler,
             giSamtykke,
             navigasjontoggles,
             nullstillGodkjenning,
@@ -125,8 +123,6 @@ class Oppfolgingsdialog extends Component {
             disableNavigation = true;
             panel = (<ReleasetPlan
                 oppfolgingsplan={oppfolgingsdialog}
-                hentPdfurler={hentPdfurler}
-                dokument={dokument}
                 giSamtykke={giSamtykke}
                 avbrytDialog={avbrytDialog}
                 rootUrl={`${getContextRoot()}`}
@@ -196,7 +192,6 @@ Oppfolgingsdialog.propTypes = {
     arbeidsforhold: opProptypes.arbeidsforholdReducerPt,
     avbrytdialogReducer: opProptypes.avbrytdialogReducerPt,
     arbeidsoppgaver: opProptypes.arbeidsoppgaverReducerPt,
-    dokument: opProptypes.dokumentReducerPt,
     delmednav: opProptypes.delmednavPt,
     fastlegeDeling: opProptypes.delMedFastlegePt,
     kontaktinfo: opProptypes.kontaktinfoReducerPt,
@@ -224,7 +219,6 @@ Oppfolgingsdialog.propTypes = {
     hentArbeidsforhold: PropTypes.func,
     hentKontaktinfo: PropTypes.func,
     hentNaermesteLeder: PropTypes.func,
-    hentPdfurler: PropTypes.func,
     hentVirksomhet: PropTypes.func,
     nullstillGodkjenning: PropTypes.func,
     settAktivtSteg: PropTypes.func,

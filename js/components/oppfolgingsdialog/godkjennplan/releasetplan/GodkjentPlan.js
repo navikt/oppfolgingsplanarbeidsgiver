@@ -1,19 +1,20 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Fareknapp } from 'nav-frontend-knapper';
-import OppfolgingsplanInnholdboks from '../../../app/OppfolgingsplanInnholdboks';
+import { textBothApprovedOppfolgingsplan } from '../../../../utils/tekstUtils';
 import {
     delMedFastlegePt,
     delmednavPt,
-    dokumentReducerPt,
     oppfolgingsplanPt,
 } from '../../../../proptypes/opproptypes';
+import OppfolgingsplanInnholdboks from '../../../app/OppfolgingsplanInnholdboks';
 import Lightbox from '../../../Lightbox';
 import GodkjennPlanTidspunkt from '../GodkjennPlanTidspunkt';
 import GodkjentPlanHandlingKnapper from './GodkjentPlanHandlingKnapper';
 import GodkjentPlanDelKnapper, { isGodkjentPlanDelKnapperAvailable } from './GodkjentPlanDelKnapper';
 import GodkjentPlanDeltBekreftelse from './GodkjentPlanDeltBekreftelse';
 import BildeTekstLinje from '../../../app/BildeTekstLinje';
+import TextForcedApprovedOppfolgingsplan from './TextForcedApprovedOppfolgingsplan';
 import PlanEkspanderbar from '../PlanEkspanderbar';
 
 const texts = {
@@ -29,27 +30,11 @@ const texts = {
         info: 'Hvis du endrer planen, må du sende den til godkjenning hos den andre. Etter godkjenning blir den en gjeldende plan.',
         button: 'Gjør endringer',
     },
-    tvungenGodkjenning: {
-        info: 'Du har ferdigstilt planen uten godkjenning fra',
-    },
+    tvungenGodkjenning: 'Du har ferdigstilt planen uten godkjenning fra',
 };
 
-const textBothApprovedOppfolgingsplan = (arbeidstakerName) => {
-    return `Denne versjonen av planen er godkjent av ${arbeidstakerName} og deg.`;
-};
-
-export const TextForcedApprovedOppfolgingsplan = ({ rootUrl, oppfolgingsplan }) => {
-    return (
-        <BildeTekstLinje
-            imgUrl={`${rootUrl}/img/svg/report-problem-circle.svg`}
-            imgAlt=""
-            tekst={`${texts.tvungenGodkjenning.info} ${oppfolgingsplan.arbeidstaker.navn}`}
-        />
-    );
-};
-TextForcedApprovedOppfolgingsplan.propTypes = {
-    rootUrl: PropTypes.string,
-    oppfolgingsplan: oppfolgingsplanPt,
+const tvungenGodkjenningText = (arbeidstakerNavn) => {
+    return `${texts.tvungenGodkjenning} ${arbeidstakerNavn}`;
 };
 
 export const AvbrytPlanBekreftelse = ({ oppfolgingsplan, avbrytDialog }) => {
@@ -80,12 +65,6 @@ class GodkjentPlan extends Component {
         this.lukkBekreftelse = this.lukkBekreftelse.bind(this);
     }
 
-    componentWillMount() {
-        if ((!this.props.dokument.hentet && !this.props.dokument.henter) || this.props.dokument.id !== this.props.oppfolgingsplan.id) {
-            this.props.hentPdfurler(this.props.oppfolgingsplan.id, 1);
-        }
-    }
-
     apneBekreftelse() {
         this.setState({ visBekreftelse: true });
     }
@@ -106,6 +85,7 @@ class GodkjentPlan extends Component {
             delMedFastlege,
         } = this.props;
         const godkjentPlan = oppfolgingsplan.godkjentPlan;
+        const arbeidstakerNavn = oppfolgingsplan.arbeidstaker.navn;
 
         return (
             <React.Fragment>
@@ -126,11 +106,11 @@ class GodkjentPlan extends Component {
                             </Lightbox>
                         }
 
-                        { !godkjentPlan.tvungenGodkjenning && <p>{textBothApprovedOppfolgingsplan(oppfolgingsplan.arbeidstaker.navn)}</p> }
+                        { !godkjentPlan.tvungenGodkjenning && <p>{textBothApprovedOppfolgingsplan(arbeidstakerNavn)}</p> }
                         { godkjentPlan.tvungenGodkjenning &&
                             <TextForcedApprovedOppfolgingsplan
                                 rootUrl={rootUrl}
-                                oppfolgingsplan={oppfolgingsplan}
+                                text={tvungenGodkjenningText(arbeidstakerNavn)}
                             />
                         }
                         <GodkjennPlanTidspunkt
@@ -167,14 +147,12 @@ class GodkjentPlan extends Component {
 GodkjentPlan.propTypes = {
     oppfolgingsplan: oppfolgingsplanPt,
     delmednav: delmednavPt,
+    delMedNavFunc: PropTypes.func,
     fastlegeDeling: delMedFastlegePt,
+    delMedFastlege: PropTypes.func,
+    avbrytDialog: PropTypes.func,
     rootUrl: PropTypes.string,
     rootUrlPlaner: PropTypes.string,
-    dokument: dokumentReducerPt,
-    delMedNavFunc: PropTypes.func,
-    delMedFastlege: PropTypes.func,
-    hentPdfurler: PropTypes.func,
-    avbrytDialog: PropTypes.func,
 };
 
 export default GodkjentPlan;

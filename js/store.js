@@ -6,7 +6,6 @@ import arbeidsoppgaver from './reducers/arbeidsoppgaver';
 import arbeidsforhold from './reducers/arbeidsforhold';
 import avbrytdialogReducer from './reducers/avbrytdialog';
 import delmednav from './reducers/delmednav';
-import dokument from './reducers/dokument';
 import fastlegeDeling from './reducers/fastlegeDeling';
 import kommentar from './reducers/kommentar';
 import kontaktinfo from './reducers/kontaktinfo';
@@ -39,7 +38,6 @@ const rootReducer = combineReducers({
     tilgang,
     samtykke,
     kommentar,
-    dokument,
     sykmeldte,
     sykmeldinger,
     tiltak,
