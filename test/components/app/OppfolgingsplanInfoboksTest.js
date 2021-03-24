@@ -8,12 +8,10 @@ chai.use(chaiEnzyme());
 const expect = chai.expect;
 
 describe('OppfolgingsplanInfoboks', () => {
-    const tittel = 'tittel';
-    const komponent = shallow(<OppfolgingsplanInfoboks
-        tittel={tittel}
-    />);
+  const tittel = 'tittel';
+  const komponent = shallow(<OppfolgingsplanInfoboks tittel={tittel} />);
 
-    it('Viser en div', () => {
-        expect(komponent.find('div.panel.blokk')).to.have.length(1);
-    });
+  it('Viser en div', () => {
+    expect(komponent.find('div.panel.blokk')).to.have.length(1);
+  });
 });

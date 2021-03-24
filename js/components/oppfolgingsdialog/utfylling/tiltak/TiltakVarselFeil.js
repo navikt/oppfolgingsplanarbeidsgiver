@@ -5,21 +5,18 @@ import Alertstripe from 'nav-frontend-alertstriper';
 import { erHerokuApp } from '../../../../utils/urlUtils';
 
 const AlertStripeStyled = styled(Alertstripe)`
-    margin-top: 1.5em;
+  margin-top: 1.5em;
 `;
 
 const TiltakVarselFeil = ({ tekst }) => {
-    return (<AlertStripeStyled
-        className="tiltakVarselFeil alertstripe--notifikasjonboks"
-        type="advarsel">
-        {erHerokuApp()
-            ? 'Denne funksjonen virker ikke på testsiden'
-            : tekst}
-    </AlertStripeStyled>);
+  return (
+    <AlertStripeStyled className="tiltakVarselFeil alertstripe--notifikasjonboks" type="advarsel">
+      {erHerokuApp() ? 'Denne funksjonen virker ikke på testsiden' : tekst}
+    </AlertStripeStyled>
+  );
 };
 TiltakVarselFeil.propTypes = {
-    tekst: PropTypes.string,
+  tekst: PropTypes.string,
 };
 
 export default TiltakVarselFeil;
-

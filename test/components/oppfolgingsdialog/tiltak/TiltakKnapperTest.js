@@ -9,18 +9,18 @@ chai.use(chaiEnzyme());
 const expect = chai.expect;
 
 describe('TiltakKnapper', () => {
-    let komponent;
+  let komponent;
 
-    beforeEach(() => {
-        komponent = shallow(<TiltakKnapper />);
-    });
+  beforeEach(() => {
+    komponent = shallow(<TiltakKnapper />);
+  });
 
-    it('Skal vise en div', () => {
-        expect(komponent.find('div.knapperad')).to.have.length(1);
-    });
+  it('Skal vise en div', () => {
+    expect(komponent.find('div.knapperad')).to.have.length(1);
+  });
 
-    it('Skal vise en Knapp', () => {
-        expect(komponent.find(Hovedknapp)).to.have.length(1);
-        expect(komponent.find('button.lenke')).to.have.length(1);
-    });
+  it('Skal vise en Knapp', () => {
+    expect(komponent.find(Hovedknapp)).to.have.length(1);
+    expect(komponent.find('button.lenke')).to.have.length(1);
+  });
 });

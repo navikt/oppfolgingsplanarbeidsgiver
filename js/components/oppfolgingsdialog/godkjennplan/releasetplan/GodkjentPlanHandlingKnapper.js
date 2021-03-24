@@ -6,84 +6,81 @@ import { STATUS } from '../../../../konstanter';
 import { API_NAVN, hentSyfoapiUrl } from '../../../../gateway-api';
 
 const texts = {
-    buttonEndre: 'Gjør endringer',
-    buttonUtgaver: 'Se tidligere utgaver',
-    buttonDownload: 'Last ned',
+  buttonEndre: 'Gjør endringer',
+  buttonUtgaver: 'Se tidligere utgaver',
+  buttonDownload: 'Last ned',
 };
 
 export const ButtonDownload = ({ oppfolgingsplan }) => {
-    return (
-        <div className="godkjentPlanKnapper__knapp godkjentPlanDelKnapper__lastNed">
-            <a
-                className="lenke"
-                href={`${hentSyfoapiUrl(API_NAVN.SYFOOPPFOLGINGSPLANSERVICE)}/dokument/${oppfolgingsplan.id}/`}
-                download="oppfølgingsplan"
-            >
-                {texts.buttonDownload}
-            </a>
-        </div>
-    );
+  return (
+    <div className="godkjentPlanKnapper__knapp godkjentPlanDelKnapper__lastNed">
+      <a
+        className="lenke"
+        href={`${hentSyfoapiUrl(API_NAVN.SYFOOPPFOLGINGSPLANSERVICE)}/dokument/${oppfolgingsplan.id}/`}
+        download="oppfølgingsplan"
+      >
+        {texts.buttonDownload}
+      </a>
+    </div>
+  );
 };
 ButtonDownload.propTypes = {
-    oppfolgingsplan: oppfolgingsplanPt,
+  oppfolgingsplan: oppfolgingsplanPt,
 };
 
 class GodkjentPlanHandlingKnapper extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            visning: '',
-        };
-        this.toggleVisning = this.toggleVisning.bind(this);
-    }
+  constructor(props) {
+    super(props);
+    this.state = {
+      visning: '',
+    };
+    this.toggleVisning = this.toggleVisning.bind(this);
+  }
 
-    toggleVisning(visning) {
-        if (this.state.visning === visning) {
-            this.setState({
-                visning: '',
-            });
-        } else {
-            this.setState({
-                visning,
-            });
-        }
+  toggleVisning(visning) {
+    if (this.state.visning === visning) {
+      this.setState({
+        visning: '',
+      });
+    } else {
+      this.setState({
+        visning,
+      });
     }
+  }
 
-    render() {
-        const {
-            oppfolgingsplan,
-            apneBekreftelse,
-        } = this.props;
-        return (
-            <div>
-                <ul className="godkjentPlanKnapper">
-                    { !erGyldigDatoIFortiden(oppfolgingsplan.godkjentPlan.gyldighetstidspunkt.tom)
-                    && oppfolgingsplan.status !== STATUS.AVBRUTT &&
-                        <li>
-                            <div className="godkjentPlanKnapper__knapp godkjentPlanKnapper__knapp--endre">
-                                <button
-                                    className="lenke"
-                                    onClick={() => {
-                                        apneBekreftelse();
-                                    }}>
-                                    {texts.buttonEndre}
-                                </button>
-                            </div>
-                        </li>
-                    }
-                    <li>
-                        <ButtonDownload
-                            oppfolgingsplan={oppfolgingsplan}
-                        />
-                    </li>
-                </ul>
-            </div>);
-    }
+  render() {
+    const { oppfolgingsplan, apneBekreftelse } = this.props;
+    return (
+      <div>
+        <ul className="godkjentPlanKnapper">
+          {!erGyldigDatoIFortiden(oppfolgingsplan.godkjentPlan.gyldighetstidspunkt.tom) &&
+            oppfolgingsplan.status !== STATUS.AVBRUTT && (
+              <li>
+                <div className="godkjentPlanKnapper__knapp godkjentPlanKnapper__knapp--endre">
+                  <button
+                    className="lenke"
+                    onClick={() => {
+                      apneBekreftelse();
+                    }}
+                  >
+                    {texts.buttonEndre}
+                  </button>
+                </div>
+              </li>
+            )}
+          <li>
+            <ButtonDownload oppfolgingsplan={oppfolgingsplan} />
+          </li>
+        </ul>
+      </div>
+    );
+  }
 }
 
 GodkjentPlanHandlingKnapper.propTypes = {
-    oppfolgingsplan: oppfolgingsplanPt,
-    apneBekreftelse: PropTypes.func,
+  oppfolgingsplan: oppfolgingsplanPt,
+  apneBekreftelse: PropTypes.func,
 };
 
 export default GodkjentPlanHandlingKnapper;

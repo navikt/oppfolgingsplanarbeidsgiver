@@ -11,31 +11,29 @@ import store from './store';
 import { hentSykmeldte } from './actions/sykmeldte_actions';
 import '../styles/styles.less';
 import './logging';
-import {
-    forlengInnloggetSesjon,
-    sjekkInnloggingssesjon,
-} from './timeout/timeout_actions';
+import { forlengInnloggetSesjon, sjekkInnloggingssesjon } from './timeout/timeout_actions';
 
 Sentry.init({
-    dsn: 'https://0a85ce6fefed42a49d44a727614d6b97@sentry.gc.nav.no/25',
-    environment: window.location.hostname,
+  dsn: 'https://0a85ce6fefed42a49d44a727614d6b97@sentry.gc.nav.no/25',
+  environment: window.location.hostname,
 });
 
 store.dispatch(hentSykmeldte());
 store.dispatch(forlengInnloggetSesjon());
 
-setPerformOnHttpCalls(() => { store.dispatch(forlengInnloggetSesjon()); });
+setPerformOnHttpCalls(() => {
+  store.dispatch(forlengInnloggetSesjon());
+});
 
 setInterval(() => {
-    store.dispatch(sjekkInnloggingssesjon());
+  store.dispatch(sjekkInnloggingssesjon());
 }, 5000);
 
-render(<Provider store={store}>
+render(
+  <Provider store={store}>
     <AppRouter history={history} />
-</Provider>,
-document.getElementById('maincontent'));
+  </Provider>,
+  document.getElementById('maincontent')
+);
 
-export {
-    history,
-    store,
-};
+export { history, store };
