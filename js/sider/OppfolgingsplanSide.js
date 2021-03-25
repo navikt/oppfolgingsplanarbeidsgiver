@@ -140,6 +140,12 @@ export class OppfolgingsplanSide extends Component {
     }
   }
 
+  setPageTitle(title) {
+    if (this.state.currentPageTitle !== title) {
+      this.setState({ currentPageTitle: title });
+    }
+  }
+
   berikSykmeldt() {
     const { skalHenteBerikelse, hentSykmeldteBerikelser, koblingId } = this.props;
     if (skalHenteBerikelse) {
@@ -185,12 +191,6 @@ export class OppfolgingsplanSide extends Component {
         })()}
       </Side>
     );
-  }
-
-  setPageTitle(title) {
-    if (this.state.currentPageTitle !== title) {
-      this.setState({ currentPageTitle: title });
-    }
   }
 }
 

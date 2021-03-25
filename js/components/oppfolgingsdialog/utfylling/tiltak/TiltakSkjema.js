@@ -1,3 +1,4 @@
+import { connect } from 'react-redux';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Field, reduxForm, SubmissionError, formValueSelector } from 'redux-form';
@@ -21,7 +22,6 @@ import { konvertDatoTiltak, konvertDatoTiltakMedPunkt } from '../../../../utils/
 import TiltakVarselFeil from './TiltakVarselFeil';
 import { tiltakPt, tiltakReducerPt } from '../../../../proptypes/opproptypes';
 import { tiltakSkjemaFeltPt } from '../../../../proptypes/tiltakproptypes';
-import { connect } from 'react-redux';
 
 const texts = {
   felter: {
@@ -210,30 +210,6 @@ export class TiltakSkjemaKomponent extends Component {
     this.handleInitialize();
   }
 
-  removeError = (id) => {
-    const errors = Object.assign(this.state.errorList);
-    const i = errors.findIndex((e) => {
-      return e.skjemaelementId === id;
-    });
-
-    if (i !== -1) {
-      errors.splice(i, 1);
-    }
-
-    this.setState({
-      errorList: errors,
-    });
-  };
-
-  touchAllFields() {
-    this.props.touch('tiltaknavn');
-    this.props.touch('beskrivelse');
-    this.props.touch('beskrivelseIkkeAktuelt');
-    this.props.touch('gjennomfoering');
-    this.props.touch('fom');
-    this.props.touch('tom');
-  }
-
   // eslint-disable-next-line camelcase
   UNSAFE_componentWillReceiveProps(nextProps) {
     const { status, tiltaknavn, beskrivelse, beskrivelseIkkeAktuelt, gjennomfoering, fom, tom } = nextProps;
@@ -278,6 +254,30 @@ export class TiltakSkjemaKomponent extends Component {
     this.setState({
       status: nyStatus,
     });
+  }
+
+  removeError = (id) => {
+    const errors = Object.assign(this.state.errorList);
+    const i = errors.findIndex((e) => {
+      return e.skjemaelementId === id;
+    });
+
+    if (i !== -1) {
+      errors.splice(i, 1);
+    }
+
+    this.setState({
+      errorList: errors,
+    });
+  };
+
+  touchAllFields() {
+    this.props.touch('tiltaknavn');
+    this.props.touch('beskrivelse');
+    this.props.touch('beskrivelseIkkeAktuelt');
+    this.props.touch('gjennomfoering');
+    this.props.touch('fom');
+    this.props.touch('tom');
   }
 
   visFeiletTiltak() {
@@ -678,6 +678,9 @@ TiltakSkjemaKomponent.propTypes = {
   varselTekst: PropTypes.string,
   visFeilMelding: PropTypes.func,
   tiltakReducer: tiltakReducerPt,
+  touch: PropTypes.func,
+  untouch: PropTypes.func,
+  status: PropTypes.string,
 };
 
 const valueSelector = formValueSelector(OPPRETT_TILTAK_NY);
@@ -694,10 +697,8 @@ const mapStateToProps = (state) => {
   };
 };
 
-let ReduxSkjema = reduxForm({
+const ReduxSkjema = reduxForm({
   form: OPPRETT_TILTAK_NY,
 })(TiltakSkjemaKomponent);
 
-ReduxSkjema = connect(mapStateToProps)(ReduxSkjema);
-
-export default ReduxSkjema;
+export default connect(mapStateToProps)(ReduxSkjema);

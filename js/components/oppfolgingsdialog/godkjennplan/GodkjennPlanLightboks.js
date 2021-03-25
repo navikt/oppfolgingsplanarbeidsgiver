@@ -74,28 +74,6 @@ export class GodkjennPlanLightboksComponent extends Component {
     window.scrollTo(0, this.formRef.current.offsetTop);
   }
 
-  removeError = (id) => {
-    const errors = Object.assign(this.state.errorList);
-    const i = errors.findIndex((e) => {
-      return e.skjemaelementId === id;
-    });
-
-    if (i !== -1) {
-      errors.splice(i, 1);
-    }
-
-    this.setState({
-      errorList: errors,
-    });
-  };
-
-  touchAllFields() {
-    this.props.touch('godkjennInput');
-    this.props.touch('startdato');
-    this.props.touch('sluttdato');
-    this.props.touch('evalueringsdato');
-  }
-
   // eslint-disable-next-line camelcase
   UNSAFE_componentWillReceiveProps(nextProps) {
     const { godkjennInput, startdato, sluttdato, evalueringsdato } = nextProps;
@@ -116,6 +94,28 @@ export class GodkjennPlanLightboksComponent extends Component {
       }
     }
   }
+
+  touchAllFields() {
+    this.props.touch('godkjennInput');
+    this.props.touch('startdato');
+    this.props.touch('sluttdato');
+    this.props.touch('evalueringsdato');
+  }
+
+  removeError = (id) => {
+    const errors = Object.assign(this.state.errorList);
+    const i = errors.findIndex((e) => {
+      return e.skjemaelementId === id;
+    });
+
+    if (i !== -1) {
+      errors.splice(i, 1);
+    }
+
+    this.setState({
+      errorList: errors,
+    });
+  };
 
   handleInitialize(oppfolgingsplan) {
     const initData = {};
@@ -452,6 +452,12 @@ GodkjennPlanLightboksComponent.propTypes = {
   initialize: PropTypes.func,
   handleSubmit: PropTypes.func,
   godkjennPlan: PropTypes.func,
+  touch: PropTypes.func,
+  untouch: PropTypes.func,
+  godkjennInput: PropTypes.string,
+  startdato: PropTypes.string,
+  sluttdato: PropTypes.string,
+  evalueringsdato: PropTypes.string,
 };
 
 const valueSelector = formValueSelector(GODKJENN_OPPFOLGINGSPLAN_SKJEMANAVN);
@@ -465,10 +471,8 @@ const mapStateToProps = (state) => {
   };
 };
 
-let ReduxSkjema = reduxForm({
+const ReduxSkjema = reduxForm({
   form: GODKJENN_OPPFOLGINGSPLAN_SKJEMANAVN,
 })(GodkjennPlanLightboksComponent);
 
-ReduxSkjema = connect(mapStateToProps)(ReduxSkjema);
-
-export default ReduxSkjema;
+export default connect(mapStateToProps)(ReduxSkjema);

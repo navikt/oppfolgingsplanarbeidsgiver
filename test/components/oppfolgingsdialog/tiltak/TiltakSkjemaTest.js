@@ -1,3 +1,5 @@
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
 import chai from 'chai';
 import React from 'react';
 import { mount, shallow } from 'enzyme';
@@ -14,8 +16,6 @@ import {
   TiltakSkjemaKomponent,
   FELTER,
 } from '../../../../js/components/oppfolgingsdialog/utfylling/tiltak/TiltakSkjema';
-import { createStore } from 'redux';
-import { Provider } from 'react-redux';
 
 chai.use(chaiEnzyme());
 const expect = chai.expect;
