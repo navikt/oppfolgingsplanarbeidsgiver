@@ -27,7 +27,6 @@ import { settAktivtSteg } from '../actions/oppfolgingsplan/toggle_actions';
 import { hentArbeidsforhold } from '../actions/oppfolgingsplan/arbeidsforhold_actions';
 import { hentKontaktinfo } from '../actions/oppfolgingsplan/kontaktinfo_actions';
 import { hentNaermesteLeder } from '../actions/oppfolgingsplan/naermesteLeder_actions';
-import { hentPdfurler } from '../actions/oppfolgingsplan/dokument_actions';
 import { hentPerson } from '../actions/oppfolgingsplan/person_actions';
 import { hentVirksomhet } from '../actions/oppfolgingsplan/virksomhet_actions';
 import { hentSykmeldinger } from '../actions/sykmeldinger_actions';
@@ -128,7 +127,6 @@ export class OppfolgingsplanSide extends Component {
     }
 
     componentDidUpdate() {
-        const { oppfolgingsdialog } = this.props;
         const navigasjonSteg = this.props.navigasjontoggles.steg;
         const utfyllingssideHashes = ['#arbeidsoppgaver', '#tiltak', '#godkjenn'];
 
@@ -225,7 +223,6 @@ OppfolgingsplanSide.propTypes = {
     arbeidsforhold: opProptypes.arbeidsforholdReducerPt,
     arbeidsoppgaver: opProptypes.arbeidsoppgaverReducerPt,
     avbrytdialogReducer: opProptypes.avbrytdialogReducerPt,
-    dokument: opProptypes.dokumentReducerPt,
     kontaktinfo: opProptypes.kontaktinfoReducerPt,
     navigasjontoggles: opProptypes.navigasjonstogglesReducerPt,
     alleOppfolgingsdialogerReducer: opProptypes.alleOppfolgingsdialogerAgPt,
@@ -259,7 +256,6 @@ OppfolgingsplanSide.propTypes = {
     godkjennDialogAg: PropTypes.func,
     hentKontaktinfo: PropTypes.func,
     hentOppfolgingsplaner: PropTypes.func,
-    hentPdfurler: PropTypes.func,
     hentPerson: PropTypes.func,
     hentNaermesteLeder: PropTypes.func,
     hentVirksomhet: PropTypes.func,
@@ -301,7 +297,9 @@ export function mapStateToProps(state, ownProps) {
         && sykmeldinger.hentet;
     const erSykmeldteHentet = state.sykmeldte.hentet && !state.sykmeldte.hentingFeilet;
     const skalHenteBerikelse = beregnSkalHenteSykmeldtBerikelse(sykmeldt, state);
-
+    const sykmeldtPerson = state.person.data && state.person.data.find((s) => {
+        return `${s.fnr}` === sykmeldt.fnr;
+    });
     return {
         henter: state.sykmeldte.henter
         || alleOppfolgingsdialogerReducer.henter
@@ -339,7 +337,6 @@ export function mapStateToProps(state, ownProps) {
         || state.samtykke.sendingFeilet,
         arbeidsoppgaver: state.arbeidsoppgaver,
         avbrytdialogReducer: state.avbrytdialogReducer,
-        dokument: state.dokument,
         delmednav: state.delmednav,
         fastlegeDeling: state.fastlegeDeling,
         arbeidsforhold: state.arbeidsforhold,
@@ -363,7 +360,7 @@ export function mapStateToProps(state, ownProps) {
             sti: '/sykefravaerarbeidsgiver',
             erKlikkbar: true,
         }, {
-            tittel: sykmeldt ? sykmeldt.navn : '',
+            tittel: sykmeldtPerson ? sykmeldtPerson.navn : '',
             sti: sykmeldt ? `/sykefravaerarbeidsgiver/${sykmeldt.koblingId}` : '',
             erKlikkbar: true,
         }, {
@@ -384,7 +381,6 @@ const OppfolgingsdialogContainer = connect(mapStateToProps, {
     nullstillGodkjenning,
     settAktivtSteg,
     settDialog,
-    hentPdfurler,
     giSamtykke,
     slettArbeidsoppgave,
     lagreArbeidsoppgave,
