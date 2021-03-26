@@ -9,18 +9,13 @@ const initiellState = {
 };
 
 export const parseSykmeldt = (sykmeldt) => {
-    return {
-        fnr: sykmeldt.fnr,
-        koblingId: sykmeldt.koblingId,
-        orgnummer: sykmeldt.orgnummer,
-    };
+    const {fnr, koblingId, orgnummer} = sykmeldt;
+    return Object.assign({}, fnr && {fnr}, koblingId && {koblingId}, orgnummer && {orgnummer});
 };
 
 export const parseBerikelse = (berikelse) => {
-    return {
-        fnr: berikelse.fnr,
-        navn: berikelse.navn,
-    };
+    const {fnr, navn} = berikelse;
+    return Object.assign({}, navn && {navn}, fnr && {fnr});
 };
 
 export default function sykmeldte(state = initiellState, action = {}) {
@@ -108,11 +103,15 @@ export default function sykmeldte(state = initiellState, action = {}) {
                     const berikelse = action.berikelser.find((k) => {
                         return k.koblingId === sykmeldt.koblingId;
                     });
-                    const parsetBerikelse = parseBerikelse(berikelse);
-                    return {
-                        ...sykmeldt,
-                        ...parsetBerikelse,
-                    };
+                    if(berikelse){
+                        return {
+                            ...sykmeldt,
+                            ...parseBerikelse(berikelse)
+                        };
+                    }
+                    return sykmeldt;
+
+
                 }),
             };
         }

@@ -3,6 +3,7 @@ import { expect } from 'chai';
 import * as actions from '../../js/actions/sykmeldinger_actions';
 import sykmeldinger from '../../js/reducers/sykmeldinger';
 import getSykmelding from '../mock/mockSykmeldinger';
+import { getExpectedSykmelding } from '../mock/mockSykmeldinger';
 import getSykmeldt from '../mock/mockSykmeldt';
 import { sykmeldteHentet } from '../../js/actions/sykmeldte_actions';
 
@@ -63,7 +64,7 @@ describe('sykmeldinger', () => {
 
         expect(nextState).to.deep.equal({
             123: {
-                data: [getSykmelding({ id: '1' }), getSykmelding({ id: '2' })],
+                data: [getExpectedSykmelding(), getExpectedSykmelding()],
                 henter: false,
                 hentingFeilet: false,
                 hentet: true,
@@ -74,7 +75,7 @@ describe('sykmeldinger', () => {
     it('håndterer SYKMELDINGER_HENTET når det finnes sykmeldinger for en annen bruker fra før', () => {
         initialState = {
             123: {
-                data: [getSykmelding({ id: '1' }), getSykmelding({ id: '2' })],
+                data: [getExpectedSykmelding(), getExpectedSykmelding()],
                 henter: false,
                 hentingFeilet: false,
                 hentet: true,
@@ -84,13 +85,13 @@ describe('sykmeldinger', () => {
         const nextState = sykmeldinger(initialState, action);
         expect(nextState).to.deep.equal({
             123: {
-                data: [getSykmelding({ id: '1' }), getSykmelding({ id: '2' })],
+                data: [getExpectedSykmelding(), getExpectedSykmelding()],
                 henter: false,
                 hentingFeilet: false,
                 hentet: true,
             },
             456: {
-                data: [getSykmelding({ id: '3' }), getSykmelding({ id: '4' })],
+                data: [getExpectedSykmelding(), getExpectedSykmelding()],
                 henter: false,
                 hentingFeilet: false,
                 hentet: true,
@@ -101,7 +102,7 @@ describe('sykmeldinger', () => {
     it('håndterer SYKMELDINGER_HENTET når det finnes sykmeldinger for denne brukeren fra før', () => {
         initialState = {
             123: {
-                data: [getSykmelding({ id: '1' }), getSykmelding({ id: '2' })],
+                data: [getExpectedSykmelding(), getExpectedSykmelding()],
                 henter: false,
                 hentingFeilet: false,
                 hentet: true,
@@ -111,7 +112,7 @@ describe('sykmeldinger', () => {
         const nextState = sykmeldinger(initialState, action);
         expect(nextState).to.deep.equal({
             123: {
-                data: [getSykmelding({ id: '3' }), getSykmelding({ id: '4' })],
+                data: [getExpectedSykmelding(), getExpectedSykmelding()],
                 henter: false,
                 hentingFeilet: false,
                 hentet: true,

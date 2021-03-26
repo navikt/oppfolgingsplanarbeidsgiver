@@ -2,7 +2,7 @@ import deepFreeze from 'deep-freeze';
 import { expect } from 'chai';
 import * as actions from '../../js/actions/sykmeldte_actions';
 import sykmeldte from '../../js/reducers/sykmeldte';
-import getSykmeldt from '../mock/mockSykmeldt';
+import getSykmeldt, { getExpectedSykmeldt } from '../mock/mockSykmeldt';
 
 describe('sykmeldte', () => {
     let initialState = deepFreeze({
@@ -17,7 +17,7 @@ describe('sykmeldte', () => {
         const nextState = sykmeldte(initialState, action);
 
         expect(nextState).to.deep.equal({
-            data: [getSykmeldt({ navn: 'Ole', koblingId: 1 }), getSykmeldt({ navn: 'Per', koblingId: 2 })],
+            data: [getExpectedSykmeldt({ koblingId: 1 }), getExpectedSykmeldt({ koblingId: 2 })],
             henter: false,
             hentet: true,
             hentingFeilet: false,
@@ -52,7 +52,7 @@ describe('sykmeldte', () => {
         });
     });
 
-    it('Håndterer henterSykmeldteBerikelser()', () => {
+    it('Håndterer HENTER_SYKMELDTE_BERIKELSER', () => {
         const sykmeldt1 = {
             koblingId: 5,
         };
@@ -65,7 +65,7 @@ describe('sykmeldte', () => {
         expect(nextState.henterBerikelser).to.deep.equal([5]);
     });
 
-    it('Håndterer henterSykmeldteBerikelser() når henterSykmeldteBerikelser() har blitt kalt med en streng', () => {
+    it('Håndterer HENTER_SYKMELDTE_BERIKELSER når henterSykmeldteBerikelser() har blitt kalt med en streng', () => {
         const sykmeldt1 = {
             koblingId: 5,
         };
@@ -78,7 +78,7 @@ describe('sykmeldte', () => {
         expect(nextState.henterBerikelser).to.deep.equal([5]);
     });
 
-    it('Håndterer henterSykmeldteBerikelser() når det allerede hentes berikelser for en koblnig', () => {
+    it('Håndterer HENTER_SYKMELDTE_BERIKELSER når det allerede hentes berikelser for en kobling', () => {
         const sykmeldt1 = {
             koblingId: 5,
         };
@@ -91,7 +91,24 @@ describe('sykmeldte', () => {
         expect(nextState.henterBerikelser).to.deep.equal([5]);
     });
 
-    it('Håndterer sykmeldteBerikelserHentet()', () => {
+    it('Håndterer SYKMELDTE_BERIKELSER_HENTET når det allerede er hentet berikelser for en kobling', () => {
+        const sykmeldt1 = {
+            navn: 'Kurt',
+            fnr: '1234',
+            koblingId: 5,
+        };
+        initialState = deepFreeze({
+            data: [sykmeldt1],
+            henterBerikelser: [],
+        });
+        const action = actions.sykmeldteBerikelserHentet([{
+            koblingId: 5,
+        }]);
+        const nextState = sykmeldte(initialState, action);
+        expect(nextState.data).to.deep.equal([sykmeldt1]);
+    });
+
+    it('Håndterer SYKMELDTE_BERIKELSER_HENTET', () => {
         const sykmeldt1 = {
             koblingId: 5,
         };
@@ -116,7 +133,7 @@ describe('sykmeldte', () => {
         }, sykmeldt2]);
     });
 
-    it('Håndterer feil', () => {
+    it('Håndterer HENT_SYKMELDTE_BERIKELSER_FEILET', () => {
         const state = {};
         const action = actions.hentSykmeldteBerikelserFeilet();
         const nextState = sykmeldte(state, action);
