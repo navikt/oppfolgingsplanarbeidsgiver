@@ -1,11 +1,11 @@
 import * as actiontyper from '../actions/actiontyper';
 
 const initiellState = {
-    henter: false,
-    hentet: false,
-    henterBerikelser: [],
-    hentingFeilet: false,
-    data: [],
+  henter: false,
+  hentet: false,
+  henterBerikelser: [],
+  hentingFeilet: false,
+  data: [],
 };
 
 export const parseSykmeldt = (sykmeldt) => {

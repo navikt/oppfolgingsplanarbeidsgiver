@@ -11,86 +11,71 @@ import { getContextRoot } from '../../../../routers/paths';
 import PlanEkspanderbar from '../PlanEkspanderbar';
 
 const texts = {
-    godkjennPlanSendt: {
-        title: 'Sendt til godkjenning',
-        buttonUndo: 'Avbryt planen',
-    },
+  godkjennPlanSendt: {
+    title: 'Sendt til godkjenning',
+    buttonUndo: 'Avbryt planen',
+  },
 };
 
 const CancelButtonStyled = styled.button`
-    margin-top: 1em;
+  margin-top: 1em;
 `;
-export const CancelButton = (
-    {
-        nullstillGodkjenning,
-        oppfolgingsplan,
-    }) => {
-    return (
-        <CancelButtonStyled
-            className="lenke lenke--avbryt"
-            onClick={() => {
-                nullstillGodkjenning(oppfolgingsplan.id, oppfolgingsplan.arbeidstaker.fnr);
-            }}>
-            {texts.godkjennPlanSendt.buttonUndo}
-        </CancelButtonStyled>
-    );
+export const CancelButton = ({ nullstillGodkjenning, oppfolgingsplan }) => {
+  return (
+    <CancelButtonStyled
+      className="lenke lenke--avbryt"
+      onClick={() => {
+        nullstillGodkjenning(oppfolgingsplan.id, oppfolgingsplan.arbeidstaker.fnr);
+      }}
+    >
+      {texts.godkjennPlanSendt.buttonUndo}
+    </CancelButtonStyled>
+  );
 };
 CancelButton.propTypes = {
-    nullstillGodkjenning: PropTypes.func,
-    oppfolgingsplan: oppfolgingsplanPt,
+  nullstillGodkjenning: PropTypes.func,
+  oppfolgingsplan: oppfolgingsplanPt,
 };
 
 const GodkjenPlanSentBlokk = (arbeidstakerName) => {
-    const text = 'Du har sendt en ny versjon av oppfølgingsplanen til din arbeidstaker ';
-    return (
-        <div className="blokk">
-            <p>
-                {text}<b>{arbeidstakerName}</b>
-            </p>
-        </div>
-    );
+  const text = 'Du har sendt en ny versjon av oppfølgingsplanen til din arbeidstaker ';
+  return (
+    <div className="blokk">
+      <p>
+        {text}
+        <b>{arbeidstakerName}</b>
+      </p>
+    </div>
+  );
 };
 
-const GodkjennPlanSendt = (
-    {
-        oppfolgingsplan,
-        nullstillGodkjenning,
-        rootUrlPlaner,
-    }) => {
-    return (
-        <OppfolgingsplanInnholdboks
-            svgUrl={`${getContextRoot()}/img/svg/hake-groenn--lys.svg`}
-            liteikon
-            svgAlt=""
-            tittel={texts.godkjennPlanSendt.title}
-        >
-            <div className="godkjennPlanSendt">
-                {GodkjenPlanSentBlokk(oppfolgingsplan.arbeidstaker.navn)}
+const GodkjennPlanSendt = ({ oppfolgingsplan, nullstillGodkjenning, rootUrlPlaner }) => {
+  return (
+    <OppfolgingsplanInnholdboks
+      svgUrl={`${getContextRoot()}/img/svg/hake-groenn--lys.svg`}
+      liteikon
+      svgAlt=""
+      tittel={texts.godkjennPlanSendt.title}
+    >
+      <div className="godkjennPlanSendt">
+        {GodkjenPlanSentBlokk(oppfolgingsplan.arbeidstaker.navn)}
 
-                <GodkjennPlanTidspunkt
-                    gyldighetstidspunkt={finnNyesteGodkjenning(oppfolgingsplan.godkjenninger).gyldighetstidspunkt}
-                />
+        <GodkjennPlanTidspunkt
+          gyldighetstidspunkt={finnNyesteGodkjenning(oppfolgingsplan.godkjenninger).gyldighetstidspunkt}
+        />
 
-                <PlanEkspanderbar
-                    oppfolgingsplan={oppfolgingsplan}
-                />
-                <CancelButton
-                    nullstillGodkjenning={nullstillGodkjenning}
-                    oppfolgingsplan={oppfolgingsplan}
-                />
-                <GodkjennPlanVenterInfo />
-                <TidligereAvbruttePlaner
-                    oppfolgingsdialog={oppfolgingsplan}
-                    rootUrlPlaner={rootUrlPlaner}
-                />
-            </div>
-        </OppfolgingsplanInnholdboks>
-    );
+        <PlanEkspanderbar oppfolgingsplan={oppfolgingsplan} />
+        <CancelButton nullstillGodkjenning={nullstillGodkjenning} oppfolgingsplan={oppfolgingsplan} />
+        <GodkjennPlanVenterInfo />
+        <TidligereAvbruttePlaner oppfolgingsdialog={oppfolgingsplan} rootUrlPlaner={rootUrlPlaner} />
+      </div>
+    </OppfolgingsplanInnholdboks>
+  );
 };
 GodkjennPlanSendt.propTypes = {
-    oppfolgingsplan: oppfolgingsplanPt,
-    nullstillGodkjenning: PropTypes.func,
-    rootUrlPlaner: PropTypes.string,
+  oppfolgingsplan: oppfolgingsplanPt,
+  nullstillGodkjenning: PropTypes.func,
+  rootUrlPlaner: PropTypes.string,
 };
 
 export default GodkjennPlanSendt;

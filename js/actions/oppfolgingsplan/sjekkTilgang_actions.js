@@ -5,38 +5,37 @@ export const SJEKKET_TILGANG = 'SJEKKET_TILGANG';
 export const SJEKK_TILGANG_403 = 'SJEKK_TILGANG_403';
 
 export const sjekkTilgang = (sykmeldt) => {
-    return {
-        type: SJEKK_TILGANG_FORESPURT,
-        sykmeldt,
-    };
+  return {
+    type: SJEKK_TILGANG_FORESPURT,
+    sykmeldt,
+  };
 };
 
 export const sjekkerTilgang = (fnr) => {
-    return {
-        type: SJEKKER_TILGANG,
-        fnr,
-    };
+  return {
+    type: SJEKKER_TILGANG,
+    fnr,
+  };
 };
 
 export const sjekketTilgang = (data, fnr) => {
-    return {
-        type: SJEKKET_TILGANG,
-        data,
-        fnr,
-    };
+  return {
+    type: SJEKKET_TILGANG,
+    data,
+    fnr,
+  };
 };
 
 export const sjekkTilgangFeilet = (fnr) => {
-    return {
-        type: SJEKK_TILGANG_FEILET,
-        fnr,
-    };
+  return {
+    type: SJEKK_TILGANG_FEILET,
+    fnr,
+  };
 };
 
 export const sjekkTilgang403 = (fnr) => {
-    return {
-        type: SJEKK_TILGANG_403,
-        fnr,
-    };
+  return {
+    type: SJEKK_TILGANG_403,
+    fnr,
+  };
 };
-

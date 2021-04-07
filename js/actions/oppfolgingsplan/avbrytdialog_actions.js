@@ -5,38 +5,38 @@ export const DIALOG_AVBRUTT = 'DIALOG_AVBRUTT';
 export const DIALOG_AVBRUTT_OG_NY_OPPRETTET = 'DIALOG_AVBRUTT_OG_NY_OPPRETTET';
 
 export const avbrytDialog = (id, fnr) => {
-    return {
-        type: AVBRYT_DIALOG_FORESPURT,
-        id,
-        fnr,
-    };
+  return {
+    type: AVBRYT_DIALOG_FORESPURT,
+    id,
+    fnr,
+  };
 };
 
 export const avbryterDialog = (fnr) => {
-    return {
-        type: AVBRYTER_DIALOG,
-        fnr,
-    };
+  return {
+    type: AVBRYTER_DIALOG,
+    fnr,
+  };
 };
 
 export const dialogAvbrutt = (id, fnr) => {
-    return {
-        type: DIALOG_AVBRUTT,
-        id,
-        fnr,
-    };
+  return {
+    type: DIALOG_AVBRUTT,
+    id,
+    fnr,
+  };
 };
 
 export const avbrytDialogFeilet = (fnr) => {
-    return {
-        type: AVBRYT_DIALOG_FEILET,
-        fnr,
-    };
+  return {
+    type: AVBRYT_DIALOG_FEILET,
+    fnr,
+  };
 };
 
 export const dialogAvbruttOgNyOpprettet = (nyPlanId) => {
-    return {
-        type: DIALOG_AVBRUTT_OG_NY_OPPRETTET,
-        nyPlanId,
-    };
+  return {
+    type: DIALOG_AVBRUTT_OG_NY_OPPRETTET,
+    nyPlanId,
+  };
 };

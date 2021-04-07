@@ -5,16 +5,19 @@ import sykmeldte from '../../js/reducers/sykmeldte';
 import getSykmeldt, { getExpectedSykmeldt } from '../mock/mockSykmeldt';
 
 describe('sykmeldte', () => {
-    let initialState = deepFreeze({
-        data: [],
-        henter: false,
-        hentet: false,
-        hentingFeilet: false,
-    });
+  let initialState = deepFreeze({
+    data: [],
+    henter: false,
+    hentet: false,
+    hentingFeilet: false,
+  });
 
-    it('håndterer SYKMELDTE_HENTET', () => {
-        const action = actions.sykmeldteHentet([getSykmeldt({ navn: 'Ole', koblingId: 1 }), getSykmeldt({ navn: 'Per', koblingId: 2 })]);
-        const nextState = sykmeldte(initialState, action);
+  it('håndterer SYKMELDTE_HENTET', () => {
+    const action = actions.sykmeldteHentet([
+      getSykmeldt({ navn: 'Ole', koblingId: 1 }),
+      getSykmeldt({ navn: 'Per', koblingId: 2 }),
+    ]);
+    const nextState = sykmeldte(initialState, action);
 
         expect(nextState).to.deep.equal({
             data: [getExpectedSykmeldt({ koblingId: 1 }), getExpectedSykmeldt({ koblingId: 2 })],
@@ -24,33 +27,33 @@ describe('sykmeldte', () => {
         });
     });
 
-    it('håndterer HENTER_SYKMELDTE', () => {
-        const action = actions.henterSykmeldte();
-        const nextState = sykmeldte(initialState, action);
-        expect(nextState).to.deep.equal({
-            data: [],
-            henter: true,
-            hentet: false,
-            hentingFeilet: false,
-        });
+  it('håndterer HENTER_SYKMELDTE', () => {
+    const action = actions.henterSykmeldte();
+    const nextState = sykmeldte(initialState, action);
+    expect(nextState).to.deep.equal({
+      data: [],
+      henter: true,
+      hentet: false,
+      hentingFeilet: false,
+    });
+  });
+
+  it('håndterer HENT_SYKMELDTE_FEILET', () => {
+    initialState = deepFreeze({
+      data: [],
+      henter: false,
+      hentingFeilet: false,
     });
 
-    it('håndterer HENT_SYKMELDTE_FEILET', () => {
-        initialState = deepFreeze({
-            data: [],
-            henter: false,
-            hentingFeilet: false,
-        });
-
-        const action = actions.hentSykmeldteFeilet();
-        const nextState = sykmeldte(initialState, action);
-        expect(nextState).to.deep.equal({
-            data: [],
-            henter: false,
-            hentingFeilet: true,
-            hentet: true,
-        });
+    const action = actions.hentSykmeldteFeilet();
+    const nextState = sykmeldte(initialState, action);
+    expect(nextState).to.deep.equal({
+      data: [],
+      henter: false,
+      hentingFeilet: true,
+      hentet: true,
     });
+  });
 
     it('Håndterer HENTER_SYKMELDTE_BERIKELSER', () => {
         const sykmeldt1 = {

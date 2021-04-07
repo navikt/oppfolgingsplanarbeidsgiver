@@ -9,78 +9,82 @@ import { skalVurdereTiltak } from '../../../../../utils/tiltakUtils';
 import TiltakInformasjonKnapper from './TiltakInformasjonKnapper';
 
 const texts = {
-    status: {
-        avtalt: 'Avtalt',
-        ikkAktuelt: 'Ikke aktuelt',
-        foreslatt: 'Foreslått',
-    },
+  status: {
+    avtalt: 'Avtalt',
+    ikkAktuelt: 'Ikke aktuelt',
+    foreslatt: 'Foreslått',
+  },
 };
 
-const TiltakListeRad = (
-    {
-        tiltak,
-        fnr,
-        sendSlett,
-        lagreSkjema,
-        visLagreSkjema,
-        lagreKommentarSkjema,
-        visLagreKommentarSkjema,
-        rootUrlImg,
-    }) => {
-    let etikettType = '';
-    let status = '';
+const TiltakListeRad = ({
+  tiltak,
+  fnr,
+  sendSlett,
+  lagreSkjema,
+  visLagreSkjema,
+  lagreKommentarSkjema,
+  visLagreKommentarSkjema,
+  rootUrlImg,
+}) => {
+  let etikettType = '';
+  let status = '';
 
-    switch (tiltak.status) {
-        case STATUS_TILTAK.AVTALT:
-            etikettType = 'suksess';
-            status = texts.status.avtalt;
-            break;
-        case STATUS_TILTAK.IKKE_AKTUELT:
-            etikettType = 'advarsel';
-            status = texts.status.ikkAktuelt;
-            break;
-        default:
-            etikettType = 'fokus';
-            status = texts.status.foreslatt;
-            break;
-    }
-    return (
-        <div>
-            <div className="tiltaktabell__rad__navn">
-                <span className="tiltak__rad__navn--tittel">
-                    { skalVurdereTiltak(tiltak, fnr) &&
-                    <img alt="" className="tiltaktabell__rad__img" src={`${rootUrlImg}/img/svg/varseltrekant.svg`} />
-                    }
-                    {tiltak.tiltaknavn}
-                </span>
-            </div>
-            { tiltak.fom && tiltak.tom && tiltak.status !== STATUS_TILTAK.IKKE_AKTUELT &&
-            <p className="tiltaktabell__meta">{toDateMedMaanedNavn(tiltak.fom)} - {toDateMedMaanedNavn(tiltak.tom)}</p>
-            }
-            { tiltak.status &&
-            <EtikettBase mini type={etikettType}>{status}</EtikettBase>
-            }
-            <TiltakInformasjonKnapper
-                element={tiltak}
-                fnr={fnr}
-                lagreSkjema={lagreSkjema}
-                visLagreSkjema={visLagreSkjema}
-                sendSlett={sendSlett}
-                lagreKommentarSkjema={lagreKommentarSkjema}
-                visLagreKommentarSkjema={visLagreKommentarSkjema}
-            />
-        </div>);
+  switch (tiltak.status) {
+    case STATUS_TILTAK.AVTALT:
+      etikettType = 'suksess';
+      status = texts.status.avtalt;
+      break;
+    case STATUS_TILTAK.IKKE_AKTUELT:
+      etikettType = 'advarsel';
+      status = texts.status.ikkAktuelt;
+      break;
+    default:
+      etikettType = 'fokus';
+      status = texts.status.foreslatt;
+      break;
+  }
+  return (
+    <div>
+      <div className="tiltaktabell__rad__navn">
+        <span className="tiltak__rad__navn--tittel">
+          {skalVurdereTiltak(tiltak, fnr) && (
+            <img alt="" className="tiltaktabell__rad__img" src={`${rootUrlImg}/img/svg/varseltrekant.svg`} />
+          )}
+          {tiltak.tiltaknavn}
+        </span>
+      </div>
+      {tiltak.fom && tiltak.tom && tiltak.status !== STATUS_TILTAK.IKKE_AKTUELT && (
+        <p className="tiltaktabell__meta">
+          {toDateMedMaanedNavn(tiltak.fom)} - {toDateMedMaanedNavn(tiltak.tom)}
+        </p>
+      )}
+      {tiltak.status && (
+        <EtikettBase mini type={etikettType}>
+          {status}
+        </EtikettBase>
+      )}
+      <TiltakInformasjonKnapper
+        element={tiltak}
+        fnr={fnr}
+        lagreSkjema={lagreSkjema}
+        visLagreSkjema={visLagreSkjema}
+        sendSlett={sendSlett}
+        lagreKommentarSkjema={lagreKommentarSkjema}
+        visLagreKommentarSkjema={visLagreKommentarSkjema}
+      />
+    </div>
+  );
 };
 
 TiltakListeRad.propTypes = {
-    tiltak: tiltakPt,
-    fnr: PropTypes.string,
-    sendSlett: PropTypes.func,
-    lagreSkjema: PropTypes.bool,
-    visLagreSkjema: PropTypes.func,
-    lagreKommentarSkjema: PropTypes.bool,
-    visLagreKommentarSkjema: PropTypes.func,
-    rootUrlImg: PropTypes.string,
+  tiltak: tiltakPt,
+  fnr: PropTypes.string,
+  sendSlett: PropTypes.func,
+  lagreSkjema: PropTypes.bool,
+  visLagreSkjema: PropTypes.func,
+  lagreKommentarSkjema: PropTypes.bool,
+  visLagreKommentarSkjema: PropTypes.func,
+  rootUrlImg: PropTypes.string,
 };
 
 export default TiltakListeRad;

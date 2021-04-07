@@ -9,52 +9,53 @@ const fadeDuration = 1000;
 const fadeOutDelay = 4000;
 
 const IconAndText = styled.div`
-    margin: 1em 0 0 0;
-    display: flex;
+  margin: 1em 0 0 0;
+  display: flex;
 `;
 
 const Text = styled.p`
-    margin: 0 .5em;
+  margin: 0 0.5em;
 `;
 
 const Icon = styled.img`
-    width: 1.5em;
+  width: 1.5em;
 `;
 
 const FadeAnimation = styled.div`
-    transition: opacity ${fadeDuration}ms ease-in-out;
-    opacity: ${({ state }) => {
-        return opacityStates[state];
-    }};
+  transition: opacity ${fadeDuration}ms ease-in-out;
+  opacity: ${({ state }) => {
+    return opacityStates[state];
+  }};
 `;
 
-const FadingIconWithText = (
-    {
-        text,
-    }) => {
-    const [shouldShow, setShouldShow] = useState(false);
+const FadingIconWithText = ({ text }) => {
+  const [shouldShow, setShouldShow] = useState(false);
 
-    useEffect(() => {
-        setShouldShow(true);
-        setTimeout(() => { setShouldShow(false); }, fadeOutDelay);
-    }, []);
+  useEffect(() => {
+    setShouldShow(true);
+    setTimeout(() => {
+      setShouldShow(false);
+    }, fadeOutDelay);
+  }, []);
 
-    return (
-        <Transition appear in={shouldShow} timeout={fadeDuration}>
-            {(state) => {
-                return (<FadeAnimation state={state}>
-                    <IconAndText>
-                        <Icon src={`${getContextRoot()}/img/svg/hake-groenn.svg`} alt="" />
-                        <Text>{text}</Text>
-                    </IconAndText>
-                </FadeAnimation>);
-            }}
-        </Transition>
-    );
+  return (
+    <Transition appear in={shouldShow} timeout={fadeDuration}>
+      {(state) => {
+        return (
+          <FadeAnimation state={state}>
+            <IconAndText>
+              <Icon src={`${getContextRoot()}/img/svg/hake-groenn.svg`} alt="" />
+              <Text>{text}</Text>
+            </IconAndText>
+          </FadeAnimation>
+        );
+      }}
+    </Transition>
+  );
 };
 
 FadingIconWithText.propTypes = {
-    text: PropTypes.string,
+  text: PropTypes.string,
 };
 
 export default FadingIconWithText;

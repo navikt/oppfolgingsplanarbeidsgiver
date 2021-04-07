@@ -11,22 +11,20 @@ chai.use(chaiEnzyme());
 const expect = chai.expect;
 
 describe('OppfolgingsdialogerInnhold', () => {
-    let component;
-    beforeEach(() => {
-        component = shallow(<OppfolgingsdialogerInnhold
-            oppfolgingsdialoger={[]}
-        />);
-    });
+  let component;
+  beforeEach(() => {
+    component = shallow(<OppfolgingsdialogerInnhold oppfolgingsdialoger={[]} />);
+  });
 
-    it('Skal vise overskrift for Oppfolgingsdialoger', () => {
-        expect(component.find(Sidetopp)).to.have.length(1);
-    });
+  it('Skal vise overskrift for Oppfolgingsdialoger', () => {
+    expect(component.find(Sidetopp)).to.have.length(1);
+  });
 
-    it('Skal vise OppfolgingsdialogerInfoPersonvern', () => {
-        expect(component.find(OppfolgingsdialogerInfoPersonvern)).to.have.length(1);
-    });
+  it('Skal vise OppfolgingsdialogerInfoPersonvern', () => {
+    expect(component.find(OppfolgingsdialogerInfoPersonvern)).to.have.length(1);
+  });
 
-    it('Skal vise OppfolgingsdialogerInnhold', () => {
-        expect(component.find(OppfolgingsdialogerVisning)).to.have.length(1);
-    });
+  it('Skal vise OppfolgingsdialogerInnhold', () => {
+    expect(component.find(OppfolgingsdialogerVisning)).to.have.length(1);
+  });
 });

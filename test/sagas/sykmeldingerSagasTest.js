@@ -5,40 +5,47 @@ import { hentSykmeldinger } from '../../js/sagas/sykmeldingerSagas';
 import * as actions from '../../js/actions/sykmeldinger_actions';
 
 describe('sykmeldingerSagas', () => {
-    beforeEach(() => {
-        process.env = {
-            REACT_APP_SYFOREST_ROOT: '/syforest',
-        };
+  beforeEach(() => {
+    process.env = {
+      REACT_APP_SYFOREST_ROOT: '/syforest',
+    };
+  });
+
+  describe('hentSykmeldinger med sykmeldt på plass', () => {
+    const koblingId = '123';
+    let action = actions.hentSykmeldinger(koblingId);
+    const sykmeldt = {
+      fnr: '12345678910',
+      navn: 'Ole Pettersen',
+      orgnummer: '123',
+      koblingId: '123',
+    };
+
+    const generator = hentSykmeldinger(action);
+
+    it('Skal dispatche HENTER_SYKMELDINGER', () => {
+      const nextPut = put(actions.henterSykmeldinger('123'));
+      expect(generator.next(sykmeldt).value).to.deep.equal(nextPut);
     });
 
-    describe('hentSykmeldinger med sykmeldt på plass', () => {
-        const koblingId = '123';
-        let action = actions.hentSykmeldinger(koblingId);
-        const sykmeldt = {
-            fnr: '12345678910',
-            navn: 'Ole Pettersen',
-            orgnummer: '123',
-            koblingId: '123',
-        };
-
-        const generator = hentSykmeldinger(action);
-
-        it('Skal dispatche HENTER_SYKMELDINGER', () => {
-            const nextPut = put(actions.henterSykmeldinger('123'));
-            expect(generator.next(sykmeldt).value).to.deep.equal(nextPut);
-        });
-
-        it('Skal dernest hente sykmeldinger', () => {
-            const nextCall = call(get, `${process.env.REACT_APP_SYFOREST_ROOT}/arbeidsgiver/sykmeldinger?koblingId=123`);
-            expect(generator.next().value).to.deep.equal(nextCall);
-        });
-
-        it('Skal dispatche HENTER_SYKMELDINGER', () => {
-            action = actions.sykmeldingerHentet([{ id: '1' }], '123');
-            const nextPut = put(action);
-            expect(generator.next([{
-                id: '1',
-            }], '123').value).to.deep.equal(nextPut);
-        });
+    it('Skal dernest hente sykmeldinger', () => {
+      const nextCall = call(get, `${process.env.REACT_APP_SYFOREST_ROOT}/arbeidsgiver/sykmeldinger?koblingId=123`);
+      expect(generator.next().value).to.deep.equal(nextCall);
     });
+
+    it('Skal dispatche HENTER_SYKMELDINGER', () => {
+      action = actions.sykmeldingerHentet([{ id: '1' }], '123');
+      const nextPut = put(action);
+      expect(
+        generator.next(
+          [
+            {
+              id: '1',
+            },
+          ],
+          '123'
+        ).value
+      ).to.deep.equal(nextPut);
+    });
+  });
 });

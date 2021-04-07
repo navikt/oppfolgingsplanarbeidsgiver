@@ -5,40 +5,37 @@ import { restdatoTildato } from '../../../utils/datoUtils';
 import { oppfolgingsplanPt } from '../../../proptypes/opproptypes';
 
 const texts = {
-    title: 'Se tidligere utgaver av denne planen',
+  title: 'Se tidligere utgaver av denne planen',
 };
 
 const textLink = (date) => {
-    return `Oppfølgingsplanen endret ${date}`;
+  return `Oppfølgingsplanen endret ${date}`;
 };
 
 const TidligereAvbruttePlaner = ({ oppfolgingsdialog, rootUrlPlaner }) => {
-    if (oppfolgingsdialog.avbruttPlanListe && oppfolgingsdialog.avbruttPlanListe.length > 0) {
-        return (
-            <Ekspanderbartpanel border tittel={texts.title}>
-                <ul>
-                    {
-                        oppfolgingsdialog.avbruttPlanListe.map((avbruttPlan, idx) => {
-                            return (<li key={idx}>
-                                <a
-                                    className="lenke"
-                                    href={`${rootUrlPlaner}/oppfolgingsplaner/${avbruttPlan.id}/`}
-                                >
-                                    {textLink(restdatoTildato(avbruttPlan.tidspunkt))}
-                                </a>
-                            </li>);
-                        })
-                    }
-                </ul>
-            </Ekspanderbartpanel>
-        );
-    }
-    return null;
+  if (oppfolgingsdialog.avbruttPlanListe && oppfolgingsdialog.avbruttPlanListe.length > 0) {
+    return (
+      <Ekspanderbartpanel border tittel={texts.title}>
+        <ul>
+          {oppfolgingsdialog.avbruttPlanListe.map((avbruttPlan, idx) => {
+            return (
+              <li key={idx}>
+                <a className="lenke" href={`${rootUrlPlaner}/oppfolgingsplaner/${avbruttPlan.id}/`}>
+                  {textLink(restdatoTildato(avbruttPlan.tidspunkt))}
+                </a>
+              </li>
+            );
+          })}
+        </ul>
+      </Ekspanderbartpanel>
+    );
+  }
+  return null;
 };
 
 TidligereAvbruttePlaner.propTypes = {
-    oppfolgingsdialog: oppfolgingsplanPt,
-    rootUrlPlaner: PropTypes.string,
+  oppfolgingsdialog: oppfolgingsplanPt,
+  rootUrlPlaner: PropTypes.string,
 };
 
 export default TidligereAvbruttePlaner;

@@ -28,32 +28,30 @@ import rootSaga from './sagas';
 const sagaMiddleware = createSagaMiddleware();
 
 const rootReducer = combineReducers({
-    oppfolgingsdialoger,
-    arbeidsoppgaver,
-    arbeidsforhold,
-    avbrytdialogReducer,
-    kopierDialogReducer,
-    navigasjontoggles,
-    nullstill,
-    tilgang,
-    samtykke,
-    kommentar,
-    sykmeldte,
-    sykmeldinger,
-    tiltak,
-    delmednav,
-    fastlegeDeling,
-    virksomhet,
-    person,
-    naermesteleder,
-    kontaktinfo,
-    timeout,
-    form: formReducer,
+  oppfolgingsdialoger,
+  arbeidsoppgaver,
+  arbeidsforhold,
+  avbrytdialogReducer,
+  kopierDialogReducer,
+  navigasjontoggles,
+  nullstill,
+  tilgang,
+  samtykke,
+  kommentar,
+  sykmeldte,
+  sykmeldinger,
+  tiltak,
+  delmednav,
+  fastlegeDeling,
+  virksomhet,
+  person,
+  naermesteleder,
+  kontaktinfo,
+  timeout,
+  form: formReducer,
 });
 
-const store = createStore(rootReducer,
-    applyMiddleware(sagaMiddleware),
-);
+const store = createStore(rootReducer, applyMiddleware(sagaMiddleware));
 
 sagaMiddleware.run(rootSaga);
 
