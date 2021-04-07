@@ -67,13 +67,13 @@ describe('OppfolgingplanUtils', () => {
     });
   });
 
-    describe('finnAktiveOppfolgingsdialoger', () => {
-        const gyldighetstidspunktPassert = {
-            tom: new Date('2017.09.26'),
-        };
-        const gyldighetstidspunktIkkePassert = {
-            tom: new Date('2017.12.15'),
-        };
+  describe('finnAktiveOppfolgingsdialoger', () => {
+    const gyldighetstidspunktPassert = {
+      tom: new Date('2017.09.26'),
+    };
+    const gyldighetstidspunktIkkePassert = {
+      tom: new Date('2017.12.15'),
+    };
 
     it('finnAktiveOppfolgingsdialoger 1', () => {
       const dialog = [
@@ -114,8 +114,7 @@ describe('OppfolgingplanUtils', () => {
       ];
       expect(finnAktiveOppfolgingsdialoger(dialog)).to.have.length(0);
     });
-
-    });
+  });
 
   describe('finnBrukersSisteInnlogging', () => {
     it('finnBrukersSisteInnlogging for arbeidsgiver', () => {

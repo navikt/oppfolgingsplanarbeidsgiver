@@ -102,13 +102,13 @@ export const erOppfolgingsdialogOpprettbarDirekte = (oppfolgingsdialoger) => {
 };
 
 export const finnAktiveOppfolgingsdialoger = (oppfolgingsdialoger) => {
-    return oppfolgingsdialoger.filter((oppfolgingsdialog) => {
-        return !oppfolgingsdialog.godkjentPlan || erOppfolgingsdialogAktiv(oppfolgingsdialog);
-    });
+  return oppfolgingsdialoger.filter((oppfolgingsdialog) => {
+    return !oppfolgingsdialog.godkjentPlan || erOppfolgingsdialogAktiv(oppfolgingsdialog);
+  });
 };
 
 export const harAktivOppfolgingsdialog = (oppfolgingsdialoger) => {
-    return finnAktiveOppfolgingsdialoger(oppfolgingsdialoger).length > 0;
+  return finnAktiveOppfolgingsdialoger(oppfolgingsdialoger).length > 0;
 };
 
 export const finnNyOppfolgingsplanMedVirkshomhetEtterAvbrutt = (oppfolgingsdialoger, virksomhetsnummer) => {
