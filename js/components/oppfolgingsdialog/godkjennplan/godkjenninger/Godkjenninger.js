@@ -19,6 +19,7 @@ const Godkjenninger = ({ oppfolgingsplan, godkjennPlan, nullstillGodkjenning, av
         godkjennPlan={godkjennPlan}
         nullstillGodkjenning={nullstillGodkjenning}
         avvisDialog={avvisDialog}
+        rootUrlPlaner={rootUrlPlaner}
       />
     );
   }
