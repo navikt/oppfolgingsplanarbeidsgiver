@@ -9,17 +9,14 @@ chai.use(chaiEnzyme());
 const expect = chai.expect;
 
 describe('CheckboxSelvstendig', () => {
-    const label = 'label';
-    const input = {
-        value: 'input value',
-    };
+  const label = 'label';
+  const input = {
+    value: 'input value',
+  };
 
-    const komponent = shallow(<CheckboxSelvstendig
-        label={label}
-        input={input}
-    />);
+  const komponent = shallow(<CheckboxSelvstendig label={label} input={input} />);
 
-    it('Viser Checkbox', () => {
-        expect(komponent.find(Checkbox)).to.have.length(1);
-    });
+  it('Viser Checkbox', () => {
+    expect(komponent.find(Checkbox)).to.have.length(1);
+  });
 });

@@ -7,79 +7,67 @@ import { erIkkeOppfolgingsdialogUtfylt } from '../../../utils/oppfolgingsplanUti
 import IkkeUtfyltPlanFeilmelding from './IkkeUtfyltPlanFeilmelding';
 
 const texts = {
-    bjorn: 'Er du ferdig med denne planen og ønsker å sende den til godkjenning?',
-    buttonGodkjenn: 'Jeg er ferdig',
+  bjorn: 'Er du ferdig med denne planen og ønsker å sende den til godkjenning?',
+  buttonGodkjenn: 'Jeg er ferdig',
 };
 
-export const ReviderEllerGodkjennPlanKnapperad = (
-    {
-        godkjennPlan,
-    }) => {
-    return (<div className="knapperad">
-        <div className="knapperad__element">
-            <Hovedknapp
-                mini
-                onClick={godkjennPlan}>
-                {texts.buttonGodkjenn}
-            </Hovedknapp>
-        </div>
-    </div>);
+export const ReviderEllerGodkjennPlanKnapperad = ({ godkjennPlan }) => {
+  return (
+    <div className="knapperad">
+      <div className="knapperad__element">
+        <Hovedknapp mini onClick={godkjennPlan}>
+          {texts.buttonGodkjenn}
+        </Hovedknapp>
+      </div>
+    </div>
+  );
 };
 ReviderEllerGodkjennPlanKnapperad.propTypes = {
-    godkjennPlan: PropTypes.func,
+  godkjennPlan: PropTypes.func,
 };
 
 class ReviderEllerGodkjennPlan extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            visIkkeUtfyltFeilmelding: false,
-        };
-        this.godkjennPlan = this.godkjennPlan.bind(this);
-    }
+  constructor(props) {
+    super(props);
+    this.state = {
+      visIkkeUtfyltFeilmelding: false,
+    };
+    this.godkjennPlan = this.godkjennPlan.bind(this);
+  }
 
-    godkjennPlan() {
-        if (erIkkeOppfolgingsdialogUtfylt(this.props.oppfolgingsplan)) {
-            this.setState({
-                visIkkeUtfyltFeilmelding: true,
-            });
-        } else {
-            this.props.visSendTilGodkjenning();
-        }
+  godkjennPlan() {
+    if (erIkkeOppfolgingsdialogUtfylt(this.props.oppfolgingsplan)) {
+      this.setState({
+        visIkkeUtfyltFeilmelding: true,
+      });
+    } else {
+      this.props.visSendTilGodkjenning();
     }
+  }
 
-    render() {
-        const {
-            oppfolgingsplan,
-            settAktivtSteg,
-            rootUrl,
-        } = this.props;
-        return (<div className="godkjennPlanOversiktInformasjon">
-            <div className="panel godkjennPlanOversiktInformasjon__panel">
-                <Bjorn
-                    className="z-index-1"
-                    rootUrl={rootUrl}>
-                    <p>{texts.bjorn}</p>
-                </Bjorn>
-                { this.state.visIkkeUtfyltFeilmelding &&
-                <IkkeUtfyltPlanFeilmelding
-                    oppfolgingsplan={oppfolgingsplan}
-                    settAktivtSteg={settAktivtSteg}
-                />
-                }
-                <ReviderEllerGodkjennPlanKnapperad
-                    godkjennPlan={this.godkjennPlan}
-                />
-            </div>
-        </div>);
-    }
+  render() {
+    const { oppfolgingsplan, settAktivtSteg, rootUrl } = this.props;
+    return (
+      <div className="godkjennPlanOversiktInformasjon">
+        <div className="panel godkjennPlanOversiktInformasjon__panel">
+          <Bjorn className="z-index-1" rootUrl={rootUrl}>
+            <p>{texts.bjorn}</p>
+          </Bjorn>
+          {this.state.visIkkeUtfyltFeilmelding && (
+            <IkkeUtfyltPlanFeilmelding oppfolgingsplan={oppfolgingsplan} settAktivtSteg={settAktivtSteg} />
+          )}
+          <ReviderEllerGodkjennPlanKnapperad godkjennPlan={this.godkjennPlan} />
+        </div>
+      </div>
+    );
+  }
 }
 
 ReviderEllerGodkjennPlan.propTypes = {
-    oppfolgingsplan: oppfolgingsplanPt,
-    settAktivtSteg: PropTypes.func,
-    visSendTilGodkjenning: PropTypes.func,
-    rootUrl: PropTypes.string,
+  oppfolgingsplan: oppfolgingsplanPt,
+  settAktivtSteg: PropTypes.func,
+  visSendTilGodkjenning: PropTypes.func,
+  rootUrl: PropTypes.string,
 };
 
 export default ReviderEllerGodkjennPlan;

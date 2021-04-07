@@ -4,31 +4,31 @@ export const DELT_MED_NAV = 'DELT_MED_NAV';
 export const DEL_MED_NAV_FEILET = 'DEL_MED_NAV_FEILET';
 
 export const delMedNav = (id, fnr) => {
-    return {
-        type: DEL_MED_NAV_FORESPURT,
-        id,
-        fnr,
-    };
+  return {
+    type: DEL_MED_NAV_FORESPURT,
+    id,
+    fnr,
+  };
 };
 
 export const delerMedNav = (fnr) => {
-    return {
-        type: DELER_MED_NAV,
-        fnr,
-    };
+  return {
+    type: DELER_MED_NAV,
+    fnr,
+  };
 };
 
 export const deltMedNav = (id, fnr) => {
-    return {
-        type: DELT_MED_NAV,
-        id,
-        fnr,
-    };
+  return {
+    type: DELT_MED_NAV,
+    id,
+    fnr,
+  };
 };
 
 export const delMedNavFeilet = (fnr) => {
-    return {
-        type: DEL_MED_NAV_FEILET,
-        fnr,
-    };
+  return {
+    type: DEL_MED_NAV_FEILET,
+    fnr,
+  };
 };

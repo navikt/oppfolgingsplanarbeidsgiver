@@ -4,27 +4,27 @@ export const SETT_DIALOG_FEILET = 'SETT_DIALOG_FEILET';
 export const DIALOG_SETT = 'DIALOG_SETT';
 
 export const settDialog = (id) => {
-    return {
-        type: SETT_DIALOG_FORESPURT,
-        id,
-    };
+  return {
+    type: SETT_DIALOG_FORESPURT,
+    id,
+  };
 };
 
 export const setterSettDialog = () => {
-    return {
-        type: SETTER_SETT_DIALOG,
-    };
+  return {
+    type: SETTER_SETT_DIALOG,
+  };
 };
 
 export const dialogSett = (id) => {
-    return {
-        type: DIALOG_SETT,
-        id,
-    };
+  return {
+    type: DIALOG_SETT,
+    id,
+  };
 };
 
 export const settDialogFeilet = () => {
-    return {
-        type: SETT_DIALOG_FEILET,
-    };
+  return {
+    type: SETT_DIALOG_FEILET,
+  };
 };
