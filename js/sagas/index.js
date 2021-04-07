@@ -22,26 +22,25 @@ import sykmeldteSagas from './sykmeldteSagas';
 import sykmeldingerSagas from './sykmeldingerSagas';
 
 export default function* rootSaga() {
-    yield all([
-        arbeidsforholdSagas(),
-        sykmeldteSagas(),
-        sykmeldingerSagas(),
-        oppfolgingsdialogerSagas(),
-        avbrytdialogSagas(),
-        nullstillGodkjenningSagas(),
-        tilgangSagas(),
-        arbeidsoppgaveSagas(),
-        kommentarSagas(),
-        kopierOppfolgingsplanSagas(),
-        samtykkeSagas(),
-        tiltakSagas(),
-        settDialogSagas(),
-        delMedFastlegeSagas(),
-        delMedNavSagas(),
-        virksomhetSagas(),
-        personSagas(),
-        kontaktinfoSagas(),
-        naermesteLederSagas(),
-    ]);
+  yield all([
+    arbeidsforholdSagas(),
+    sykmeldteSagas(),
+    sykmeldingerSagas(),
+    oppfolgingsdialogerSagas(),
+    avbrytdialogSagas(),
+    nullstillGodkjenningSagas(),
+    tilgangSagas(),
+    arbeidsoppgaveSagas(),
+    kommentarSagas(),
+    kopierOppfolgingsplanSagas(),
+    samtykkeSagas(),
+    tiltakSagas(),
+    settDialogSagas(),
+    delMedFastlegeSagas(),
+    delMedNavSagas(),
+    virksomhetSagas(),
+    personSagas(),
+    kontaktinfoSagas(),
+    naermesteLederSagas(),
+  ]);
 }
-
