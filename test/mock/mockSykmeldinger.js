@@ -63,20 +63,21 @@ const sykmelding = {
 };
 
 const expectedSykmelding = {
-    mulighetForArbeid: {
-        perioder: [{
-            tom: new Date('2016-10-15'),
-        }],
-    },
+  mulighetForArbeid: {
+    perioder: [
+      {
+        tom: new Date('2016-10-15'),
+      },
+    ],
+  },
 };
 
-
 const getSykmelding = (skmld = {}) => {
-    return Object.assign({}, sykmelding, skmld);
+  return Object.assign({}, sykmelding, skmld);
 };
 
 export const getExpectedSykmelding = (skmld = {}) => {
-    return Object.assign({}, expectedSykmelding, skmld);
+  return Object.assign({}, expectedSykmelding, skmld);
 };
 
 export const hentSykmeldingIkkeGyldigForOppfoelging = (dagensDato) => {

@@ -2,8 +2,7 @@ import deepFreeze from 'deep-freeze';
 import { expect } from 'chai';
 import * as actions from '../../js/actions/sykmeldinger_actions';
 import sykmeldinger from '../../js/reducers/sykmeldinger';
-import getSykmelding from '../mock/mockSykmeldinger';
-import { getExpectedSykmelding } from '../mock/mockSykmeldinger';
+import { getSykmelding, getExpectedSykmelding } from '../mock/mockSykmeldinger';
 import getSykmeldt from '../mock/mockSykmeldt';
 import { sykmeldteHentet } from '../../js/actions/sykmeldte_actions';
 
@@ -68,63 +67,63 @@ describe('sykmeldinger', () => {
     const action = actions.sykmeldingerHentet([getSykmelding({ id: '1' }), getSykmelding({ id: '2' })], '123');
     const nextState = sykmeldinger(initialState, action);
 
-        expect(nextState).to.deep.equal({
-            123: {
-                data: [getExpectedSykmelding(), getExpectedSykmelding()],
-                henter: false,
-                hentingFeilet: false,
-                hentet: true,
-            },
-        });
+    expect(nextState).to.deep.equal({
+      123: {
+        data: [getExpectedSykmelding(), getExpectedSykmelding()],
+        henter: false,
+        hentingFeilet: false,
+        hentet: true,
+      },
     });
+  });
 
-    it('håndterer SYKMELDINGER_HENTET når det finnes sykmeldinger for en annen bruker fra før', () => {
-        initialState = {
-            123: {
-                data: [getExpectedSykmelding(), getExpectedSykmelding()],
-                henter: false,
-                hentingFeilet: false,
-                hentet: true,
-            },
-        };
-        const action = actions.sykmeldingerHentet([getSykmelding({ id: '3' }), getSykmelding({ id: '4' })], '456');
-        const nextState = sykmeldinger(initialState, action);
-        expect(nextState).to.deep.equal({
-            123: {
-                data: [getExpectedSykmelding(), getExpectedSykmelding()],
-                henter: false,
-                hentingFeilet: false,
-                hentet: true,
-            },
-            456: {
-                data: [getExpectedSykmelding(), getExpectedSykmelding()],
-                henter: false,
-                hentingFeilet: false,
-                hentet: true,
-            },
-        });
+  it('håndterer SYKMELDINGER_HENTET når det finnes sykmeldinger for en annen bruker fra før', () => {
+    initialState = {
+      123: {
+        data: [getExpectedSykmelding(), getExpectedSykmelding()],
+        henter: false,
+        hentingFeilet: false,
+        hentet: true,
+      },
+    };
+    const action = actions.sykmeldingerHentet([getSykmelding({ id: '3' }), getSykmelding({ id: '4' })], '456');
+    const nextState = sykmeldinger(initialState, action);
+    expect(nextState).to.deep.equal({
+      123: {
+        data: [getExpectedSykmelding(), getExpectedSykmelding()],
+        henter: false,
+        hentingFeilet: false,
+        hentet: true,
+      },
+      456: {
+        data: [getExpectedSykmelding(), getExpectedSykmelding()],
+        henter: false,
+        hentingFeilet: false,
+        hentet: true,
+      },
     });
+  });
 
-    it('håndterer SYKMELDINGER_HENTET når det finnes sykmeldinger for denne brukeren fra før', () => {
-        initialState = {
-            123: {
-                data: [getExpectedSykmelding(), getExpectedSykmelding()],
-                henter: false,
-                hentingFeilet: false,
-                hentet: true,
-            },
-        };
-        const action = actions.sykmeldingerHentet([getSykmelding({ id: '3' }), getSykmelding({ id: '4' })], '123');
-        const nextState = sykmeldinger(initialState, action);
-        expect(nextState).to.deep.equal({
-            123: {
-                data: [getExpectedSykmelding(), getExpectedSykmelding()],
-                henter: false,
-                hentingFeilet: false,
-                hentet: true,
-            },
-        });
+  it('håndterer SYKMELDINGER_HENTET når det finnes sykmeldinger for denne brukeren fra før', () => {
+    initialState = {
+      123: {
+        data: [getExpectedSykmelding(), getExpectedSykmelding()],
+        henter: false,
+        hentingFeilet: false,
+        hentet: true,
+      },
+    };
+    const action = actions.sykmeldingerHentet([getSykmelding({ id: '3' }), getSykmelding({ id: '4' })], '123');
+    const nextState = sykmeldinger(initialState, action);
+    expect(nextState).to.deep.equal({
+      123: {
+        data: [getExpectedSykmelding(), getExpectedSykmelding()],
+        henter: false,
+        hentingFeilet: false,
+        hentet: true,
+      },
     });
+  });
 
   it('håndterer HENTER_SYKMELDINGER', () => {
     initialState = deepFreeze({});

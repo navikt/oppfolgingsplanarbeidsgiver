@@ -19,13 +19,13 @@ describe('sykmeldte', () => {
     ]);
     const nextState = sykmeldte(initialState, action);
 
-        expect(nextState).to.deep.equal({
-            data: [getExpectedSykmeldt({ koblingId: 1 }), getExpectedSykmeldt({ koblingId: 2 })],
-            henter: false,
-            hentet: true,
-            hentingFeilet: false,
-        });
+    expect(nextState).to.deep.equal({
+      data: [getExpectedSykmeldt({ koblingId: 1 }), getExpectedSykmeldt({ koblingId: 2 })],
+      henter: false,
+      hentet: true,
+      hentingFeilet: false,
     });
+  });
 
   it('håndterer HENTER_SYKMELDTE', () => {
     const action = actions.henterSykmeldte();
@@ -55,91 +55,98 @@ describe('sykmeldte', () => {
     });
   });
 
-    it('Håndterer HENTER_SYKMELDTE_BERIKELSER', () => {
-        const sykmeldt1 = {
-            koblingId: 5,
-        };
-        initialState = deepFreeze({
-            data: [sykmeldt1],
-            henterBerikelser: [],
-        });
-        const action = actions.henterSykmeldteBerikelser([5]);
-        const nextState = sykmeldte(initialState, action);
-        expect(nextState.henterBerikelser).to.deep.equal([5]);
+  it('Håndterer HENTER_SYKMELDTE_BERIKELSER', () => {
+    const sykmeldt1 = {
+      koblingId: 5,
+    };
+    initialState = deepFreeze({
+      data: [sykmeldt1],
+      henterBerikelser: [],
     });
+    const action = actions.henterSykmeldteBerikelser([5]);
+    const nextState = sykmeldte(initialState, action);
+    expect(nextState.henterBerikelser).to.deep.equal([5]);
+  });
 
-    it('Håndterer HENTER_SYKMELDTE_BERIKELSER når henterSykmeldteBerikelser() har blitt kalt med en streng', () => {
-        const sykmeldt1 = {
-            koblingId: 5,
-        };
-        initialState = deepFreeze({
-            data: [sykmeldt1],
-            henterBerikelser: [],
-        });
-        const action = actions.henterSykmeldteBerikelser(['5']);
-        const nextState = sykmeldte(initialState, action);
-        expect(nextState.henterBerikelser).to.deep.equal([5]);
+  it('Håndterer HENTER_SYKMELDTE_BERIKELSER når henterSykmeldteBerikelser() har blitt kalt med en streng', () => {
+    const sykmeldt1 = {
+      koblingId: 5,
+    };
+    initialState = deepFreeze({
+      data: [sykmeldt1],
+      henterBerikelser: [],
     });
+    const action = actions.henterSykmeldteBerikelser(['5']);
+    const nextState = sykmeldte(initialState, action);
+    expect(nextState.henterBerikelser).to.deep.equal([5]);
+  });
 
-    it('Håndterer HENTER_SYKMELDTE_BERIKELSER når det allerede hentes berikelser for en kobling', () => {
-        const sykmeldt1 = {
-            koblingId: 5,
-        };
-        initialState = deepFreeze({
-            data: [sykmeldt1],
-            henterBerikelser: [5],
-        });
-        const action = actions.henterSykmeldteBerikelser([5]);
-        const nextState = sykmeldte(initialState, action);
-        expect(nextState.henterBerikelser).to.deep.equal([5]);
+  it('Håndterer HENTER_SYKMELDTE_BERIKELSER når det allerede hentes berikelser for en kobling', () => {
+    const sykmeldt1 = {
+      koblingId: 5,
+    };
+    initialState = deepFreeze({
+      data: [sykmeldt1],
+      henterBerikelser: [5],
     });
+    const action = actions.henterSykmeldteBerikelser([5]);
+    const nextState = sykmeldte(initialState, action);
+    expect(nextState.henterBerikelser).to.deep.equal([5]);
+  });
 
-    it('Håndterer SYKMELDTE_BERIKELSER_HENTET når det allerede er hentet berikelser for en kobling', () => {
-        const sykmeldt1 = {
-            navn: 'Kurt',
-            fnr: '1234',
-            koblingId: 5,
-        };
-        initialState = deepFreeze({
-            data: [sykmeldt1],
-            henterBerikelser: [],
-        });
-        const action = actions.sykmeldteBerikelserHentet([{
-            koblingId: 5,
-        }]);
-        const nextState = sykmeldte(initialState, action);
-        expect(nextState.data).to.deep.equal([sykmeldt1]);
+  it('Håndterer SYKMELDTE_BERIKELSER_HENTET når det allerede er hentet berikelser for en kobling', () => {
+    const sykmeldt1 = {
+      navn: 'Kurt',
+      fnr: '1234',
+      koblingId: 5,
+    };
+    initialState = deepFreeze({
+      data: [sykmeldt1],
+      henterBerikelser: [],
     });
+    const action = actions.sykmeldteBerikelserHentet([
+      {
+        koblingId: 5,
+      },
+    ]);
+    const nextState = sykmeldte(initialState, action);
+    expect(nextState.data).to.deep.equal([sykmeldt1]);
+  });
 
-    it('Håndterer SYKMELDTE_BERIKELSER_HENTET', () => {
-        const sykmeldt1 = {
-            koblingId: 5,
-        };
-        const sykmeldt2 = {
-            koblingId: 6,
-        };
-        initialState = deepFreeze({
-            data: [sykmeldt1, sykmeldt2],
-            henterBerikelser: [5, 6],
-        });
-        const action = actions.sykmeldteBerikelserHentet([{
-            navn: 'Kurt',
-            fnr: '1234',
-            koblingId: 5,
-        }]);
-        const nextState = sykmeldte(initialState, action);
-        expect(nextState.henterBerikelser).to.deep.equal([6]);
-        expect(nextState.data).to.deep.equal([{
-            navn: 'Kurt',
-            fnr: '1234',
-            koblingId: 5,
-        }, sykmeldt2]);
+  it('Håndterer SYKMELDTE_BERIKELSER_HENTET', () => {
+    const sykmeldt1 = {
+      koblingId: 5,
+    };
+    const sykmeldt2 = {
+      koblingId: 6,
+    };
+    initialState = deepFreeze({
+      data: [sykmeldt1, sykmeldt2],
+      henterBerikelser: [5, 6],
     });
+    const action = actions.sykmeldteBerikelserHentet([
+      {
+        navn: 'Kurt',
+        fnr: '1234',
+        koblingId: 5,
+      },
+    ]);
+    const nextState = sykmeldte(initialState, action);
+    expect(nextState.henterBerikelser).to.deep.equal([6]);
+    expect(nextState.data).to.deep.equal([
+      {
+        navn: 'Kurt',
+        fnr: '1234',
+        koblingId: 5,
+      },
+      sykmeldt2,
+    ]);
+  });
 
-    it('Håndterer HENT_SYKMELDTE_BERIKELSER_FEILET', () => {
-        const state = {};
-        const action = actions.hentSykmeldteBerikelserFeilet();
-        const nextState = sykmeldte(state, action);
-        expect(nextState.hentingFeilet).to.equal(true);
-    });
+  it('Håndterer HENT_SYKMELDTE_BERIKELSER_FEILET', () => {
+    const state = {};
+    const action = actions.hentSykmeldteBerikelserFeilet();
+    const nextState = sykmeldte(state, action);
+    expect(nextState.hentingFeilet).to.equal(true);
+  });
 });

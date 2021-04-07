@@ -4,15 +4,15 @@ import { toDate } from '../utils/datoUtils';
 const initiellState = {};
 
 export const parseSykmelding = (sykmelding) => {
-    return {
-        mulighetForArbeid: {
-            perioder: sykmelding.mulighetForArbeid.perioder.map((p) => {
-                return {
-                    tom: toDate(p.tom),
-                };
-            }),
-        },
-    };
+  return {
+    mulighetForArbeid: {
+      perioder: sykmelding.mulighetForArbeid.perioder.map((p) => {
+        return {
+          tom: toDate(p.tom),
+        };
+      }),
+    },
+  };
 };
 
 export default function sykmeldinger(state = initiellState, action = {}) {
