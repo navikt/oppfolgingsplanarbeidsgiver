@@ -2,7 +2,7 @@ import deepFreeze from 'deep-freeze';
 import { expect } from 'chai';
 import * as actions from '../../js/actions/sykmeldinger_actions';
 import sykmeldinger from '../../js/reducers/sykmeldinger';
-import { getSykmelding, getExpectedSykmelding } from '../mock/mockSykmeldinger';
+import getSykmelding, { getExpectedSykmelding } from '../mock/mockSykmeldinger';
 import getSykmeldt from '../mock/mockSykmeldt';
 import { sykmeldteHentet } from '../../js/actions/sykmeldte_actions';
 
