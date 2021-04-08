@@ -8,12 +8,22 @@ const initiellState = {
   data: [],
 };
 
+export const parseSykmeldt = (sykmeldt) => {
+  const { fnr, koblingId, orgnummer } = sykmeldt;
+  return Object.assign({}, fnr && { fnr }, koblingId && { koblingId }, orgnummer && { orgnummer });
+};
+
+export const parseBerikelse = (berikelse) => {
+  const { fnr, navn } = berikelse;
+  return Object.assign({}, navn && { navn }, fnr && { fnr });
+};
+
 export default function sykmeldte(state = initiellState, action = {}) {
   switch (action.type) {
     case actiontyper.SYKMELDTE_HENTET:
       return {
         ...state,
-        data: action.sykmeldte,
+        data: action.sykmeldte.map(parseSykmeldt),
         henter: false,
         hentet: true,
         hentingFeilet: false,
@@ -88,15 +98,17 @@ export default function sykmeldte(state = initiellState, action = {}) {
             return b.koblingId === koblingId;
           });
         }),
-        data: state.data.map((s) => {
+        data: state.data.map((sykmeldt) => {
           const berikelse = action.berikelser.find((k) => {
-            return k.koblingId === s.koblingId;
+            return k.koblingId === sykmeldt.koblingId;
           });
-          const r = {
-            ...s,
-            ...berikelse,
-          };
-          return r;
+          if (berikelse) {
+            return {
+              ...sykmeldt,
+              ...parseBerikelse(berikelse),
+            };
+          }
+          return sykmeldt;
         }),
       };
     }

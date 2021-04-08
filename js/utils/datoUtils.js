@@ -61,3 +61,12 @@ export const sluttDatoSenereEnnStartDato = (start, slutt) => {
   const sluttDato = fraInputdatoTilJSDato(slutt);
   return startDato.getTime() < sluttDato.getTime();
 };
+
+export const toDate = (dato) => {
+  if (typeof dato === 'undefined' || dato === null) {
+    return null;
+  } else if (typeof date === 'string' && dato.includes('T') && !dato.includes('Z')) {
+    return new Date(`${dato}Z`);
+  }
+  return new Date(dato);
+};

@@ -1,4 +1,3 @@
-import { parseSykmelding } from '@navikt/digisyfo-npm';
 import { MND_SIDEN_SYKMELDING_GRENSE_FOR_OPPFOELGING } from '../../js/konstanter';
 
 const MILLISEKUNDER_PER_DAG = 86400000;
@@ -63,9 +62,22 @@ const sykmelding = {
   },
 };
 
+const expectedSykmelding = {
+  mulighetForArbeid: {
+    perioder: [
+      {
+        tom: new Date('2016-10-15'),
+      },
+    ],
+  },
+};
+
 const getSykmelding = (skmld = {}) => {
-  const s = Object.assign({}, sykmelding, skmld);
-  return parseSykmelding(s);
+  return Object.assign({}, sykmelding, skmld);
+};
+
+export const getExpectedSykmelding = (skmld = {}) => {
+  return Object.assign({}, expectedSykmelding, skmld);
 };
 
 export const hentSykmeldingIkkeGyldigForOppfoelging = (dagensDato) => {
