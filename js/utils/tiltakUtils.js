@@ -55,10 +55,7 @@ export const sorterKommentarerEtterOpprettet = (kommentarer) => {
 };
 
 export const skalVurdereTiltak = (tiltak, fnr) => {
-  return (
-    tiltak.opprettetAv.fnr !== fnr &&
-    tiltak.sistEndretAv.fnr !== fnr
-  );
+  return tiltak.opprettetAv.fnr !== fnr && tiltak.sistEndretAv.fnr !== fnr;
 };
 
 export const sorterTiltakerEtterStatus = (tiltakListe) => {
