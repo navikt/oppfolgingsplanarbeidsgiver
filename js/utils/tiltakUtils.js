@@ -67,17 +67,10 @@ export const sorterKommentarerEtterOpprettet = (kommentarer) => {
   });
 };
 
-const harArbeidsgiverKommentert = (tiltak, fnr) => {
-  return tiltak.kommentarer.filter((kommentar) => {
-    return kommentar.opprettetAv.fnr !== fnr;
-  });
-};
-
 export const skalVurdereTiltak = (tiltak, fnr) => {
   return (
     tiltak.opprettetAv.fnr !== fnr &&
-    tiltak.sistEndretAv.fnr !== fnr &&
-    (!tiltak.kommentarer || harArbeidsgiverKommentert(tiltak, fnr).length === 0)
+    tiltak.sistEndretAv.fnr !== fnr
   );
 };
 
