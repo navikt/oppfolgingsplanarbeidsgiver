@@ -182,7 +182,9 @@ class Oppfolgingsdialog extends Component {
         {!disableNavigation && (
           <NavigasjonsTopp disabled={disableNavigation} settAktivtSteg={settAktivtSteg} steg={navigasjontoggles.steg} />
         )}
-        <div id="oppfolgingsdialogpanel">{panel}</div>
+        <div id="oppfolgingsdialogpanel" className="blokk">
+          {panel}
+        </div>
         <NavigasjonsBunn
           disabled={disableNavigation}
           settAktivtSteg={settAktivtSteg}
