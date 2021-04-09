@@ -36,19 +36,6 @@ export const input2RSTiltak = (tiltak) => {
 
   return rsTiltak;
 };
-export const finnTiltakIkkeLagtTilAvAktoer = (fnr, tiltakListe) => {
-  return tiltakListe.filter((tiltak) => {
-    return fnr.toString() !== tiltak.opprettetAv.fnr.toString();
-  });
-};
-
-export const erTiltaketOpprettet = (tiltakListe, lagretTiltak) => {
-  return (
-    tiltakListe.filter((tiltak) => {
-      return tiltak.tiltakId === lagretTiltak.tiltakId;
-    }).length > 0
-  );
-};
 
 export const konvertDatoTiltak = (dato) => {
   const datum = dato.split('T')[0];
