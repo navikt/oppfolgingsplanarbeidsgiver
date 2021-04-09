@@ -6,7 +6,7 @@ metadata:
   labels:
     team: teamsykefravr
 spec:
-  image: docker.pkg.github.com/navikt/oppfolgingsplanarbeidsgiver/oppfolgingsplanarbeidsgiver:945304529253eca71008776206ae4df32c55e281
+  image: {{ image }}
   replicas:
     min: 2
     max: 2
