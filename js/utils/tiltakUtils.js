@@ -36,19 +36,6 @@ export const input2RSTiltak = (tiltak) => {
 
   return rsTiltak;
 };
-export const finnTiltakIkkeLagtTilAvAktoer = (fnr, tiltakListe) => {
-  return tiltakListe.filter((tiltak) => {
-    return fnr.toString() !== tiltak.opprettetAv.fnr.toString();
-  });
-};
-
-export const erTiltaketOpprettet = (tiltakListe, lagretTiltak) => {
-  return (
-    tiltakListe.filter((tiltak) => {
-      return tiltak.tiltakId === lagretTiltak.tiltakId;
-    }).length > 0
-  );
-};
 
 export const konvertDatoTiltak = (dato) => {
   const datum = dato.split('T')[0];
@@ -67,18 +54,8 @@ export const sorterKommentarerEtterOpprettet = (kommentarer) => {
   });
 };
 
-const harArbeidsgiverKommentert = (tiltak, fnr) => {
-  return tiltak.kommentarer.filter((kommentar) => {
-    return kommentar.opprettetAv.fnr !== fnr;
-  });
-};
-
 export const skalVurdereTiltak = (tiltak, fnr) => {
-  return (
-    tiltak.opprettetAv.fnr !== fnr &&
-    tiltak.sistEndretAv.fnr !== fnr &&
-    (!tiltak.kommentarer || harArbeidsgiverKommentert(tiltak, fnr).length === 0)
-  );
+  return tiltak.opprettetAv.fnr !== fnr && tiltak.sistEndretAv.fnr !== fnr;
 };
 
 export const sorterTiltakerEtterStatus = (tiltakListe) => {
