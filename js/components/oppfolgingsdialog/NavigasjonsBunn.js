@@ -1,9 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router';
-import styled from 'styled-components';
 import { Knapp, Hovedknapp } from 'nav-frontend-knapper';
 import { VenstreChevron } from 'nav-frontend-chevron';
+import Lenke from 'nav-frontend-lenker';
 import { getContextRoot } from '../../routers/paths';
 
 const tekster = {
@@ -21,36 +20,14 @@ const handleKeyPress = (settAktivtSteg, nesteSteg, e) => {
   }
 };
 
-const LinkStyled = styled(Link)`
-  display: flex;
-  font-weight: bold;
-  align-items: center;
-`;
-
-const NavBottom = styled.nav`
-  display: flex;
-  justify-content: flex-start;
-  margin-top: 2rem;
-`;
-
-const BackToOversikt = ({ koblingId }) => {
-  return (
-    <NavBottom>
-      <LinkStyled to={`${getContextRoot()}/${koblingId}/oppfolgingsplaner`}>
-        <VenstreChevron />
-        <span>{tekster.knapp.oversikt}</span>
-      </LinkStyled>
-    </NavBottom>
-  );
-};
-
-BackToOversikt.propTypes = {
-  koblingId: PropTypes.string,
-};
-
 const NavigasjonsBunn = ({ steg, settAktivtSteg, disabled, koblingId }) => {
   if (disabled) {
-    return <BackToOversikt koblingId={koblingId} />;
+    return (
+      <Lenke href={`${getContextRoot()}/${koblingId}/oppfolgingsplaner`}>
+        <VenstreChevron />
+        {tekster.knapp.oversikt}
+      </Lenke>
+    );
   }
   return (
     <nav className="navigasjonsBunn">
