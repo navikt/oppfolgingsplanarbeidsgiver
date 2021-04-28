@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { Field, reduxForm, SubmissionError, formValueSelector } from 'redux-form';
 import { Panel } from 'nav-frontend-paneler';
 import { Feiloppsummering } from 'nav-frontend-skjema';
-import { OPPRETT_TILTAK_NY, STATUS_TILTAK, tekstfeltRegex } from '../../../../konstanter';
+import { OPPRETT_TILTAK_NY, STATUS_TILTAK, tekstfeltBegynnerMedUgyldigTegnRegex, tekstfeltRegex } from '../../../../konstanter';
 import TekstFelt from '../../../../skjema/TekstFelt';
 import TekstOmrade from '../../../../skjema/TekstOmrade';
 import TiltakRadioKnapper from './TiltakRadioKnapper';
@@ -430,7 +430,7 @@ export class TiltakSkjemaKomponent extends Component {
 
     if (!value || value.trim().length === 0) {
       feilmelding = 'Fyll inn overskrift';
-    } else if (value.match(tekstfeltRegex)) {
+    } else if (value.match(tekstfeltBegynnerMedUgyldigTegnRegex) || value.match(tekstfeltRegex)) {
       feilmelding = 'Ugyldig spesialtegn er oppgitt';
     }
 
