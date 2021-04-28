@@ -3,7 +3,7 @@ export const OPPRETT_SKJEMANAVN = 'OPPRETT_SKJEMANAVN';
 export const GODKJENN_OPPFOLGINGSPLAN_SKJEMANAVN = 'GODKJENN_OPPFOLGINGSPLAN_SKJEMANAVN';
 export const DATOVELGERFELT_SKJEMA = 'DATOVELGERFELT_SKJEMA';
 export const tekstfeltRegex = new RegExp('.*<[^ ][^>]+[^ ]>.*');
-export const tekstfeltBegynnerMedUgyldigTegnRegex = new RegExp('^<');
+export const tekstfeltBegynnerMedUgyldigTegnRegex = new RegExp('^[^a-zA-Z0-9]+[0-9A-Za-z:;., !$?\\-_]');
 export const maanedListe = [
   'januar',
   'februar',
