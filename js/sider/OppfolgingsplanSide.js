@@ -247,6 +247,7 @@ OppfolgingsplanSide.propTypes = {
   hentSykmeldinger: PropTypes.func,
   skalHenteBerikelse: PropTypes.bool,
   hentSykmeldteBerikelser: PropTypes.func,
+  alleInputFormer: PropTypes.func,
 };
 
 export function mapStateToProps(state, ownProps) {
@@ -363,6 +364,7 @@ export function mapStateToProps(state, ownProps) {
         tittel: texts.brodsmuler.oppfolgingsplan,
       },
     ],
+    alleInputFormer: state.form,
   };
 }
 
