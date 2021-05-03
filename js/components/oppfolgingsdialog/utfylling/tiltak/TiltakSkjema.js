@@ -1,17 +1,19 @@
-import { connect } from 'react-redux';
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { Field, reduxForm, SubmissionError, formValueSelector } from 'redux-form';
 import { Panel } from 'nav-frontend-paneler';
 import { Feiloppsummering } from 'nav-frontend-skjema';
-import { OPPRETT_TILTAK_NY, STATUS_TILTAK, tekstfeltRegex } from '../../../../konstanter';
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Field, formValueSelector, reduxForm, SubmissionError } from 'redux-form';
+import {
+  OPPRETT_TILTAK_NY,
+  STATUS_TILTAK,
+  tekstfeltBegynnerMedUgyldigTegnRegex,
+  tekstfeltRegex,
+} from '../../../../konstanter';
+import { tiltakPt, tiltakReducerPt } from '../../../../proptypes/opproptypes';
+import { tiltakSkjemaFeltPt } from '../../../../proptypes/tiltakproptypes';
 import TekstFelt from '../../../../skjema/TekstFelt';
 import TekstOmrade from '../../../../skjema/TekstOmrade';
-import TiltakRadioKnapper from './TiltakRadioKnapper';
-import TiltakDatovelger from './TiltakDatovelger';
-import TiltakKnapper from './TiltakKnapper';
-import TiltakForeslaattAv from './TiltakForeslaattAv';
-import TiltakInfoVarsel from './TiltakInfoVarsel';
 import {
   erGyldigDato,
   erGyldigDatoformat,
@@ -19,9 +21,12 @@ import {
   sluttDatoSenereEnnStartDato,
 } from '../../../../utils/datoUtils';
 import { konvertDatoTiltak, konvertDatoTiltakMedPunkt } from '../../../../utils/tiltakUtils';
+import TiltakDatovelger from './TiltakDatovelger';
+import TiltakForeslaattAv from './TiltakForeslaattAv';
+import TiltakInfoVarsel from './TiltakInfoVarsel';
+import TiltakKnapper from './TiltakKnapper';
+import TiltakRadioKnapper from './TiltakRadioKnapper';
 import TiltakVarselFeil from './TiltakVarselFeil';
-import { tiltakPt, tiltakReducerPt } from '../../../../proptypes/opproptypes';
-import { tiltakSkjemaFeltPt } from '../../../../proptypes/tiltakproptypes';
 
 const texts = {
   felter: {
@@ -430,7 +435,7 @@ export class TiltakSkjemaKomponent extends Component {
 
     if (!value || value.trim().length === 0) {
       feilmelding = 'Fyll inn overskrift';
-    } else if (value.match(tekstfeltRegex)) {
+    } else if (value.match(tekstfeltBegynnerMedUgyldigTegnRegex) || value.match(tekstfeltRegex)) {
       feilmelding = 'Ugyldig spesialtegn er oppgitt';
     }
 

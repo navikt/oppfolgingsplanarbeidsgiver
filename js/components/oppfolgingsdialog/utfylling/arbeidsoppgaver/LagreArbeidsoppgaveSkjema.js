@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form';
 import { Panel } from 'nav-frontend-paneler';
-import { OPPRETT_SKJEMANAVN, tekstfeltRegex } from '../../../../konstanter';
+import { OPPRETT_SKJEMANAVN, tekstfeltBegynnerMedUgyldigTegnRegex, tekstfeltRegex } from '../../../../konstanter';
 import * as opProptypes from '../../../../proptypes/opproptypes';
 import Inputfelt from '../../../../skjema/Inputfelt';
 
@@ -90,7 +90,10 @@ const validate = (values) => {
   const feilmeldinger = {};
   if (!values.arbeidsoppgavenavn || (values.arbeidsoppgavenavn && values.arbeidsoppgavenavn.trim() === '')) {
     feilmeldinger.arbeidsoppgavenavn = 'Fyll inn arbeidsoppgave';
-  } else if (values.arbeidsoppgavenavn.match(tekstfeltRegex)) {
+  } else if (
+    values.arbeidsoppgavenavn.match(tekstfeltBegynnerMedUgyldigTegnRegex) ||
+    values.arbeidsoppgavenavn.match(tekstfeltRegex)
+  ) {
     feilmeldinger.arbeidsoppgavenavn = 'Ugyldig spesialtegn er oppgitt';
   }
   const navnLengde = values.arbeidsoppgavenavn ? values.arbeidsoppgavenavn.length : 0;

@@ -1,11 +1,9 @@
-export const LAGRE_TILTAK = 'LAGRE_TILTAK';
-export const LAGRE_KOMMENTAR = 'LAGRE_KOMMENTAR';
 export const OPPRETT_TILTAK_NY = 'OPPRETT_TILTAK_NY';
 export const OPPRETT_SKJEMANAVN = 'OPPRETT_SKJEMANAVN';
 export const GODKJENN_OPPFOLGINGSPLAN_SKJEMANAVN = 'GODKJENN_OPPFOLGINGSPLAN_SKJEMANAVN';
 export const DATOVELGERFELT_SKJEMA = 'DATOVELGERFELT_SKJEMA';
 export const tekstfeltRegex = new RegExp('.*<[^ ][^>]+[^ ]>.*');
-export const tekstfeltTomtRegex = /^ *$/;
+export const tekstfeltBegynnerMedUgyldigTegnRegex = new RegExp('^[^a-zA-Z0-9]+[0-9A-Za-z:;., !$?\\-_]');
 export const maanedListe = [
   'januar',
   'februar',
@@ -20,7 +18,6 @@ export const maanedListe = [
   'november',
   'desember',
 ];
-export const TILBAKEMELDING_LENKE = 'https://www.survey-xact.no/LinkCollector?key=U3352LLZ1591';
 export const MND_SIDEN_SYKMELDING_GRENSE_FOR_OPPFOELGING = 4;
 
 export const HOST_NAMES = {
