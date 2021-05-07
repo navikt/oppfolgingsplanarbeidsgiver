@@ -3,7 +3,11 @@ import chai from 'chai';
 import { shallow } from 'enzyme';
 import chaiEnzyme from 'chai-enzyme';
 import sinon from 'sinon';
-import Oppfolgingsdialog, { erAvvistAvArbeidsgiver } from '../../../js/components/oppfolgingsdialog/Oppfolgingsdialog';
+import Oppfolgingsdialog, {
+  erAvvistAvArbeidsgiver,
+  LagreAdvarselstripe,
+  tekster,
+} from '../../../js/components/oppfolgingsdialog/Oppfolgingsdialog';
 import SideOverskrift from '../../../js/components/oppfolgingsdialog/SideOverskrift';
 import AvbruttGodkjentPlanVarsel from '../../../js/components/oppfolgingsdialog/AvbruttGodkjentPlanVarsel';
 import Godkjenn from '../../../js/components/oppfolgingsdialog/godkjennplan/Godkjenn';
@@ -30,6 +34,7 @@ describe('Oppfolgingsdialog', () => {
   let hentKontaktinfo;
   let hentArbeidsforhold;
   let settDialog;
+  let alleInputFormer;
   const data = {
     henter: [],
     hentet: [],
@@ -394,6 +399,102 @@ describe('Oppfolgingsdialog', () => {
       />
     );
     expect(component.find(Godkjenn)).to.have.length(1);
+  });
+
+  it('Skal vise advarsel om at åpen arbeidsoppgave ikke er lagret ', () => {
+    oppfolgingsdialog = Object.assign({}, getOppfolgingsplan(), {
+      godkjentPlan: null,
+      godkjenninger: [],
+      avbruttPlanListe: [],
+    });
+    navigasjontoggles = { steg: 1 };
+    alleInputFormer = { lagreArbeidsgiver: {} };
+    component = shallow(
+      <Oppfolgingsdialog
+        avbrytdialogReducer={avbrytdialogReducer}
+        settAktivtSteg={settAktivtSteg}
+        oppfolgingsdialog={oppfolgingsdialog}
+        navigasjontoggles={navigasjontoggles}
+        settDialog={settDialog}
+        hentNaermesteLeder={hentNaermesteLeder}
+        naermesteleder={naermesteleder}
+        hentVirksomhet={hentVirksomhet}
+        hentPerson={hentPerson}
+        hentKontaktinfo={hentKontaktinfo}
+        virksomhet={virksomhet}
+        person={person}
+        kontaktinfo={kontaktinfo}
+        arbeidsforhold={arbeidsforhold}
+        hentArbeidsforhold={hentArbeidsforhold}
+        sykmeldinger={sykmeldinger}
+        alleInputFormer={alleInputFormer}
+      />
+    );
+    expect(component.find(LagreAdvarselstripe)).to.contain.html(tekster.lagreOppgaveAdvarselTekst);
+  });
+
+  it('Skal vise advarsel om at åpent tiltak ikke er lagret ', () => {
+    oppfolgingsdialog = Object.assign({}, getOppfolgingsplan(), {
+      godkjentPlan: null,
+      godkjenninger: [],
+      avbruttPlanListe: [],
+    });
+    navigasjontoggles = { steg: 2 };
+    alleInputFormer = { OPPRETT_TILTAK_NY: {} };
+    component = shallow(
+      <Oppfolgingsdialog
+        avbrytdialogReducer={avbrytdialogReducer}
+        settAktivtSteg={settAktivtSteg}
+        oppfolgingsdialog={oppfolgingsdialog}
+        navigasjontoggles={navigasjontoggles}
+        settDialog={settDialog}
+        hentNaermesteLeder={hentNaermesteLeder}
+        naermesteleder={naermesteleder}
+        hentVirksomhet={hentVirksomhet}
+        hentPerson={hentPerson}
+        hentKontaktinfo={hentKontaktinfo}
+        virksomhet={virksomhet}
+        person={person}
+        kontaktinfo={kontaktinfo}
+        arbeidsforhold={arbeidsforhold}
+        hentArbeidsforhold={hentArbeidsforhold}
+        sykmeldinger={sykmeldinger}
+        alleInputFormer={alleInputFormer}
+      />
+    );
+    expect(component.find(LagreAdvarselstripe)).to.contain.html(tekster.lagreTiltakAdvarselTekst);
+  });
+
+  it('Skal ikke vise advarsel dersom ingen oppgaver er åpne ', () => {
+    oppfolgingsdialog = Object.assign({}, getOppfolgingsplan(), {
+      godkjentPlan: null,
+      godkjenninger: [],
+      avbruttPlanListe: [],
+    });
+    navigasjontoggles = { steg: 1 };
+    alleInputFormer = {};
+    component = shallow(
+      <Oppfolgingsdialog
+        avbrytdialogReducer={avbrytdialogReducer}
+        settAktivtSteg={settAktivtSteg}
+        oppfolgingsdialog={oppfolgingsdialog}
+        navigasjontoggles={navigasjontoggles}
+        settDialog={settDialog}
+        hentNaermesteLeder={hentNaermesteLeder}
+        naermesteleder={naermesteleder}
+        hentVirksomhet={hentVirksomhet}
+        hentPerson={hentPerson}
+        hentKontaktinfo={hentKontaktinfo}
+        virksomhet={virksomhet}
+        person={person}
+        kontaktinfo={kontaktinfo}
+        arbeidsforhold={arbeidsforhold}
+        hentArbeidsforhold={hentArbeidsforhold}
+        sykmeldinger={sykmeldinger}
+        alleInputFormer={alleInputFormer}
+      />
+    );
+    expect(component.find(LagreAdvarselstripe)).to.have.length(0);
   });
 
   describe('erAvvistAvArbeidsgiver', () => {
