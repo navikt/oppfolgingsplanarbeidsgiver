@@ -1,18 +1,9 @@
 const path = require('path');
 const fs = require('fs');
-const request = require('request');
 const express = require('express');
 
 const mockOppfolgingsplan = require('./oppfolgingsplan/mockOppfolgingsplan');
 const dateUtil = require('./util/dateUtil');
-
-const uuid = () => {
-  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
-    const r = (Math.random() * 16) | 0;
-    v = c === 'x' ? r : (r & 0x3) | 0x8;
-    return v.toString(16);
-  });
-};
 
 const mockData = {};
 
@@ -172,10 +163,6 @@ function mockForOpplaeringsmiljo(server) {
 function mockForLokaltMiljo(server) {
   server.use(express.json());
   server.use(express.urlencoded());
-
-  server.post('/syforest/arbeidsgiver/:fnr/:orgnr/actions/avkreft', (req, res) => {
-    res.send();
-  });
 
   server.post('/syfooppfolgingsplanservice/api/tiltak/actions/:response/lagreKommentar', (req, res) => {
     mockOpprettetIdResultat(res);
