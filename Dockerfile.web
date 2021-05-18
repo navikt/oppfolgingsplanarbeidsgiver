@@ -1,4 +1,5 @@
 FROM node
+LABEL org.opencontainers.image.source=https://github.com/navikt/oppfolgingsplanarbeidsgiver
 
 WORKDIR /usr/src/app
 COPY . .
