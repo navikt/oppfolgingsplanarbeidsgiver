@@ -10,7 +10,6 @@ import history from './history';
 import store from './store';
 import { hentSykmeldte } from './actions/sykmeldte_actions';
 import '../styles/styles.less';
-import './logging';
 import { forlengInnloggetSesjon, sjekkInnloggingssesjon } from './timeout/timeout_actions';
 
 Sentry.init({
