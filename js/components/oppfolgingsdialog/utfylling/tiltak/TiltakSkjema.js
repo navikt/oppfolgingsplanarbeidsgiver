@@ -435,7 +435,11 @@ export class TiltakSkjemaKomponent extends Component {
 
     if (!value || value.trim().length === 0) {
       feilmelding = 'Fyll inn overskrift';
-    } else if (value.match(tekstfeltBegynnerMedUgyldigTegnRegex) || value.match(tekstfeltRegex)) {
+    } else if (
+      value.match(tekstfeltBegynnerMedUgyldigTegnRegex) ||
+      value.match(tekstfeltInneholderUgyldigTegnRegex) ||
+      value.match(tekstfeltRegex)
+    ) {
       feilmelding = 'Ugyldig spesialtegn er oppgitt';
     }
 

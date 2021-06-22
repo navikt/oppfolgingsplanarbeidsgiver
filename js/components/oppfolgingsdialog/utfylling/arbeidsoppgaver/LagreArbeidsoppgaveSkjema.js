@@ -2,7 +2,12 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form';
 import { Panel } from 'nav-frontend-paneler';
-import { OPPRETT_SKJEMANAVN, tekstfeltBegynnerMedUgyldigTegnRegex, tekstfeltRegex } from '../../../../konstanter';
+import {
+  OPPRETT_SKJEMANAVN,
+  tekstfeltBegynnerMedUgyldigTegnRegex,
+  tekstfeltInneholderUgyldigTegnRegex,
+  tekstfeltRegex,
+} from '../../../../konstanter';
 import * as opProptypes from '../../../../proptypes/opproptypes';
 import Inputfelt from '../../../../skjema/Inputfelt';
 
@@ -92,6 +97,7 @@ const validate = (values) => {
     feilmeldinger.arbeidsoppgavenavn = 'Fyll inn arbeidsoppgave';
   } else if (
     values.arbeidsoppgavenavn.match(tekstfeltBegynnerMedUgyldigTegnRegex) ||
+    values.arbeidsoppgavenavn.match(tekstfeltInneholderUgyldigTegnRegex) ||
     values.arbeidsoppgavenavn.match(tekstfeltRegex)
   ) {
     feilmeldinger.arbeidsoppgavenavn = 'Ugyldig spesialtegn er oppgitt';
