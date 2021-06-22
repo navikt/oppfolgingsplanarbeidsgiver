@@ -4,7 +4,6 @@ import { Field, reduxForm } from 'redux-form';
 import { Panel } from 'nav-frontend-paneler';
 import {
   OPPRETT_SKJEMANAVN,
-  tekstfeltBegynnerMedUgyldigTegnRegex,
   tekstfeltInneholderUgyldigTegnRegex,
   tekstfeltRegex,
 } from '../../../../konstanter';
@@ -96,7 +95,6 @@ const validate = (values) => {
   if (!values.arbeidsoppgavenavn || (values.arbeidsoppgavenavn && values.arbeidsoppgavenavn.trim() === '')) {
     feilmeldinger.arbeidsoppgavenavn = 'Fyll inn arbeidsoppgave';
   } else if (
-    values.arbeidsoppgavenavn.match(tekstfeltBegynnerMedUgyldigTegnRegex) ||
     values.arbeidsoppgavenavn.match(tekstfeltInneholderUgyldigTegnRegex) ||
     values.arbeidsoppgavenavn.match(tekstfeltRegex)
   ) {

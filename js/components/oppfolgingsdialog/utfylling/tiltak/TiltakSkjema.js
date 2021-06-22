@@ -8,7 +8,6 @@ import {
   OPPRETT_TILTAK_NY,
   STATUS_TILTAK,
   tekstfeltInneholderUgyldigTegnRegex,
-  tekstfeltBegynnerMedUgyldigTegnRegex,
   tekstfeltRegex,
 } from '../../../../konstanter';
 import { tiltakPt, tiltakReducerPt } from '../../../../proptypes/opproptypes';
@@ -437,7 +436,6 @@ export class TiltakSkjemaKomponent extends Component {
     if (!value || value.trim().length === 0) {
       feilmelding = 'Fyll inn overskrift';
     } else if (
-      value.match(tekstfeltBegynnerMedUgyldigTegnRegex) ||
       value.match(tekstfeltInneholderUgyldigTegnRegex) ||
       value.match(tekstfeltRegex)
     ) {
