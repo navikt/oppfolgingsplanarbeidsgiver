@@ -7,6 +7,7 @@ import { Field, formValueSelector, reduxForm, SubmissionError } from 'redux-form
 import {
   OPPRETT_TILTAK_NY,
   STATUS_TILTAK,
+  tekstfeltInneholderUgyldigTegnRegex,
   tekstfeltBegynnerMedUgyldigTegnRegex,
   tekstfeltRegex,
 } from '../../../../konstanter';
