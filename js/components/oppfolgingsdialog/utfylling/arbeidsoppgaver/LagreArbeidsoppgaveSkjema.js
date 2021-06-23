@@ -4,7 +4,7 @@ import { Field, reduxForm } from 'redux-form';
 import { Panel } from 'nav-frontend-paneler';
 import {
   OPPRETT_SKJEMANAVN,
-  tekstfeltInneholderUgyldigTegnRegex,
+  tekstfeltInneholderEllerBegynnerMedUgyldigTegnRegex,
   tekstfeltRegex,
 } from '../../../../konstanter';
 import * as opProptypes from '../../../../proptypes/opproptypes';
@@ -95,7 +95,7 @@ const validate = (values) => {
   if (!values.arbeidsoppgavenavn || (values.arbeidsoppgavenavn && values.arbeidsoppgavenavn.trim() === '')) {
     feilmeldinger.arbeidsoppgavenavn = 'Fyll inn arbeidsoppgave';
   } else if (
-    values.arbeidsoppgavenavn.match(tekstfeltInneholderUgyldigTegnRegex) ||
+    values.arbeidsoppgavenavn.match(tekstfeltInneholderEllerBegynnerMedUgyldigTegnRegex) ||
     values.arbeidsoppgavenavn.match(tekstfeltRegex)
   ) {
     feilmeldinger.arbeidsoppgavenavn = 'Ugyldig spesialtegn er oppgitt';
