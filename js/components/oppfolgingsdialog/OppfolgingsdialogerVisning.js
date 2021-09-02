@@ -12,6 +12,7 @@ import OppfolgingsplanerOpprett from './opprett/OppfolgingsplanerOpprett';
 import OppfolgingsplanerIngenplan from './opprett/OppfolgingsplanerIngenplan';
 import OppfolgingsplanFilm from '../oppfolgingsplaner/OppfolgingsplanFilm';
 import OppfolgingsdialogTeasere from '../oppfolgingsplaner/OppfolgingsdialogTeasere';
+import { SamtalestøttePodlet } from '../../microfrontends/microfrontends';
 
 const texts = {
   teaserActivePlan: {
@@ -36,6 +37,7 @@ class OppfolgingsdialogerVisning extends Component {
       visOppfolgingsdialogOpprett: vis,
     });
   }
+
   render() {
     const { oppfolgingsdialoger, koblingId, kopierOppfolgingsdialog, opprettOppfolgingsdialog } = this.props;
     return (
@@ -80,11 +82,17 @@ class OppfolgingsdialogerVisning extends Component {
             />
           </div>
         )}
+        {/* eslint-disable-next-line react/jsx-pascal-case */}
+        <SamtalestøttePodlet
+          visning="SNAKKEBOBLE"
+          prodDomener={['tjenester.nav.no', 'oppfolgingsplanarbeidsgiver.nais.oera.no']}
+        />
         <OppfolgingsplanFilm />
       </div>
     );
   }
 }
+
 OppfolgingsdialogerVisning.propTypes = {
   koblingId: PropTypes.string,
   oppfolgingsdialoger: PropTypes.arrayOf(opProptypes.oppfolgingsplanPt),
