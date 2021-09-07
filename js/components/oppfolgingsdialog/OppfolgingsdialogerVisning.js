@@ -13,6 +13,7 @@ import OppfolgingsplanerIngenplan from './opprett/OppfolgingsplanerIngenplan';
 import OppfolgingsplanFilm from '../oppfolgingsplaner/OppfolgingsplanFilm';
 import OppfolgingsdialogTeasere from '../oppfolgingsplaner/OppfolgingsdialogTeasere';
 import { SamtalestøttePodlet } from '../../microfrontends/microfrontends';
+import SamtalestøttePanel from "../../SamtalestøttePanel/SamtalestøttePanel";
 
 const texts = {
   teaserActivePlan: {
@@ -87,6 +88,8 @@ class OppfolgingsdialogerVisning extends Component {
           visning="SNAKKEBOBLE"
           prodDomener={['tjenester.nav.no', 'oppfolgingsplanarbeidsgiver.nais.oera.no']}
         />
+        {/* eslint-disable-next-line react/jsx-pascal-case */}
+        <SamtalestøttePanel />
         <OppfolgingsplanFilm />
       </div>
     );
