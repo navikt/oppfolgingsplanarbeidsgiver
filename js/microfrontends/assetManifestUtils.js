@@ -20,7 +20,7 @@ function extractPathsFromCRAManifest(manifestObject) {
   const pathsToLoad = [];
   const { files, entrypoints } = manifestObject;
   if (files == null || typeof files !== 'object' || !Array.isArray(entrypoints)) {
-    throw new Error('Invalid manifest: ' + JSON.stringify(manifestObject));
+    throw new Error(`Invalid manifest: ${JSON.stringify(manifestObject)}`);
   }
 
   const fileList = Object.entries(files).map(([name, path]) => ({ name, path }));
@@ -31,7 +31,7 @@ function extractPathsFromCRAManifest(manifestObject) {
     if (matchingFile) {
       pathsToLoad.push(matchingFile.path);
     } else {
-      console.warn('Fant ikke fil i asset-manifest for entrypoint ' + entrypoint);
+      console.warn(`Fant ikke fil i asset-manifest for entrypoint ${entrypoint}`);
     }
   });
 
