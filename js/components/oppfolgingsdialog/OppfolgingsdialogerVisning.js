@@ -84,11 +84,6 @@ class OppfolgingsdialogerVisning extends Component {
           </div>
         )}
         {/* eslint-disable-next-line react/jsx-pascal-case */}
-        <SamtalestøttePodlet
-          visning="SNAKKEBOBLE"
-          prodDomener={['tjenester.nav.no', 'oppfolgingsplanarbeidsgiver.nais.oera.no']}
-        />
-        {/* eslint-disable-next-line react/jsx-pascal-case */}
         <SamtalestøttePanel />
         <OppfolgingsplanFilm />
       </div>
