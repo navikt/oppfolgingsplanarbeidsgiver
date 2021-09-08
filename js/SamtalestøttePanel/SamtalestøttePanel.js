@@ -1,11 +1,10 @@
 import React from 'react';
 import PanelBase from 'nav-frontend-paneler';
 import { SamtalestøttePodlet } from '../microfrontends/microfrontends';
-import '../../styles/_samtalestøttePanel.less';
 
 const SamtalestøttePanel = () => {
   return (
-    <PanelBase className={'samtalestøttePanel'}>
+    <PanelBase>
       {/* eslint-disable-next-line react/jsx-pascal-case */}
       <SamtalestøttePodlet
         visning="SNAKKEBOBLE"
