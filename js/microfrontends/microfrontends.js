@@ -4,12 +4,7 @@ import NavFrontendSpinner from 'nav-frontend-spinner';
 import { AsyncNavspa } from '@navikt/navspa';
 import { createAssetManifestParser, getMiljø } from './assetManifestUtils';
 
-/*
-type PodletProps = {
-  visning: string | undefined;
-}; */
-const SAMTALESTØTTE_MIKROFONTEND = 'samtalestotte-podlet';
-const SAMTALESTØTTE_MIKROFRONTEND_PATH = '/' + SAMTALESTØTTE_MIKROFONTEND;
+const SAMTALESTØTTE_MIKROFRONTEND = 'samtalestotte-podlet';
 const LasterInn = () => (
   <div className="microfrontends__laster-inn">
     <NavFrontendSpinner />
@@ -22,21 +17,23 @@ const getMikrofrontendConfig = () => {
   switch (miljø) {
     case 'dev-sbs':
       return {
-        appBaseUrl: 'https://arbeidsgiver-gcp.dev.nav.no' + SAMTALESTØTTE_MIKROFRONTEND_PATH,
+        appBaseUrl: `https://arbeidsgiver-gcp.dev.nav.no/${SAMTALESTØTTE_MIKROFRONTEND}`,
       };
 
     case 'local':
       return {
-        appBaseUrl: 'http://localhost:3001' + SAMTALESTØTTE_MIKROFRONTEND_PATH,
+        appBaseUrl: `http://localhost:3001/${SAMTALESTØTTE_MIKROFRONTEND}`,
       };
 
     default:
-      return { appBaseUrl: SAMTALESTØTTE_MIKROFRONTEND_PATH };
+      return {
+        appBaseUrl: `https://arbeidsgiver.nav.no/${SAMTALESTØTTE_MIKROFRONTEND}`,
+      };
   }
 };
 
 const samtalestottePodletConfig = {
-  appName: SAMTALESTØTTE_MIKROFONTEND,
+  appName: SAMTALESTØTTE_MIKROFRONTEND,
   appBaseUrl: getMikrofrontendConfig().appBaseUrl,
   assetManifestParser: createAssetManifestParser(getMikrofrontendConfig()),
   loader: <LasterInn />,

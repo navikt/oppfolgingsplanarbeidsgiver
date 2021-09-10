@@ -12,8 +12,7 @@ import OppfolgingsplanerOpprett from './opprett/OppfolgingsplanerOpprett';
 import OppfolgingsplanerIngenplan from './opprett/OppfolgingsplanerIngenplan';
 import OppfolgingsplanFilm from '../oppfolgingsplaner/OppfolgingsplanFilm';
 import OppfolgingsdialogTeasere from '../oppfolgingsplaner/OppfolgingsdialogTeasere';
-import { SamtalestøttePodlet } from '../../microfrontends/microfrontends';
-import SamtalestøttePanel from "../../SamtalestøttePanel/SamtalestøttePanel";
+import SamtalestøttePanel from '../../SamtalestøttePanel/SamtalestøttePanel';
 
 const texts = {
   teaserActivePlan: {
