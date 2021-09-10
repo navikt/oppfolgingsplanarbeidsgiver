@@ -12,6 +12,7 @@ import OppfolgingsplanerOpprett from './opprett/OppfolgingsplanerOpprett';
 import OppfolgingsplanerIngenplan from './opprett/OppfolgingsplanerIngenplan';
 import OppfolgingsplanFilm from '../oppfolgingsplaner/OppfolgingsplanFilm';
 import OppfolgingsdialogTeasere from '../oppfolgingsplaner/OppfolgingsdialogTeasere';
+import SamtalestøttePanel from '../../SamtalestøttePanel/SamtalestøttePanel';
 
 const texts = {
   teaserActivePlan: {
@@ -36,6 +37,7 @@ class OppfolgingsdialogerVisning extends Component {
       visOppfolgingsdialogOpprett: vis,
     });
   }
+
   render() {
     const { oppfolgingsdialoger, koblingId, kopierOppfolgingsdialog, opprettOppfolgingsdialog } = this.props;
     return (
@@ -80,11 +82,14 @@ class OppfolgingsdialogerVisning extends Component {
             />
           </div>
         )}
+        {/* eslint-disable-next-line react/jsx-pascal-case */}
+        <SamtalestøttePanel />
         <OppfolgingsplanFilm />
       </div>
     );
   }
 }
+
 OppfolgingsdialogerVisning.propTypes = {
   koblingId: PropTypes.string,
   oppfolgingsdialoger: PropTypes.arrayOf(opProptypes.oppfolgingsplanPt),
