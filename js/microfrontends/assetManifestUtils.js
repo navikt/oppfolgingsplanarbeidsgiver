@@ -38,20 +38,21 @@ function extractPathsFromCRAManifest(manifestObject) {
   return pathsToLoad;
 }
 
-export function makeAbsolute(baseUrl, maybeAbsolutePath, isSameDomain) {
-  if (maybeAbsolutePath.startsWith('http') || isSameDomain) {
+export function makeAbsolute(baseUrl, maybeAbsolutePath) {
+  if (maybeAbsolutePath.startsWith('http')) {
     return maybeAbsolutePath;
   }
-  const url = new URL(baseUrl);
-  return `${url.origin}${maybeAbsolutePath}`;
+  if (baseUrl.startsWith('http')) {
+    const url = new URL(baseUrl);
+    return `${url.origin}${maybeAbsolutePath}`;
+  }
+  return `${window.location.origin}${maybeAbsolutePath}`;
 }
 
 export function createAssetManifestParser(mikrofrontendConfig) {
   return (manifestObject) => {
     const pathsToLoad = extractPathsFromCRAManifest(manifestObject);
-    const debugPaths = pathsToLoad.map((path) =>
-      makeAbsolute(mikrofrontendConfig.appBaseUrl, path, mikrofrontendConfig.isSameDomain)
-    );
+    const debugPaths = pathsToLoad.map((path) => makeAbsolute(mikrofrontendConfig.appBaseUrl, path));
     return debugPaths;
   };
 }

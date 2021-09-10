@@ -23,17 +23,15 @@ const getMikrofrontendConfig = () => {
     case 'dev-sbs':
       return {
         appBaseUrl: 'https://arbeidsgiver-gcp.dev.nav.no' + SAMTALESTØTTE_MIKROFRONTEND_PATH,
-        isSameDomain: false,
       };
 
     case 'local':
       return {
         appBaseUrl: 'http://localhost:3001' + SAMTALESTØTTE_MIKROFRONTEND_PATH,
-        isSameDomain: false,
       };
 
     default:
-      return { appBaseUrl: SAMTALESTØTTE_MIKROFRONTEND_PATH, isSameDomain: true };
+      return { appBaseUrl: SAMTALESTØTTE_MIKROFRONTEND_PATH };
   }
 };
 
