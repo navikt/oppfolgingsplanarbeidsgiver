@@ -39,7 +39,7 @@ class OppfolgingsdialogerVisning extends Component {
   }
 
   render() {
-    const { oppfolgingsdialoger, koblingId, kopierOppfolgingsdialog, opprettOppfolgingsdialog } = this.props;
+    const { oppfolgingsdialoger, koblingId, kopierOppfolgingsdialog, opprettOppfolgingsdialog, orgnummer } = this.props;
     return (
       <div>
         {this.state.visOppfolgingsdialogOpprett && (
@@ -83,7 +83,7 @@ class OppfolgingsdialogerVisning extends Component {
           </div>
         )}
         {/* eslint-disable-next-line react/jsx-pascal-case */}
-        <SamtalestøttePanel />
+        <SamtalestøttePanel orgnummer={orgnummer} />
         <OppfolgingsplanFilm />
       </div>
     );
@@ -95,6 +95,7 @@ OppfolgingsdialogerVisning.propTypes = {
   oppfolgingsdialoger: PropTypes.arrayOf(opProptypes.oppfolgingsplanPt),
   kopierOppfolgingsdialog: PropTypes.func,
   opprettOppfolgingsdialog: PropTypes.func,
+  orgnummer: PropTypes.string,
 };
 
 export default OppfolgingsdialogerVisning;
