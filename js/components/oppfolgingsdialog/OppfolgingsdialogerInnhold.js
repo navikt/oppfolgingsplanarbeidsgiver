@@ -13,7 +13,7 @@ const texts = {
 
 const OppfolgingsdialogerInnhold = ({
   oppfolgingsdialoger,
-  koblingId,
+  narmestelederId,
   kopierOppfolgingsdialog,
   opprettOppfolgingsdialog,
 }) => {
@@ -31,7 +31,7 @@ const OppfolgingsdialogerInnhold = ({
         />
       )}
       <OppfolgingsdialogVisning
-        koblingId={koblingId}
+        narmestelederId={narmestelederId}
         oppfolgingsdialoger={oppfolgingsdialoger}
         kopierOppfolgingsdialog={kopierOppfolgingsdialog}
         opprettOppfolgingsdialog={opprettOppfolgingsdialog}
@@ -40,7 +40,7 @@ const OppfolgingsdialogerInnhold = ({
   );
 };
 OppfolgingsdialogerInnhold.propTypes = {
-  koblingId: PropTypes.string,
+  narmestelederId: PropTypes.string,
   oppfolgingsdialoger: PropTypes.arrayOf(oppfolgingsplanPt),
   kopierOppfolgingsdialog: PropTypes.func,
   opprettOppfolgingsdialog: PropTypes.func,

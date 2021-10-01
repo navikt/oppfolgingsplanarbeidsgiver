@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { sykmeldt as sykmeldtPt, brodsmule as brodsmulePt, sykmeldingerReducerPt } from '../shapes';
+import { brodsmule as brodsmulePt, sykmeldt as sykmeldtPt } from '../shapes';
 import {
   forsoektHentetSykmeldte,
   henterEllerHarHentetOppfolgingsdialoger,
-  henterEllerHarHentetSykmeldinger,
   oppfolgingsdialogHarBlittOpprettet,
 } from '../utils/reducerUtils';
 import { populerDialogFraState } from '../utils/stateUtils';
-import { finnOppfolgingsplanerPaVirksomhet, sykmeldtHarGyldigSykmelding } from '../utils/oppfolgingsplanUtils';
+import { finnOppfolgingsplanerPaVirksomhet } from '../utils/oppfolgingsplanUtils';
 import Side from '../sider/Side';
 import AppSpinner from '../components/AppSpinner';
 import Feilmelding from '../components/Feilmelding';
@@ -25,11 +24,9 @@ import { hentNaermesteLeder } from '../actions/oppfolgingsplan/naermesteLeder_ac
 import { hentPerson } from '../actions/oppfolgingsplan/person_actions';
 import { hentVirksomhet } from '../actions/oppfolgingsplan/virksomhet_actions';
 import { sjekkTilgang } from '../actions/oppfolgingsplan/sjekkTilgang_actions';
-import { hentSykmeldinger } from '../actions/sykmeldinger_actions';
 import Oppfolgingsdialoger from '../components/oppfolgingsdialog/Oppfolgingsdialoger';
 import { getContextRoot } from '../routers/paths';
-import { hentSykmeldteBerikelser as hentSykmeldteBerikelserAction } from '../actions/sykmeldte_actions';
-import { beregnSkalHenteSykmeldtBerikelse } from '../utils/sykmeldtUtils';
+import { hentSykmeldte } from '../actions/sykmeldte_actions';
 
 const texts = {
   pageTitle: 'Oppfølgingsplaner - Oversikt',
@@ -53,19 +50,23 @@ export class OppfolgingsplanerSide extends Component {
   }
 
   componentDidMount() {
-    const { koblingId, alleOppfolgingsdialogerReducer, sykmeldinger } = this.props;
+    const { narmestelederId, alleOppfolgingsdialogerReducer, sykmeldteReducer } = this.props;
     if (!henterEllerHarHentetOppfolgingsdialoger(alleOppfolgingsdialogerReducer)) {
       this.props.hentOppfolgingsplaner();
     }
-    if (!henterEllerHarHentetSykmeldinger(sykmeldinger)) {
-      this.props.hentSykmeldinger(koblingId);
+    if (!forsoektHentetSykmeldte(sykmeldteReducer)) {
+      this.props.hentSykmeldte(narmestelederId);
     }
-    this.berikSykmeldt();
   }
 
   // eslint-disable-next-line camelcase
   UNSAFE_componentWillReceiveProps(nextProps) {
-    const { koblingId, alleOppfolgingsdialogerReducer, kopierDialogReducer, oppfolgingsdialogerReducer } = this.props;
+    const {
+      narmestelederId,
+      alleOppfolgingsdialogerReducer,
+      kopierDialogReducer,
+      oppfolgingsdialogerReducer,
+    } = this.props;
     const { sykmeldt } = nextProps;
 
     this.props.sjekkTilgang(sykmeldt);
@@ -83,22 +84,16 @@ export class OppfolgingsplanerSide extends Component {
       !alleOppfolgingsdialogerReducer.hentet &&
       nextProps.alleOppfolgingsdialogerReducer.hentet
     ) {
-      history.push(`${getContextRoot()}/${koblingId}/oppfolgingsplaner/${oppfolgingsdialogerReducer.opprettetId}`);
+      history.push(
+        `${getContextRoot()}/${narmestelederId}/oppfolgingsplaner/${oppfolgingsdialogerReducer.opprettetId}`
+      );
     }
     if (
       kopierDialogReducer.sendt &&
       !alleOppfolgingsdialogerReducer.hentet &&
       nextProps.alleOppfolgingsdialogerReducer.hentet
     ) {
-      history.push(`${getContextRoot()}/${koblingId}/oppfolgingsplaner/${kopierDialogReducer.data}`);
-    }
-    this.berikSykmeldt();
-  }
-
-  berikSykmeldt() {
-    const { skalHenteSykmeldtBerikelse, hentSykmeldteBerikelser, koblingId } = this.props;
-    if (skalHenteSykmeldtBerikelse) {
-      hentSykmeldteBerikelser([koblingId]);
+      history.push(`${getContextRoot()}/${narmestelederId}/oppfolgingsplaner/${kopierDialogReducer.data}`);
     }
   }
 
@@ -116,17 +111,7 @@ export class OppfolgingsplanerSide extends Component {
   }
 
   render() {
-    const {
-      brodsmuler,
-      harSykmeldtGyldigSykmelding,
-      henter,
-      hentingFeilet,
-      tilgang,
-      hentet,
-      sender,
-      sendingFeilet,
-      sykmeldt,
-    } = this.props;
+    const { brodsmuler, henter, hentingFeilet, tilgang, hentet, sender, sendingFeilet, sykmeldt } = this.props;
     return (
       <Side
         tittel={texts.pageTitle}
@@ -138,7 +123,7 @@ export class OppfolgingsplanerSide extends Component {
             return <AppSpinner />;
           } else if (hentingFeilet || sendingFeilet) {
             return <Feilmelding />;
-          } else if (!tilgang.data.harTilgang || !sykmeldt || !harSykmeldtGyldigSykmelding) {
+          } else if (!tilgang.data.harTilgang || !sykmeldt) {
             return (
               <OppfolgingsplanInfoboks
                 svgUrl={`${getContextRoot()}/img/svg/oppfolgingsdialogFeilmeldingAG.svg`}
@@ -162,38 +147,31 @@ OppfolgingsplanerSide.propTypes = {
   sender: PropTypes.bool,
   sendingFeilet: PropTypes.bool,
   kopierDialogReducer: opproptypes.kopierDialogReducerPt,
+  sykmeldteReducer: opproptypes.sykmeldteReducerPt,
   oppfolgingsdialogerReducer: opproptypes.oppfolgingsdialogerAgPt,
   alleOppfolgingsdialogerReducer: opproptypes.alleOppfolgingsdialogerAgPt,
   naermesteleder: opproptypes.naermestelederReducerPt,
   person: opproptypes.personReducerPt,
-  sykmeldinger: sykmeldingerReducerPt,
   tilgang: opproptypes.tilgangReducerPt,
   virksomhet: opproptypes.virksomhetReducerPt,
   oppfolgingsdialoger: PropTypes.arrayOf(opproptypes.oppfolgingsplanPt),
-  koblingId: PropTypes.string,
+  narmestelederId: PropTypes.string,
   sykmeldt: sykmeldtPt,
-  harSykmeldtGyldigSykmelding: PropTypes.bool,
   brodsmuler: PropTypes.arrayOf(brodsmulePt),
   giSamtykke: PropTypes.func,
   hentNaermesteLeder: PropTypes.func,
   hentOppfolgingsplaner: PropTypes.func,
+  hentSykmeldte: PropTypes.func,
   hentPerson: PropTypes.func,
-  hentSykmeldinger: PropTypes.func,
   hentVirksomhet: PropTypes.func,
   kopierOppfolgingsdialog: PropTypes.func,
   opprettOppfolgingsdialogAg: PropTypes.func,
   sjekkTilgang: PropTypes.func,
-  skalHenteSykmeldtBerikelse: PropTypes.bool,
-  hentSykmeldteBerikelser: PropTypes.func,
 };
 
 export function mapStateToProps(state, ownProps) {
-  const koblingId = ownProps.params.koblingId;
-  const sykmeldt =
-    state.sykmeldte.data &&
-    state.sykmeldte.data.filter((s) => {
-      return `${s.koblingId}` === koblingId;
-    })[0];
+  const narmestelederId = ownProps.params.narmestelederId;
+  const sykmeldt = state.sykmeldte.data;
   let tilgang = { data: {} };
   const alleOppfolgingsdialogerReducer = state.oppfolgingsdialoger;
   let oppfolgingsdialogerReducer = {};
@@ -209,56 +187,37 @@ export function mapStateToProps(state, ownProps) {
         )
       : [];
   }
-  const sykmeldinger = state.sykmeldinger[koblingId] || {};
-  const harSykmeldtGyldigSykmelding = sykmeldinger.data && sykmeldtHarGyldigSykmelding(sykmeldinger.data);
   const harForsoektHentetOppfolgingsdialoger = alleOppfolgingsdialogerReducer.hentingForsokt;
-  const harForsoektHentetAlt =
-    harForsoektHentetOppfolgingsdialoger && forsoektHentetSykmeldte(state.sykmeldte) && sykmeldinger.hentet;
+  const harForsoektHentetAlt = harForsoektHentetOppfolgingsdialoger && forsoektHentetSykmeldte(state.sykmeldte);
   const erSykmeldteHentet = state.sykmeldte.hentet && !state.sykmeldte.hentingFeilet;
-  const sykmeldtPerson =
-    state.person.data &&
-    state.person.data.filter((s) => {
-      return `${s.fnr}` === sykmeldt.fnr;
-    })[0];
   return {
     henter:
       state.sykmeldte.henter ||
       alleOppfolgingsdialogerReducer.henter ||
       tilgang.henter ||
-      sykmeldinger.henter ||
       !harForsoektHentetAlt ||
-      (erSykmeldteHentet && sykmeldt && !tilgang.hentingForsokt) ||
-      (state.sykmeldte.henterBerikelser.length > 0 && !state.sykmeldte.hentingFeilet),
+      (erSykmeldteHentet && sykmeldt && !tilgang.hentingForsokt),
     hentingFeilet:
-      state.sykmeldte.hentingFeilet ||
-      alleOppfolgingsdialogerReducer.hentingFeilet ||
-      tilgang.hentingFeilet ||
-      sykmeldinger.hentingFeilet,
+      state.sykmeldte.hentingFeilet || alleOppfolgingsdialogerReducer.hentingFeilet || tilgang.hentingFeilet,
     hentet:
       state.sykmeldte.hentet ||
       harForsoektHentetOppfolgingsdialoger ||
       tilgang.hentet ||
-      oppfolgingsdialogerReducer.opprettet ||
-      state.sykmeldte.slettet,
-    sender: oppfolgingsdialogerReducer.oppretter || state.kopierDialogReducer.sender || state.sykmeldte.sletter,
-    sendingFeilet:
-      oppfolgingsdialogerReducer.opprettingFeilet ||
-      state.kopierDialogReducer.sendingFeilet ||
-      state.sykmeldte.slettingFeilet,
+      oppfolgingsdialogerReducer.opprettet,
+    sender: oppfolgingsdialogerReducer.oppretter || state.kopierDialogReducer.sender,
+    sendingFeilet: oppfolgingsdialogerReducer.opprettingFeilet || state.kopierDialogReducer.sendingFeilet,
     naermesteleder: state.naermesteleder,
     person: state.person,
     kopierDialogReducer: state.kopierDialogReducer,
     alleOppfolgingsdialogerReducer,
     oppfolgingsdialogerReducer,
-    sykmeldinger,
     tilgang,
     virksomhet: state.virksomhet,
-    koblingId: ownProps.params.koblingId,
+    narmestelederId,
     oppfolgingsdialoger,
     sykmeldt,
+    sykmeldteReducer: state.sykmeldte,
     kontaktinfo: state.kontaktinfo,
-    harSykmeldtGyldigSykmelding,
-    skalHenteSykmeldtBerikelse: beregnSkalHenteSykmeldtBerikelse(sykmeldt, state),
     brodsmuler: [
       {
         tittel: texts.brodsmuler.dineSykmeldte,
@@ -266,8 +225,8 @@ export function mapStateToProps(state, ownProps) {
         erKlikkbar: true,
       },
       {
-        tittel: sykmeldtPerson ? sykmeldtPerson.navn : '',
-        sti: sykmeldt ? `/sykefravaerarbeidsgiver/${sykmeldt.koblingId}` : '',
+        tittel: sykmeldt ? sykmeldt.navn : '',
+        sti: sykmeldt ? `/sykefravaerarbeidsgiver/${sykmeldt.narmestelederId}` : '',
         erKlikkbar: true,
       },
       {
@@ -287,8 +246,7 @@ const OppfolgingsdialogerContainer = connect(mapStateToProps, {
   hentVirksomhet,
   hentPerson,
   hentKontaktinfo,
-  hentSykmeldinger,
-  hentSykmeldteBerikelser: hentSykmeldteBerikelserAction,
+  hentSykmeldte,
 })(OppfolgingsplanerSide);
 
 export default OppfolgingsdialogerContainer;

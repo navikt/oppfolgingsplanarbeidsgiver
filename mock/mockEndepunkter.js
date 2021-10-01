@@ -3,14 +3,13 @@ const fs = require('fs');
 const express = require('express');
 
 const mockOppfolgingsplan = require('./oppfolgingsplan/mockOppfolgingsplan');
-const dateUtil = require('./util/dateUtil');
 
 const mockData = {};
 
 const lastFilTilMinne = (filnavn) => {
   fs.readFile(path.join(__dirname, `/data/${filnavn}.json`), (err, data) => {
     if (err) {
-      console.log('feil i ' + filnavn);
+      console.log(`feil i ${filnavn}`);
       throw err;
     }
     mockData[filnavn] = JSON.parse(data.toString());
@@ -18,62 +17,22 @@ const lastFilTilMinne = (filnavn) => {
 };
 
 const ARBEIDSFORHOLD = 'arbeidsforhold';
-const BERIK = 'berik';
 const KONTAKTINFO = 'kontaktinfo';
 const NAERMESTELEDER = 'naermesteleder';
 const PERSON = 'person';
 const PERSON_SEVERUS = 'personSeverus';
-const SYKMELDINGER = 'sykmeldinger';
 const SYKMELDTE = 'sykmeldte';
 const TILGANG = 'tilgang';
 const VIRKSOMHET = 'virksomhet';
 
 lastFilTilMinne(ARBEIDSFORHOLD);
 lastFilTilMinne(SYKMELDTE);
-lastFilTilMinne(SYKMELDINGER);
-lastFilTilMinne(BERIK);
 lastFilTilMinne(PERSON);
 lastFilTilMinne(PERSON_SEVERUS);
-lastFilTilMinne(BERIK);
 lastFilTilMinne(KONTAKTINFO);
 lastFilTilMinne(NAERMESTELEDER);
 lastFilTilMinne(TILGANG);
 lastFilTilMinne(VIRKSOMHET);
-
-const SYKMELDING_TYPE = {
-  SYKMELDING_INAKTIV: {
-    fomUke: -20,
-    tomUke: -18,
-  },
-  SYKMELDING_AKTIV: {
-    fomUke: -16,
-    tomUke: 2,
-  },
-};
-
-const getSykmeldinger = (type, koblingId) => {
-  const today = new Date();
-  const sykmeldinger = mockData[SYKMELDINGER][koblingId] || [];
-  if (sykmeldinger.length === 0) {
-    return [];
-  }
-  const sykmelding = sykmeldinger[0];
-  return [
-    {
-      ...sykmelding,
-      mulighetForArbeid: {
-        ...sykmelding.mulighetForArbeid,
-        perioder: [
-          {
-            ...sykmelding.mulighetForArbeid.perioder[0],
-            fom: dateUtil.leggTilDagerPaDato(today, type.fomUke * 7).toJSON(),
-            tom: dateUtil.leggTilDagerPaDato(today, type.tomUke * 7).toJSON(),
-          },
-        ],
-      },
-    },
-  ];
-};
 
 function mockOpprettetIdResultat(res) {
   mockOpprettetIdResultat.rollingCounter += 1;
@@ -86,20 +45,9 @@ function mockForOpplaeringsmiljo(server) {
   server.use(express.json());
   server.use(express.urlencoded());
 
-  server.get('/syforest/arbeidsgiver/sykmeldte', (req, res) => {
+  server.get('/oppfolgingsplanarbeidsgiver/api/dinesykmeldte/123', (req, res) => {
     res.setHeader('Content-Type', 'application/json');
     res.send(JSON.stringify(mockData[SYKMELDTE]));
-  });
-
-  server.get('/syforest/arbeidsgiver/sykmeldte/berik', (req, res) => {
-    res.setHeader('Content-Type', 'application/json');
-    res.send(JSON.stringify(mockData[BERIK]));
-  });
-
-  server.get('/syforest/arbeidsgiver/sykmeldinger', (req, res) => {
-    res.setHeader('Content-Type', 'application/json');
-    const koblingId = req.query.koblingId;
-    res.send(getSykmeldinger(SYKMELDING_TYPE.SYKMELDING_AKTIV, koblingId));
   });
 
   server.get('/syfooppfolgingsplanservice/api/arbeidsgiver/oppfolgingsplaner', (req, res) => {
@@ -149,13 +97,13 @@ function mockForOpplaeringsmiljo(server) {
 
   server.get('/esso/logout', (req, res) => {
     res.send(
-      '<p>Du har blitt sendt til utlogging.</p><p><a href="/oppfolgingsplanarbeidsgiver/28790/">Gå til Dine Sykmeldtes Oppfølgingplaner</a></p>'
+      '<p>Du har blitt sendt til utlogging.</p><p><a href="/oppfolgingsplanarbeidsgiver/123/">Gå til Dine Sykmeldtes Oppfølgingplaner</a></p>'
     );
   });
 
   server.get('/dittnav', (req, res) => {
     res.send(
-      '<p>Ditt Nav er ikke tilgjengelig - dette er en testside som kun viser Ditt sykefravær.</p><p><a href="/oppfolgingsplanarbeidsgiver/28790">Gå til Dine Sykmeldtes Oppfølgingplaner</a></p>'
+      '<p>Ditt Nav er ikke tilgjengelig - dette er en testside som kun viser Ditt sykefravær.</p><p><a href="/oppfolgingsplanarbeidsgiver/123">Gå til Dine Sykmeldtes Oppfølgingplaner</a></p>'
     );
   });
 }
@@ -163,6 +111,11 @@ function mockForOpplaeringsmiljo(server) {
 function mockForLokaltMiljo(server) {
   server.use(express.json());
   server.use(express.urlencoded());
+
+  server.get('/oppfolgingsplanarbeidsgiver/api/dinesykmeldte/123', (req, res) => {
+    res.setHeader('Content-Type', 'application/json');
+    res.send(JSON.stringify(mockData[SYKMELDTE]));
+  });
 
   server.post('/syfooppfolgingsplanservice/api/tiltak/actions/:response/lagreKommentar', (req, res) => {
     mockOpprettetIdResultat(res);

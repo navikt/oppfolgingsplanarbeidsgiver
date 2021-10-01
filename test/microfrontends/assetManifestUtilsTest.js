@@ -4,7 +4,7 @@ import { withCurrentLocation } from '../mock/testUtils';
 
 const expect = chai.expect;
 
-describe('makeAbsoulte oppdaterer path til ressurser fra asset-manifest avhengig av domene', () => {
+describe('makeAbsolute oppdaterer path til ressurser fra asset-manifest avhengig av domene', () => {
   it('returnerer samme path når begge kjører på samme domene', () => {
     withCurrentLocation('http://dummy.io/containerapp', () => {
       expect(
