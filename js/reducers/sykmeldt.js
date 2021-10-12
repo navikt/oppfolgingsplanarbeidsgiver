@@ -7,17 +7,17 @@ const initiellState = {
   data: undefined,
 };
 
-export default function sykmeldte(state = initiellState, action = {}) {
+export default function sykmeldt(state = initiellState, action = {}) {
   switch (action.type) {
-    case actiontyper.SYKMELDTE_HENTET:
+    case actiontyper.SYKMELDT_HENTET:
       return {
         ...state,
-        data: action.sykmeldte,
+        data: action.sykmeldt,
         henter: false,
         hentet: true,
         hentingFeilet: false,
       };
-    case actiontyper.HENTER_SYKMELDTE:
+    case actiontyper.HENTER_SYKMELDT:
       return {
         ...state,
         data: undefined,
@@ -25,7 +25,7 @@ export default function sykmeldte(state = initiellState, action = {}) {
         hentet: false,
         hentingFeilet: false,
       };
-    case actiontyper.HENT_SYKMELDTE_FEILET:
+    case actiontyper.HENT_SYKMELDT_FEILET:
       return {
         ...state,
         data: undefined,

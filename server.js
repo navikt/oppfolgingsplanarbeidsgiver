@@ -44,7 +44,6 @@ const renderPage = (decoratorFragments, isFrontPage) => {
       Object.assign(
         {
           LOGINSERVICE_URL: `${process.env.LOGINSERVICE_URL}`,
-          SYFOREST_URL: '/syforest',
           spinnerMedTekst: isFrontPage,
           spinnerUtenTekst: !isFrontPage,
         },

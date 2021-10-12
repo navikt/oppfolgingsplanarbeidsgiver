@@ -38,10 +38,9 @@ describe('OppfolgingsplanerSide', () => {
       },
     };
     const state = {
-      sykmeldte: {
+      sykmeldt: {
         hentet: true,
         data: sykmeldt,
-        henterBerikelser: [],
       },
       oppfolgingsdialoger: {
         henter: false,
@@ -163,10 +162,10 @@ describe('OppfolgingsplanerSide', () => {
     const dagensDato = new Date('2017-01-01');
     let sjekkTilgang;
     let hentOppfolgingsplaner;
-    let hentSykmeldte;
+    let hentSykmeldt;
     let alleOppfolgingsdialogerReducer;
     let oppfolgingsdialogerReducer;
-    let sykmeldteReducer;
+    let sykmeldtReducer;
     let tilgang;
     let loggError;
     let hentingFeiletMap;
@@ -189,12 +188,12 @@ describe('OppfolgingsplanerSide', () => {
     beforeEach(() => {
       clock = sinon.useFakeTimers(dagensDato.getTime());
       oppfolgingsdialogerReducer = {};
-      sykmeldteReducer = {};
+      sykmeldtReducer = {};
       alleOppfolgingsdialogerReducer = {};
       tilgang = { data: {} };
       sjekkTilgang = sinon.spy();
       hentOppfolgingsplaner = sinon.spy();
-      hentSykmeldte = sinon.spy();
+      hentSykmeldt = sinon.spy();
       loggError = sinon.spy();
       hentingFeiletMap = {};
     });
@@ -214,8 +213,8 @@ describe('OppfolgingsplanerSide', () => {
           hentOppfolgingsplaner={hentOppfolgingsplaner}
           sjekkTilgang={sjekkTilgang}
           params={params}
-          sykmeldteReducer={sykmeldteReducer}
-          hentSykmeldte={hentSykmeldte}
+          sykmeldtReducer={sykmeldtReducer}
+          hentSykmeldt={hentSykmeldt}
         />
       );
       expect(component.contains(<AppSpinner />)).to.equal(true);
@@ -232,8 +231,8 @@ describe('OppfolgingsplanerSide', () => {
           hentOppfolgingsplaner={hentOppfolgingsplaner}
           sjekkTilgang={sjekkTilgang}
           params={params}
-          sykmeldteReducer={sykmeldteReducer}
-          hentSykmeldte={hentSykmeldte}
+          sykmeldtReducer={sykmeldtReducer}
+          hentSykmeldt={hentSykmeldt}
         />
       );
       expect(component.contains(<AppSpinner />)).to.equal(true);
@@ -250,9 +249,9 @@ describe('OppfolgingsplanerSide', () => {
           hentOppfolgingsplaner={hentOppfolgingsplaner}
           sjekkTilgang={sjekkTilgang}
           params={params}
-          hentSykmeldte={hentSykmeldte}
+          hentSykmeldt={hentSykmeldt}
           loggError={loggError}
-          sykmeldteReducer={sykmeldteReducer}
+          sykmeldtReducer={sykmeldtReducer}
           hentingFeiletMap={hentingFeiletMap}
         />
       );
@@ -270,9 +269,9 @@ describe('OppfolgingsplanerSide', () => {
           hentOppfolgingsplaner={hentOppfolgingsplaner}
           sjekkTilgang={sjekkTilgang}
           params={params}
-          hentSykmeldte={hentSykmeldte}
+          hentSykmeldt={hentSykmeldt}
           loggError={loggError}
-          sykmeldteReducer={sykmeldteReducer}
+          sykmeldtReducer={sykmeldtReducer}
           hentingFeiletMap={hentingFeiletMap}
         />
       );
@@ -289,8 +288,8 @@ describe('OppfolgingsplanerSide', () => {
           hentOppfolgingsplaner={hentOppfolgingsplaner}
           sjekkTilgang={sjekkTilgang}
           params={params}
-          hentSykmeldte={hentSykmeldte}
-          sykmeldteReducer={sykmeldteReducer}
+          hentSykmeldt={hentSykmeldt}
+          sykmeldtReducer={sykmeldtReducer}
           sykmeldt={sykmeldt}
         />
       );
@@ -307,9 +306,9 @@ describe('OppfolgingsplanerSide', () => {
           hentOppfolgingsplaner={hentOppfolgingsplaner}
           sjekkTilgang={sjekkTilgang}
           params={params}
-          hentSykmeldte={hentSykmeldte}
+          hentSykmeldt={hentSykmeldt}
           sykmeldt={null}
-          sykmeldteReducer={sykmeldteReducer}
+          sykmeldtReducer={sykmeldtReducer}
         />
       );
       expect(component.find(OppfolgingsplanInfoboks)).to.have.length(1);
@@ -328,8 +327,8 @@ describe('OppfolgingsplanerSide', () => {
             hentOppfolgingsplaner={hentOppfolgingsplaner}
             sjekkTilgang={sjekkTilgang}
             params={params}
-            hentSykmeldte={hentSykmeldte}
-            sykmeldteReducer={sykmeldteReducer}
+            hentSykmeldt={hentSykmeldt}
+            sykmeldtReducer={sykmeldtReducer}
             sykmeldt={sykmeldt}
           />
         );

@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { brodsmule as brodsmulePt, sykmeldt as sykmeldtPt } from '../shapes';
 import * as opProptypes from '../proptypes/opproptypes';
 import {
-  forsoektHentetSykmeldte,
+  forsoektHentetSykmeldt,
   henterEllerHarHentetOppfolgingsdialoger,
   oppfolgingsdialogHarBlittAvbrutt,
 } from '../utils/reducerUtils';
@@ -37,7 +37,7 @@ import { avvisPlan, godkjennPlan, hentOppfolgingsplaner } from '../actions/oppfo
 import Oppfolgingsdialog from '../components/oppfolgingsdialog/Oppfolgingsdialog';
 import { getContextRoot } from '../routers/paths';
 import history from '../history';
-import { hentSykmeldte } from '../actions/sykmeldte_actions';
+import { hentSykmeldt } from '../actions/sykmeldt_actions';
 
 const pageTitleArbeidsoppgaver = 'Oppfølgingsplan - Arbeidsoppgaver';
 const pageTitleTiltak = 'Oppfølgingsplan - Tiltak';
@@ -69,12 +69,12 @@ export class OppfolgingsplanSide extends Component {
   }
 
   componentDidMount() {
-    const { narmestelederId, alleOppfolgingsdialogerReducer, sykmeldteReducer } = this.props;
+    const { narmestelederId, alleOppfolgingsdialogerReducer, sykmeldtReducer } = this.props;
     if (!henterEllerHarHentetOppfolgingsdialoger(alleOppfolgingsdialogerReducer)) {
       this.props.hentOppfolgingsplaner();
     }
-    if (!forsoektHentetSykmeldte(sykmeldteReducer)) {
-      this.props.hentSykmeldte(narmestelederId);
+    if (!forsoektHentetSykmeldt(sykmeldtReducer)) {
+      this.props.hentSykmeldt(narmestelederId);
     }
   }
 
@@ -193,7 +193,7 @@ OppfolgingsplanSide.propTypes = {
   navigasjontoggles: opProptypes.navigasjonstogglesReducerPt,
   alleOppfolgingsdialogerReducer: opProptypes.alleOppfolgingsdialogerAgPt,
   oppfolgingsdialogerReducer: opProptypes.oppfolgingsdialogerAgPt,
-  sykmeldteReducer: opProptypes.sykmeldteReducerPt,
+  sykmeldtReducer: opProptypes.sykmeldtReducerPt,
   naermesteleder: opProptypes.naermestelederReducerPt,
   tilgang: opProptypes.tilgangReducerPt,
   tiltak: opProptypes.tiltakReducerPt,
@@ -221,7 +221,7 @@ OppfolgingsplanSide.propTypes = {
   godkjennDialogAg: PropTypes.func,
   hentKontaktinfo: PropTypes.func,
   hentOppfolgingsplaner: PropTypes.func,
-  hentSykmeldte: PropTypes.func,
+  hentSykmeldt: PropTypes.func,
   hentPerson: PropTypes.func,
   hentNaermesteLeder: PropTypes.func,
   hentVirksomhet: PropTypes.func,
@@ -236,7 +236,7 @@ OppfolgingsplanSide.propTypes = {
 export function mapStateToProps(state, ownProps) {
   const narmestelederId = ownProps.params.narmestelederId;
   const id = ownProps.params.oppfolgingsplanId;
-  const sykmeldt = state.sykmeldte.data;
+  const sykmeldt = state.sykmeldt.data;
   let tilgang = { data: {} };
   const alleOppfolgingsdialogerReducer = state.oppfolgingsdialoger;
   let oppfolgingsdialogerReducer = {};
@@ -252,17 +252,17 @@ export function mapStateToProps(state, ownProps) {
     oppfolgingsdialog = oppfolgingsdialog ? populerDialogFraState(oppfolgingsdialog, state) : {};
   }
   const harForsoektHentetOppfolgingsdialoger = alleOppfolgingsdialogerReducer.hentingForsokt;
-  const harForsoektHentetAlt = harForsoektHentetOppfolgingsdialoger && forsoektHentetSykmeldte(state.sykmeldte);
-  const erSykmeldteHentet = state.sykmeldte.hentet && !state.sykmeldte.hentingFeilet;
+  const harForsoektHentetAlt = harForsoektHentetOppfolgingsdialoger && forsoektHentetSykmeldt(state.sykmeldt);
+  const erSykmeldtHentet = state.sykmeldt.hentet && !state.sykmeldt.hentingFeilet;
   return {
     henter:
-      state.sykmeldte.henter ||
+      state.sykmeldt.henter ||
       alleOppfolgingsdialogerReducer.henter ||
       tilgang.henter ||
       !harForsoektHentetAlt ||
-      (erSykmeldteHentet && sykmeldt && !tilgang.hentingForsokt),
+      (erSykmeldtHentet && sykmeldt && !tilgang.hentingForsokt),
     hentingFeilet:
-      state.sykmeldte.hentingFeilet || alleOppfolgingsdialogerReducer.hentingFeilet || tilgang.hentingFeilet,
+      state.sykmeldt.hentingFeilet || alleOppfolgingsdialogerReducer.hentingFeilet || tilgang.hentingFeilet,
     hentet:
       oppfolgingsdialogerReducer.hentet ||
       state.tilgang.hentet ||
@@ -290,7 +290,7 @@ export function mapStateToProps(state, ownProps) {
       state.samtykke.sendingFeilet,
     arbeidsoppgaver: state.arbeidsoppgaver,
     avbrytdialogReducer: state.avbrytdialogReducer,
-    sykmeldteReducer: state.sykmeldte,
+    sykmeldtReducer: state.sykmeldt,
     delmednav: state.delmednav,
     fastlegeDeling: state.fastlegeDeling,
     arbeidsforhold: state.arbeidsforhold,
@@ -355,7 +355,7 @@ const OppfolgingsdialogContainer = connect(mapStateToProps, {
   hentPerson,
   hentKontaktinfo,
   hentNaermesteLeder,
-  hentSykmeldte,
+  hentSykmeldt,
 })(OppfolgingsplanSide);
 
 export default OppfolgingsdialogContainer;

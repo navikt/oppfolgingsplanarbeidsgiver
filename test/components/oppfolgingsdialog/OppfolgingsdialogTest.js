@@ -47,21 +47,6 @@ describe('Oppfolgingsdialog', () => {
   const arbeidsforhold = data;
   const naermesteleder = data;
   const avbrytdialogReducer = {};
-  const sykmeldinger = [
-    {
-      identdato: new Date(2017, 12, 31),
-      orgnummer: getOppfolgingsplan().virksomhet.virksomhetsnummer,
-      mulighetForArbeid: {
-        perioder: [
-          {
-            fom: new Date(2018, 1, 1),
-            tom: new Date(2018, 2, 1),
-            grad: 100,
-          },
-        ],
-      },
-    },
-  ];
 
   beforeEach(() => {
     settDialog = sinon.spy();
@@ -90,7 +75,6 @@ describe('Oppfolgingsdialog', () => {
         kontaktinfo={kontaktinfo}
         arbeidsforhold={arbeidsforhold}
         hentArbeidsforhold={hentArbeidsforhold}
-        sykmeldinger={sykmeldinger}
       />
     );
   });
@@ -125,7 +109,6 @@ describe('Oppfolgingsdialog', () => {
         kontaktinfo={kontaktinfo}
         arbeidsforhold={arbeidsforhold}
         hentArbeidsforhold={hentArbeidsforhold}
-        sykmeldinger={sykmeldinger}
       />
     );
     expect(componentUnderArbeid.find(NavigasjonsTopp)).to.have.length(1);
@@ -158,7 +141,6 @@ describe('Oppfolgingsdialog', () => {
         oppfolgingsdialogAvbrutt
         arbeidsforhold={arbeidsforhold}
         hentArbeidsforhold={hentArbeidsforhold}
-        sykmeldinger={sykmeldinger}
       />
     );
     expect(component.find(AvbruttGodkjentPlanVarsel)).to.have.length(1);
@@ -194,7 +176,6 @@ describe('Oppfolgingsdialog', () => {
         kontaktinfo={kontaktinfo}
         arbeidsforhold={arbeidsforhold}
         hentArbeidsforhold={hentArbeidsforhold}
-        sykmeldinger={sykmeldinger}
       />
     );
     expect(component.find(Samtykke)).to.have.length(1);
@@ -230,7 +211,6 @@ describe('Oppfolgingsdialog', () => {
         kontaktinfo={kontaktinfo}
         arbeidsforhold={arbeidsforhold}
         hentArbeidsforhold={hentArbeidsforhold}
-        sykmeldinger={sykmeldinger}
       />
     );
     expect(component.find(Samtykke)).to.have.length(1);
@@ -272,7 +252,6 @@ describe('Oppfolgingsdialog', () => {
         kontaktinfo={kontaktinfo}
         arbeidsforhold={arbeidsforhold}
         hentArbeidsforhold={hentArbeidsforhold}
-        sykmeldinger={sykmeldinger}
       />
     );
     expect(component.find(Godkjenninger)).to.have.length(1);
@@ -305,7 +284,6 @@ describe('Oppfolgingsdialog', () => {
         kontaktinfo={kontaktinfo}
         arbeidsforhold={arbeidsforhold}
         hentArbeidsforhold={hentArbeidsforhold}
-        sykmeldinger={sykmeldinger}
       />
     );
     expect(component.find(ReleasetPlan)).to.have.length(1);
@@ -335,7 +313,6 @@ describe('Oppfolgingsdialog', () => {
         kontaktinfo={kontaktinfo}
         arbeidsforhold={arbeidsforhold}
         hentArbeidsforhold={hentArbeidsforhold}
-        sykmeldinger={sykmeldinger}
       />
     );
     expect(component.find(Arbeidsoppgaver)).to.have.length(1);
@@ -365,7 +342,6 @@ describe('Oppfolgingsdialog', () => {
         kontaktinfo={kontaktinfo}
         arbeidsforhold={arbeidsforhold}
         hentArbeidsforhold={hentArbeidsforhold}
-        sykmeldinger={sykmeldinger}
       />
     );
     expect(component.find(Tiltak)).to.have.length(1);
@@ -395,7 +371,6 @@ describe('Oppfolgingsdialog', () => {
         kontaktinfo={kontaktinfo}
         arbeidsforhold={arbeidsforhold}
         hentArbeidsforhold={hentArbeidsforhold}
-        sykmeldinger={sykmeldinger}
       />
     );
     expect(component.find(Godkjenn)).to.have.length(1);
@@ -426,7 +401,6 @@ describe('Oppfolgingsdialog', () => {
         kontaktinfo={kontaktinfo}
         arbeidsforhold={arbeidsforhold}
         hentArbeidsforhold={hentArbeidsforhold}
-        sykmeldinger={sykmeldinger}
         alleInputFormer={alleInputFormer}
       />
     );
@@ -458,7 +432,6 @@ describe('Oppfolgingsdialog', () => {
         kontaktinfo={kontaktinfo}
         arbeidsforhold={arbeidsforhold}
         hentArbeidsforhold={hentArbeidsforhold}
-        sykmeldinger={sykmeldinger}
         alleInputFormer={alleInputFormer}
       />
     );
@@ -490,7 +463,6 @@ describe('Oppfolgingsdialog', () => {
         kontaktinfo={kontaktinfo}
         arbeidsforhold={arbeidsforhold}
         hentArbeidsforhold={hentArbeidsforhold}
-        sykmeldinger={sykmeldinger}
         alleInputFormer={alleInputFormer}
       />
     );
