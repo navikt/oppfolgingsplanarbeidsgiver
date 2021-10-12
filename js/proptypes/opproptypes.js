@@ -214,6 +214,13 @@ export const kopierDialogReducerPt = PropTypes.shape({
   data: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 });
 
+export const sykmeldteReducerPt = PropTypes.shape({
+  henter: PropTypes.bool,
+  hentet: PropTypes.bool,
+  hentingFeilet: PropTypes.bool,
+  data: PropTypes.any,
+});
+
 export const navigasjonstogglesReducerPt = PropTypes.shape({
   steg: PropTypes.number,
 });

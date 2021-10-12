@@ -10,6 +10,7 @@ module.exports = {
     publicPath: 'http://localhost:9091/assets/',
     filename: 'bundle.js',
   },
+  devtool: 'eval-source-map',
   mode: 'development',
   resolve: {
     alias: {

@@ -2,14 +2,13 @@ const sykmeldt = {
   navn: 'Postmann Pat',
   fnr: '01234567891',
   orgnummer: '81549300',
-  koblingId: 123,
-  harNySykmelding: true,
+  narmestelederId: 123,
 };
 
 const expectedSykmeldt = {
   fnr: '01234567891',
   orgnummer: '81549300',
-  koblingId: 123,
+  narmestelederId: 123,
 };
 
 const mockSykmeldt = (s = {}) => {

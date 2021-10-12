@@ -38,21 +38,45 @@ function extractPathsFromCRAManifest(manifestObject) {
   return pathsToLoad;
 }
 
+export function joinPaths(...paths) {
+  return paths
+    .map((path, idx) => {
+      if (path.trim() === '' || path === '/') {
+        return null;
+      }
+
+      const isFirstPath = idx === 0;
+      const isLastPath = idx === paths.length - 1;
+
+      let cleanedPath = path;
+
+      if (cleanedPath.startsWith('/') && !isFirstPath) {
+        cleanedPath = cleanedPath.substr(1);
+      }
+
+      if (cleanedPath.endsWith('/') && !isLastPath) {
+        cleanedPath = cleanedPath.substr(0, path.length - 1);
+      }
+
+      return cleanedPath;
+    })
+    .filter((p) => p != null)
+    .join('/');
+}
+
 export function makeAbsolute(baseUrl, maybeAbsolutePath) {
   if (maybeAbsolutePath.startsWith('http')) {
     return maybeAbsolutePath;
-  }
-  if (baseUrl.startsWith('http')) {
+  } else if (baseUrl.startsWith('http')) {
     const url = new URL(baseUrl);
-    return `${url.origin}${maybeAbsolutePath}`;
+    return joinPaths(url.origin, maybeAbsolutePath);
   }
-  return `${window.location.origin}${maybeAbsolutePath}`;
+  return joinPaths(window.location.origin, maybeAbsolutePath);
 }
 
 export function createAssetManifestParser(mikrofrontendConfig) {
   return (manifestObject) => {
     const pathsToLoad = extractPathsFromCRAManifest(manifestObject);
-    const debugPaths = pathsToLoad.map((path) => makeAbsolute(mikrofrontendConfig.appBaseUrl, path));
-    return debugPaths;
+    return pathsToLoad.map((path) => makeAbsolute(mikrofrontendConfig.appBaseUrl, path));
   };
 }

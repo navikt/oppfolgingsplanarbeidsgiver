@@ -45,3 +45,5 @@ spec:
       value: https://itjenester.oera.no/syforest
     - name: SYFOOPRESTAPI_URL
       value: https://syfooprest.nais.oera.no/syfooprest/api
+    - name: SYKMELDINGER_ARBEIDSGIVER_URL
+      value: https://sykmeldinger-arbeidsgiver.nav.no

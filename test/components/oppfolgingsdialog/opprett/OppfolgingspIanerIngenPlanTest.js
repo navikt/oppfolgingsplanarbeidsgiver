@@ -1,3 +1,4 @@
+import referee from '@sinonjs/referee';
 import React from 'react';
 import chai from 'chai';
 import { mount } from 'enzyme';
@@ -5,29 +6,26 @@ import chaiEnzyme from 'chai-enzyme';
 import sinon from 'sinon';
 import OppfolgingsplanerIngenplan from '../../../../js/components/oppfolgingsdialog/opprett/OppfolgingsplanerIngenplan';
 import OppfolgingsplanerIngenplanKnapper from '../../../../js/components/oppfolgingsdialog/opprett/OppfolgingsplanerIngenplanKnapper';
-import getOppfolgingsplan, { hentOppfolgingsplanTidligere } from '../../../mock/mockOppfolgingsdialog';
+import { hentOppfolgingsplanAktiv, hentOppfolgingsplanTidligere } from '../../../mock/mockOppfolgingsdialog';
 
 chai.use(chaiEnzyme());
 const expect = chai.expect;
-const assert = chai.assert;
+const assertTrue = referee.assert;
 
 describe('OppfolgingsplanerIngenplan', () => {
-  let klokke;
-  const dagensDato = new Date('2017-01-01');
-
-  let komponent;
   let opprett;
   let visOppfolgingsdialogOpprett;
-  let arbeidsgiver;
+  const arbeidsgiver = {
+    virksomhetsnummer: '12345678',
+  };
 
   beforeEach(() => {
-    klokke = sinon.useFakeTimers(dagensDato.getTime());
     opprett = sinon.spy();
     visOppfolgingsdialogOpprett = sinon.spy();
-    arbeidsgiver = {
-      virksomhetsnummer: '12345678',
-    };
-    komponent = mount(
+  });
+
+  it('Skal vise OppfolgingsplanerIngenplanKnapper', () => {
+    const komponent = mount(
       <OppfolgingsplanerIngenplan
         opprett={opprett}
         oppfolgingsdialoger={[]}
@@ -35,40 +33,34 @@ describe('OppfolgingsplanerIngenplan', () => {
         rootUrl=""
       />
     );
-  });
-
-  afterEach(() => {
-    klokke.restore();
-  });
-
-  it('Skal vise OppfolgingsplanerIngenplanKnapper', () => {
     expect(komponent.find(OppfolgingsplanerIngenplanKnapper)).to.have.length(1);
   });
 
   describe('OppfolgingsplanerIngenplanKnapper', () => {
-    let oppfolgingsdialogTidligere;
-    let oppfolgingsdialogIkkeTidligere;
-    let virksomhet;
-
-    beforeEach(() => {
-      virksomhet = { virksomhetsnummer: arbeidsgiver.virksomhetsnummer };
-      oppfolgingsdialogTidligere = {
-        ...hentOppfolgingsplanTidligere(dagensDato),
-        virksomhet,
-      };
-      oppfolgingsdialogIkkeTidligere = {
-        ...getOppfolgingsplan(),
-        virksomhet,
-        godkjentplan: null,
-      };
-    });
+    const oppfolgingsdialogTidligere = {
+      ...hentOppfolgingsplanTidligere(new Date()),
+      arbeidsgiver,
+    };
+    const oppfolgingsdialogIkkeTidligere = {
+      ...hentOppfolgingsplanAktiv(new Date()),
+      arbeidsgiver,
+      godkjentplan: null,
+    };
 
     it('Skal vise knapp for aa opprett ny dialog', () => {
+      const komponent = mount(
+        <OppfolgingsplanerIngenplan
+          opprett={opprett}
+          oppfolgingsdialoger={[]}
+          visOppfolgingsdialogOpprett={visOppfolgingsdialogOpprett}
+          rootUrl=""
+        />
+      );
       expect(komponent.find('button')).to.have.length(1);
     });
 
     it('Skal vise knapp som kaller opprett, om oppfolgingsdialog er opprettbar direkte uten ekstra utfylling', () => {
-      komponent = mount(
+      const komponent = mount(
         <OppfolgingsplanerIngenplan
           opprett={opprett}
           visOppfolgingsdialogOpprett={visOppfolgingsdialogOpprett}
@@ -77,11 +69,11 @@ describe('OppfolgingsplanerIngenplan', () => {
         />
       );
       komponent.find('button').simulate('click');
-      assert(opprett.calledOnce, true);
+      assertTrue(opprett.calledOnce);
     });
 
     it('Skal vise knapp som kaller visOppfolgingsdialogOpprett, om AT har tidligere godkjent oppfolgingsdialog med virksomhet', () => {
-      komponent = mount(
+      const komponent = mount(
         <OppfolgingsplanerIngenplan
           opprett={opprett}
           visOppfolgingsdialogOpprett={visOppfolgingsdialogOpprett}
@@ -90,7 +82,7 @@ describe('OppfolgingsplanerIngenplan', () => {
         />
       );
       komponent.find('button').simulate('click');
-      assert(visOppfolgingsdialogOpprett.calledOnce, true);
+      assertTrue(visOppfolgingsdialogOpprett.calledOnce);
     });
   });
 });
