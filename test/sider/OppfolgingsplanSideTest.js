@@ -30,10 +30,10 @@ describe('OppfolgingsplanSide', () => {
     let hentOppfolgingsplaner;
     let settDialog;
     let hentArbeidsforhold;
-    let hentSykmeldte;
+    let hentSykmeldt;
     let alleOppfolgingsdialogerReducer;
     let oppfolgingsdialogerReducer;
-    let sykmeldteReducer;
+    let sykmeldtReducer;
     let tilgang;
     const sykmeldt = {
       fnr: '1000000000000',
@@ -53,14 +53,14 @@ describe('OppfolgingsplanSide', () => {
 
     beforeEach(() => {
       alleOppfolgingsdialogerReducer = {};
-      sykmeldteReducer = {};
+      sykmeldtReducer = {};
       oppfolgingsdialogerReducer = {};
       tilgang = { data: {} };
       sjekkTilgang = sinon.spy();
       hentOppfolgingsplaner = sinon.spy();
       settDialog = sinon.spy();
       hentArbeidsforhold = sinon.spy();
-      hentSykmeldte = sinon.spy();
+      hentSykmeldt = sinon.spy();
     });
 
     it('Skal vise spinner dersom data hentes', () => {
@@ -68,7 +68,7 @@ describe('OppfolgingsplanSide', () => {
         <Container
           alleOppfolgingsdialogerReducer={alleOppfolgingsdialogerReducer}
           oppfolgingsdialogerReducer={oppfolgingsdialogerReducer}
-          sykmeldteReducer={sykmeldteReducer}
+          sykmeldtReducer={sykmeldtReducer}
           tilgang={tilgang}
           oppfolgingsdialoger={[]}
           henter
@@ -77,7 +77,7 @@ describe('OppfolgingsplanSide', () => {
           sjekkTilgang={sjekkTilgang}
           settDialog={settDialog}
           hentArbeidsforhold={hentArbeidsforhold}
-          hentSykmeldte={hentSykmeldte}
+          hentSykmeldt={hentSykmeldt}
         />
       );
       expect(component.contains(<AppSpinner />)).to.equal(true);
@@ -88,7 +88,7 @@ describe('OppfolgingsplanSide', () => {
         <Container
           alleOppfolgingsdialogerReducer={alleOppfolgingsdialogerReducer}
           oppfolgingsdialogerReducer={oppfolgingsdialogerReducer}
-          sykmeldteReducer={sykmeldteReducer}
+          sykmeldtReducer={sykmeldtReducer}
           tilgang={tilgang}
           oppfolgingsdialoger={[]}
           sender
@@ -97,7 +97,7 @@ describe('OppfolgingsplanSide', () => {
           sjekkTilgang={sjekkTilgang}
           settDialog={settDialog}
           hentArbeidsforhold={hentArbeidsforhold}
-          hentSykmeldte={hentSykmeldte}
+          hentSykmeldt={hentSykmeldt}
         />
       );
       expect(component.contains(<AppSpinner />)).to.equal(true);
@@ -108,7 +108,7 @@ describe('OppfolgingsplanSide', () => {
         <Container
           alleOppfolgingsdialogerReducer={alleOppfolgingsdialogerReducer}
           oppfolgingsdialogerReducer={oppfolgingsdialogerReducer}
-          sykmeldteReducer={sykmeldteReducer}
+          sykmeldtReducer={sykmeldtReducer}
           tilgang={tilgang}
           oppfolgingsdialoger={[]}
           hentet={false}
@@ -117,7 +117,7 @@ describe('OppfolgingsplanSide', () => {
           sjekkTilgang={sjekkTilgang}
           settDialog={settDialog}
           hentArbeidsforhold={hentArbeidsforhold}
-          hentSykmeldte={hentSykmeldte}
+          hentSykmeldt={hentSykmeldt}
         />
       );
       expect(component.contains(<Feilmelding />)).to.equal(true);
@@ -128,7 +128,7 @@ describe('OppfolgingsplanSide', () => {
         <Container
           alleOppfolgingsdialogerReducer={alleOppfolgingsdialogerReducer}
           oppfolgingsdialogerReducer={oppfolgingsdialogerReducer}
-          sykmeldteReducer={sykmeldteReducer}
+          sykmeldtReducer={sykmeldtReducer}
           tilgang={tilgang}
           oppfolgingsdialoger={[]}
           hentet={false}
@@ -137,7 +137,7 @@ describe('OppfolgingsplanSide', () => {
           sjekkTilgang={sjekkTilgang}
           settDialog={settDialog}
           hentArbeidsforhold={hentArbeidsforhold}
-          hentSykmeldte={hentSykmeldte}
+          hentSykmeldt={hentSykmeldt}
         />
       );
       expect(component.contains(<Feilmelding />)).to.equal(true);
@@ -148,14 +148,14 @@ describe('OppfolgingsplanSide', () => {
         <Container
           alleOppfolgingsdialogerReducer={alleOppfolgingsdialogerReducer}
           oppfolgingsdialogerReducer={oppfolgingsdialogerReducer}
-          sykmeldteReducer={sykmeldteReducer}
+          sykmeldtReducer={sykmeldtReducer}
           oppfolgingsdialoger={[]}
           tilgang={{ data: ikkeTilgang }}
           hentOppfolgingsplaner={hentOppfolgingsplaner}
           sjekkTilgang={sjekkTilgang}
           settDialog={settDialog}
           hentArbeidsforhold={hentArbeidsforhold}
-          hentSykmeldte={hentSykmeldte}
+          hentSykmeldt={hentSykmeldt}
           sykmeldt={sykmeldt}
         />
       );
@@ -167,7 +167,7 @@ describe('OppfolgingsplanSide', () => {
         <Container
           alleOppfolgingsdialogerReducer={alleOppfolgingsdialogerReducer}
           oppfolgingsdialogerReducer={oppfolgingsdialogerReducer}
-          sykmeldteReducer={sykmeldteReducer}
+          sykmeldtReducer={sykmeldtReducer}
           oppfolgingsdialoger={[]}
           tilgang={{ data: harTilgang }}
           hentOppfolgingsplaner={hentOppfolgingsplaner}
@@ -175,7 +175,7 @@ describe('OppfolgingsplanSide', () => {
           settDialog={settDialog}
           hentArbeidsforhold={hentArbeidsforhold}
           navigasjontoggles={navigasjontoggles}
-          hentSykmeldte={hentSykmeldte}
+          hentSykmeldt={hentSykmeldt}
           sykmeldt={sykmeldt}
         />
       );

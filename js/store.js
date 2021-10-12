@@ -22,7 +22,7 @@ import tiltak from './reducers/tiltak';
 import timeout from './timeout/timeout';
 import virksomhet from './reducers/virksomhet';
 
-import sykmeldte from './reducers/sykmeldte';
+import sykmeldt from './reducers/sykmeldt';
 import rootSaga from './sagas';
 
 const sagaMiddleware = createSagaMiddleware();
@@ -38,7 +38,7 @@ const rootReducer = combineReducers({
   tilgang,
   samtykke,
   kommentar,
-  sykmeldte,
+  sykmeldt,
   tiltak,
   delmednav,
   fastlegeDeling,

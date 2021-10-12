@@ -21,12 +21,12 @@ const KONTAKTINFO = 'kontaktinfo';
 const NAERMESTELEDER = 'naermesteleder';
 const PERSON = 'person';
 const PERSON_SEVERUS = 'personSeverus';
-const SYKMELDTE = 'sykmeldte';
+const SYKMELDT = 'sykmeldt';
 const TILGANG = 'tilgang';
 const VIRKSOMHET = 'virksomhet';
 
 lastFilTilMinne(ARBEIDSFORHOLD);
-lastFilTilMinne(SYKMELDTE);
+lastFilTilMinne(SYKMELDT);
 lastFilTilMinne(PERSON);
 lastFilTilMinne(PERSON_SEVERUS);
 lastFilTilMinne(KONTAKTINFO);
@@ -47,7 +47,7 @@ function mockForOpplaeringsmiljo(server) {
 
   server.get('/oppfolgingsplanarbeidsgiver/api/dinesykmeldte/123', (req, res) => {
     res.setHeader('Content-Type', 'application/json');
-    res.send(JSON.stringify(mockData[SYKMELDTE]));
+    res.send(JSON.stringify(mockData[SYKMELDT]));
   });
 
   server.get('/syfooppfolgingsplanservice/api/arbeidsgiver/oppfolgingsplaner', (req, res) => {
@@ -114,7 +114,7 @@ function mockForLokaltMiljo(server) {
 
   server.get('/oppfolgingsplanarbeidsgiver/api/dinesykmeldte/123', (req, res) => {
     res.setHeader('Content-Type', 'application/json');
-    res.send(JSON.stringify(mockData[SYKMELDTE]));
+    res.send(JSON.stringify(mockData[SYKMELDT]));
   });
 
   server.post('/syfooppfolgingsplanservice/api/tiltak/actions/:response/lagreKommentar', (req, res) => {

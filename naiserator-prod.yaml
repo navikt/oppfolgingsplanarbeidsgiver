@@ -41,8 +41,6 @@ spec:
       value: "https://nav.no/dekoratoren"
     - name: LOGINSERVICE_URL
       value: https://loginservice.nav.no/login
-    - name: SYKEFRAVAERAPI_URL
-      value: https://itjenester.oera.no/syforest
     - name: SYFOOPRESTAPI_URL
       value: https://syfooprest.nais.oera.no/syfooprest/api
     - name: SYKMELDINGER_ARBEIDSGIVER_URL
