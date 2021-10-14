@@ -12,12 +12,12 @@ const LinkStyled = styled(Link)`
   text-transform: initial !important;
 `;
 
-const LagreOgAvsluttKnapp = ({ koblingId }) => {
+const LagreOgAvsluttKnapp = ({ narmestelederId }) => {
   return (
     <div className="knapperad">
       <LinkStyled
         className="knapperad__element knapp knapp--flat"
-        to={`${getContextRoot()}/${koblingId}/oppfolgingsplaner`}
+        to={`${getContextRoot()}/${narmestelederId}/oppfolgingsplaner`}
       >
         {tekster.knapp}
       </LinkStyled>
@@ -26,7 +26,7 @@ const LagreOgAvsluttKnapp = ({ koblingId }) => {
 };
 
 LagreOgAvsluttKnapp.propTypes = {
-  koblingId: PropTypes.string,
+  narmestelederId: PropTypes.string,
 };
 
 export default LagreOgAvsluttKnapp;

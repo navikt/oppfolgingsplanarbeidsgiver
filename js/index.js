@@ -8,7 +8,6 @@ import React from 'react';
 import AppRouter from './routers/AppRouter';
 import history from './history';
 import store from './store';
-import { hentSykmeldte } from './actions/sykmeldte_actions';
 import '../styles/styles.less';
 import { forlengInnloggetSesjon, sjekkInnloggingssesjon } from './timeout/timeout_actions';
 
@@ -17,7 +16,6 @@ Sentry.init({
   environment: window.location.hostname,
 });
 
-store.dispatch(hentSykmeldte());
 store.dispatch(forlengInnloggetSesjon());
 
 setPerformOnHttpCalls(() => {

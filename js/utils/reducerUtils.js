@@ -2,16 +2,8 @@ export const finnUnikeElementer = (liste) => {
   return new Set(Array.from(new Set(liste.map(JSON.stringify))).map(JSON.parse));
 };
 
-export const forsoektHentetSykmeldte = (sykmeldte) => {
-  return sykmeldte.hentet || sykmeldte.hentingFeilet;
-};
-
-export const forsoektHentetOppfolgingsdialoger = (oppfolgingsdialoger) => {
-  return oppfolgingsdialoger.hentet || oppfolgingsdialoger.hentingFeilet;
-};
-
-export const henterEllerHarHentetSykmeldinger = (sykmeldinger) => {
-  return sykmeldinger.henter || sykmeldinger.hentet;
+export const forsoektHentetSykmeldt = (sykmeldt) => {
+  return sykmeldt.hentet || sykmeldt.hentingFeilet;
 };
 
 export const oppfolgingsdialogHarBlittAvbrutt = (avbrytdialog, nesteAvbrytdialog) => {

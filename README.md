@@ -11,7 +11,7 @@ React-app for den sykmeldtes nærmeste leder. Viser oppfølgingsplaner til leder
     - `$ npm run dev`
     - I et annet vindu `$ npm run start-local`
     - Eventuelt kan komandoene kjøres fra `package.json` i intellij.
-    - Sjekk at appen kjører på http://localhost:8289/oppfolgingsplanarbeidsgiver/28790/oppfolgingsplaner
+    - Sjekk at appen kjører på http://localhost:8289/oppfolgingsplanarbeidsgiver/123/oppfolgingsplaner
 * Kjør tester med `npm test` eller `npm test:watch`
 * Lint JS-kode med `npm run lint` eller `npm run lint:fix`
 

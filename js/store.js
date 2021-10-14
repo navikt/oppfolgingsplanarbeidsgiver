@@ -1,6 +1,7 @@
-import { createStore, combineReducers, applyMiddleware } from 'redux';
+import { applyMiddleware, combineReducers, createStore } from 'redux';
 import { reducer as formReducer } from 'redux-form';
 import createSagaMiddleware from 'redux-saga';
+import { composeWithDevTools } from 'redux-devtools-extension';
 
 import arbeidsoppgaver from './reducers/arbeidsoppgaver';
 import arbeidsforhold from './reducers/arbeidsforhold';
@@ -21,8 +22,7 @@ import tiltak from './reducers/tiltak';
 import timeout from './timeout/timeout';
 import virksomhet from './reducers/virksomhet';
 
-import sykmeldte from './reducers/sykmeldte';
-import sykmeldinger from './reducers/sykmeldinger';
+import sykmeldt from './reducers/sykmeldt';
 import rootSaga from './sagas';
 
 const sagaMiddleware = createSagaMiddleware();
@@ -38,8 +38,7 @@ const rootReducer = combineReducers({
   tilgang,
   samtykke,
   kommentar,
-  sykmeldte,
-  sykmeldinger,
+  sykmeldt,
   tiltak,
   delmednav,
   fastlegeDeling,
@@ -51,7 +50,7 @@ const rootReducer = combineReducers({
   form: formReducer,
 });
 
-const store = createStore(rootReducer, applyMiddleware(sagaMiddleware));
+const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(sagaMiddleware)));
 
 sagaMiddleware.run(rootSaga);
 
