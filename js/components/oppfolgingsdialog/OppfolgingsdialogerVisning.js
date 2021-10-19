@@ -39,7 +39,13 @@ class OppfolgingsdialogerVisning extends Component {
   }
 
   render() {
-    const { oppfolgingsdialoger, narmestelederId, kopierOppfolgingsdialog, opprettOppfolgingsdialog, orgnummer } = this.props;
+    const {
+      oppfolgingsdialoger,
+      narmestelederId,
+      kopierOppfolgingsdialog,
+      opprettOppfolgingsdialog,
+      orgnummer,
+    } = this.props;
     return (
       <div>
         {this.state.visOppfolgingsdialogOpprett && (
