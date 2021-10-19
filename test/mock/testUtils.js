@@ -17,3 +17,11 @@ export const leggTilMnderOgDagerPaaDato = (dato, mnder, dager) => {
   nyDato = leggTilDagerPaaDato(nyDato, dager);
   return new Date(nyDato);
 };
+
+export async function withCurrentLocation(url, assertion) {
+  const original = window.location;
+  delete window.location;
+  window.location = new URL(url);
+  await assertion();
+  window.location = original;
+}

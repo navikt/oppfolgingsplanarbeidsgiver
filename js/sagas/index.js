@@ -17,15 +17,12 @@ import settDialogSagas from './oppfolgingsplan/settDialogSagas';
 import tilgangSagas from './oppfolgingsplan/tilgangSagas';
 import tiltakSagas from './oppfolgingsplan/tiltakSagas';
 import virksomhetSagas from './oppfolgingsplan/virksomhetSagas';
-
-import sykmeldteSagas from './sykmeldteSagas';
-import sykmeldingerSagas from './sykmeldingerSagas';
+import sykmeldtSagas from './sykmeldtSagas';
 
 export default function* rootSaga() {
   yield all([
     arbeidsforholdSagas(),
-    sykmeldteSagas(),
-    sykmeldingerSagas(),
+    sykmeldtSagas(),
     oppfolgingsdialogerSagas(),
     avbrytdialogSagas(),
     nullstillGodkjenningSagas(),
