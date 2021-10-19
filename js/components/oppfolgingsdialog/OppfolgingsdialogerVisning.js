@@ -39,7 +39,13 @@ class OppfolgingsdialogerVisning extends Component {
   }
 
   render() {
-    const { oppfolgingsdialoger, koblingId, kopierOppfolgingsdialog, opprettOppfolgingsdialog } = this.props;
+    const {
+      oppfolgingsdialoger,
+      narmestelederId,
+      kopierOppfolgingsdialog,
+      opprettOppfolgingsdialog,
+      orgnummer,
+    } = this.props;
     return (
       <div>
         {this.state.visOppfolgingsdialogOpprett && (
@@ -55,7 +61,7 @@ class OppfolgingsdialogerVisning extends Component {
             oppfolgingsdialoger={finnAktiveOppfolgingsdialoger(oppfolgingsdialoger)}
             tittel={texts.teaserActivePlan.title}
             id="OppfolgingsdialogTeasereAG"
-            rootUrlPlaner={`${getContextRoot()}/${koblingId}`}
+            rootUrlPlaner={`${getContextRoot()}/${narmestelederId}`}
             rootUrl={getContextRoot()}
           />
         )}
@@ -77,13 +83,13 @@ class OppfolgingsdialogerVisning extends Component {
               harTidligerOppfolgingsdialoger
               tittel={texts.teaserOutdatedPlaner.title}
               id="OppfolgingsdialogTeasereAG"
-              rootUrlPlaner={`${getContextRoot()}/${koblingId}`}
+              rootUrlPlaner={`${getContextRoot()}/${narmestelederId}`}
               rootUrl={getContextRoot()}
             />
           </div>
         )}
         {/* eslint-disable-next-line react/jsx-pascal-case */}
-        <SamtalestøttePanel />
+        <SamtalestøttePanel orgnummer={orgnummer} />
         <OppfolgingsplanFilm />
       </div>
     );
@@ -91,10 +97,11 @@ class OppfolgingsdialogerVisning extends Component {
 }
 
 OppfolgingsdialogerVisning.propTypes = {
-  koblingId: PropTypes.string,
+  narmestelederId: PropTypes.string,
   oppfolgingsdialoger: PropTypes.arrayOf(opProptypes.oppfolgingsplanPt),
   kopierOppfolgingsdialog: PropTypes.func,
   opprettOppfolgingsdialog: PropTypes.func,
+  orgnummer: PropTypes.string,
 };
 
 export default OppfolgingsdialogerVisning;

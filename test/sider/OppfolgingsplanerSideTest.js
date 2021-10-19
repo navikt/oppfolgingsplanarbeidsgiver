@@ -3,8 +3,7 @@ import React from 'react';
 import sinon from 'sinon';
 import { shallow } from 'enzyme';
 import chaiEnzyme from 'chai-enzyme';
-import { hentSykmeldingGyldigForOppfoelging, hentSykmeldingIkkeGyldigForOppfoelging } from '../mock/mockSykmeldinger';
-import { OppfolgingsplanerSide, mapStateToProps } from '../../js/sider/OppfolgingsplanerSide';
+import { mapStateToProps, OppfolgingsplanerSide } from '../../js/sider/OppfolgingsplanerSide';
 import Oppfolgingsdialoger from '../../js/components/oppfolgingsdialog/Oppfolgingsdialoger';
 import AppSpinner from '../../js/components/AppSpinner';
 import Feilmelding from '../../js/components/Feilmelding';
@@ -25,43 +24,30 @@ describe('OppfolgingsplanerSide', () => {
       clock.restore();
     });
 
-    const sykmeldt1 = {
+    const sykmeldt = {
       fnr: '81549300',
       navn: 'test testersen',
       orgnummer: '81549300',
-      koblingId: '123',
-    };
-    const sykmeldt2 = {
-      fnr: '12304829',
-      navn: 'Tore Tang',
-      orgnummer: '12304829',
-      koblingId: '456',
+      narmestelederId: '123',
     };
 
     const ownProps = {
       params: {
-        koblingId: sykmeldt1.koblingId,
+        narmestelederId: sykmeldt.narmestelederId,
         oppfolgingsplanId: '1',
       },
     };
     const state = {
-      sykmeldte: {
+      sykmeldt: {
         hentet: true,
-        data: [sykmeldt1, sykmeldt2],
-        henterBerikelser: [],
-      },
-      sykmeldinger: {
-        [sykmeldt1.koblingId]: {
-          hentet: true,
-          data: [],
-        },
+        data: sykmeldt,
       },
       oppfolgingsdialoger: {
         henter: false,
         hentet: true,
         hentingFeilet: false,
         hentingForsokt: true,
-        [sykmeldt1.fnr]: {
+        [sykmeldt.fnr]: {
           data: [
             {
               opprettetDato: '05-05-2017',
@@ -69,7 +55,7 @@ describe('OppfolgingsplanerSide', () => {
                 fnr: '81549300',
               },
               virksomhet: {
-                virksomhetsnummer: sykmeldt1.orgnummer,
+                virksomhetsnummer: sykmeldt.orgnummer,
               },
               arbeidsgiver: {
                 naermesteLeder: {},
@@ -86,7 +72,7 @@ describe('OppfolgingsplanerSide', () => {
         },
       },
       tilgang: {
-        [sykmeldt1.fnr]: {
+        [sykmeldt.fnr]: {
           henter: false,
           hentet: true,
           hentingFeilet: false,
@@ -98,11 +84,11 @@ describe('OppfolgingsplanerSide', () => {
         },
       },
       kontaktinfo: {
-        data: [{ fnr: sykmeldt1.fnr, kontaktinfo: { skalHaVarsel: true, epost: 'test@nav.no', tlf: '22229999' } }],
+        data: [{ fnr: sykmeldt.fnr, kontaktinfo: { skalHaVarsel: true, epost: 'test@nav.no', tlf: '22229999' } }],
       },
       kopierDialogReducer: {},
       person: {
-        data: [{ fnr: sykmeldt1.fnr, navn: 'Test Testesen' }],
+        data: [{ fnr: sykmeldt.fnr, navn: 'Test Testesen' }],
       },
       naermesteleder: {
         data: [],
@@ -129,7 +115,7 @@ describe('OppfolgingsplanerSide', () => {
             skalHaVarsel: true,
           },
           virksomhet: {
-            virksomhetsnummer: sykmeldt1.orgnummer,
+            virksomhetsnummer: sykmeldt.orgnummer,
             navn: '',
           },
           arbeidsgiver: {
@@ -155,9 +141,8 @@ describe('OppfolgingsplanerSide', () => {
         },
       ]);
 
-      expect(res.koblingId).to.deep.equal(sykmeldt1.koblingId);
+      expect(res.narmestelederId).to.deep.equal(sykmeldt.narmestelederId);
       expect(res.hentingFeilet).to.deep.not.equal(true);
-      expect(res.oppfolgingIkkeFunnet).to.deep.not.equal(true);
       expect(res.henter).to.deep.not.equal(true);
       expect(res.tilgang).to.deep.equal({
         henter: false,
@@ -169,35 +154,6 @@ describe('OppfolgingsplanerSide', () => {
           ikkeTilgangGrunn: null,
         },
       });
-      expect(res.harSykmeldtGyldigSykmelding).to.deep.equal(false);
-    });
-
-    it('Skal returnere harSykmeldtGyldigSykmelding lik false, om det ikke er sykmeldinger gyldig for oppfoelging', () => {
-      const res = mapStateToProps(
-        Object.assign({}, state, {
-          sykmeldinger: {
-            [sykmeldt1.koblingId]: {
-              data: [hentSykmeldingIkkeGyldigForOppfoelging(dagensDato)],
-            },
-          },
-        }),
-        ownProps
-      );
-      expect(res.harSykmeldtGyldigSykmelding).to.deep.equal(false);
-    });
-
-    it('Skal returnere harSykmeldtGyldigSykmelding lik true, om det er sykmeldinger gyldig for oppfoelging', () => {
-      const res = mapStateToProps(
-        Object.assign({}, state, {
-          sykmeldinger: {
-            [sykmeldt1.koblingId]: {
-              data: [hentSykmeldingGyldigForOppfoelging(dagensDato)],
-            },
-          },
-        }),
-        ownProps
-      );
-      expect(res.harSykmeldtGyldigSykmelding).to.deep.equal(true);
     });
   });
 
@@ -206,11 +162,10 @@ describe('OppfolgingsplanerSide', () => {
     const dagensDato = new Date('2017-01-01');
     let sjekkTilgang;
     let hentOppfolgingsplaner;
-    let hentSykmeldinger;
-    let hentSykmeldte;
+    let hentSykmeldt;
     let alleOppfolgingsdialogerReducer;
     let oppfolgingsdialogerReducer;
-    let sykmeldinger;
+    let sykmeldtReducer;
     let tilgang;
     let loggError;
     let hentingFeiletMap;
@@ -218,10 +173,10 @@ describe('OppfolgingsplanerSide', () => {
       fnr: '1000000000000',
       navn: 'fornavn etternavn',
       orgnummer: '81549300',
-      koblingId: '123',
+      narmestelederId: '123',
     };
     const params = {
-      koblingId: '123',
+      narmestelederId: '123',
     };
     const harTilgang = {
       harTilgang: true,
@@ -232,14 +187,13 @@ describe('OppfolgingsplanerSide', () => {
 
     beforeEach(() => {
       clock = sinon.useFakeTimers(dagensDato.getTime());
-      sykmeldinger = {};
       oppfolgingsdialogerReducer = {};
+      sykmeldtReducer = {};
       alleOppfolgingsdialogerReducer = {};
       tilgang = { data: {} };
       sjekkTilgang = sinon.spy();
       hentOppfolgingsplaner = sinon.spy();
-      hentSykmeldinger = sinon.spy();
-      hentSykmeldte = sinon.spy();
+      hentSykmeldt = sinon.spy();
       loggError = sinon.spy();
       hentingFeiletMap = {};
     });
@@ -254,14 +208,13 @@ describe('OppfolgingsplanerSide', () => {
           tilgang={tilgang}
           alleOppfolgingsdialogerReducer={alleOppfolgingsdialogerReducer}
           oppfolgingsdialogerReducer={oppfolgingsdialogerReducer}
-          sykmeldinger={sykmeldinger}
           oppfolgingsdialoger={[]}
           henter
           hentOppfolgingsplaner={hentOppfolgingsplaner}
-          hentSykmeldinger={hentSykmeldinger}
           sjekkTilgang={sjekkTilgang}
           params={params}
-          hentSykmeldte={hentSykmeldte}
+          sykmeldtReducer={sykmeldtReducer}
+          hentSykmeldt={hentSykmeldt}
         />
       );
       expect(component.contains(<AppSpinner />)).to.equal(true);
@@ -273,14 +226,13 @@ describe('OppfolgingsplanerSide', () => {
           tilgang={tilgang}
           alleOppfolgingsdialogerReducer={alleOppfolgingsdialogerReducer}
           oppfolgingsdialogerReducer={oppfolgingsdialogerReducer}
-          sykmeldinger={sykmeldinger}
           oppfolgingsdialoger={[]}
           sender
           hentOppfolgingsplaner={hentOppfolgingsplaner}
-          hentSykmeldinger={hentSykmeldinger}
           sjekkTilgang={sjekkTilgang}
           params={params}
-          hentSykmeldte={hentSykmeldte}
+          sykmeldtReducer={sykmeldtReducer}
+          hentSykmeldt={hentSykmeldt}
         />
       );
       expect(component.contains(<AppSpinner />)).to.equal(true);
@@ -292,15 +244,14 @@ describe('OppfolgingsplanerSide', () => {
           tilgang={tilgang}
           alleOppfolgingsdialogerReducer={alleOppfolgingsdialogerReducer}
           oppfolgingsdialogerReducer={oppfolgingsdialogerReducer}
-          sykmeldinger={sykmeldinger}
           oppfolgingsdialoger={[]}
           hentingFeilet
           hentOppfolgingsplaner={hentOppfolgingsplaner}
-          hentSykmeldinger={hentSykmeldinger}
           sjekkTilgang={sjekkTilgang}
           params={params}
-          hentSykmeldte={hentSykmeldte}
+          hentSykmeldt={hentSykmeldt}
           loggError={loggError}
+          sykmeldtReducer={sykmeldtReducer}
           hentingFeiletMap={hentingFeiletMap}
         />
       );
@@ -313,15 +264,14 @@ describe('OppfolgingsplanerSide', () => {
           tilgang={tilgang}
           alleOppfolgingsdialogerReducer={alleOppfolgingsdialogerReducer}
           oppfolgingsdialogerReducer={oppfolgingsdialogerReducer}
-          sykmeldinger={sykmeldinger}
           sendingFeilet
           oppfolgingsdialoger={[]}
           hentOppfolgingsplaner={hentOppfolgingsplaner}
-          hentSykmeldinger={hentSykmeldinger}
           sjekkTilgang={sjekkTilgang}
           params={params}
-          hentSykmeldte={hentSykmeldte}
+          hentSykmeldt={hentSykmeldt}
           loggError={loggError}
+          sykmeldtReducer={sykmeldtReducer}
           hentingFeiletMap={hentingFeiletMap}
         />
       );
@@ -333,43 +283,36 @@ describe('OppfolgingsplanerSide', () => {
         <OppfolgingsplanerSide
           alleOppfolgingsdialogerReducer={alleOppfolgingsdialogerReducer}
           oppfolgingsdialogerReducer={oppfolgingsdialogerReducer}
-          sykmeldinger={sykmeldinger}
           oppfolgingsdialoger={[]}
           tilgang={{ data: ikkeTilgang }}
           hentOppfolgingsplaner={hentOppfolgingsplaner}
-          hentSykmeldinger={hentSykmeldinger}
           sjekkTilgang={sjekkTilgang}
           params={params}
-          hentSykmeldte={hentSykmeldte}
+          hentSykmeldt={hentSykmeldt}
+          sykmeldtReducer={sykmeldtReducer}
           sykmeldt={sykmeldt}
         />
       );
       expect(component.find(OppfolgingsplanInfoboks)).to.have.length(1);
     });
 
-    it(
-      'Skal vise OppfolgingsplanInfoboks dersom leder ikke har sykmeldt, ' +
-        'og det ikke eksisterer en sykmelding gyldig for oppfoelging',
-      () => {
-        const component = shallow(
-          <OppfolgingsplanerSide
-            alleOppfolgingsdialogerReducer={alleOppfolgingsdialogerReducer}
-            oppfolgingsdialogerReducer={oppfolgingsdialogerReducer}
-            sykmeldinger={sykmeldinger}
-            oppfolgingsdialoger={[]}
-            tilgang={{ data: harTilgang }}
-            hentOppfolgingsplaner={hentOppfolgingsplaner}
-            hentSykmeldinger={hentSykmeldinger}
-            sjekkTilgang={sjekkTilgang}
-            params={params}
-            hentSykmeldte={hentSykmeldte}
-            sykmeldt={null}
-            harSykmeldtGyldigSykmelding={false}
-          />
-        );
-        expect(component.find(OppfolgingsplanInfoboks)).to.have.length(1);
-      }
-    );
+    it('Skal vise OppfolgingsplanInfoboks dersom leder ikke har sykmeldt', () => {
+      const component = shallow(
+        <OppfolgingsplanerSide
+          alleOppfolgingsdialogerReducer={alleOppfolgingsdialogerReducer}
+          oppfolgingsdialogerReducer={oppfolgingsdialogerReducer}
+          oppfolgingsdialoger={[]}
+          tilgang={{ data: harTilgang }}
+          hentOppfolgingsplaner={hentOppfolgingsplaner}
+          sjekkTilgang={sjekkTilgang}
+          params={params}
+          hentSykmeldt={hentSykmeldt}
+          sykmeldt={null}
+          sykmeldtReducer={sykmeldtReducer}
+        />
+      );
+      expect(component.find(OppfolgingsplanInfoboks)).to.have.length(1);
+    });
 
     it(
       'Skal vise Oppfolgingsdialoger dersom henting er OK, ' +
@@ -379,16 +322,14 @@ describe('OppfolgingsplanerSide', () => {
           <OppfolgingsplanerSide
             alleOppfolgingsdialogerReducer={alleOppfolgingsdialogerReducer}
             oppfolgingsdialogerReducer={oppfolgingsdialogerReducer}
-            sykmeldinger={sykmeldinger}
             oppfolgingsdialoger={[]}
             tilgang={{ data: harTilgang }}
             hentOppfolgingsplaner={hentOppfolgingsplaner}
-            hentSykmeldinger={hentSykmeldinger}
             sjekkTilgang={sjekkTilgang}
             params={params}
-            hentSykmeldte={hentSykmeldte}
+            hentSykmeldt={hentSykmeldt}
+            sykmeldtReducer={sykmeldtReducer}
             sykmeldt={sykmeldt}
-            harSykmeldtGyldigSykmelding
           />
         );
         expect(component.find(Oppfolgingsdialoger)).to.have.length(1);

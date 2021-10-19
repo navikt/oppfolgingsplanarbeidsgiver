@@ -25,13 +25,6 @@ export const gyldighetstidspunktPt = PropTypes.shape({
   evalueres: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date)]),
 });
 
-export const kontaktInfoPt = PropTypes.shape({
-  epost: PropTypes.string,
-  tlf: PropTypes.string,
-  skalHaVarsel: PropTypes.bool,
-  feilAarsak: PropTypes.string,
-});
-
 export const personPt = PropTypes.shape({
   navn: PropTypes.string,
   fnr: PropTypes.string,
@@ -214,14 +207,15 @@ export const kopierDialogReducerPt = PropTypes.shape({
   data: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 });
 
-export const navigasjonstogglesReducerPt = PropTypes.shape({
-  steg: PropTypes.number,
+export const sykmeldtReducerPt = PropTypes.shape({
+  henter: PropTypes.bool,
+  hentet: PropTypes.bool,
+  hentingFeilet: PropTypes.bool,
+  data: PropTypes.any,
 });
 
-export const nullstillGodkjenningReducerPt = PropTypes.shape({
-  sender: PropTypes.bool,
-  sendt: PropTypes.bool,
-  sendingFeilet: PropTypes.bool,
+export const navigasjonstogglesReducerPt = PropTypes.shape({
+  steg: PropTypes.number,
 });
 
 export const samtykkeReducerPt = PropTypes.shape({

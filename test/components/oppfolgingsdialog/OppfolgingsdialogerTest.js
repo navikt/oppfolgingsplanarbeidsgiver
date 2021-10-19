@@ -35,7 +35,7 @@ describe('Oppfolgingsdialoger', () => {
     hentVirksomhet = sinon.spy();
     component = shallow(
       <Oppfolgingsdialoger
-        sykmeldt={{ fnr: 'fnr', koblingId: 1 }}
+        sykmeldt={{ fnr: 'fnr', narmestelederId: 1 }}
         oppfolgingsdialoger={oppfolgingsdialoger}
         naermesteleder={naermesteleder}
         person={person}
@@ -56,7 +56,7 @@ describe('Oppfolgingsdialoger', () => {
   it('Skal vise Ingenkontaktinformasjon-melding dersom ingen kontaktinformasjon', () => {
     component = shallow(
       <Oppfolgingsdialoger
-        sykmeldt={{ fnr: 'fnr', koblingId: 1 }}
+        sykmeldt={{ fnr: 'fnr', narmestelederId: 1 }}
         oppfolgingsdialoger={oppfolgingsdialoger}
         naermesteleder={naermesteleder}
         person={person}

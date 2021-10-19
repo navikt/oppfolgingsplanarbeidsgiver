@@ -117,7 +117,7 @@ class Oppfolgingsdialog extends Component {
       slettArbeidsoppgave,
       lagreKommentar,
       slettKommentar,
-      koblingId,
+      narmestelederId,
       delMedNavFunc,
       delmednav,
       fastlegeDeling,
@@ -144,7 +144,7 @@ class Oppfolgingsdialog extends Component {
           oppfolgingsplan={oppfolgingsdialog}
           godkjennPlan={godkjennDialogAg}
           nullstillGodkjenning={nullstillGodkjenning}
-          rootUrlPlaner={`${getContextRoot()}/${koblingId}`}
+          rootUrlPlaner={`${getContextRoot()}/${narmestelederId}`}
         />
       );
     } else if (inneholderGodkjentPlan(oppfolgingsdialog)) {
@@ -155,7 +155,7 @@ class Oppfolgingsdialog extends Component {
           giSamtykke={giSamtykke}
           avbrytDialog={avbrytDialog}
           rootUrl={`${getContextRoot()}`}
-          rootUrlPlaner={`${getContextRoot()}/${koblingId}`}
+          rootUrlPlaner={`${getContextRoot()}/${narmestelederId}`}
           delMedNavFunc={delMedNavFunc}
           delmednav={delmednav}
           fastlegeDeling={fastlegeDeling}
@@ -216,9 +216,9 @@ class Oppfolgingsdialog extends Component {
           disabled={disableNavigation}
           settAktivtSteg={settAktivtSteg}
           steg={navigasjontoggles.steg}
-          koblingId={koblingId}
+          narmestelederId={narmestelederId}
         />
-        {skalViseAvsluttOgLagre && <LagreOgAvsluttKnapp koblingId={koblingId} />}
+        {skalViseAvsluttOgLagre && <LagreOgAvsluttKnapp narmestelederId={narmestelederId} />}
       </div>
     );
   }
@@ -234,7 +234,7 @@ Oppfolgingsdialog.propTypes = {
   naermesteleder: opProptypes.naermestelederReducerPt,
   navigasjontoggles: opProptypes.navigasjonstogglesReducerPt,
   oppfolgingsdialog: opProptypes.oppfolgingsplanPt,
-  koblingId: PropTypes.string,
+  narmestelederId: PropTypes.string,
   person: opProptypes.personReducerPt,
   tiltak: opProptypes.tiltakReducerPt,
   virksomhet: opProptypes.virksomhetReducerPt,
