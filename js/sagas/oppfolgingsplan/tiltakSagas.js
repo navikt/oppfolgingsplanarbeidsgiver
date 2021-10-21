@@ -1,5 +1,4 @@
 import { call, put, fork, takeEvery, all } from 'redux-saga/effects';
-import { log } from '@navikt/digisyfo-npm';
 import { API_NAVN, hentSyfoapiUrl, post } from '../../gateway-api/gatewayApi';
 import * as actions from '../../actions/oppfolgingsplan/tiltak_actions';
 import { input2RSTiltak } from '../../utils/tiltakUtils';
@@ -19,7 +18,6 @@ export function* lagreTiltak(action) {
       window.location.reload();
       return;
     }
-    log(e);
     yield put(actions.lagreTiltakFeilet(fnr, action.tiltak));
   }
 }
@@ -37,7 +35,6 @@ export function* slettTiltak(action) {
       window.location.reload();
       return;
     }
-    log(e);
     yield put(actions.slettTiltakFeilet(fnr, action.tiltakId));
   }
 }

@@ -1,5 +1,5 @@
 import { call, put, fork, takeEvery } from 'redux-saga/effects';
-import { get, log } from '@navikt/digisyfo-npm';
+import { get } from '@navikt/digisyfo-npm';
 import * as actions from '../../actions/oppfolgingsplan/naermesteLeder_actions';
 import { personHentet } from '../../actions/oppfolgingsplan/person_actions';
 import { fullNaisUrl } from '../../utils/urlUtils';
@@ -25,7 +25,6 @@ export function* hentNaermesteLederSaga(action) {
       yield put(actions.ingenNaermesteLeder(action.fnr, action.virksomhetsnummer));
       return;
     }
-    log(e);
     yield put(actions.hentNaermesteLederFeilet(action.fnr, action.virksomhetsnummer));
   }
 }

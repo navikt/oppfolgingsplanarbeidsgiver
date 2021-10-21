@@ -1,5 +1,4 @@
 import { call, put, fork, takeEvery, all } from 'redux-saga/effects';
-import { log } from '@navikt/digisyfo-npm';
 import { API_NAVN, hentSyfoapiUrl, post } from '../../gateway-api/gatewayApi';
 import * as actions from '../../actions/oppfolgingsplan/kommentar_actions';
 
@@ -18,7 +17,6 @@ export function* lagreKommentar(action) {
       window.location.reload();
       return;
     }
-    log(e);
     yield put(actions.lagreKommentarFeilet(fnr, action.tiltakId));
   }
 }
@@ -36,7 +34,6 @@ export function* slettKommentar(action) {
       window.location.reload();
       return;
     }
-    log(e);
     yield put(actions.slettKommentarFeilet(fnr, action.tiltakId, action.kommentarId));
   }
 }

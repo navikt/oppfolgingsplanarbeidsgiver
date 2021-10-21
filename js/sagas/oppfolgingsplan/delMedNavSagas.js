@@ -1,5 +1,4 @@
 import { call, put, fork, takeEvery } from 'redux-saga/effects';
-import { log } from '@navikt/digisyfo-npm';
 import { API_NAVN, hentSyfoapiUrl, post } from '../../gateway-api/gatewayApi';
 import * as actions from '../../actions/oppfolgingsplan/delmednav_actions';
 
@@ -12,7 +11,6 @@ export function* delMedNav(action) {
     yield call(post, url);
     yield put(actions.deltMedNav(action.id, fnr));
   } catch (e) {
-    log(e);
     yield put(actions.delMedNavFeilet(fnr));
   }
 }

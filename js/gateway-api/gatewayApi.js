@@ -1,4 +1,3 @@
-import { log } from '@navikt/digisyfo-npm';
 import ponyfill from 'fetch-ponyfill';
 
 const ponyfills = ponyfill();
@@ -37,6 +36,13 @@ export const hentLoginUrl = () => {
   }
   // Preprod
   return 'https://loginservice-q.nav.no/login';
+};
+
+const log = (...data) => {
+  if (window.location.search.indexOf('log=true') > -1 || process.env.NODE_ENV === 'development') {
+    // eslint-disable-next-line no-console
+    console.log(data);
+  }
 };
 
 export function get(url, headers = null) {
