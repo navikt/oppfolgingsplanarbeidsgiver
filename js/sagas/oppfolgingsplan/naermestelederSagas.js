@@ -1,9 +1,9 @@
 import { call, put, fork, takeEvery } from 'redux-saga/effects';
-import { get } from '@navikt/digisyfo-npm';
 import * as actions from '../../actions/oppfolgingsplan/naermesteLeder_actions';
 import { personHentet } from '../../actions/oppfolgingsplan/person_actions';
 import { fullNaisUrl } from '../../utils/urlUtils';
 import { HOST_NAMES } from '../../konstanter';
+import { get } from '../../gateway-api';
 
 export const mapNarmesteLederToPerson = (narmesteLeder) => {
   return {
