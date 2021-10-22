@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Knapp from 'nav-frontend-knapper';
-import { Panel } from 'nav-frontend-paneler';
-import { getContextRoot } from '../../routers/paths';
+import { Knapp } from 'nav-frontend-knapper';
+import Panel from 'nav-frontend-paneler';
 import Sidetopp from '../Sidetopp';
 import Infomelding from '../Infomelding';
+import { InformasjonImage } from '@/images/imageComponents';
 
 const texts = {
   title: 'Oppfølgingsplaner',
@@ -21,7 +21,7 @@ const SykmeldtIngenKontaktinformasjon = ({ meldingSett }) => {
       <Sidetopp tittel={texts.title} />
       <Panel border>
         <Infomelding
-          ikon={`${getContextRoot()}/img/svg/feilmelding_ingen_kontaktinformasjon.svg`}
+          ikon={InformasjonImage}
           ikonAlt=""
           tittel={texts.infomelding.title}
           tekst={texts.infomelding.info}

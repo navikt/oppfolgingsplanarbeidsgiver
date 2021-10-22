@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Transition } from 'react-transition-group';
-import { getContextRoot } from '../../../../routers/paths';
+import { HakeGronnImage } from '@/images/imageComponents';
 
 const opacityStates = { entering: '0', entered: '1', exiting: '1', exited: '0' };
 const fadeDuration = 1000;
@@ -44,7 +44,7 @@ const FadingIconWithText = ({ text }) => {
         return (
           <FadeAnimation state={state}>
             <IconAndText>
-              <Icon src={`${getContextRoot()}/img/svg/hake-groenn.svg`} alt="" />
+              <Icon src={HakeGronnImage} alt="" />
               <Text>{text}</Text>
             </IconAndText>
           </FadeAnimation>

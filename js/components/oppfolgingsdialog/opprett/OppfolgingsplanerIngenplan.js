@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Panel } from 'nav-frontend-paneler';
-import { getContextRoot } from '../../../routers/paths';
-import { oppfolgingsplanPt } from '../../../proptypes/opproptypes';
+import Panel from 'nav-frontend-paneler';
+import { oppfolgingsplanPt } from '@/proptypes/opproptypes';
 import OppfolgingsplanerIngenplanKnapper from './OppfolgingsplanerIngenplanKnapper';
+import { OppfolgingsdialogTomImage } from '@/images/imageComponents';
 
 const texts = {
   title: 'Aktiv oppfølgingsplan',
@@ -20,7 +20,7 @@ const OppfolgingsplanerIngenplan = ({ oppfolgingsdialoger, opprett, visOppfolgin
       </header>
       <Panel border>
         <div className="oppfolgingsdialogerIngenplan__blokk">
-          <img alt="" src={`${getContextRoot()}/img/svg/oppfolgingsdialog-tom.svg`} />
+          <img alt="" src={OppfolgingsdialogTomImage} />
           <div className="inngangspanel__innhold">
             <header className="inngangspanel__header">
               <h3 className="js-title">

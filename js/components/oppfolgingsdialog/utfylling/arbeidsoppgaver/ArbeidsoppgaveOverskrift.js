@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { KANGJENNOMFOERES } from '../../../../konstanter';
 import * as opProptypes from '../../../../proptypes/opproptypes';
 import ArbeidsoppgaveInformasjonKnapper from './ArbeidsoppgaveInformasjonKnapper';
-import { getContextRoot } from '../../../../routers/paths';
+import { AdvarselImage, HakeGronnImage, HakeOransjeImage, KryssRoedImage } from '@/images/imageComponents';
 
 const texts = {
   hentArbeidsoppgaveUnderTekst: {
@@ -16,17 +16,16 @@ const texts = {
 };
 
 export const hentArbeidsoppgaveIkon = (arbeidsoppgave) => {
-  const rootUrlImg = getContextRoot();
   if (arbeidsoppgave.gjennomfoering) {
     if (arbeidsoppgave.gjennomfoering.kanGjennomfoeres === KANGJENNOMFOERES.KAN) {
-      return `${rootUrlImg}/img/svg/hake-groenn.svg`;
+      return HakeGronnImage;
     } else if (arbeidsoppgave.gjennomfoering.kanGjennomfoeres === KANGJENNOMFOERES.TILRETTELEGGING) {
-      return `${rootUrlImg}/img/svg/hake-oransje.svg`;
+      return HakeOransjeImage;
     } else if (arbeidsoppgave.gjennomfoering.kanGjennomfoeres === KANGJENNOMFOERES.KAN_IKKE) {
-      return `${rootUrlImg}/img/svg/kryss-roed.svg`;
+      return KryssRoedImage;
     }
   }
-  return `${rootUrlImg}/img/svg/advarsel.svg`;
+  return AdvarselImage;
 };
 
 export const hentArbeidsoppgaveUnderTekst = (arbeidsoppgave) => {

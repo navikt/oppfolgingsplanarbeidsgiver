@@ -4,7 +4,7 @@ import { shallow } from 'enzyme';
 import chaiEnzyme from 'chai-enzyme';
 import OppfolgingsdialogerVisning from '../../../js/components/oppfolgingsdialog/OppfolgingsdialogerVisning';
 import OppfolgingsplanerIngenplan from '../../../js/components/oppfolgingsdialog/opprett/OppfolgingsplanerIngenplan';
-import OppfolgingsplanFilm from '../../../js/components/oppfolgingsplaner/OppfolgingsplanFilm';
+import OppfolgingsplanFilm from '../../../js/components/oppfolgingsplaner/OppfolgingsplanFilm.tsx';
 import OppfolgingsdialogTeasere from '../../../js/components/oppfolgingsplaner/OppfolgingsdialogTeasere';
 import getOppfolgingsplan from '../../mock/mockOppfolgingsdialog';
 

@@ -3,16 +3,17 @@ import PropTypes from 'prop-types';
 import { oppfolgingsplanPt } from '../../../../proptypes/opproptypes';
 import { toDateMedMaanedNavn } from '../../../../utils/datoUtils';
 import BildeTekstLinje from '../../../app/BildeTekstLinje';
+import { CalendarImage } from '@/images/imageComponents';
 
 const textOppfolgingsplanDuration = (dateFrom, dateTo) => {
   return `Planens varighet: ${dateFrom} – ${dateTo}`;
 };
 
-const GodkjentPlanAvbruttTidspunkt = ({ oppfolgingsdialog, rootUrl }) => {
+const GodkjentPlanAvbruttTidspunkt = ({ oppfolgingsdialog }) => {
   return (
     <div className="blokk godkjentPlanAvbruttTidspunkt">
       <BildeTekstLinje
-        imgUrl={`${rootUrl}/img/svg/calendar.svg`}
+        imgUrl={CalendarImage}
         imgAlt=""
         tekst={textOppfolgingsplanDuration(
           toDateMedMaanedNavn(oppfolgingsdialog.godkjentPlan.gyldighetstidspunkt.fom),

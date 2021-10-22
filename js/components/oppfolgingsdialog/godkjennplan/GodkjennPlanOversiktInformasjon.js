@@ -15,6 +15,7 @@ import {
   tiltakPt,
   virksomhetPt,
 } from '../../../proptypes/opproptypes';
+import { HakeGronnLysImage, HakeOransjeImage, KryssRoedImage, VarseltrekantImage } from '@/images/imageComponents';
 
 const texts = {
   informasjonPanelOverskrift: {
@@ -202,26 +203,25 @@ export const InformasjonPanelArbeidsoppgaverEtterGjennomfoering = ({
   arbeidsoppgaver,
   type,
   tittel,
-  rootUrl,
 }) => {
   let hentPanelType;
   let imgUrl;
   switch (type) {
     case KANGJENNOMFOERES.KAN:
       hentPanelType = 'oppfolgingsplanLapp--groenn';
-      imgUrl = `${rootUrl}/img/svg/hake-groenn--lys.svg`;
+      imgUrl = HakeGronnLysImage;
       break;
     case KANGJENNOMFOERES.TILRETTELEGGING:
       hentPanelType = 'oppfolgingsplanLapp--gul';
-      imgUrl = `${rootUrl}/img/svg/hake-oransje.svg`;
+      imgUrl = HakeOransjeImage;
       break;
     case KANGJENNOMFOERES.KAN_IKKE:
       hentPanelType = 'oppfolgingsplanLapp--roed';
-      imgUrl = `${rootUrl}/img/svg/kryss-roed.svg`;
+      imgUrl = KryssRoedImage;
       break;
     default:
       hentPanelType = 'oppfolgingsplanLapp--graa';
-      imgUrl = `${rootUrl}/img/svg/varseltrekant.svg`;
+      imgUrl = VarseltrekantImage;
       break;
   }
   const arbeidstaker = oppfolgingsdialog.arbeidstaker;
@@ -271,7 +271,6 @@ InformasjonPanelArbeidsoppgaverEtterGjennomfoering.propTypes = {
   arbeidsoppgaver: PropTypes.arrayOf(arbeidsoppgavePt),
   type: PropTypes.string,
   tittel: PropTypes.string,
-  rootUrl: PropTypes.string,
 };
 
 export const InformasjonPanelArbeidsoppgaver = ({ oppfolgingsdialog, arbeidsoppgaver, rootUrl }) => {

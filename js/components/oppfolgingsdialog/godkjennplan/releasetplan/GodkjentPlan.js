@@ -11,6 +11,7 @@ import GodkjentPlanDelKnapper, { isGodkjentPlanDelKnapperAvailable } from './God
 import GodkjentPlanDeltBekreftelse from './GodkjentPlanDeltBekreftelse';
 import TextForcedApprovedOppfolgingsplan from './TextForcedApprovedOppfolgingsplan';
 import PlanEkspanderbar from '../PlanEkspanderbar';
+import { HakeGronnLysImage } from '@/images/imageComponents';
 
 const texts = {
   godkjentPlan: {
@@ -91,7 +92,7 @@ class GodkjentPlan extends Component {
       <React.Fragment>
         <OppfolgingsplanInnholdboks
           classnames="godkjentPlanOppfolgingsplanInfoboks"
-          svgUrl={`${rootUrl}/img/svg/hake-groenn--lys.svg`}
+          svgUrl={HakeGronnLysImage}
           svgAlt=""
           tittel={texts.godkjentPlan.title}
           mediumIcon

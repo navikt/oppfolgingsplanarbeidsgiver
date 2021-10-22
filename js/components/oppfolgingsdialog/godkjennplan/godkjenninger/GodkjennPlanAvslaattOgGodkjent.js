@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Hovedknapp } from 'nav-frontend-knapper';
-import { getContextRoot } from '../../../../routers/paths';
 import { oppfolgingsplanPt } from '../../../../proptypes/opproptypes';
 import { hentGodkjenningsTidspunkt } from '../../../../utils/oppfolgingsplanUtils';
 import OppfolgingsplanInnholdboks from '../../../app/OppfolgingsplanInnholdboks';
@@ -9,6 +8,7 @@ import GodkjennPlanTidspunkt from '../GodkjennPlanTidspunkt';
 import { EditButton } from './EditButton';
 import { SharingCheckbox } from './SharingCheckbox';
 import PlanEkspanderbar from '../PlanEkspanderbar';
+import { PlanMottattIgjenImage } from '@/images/imageComponents';
 
 const texts = {
   godkjennPlanMottattKnapper: {
@@ -55,7 +55,7 @@ const GodkjennPlanAvslaattOgGodkjent = ({ oppfolgingsplan, godkjennPlan, avvisDi
   return (
     <div className="godkjennPlanAvslaattOgGodkjent">
       <OppfolgingsplanInnholdboks
-        svgUrl={`${getContextRoot()}/img/svg/plan-mottatt-igjen.svg`}
+        svgUrl={PlanMottattIgjenImage}
         svgAlt=""
         tittel={texts.godkjennPlanAvslaattOgGodkjent.title}
       >

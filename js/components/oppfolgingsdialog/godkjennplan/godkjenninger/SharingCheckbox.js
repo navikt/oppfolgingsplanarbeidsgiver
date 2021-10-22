@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Checkbox } from 'nav-frontend-skjema';
-import { oppfolgingsplanPt } from '../../../../proptypes/opproptypes';
-import { getContextRoot } from '../../../../routers/paths';
+import { oppfolgingsplanPt } from '@/proptypes/opproptypes';
+import { InfoSirkelFyllImage } from '@/images/imageComponents';
 
 const texts = {
   delMedNav: 'Del planen med NAV',
@@ -29,7 +29,7 @@ export const SharingCheckbox = ({ oppfolgingsplan, checked, onChange }) => {
         return godkjenning.delMedNav;
       }) ? (
         <IconTextBox>
-          <Icon src={`${getContextRoot()}/img/svg/info-sirkel-fyll.svg`} alt="" /> <strong>{texts.preDelMedNav}</strong>
+          <Icon src={InfoSirkelFyllImage} alt="" /> <strong>{texts.preDelMedNav}</strong>
         </IconTextBox>
       ) : (
         <Checkbox checked={checked} onChange={onChange} label={texts.delMedNav} />

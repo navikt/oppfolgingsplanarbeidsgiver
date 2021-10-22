@@ -1,4 +1,4 @@
-import { Panel } from 'nav-frontend-paneler';
+import Panel from 'nav-frontend-paneler';
 import { Feiloppsummering } from 'nav-frontend-skjema';
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
@@ -217,6 +217,7 @@ export class TiltakSkjemaKomponent extends Component {
 
   // eslint-disable-next-line camelcase
   UNSAFE_componentWillReceiveProps(nextProps) {
+    // eslint-disable-next-line react/prop-types
     const { status, tiltaknavn, beskrivelse, beskrivelseIkkeAktuelt, gjennomfoering, fom, tom } = nextProps;
 
     if (status !== this.props.status && this.state.isFormSubmitted) {

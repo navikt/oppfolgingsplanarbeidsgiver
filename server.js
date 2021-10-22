@@ -1,165 +1,62 @@
-require('dotenv').config();
-
 const express = require('express');
 const path = require('path');
-const mustacheExpress = require('mustache-express');
-const Promise = require('promise');
-const getDecorator = require('./decorator');
 const prometheus = require('prom-client');
-const { createProxyMiddleware } = require('http-proxy-middleware');
+const getHtmlWithDecorator = require('./server/getHtmlWithDecorator');
+const winstonLogger = require('./server/winstonLogger');
+const appProxy = require('./server/appProxy');
 
 // Prometheus metrics
 const collectDefaultMetrics = prometheus.collectDefaultMetrics;
 collectDefaultMetrics({ timeout: 5000 });
 
-const httpRequestDurationMicroseconds = new prometheus.Histogram({
-  name: 'http_request_duration_ms',
-  help: 'Duration of HTTP requests in ms',
-  labelNames: ['route'],
-  // buckets for response time from 0.1ms to 500ms
-  buckets: [0.1, 5, 15, 50, 100, 200, 300, 400, 500],
-});
 const server = express();
-
 const env = process.argv[2];
-const settings = env === 'local' ? { isProd: false } : require('./settings.json');
 
-server.set('views', `${__dirname}/dist`);
-server.set('view engine', 'mustache');
-server.engine('html', mustacheExpress());
+server.use(express.json());
+server.disable('x-powered-by');
 
-const sykmeldingerArbeidsgiverEnvVar = () => {
-  const fromEnv = process.env.SYKMELDINGER_ARBEIDSGIVER_URL;
-  if (fromEnv) {
-    return fromEnv;
-  }
+const DIST_DIR = path.join(__dirname, './dist');
+const HTML_FILE = path.join(DIST_DIR, 'index.html');
 
-  throw new Error(`Missing required environment variable SYKMELDINGER_ARBEIDSGIVER_URL`);
-};
-
-const renderPage = (decoratorFragments, isFrontPage) => {
-  return new Promise((resolve, reject) => {
-    server.render(
-      'index.html',
-      Object.assign(
-        {
-          LOGINSERVICE_URL: `${process.env.LOGINSERVICE_URL}`,
-          spinnerMedTekst: isFrontPage,
-          spinnerUtenTekst: !isFrontPage,
-        },
-        decoratorFragments,
-        settings
-      ),
-      (err, html) => {
-        if (err) {
-          reject(err);
-        } else {
-          resolve(html);
-        }
-      }
-    );
-  });
-};
-
-const renderSubpages = (decoratorFragments) => {
-  return renderPage(decoratorFragments, false);
-};
-
-const renderFrontPage = (decoratorFragments) => {
-  return renderPage(decoratorFragments, true);
-};
-
-const renderApp = (decoratorFragments) => {
-  return Promise.all([renderFrontPage(decoratorFragments), renderSubpages(decoratorFragments)]);
-};
-
-function nocache(req, res, next) {
-  res.header('Cache-Control', 'private, no-cache, no-store, must-revalidate');
-  res.header('Expires', '-1');
-  res.header('Pragma', 'no-cache');
-  next();
+function disableCache(res) {
+  res.setHeader('Pragma', 'no-cache');
+  res.setHeader('Cache-Control', 'private, no-cache, no-store, must-revalidate');
+  res.setHeader('Expires', '-1');
 }
 
-const startServer = (html) => {
-  const htmlFrontPage = html[0];
-  const htmlOtherPages = html[1];
+server.get('/', (req, res) => {
+  res.redirect('/syk/oppfolgingsplanarbeidsgiver');
+});
 
-  server.use('/oppfolgingsplanarbeidsgiver/resources', express.static(path.resolve(__dirname, 'dist/resources')));
+server.use(['/static', '/syk/oppfolgingsplanarbeidsgiver/static'], express.static(DIST_DIR, { index: false }));
+server.get('/internal/isAlive|isReady', (req, res) => res.sendStatus(200));
 
-  server.use('/oppfolgingsplanarbeidsgiver/img', express.static(path.resolve(__dirname, 'dist/resources/img')));
-
-  if (env === 'opplaering') {
-    require('./mock/mockEndepunkter').mockForOpplaeringsmiljo(server);
-  }
-
-  if (env === 'local') {
-    require('./mock/mockEndepunkter').mockForOpplaeringsmiljo(server);
-    require('./mock/mockEndepunkter').mockForLokaltMiljo(server);
-  } else {
-    const sykmeldingerArbeidsgiverHost = sykmeldingerArbeidsgiverEnvVar();
-    server.use(
-      '/oppfolgingsplanarbeidsgiver/api/dinesykmeldte',
-      createProxyMiddleware({
-        target: `${sykmeldingerArbeidsgiverHost}`,
-        pathRewrite: {
-          '^/oppfolgingsplanarbeidsgiver/api/dinesykmeldte': '/api/dinesykmeldte',
-        },
-        onError: (err, req, res) => {
-          res.statusCode = 500;
-          res.setHeader('Content-Type', 'application/json');
-          res.write(
-            JSON.stringify({
-              error: `Failed to connect to API. Reason: ${err}`,
-            })
-          );
-          res.end();
-        },
-        logLevel: 'error',
-        changeOrigin: true,
-      })
-    );
-  }
-
-  server.get(
-    ['/', '/oppfolgingsplanarbeidsgiver/?', /^\/oppfolgingsplanarbeidsgiver\/(?!(resources|img)).*$/],
-    nocache,
-    (req, res) => {
-      const html =
-        req.url === 'oppfolgingsplanarbeidsgiver' || req.url === 'oppfolgingsplanarbeidsgiver/'
-          ? htmlFrontPage
-          : htmlOtherPages;
-      res.send(html);
-      httpRequestDurationMicroseconds.labels(req.route.path).observe(10);
-    }
-  );
+if (env === 'opplaering') {
+  require('./mock/mockEndepunkter').mockForOpplaeringsmiljo(server);
+} else if (env === 'local') {
+  require('./mock/mockEndepunkter').mockForOpplaeringsmiljo(server);
+  require('./mock/mockEndepunkter').mockForLokaltMiljo(server);
+} else {
+  appProxy(server);
 
   server.get('/actuator/metrics', (req, res) => {
     res.set('Content-Type', prometheus.register.contentType);
     res.end(prometheus.register.metrics());
   });
+}
 
-  server.get('/health/isAlive', (req, res) => {
-    res.sendStatus(200);
-  });
+server.use('*', (req, res) =>
+  getHtmlWithDecorator(HTML_FILE)
+    .then((html) => {
+      disableCache(res);
+      res.send(html);
+    })
+    .catch((e) => {
+      winstonLogger.error(e);
+      disableCache(res);
+      res.status(500).send(e);
+    })
+);
 
-  server.get('/health/isReady', (req, res) => {
-    res.sendStatus(200);
-  });
-
-  const port = env !== 'local' ? process.env.PORT : 8289;
-  server.listen(port, () => {
-    console.log(`App listening on port: ${port}`);
-  });
-};
-
-const logError = (errorMessage, details) => {
-  console.log(errorMessage, details);
-};
-
-getDecorator()
-  .then(renderApp, (error) => {
-    logError('Failed to render app', error);
-  })
-  .then(startServer, (error) => {
-    logError('Failed to render app', error);
-  });
+const port = process.env.PORT || 8080;
+server.listen(port, () => winstonLogger.info(`App listening on port: ${port}`));

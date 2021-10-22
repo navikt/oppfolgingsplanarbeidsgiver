@@ -9,7 +9,7 @@ import {
 } from '../utils/reducerUtils';
 import { populerDialogFraState } from '../utils/stateUtils';
 import { finnOppfolgingsplanerPaVirksomhet } from '../utils/oppfolgingsplanUtils';
-import Side from '../sider/Side';
+import { Side } from '../sider/Side';
 import AppSpinner from '../components/AppSpinner';
 import Feilmelding from '../components/Feilmelding';
 import OppfolgingsplanInfoboks from '../components/app/OppfolgingsplanInfoboks';
@@ -27,6 +27,7 @@ import { sjekkTilgang } from '../actions/oppfolgingsplan/sjekkTilgang_actions';
 import Oppfolgingsdialoger from '../components/oppfolgingsdialog/Oppfolgingsdialoger';
 import { getContextRoot } from '../routers/paths';
 import { hentSykmeldt } from '../actions/sykmeldt_actions';
+import { OppfolgingsdialogFeilmeldingAGImage } from '@/images/imageComponents';
 
 const texts = {
   pageTitle: 'Oppfølgingsplaner - Oversikt',
@@ -126,7 +127,7 @@ export class OppfolgingsplanerSide extends Component {
           } else if (!tilgang.data.harTilgang || !sykmeldt) {
             return (
               <OppfolgingsplanInfoboks
-                svgUrl={`${getContextRoot()}/img/svg/oppfolgingsdialogFeilmeldingAG.svg`}
+                svgUrl={OppfolgingsdialogFeilmeldingAGImage}
                 svgAlt=""
                 tittel={texts.infoboksNoAccess.title}
                 tekst={texts.infoboksNoAccess.info}

@@ -72,7 +72,6 @@ describe('GodkjennPlanSkjemaDatovelger', () => {
       };
     }
 
-    window.sessionStorage = storageMock();
     const felt = FELTER.fom;
     const komponent = shallow(<GodkjennPlanSkjemaDatovelgerFelt felt={felt} dato="01.12.2017" />);
 
