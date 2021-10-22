@@ -1,14 +1,11 @@
-import { call, put, fork, takeEvery } from 'redux-saga/effects';
+import { call, fork, put, takeEvery } from 'redux-saga/effects';
 import { get, log } from '@navikt/digisyfo-npm';
 import * as actions from '../../actions/oppfolgingsplan/arbeidsforhold_actions';
-import { fullNaisUrl } from '../../utils/urlUtils';
-import { HOST_NAMES } from '../../konstanter';
 
 export function* hentArbeidsforhold(action) {
   yield put(actions.henterArbeidsforhold(action.fnr, action.virksomhetsnummer));
   try {
-    const path = `${process.env.REACT_APP_SYFOOPREST_ROOT}/arbeidsforhold?fnr=${action.fnr}&virksomhetsnummer=${action.virksomhetsnummer}&fom=${action.fom}`;
-    const url = fullNaisUrl(HOST_NAMES.SYFOOPREST, path);
+    const url = `${process.env.REACT_APP_SYFOOPREST_PROXY_PATH}/api/arbeidsforhold?fnr=${action.fnr}&virksomhetsnummer=${action.virksomhetsnummer}&fom=${action.fom}`;
     const stillinger = yield call(get, url);
     yield put(actions.hentetArbeidsforhold(stillinger, action.fnr, action.virksomhetsnummer));
   } catch (e) {

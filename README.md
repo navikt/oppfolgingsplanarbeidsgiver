@@ -1,6 +1,6 @@
 # Oppfolgingsplanarbeidsgiver
 
-Frontend for arbeidsgivers digitalisering av sykefraværsoppfølging http://tjenester.nav.no/oppfolgingsplanarbeidsgiver/
+Frontend for arbeidsgivers digitalisering av sykefraværsoppfølging https://www.nav.no/oppfolgingsplanarbeidsgiver/
 
 ### TL;DR
 
