@@ -6,7 +6,7 @@ const mustacheExpress = require('mustache-express');
 const Promise = require('promise');
 const getDecorator = require('./decorator');
 const prometheus = require('prom-client');
-const { createProxyMiddleware } = require('http-proxy-middleware');
+const appProxy = require('./server/appProxy');
 
 // Prometheus metrics
 const collectDefaultMetrics = prometheus.collectDefaultMetrics;
@@ -27,15 +27,6 @@ const settings = env === 'local' ? { isProd: false } : require('./settings.json'
 server.set('views', `${__dirname}/dist`);
 server.set('view engine', 'mustache');
 server.engine('html', mustacheExpress());
-
-const sykmeldingerArbeidsgiverEnvVar = () => {
-  const fromEnv = process.env.SYKMELDINGER_ARBEIDSGIVER_URL;
-  if (fromEnv) {
-    return fromEnv;
-  }
-
-  throw new Error(`Missing required environment variable SYKMELDINGER_ARBEIDSGIVER_URL`);
-};
 
 const renderPage = (decoratorFragments, isFrontPage) => {
   return new Promise((resolve, reject) => {
@@ -96,28 +87,7 @@ const startServer = (html) => {
     require('./mock/mockEndepunkter').mockForOpplaeringsmiljo(server);
     require('./mock/mockEndepunkter').mockForLokaltMiljo(server);
   } else {
-    const sykmeldingerArbeidsgiverHost = sykmeldingerArbeidsgiverEnvVar();
-    server.use(
-      '/oppfolgingsplanarbeidsgiver/api/dinesykmeldte',
-      createProxyMiddleware({
-        target: `${sykmeldingerArbeidsgiverHost}`,
-        pathRewrite: {
-          '^/oppfolgingsplanarbeidsgiver/api/dinesykmeldte': '/api/dinesykmeldte',
-        },
-        onError: (err, req, res) => {
-          res.statusCode = 500;
-          res.setHeader('Content-Type', 'application/json');
-          res.write(
-            JSON.stringify({
-              error: `Failed to connect to API. Reason: ${err}`,
-            })
-          );
-          res.end();
-        },
-        logLevel: 'error',
-        changeOrigin: true,
-      })
-    );
+    appProxy(server);
   }
 
   server.get(

@@ -47,7 +47,7 @@ jobs:
           echo ${IMAGE}
 
   deploy-dev:
-    name: Deploy to NAIS Dev-sbs
+    name: Deploy to dev-gcp
     needs: build
     runs-on: ubuntu-latest
     steps:
@@ -55,5 +55,5 @@ jobs:
       - uses: nais/deploy/actions/deploy@v1
         env:
           APIKEY: ${{ secrets.NAIS_DEPLOY_APIKEY }}
-          CLUSTER: dev-sbs
+          CLUSTER: dev-gcp
           RESOURCE: naiserator-dev.yaml

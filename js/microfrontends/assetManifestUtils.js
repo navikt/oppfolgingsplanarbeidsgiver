@@ -1,22 +1,6 @@
 // TODO: koden i denne filen kommer i en senere versjon av NavSpa
 //  -- koden kan da slettes når @navikt/navspa til v4.x blir tilgjengelig
 
-import { erHerokuApp } from '../utils/urlUtils';
-
-export function getMiljø() {
-  const hostname = window.location.hostname;
-  if (hostname.includes('tjenester.nav.no') || hostname.includes('oppfolgingsplanarbeidsgiver.nais.oera.no')) {
-    return 'prod-sbs';
-  }
-  if (hostname.includes('tjenester-q1.nav.no') || hostname.includes('oppfolgingsplanarbeidsgiver.nais.oera-q.local')) {
-    return 'dev-sbs';
-  }
-  if (erHerokuApp()) {
-    return 'heroku';
-  }
-  return 'local';
-}
-
 /**
  * Extracts paths to load from a Create React App asset manifest.
  * @param manifestObject parsed json from the asset manifest
@@ -70,13 +54,11 @@ export function joinPaths(...paths) {
 }
 
 export function makeAbsolute(baseUrl, maybeAbsolutePath) {
+  const proxyUrl = `${window.location.origin}/oppfolgingsplanarbeidsgiver/api`;
   if (maybeAbsolutePath.startsWith('http')) {
     return maybeAbsolutePath;
-  } else if (baseUrl.startsWith('http')) {
-    const url = new URL(baseUrl);
-    return joinPaths(url.origin, maybeAbsolutePath);
   }
-  return joinPaths(window.location.origin, maybeAbsolutePath);
+  return joinPaths(proxyUrl, maybeAbsolutePath);
 }
 
 export function createAssetManifestParser(mikrofrontendConfig) {
