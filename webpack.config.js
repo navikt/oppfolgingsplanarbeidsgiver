@@ -1,7 +1,8 @@
-var path = require('path');
-var mainPath = path.resolve(__dirname, 'js', 'index.js');
-var autoprefixer = require('autoprefixer');
-var Dotenv = require('dotenv-webpack');
+const path = require('path');
+const autoprefixer = require('autoprefixer');
+const Dotenv = require('dotenv-webpack');
+
+const mainPath = path.resolve(__dirname, 'js', 'index.js');
 
 module.exports = {
   entry: ['babel-polyfill', mainPath],
@@ -31,7 +32,7 @@ module.exports = {
           {
             loader: 'postcss-loader',
             options: {
-              plugins: function () {
+              plugins() {
                 return [autoprefixer];
               },
             },

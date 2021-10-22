@@ -1,5 +1,6 @@
 import * as actions from '../actions/oppfolgingsplan/kommentar_actions';
 import { LAGRER_TILTAK, SLETTER_TILTAK } from '../actions/oppfolgingsplan/tiltak_actions';
+import { SETT_AKTIVT_STEG } from '../actions/oppfolgingsplan/toggle_actions';
 
 const initiellState = {
   slettet: false,
@@ -15,7 +16,7 @@ const initiellState = {
 
 const kommentar = (state = initiellState, action = {}) => {
   switch (action.type) {
-    case actions.SETT_AKTIVT_STEG: {
+    case SETT_AKTIVT_STEG: {
       return Object.assign({}, state, {
         feiletTiltakId: 0,
         lagringFeilet: false,

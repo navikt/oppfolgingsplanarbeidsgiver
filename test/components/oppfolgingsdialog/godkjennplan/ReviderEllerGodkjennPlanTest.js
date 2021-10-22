@@ -22,7 +22,6 @@ describe('ReviderEllerGodkjennPlan', () => {
   });
 
   describe('Standard visning', () => {
-
     it('Skal vise ReviderEllerGodkjennPlanKnapperad', () => {
       expect(komponent.find(ReviderEllerGodkjennPlanKnapperad)).to.have.length(1);
     });
