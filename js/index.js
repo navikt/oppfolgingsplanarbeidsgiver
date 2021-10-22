@@ -1,7 +1,6 @@
 import 'whatwg-fetch';
 import 'babel-polyfill';
 import { render } from 'react-dom';
-import { setPerformOnHttpCalls } from '@navikt/digisyfo-npm';
 import * as Sentry from '@sentry/browser';
 import { Provider } from 'react-redux';
 import React from 'react';
@@ -18,10 +17,6 @@ Sentry.init({
 
 store.dispatch(forlengInnloggetSesjon());
 
-setPerformOnHttpCalls(() => {
-  store.dispatch(forlengInnloggetSesjon());
-});
-
 setInterval(() => {
   store.dispatch(sjekkInnloggingssesjon());
 }, 5000);
@@ -33,4 +28,4 @@ render(
   document.getElementById('maincontent')
 );
 
-export { history, store };
+export { history };
