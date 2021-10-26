@@ -1,6 +1,8 @@
 // TODO: koden i denne filen kommer i en senere versjon av NavSpa
 //  -- koden kan da slettes når @navikt/navspa til v4.x blir tilgjengelig
 
+import { erHerokuApp } from '../utils/urlUtils';
+
 export function getMiljø() {
   const hostname = window.location.hostname;
   if (hostname.includes('tjenester.nav.no') || hostname.includes('oppfolgingsplanarbeidsgiver.nais.oera.no')) {
@@ -8,6 +10,9 @@ export function getMiljø() {
   }
   if (hostname.includes('tjenester-q1.nav.no') || hostname.includes('oppfolgingsplanarbeidsgiver.nais.oera-q.local')) {
     return 'dev-sbs';
+  }
+  if (erHerokuApp()) {
+    return 'heroku';
   }
   return 'local';
 }
