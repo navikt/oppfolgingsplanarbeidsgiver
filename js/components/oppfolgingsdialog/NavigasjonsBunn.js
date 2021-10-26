@@ -20,10 +20,10 @@ const handleKeyPress = (settAktivtSteg, nesteSteg, e) => {
   }
 };
 
-const NavigasjonsBunn = ({ steg, settAktivtSteg, disabled, koblingId }) => {
+const NavigasjonsBunn = ({ steg, settAktivtSteg, disabled, narmestelederId }) => {
   if (disabled) {
     return (
-      <Lenke href={`${getContextRoot()}/${koblingId}/oppfolgingsplaner`}>
+      <Lenke href={`${getContextRoot()}/${narmestelederId}/oppfolgingsplaner`}>
         <VenstreChevron />
         {tekster.knapp.oversikt}
       </Lenke>
@@ -64,7 +64,7 @@ NavigasjonsBunn.propTypes = {
   steg: PropTypes.number,
   settAktivtSteg: PropTypes.func,
   disabled: PropTypes.bool,
-  koblingId: PropTypes.string,
+  narmestelederId: PropTypes.string,
 };
 
 export default NavigasjonsBunn;

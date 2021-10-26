@@ -6,6 +6,7 @@ import { oppfolgingsplanPt } from '../../proptypes/opproptypes';
 import OppfolgingsdialogVisning from './OppfolgingsdialogerVisning';
 import OppfolgingsdialogerInfoPersonvern from './OppfolgingsdialogerInfoPersonvern';
 import AvbruttPlanNotifikasjonBoksAdvarsel from './godkjennplan/godkjentplan/AvbruttPlanNotifikasjonBoksAdvarsel';
+import { sykmeldt as sykmeldtPt } from '../../shapes';
 
 const texts = {
   pageTitle: 'Oppfølgingsplaner',
@@ -13,9 +14,10 @@ const texts = {
 
 const OppfolgingsdialogerInnhold = ({
   oppfolgingsdialoger,
-  koblingId,
+  narmestelederId,
   kopierOppfolgingsdialog,
   opprettOppfolgingsdialog,
+  sykmeldt,
 }) => {
   const planerAvbruttAvMotpartSidenSistInnlogging = finnGodkjentedialogerAvbruttAvMotpartSidenSistInnlogging(
     oppfolgingsdialoger
@@ -31,19 +33,21 @@ const OppfolgingsdialogerInnhold = ({
         />
       )}
       <OppfolgingsdialogVisning
-        koblingId={koblingId}
+        narmestelederId={narmestelederId}
         oppfolgingsdialoger={oppfolgingsdialoger}
         kopierOppfolgingsdialog={kopierOppfolgingsdialog}
         opprettOppfolgingsdialog={opprettOppfolgingsdialog}
+        orgnummer={sykmeldt.orgnummer}
       />
     </div>
   );
 };
 OppfolgingsdialogerInnhold.propTypes = {
-  koblingId: PropTypes.string,
+  narmestelederId: PropTypes.string,
   oppfolgingsdialoger: PropTypes.arrayOf(oppfolgingsplanPt),
   kopierOppfolgingsdialog: PropTypes.func,
   opprettOppfolgingsdialog: PropTypes.func,
+  sykmeldt: PropTypes.shape(sykmeldtPt),
 };
 
 export default OppfolgingsdialogerInnhold;

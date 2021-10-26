@@ -13,7 +13,7 @@ const expect = chai.expect;
 describe('OppfolgingsdialogerInnhold', () => {
   let component;
   beforeEach(() => {
-    component = shallow(<OppfolgingsdialogerInnhold oppfolgingsdialoger={[]} />);
+    component = shallow(<OppfolgingsdialogerInnhold oppfolgingsdialoger={[]} sykmeldt={[]} />);
   });
 
   it('Skal vise overskrift for Oppfolgingsdialoger', () => {

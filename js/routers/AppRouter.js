@@ -7,10 +7,13 @@ import OppfolgingsplanContainer from '../sider/OppfolgingsplanSide';
 const AppRouter = ({ history }) => {
   return (
     <Router history={history}>
-      <Route path="/oppfolgingsplanarbeidsgiver/:koblingId" component={OppfolgingsplanerContainer} />
-      <Route path="/oppfolgingsplanarbeidsgiver/:koblingId/oppfolgingsplaner" component={OppfolgingsplanerContainer} />
+      <Route path="/oppfolgingsplanarbeidsgiver/:narmestelederId" component={OppfolgingsplanerContainer} />
       <Route
-        path="/oppfolgingsplanarbeidsgiver/:koblingId/oppfolgingsplaner/:oppfolgingsplanId"
+        path="/oppfolgingsplanarbeidsgiver/:narmestelederId/oppfolgingsplaner"
+        component={OppfolgingsplanerContainer}
+      />
+      <Route
+        path="/oppfolgingsplanarbeidsgiver/:narmestelederId/oppfolgingsplaner/:oppfolgingsplanId"
         component={OppfolgingsplanContainer}
       />
     </Router>
