@@ -90,9 +90,7 @@ const startServer = (html) => {
 
   if (env === 'opplaering') {
     require('./mock/mockEndepunkter').mockForOpplaeringsmiljo(server);
-  }
-
-  if (env === 'local') {
+  } else if (env === 'local') {
     require('./mock/mockEndepunkter').mockForOpplaeringsmiljo(server);
     require('./mock/mockEndepunkter').mockForLokaltMiljo(server);
   } else {
