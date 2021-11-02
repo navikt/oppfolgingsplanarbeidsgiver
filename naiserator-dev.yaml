@@ -44,5 +44,3 @@ spec:
       value: https://syfooprest.dev.nav.no
     - name: SYKMELDINGER_ARBEIDSGIVER_URL
       value: https://sykmeldinger-arbeidsgiver.dev.nav.no
-    - name: SAMTALESTOTTE_URL
-      value: https://arbeidsgiver-gcp.dev.nav.no

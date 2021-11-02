@@ -24,28 +24,6 @@ const appProxy = (server) => {
   );
 
   server.use(
-    '/oppfolgingsplanarbeidsgiver/api/samtalestotte-podlet',
-    createProxyMiddleware({
-      target: process.env.SAMTALESTOTTE_URL,
-      pathRewrite: {
-        '^/oppfolgingsplanarbeidsgiver/api/samtalestotte-podlet': '/samtalestotte-podlet',
-      },
-      onError: (err, req, res) => {
-        res.statusCode = 500;
-        res.setHeader('Content-Type', 'application/json');
-        res.write(
-          JSON.stringify({
-            error: `Failed to connect to API. Reason: ${err}`,
-          })
-        );
-        res.end();
-      },
-      logLevel: 'error',
-      changeOrigin: true,
-    })
-  );
-
-  server.use(
     '/oppfolgingsplanarbeidsgiver/api/syfooprest',
     createProxyMiddleware({
       target: process.env.SYFOOPREST_URL,

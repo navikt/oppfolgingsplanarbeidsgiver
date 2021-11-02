@@ -20,3 +20,16 @@ export const isProd = () => {
   const url = window.location.href;
   return url.indexOf('www.nav.no') > -1;
 };
+
+export function getMiljo() {
+  if (isProd()) {
+    return 'prod-gcp';
+  }
+  if (isPreProd()) {
+    return 'dev-gcp';
+  }
+  if (isHeroku()) {
+    return 'heroku';
+  }
+  return 'local';
+}
