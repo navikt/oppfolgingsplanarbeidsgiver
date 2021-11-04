@@ -25,6 +25,11 @@ const getMikrofrontendConfig = () => {
         appBaseUrl: `http://localhost:3001/${SAMTALESTØTTE_MIKROFRONTEND}`,
       };
 
+    case 'heroku':
+      return {
+        appBaseUrl: `https://arbeidsgiver.labs.nais.io/${SAMTALESTØTTE_MIKROFRONTEND}`,
+      };
+
     default:
       return {
         appBaseUrl: `https://arbeidsgiver.nav.no/${SAMTALESTØTTE_MIKROFRONTEND}`,
