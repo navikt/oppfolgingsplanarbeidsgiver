@@ -1,5 +1,6 @@
-import { log } from '@navikt/digisyfo-npm';
 import ponyfill from 'fetch-ponyfill';
+import store from '../store';
+import { forlengInnloggetSesjon } from '../timeout/timeout_actions';
 
 const ponyfills = ponyfill();
 
@@ -39,9 +40,18 @@ export const hentLoginUrl = () => {
   return 'https://loginservice-q.nav.no/login';
 };
 
+const log = (...data) => {
+  if (window.location.search.indexOf('log=true') > -1 || process.env.NODE_ENV === 'development') {
+    // eslint-disable-next-line no-console
+    console.log(data);
+  }
+};
+
 export function get(url, headers = null) {
   const customFetch = getFetch();
   const CustomHeaders = getHeaders();
+  store.dispatch(forlengInnloggetSesjon());
+
   return customFetch(url, {
     credentials: 'include',
     headers: headers || new CustomHeaders(),
@@ -72,6 +82,8 @@ export function get(url, headers = null) {
 export const post = (url, body) => {
   const customFetch = getFetch();
   const CustomHeaders = getHeaders();
+  store.dispatch(forlengInnloggetSesjon());
+
   return customFetch(url, {
     credentials: 'include',
     method: 'POST',

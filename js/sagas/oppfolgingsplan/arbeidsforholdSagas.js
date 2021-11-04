@@ -1,8 +1,8 @@
 import { call, put, fork, takeEvery } from 'redux-saga/effects';
-import { get, log } from '@navikt/digisyfo-npm';
 import * as actions from '../../actions/oppfolgingsplan/arbeidsforhold_actions';
 import { fullNaisUrl } from '../../utils/urlUtils';
 import { HOST_NAMES } from '../../konstanter';
+import { get } from '../../gateway-api';
 
 export function* hentArbeidsforhold(action) {
   yield put(actions.henterArbeidsforhold(action.fnr, action.virksomhetsnummer));
@@ -12,7 +12,6 @@ export function* hentArbeidsforhold(action) {
     const stillinger = yield call(get, url);
     yield put(actions.hentetArbeidsforhold(stillinger, action.fnr, action.virksomhetsnummer));
   } catch (e) {
-    log(e);
     yield put(actions.hentArbeidsforholdFeilet(action.fnr, action.virksomhetsnummer));
   }
 }

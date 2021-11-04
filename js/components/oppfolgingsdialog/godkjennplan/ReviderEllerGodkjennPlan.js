@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Hovedknapp } from 'nav-frontend-knapper';
-import { Bjorn } from '@navikt/digisyfo-npm';
+import Veilederpanel from 'nav-frontend-veilederpanel';
 import { oppfolgingsplanPt } from '../../../proptypes/opproptypes';
 import { erIkkeOppfolgingsdialogUtfylt } from '../../../utils/oppfolgingsplanUtils';
 import IkkeUtfyltPlanFeilmelding from './IkkeUtfyltPlanFeilmelding';
+import VeilederAvatar from '../../app/VeilederAvatar';
 
 const texts = {
-  bjorn: 'Er du ferdig med denne planen og ønsker å sende den til godkjenning?',
+  veileder: 'Er du ferdig med denne planen og ønsker å sende den til godkjenning?',
   buttonGodkjenn: 'Jeg er ferdig',
 };
 
@@ -46,13 +47,11 @@ class ReviderEllerGodkjennPlan extends Component {
   }
 
   render() {
-    const { oppfolgingsplan, settAktivtSteg, rootUrl } = this.props;
+    const { oppfolgingsplan, settAktivtSteg } = this.props;
     return (
       <div className="godkjennPlanOversiktInformasjon">
         <div className="panel godkjennPlanOversiktInformasjon__panel">
-          <Bjorn className="z-index-1" rootUrl={rootUrl}>
-            <p>{texts.bjorn}</p>
-          </Bjorn>
+          <Veilederpanel svg={<VeilederAvatar />}>{texts.veileder}</Veilederpanel>
           {this.state.visIkkeUtfyltFeilmelding && (
             <IkkeUtfyltPlanFeilmelding oppfolgingsplan={oppfolgingsplan} settAktivtSteg={settAktivtSteg} />
           )}
@@ -67,7 +66,6 @@ ReviderEllerGodkjennPlan.propTypes = {
   oppfolgingsplan: oppfolgingsplanPt,
   settAktivtSteg: PropTypes.func,
   visSendTilGodkjenning: PropTypes.func,
-  rootUrl: PropTypes.string,
 };
 
 export default ReviderEllerGodkjennPlan;

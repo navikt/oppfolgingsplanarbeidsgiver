@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import { Field, formValueSelector } from 'redux-form';
 import { connect } from 'react-redux';
 import MaskedInput from 'react-maskedinput';
-import { toDatePrettyPrint } from '@navikt/digisyfo-npm';
 import { DATOVELGERFELT_SKJEMA } from '../konstanter';
 import Feilmelding from './Feilmelding';
 import DayPickerComponent from './DayPicker';
 import { fieldPropTypes } from '../proptypes/fieldproptypes';
+import { toDatePrettyPrint } from '../utils/datoUtils';
 
 export class DatoField extends Component {
   constructor(props) {

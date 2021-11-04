@@ -59,7 +59,6 @@ class Godkjenn extends Component {
         {!this.state.visGodkjenPlanSkjema && (
           <ReviderEllerGodkjennPlan
             oppfolgingsplan={oppfolgingsplan}
-            rootUrl={rootUrl}
             settAktivtSteg={settAktivtSteg}
             visSendTilGodkjenning={this.visGodkjenPlanSkjema}
           />

@@ -1,5 +1,4 @@
 import { call, put, fork, takeEvery, all } from 'redux-saga/effects';
-import { log } from '@navikt/digisyfo-npm';
 import { API_NAVN, hentSyfoapiUrl, post } from '../../gateway-api/gatewayApi';
 import * as actions from '../../actions/oppfolgingsplan/arbeidsoppgave_actions';
 import { input2RSArbeidsoppgave } from '../../utils/arbeidsoppgaveUtils';
@@ -19,8 +18,6 @@ export function* lagreArbeidsoppgave(action) {
       window.location.reload();
       return;
     }
-    log(e);
-
     yield put(actions.lagreArbeidsoppgaveFeilet(fnr, body));
   }
 }
@@ -40,7 +37,6 @@ export function* slettArbeidsoppgave(action) {
       window.location.reload();
       return;
     }
-    log(e);
     yield put(actions.slettArbeidsoppgaveFeilet(fnr, action.arbeidsoppgaveId));
   }
 }

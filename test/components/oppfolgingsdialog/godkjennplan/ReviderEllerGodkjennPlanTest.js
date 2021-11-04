@@ -4,7 +4,6 @@ import sinon from 'sinon';
 import { shallow } from 'enzyme';
 import chaiEnzyme from 'chai-enzyme';
 import { Hovedknapp } from 'nav-frontend-knapper';
-import { Bjorn } from '@navikt/digisyfo-npm';
 import ReviderEllerGodkjennPlan, {
   ReviderEllerGodkjennPlanKnapperad,
 } from '../../../../js/components/oppfolgingsdialog/godkjennplan/ReviderEllerGodkjennPlan';
@@ -23,10 +22,6 @@ describe('ReviderEllerGodkjennPlan', () => {
   });
 
   describe('Standard visning', () => {
-    it('Skal vise Bjorn', () => {
-      expect(komponent.find(Bjorn)).to.have.length(1);
-    });
-
     it('Skal vise ReviderEllerGodkjennPlanKnapperad', () => {
       expect(komponent.find(ReviderEllerGodkjennPlanKnapperad)).to.have.length(1);
     });

@@ -1,8 +1,8 @@
 import { call, put, takeEvery } from 'redux-saga/effects';
-import { get, log } from '@navikt/digisyfo-npm';
 import * as actions from '../actions/sykmeldt_actions';
 import * as actiontyper from '../actions/actiontyper';
 import { getContextRoot } from '../routers/paths';
+import { get } from '../gateway-api';
 
 export function* hentSykmeldt(action) {
   yield put(actions.henterSykmeldt());
@@ -11,7 +11,6 @@ export function* hentSykmeldt(action) {
     const data = yield call(get, url);
     yield put(actions.sykmeldtHentet(data));
   } catch (e) {
-    log(e);
     yield put(actions.hentSykmeldtFeilet());
   }
 }
