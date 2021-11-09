@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Hovedknapp } from 'nav-frontend-knapper';
-import { getContextRoot } from '../../../../routers/paths';
-import { oppfolgingsplanPt } from '../../../../proptypes/opproptypes';
+import { oppfolgingsplanPt } from '@/proptypes/opproptypes';
 import OppfolgingsplanInnholdboks from '../../../app/OppfolgingsplanInnholdboks';
 import GodkjennPlanTidspunkt from '../GodkjennPlanTidspunkt';
 import TidligereAvbruttePlaner from '../TidligereAvbruttePlaner';
@@ -10,6 +9,7 @@ import GodkjennPlanTilAltinnTekst from './GodkjennPlanTilAltinnTekst';
 import { EditButton } from './EditButton';
 import { SharingCheckbox } from './SharingCheckbox';
 import PlanEkspanderbar from '../PlanEkspanderbar';
+import { PlanMottattImage } from '@/images/imageComponents';
 
 const texts = {
   godkjennPlanMottattKnapper: {
@@ -62,13 +62,8 @@ GodkjennPlanMottattKnapper.propTypes = {
 };
 
 const GodkjennPlanMottatt = ({ oppfolgingsplan, rootUrlPlaner, godkjennPlan, avvisDialog }) => {
-  const rootUrl = getContextRoot();
   return (
-    <OppfolgingsplanInnholdboks
-      svgUrl={`${rootUrl}/img/svg/plan-mottatt.svg`}
-      svgAlt=""
-      tittel={texts.godkjennPlanMottatt.title}
-    >
+    <OppfolgingsplanInnholdboks svgUrl={PlanMottattImage} svgAlt="" tittel={texts.godkjennPlanMottatt.title}>
       <div className="godkjennPlanMottatt">
         <div className="blokk">
           <p>

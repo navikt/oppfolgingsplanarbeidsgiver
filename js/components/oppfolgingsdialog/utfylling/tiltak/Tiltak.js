@@ -14,6 +14,7 @@ import TiltakSkjema from './TiltakSkjema';
 import TiltakListe from './liste/TiltakListe';
 import StegTittel from '../StegTittel';
 import ObligatoriskeFelterInfotekst from '../ObligatoriskeFelterInfotekst';
+import { TiltakOnboardingImage } from '@/images/imageComponents';
 import { scrollTo } from '../../../../utils/browserUtils';
 
 const texts = {
@@ -77,6 +78,7 @@ class Tiltak extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (!prevState.visTiltakSkjema && this.state.visTiltakSkjema && this.lagreSkjema) {
+      // eslint-disable-next-line react/no-find-dom-node
       const form = findDOMNode(this.lagreSkjema);
       scrollTo(form, 300);
     }
@@ -154,7 +156,7 @@ class Tiltak extends Component {
             <div ref={this.formRef}>
               {!this.state.visTiltakSkjema ? (
                 <OppfolgingsplanInfoboks
-                  svgUrl={`${getContextRoot()}/img/svg/tiltak-onboarding.svg`}
+                  svgUrl={TiltakOnboardingImage}
                   svgAlt=""
                   tittel={texts.infoboks.title}
                   tekst={texts.infoboks.info}

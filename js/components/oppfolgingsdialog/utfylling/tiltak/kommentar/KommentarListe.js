@@ -60,7 +60,7 @@ export class KommentarListeElement extends Component {
     };
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (
       nextProps.kommentar.id === nextProps.kommentarReducer.feiletKommentarId &&
       nextProps.elementId === nextProps.kommentarReducer.feiletTiltakId &&

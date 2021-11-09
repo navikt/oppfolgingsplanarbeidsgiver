@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Field, reduxForm } from 'redux-form';
-import { Panel } from 'nav-frontend-paneler';
+import Panel from 'nav-frontend-paneler';
 import {
   OPPRETT_SKJEMANAVN,
   tekstfeltInneholderEllerBegynnerMedUgyldigTegnRegex,
@@ -31,7 +31,7 @@ export class LagreArbeidsoppgaveSkjemaKomponent extends Component {
     this.handleInitialize();
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     this.setState({
       spinner: nextProps.arbeidsoppgaverReducer.lagrer,
     });

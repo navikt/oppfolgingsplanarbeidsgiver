@@ -45,7 +45,7 @@ function mockForOpplaeringsmiljo(server) {
   server.use(express.json());
   server.use(express.urlencoded());
 
-  server.get('/oppfolgingsplanarbeidsgiver/api/dinesykmeldte/123', (req, res) => {
+  server.get('/syk/oppfolgingsplanarbeidsgiver/api/dinesykmeldte/123', (req, res) => {
     res.setHeader('Content-Type', 'application/json');
     res.send(JSON.stringify(mockData[SYKMELDT]));
   });
@@ -60,32 +60,32 @@ function mockForOpplaeringsmiljo(server) {
     res.send(JSON.stringify(mockData[TILGANG]));
   });
 
-  server.get('/syfooprest/api/arbeidsforhold', (req, res) => {
+  server.get('/syk/oppfolgingsplanarbeidsgiver/api/syfooprest/arbeidsforhold', (req, res) => {
     res.setHeader('Content-Type', 'application/json');
     res.send(JSON.stringify(mockData[ARBEIDSFORHOLD]));
   });
 
-  server.get('/syfooprest/api/virksomhet/*', (req, res) => {
+  server.get('/syk/oppfolgingsplanarbeidsgiver/api/syfooprest/virksomhet/*', (req, res) => {
     res.setHeader('Content-Type', 'application/json');
     res.send(JSON.stringify(mockData[VIRKSOMHET]));
   });
 
-  server.get('/syfooprest/api/person/01010112345', (req, res) => {
+  server.get('/syk/oppfolgingsplanarbeidsgiver/api/syfooprest/person/01010112345', (req, res) => {
     res.setHeader('Content-Type', 'application/json');
     res.send(JSON.stringify(mockData[PERSON_SEVERUS]));
   });
 
-  server.get('/syfooprest/api/person/*', (req, res) => {
+  server.get('/syk/oppfolgingsplanarbeidsgiver/api/syfooprest/person/*', (req, res) => {
     res.setHeader('Content-Type', 'application/json');
     res.send(JSON.stringify(mockData[PERSON]));
   });
 
-  server.get('/syfooprest/api/naermesteleder/*', (req, res) => {
+  server.get('/syk/oppfolgingsplanarbeidsgiver/api/syfooprest/naermesteleder/*', (req, res) => {
     res.setHeader('Content-Type', 'application/json');
     res.send(JSON.stringify(mockData[NAERMESTELEDER]));
   });
 
-  server.get('/syfooprest/api/kontaktinfo/*', (req, res) => {
+  server.get('/syk/oppfolgingsplanarbeidsgiver/api/syfooprest/kontaktinfo/*', (req, res) => {
     res.setHeader('Content-Type', 'application/json');
     res.send(JSON.stringify(mockData[KONTAKTINFO]));
   });
@@ -97,13 +97,13 @@ function mockForOpplaeringsmiljo(server) {
 
   server.get('/esso/logout', (req, res) => {
     res.send(
-      '<p>Du har blitt sendt til utlogging.</p><p><a href="/oppfolgingsplanarbeidsgiver/123/">Gå til Dine Sykmeldtes Oppfølgingplaner</a></p>'
+      '<p>Du har blitt sendt til utlogging.</p><p><a href="/syk/oppfolgingsplanarbeidsgiver/123/">Gå til Dine Sykmeldtes Oppfølgingplaner</a></p>'
     );
   });
 
   server.get('/dittnav', (req, res) => {
     res.send(
-      '<p>Ditt Nav er ikke tilgjengelig - dette er en testside som kun viser Ditt sykefravær.</p><p><a href="/oppfolgingsplanarbeidsgiver/123">Gå til Dine Sykmeldtes Oppfølgingplaner</a></p>'
+      '<p>Ditt Nav er ikke tilgjengelig - dette er en testside som kun viser Ditt sykefravær.</p><p><a href="/syk/oppfolgingsplanarbeidsgiver/123">Gå til Dine Sykmeldtes Oppfølgingplaner</a></p>'
     );
   });
 }
@@ -112,7 +112,7 @@ function mockForLokaltMiljo(server) {
   server.use(express.json());
   server.use(express.urlencoded());
 
-  server.get('/oppfolgingsplanarbeidsgiver/api/dinesykmeldte/123', (req, res) => {
+  server.get('/syk/oppfolgingsplanarbeidsgiver/api/dinesykmeldte/123', (req, res) => {
     res.setHeader('Content-Type', 'application/json');
     res.send(JSON.stringify(mockData[SYKMELDT]));
   });

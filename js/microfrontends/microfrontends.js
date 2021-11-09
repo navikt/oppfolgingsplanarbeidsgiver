@@ -1,10 +1,10 @@
 import React from 'react';
-
-import NavFrontendSpinner from 'nav-frontend-spinner';
 import { AsyncNavspa } from '@navikt/navspa';
-import { createAssetManifestParser, getMiljø } from './assetManifestUtils';
+import NavFrontendSpinner from 'nav-frontend-spinner';
+import { getMiljo } from '../utils/urlUtils';
 
-const SAMTALESTØTTE_MIKROFRONTEND = 'samtalestotte-podlet';
+const SAMTALESTOTTE_MIKROFRONTEND = 'samtalestotte-podlet';
+
 const LasterInn = () => (
   <div className="microfrontends__laster-inn">
     <NavFrontendSpinner />
@@ -12,36 +12,33 @@ const LasterInn = () => (
 );
 
 const getMikrofrontendConfig = () => {
-  const miljø = getMiljø();
+  const env = getMiljo();
 
-  switch (miljø) {
-    case 'dev-sbs':
+  switch (env) {
+    case 'dev-gcp':
       return {
-        appBaseUrl: `https://arbeidsgiver-gcp.dev.nav.no/${SAMTALESTØTTE_MIKROFRONTEND}`,
+        appBaseUrl: `https://arbeidsgiver-gcp.dev.nav.no/${SAMTALESTOTTE_MIKROFRONTEND}`,
       };
 
     case 'local':
       return {
-        appBaseUrl: `http://localhost:3001/${SAMTALESTØTTE_MIKROFRONTEND}`,
+        appBaseUrl: `http://localhost:3001/${SAMTALESTOTTE_MIKROFRONTEND}`,
       };
 
     case 'heroku':
       return {
-        appBaseUrl: `https://arbeidsgiver.labs.nais.io/${SAMTALESTØTTE_MIKROFRONTEND}`,
+        appBaseUrl: `https://arbeidsgiver.labs.nais.io/${SAMTALESTOTTE_MIKROFRONTEND}`,
       };
 
     default:
       return {
-        appBaseUrl: `https://arbeidsgiver.nav.no/${SAMTALESTØTTE_MIKROFRONTEND}`,
+        appBaseUrl: `https://arbeidsgiver.nav.no/${SAMTALESTOTTE_MIKROFRONTEND}`,
       };
   }
 };
 
-const samtalestottePodletConfig = {
-  appName: SAMTALESTØTTE_MIKROFRONTEND,
+export const SamtalestottePodlet = AsyncNavspa.importer({
+  appName: SAMTALESTOTTE_MIKROFRONTEND,
   appBaseUrl: getMikrofrontendConfig().appBaseUrl,
-  assetManifestParser: createAssetManifestParser(getMikrofrontendConfig()),
   loader: <LasterInn />,
-};
-
-export const SamtalestøttePodlet = AsyncNavspa.importer(samtalestottePodletConfig);
+});

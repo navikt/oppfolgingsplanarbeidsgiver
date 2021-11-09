@@ -28,13 +28,13 @@ TilGodkjenningStatus.propTypes = {
   oppfolgingsplan: opProptypes.oppfolgingsplanPt,
 };
 
-const OppfolgingsdialogTeaser = ({ oppfolgingsdialog, rootUrl, rootUrlPlaner }) => {
+const OppfolgingsdialogTeaser = ({ oppfolgingsdialog, rootUrlPlaner }) => {
   const planStatus = hentPlanStatus(oppfolgingsdialog);
   return (
     <LenkepanelBase href={`${rootUrlPlaner}/oppfolgingsplaner/${oppfolgingsdialog.id}`} border>
       <div className="inngangspanel">
         <span className="oppfolgingsplanInnhold__ikon">
-          <img alt="" src={`${rootUrl}/img/svg/${planStatus.img}`} />
+          <img alt="" src={planStatus.img} />
         </span>
         <div className="inngangspanel__innhold">
           <header className="inngangspanel__header">
@@ -56,7 +56,6 @@ const OppfolgingsdialogTeaser = ({ oppfolgingsdialog, rootUrl, rootUrlPlaner }) 
 
 OppfolgingsdialogTeaser.propTypes = {
   oppfolgingsdialog: opProptypes.oppfolgingsplanPt,
-  rootUrl: PropTypes.string,
   rootUrlPlaner: PropTypes.string,
 };
 

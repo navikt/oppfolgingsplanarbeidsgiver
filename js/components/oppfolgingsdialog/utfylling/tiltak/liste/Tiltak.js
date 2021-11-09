@@ -37,7 +37,7 @@ class Tiltak extends Component {
     this.skjulLagreKommentarSkjema = this.skjulLagreKommentarSkjema.bind(this);
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (
       this.props.element.tiltakId === nextProps.kommentarReducer.tiltakId &&
       this.props.kommentarReducer.lagrer &&
@@ -136,7 +136,6 @@ class Tiltak extends Component {
       tiltakReducer,
       feilMelding,
       visFeilMelding,
-      rootUrlImg,
     } = this.props;
     return (() => {
       return (
@@ -153,7 +152,6 @@ class Tiltak extends Component {
               visLagreSkjema={this.visLagreSkjema}
               lagreKommentarSkjema={this.state.lagreKommentarSkjema}
               visLagreKommentarSkjema={this.visLagreKommentarSkjema}
-              rootUrlImg={rootUrlImg}
             />
           </div>
           {!this.state.visLagreSkjema && (
@@ -170,7 +168,6 @@ class Tiltak extends Component {
               kommentarReducer={kommentarReducer}
               feilMelding={feilMelding}
               visFeilMelding={visFeilMelding}
-              rootUrlImg={rootUrlImg}
             />
           )}
           {this.state.visLagreSkjema && (
@@ -185,7 +182,6 @@ class Tiltak extends Component {
               varselTekst={this.state.varselTekst}
               visFeilMelding={visFeilMelding}
               tiltakReducer={tiltakReducer}
-              rootUrlImg={rootUrlImg}
             />
           )}
           {this.state.visSlettingFeilet && feilMelding && (
@@ -215,7 +211,6 @@ Tiltak.propTypes = {
   tiltakReducer: tiltakReducerPt,
   visFeilMelding: PropTypes.func,
   feilMelding: PropTypes.bool,
-  rootUrlImg: PropTypes.string,
 };
 
 Tiltak.defaultProps = {

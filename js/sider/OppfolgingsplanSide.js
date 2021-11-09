@@ -13,7 +13,7 @@ import {
   finnNyOppfolgingsplanMedVirkshomhetEtterAvbrutt,
   finnOppfolgingsplanerPaVirksomhet,
 } from '../utils/oppfolgingsplanUtils';
-import Side from '../sider/Side';
+import { Side } from '../sider/Side';
 import AppSpinner from '../components/AppSpinner';
 import Feilmelding from '../components/Feilmelding';
 import OppfolgingsplanInfoboks from '../components/app/OppfolgingsplanInfoboks';
@@ -38,6 +38,7 @@ import Oppfolgingsdialog from '../components/oppfolgingsdialog/Oppfolgingsdialog
 import { getContextRoot } from '../routers/paths';
 import history from '../history';
 import { hentSykmeldt } from '../actions/sykmeldt_actions';
+import { OppfolgingsdialogFeilmeldingAGImage } from '@/images/imageComponents';
 
 const pageTitleArbeidsoppgaver = 'Oppfølgingsplan - Arbeidsoppgaver';
 const pageTitleTiltak = 'Oppfølgingsplan - Tiltak';
@@ -166,7 +167,7 @@ export class OppfolgingsplanSide extends Component {
           } else if (!tilgang.data.harTilgang || !sykmeldt) {
             return (
               <OppfolgingsplanInfoboks
-                svgUrl={`${getContextRoot()}/img/svg/oppfolgingsdialogFeilmeldingAG.svg`}
+                svgUrl={OppfolgingsdialogFeilmeldingAGImage}
                 svgAlt=""
                 tittel={texts.infoboksNoAccess.title}
                 tekst={texts.infoboksNoAccess.info}

@@ -9,7 +9,7 @@ function getDefaultOppfolgingsplaner() {
       status: 'UNDER_ARBEID',
       virksomhet: {
         virksomhetsnummer: '333444555',
-        navn: '',
+        navn: 'Mesterlig Laks',
       },
       godkjentPlan: null,
       godkjenninger: [],
@@ -407,7 +407,7 @@ function getDefaultOppfolgingsplaner() {
       status: 'AVBRUTT',
       virksomhet: {
         virksomhetsnummer: '333444555',
-        navn: '',
+        navn: 'Stor Hest',
       },
       godkjentPlan: {
         opprettetTidspunkt: '2020-02-11T15:34:52.311',
@@ -608,7 +608,7 @@ function getDefaultOppfolgingsplaner() {
       status: 'AVBRUTT',
       virksomhet: {
         virksomhetsnummer: '333444555',
-        navn: '',
+        navn: 'Reketrålaren',
       },
       godkjentPlan: {
         opprettetTidspunkt: '2020-02-20T10:46:04.736',

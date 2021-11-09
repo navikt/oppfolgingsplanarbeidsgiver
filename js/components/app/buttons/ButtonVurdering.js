@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Knapp from 'nav-frontend-knapper';
+import { Knapp } from 'nav-frontend-knapper';
 
 const texts = {
   buttonVurdering: 'Gi din vurdering',

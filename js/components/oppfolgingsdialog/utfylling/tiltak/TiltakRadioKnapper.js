@@ -26,7 +26,7 @@ class TiltakRadioKnapper extends Component {
     this.handledChange = this.handledChange.bind(this);
   }
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     const initData = {};
     initData.tiltakStatus = this.props.tiltak ? this.props.tiltak.status : STATUS_TILTAK.FORSLAG;
   }

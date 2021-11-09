@@ -1,8 +1,16 @@
 {
-  "presets": ["env", "react", "babel-preset-stage-1"],
-  "env": {
-    "test": {
-        "plugins": ["istanbul"]
-    }
-  }
+  "plugins": [
+    "@babel/plugin-transform-runtime",
+    "@babel/plugin-proposal-export-default-from",
+    "@babel/plugin-proposal-class-properties",
+    [
+      "module-resolver",
+      {
+        "alias": {
+          "@": "./js"
+        }
+      }
+    ]
+  ],
+  "presets": ["@babel/preset-env", "@babel/preset-react", "@babel/preset-typescript"]
 }

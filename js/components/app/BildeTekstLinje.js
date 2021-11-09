@@ -31,7 +31,7 @@ const BildeTekstLinje = ({ imgAlt, imgUrl, tekst }) => {
 };
 BildeTekstLinje.propTypes = {
   imgAlt: PropTypes.string,
-  imgUrl: PropTypes.string,
+  imgUrl: PropTypes.objectOf(PropTypes.any),
   tekst: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
 };
 export default BildeTekstLinje;

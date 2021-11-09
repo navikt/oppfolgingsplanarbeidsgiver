@@ -10,6 +10,7 @@ import { delMedFastlegePt, delmednavPt, oppfolgingsplanPt } from '../../../../pr
 import GodkjentPlanDeltBekreftelse from './GodkjentPlanDeltBekreftelse';
 import TextForcedApprovedOppfolgingsplan from './TextForcedApprovedOppfolgingsplan';
 import { ButtonDownload } from './GodkjentPlanHandlingKnapper';
+import { PlanAvbruttImage } from '@/images/imageComponents';
 
 const texts = {
   linkActivePlan: 'Tilbake til den gjeldende utgave',
@@ -43,7 +44,7 @@ const GodkjentPlanAvbrutt = ({
           </a>
         )}
       </div>
-      <OppfolgingsplanInnholdboks svgUrl={`${rootUrl}/img/svg/plan-avbrutt.svg`} svgAlt="" tittel={texts.title}>
+      <OppfolgingsplanInnholdboks svgUrl={PlanAvbruttImage} svgAlt="" tittel={texts.title}>
         <div className="godkjentPlanAvbrutt">
           {!godkjentPlan.tvungenGodkjenning && <p>{textBothApprovedOppfolgingsplan(arbeidstakerNavn)}</p>}
           {godkjentPlan.tvungenGodkjenning && (

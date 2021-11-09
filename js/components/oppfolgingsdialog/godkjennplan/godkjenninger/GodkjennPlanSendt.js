@@ -7,8 +7,8 @@ import OppfolgingsplanInnholdboks from '../../../app/OppfolgingsplanInnholdboks'
 import GodkjennPlanTidspunkt from '../GodkjennPlanTidspunkt';
 import TidligereAvbruttePlaner from '../TidligereAvbruttePlaner';
 import GodkjennPlanVenterInfo from '../GodkjennPlanVenterInfo';
-import { getContextRoot } from '../../../../routers/paths';
 import PlanEkspanderbar from '../PlanEkspanderbar';
+import { HakeGronnLysImage } from '@/images/imageComponents';
 
 const texts = {
   godkjennPlanSendt: {
@@ -51,12 +51,7 @@ const GodkjenPlanSentBlokk = (arbeidstakerName) => {
 
 const GodkjennPlanSendt = ({ oppfolgingsplan, nullstillGodkjenning, rootUrlPlaner }) => {
   return (
-    <OppfolgingsplanInnholdboks
-      svgUrl={`${getContextRoot()}/img/svg/hake-groenn--lys.svg`}
-      liteikon
-      svgAlt=""
-      tittel={texts.godkjennPlanSendt.title}
-    >
+    <OppfolgingsplanInnholdboks svgUrl={HakeGronnLysImage} liteikon svgAlt="" tittel={texts.godkjennPlanSendt.title}>
       <div className="godkjennPlanSendt">
         {GodkjenPlanSentBlokk(oppfolgingsplan.arbeidstaker.navn)}
 

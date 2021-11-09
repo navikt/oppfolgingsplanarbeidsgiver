@@ -18,7 +18,7 @@ class Godkjenn extends Component {
     this.formRef = React.createRef();
   }
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     window.location.hash = 'godkjenn';
     window.sessionStorage.setItem('hash', 'godkjenn');
   }

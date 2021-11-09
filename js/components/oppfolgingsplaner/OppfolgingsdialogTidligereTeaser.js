@@ -5,13 +5,13 @@ import * as opProptypes from '../../proptypes/opproptypes';
 import { finnOppfolgingsdialogMotpartNavn } from '../../utils/oppfolgingsplanUtils';
 import { hentPlanStatus } from '../../utils/teaserUtils';
 
-const OppfolgingsdialogTidligereTeaser = ({ oppfolgingsdialog, rootUrl, rootUrlPlaner }) => {
+const OppfolgingsdialogTidligereTeaser = ({ oppfolgingsdialog, rootUrlPlaner }) => {
   const planStatus = hentPlanStatus(oppfolgingsdialog);
   return (
     <LenkepanelBase href={`${rootUrlPlaner}/oppfolgingsplaner/${oppfolgingsdialog.id}`} border>
       <div className="inngangspanel">
         <span className="oppfolgingsplanInnhold__ikon">
-          <img alt="" src={`${rootUrl}/img/svg/${planStatus.img}`} />
+          <img alt="" src={planStatus.img} />
         </span>
         <div className="inngangspanel__innhold">
           <header className="inngangspanel__header">
@@ -27,7 +27,6 @@ const OppfolgingsdialogTidligereTeaser = ({ oppfolgingsdialog, rootUrl, rootUrlP
 };
 OppfolgingsdialogTidligereTeaser.propTypes = {
   oppfolgingsdialog: opProptypes.oppfolgingsplanPt,
-  rootUrl: PropTypes.string,
   rootUrlPlaner: PropTypes.string,
 };
 

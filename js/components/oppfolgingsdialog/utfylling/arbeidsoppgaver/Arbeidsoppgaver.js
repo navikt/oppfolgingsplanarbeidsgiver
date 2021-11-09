@@ -4,7 +4,6 @@ import { findDOMNode } from 'react-dom';
 import { sorterArbeidsoppgaverEtterOpprettet } from '../../../../utils/arbeidsoppgaveUtils';
 import { capitalizeFirstLetter } from '../../../../utils/tekstUtils';
 import * as opProptypes from '../../../../proptypes/opproptypes';
-import { getContextRoot } from '../../../../routers/paths';
 import { isEmpty } from '../../../../utils/oppfolgingsplanUtils';
 import OppfolgingsplanInfoboks from '../../../app/OppfolgingsplanInfoboks';
 import LeggTilElementKnapper from '../LeggTilElementKnapper';
@@ -13,6 +12,7 @@ import ArbeidsoppgaverInfoboks from './ArbeidsoppgaverInfoboks';
 import LagreArbeidsoppgaveSkjema from './LagreArbeidsoppgaveSkjema';
 import StegTittel from '../StegTittel';
 import ObligatoriskeFelterInfotekst from '../ObligatoriskeFelterInfotekst';
+import { ArbeidsoppgaveOnboardingImage } from '@/images/imageComponents';
 import { scrollTo } from '../../../../utils/browserUtils';
 
 const texts = {
@@ -147,6 +147,7 @@ class Arbeidsoppgaver extends Component {
   }
 
   scrollToForm() {
+    // eslint-disable-next-line react/no-find-dom-node
     const form = findDOMNode(this.lagreSkjema);
     scrollTo(form, 300);
   }
@@ -176,7 +177,7 @@ class Arbeidsoppgaver extends Component {
               )}
               {!this.state.visArbeidsoppgaveSkjema ? (
                 <OppfolgingsplanInfoboks
-                  svgUrl={`${getContextRoot()}/img/svg/arbeidsoppgave-onboarding.svg`}
+                  svgUrl={ArbeidsoppgaveOnboardingImage}
                   svgAlt=""
                   tittel={texts.infoboks.title}
                   tekst={texts.infoboks.info}

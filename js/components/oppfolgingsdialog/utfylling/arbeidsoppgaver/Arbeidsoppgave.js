@@ -26,7 +26,7 @@ class Arbeidsoppgave extends Component {
     this.sendSlett = this.sendSlett.bind(this);
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (this.props.element.arbeidsoppgaveId === nextProps.arbeidsoppgaverReducer.feiletOppgaveId) {
       if (
         nextProps.arbeidsoppgaverReducer.slettingFeilet &&

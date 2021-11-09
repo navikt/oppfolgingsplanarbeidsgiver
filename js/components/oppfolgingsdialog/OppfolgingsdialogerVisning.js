@@ -12,7 +12,7 @@ import OppfolgingsplanerOpprett from './opprett/OppfolgingsplanerOpprett';
 import OppfolgingsplanerIngenplan from './opprett/OppfolgingsplanerIngenplan';
 import OppfolgingsplanFilm from '../oppfolgingsplaner/OppfolgingsplanFilm';
 import OppfolgingsdialogTeasere from '../oppfolgingsplaner/OppfolgingsdialogTeasere';
-import SamtalestøttePanel from '../../SamtalestøttePanel/SamtalestøttePanel';
+import SamtalestottePanel from '../../SamtalestottePanel/SamtalestottePanel';
 
 const texts = {
   teaserActivePlan: {
@@ -62,7 +62,6 @@ class OppfolgingsdialogerVisning extends Component {
             tittel={texts.teaserActivePlan.title}
             id="OppfolgingsdialogTeasereAG"
             rootUrlPlaner={`${getContextRoot()}/${narmestelederId}`}
-            rootUrl={getContextRoot()}
           />
         )}
 
@@ -84,12 +83,11 @@ class OppfolgingsdialogerVisning extends Component {
               tittel={texts.teaserOutdatedPlaner.title}
               id="OppfolgingsdialogTeasereAG"
               rootUrlPlaner={`${getContextRoot()}/${narmestelederId}`}
-              rootUrl={getContextRoot()}
             />
           </div>
         )}
         {/* eslint-disable-next-line react/jsx-pascal-case */}
-        <SamtalestøttePanel orgnummer={orgnummer} />
+        <SamtalestottePanel orgnummer={orgnummer} />
         <OppfolgingsplanFilm />
       </div>
     );

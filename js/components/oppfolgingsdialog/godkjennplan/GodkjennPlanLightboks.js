@@ -18,7 +18,7 @@ import CheckboxSelvstendig from '../../../skjema/CheckboxSelvstendig';
 import GodkjennPlanSkjemaDatovelger from './GodkjennPlanSkjemaDatovelger';
 import { oppfolgingsplanPt } from '../../../proptypes/opproptypes';
 import { getEndDateFromTiltakListe, getStartDateFromTiltakListe } from '../../../utils/tiltakUtils';
-import { erHerokuApp } from '../../../utils/urlUtils';
+import { isHeroku } from '../../../utils/urlUtils';
 import ObligatoriskeFelterInfotekst from '../utfylling/ObligatoriskeFelterInfotekst';
 
 const texts = {
@@ -328,7 +328,7 @@ export class GodkjennPlanLightboksComponent extends Component {
                     id="giGodkjenning"
                     disabled={this.state.visIkkeUtfyltFeilmelding}
                     onClick={(e) => {
-                      if (erHerokuApp()) {
+                      if (isHeroku()) {
                         e.preventDefault();
                       }
                     }}
@@ -419,7 +419,7 @@ export class GodkjennPlanLightboksComponent extends Component {
                   htmlType="submit"
                   spinner={this.state.submitting}
                   onClick={(e) => {
-                    if (erHerokuApp()) {
+                    if (isHeroku()) {
                       e.preventDefault();
                     }
                   }}

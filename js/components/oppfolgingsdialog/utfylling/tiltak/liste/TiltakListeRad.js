@@ -7,6 +7,7 @@ import { tiltakPt } from '../../../../../proptypes/opproptypes';
 import { toDateMedMaanedNavn } from '../../../../../utils/datoUtils';
 import { skalVurdereTiltak } from '../../../../../utils/tiltakUtils';
 import TiltakInformasjonKnapper from './TiltakInformasjonKnapper';
+import { VarseltrekantImage } from '@/images/imageComponents';
 
 const texts = {
   status: {
@@ -24,7 +25,6 @@ const TiltakListeRad = ({
   visLagreSkjema,
   lagreKommentarSkjema,
   visLagreKommentarSkjema,
-  rootUrlImg,
 }) => {
   let etikettType = '';
   let status = '';
@@ -47,9 +47,7 @@ const TiltakListeRad = ({
     <div>
       <div className="tiltaktabell__rad__navn">
         <span className="tiltak__rad__navn--tittel">
-          {skalVurdereTiltak(tiltak, fnr) && (
-            <img alt="" className="tiltaktabell__rad__img" src={`${rootUrlImg}/img/svg/varseltrekant.svg`} />
-          )}
+          {skalVurdereTiltak(tiltak, fnr) && <img alt="" className="tiltaktabell__rad__img" src={VarseltrekantImage} />}
           {tiltak.tiltaknavn}
         </span>
       </div>

@@ -28,7 +28,7 @@ const OppfolgingsplanInfoboks = ({ classnames = '', svgUrl, svgAlt, tittel, chil
 
 OppfolgingsplanInfoboks.propTypes = {
   classnames: PropTypes.string,
-  svgUrl: PropTypes.string,
+  svgUrl: PropTypes.objectOf(PropTypes.any),
   liteikon: PropTypes.bool,
   mediumIcon: PropTypes.bool,
   svgAlt: PropTypes.string,

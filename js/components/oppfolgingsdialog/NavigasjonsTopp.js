@@ -17,7 +17,7 @@ const stegListe = [
 ];
 
 class NavigasjonsTopp extends Component {
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     if (this.props.disabled) {
       this.props.settAktivtSteg(3);
     }

@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Hovedknapp } from 'nav-frontend-knapper';
-import { getContextRoot } from '../../../../routers/paths';
 import { oppfolgingsplanPt } from '../../../../proptypes/opproptypes';
 import OppfolgingsplanInnholdboks from '../../../app/OppfolgingsplanInnholdboks';
+import { OppfolgingsplanAvslattImage } from '@/images/imageComponents';
 
 const texts = {
   title: 'Arbeidstakeren din har noen forslag',
@@ -13,11 +13,7 @@ const texts = {
 
 const GodkjennPlanAvslaatt = ({ oppfolgingsplan, nullstillGodkjenning }) => {
   return (
-    <OppfolgingsplanInnholdboks
-      svgUrl={`${getContextRoot()}/img/svg/oppfolgingsplan-avslaatt.svg`}
-      svgAlt=""
-      tittel={texts.title}
-    >
+    <OppfolgingsplanInnholdboks svgUrl={OppfolgingsplanAvslattImage} svgAlt="" tittel={texts.title}>
       <div className="godkjennPlanAvslaatt">
         <div className="godkjennPlanAvslaatt__infoboks">
           <p>{texts.paragraphInfo}</p>

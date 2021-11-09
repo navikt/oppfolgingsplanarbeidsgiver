@@ -53,7 +53,7 @@ const GodkjentPlanDelKnapper = ({ oppfolgingsplan, delmednav, delMedNavFunc, fas
     if (prevProp === false && delmednav.sendt) {
       setShowFadingIconWithText(true);
     }
-  }, [delmednav.sendt]);
+  }, [delmednav.sendt, prevProp]);
 
   return (
     <div>

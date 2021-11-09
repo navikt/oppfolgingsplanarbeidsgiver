@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import BildeTekstLinje from '../../../app/BildeTekstLinje';
+import { ReportProblemCircleImage } from '@/images/imageComponents';
 
-const TextForcedApprovedOppfolgingsplan = ({ rootUrl, text }) => {
-  return <BildeTekstLinje imgUrl={`${rootUrl}/img/svg/report-problem-circle.svg`} imgAlt="" tekst={text} />;
+const TextForcedApprovedOppfolgingsplan = ({ text }) => {
+  return <BildeTekstLinje imgUrl={ReportProblemCircleImage} imgAlt="" tekst={text} />;
 };
 
 TextForcedApprovedOppfolgingsplan.propTypes = {
-  rootUrl: PropTypes.string,
   text: PropTypes.string,
 };
 

@@ -86,7 +86,7 @@ export class LagreKommentarSkjemaComponent extends Component {
     };
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (nextProps.kommentarReducer.tiltakId === this.props.elementId) {
       this.setState({
         spinner: nextProps.kommentarReducer.lagrer,

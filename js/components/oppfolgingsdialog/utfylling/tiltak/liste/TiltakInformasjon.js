@@ -77,7 +77,7 @@ class TiltakInformasjon extends Component {
     };
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     if (
       this.props.element.tiltakId === nextProps.kommentarReducer.feiletTiltakId &&
       nextProps.kommentarReducer.lagringFeilet &&
