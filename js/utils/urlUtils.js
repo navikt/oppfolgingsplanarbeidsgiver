@@ -1,11 +1,7 @@
-export const isHeroku = () => {
+export const isLabs = () => {
   const url = window && window.location && window.location.href ? window.location.href : '';
 
-  return url.indexOf('herokuapp') > -1;
-};
-
-export const getSykefravaerarbeidsgiverUrl = (sti) => {
-  return isHeroku() ? `https://sykefravaerarbeidsgiver.herokuapp.com${sti}` : sti;
+  return url.indexOf('.labs.nais.') > -1;
 };
 
 export const isLocal = () => {
@@ -28,8 +24,8 @@ export function getMiljo() {
   if (isPreProd()) {
     return 'dev-gcp';
   }
-  if (isHeroku()) {
-    return 'heroku';
+  if (isLabs()) {
+    return 'labs';
   }
   return 'local';
 }

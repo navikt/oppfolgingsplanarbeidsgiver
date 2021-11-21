@@ -18,7 +18,6 @@ import CheckboxSelvstendig from '../../../skjema/CheckboxSelvstendig';
 import GodkjennPlanSkjemaDatovelger from './GodkjennPlanSkjemaDatovelger';
 import { oppfolgingsplanPt } from '../../../proptypes/opproptypes';
 import { getEndDateFromTiltakListe, getStartDateFromTiltakListe } from '../../../utils/tiltakUtils';
-import { isHeroku } from '../../../utils/urlUtils';
 import ObligatoriskeFelterInfotekst from '../utfylling/ObligatoriskeFelterInfotekst';
 
 const texts = {
@@ -327,11 +326,6 @@ export class GodkjennPlanLightboksComponent extends Component {
                     label={texts.approval.sendForApproval}
                     id="giGodkjenning"
                     disabled={this.state.visIkkeUtfyltFeilmelding}
-                    onClick={(e) => {
-                      if (isHeroku()) {
-                        e.preventDefault();
-                      }
-                    }}
                   />
                   <input
                     key="opprettplan-2"
@@ -415,15 +409,7 @@ export class GodkjennPlanLightboksComponent extends Component {
           <div className="knapperad">
             <div className="knapperad__element">
               {this.state.radioSelected && (
-                <Hovedknapp
-                  htmlType="submit"
-                  spinner={this.state.submitting}
-                  onClick={(e) => {
-                    if (isHeroku()) {
-                      e.preventDefault();
-                    }
-                  }}
-                >
+                <Hovedknapp htmlType="submit" spinner={this.state.submitting}>
                   {this.state.createWithoutApproval ? texts.buttonSend.noApproval : texts.buttonSend.approval}
                 </Hovedknapp>
               )}
