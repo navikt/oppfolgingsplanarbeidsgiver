@@ -1,3 +1,4 @@
+import { isLabs, isLocal, isPreProd } from '@/utils/urlUtils';
 import ponyfill from 'fetch-ponyfill';
 import store from '../store';
 import { forlengInnloggetSesjon } from '../timeout/timeout_actions';
@@ -118,16 +119,12 @@ export const post = (url, body) => {
 };
 
 export const hentSyfoapiUrl = (appNavn) => {
-  const url = window && window.location && window.location.href ? window.location.href : '';
-  if (url.indexOf('www.nav') > -1) {
-    // Prod
-    return `https://syfoapi.nav.no/${appNavn}/api`;
-  } else if (url.indexOf('localhost') > -1 || url.indexOf('herokuapp') > -1) {
-    // Lokalt
+  if (isPreProd()) {
+    return `https://syfoapi.dev.nav.no/${appNavn}/api`;
+  } else if (isLocal() || isLabs()) {
     return `/${appNavn}/api`;
   }
-  // Preprod
-  return `https://syfoapi.dev.nav.no/${appNavn}/api`;
+  return `https://syfoapi.nav.no/${appNavn}/api`;
 };
 
 export const API_NAVN = {

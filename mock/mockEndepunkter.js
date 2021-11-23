@@ -45,7 +45,7 @@ function mockForOpplaeringsmiljo(server) {
   server.use(express.json());
   server.use(express.urlencoded());
 
-  server.get('/syk/oppfolgingsplanarbeidsgiver/api/dinesykmeldte/123', (req, res) => {
+  server.get('/syk/oppfolgingsplanarbeidsgiver/api/dinesykmeldte/*', (req, res) => {
     res.setHeader('Content-Type', 'application/json');
     res.send(JSON.stringify(mockData[SYKMELDT]));
   });
@@ -112,7 +112,7 @@ function mockForLokaltMiljo(server) {
   server.use(express.json());
   server.use(express.urlencoded());
 
-  server.get('/syk/oppfolgingsplanarbeidsgiver/api/dinesykmeldte/123', (req, res) => {
+  server.get('/syk/oppfolgingsplanarbeidsgiver/api/dinesykmeldte/*', (req, res) => {
     res.setHeader('Content-Type', 'application/json');
     res.send(JSON.stringify(mockData[SYKMELDT]));
   });

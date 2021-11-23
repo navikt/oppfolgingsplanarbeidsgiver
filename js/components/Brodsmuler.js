@@ -3,11 +3,10 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 import { getContextRoot } from '../routers/paths';
 import { brodsmule as brodsmulePt } from '../shapes';
-import { getSykefravaerarbeidsgiverUrl } from '../utils/urlUtils';
 import { PersonImage } from '@/images/imageComponents';
 
 const Brodsmule = ({ sti, tittel, sisteSmule, erKlikkbar }) => {
-  const nySti = sti && sti.indexOf('/sykefravaerarbeidsgiver') > -1 ? getSykefravaerarbeidsgiverUrl(sti) : sti;
+  const nySti = sti;
   const root = sti && sti.indexOf('/sykefravaerarbeidsgiver') > -1 ? '' : getContextRoot();
   const link =
     root === '' ? (

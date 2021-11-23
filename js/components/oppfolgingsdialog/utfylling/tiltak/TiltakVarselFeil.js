@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import Alertstripe from 'nav-frontend-alertstriper';
-import { isHeroku } from '../../../../utils/urlUtils';
 
 const AlertStripeStyled = styled(Alertstripe)`
   margin-top: 1.5em;
@@ -11,7 +10,7 @@ const AlertStripeStyled = styled(Alertstripe)`
 const TiltakVarselFeil = ({ tekst }) => {
   return (
     <AlertStripeStyled className="tiltakVarselFeil alertstripe--notifikasjonboks" type="advarsel">
-      {isHeroku() ? 'Denne funksjonen virker ikke på testsiden' : tekst}
+      {tekst}
     </AlertStripeStyled>
   );
 };
