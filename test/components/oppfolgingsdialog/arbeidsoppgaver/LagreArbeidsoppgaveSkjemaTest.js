@@ -37,7 +37,7 @@ describe('LagreArbeidsoppgaveSkjemaTest', () => {
       handleSubmit = sinon.spy();
       komponent = mount(
         <Provider store={store}>
-          <LagreArbeidsoppgaveSkjema handleSubmit={handleSubmit} />
+          <LagreArbeidsoppgaveSkjema />
         </Provider>
       );
     });
@@ -51,7 +51,7 @@ describe('LagreArbeidsoppgaveSkjemaTest', () => {
     });
 
     it('Skal vise ikke feildmelding', () => {
-      komponent = shallow(<LagreArbeidsoppgaveSkjema handleSubmit={handleSubmit} />);
+      komponent = shallow(<LagreArbeidsoppgaveSkjema />);
       const values = {
         arbeidsoppgavenavn: 'navn',
       };
@@ -61,7 +61,7 @@ describe('LagreArbeidsoppgaveSkjemaTest', () => {
     });
 
     it('Skal vise feildmelding når validate går feil', () => {
-      komponent = shallow(<LagreArbeidsoppgaveSkjema handleSubmit={handleSubmit} />);
+      komponent = shallow(<LagreArbeidsoppgaveSkjema />);
       const values = {
         arbeidsoppgavenavn: '',
       };

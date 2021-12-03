@@ -189,12 +189,10 @@ class Arbeidsoppgaver extends Component {
                 </OppfolgingsplanInfoboks>
               ) : (
                 <LagreArbeidsoppgaveSkjema
-                  toggleArbeidsoppgaveSkjema={this.toggleArbeidsoppgaveSkjema}
-                  varselTekst={this.state.varselTekst}
-                  oppdateringFeilet={this.state.lagreNyOppgaveFeilet}
                   arbeidsoppgaverReducer={arbeidsoppgaver}
                   avbryt={this.skjulSkjema}
-                  onSubmit={this.sendLagreArbeidsoppgave}
+                  oppdateringFeilet={this.state.lagreNyOppgaveFeilet}
+                  varselTekst={this.state.varselTekst}
                 />
               )}
             </div>
@@ -207,14 +205,10 @@ class Arbeidsoppgaver extends Component {
               />
               {this.state.visArbeidsoppgaveSkjema && (
                 <LagreArbeidsoppgaveSkjema
-                  onSubmit={this.sendLagreArbeidsoppgave}
-                  avbryt={this.skjulSkjema}
-                  ref={(lagreSkjema) => {
-                    this.lagreSkjema = lagreSkjema;
-                  }}
-                  varselTekst={this.state.varselTekst}
-                  oppdateringFeilet={this.state.lagreNyOppgaveFeilet}
                   arbeidsoppgaverReducer={arbeidsoppgaver}
+                  avbryt={this.skjulSkjema}
+                  oppdateringFeilet={this.state.lagreNyOppgaveFeilet}
+                  varselTekst={this.state.varselTekst}
                 />
               )}
               <ArbeidsoppgaverListe
