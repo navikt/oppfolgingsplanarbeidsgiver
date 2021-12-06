@@ -1,16 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Feilmelding = ({ touched, error }) => {
+const Feilmelding = ({ error }) => {
   return (
     <p className="skjemaelement__feilmelding typo-feilmelding" aria-live="polite">
-      {touched && error}
+      {error}
     </p>
   );
 };
 
 Feilmelding.propTypes = {
-  touched: PropTypes.bool,
   error: PropTypes.string,
 };
 

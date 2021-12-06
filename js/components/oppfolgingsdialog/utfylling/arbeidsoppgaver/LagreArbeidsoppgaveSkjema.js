@@ -5,7 +5,7 @@ import Inputfelt from '../../../../skjema/Inputfelt';
 import * as opProptypes from '../../../../proptypes/opproptypes';
 
 
-const LagreArbeidsoppgaveSkjema = ({ arbeidsoppgaverReducer, avbryt, oppdateringFeilet, varselTekst }) => {
+const LagreArbeidsoppgaveSkjema = ({ arbeidsoppgaverReducer, avbryt, oppdateringFeilet, varselTekst, onSubmit }) => {
     const [spinner, setSpinner] = useState(false);
 
     useEffect(() => {
@@ -14,11 +14,12 @@ const LagreArbeidsoppgaveSkjema = ({ arbeidsoppgaverReducer, avbryt, oppdatering
 
     return (
       <Panel border>
-        <Inputfelt
+        <Inputfelt 
             avbryt={avbryt}
             oppdateringFeilet={oppdateringFeilet}
-            varselTekst={varselTekst}
             spinner={spinner}
+            varselTekst={varselTekst}
+            onSubmit={onSubmit}
         />
       </Panel>
     );
@@ -29,6 +30,7 @@ LagreArbeidsoppgaveSkjema.propTypes = {
   avbryt: PropTypes.func,
   oppdateringFeilet: PropTypes.bool,
   varselTekst: PropTypes.string,
+  onSubmit: PropTypes.func,
 };
 
 export default LagreArbeidsoppgaveSkjema;

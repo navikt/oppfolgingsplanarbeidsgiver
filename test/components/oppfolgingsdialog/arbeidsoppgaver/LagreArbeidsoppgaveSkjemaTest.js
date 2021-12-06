@@ -4,9 +4,6 @@ import { mount, shallow } from 'enzyme';
 import sinon from 'sinon';
 import chaiEnzyme from 'chai-enzyme';
 import { Field } from 'redux-form';
-import configureMockStore from 'redux-mock-store';
-import { Provider } from 'react-redux';
-import createSagaMiddleware from 'redux-saga';
 import LagreArbeidsoppgaveSkjema from '../../../../js/components/oppfolgingsdialog/utfylling/arbeidsoppgaver/LagreArbeidsoppgaveSkjema';
 
 chai.use(chaiEnzyme());
@@ -14,44 +11,19 @@ const expect = chai.expect;
 
 describe('LagreArbeidsoppgaveSkjemaTest', () => {
   describe('Ska vise rett komponent', () => {
-    const sagaMiddleware = createSagaMiddleware();
-    const middlewares = [sagaMiddleware];
-    const mockStore = configureMockStore(middlewares);
     let komponent;
-    let store;
+    let arbeidsoppgaverReducer = {};
     let handleSubmit;
 
-    const getState = {
-      arbeidsgivere: {
-        data: [],
-      },
-      brukerinfo: {
-        bruker: {
-          data: {},
-        },
-      },
-    };
-
     beforeEach(() => {
-      store = mockStore(getState);
       handleSubmit = sinon.spy();
       komponent = mount(
-        <Provider store={store}>
-          <LagreArbeidsoppgaveSkjema />
-        </Provider>
+        <LagreArbeidsoppgaveSkjema handleSubmit={handleSubmit} arbeidsoppgaverReducer={arbeidsoppgaverReducer} />
       );
     });
 
-    it('Skal vise form element', () => {
-      expect(komponent.find('form.panel')).to.have.length(1);
-    });
-
-    it('Skal vise Field element validate ', () => {
-      expect(komponent.find(Field)).to.have.length(1);
-    });
-
     it('Skal vise ikke feildmelding', () => {
-      komponent = shallow(<LagreArbeidsoppgaveSkjema />);
+      komponent = shallow(<LagreArbeidsoppgaveSkjema handleSubmit={handleSubmit} arbeidsoppgaverReducer={arbeidsoppgaverReducer} />);
       const values = {
         arbeidsoppgavenavn: 'navn',
       };
@@ -61,7 +33,7 @@ describe('LagreArbeidsoppgaveSkjemaTest', () => {
     });
 
     it('Skal vise feildmelding når validate går feil', () => {
-      komponent = shallow(<LagreArbeidsoppgaveSkjema />);
+      komponent = shallow(<LagreArbeidsoppgaveSkjema handleSubmit={handleSubmit} arbeidsoppgaverReducer={arbeidsoppgaverReducer}/>);
       const values = {
         arbeidsoppgavenavn: '',
       };

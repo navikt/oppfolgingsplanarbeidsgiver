@@ -193,6 +193,7 @@ class Arbeidsoppgaver extends Component {
                   avbryt={this.skjulSkjema}
                   oppdateringFeilet={this.state.lagreNyOppgaveFeilet}
                   varselTekst={this.state.varselTekst}
+                  onSubmit={this.sendLagreArbeidsoppgave}
                 />
               )}
             </div>
@@ -209,6 +210,7 @@ class Arbeidsoppgaver extends Component {
                   avbryt={this.skjulSkjema}
                   oppdateringFeilet={this.state.lagreNyOppgaveFeilet}
                   varselTekst={this.state.varselTekst}
+                  onSubmit={this.sendLagreArbeidsoppgave}
                 />
               )}
               <ArbeidsoppgaverListe
