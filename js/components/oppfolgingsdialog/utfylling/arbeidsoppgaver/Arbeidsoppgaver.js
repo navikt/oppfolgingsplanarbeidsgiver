@@ -17,7 +17,6 @@ import { scrollTo } from '../../../../utils/browserUtils';
 
 const texts = {
   tittel: 'Arbeidsoppgaver',
-  updateError: 'En midlertidig feil gjør at vi ikke kan lagre endringene dine akkurat nå. Prøv igjen senere.',
   infoboks: {
     title: 'Hva er arbeidsoppgavene?',
     info: `
@@ -69,7 +68,6 @@ class Arbeidsoppgaver extends Component {
       nyArbeidsoppgave: false,
       oppdatertArbeidsoppgave: false,
       lagreNyOppgaveFeilet: false,
-      varselTekst: '',
       oppdateringFeilet: false,
     };
     window.location.hash = 'arbeidsoppgaver';
@@ -101,7 +99,6 @@ class Arbeidsoppgaver extends Component {
       this.setState({
         lagreNyOppgaveFeilet: true,
         visArbeidsoppgaveSkjema: true,
-        varselTekst: texts.updateError,
       });
     }
   }
@@ -190,10 +187,9 @@ class Arbeidsoppgaver extends Component {
               ) : (
                 <LagreArbeidsoppgaveSkjema
                   arbeidsoppgaverReducer={arbeidsoppgaver}
-                  avbryt={this.skjulSkjema}
                   oppdateringFeilet={this.state.lagreNyOppgaveFeilet}
-                  varselTekst={this.state.varselTekst}
                   onSubmit={this.sendLagreArbeidsoppgave}
+                  avbryt={this.skjulSkjema}
                 />
               )}
             </div>
@@ -207,10 +203,9 @@ class Arbeidsoppgaver extends Component {
               {this.state.visArbeidsoppgaveSkjema && (
                 <LagreArbeidsoppgaveSkjema
                   arbeidsoppgaverReducer={arbeidsoppgaver}
-                  avbryt={this.skjulSkjema}
                   oppdateringFeilet={this.state.lagreNyOppgaveFeilet}
-                  varselTekst={this.state.varselTekst}
                   onSubmit={this.sendLagreArbeidsoppgave}
+                  avbryt={this.skjulSkjema}
                 />
               )}
               <ArbeidsoppgaverListe

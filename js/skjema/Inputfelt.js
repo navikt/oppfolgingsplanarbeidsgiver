@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Hovedknapp } from 'nav-frontend-knapper';
 import { Textarea } from 'nav-frontend-skjema';
 import Feilmelding from './Feilmelding';
+import ArbeidsoppgaveVarselFeil from '../components/oppfolgingsdialog/utfylling/arbeidsoppgaver/ArbeidsoppgaveVarselFeil';
 import { tekstfeltInneholderEllerBegynnerMedUgyldigTegnRegex, tekstfeltRegex } from '../konstanter';
 
 const nameMaxLen = 100;
@@ -12,7 +13,7 @@ const texts = {
   buttonSave: "Lagre arbeidsoppgave",
   buttonCancel: "Avbryt",
   errors: {
-    store: "Varselboks tekst",
+    update: "En midlertidig feil gjør at vi ikke kan lagre endringene dine akkurat nå. Prøv igjen senere.",
     noInput: "Fyll inn arbeidsoppgave",
     maxLengthExceeded: `Maks ${nameMaxLen} tegn er tillatt`,
     invalidCharacters: "Ugyldige spesialtegn er oppgitt",
@@ -40,28 +41,8 @@ const validateInput = (input) => {
   return null;
 }
 
-/*
-const validate = (values) => {
-  const feilmeldinger = {};
-  if (!values.arbeidsoppgavenavn || (values.arbeidsoppgavenavn && values.arbeidsoppgavenavn.trim() === '')) {
-    feilmeldinger.arbeidsoppgavenavn = 'Fyll inn arbeidsoppgave';
-  } else if (
-    values.arbeidsoppgavenavn.match(tekstfeltInneholderEllerBegynnerMedUgyldigTegnRegex) ||
-    values.arbeidsoppgavenavn.match(tekstfeltRegex)
-  ) {
-    feilmeldinger.arbeidsoppgavenavn = 'Ugyldig spesialtegn er oppgitt';
-  }
-  const navnLengde = values.arbeidsoppgavenavn ? values.arbeidsoppgavenavn.length : 0;
-  const navnMaksLengde = 100;
-  if (navnLengde > navnMaksLengde) {
-    feilmeldinger.arbeidsoppgavenavn = `Maks ${navnMaksLengde} tegn tillatt`;
-  }
-  return feilmeldinger;
-};
-*/
-
 const Inputfelt = (props) => {
-  const { avbryt, spinner, onSubmit } = props;
+  const { oppdateringFeilet, spinner, onSubmit, avbryt } = props;
   const [arbeidsoppgaveInputText, setArbeidsoppgaveInputText] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
 
@@ -89,15 +70,16 @@ const Inputfelt = (props) => {
     
     <div>
       <form onSubmit={handleSubmit}>
-          <Textarea
-              label={texts.textFieldName}
-              maxLength={nameMaxLen}
-              onChange={handleChange}
-              value={arbeidsoppgaveInputText}
-          />
+        <Textarea
+          label={texts.textFieldName}
+          maxLength={nameMaxLen}
+          onChange={handleChange}
+          value={arbeidsoppgaveInputText}
+        />
+        {oppdateringFeilet && <ArbeidsoppgaveVarselFeil tekst={texts.errors.update} />}
           <div className="arbeidsgiveroppgave__rad--feilmelding">
             <Feilmelding error={errorMsg} />
-        </div>
+          </div>
         <div className="arbeidsgiveroppgave__rad">
             
               <div className="knapperad knapperad--justervenstre">
