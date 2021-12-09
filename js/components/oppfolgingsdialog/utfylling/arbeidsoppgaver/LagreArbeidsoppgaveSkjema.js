@@ -4,24 +4,18 @@ import Panel from 'nav-frontend-paneler';
 import Inputfelt from '../../../../skjema/Inputfelt';
 import * as opProptypes from '../../../../proptypes/opproptypes';
 
-
 const LagreArbeidsoppgaveSkjema = ({ arbeidsoppgaverReducer, oppdateringFeilet, onSubmit, avbryt }) => {
-    const [spinner, setSpinner] = useState(false);
+  const [spinner, setSpinner] = useState(false);
 
-    useEffect(() => {
-        setSpinner(arbeidsoppgaverReducer.lagrer)
-    }, [arbeidsoppgaverReducer.lagrer]);
+  useEffect(() => {
+    setSpinner(arbeidsoppgaverReducer.lagrer);
+  }, [arbeidsoppgaverReducer.lagrer]);
 
-    return (
-      <Panel border>
-        <Inputfelt 
-            oppdateringFeilet={oppdateringFeilet}
-            spinner={spinner}
-            onSubmit={onSubmit}
-            avbryt={avbryt}
-        />
-      </Panel>
-    );
+  return (
+    <Panel border>
+      <Inputfelt oppdateringFeilet={oppdateringFeilet} spinner={spinner} onSubmit={onSubmit} avbryt={avbryt} />
+    </Panel>
+  );
 };
 
 LagreArbeidsoppgaveSkjema.propTypes = {

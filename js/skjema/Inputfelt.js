@@ -9,14 +9,14 @@ import { tekstfeltInneholderEllerBegynnerMedUgyldigTegnRegex, tekstfeltRegex } f
 const nameMaxLen = 100;
 
 export const texts = {
-  textFieldName: "Navn på arbeidsoppgave",
-  buttonSave: "Lagre arbeidsoppgave",
-  buttonCancel: "Avbryt",
+  textFieldName: 'Navn på arbeidsoppgave',
+  buttonSave: 'Lagre arbeidsoppgave',
+  buttonCancel: 'Avbryt',
   errors: {
-    update: "En midlertidig feil gjør at vi ikke kan lagre endringene dine akkurat nå. Prøv igjen senere.",
-    emptyInput: "Fyll inn arbeidsoppgave",
+    update: 'En midlertidig feil gjør at vi ikke kan lagre endringene dine akkurat nå. Prøv igjen senere.',
+    emptyInput: 'Fyll inn arbeidsoppgave',
     maxLengthExceeded: `Maks ${nameMaxLen} tegn er tillatt`,
-    invalidCharacters: "Ugyldige spesialtegn er oppgitt",
+    invalidCharacters: 'Ugyldige spesialtegn er oppgitt',
   },
 };
 
@@ -32,14 +32,11 @@ const validateInput = (input) => {
     return texts.errors.emptyInput;
   } else if (input.length > nameMaxLen) {
     return texts.errors.maxLengthExceeded;
-  } else if (
-    input.match(tekstfeltInneholderEllerBegynnerMedUgyldigTegnRegex) ||
-    input.match(tekstfeltRegex)
-  ) {
+  } else if (input.match(tekstfeltInneholderEllerBegynnerMedUgyldigTegnRegex) || input.match(tekstfeltRegex)) {
     return texts.errors.invalidCharacters;
   }
   return null;
-}
+};
 
 const Inputfelt = (props) => {
   const { oppdateringFeilet, spinner, onSubmit, avbryt } = props;
@@ -60,14 +57,13 @@ const Inputfelt = (props) => {
     const error = validateInput(arbeidsoppgaveInputText);
 
     if (!error) {
-      onSubmit({"arbeidsoppgavenavn": arbeidsoppgaveInputText});
+      onSubmit({ arbeidsoppgavenavn: arbeidsoppgaveInputText });
     } else {
       setErrorMsg(error);
     }
   };
 
   return (
-    
     <div>
       <form onSubmit={handleSubmit}>
         <Textarea
@@ -82,35 +78,27 @@ const Inputfelt = (props) => {
           <Feilmelding error={errorMsg} />
         </div>
         <div className="arbeidsgiveroppgave__rad">
-            
-              <div className="knapperad knapperad--justervenstre">
-                <div className="knapperad__element">
-                  <Hovedknapp
-                    disabled={spinner}
-                    spinner={spinner}
-                    htmlType="submit"
-                    role="submit"
-                    mini
-                  >
-                    {texts.buttonSave}
-                  </Hovedknapp>
-                </div>
+          <div className="knapperad knapperad--justervenstre">
+            <div className="knapperad__element">
+              <Hovedknapp disabled={spinner} spinner={spinner} htmlType="submit" role="submit" mini>
+                {texts.buttonSave}
+              </Hovedknapp>
+            </div>
 
-                <div className="knapperad__element">
-                  <button
-                    type="button"
-                    role="button"
-                    className="lenke"
-                    onKeyPress={(e) => {
-                      handleKeyPress(avbryt, e);
-                    }}
-                    onMouseDown={avbryt}
-                  >
-                    {texts.buttonCancel}
-                  </button>
-                </div>
-              </div>
-
+            <div className="knapperad__element">
+              <button
+                type="button"
+                role="button"
+                className="lenke"
+                onKeyPress={(e) => {
+                  handleKeyPress(avbryt, e);
+                }}
+                onMouseDown={avbryt}
+              >
+                {texts.buttonCancel}
+              </button>
+            </div>
+          </div>
         </div>
       </form>
     </div>
