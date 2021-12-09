@@ -72,6 +72,7 @@ const Inputfelt = (props) => {
       <form onSubmit={handleSubmit}>
         <Textarea
           label={texts.textFieldName}
+          role="input"
           maxLength={nameMaxLen}
           onChange={handleChange}
           value={arbeidsoppgaveInputText}
