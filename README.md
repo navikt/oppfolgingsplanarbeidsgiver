@@ -16,4 +16,4 @@ React-app for den sykmeldtes nærmeste leder. Viser oppfølgingsplaner til leder
 
 ## Test - Logge på i dev-miljø
 
-Se denne siden for [testdata](https://confluence.adeo.no/pages/viewpage.action?pageId=228580060) (NAV-intern lenke).
+Se eSYFO's dokumentasjon for testing under avsnittet `Nærmeste leder - inngang:` her: https://github.com/navikt/syfodok/tree/master/eSYFO/content/testing/komme-inn-i-testmilj%C3%B8
