@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const Feilmelding = ({ error }) => {
   return (
-    <p className="skjemaelement__feilmelding typo-feilmelding" aria-live="polite">
+    <p className="skjemaelement__feilmelding typo-feilmelding" role="alert" aria-live="polite">
       {error}
     </p>
   );

@@ -8,13 +8,13 @@ import { tekstfeltInneholderEllerBegynnerMedUgyldigTegnRegex, tekstfeltRegex } f
 
 const nameMaxLen = 100;
 
-const texts = {
+export const texts = {
   textFieldName: "Navn på arbeidsoppgave",
   buttonSave: "Lagre arbeidsoppgave",
   buttonCancel: "Avbryt",
   errors: {
     update: "En midlertidig feil gjør at vi ikke kan lagre endringene dine akkurat nå. Prøv igjen senere.",
-    noInput: "Fyll inn arbeidsoppgave",
+    emptyInput: "Fyll inn arbeidsoppgave",
     maxLengthExceeded: `Maks ${nameMaxLen} tegn er tillatt`,
     invalidCharacters: "Ugyldige spesialtegn er oppgitt",
   },
@@ -29,7 +29,7 @@ const handleKeyPress = (avbryt, e) => {
 
 const validateInput = (input) => {
   if (input === '') {
-    return texts.errors.noInput;
+    return texts.errors.emptyInput;
   } else if (input.length > nameMaxLen) {
     return texts.errors.maxLengthExceeded;
   } else if (
@@ -77,9 +77,9 @@ const Inputfelt = (props) => {
           value={arbeidsoppgaveInputText}
         />
         {oppdateringFeilet && <ArbeidsoppgaveVarselFeil tekst={texts.errors.update} />}
-          <div className="arbeidsgiveroppgave__rad--feilmelding">
-            <Feilmelding error={errorMsg} />
-          </div>
+        <div className="arbeidsgiveroppgave__rad--feilmelding">
+          <Feilmelding error={errorMsg} />
+        </div>
         <div className="arbeidsgiveroppgave__rad">
             
               <div className="knapperad knapperad--justervenstre">
@@ -88,6 +88,7 @@ const Inputfelt = (props) => {
                     disabled={spinner}
                     spinner={spinner}
                     htmlType="submit"
+                    role="submit"
                     mini
                   >
                     {texts.buttonSave}
@@ -97,6 +98,7 @@ const Inputfelt = (props) => {
                 <div className="knapperad__element">
                   <button
                     type="button"
+                    role="button"
                     className="lenke"
                     onKeyPress={(e) => {
                       handleKeyPress(avbryt, e);
@@ -115,11 +117,10 @@ const Inputfelt = (props) => {
 };
 
 Inputfelt.propTypes = {
-  avbryt: PropTypes.func,
   oppdateringFeilet: PropTypes.bool,
   spinner: PropTypes.bool,
-  varselTekst: PropTypes.string,
   onSubmit: PropTypes.func,
+  avbryt: PropTypes.func,
 };
 
 export default Inputfelt;
