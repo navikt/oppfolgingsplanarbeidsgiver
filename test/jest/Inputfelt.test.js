@@ -14,10 +14,7 @@ test('Skal vise riktig feilmeldinger ved validering', () => {
 
   const emptyString = '';
   const invalidString = '?? Invalid string';
-  var tooLongString = '';
-  for (var i = 0; i < 101; i++) {
-    tooLongString += 'C';
-  }
+  const tooLongString = "C".repeat(101);
 
   render(<Inputfelt
     oppdateringFeilet={false}
