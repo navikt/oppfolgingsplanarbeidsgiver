@@ -26,17 +26,17 @@ test('Skal vise riktig feilmeldinger ved validering', () => {
   const textareaInput = screen.getByRole(inputRole);
   const submitButton = screen.getByRole(submitRole);
   
-  fireEvent.change(textareaInput, { target: { value: emptyString}});
+  fireEvent.change(textareaInput, { target: { value: emptyString } });
   fireEvent.click(submitButton);
   const errorTextEmptyInput = screen.getByText(texts.errors.emptyInput);
   expect(errorTextEmptyInput).toBeInTheDocument();
 
-  fireEvent.change(textareaInput, { target: { value: invalidString}});
+  fireEvent.change(textareaInput, { target: { value: invalidString } });
   fireEvent.click(submitButton);
   const errorTextInvalidChar = screen.getByText(texts.errors.invalidCharacters);
   expect(errorTextInvalidChar).toBeInTheDocument();
 
-  fireEvent.change(textareaInput, { target: { value: tooLongString}});
+  fireEvent.change(textareaInput, { target: { value: tooLongString } });
   fireEvent.click(submitButton);
   const errorTextTooLong = screen.getByText(texts.errors.maxLengthExceeded);
   expect(errorTextTooLong).toBeInTheDocument();
@@ -58,7 +58,7 @@ test('Skal IKKE vise feilmelding dersom input er gyldig', () => {
   const textareaInput = screen.getByRole(inputRole);
   const submitButton = screen.getByRole(submitRole);
 
-  fireEvent.change(textareaInput, { target: { value: validString}});
+  fireEvent.change(textareaInput, { target: { value: validString } });
   fireEvent.click(submitButton);
   const errorPanel = screen.getByRole(alertRole);
   expect(errorPanel).not.toHaveTextContent();
