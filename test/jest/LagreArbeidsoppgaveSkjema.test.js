@@ -1,24 +1,26 @@
 import '@testing-library/jest-dom';
 import React from 'react';
 import { screen, render, fireEvent } from '@testing-library/react';
-import  Inputfelt, { texts } from '../../js/skjema/Inputfelt';
+import LagreArbeidsoppgaveSkjema, { texts } from '../../js/components/oppfolgingsdialog/utfylling/arbeidsoppgaver/LagreArbeidsoppgaveSkjema.js';
   
 
 const inputRole = 'input';
 const submitRole = 'submit';
 const alertRole = 'alert';
+const arbeidsoppgaverReducer = { lagrer: false }
 
 test('Skal vise riktig feilmeldinger ved validering', () => {
   const onSubmit = jest.fn();
   const avbryt = jest.fn();
+  
 
   const emptyString = '';
   const invalidString = '?? Invalid string';
   const tooLongString = "C".repeat(101);
 
-  render(<Inputfelt
+  render(<LagreArbeidsoppgaveSkjema
+    arbeidsoppgaverReducer={arbeidsoppgaverReducer}
     oppdateringFeilet={false}
-    spinner={false}
     onSubmit={onSubmit}
     avbryt={avbryt}
   />);
@@ -48,9 +50,9 @@ test('Skal IKKE vise feilmelding dersom input er gyldig', () => {
 
   const validString = 'Valid string';
 
-  render(<Inputfelt
+  render(<LagreArbeidsoppgaveSkjema
+    arbeidsoppgaverReducer={arbeidsoppgaverReducer}
     oppdateringFeilet={false}
-    spinner={false}
     onSubmit={onSubmit}
     avbryt={avbryt}
   />);
@@ -68,11 +70,9 @@ test('Skal vise alertboks dersom lagring av ny arbeidsoppgave feiler', () => {
   const onSubmit = jest.fn();
   const avbryt = jest.fn();
 
-  const alertRole = 'alert';
-
-  render(<Inputfelt
+  render(<LagreArbeidsoppgaveSkjema
+    arbeidsoppgaverReducer={arbeidsoppgaverReducer}
     oppdateringFeilet={true}
-    spinner={false}
     onSubmit={onSubmit}
     avbryt={avbryt}
   />);
