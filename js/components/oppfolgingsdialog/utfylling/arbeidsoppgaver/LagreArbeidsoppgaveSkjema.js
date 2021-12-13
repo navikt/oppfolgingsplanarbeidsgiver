@@ -49,9 +49,13 @@ const LagreArbeidsoppgaveSkjema = (props) => {
   const handleChange = (event) => {
     const input = event.target.value;
     setArbeidsoppgaveInputText(input);
-    const error = validateInput(input);
-    if (!error) {
-      setErrorMsg('');
+    if (errorMsg !== '') {
+      const error = validateInput(input);
+      if (!error) {
+        setErrorMsg('');
+      } else {
+        setErrorMsg(error);
+      }
     }
   };
 
