@@ -120,4 +120,3 @@ LagreArbeidsoppgaveSkjema.propTypes = {
 };
 
 export default LagreArbeidsoppgaveSkjema;
-
