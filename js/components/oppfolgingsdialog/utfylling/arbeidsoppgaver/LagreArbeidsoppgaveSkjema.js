@@ -1,116 +1,119 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Field, reduxForm } from 'redux-form';
+import { Hovedknapp, Flatknapp } from 'nav-frontend-knapper';
+import { Textarea } from 'nav-frontend-skjema';
 import Panel from 'nav-frontend-paneler';
-import {
-  OPPRETT_SKJEMANAVN,
-  tekstfeltInneholderEllerBegynnerMedUgyldigTegnRegex,
-  tekstfeltRegex,
-} from '../../../../konstanter';
+import Feilmelding from '@/skjema/Feilmelding';
+import ArbeidsoppgaveVarselFeil from './ArbeidsoppgaveVarselFeil';
+import { tekstfeltInneholderEllerBegynnerMedUgyldigTegnRegex, tekstfeltRegex } from '@/konstanter';
 import * as opProptypes from '../../../../proptypes/opproptypes';
-import Inputfelt from '../../../../skjema/Inputfelt';
 
-const texts = {
-  felter: {
-    arbeidsoppgavenavn: {
-      label: 'Navn på arbeidsoppgave',
-    },
+const nameMaxLen = 100;
+
+export const texts = {
+  textFieldName: 'Navn på arbeidsoppgave',
+  buttonSave: 'Lagre arbeidsoppgave',
+  buttonCancel: 'Avbryt',
+  errors: {
+    update: 'En midlertidig feil gjør at vi ikke kan lagre endringene dine akkurat nå. Prøv igjen senere.',
+    emptyInput: 'Fyll inn arbeidsoppgave',
+    maxLengthExceeded: `Maks ${nameMaxLen} tegn er tillatt`,
+    invalidCharacters: 'Ugyldige spesialtegn er oppgitt',
   },
 };
 
-export class LagreArbeidsoppgaveSkjemaKomponent extends Component {
-  constructor() {
-    super();
-    this.state = {
-      spinner: false,
-    };
-    this.avbryt = this.avbryt.bind(this);
+const handleKeyPress = (avbryt, e) => {
+  e.preventDefault();
+  if (e.nativeEvent.keyCode === 13) {
+    avbryt();
   }
+};
 
-  componentDidMount() {
-    this.handleInitialize();
+const validateInput = (input) => {
+  if (input === '') {
+    return texts.errors.emptyInput;
+  } else if (input.length > nameMaxLen) {
+    return texts.errors.maxLengthExceeded;
+  } else if (input.match(tekstfeltInneholderEllerBegynnerMedUgyldigTegnRegex) || input.match(tekstfeltRegex)) {
+    return texts.errors.invalidCharacters;
   }
+  return null;
+};
 
-  UNSAFE_componentWillReceiveProps(nextProps) {
-    this.setState({
-      spinner: nextProps.arbeidsoppgaverReducer.lagrer,
-    });
-  }
+const LagreArbeidsoppgaveSkjema = (props) => {
+  const { arbeidsoppgaverReducer, oppdateringFeilet, onSubmit, avbryt } = props;
+  const spinner = arbeidsoppgaverReducer.lagrer;
+  const [arbeidsoppgaveInputText, setArbeidsoppgaveInputText] = useState('');
+  const [errorMsg, setErrorMsg] = useState('');
 
-  handleInitialize() {
-    const initData = {};
-    if (this.props.arbeidsoppgaverReducer) {
-      initData.arbeidsoppgavenavn = this.props.arbeidsoppgaverReducer.arbeidsoppgave
-        ? this.props.arbeidsoppgaverReducer.arbeidsoppgave.arbeidsoppgavenavn
-        : '';
+  const handleChange = (event) => {
+    const input = event.target.value;
+    setArbeidsoppgaveInputText(input);
+    if (errorMsg !== '') {
+      const error = validateInput(input);
+      if (!error) {
+        setErrorMsg('');
+      } else {
+        setErrorMsg(error);
+      }
     }
-    this.props.initialize(initData);
-  }
+  };
 
-  avbryt() {
-    this.props.arbeidsoppgaverReducer.arbeidsoppgave = null;
-    this.props.avbryt();
-  }
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const error = validateInput(arbeidsoppgaveInputText);
 
-  render() {
-    const { handleSubmit, varselTekst, oppdateringFeilet } = this.props;
-    return (
-      <Panel border>
-        <form className="panel" onSubmit={handleSubmit}>
-          <div className="skjemaelement">
-            <label className="skjemaelement__label" id="arbeidsoppgavenavn" htmlFor="arbeidsoppgavenavn-input">
-              {texts.felter.arbeidsoppgavenavn.label}
-            </label>
-            <Field
-              className="skjemaelement__input input--fullbredde"
-              name="arbeidsoppgavenavn"
-              id="arbeidsoppgavenavn-input"
-              aria-labelledby="arbeidsoppgavenavn"
-              component={Inputfelt}
-              placeholder="Skriv inn tekst"
-              avbryt={this.avbryt}
-              oppdateringFeilet={oppdateringFeilet}
-              varselTekst={varselTekst}
-              spinner={this.state.spinner}
-              autoFocus
-            />
+    if (!error) {
+      onSubmit({ arbeidsoppgavenavn: arbeidsoppgaveInputText });
+    } else {
+      setErrorMsg(error);
+    }
+  };
+
+  return (
+    <Panel border>
+      <form onSubmit={handleSubmit}>
+        <Textarea
+          label={texts.textFieldName}
+          role="input"
+          maxLength={nameMaxLen}
+          onChange={handleChange}
+          value={arbeidsoppgaveInputText}
+        />
+        {oppdateringFeilet && <ArbeidsoppgaveVarselFeil tekst={texts.errors.update} />}
+        <div className="arbeidsgiveroppgave__rad--feilmelding">
+          <Feilmelding error={errorMsg} />
+        </div>
+        <div className="arbeidsgiveroppgave__rad">
+          <div className="knapperad knapperad--justervenstre">
+            <div className="knapperad__element">
+              <Hovedknapp disabled={spinner} spinner={spinner} htmlType="submit" role="submit" mini>
+                {texts.buttonSave}
+              </Hovedknapp>
+            </div>
+
+            <div className="knapperad__element">
+              <Flatknapp
+                onKeyPress={(e) => {
+                  handleKeyPress(avbryt, e);
+                }}
+                onMouseDown={avbryt}
+              >
+                Avbryt
+              </Flatknapp>
+            </div>
           </div>
-        </form>
-      </Panel>
-    );
-  }
-}
+        </div>
+      </form>
+    </Panel>
+  );
+};
 
-LagreArbeidsoppgaveSkjemaKomponent.propTypes = {
+LagreArbeidsoppgaveSkjema.propTypes = {
   arbeidsoppgaverReducer: opProptypes.arbeidsoppgaverReducerPt,
-  handleSubmit: PropTypes.func,
-  avbryt: PropTypes.func,
   oppdateringFeilet: PropTypes.bool,
-  varselTekst: PropTypes.string,
-  initialize: PropTypes.func,
+  onSubmit: PropTypes.func,
+  avbryt: PropTypes.func,
 };
 
-const validate = (values) => {
-  const feilmeldinger = {};
-  if (!values.arbeidsoppgavenavn || (values.arbeidsoppgavenavn && values.arbeidsoppgavenavn.trim() === '')) {
-    feilmeldinger.arbeidsoppgavenavn = 'Fyll inn arbeidsoppgave';
-  } else if (
-    values.arbeidsoppgavenavn.match(tekstfeltInneholderEllerBegynnerMedUgyldigTegnRegex) ||
-    values.arbeidsoppgavenavn.match(tekstfeltRegex)
-  ) {
-    feilmeldinger.arbeidsoppgavenavn = 'Ugyldig spesialtegn er oppgitt';
-  }
-  const navnLengde = values.arbeidsoppgavenavn ? values.arbeidsoppgavenavn.length : 0;
-  const navnMaksLengde = 100;
-  if (navnLengde > navnMaksLengde) {
-    feilmeldinger.arbeidsoppgavenavn = `Maks ${navnMaksLengde} tegn tillatt`;
-  }
-  return feilmeldinger;
-};
-
-const ReduxSkjema = reduxForm({
-  form: OPPRETT_SKJEMANAVN,
-  validate,
-})(LagreArbeidsoppgaveSkjemaKomponent);
-
-export default ReduxSkjema;
+export default LagreArbeidsoppgaveSkjema;

@@ -54,41 +54,6 @@ describe('Arbeidsoppgaver', () => {
     });
   });
 
-  it('Skal vise feilmelding dersom lagring av ny arbeidsoppgave feilet', () => {
-    component = shallow(
-      <Arbeidsoppgaver
-        oppfolgingsdialog={oppfolgingsdialogUtenArbeidsoppgaver}
-        lagreArbeidsoppgave={lagreArbeidsoppgave}
-        slettArbeidsoppgave={slettArbeidsoppgave}
-        arbeidsoppgaver={{
-          lagringFeilet: false,
-        }}
-      />,
-      { disableLifecycleMethods: true }
-    );
-    component.setProps({ arbeidsoppgaver: { lagringFeilet: true } });
-    expect(component.state().varselTekst).to.equal(
-      'En midlertidig feil gjør at vi ikke kan lagre endringene dine akkurat nå. Prøv igjen senere.'
-    );
-  });
-
-  it('Skal ikke vise feilmelding dersom lagring av ny arbeidsoppgave ikke feilet', () => {
-    component = shallow(
-      <Arbeidsoppgaver
-        oppfolgingsdialog={oppfolgingsdialogUtenArbeidsoppgaver}
-        lagreArbeidsoppgave={lagreArbeidsoppgave}
-        slettArbeidsoppgave={slettArbeidsoppgave}
-        arbeidsoppgaver={{
-          lagringFeilet: false,
-          feiletOppgaveId: 5,
-        }}
-      />,
-      { disableLifecycleMethods: true }
-    );
-    component.setProps({ arbeidsoppgaver: { lagringFeilet: true, feiletOppgaveId: 5 } });
-    expect(component.state().varselTekst).to.equal('');
-  });
-
   describe('Oppfolgingsdialog uten Arbeidsoppgaver', () => {
     let componentUtenArbeidsoppgaver;
     beforeEach(() => {

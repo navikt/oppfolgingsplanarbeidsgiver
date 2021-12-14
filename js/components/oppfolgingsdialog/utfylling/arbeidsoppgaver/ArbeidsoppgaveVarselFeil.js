@@ -4,7 +4,7 @@ import Alertstripe from 'nav-frontend-alertstriper';
 
 const ArbeidsoppgaveVarselFeil = ({ tekst }) => {
   return (
-    <Alertstripe className="alertstripe--notifikasjonboks" type="advarsel">
+    <Alertstripe className="alertstripe--notifikasjonboks" role="alert" type="advarsel">
       {tekst}
     </Alertstripe>
   );
