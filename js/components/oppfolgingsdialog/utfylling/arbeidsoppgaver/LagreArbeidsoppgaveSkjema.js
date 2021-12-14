@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Hovedknapp } from 'nav-frontend-knapper';
+import { Hovedknapp, Flatknapp } from 'nav-frontend-knapper';
 import { Textarea } from 'nav-frontend-skjema';
 import Panel from 'nav-frontend-paneler';
 import Feilmelding from '@/skjema/Feilmelding';
@@ -92,18 +92,16 @@ const LagreArbeidsoppgaveSkjema = (props) => {
               </Hovedknapp>
             </div>
 
+      
             <div className="knapperad__element">
-              <button
-                type="button"
-                role="button"
-                className="lenke"
+              <Flatknapp
                 onKeyPress={(e) => {
                   handleKeyPress(avbryt, e);
                 }}
                 onMouseDown={avbryt}
               >
-                {texts.buttonCancel}
-              </button>
+                Avbryt
+              </Flatknapp>
             </div>
           </div>
         </div>
