@@ -92,7 +92,6 @@ const LagreArbeidsoppgaveSkjema = (props) => {
               </Hovedknapp>
             </div>
 
-      
             <div className="knapperad__element">
               <Flatknapp
                 onKeyPress={(e) => {
