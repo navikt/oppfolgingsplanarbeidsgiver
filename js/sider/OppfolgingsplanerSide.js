@@ -201,7 +201,6 @@ export function mapStateToProps(state, ownProps) {
         return populerDialogFraState(oppfolgingsdialog, state);
       });
     }
-    console.log('Filtrerte oppfolgingsdialoger', oppfolgingsdialoger);
   }
   const harForsoektHentetOppfolgingsdialoger = alleOppfolgingsdialogerReducer.hentingForsokt;
   const harForsoektHentetAlt = harForsoektHentetOppfolgingsdialoger && forsoektHentetSykmeldt(state.sykmeldt);
