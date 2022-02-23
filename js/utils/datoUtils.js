@@ -84,7 +84,3 @@ export const toDatePrettyPrint = (dato) => {
 
   return `${days}.${months}.${years}`;
 };
-
-export const getDateDifferenceInDays = (first, second) => {
-  return Math.round((second - first) / (1000 * 60 * 60 * 24));
-};

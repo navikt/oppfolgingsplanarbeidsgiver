@@ -18,13 +18,11 @@ import tilgangSagas from './oppfolgingsplan/tilgangSagas';
 import tiltakSagas from './oppfolgingsplan/tiltakSagas';
 import virksomhetSagas from './oppfolgingsplan/virksomhetSagas';
 import sykmeldtSagas from './sykmeldtSagas';
-import dineSykmeldteMedSykmeldingerSagas from '@/sagas/dineSykmeldteMedSykmeldingerSagas';
 
 export default function* rootSaga() {
   yield all([
     arbeidsforholdSagas(),
     sykmeldtSagas(),
-    dineSykmeldteMedSykmeldingerSagas(),
     oppfolgingsdialogerSagas(),
     avbrytdialogSagas(),
     nullstillGodkjenningSagas(),

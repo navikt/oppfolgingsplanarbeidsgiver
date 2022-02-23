@@ -6,13 +6,6 @@ export const sykmeldt = PropTypes.shape({
   orgnr: PropTypes.string,
 });
 
-export const dineSykmeldteMedSykmeldinger = PropTypes.shape({
-  fnr: PropTypes.string.isRequired,
-  narmestelederId: PropTypes.string.isRequired,
-  orgnr: PropTypes.string,
-  sykmeldinger: PropTypes.array,
-});
-
 export const brodsmule = PropTypes.shape({
   sti: PropTypes.string,
   tittel: PropTypes.string,

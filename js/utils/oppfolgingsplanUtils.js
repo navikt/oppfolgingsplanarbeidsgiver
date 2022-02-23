@@ -1,5 +1,5 @@
-import { MND_SIDEN_SYKMELDING_GRENSE_FOR_OPPFOLGING, STATUS } from '@/konstanter';
-import { erGyldigDatoIFortiden, getDateDifferenceInDays } from './datoUtils';
+import { STATUS } from '../konstanter';
+import { erGyldigDatoIFortiden } from './datoUtils';
 
 export const isEmpty = (array) => {
   return !array || array.length === 0;
@@ -58,12 +58,6 @@ export const erOppfolgingsdialogTidligere = (oppfolgingsdialog) => {
 export const finnOppfolgingsplanerPaVirksomhet = (planer, orgnummer) => {
   return planer.filter((plan) => {
     return plan.virksomhet.virksomhetsnummer === orgnummer;
-  });
-};
-
-export const finnDineSykmeldteMedSykmeldingerPaVirksomhet = (dineSykmeldteMedSykmeldinger, orgnummer) => {
-  return dineSykmeldteMedSykmeldinger.filter((s) => {
-    return s.orgnummer === orgnummer;
   });
 };
 
@@ -160,108 +154,4 @@ export const manglerSamtykke = (oppfolgingsplan) => {
     return oppfolgingsplan.arbeidstaker.samtykke === null;
   }
   return oppfolgingsplan.arbeidsgiver.naermesteLeder.samtykke === null;
-};
-
-export const erSykmeldingGyldigForOppfolgingMedGrensedato = (perioder, dato) => {
-  return (
-    perioder.filter((periode) => {
-      const tomGrenseDato = new Date(dato);
-      tomGrenseDato.setHours(0, 0, 0, 0);
-      tomGrenseDato.setMonth(tomGrenseDato.getMonth() - MND_SIDEN_SYKMELDING_GRENSE_FOR_OPPFOLGING);
-      return new Date(periode.tom) >= new Date(tomGrenseDato);
-    }).length > 0
-  );
-};
-
-export const finnSykmeldingerPaVirksomhet = (sykmeldinger, orgnummer) => {
-  return sykmeldinger.filter((sm) => {
-    return sm.orgnummer === orgnummer;
-  });
-};
-
-function compareFomDate(a, b) {
-  if (a.fom < b.fom) {
-    return -1;
-  }
-  if (a.fom > b.fom) {
-    return 1;
-  }
-  return 0;
-}
-
-export const erOppfolgingsplanGyldigForOppfolgingMedGrensedato = (fomLastSykefravar, tomOppfolgingsplan) => {
-  const tomGrenseDato = new Date(
-    fomLastSykefravar.getFullYear(),
-    fomLastSykefravar.getMonth(),
-    fomLastSykefravar.getDate()
-  );
-
-  tomGrenseDato.setHours(0, 0, 0, 0);
-  tomGrenseDato.setMonth(fomLastSykefravar.getMonth() - MND_SIDEN_SYKMELDING_GRENSE_FOR_OPPFOLGING);
-  return new Date(tomOppfolgingsplan) >= tomGrenseDato;
-};
-
-export const finnGyldigePlanerPaVirksomhet = (planer, orgnummer, dineSykmeldteMedSykmeldinger) => {
-  const oppfolgingsplanerPaVirksomhet = finnOppfolgingsplanerPaVirksomhet(planer, orgnummer);
-  const dineSykmeldteMedSykmeldingerPaVirksomhet = finnDineSykmeldteMedSykmeldingerPaVirksomhet(
-    dineSykmeldteMedSykmeldinger,
-    orgnummer
-  );
-  const lastSykefravar = getLastSykefravar(dineSykmeldteMedSykmeldingerPaVirksomhet);
-
-  if (!lastSykefravar || !oppfolgingsplanerPaVirksomhet) return [];
-
-  return oppfolgingsplanerPaVirksomhet.filter((oppfolgingsplan) => {
-    if (oppfolgingsplan.godkjentPlan) {
-      return erOppfolgingsplanGyldigForOppfolgingMedGrensedato(
-        lastSykefravar.fom,
-        oppfolgingsplan.godkjentPlan.gyldighetstidspunkt.tom
-      );
-    }
-    return erOppfolgingsplanGyldigForOppfolgingMedGrensedato(lastSykefravar.fom, oppfolgingsplan.sistEndretDato);
-  });
-};
-
-let getLastSykefravar = (dineSykmeldteMedSykmeldingerPaVirksomhet) => {
-  let sykefravarList = [];
-
-  dineSykmeldteMedSykmeldingerPaVirksomhet.filter((dineSykmeldte) => {
-    dineSykmeldte.sykmeldinger.filter((sykmelding) => {
-      const perioderDatesSorted = getSortedPerioderDates(sykmelding.mulighetForArbeid.perioder);
-      const perioderDatesSortedLength = perioderDatesSorted.length;
-      let currentFravar = { fom: perioderDatesSorted[0].fom, tom: perioderDatesSorted[0].tom };
-
-      if (perioderDatesSortedLength === 1) {
-        sykefravarList.push(currentFravar);
-        return sykefravarList;
-      }
-
-      for (let i = 1; i < perioderDatesSortedLength; i++) {
-        if (isSameFravar(perioderDatesSorted, i)) {
-          currentFravar.tom = perioderDatesSorted[i].tom;
-
-          if (i === perioderDatesSortedLength - 1) {
-            sykefravarList.push({ fom: currentFravar.fom, tom: currentFravar.tom });
-          }
-        } else {
-          sykefravarList.push({ fom: currentFravar.fom, tom: currentFravar.tom });
-          currentFravar.fom = perioderDatesSorted[i].fom;
-          currentFravar.tom = perioderDatesSorted[i].tom;
-        }
-      }
-      return sykefravarList;
-    });
-  });
-  return sykefravarList[sykefravarList.length - 1];
-};
-
-const isSameFravar = (datesList, i) => {
-  return getDateDifferenceInDays(datesList[i - 1].tom, datesList[i].fom) < 16;
-};
-
-const getSortedPerioderDates = (perioder) => {
-  const perioderDates = perioder.map((periode) => {
-    return { fom: new Date(periode.fom), tom: new Date(periode.tom) };
-  });
-  return perioderDates.sort(compareFomDate);
 };
