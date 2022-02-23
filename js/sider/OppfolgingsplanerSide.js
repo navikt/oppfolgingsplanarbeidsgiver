@@ -197,9 +197,13 @@ export function mapStateToProps(state, ownProps) {
         sykmeldt.orgnummer,
         dineSykmeldteMedSykmeldinger
       );
-      oppfolgingsdialoger = planerPaVirksomhetKnyttetTilGyldigSykmelding.map((oppfolgingsdialog) => {
-        return populerDialogFraState(oppfolgingsdialog, state);
-      });
+      planerPaVirksomhetKnyttetTilGyldigSykmelding && planerPaVirksomhetKnyttetTilGyldigSykmelding.length
+        ? (oppfolgingsdialoger = planerPaVirksomhetKnyttetTilGyldigSykmelding.map((oppfolgingsdialog) => {
+            return populerDialogFraState(oppfolgingsdialog, state);
+          }))
+        : [];
+    } else {
+      return [];
     }
   }
   const harForsoektHentetOppfolgingsdialoger = alleOppfolgingsdialogerReducer.hentingForsokt;
