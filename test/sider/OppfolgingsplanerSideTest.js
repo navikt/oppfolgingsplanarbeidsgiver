@@ -8,7 +8,6 @@ import Oppfolgingsdialoger from '../../js/components/oppfolgingsdialog/Oppfolgin
 import AppSpinner from '../../js/components/AppSpinner';
 import Feilmelding from '../../js/components/Feilmelding';
 import OppfolgingsplanInfoboks from '../../js/components/app/OppfolgingsplanInfoboks';
-import dateUtil from '../../mock/util/dateUtil';
 
 chai.use(chaiEnzyme());
 const expect = chai.expect;
@@ -32,7 +31,6 @@ describe('OppfolgingsplanerSide', () => {
       narmestelederId: '123',
     };
 
-    const today = new Date();
     const ownProps = {
       params: {
         narmestelederId: sykmeldt.narmestelederId,
@@ -43,57 +41,6 @@ describe('OppfolgingsplanerSide', () => {
       sykmeldt: {
         hentet: true,
         data: sykmeldt,
-      },
-      dineSykmeldteMedSykmeldinger: {
-        henter: false,
-        hentet: true,
-        hentingFeilet: false,
-        data: [
-          {
-            narmestelederId: '123',
-            fnr: '81549300',
-            navn: 'Kreativ Hatt',
-            orgnummer: '81549300',
-            sykmeldinger: [
-              {
-                innspillTilArbeidsgiver: 'string',
-                arbeidsevne: {
-                  tilretteleggingArbeidsplass: 'Fortsett som sist',
-                },
-                arbeidsgiver: 'Pengeløs sparebank',
-                bekreftelse: {
-                  sykmelder: 'Fornavn Etternavn',
-                  sykmelderTlf: 'string',
-                  utstedelsesdato: '2022-02-16',
-                },
-                friskmelding: {
-                  arbeidsfoerEtterPerioden: true,
-                  hensynPaaArbeidsplassen: 'Må ta det pent',
-                },
-                mulighetForArbeid: {
-                  aarsakAktivitetIkkeMulig434: 'andre årsaker til sykefravær',
-                  aktivitetIkkeMulig434: ['ANNET'],
-                  perioder: [
-                    {
-                      fom: '2022-02-16',
-                      tom: new Date().setFullYear(new Date().getFullYear() + 1),
-                      grad: 100,
-                      reisetilskudd: false,
-                      avventende: 'string',
-                    },
-                  ],
-                },
-                pasient: {
-                  fnr: '01010112345',
-                  navn: 'Kreativ Hatt',
-                },
-                skalViseSkravertFelt: true,
-                stillingsprosent: 100,
-                sykmeldingId: '3fa85f64-5717-4562-b3fc-2c963f66afa6',
-              },
-            ],
-          },
-        ],
       },
       oppfolgingsdialoger: {
         henter: false,
@@ -120,21 +67,6 @@ describe('OppfolgingsplanerSide', () => {
               arbeidsoppgaveListe: [],
               tiltakListe: [],
               godkjenninger: [],
-              godkjentPlan: {
-                opprettetTidspunkt: dateUtil.leggTilDagerPaDato(today, -7).toJSON(),
-                gyldighetstidspunkt: {
-                  fom: dateUtil.leggTilDagerPaDato(today, -7).toJSON(),
-                  tom: dateUtil.leggTilDagerPaDato(today, 7).toJSON(),
-                  evalueres: dateUtil.leggTilDagerPaDato(today, 14).toJSON(),
-                },
-                tvungenGodkjenning: true,
-                deltMedNAVTidspunkt: null,
-                deltMedNAV: false,
-                deltMedFastlegeTidspunkt: null,
-                deltMedFastlege: false,
-                dokumentUuid: '12345678-1234-1234-1234-123456789abc',
-                avbruttPlan: null,
-              },
             },
           ],
         },
@@ -206,21 +138,6 @@ describe('OppfolgingsplanerSide', () => {
           arbeidsoppgaveListe: [],
           tiltakListe: [],
           godkjenninger: [],
-          godkjentPlan: {
-            opprettetTidspunkt: dateUtil.leggTilDagerPaDato(today, -7).toJSON(),
-            gyldighetstidspunkt: {
-              fom: dateUtil.leggTilDagerPaDato(today, -7).toJSON(),
-              tom: dateUtil.leggTilDagerPaDato(today, 7).toJSON(),
-              evalueres: dateUtil.leggTilDagerPaDato(today, 14).toJSON(),
-            },
-            tvungenGodkjenning: true,
-            deltMedNAVTidspunkt: null,
-            deltMedNAV: false,
-            deltMedFastlegeTidspunkt: null,
-            deltMedFastlege: false,
-            dokumentUuid: '12345678-1234-1234-1234-123456789abc',
-            avbruttPlan: null,
-          },
         },
       ]);
 
@@ -246,7 +163,6 @@ describe('OppfolgingsplanerSide', () => {
     let sjekkTilgang;
     let hentOppfolgingsplaner;
     let hentSykmeldt;
-    let hentDineSykmeldteMedSykmeldinger;
     let alleOppfolgingsdialogerReducer;
     let oppfolgingsdialogerReducer;
     let sykmeldtReducer;
@@ -278,7 +194,6 @@ describe('OppfolgingsplanerSide', () => {
       sjekkTilgang = sinon.spy();
       hentOppfolgingsplaner = sinon.spy();
       hentSykmeldt = sinon.spy();
-      hentDineSykmeldteMedSykmeldinger = sinon.spy();
       loggError = sinon.spy();
       hentingFeiletMap = {};
     });
@@ -300,7 +215,6 @@ describe('OppfolgingsplanerSide', () => {
           params={params}
           sykmeldtReducer={sykmeldtReducer}
           hentSykmeldt={hentSykmeldt}
-          hentDineSykmeldteMedSykmeldinger={hentDineSykmeldteMedSykmeldinger}
         />
       );
       expect(component.contains(<AppSpinner />)).to.equal(true);
@@ -319,7 +233,6 @@ describe('OppfolgingsplanerSide', () => {
           params={params}
           sykmeldtReducer={sykmeldtReducer}
           hentSykmeldt={hentSykmeldt}
-          hentDineSykmeldteMedSykmeldinger={hentDineSykmeldteMedSykmeldinger}
         />
       );
       expect(component.contains(<AppSpinner />)).to.equal(true);
@@ -337,7 +250,6 @@ describe('OppfolgingsplanerSide', () => {
           sjekkTilgang={sjekkTilgang}
           params={params}
           hentSykmeldt={hentSykmeldt}
-          hentDineSykmeldteMedSykmeldinger={hentDineSykmeldteMedSykmeldinger}
           loggError={loggError}
           sykmeldtReducer={sykmeldtReducer}
           hentingFeiletMap={hentingFeiletMap}
@@ -358,7 +270,6 @@ describe('OppfolgingsplanerSide', () => {
           sjekkTilgang={sjekkTilgang}
           params={params}
           hentSykmeldt={hentSykmeldt}
-          hentDineSykmeldteMedSykmeldinger={hentDineSykmeldteMedSykmeldinger}
           loggError={loggError}
           sykmeldtReducer={sykmeldtReducer}
           hentingFeiletMap={hentingFeiletMap}
@@ -378,7 +289,6 @@ describe('OppfolgingsplanerSide', () => {
           sjekkTilgang={sjekkTilgang}
           params={params}
           hentSykmeldt={hentSykmeldt}
-          hentDineSykmeldteMedSykmeldinger={hentDineSykmeldteMedSykmeldinger}
           sykmeldtReducer={sykmeldtReducer}
           sykmeldt={sykmeldt}
         />
@@ -397,7 +307,6 @@ describe('OppfolgingsplanerSide', () => {
           sjekkTilgang={sjekkTilgang}
           params={params}
           hentSykmeldt={hentSykmeldt}
-          hentDineSykmeldteMedSykmeldinger={hentDineSykmeldteMedSykmeldinger}
           sykmeldt={null}
           sykmeldtReducer={sykmeldtReducer}
         />
@@ -419,7 +328,6 @@ describe('OppfolgingsplanerSide', () => {
             sjekkTilgang={sjekkTilgang}
             params={params}
             hentSykmeldt={hentSykmeldt}
-            hentDineSykmeldteMedSykmeldinger={hentDineSykmeldteMedSykmeldinger}
             sykmeldtReducer={sykmeldtReducer}
             sykmeldt={sykmeldt}
           />

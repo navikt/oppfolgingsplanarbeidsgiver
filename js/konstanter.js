@@ -21,8 +21,6 @@ export const maanedListe = [
   'desember',
 ];
 
-export const MND_SIDEN_SYKMELDING_GRENSE_FOR_OPPFOLGING = 4;
-
 export const HOST_NAMES = {
   SYFOOPREST: 'syfooprest',
 };
