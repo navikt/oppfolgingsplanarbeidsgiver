@@ -214,6 +214,13 @@ export const sykmeldtReducerPt = PropTypes.shape({
   data: PropTypes.any,
 });
 
+export const dineSykmeldteMedSykmeldingerReducerPt = PropTypes.shape({
+  henter: PropTypes.bool,
+  hentet: PropTypes.bool,
+  hentingFeilet: PropTypes.bool,
+  data: PropTypes.any,
+});
+
 export const navigasjonstogglesReducerPt = PropTypes.shape({
   steg: PropTypes.number,
 });
