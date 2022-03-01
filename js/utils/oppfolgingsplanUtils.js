@@ -246,6 +246,5 @@ let getLastSykefravar = (dineSykmeldteMedSykmeldinger, orgnummer) => {
       return sykefravarList;
     });
   });
-  console.log('sykefravarList', sykefravarList);
   return sykefravarList[sykefravarList.length - 1];
 };

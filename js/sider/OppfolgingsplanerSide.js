@@ -179,6 +179,23 @@ OppfolgingsplanerSide.propTypes = {
   sjekkTilgang: PropTypes.func,
 };
 
+const populatePlanerPaVirksomhetKnyttetTilGyldigSykmelding = (
+  data,
+  orgnummer,
+  dineSykmeldteMedSykmeldinger,
+  state
+) => {
+  const planerPaVirksomhetKnyttetTilGyldigSykmelding = finnGyldigePlanerPaVirksomhet(
+    data,
+    orgnummer,
+    dineSykmeldteMedSykmeldinger
+  );
+
+  return planerPaVirksomhetKnyttetTilGyldigSykmelding.map((oppfolgingsdialog) => {
+    return populerDialogFraState(oppfolgingsdialog, state);
+  });
+};
+
 export function mapStateToProps(state, ownProps) {
   const narmestelederId = ownProps.params.narmestelederId;
   const sykmeldt = state.sykmeldt.data;
@@ -191,17 +208,14 @@ export function mapStateToProps(state, ownProps) {
     tilgang = state.tilgang[sykmeldt.fnr] || tilgang;
     oppfolgingsdialogerReducer = state.oppfolgingsdialoger[sykmeldt.fnr] || {};
 
-    if (oppfolgingsdialogerReducer.data) {
-      const planerPaVirksomhetKnyttetTilGyldigSykmelding = finnGyldigePlanerPaVirksomhet(
-        oppfolgingsdialogerReducer.data,
-        sykmeldt.orgnummer,
-        dineSykmeldteMedSykmeldinger
-      );
-      oppfolgingsdialoger = planerPaVirksomhetKnyttetTilGyldigSykmelding.map((oppfolgingsdialog) => {
-        return populerDialogFraState(oppfolgingsdialog, state);
-      });
-    }
-    console.log('Filtrerte oppfolgingsdialoger', oppfolgingsdialoger);
+    oppfolgingsdialoger = oppfolgingsdialogerReducer.data
+      ? populatePlanerPaVirksomhetKnyttetTilGyldigSykmelding(
+          oppfolgingsdialogerReducer.data,
+          sykmeldt.orgnummer,
+          dineSykmeldteMedSykmeldinger,
+          state
+        )
+      : [];
   }
   const harForsoektHentetOppfolgingsdialoger = alleOppfolgingsdialogerReducer.hentingForsokt;
   const harForsoektHentetAlt = harForsoektHentetOppfolgingsdialoger && forsoektHentetSykmeldt(state.sykmeldt);
