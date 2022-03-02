@@ -1,26 +1,29 @@
-import * as actiontyper from './actiontyper';
+export const HENTER_DINE_SYKMELDTE_MED_SYKMELDINGER = 'HENTER_DINE_SYKMELDTE_MED_SYKMELDINGER';
+export const DINE_SYKMELDTE_MED_SYKMELDINGER_HENTET = 'DINE_SYKMELDTE_MED_SYKMELDINGER_HENTET';
+export const HENT_DINE_SYKMELDTE_MED_SYKMELDINGER_FEILET = 'HENT_DINE_SYKMELDTE_MED_SYKMELDINGER_FEILET';
+export const HENT_DINE_SYKMELDTE_MED_SYKMELDINGER_FORESPURT = 'HENT_DINE_SYKMELDTE_MED_SYKMELDINGER_FORESPURT';
 
 export function henterDineSykmeldteMedSykmeldinger() {
   return {
-    type: actiontyper.HENTER_DINE_SYKMELDTE_MED_SYKMELDINGER,
+    type: HENTER_DINE_SYKMELDTE_MED_SYKMELDINGER,
   };
 }
 
 export function dineSykmeldteMedSykmeldingerHentet(sykmeldinger) {
   return {
-    type: actiontyper.DINE_SYKMELDTE_MED_SYKMELDINGER_HENTET,
+    type: DINE_SYKMELDTE_MED_SYKMELDINGER_HENTET,
     sykmeldinger,
   };
 }
 
 export function hentDineSykmeldteMedSykmeldingerFeilet() {
   return {
-    type: actiontyper.HENT_DINE_SYKMELDTE_MED_SYKMELDINGER_FEILET,
+    type: HENT_DINE_SYKMELDTE_MED_SYKMELDINGER_FEILET,
   };
 }
 
 export function hentDineSykmeldteMedSykmeldinger() {
   return {
-    type: actiontyper.HENT_DINE_SYKMELDTE_MED_SYKMELDINGER_FORESPURT,
+    type: HENT_DINE_SYKMELDTE_MED_SYKMELDINGER_FORESPURT,
   };
 }

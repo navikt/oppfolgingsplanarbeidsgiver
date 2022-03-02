@@ -40,7 +40,7 @@ const rootReducer = combineReducers({
   samtykke,
   kommentar,
   sykmeldt,
-  dineSykmeldteMedSykmeldinger: dineSykmeldteMedSykmeldinger,
+  dineSykmeldteMedSykmeldinger,
   tiltak,
   delmednav,
   fastlegeDeling,

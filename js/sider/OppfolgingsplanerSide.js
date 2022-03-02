@@ -279,7 +279,7 @@ const OppfolgingsdialogerContainer = connect(mapStateToProps, {
   hentPerson,
   hentKontaktinfo,
   hentSykmeldt,
-  hentDineSykmeldteMedSykmeldinger: hentDineSykmeldteMedSykmeldinger,
+  hentDineSykmeldteMedSykmeldinger,
 })(OppfolgingsplanerSide);
 
 export default OppfolgingsdialogerContainer;

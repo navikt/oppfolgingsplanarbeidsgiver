@@ -1,5 +1,5 @@
 import { call, fork, put, takeEvery } from 'redux-saga/effects';
-import * as actiontyper from '../actions/sykmeldinger/actiontyper';
+import * as actiontyper from '../actions/sykmeldinger/sykmeldinger_actions';
 import {
   henterDineSykmeldteMedSykmeldinger,
   hentDineSykmeldteMedSykmeldingerFeilet,
