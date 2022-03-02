@@ -179,12 +179,7 @@ OppfolgingsplanerSide.propTypes = {
   sjekkTilgang: PropTypes.func,
 };
 
-const populatePlanerPaVirksomhetKnyttetTilGyldigSykmelding = (
-  data,
-  orgnummer,
-  dineSykmeldteMedSykmeldinger,
-  state
-) => {
+const populatePlanerPaVirksomhetKnyttetTilGyldigSykmelding = (data, orgnummer, dineSykmeldteMedSykmeldinger, state) => {
   const planerPaVirksomhetKnyttetTilGyldigSykmelding = finnGyldigePlanerPaVirksomhet(
     data,
     orgnummer,
