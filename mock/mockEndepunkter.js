@@ -22,11 +22,13 @@ const NAERMESTELEDER = 'naermesteleder';
 const PERSON = 'person';
 const PERSON_SEVERUS = 'personSeverus';
 const SYKMELDT = 'sykmeldt';
+const DINE_SYKMELDTE_MED_SYKMELDINGER = 'dineSykmeldteMedSykmeldinger';
 const TILGANG = 'tilgang';
 const VIRKSOMHET = 'virksomhet';
 
 lastFilTilMinne(ARBEIDSFORHOLD);
 lastFilTilMinne(SYKMELDT);
+lastFilTilMinne(DINE_SYKMELDTE_MED_SYKMELDINGER);
 lastFilTilMinne(PERSON);
 lastFilTilMinne(PERSON_SEVERUS);
 lastFilTilMinne(KONTAKTINFO);
@@ -45,9 +47,14 @@ function mockForOpplaeringsmiljo(server) {
   server.use(express.json());
   server.use(express.urlencoded());
 
-  server.get('/syk/oppfolgingsplanarbeidsgiver/api/dinesykmeldte/*', (req, res) => {
+  server.get('/syk/oppfolgingsplanarbeidsgiver/api/dinesykmeldte/:narmestelederId', (req, res) => {
     res.setHeader('Content-Type', 'application/json');
     res.send(JSON.stringify(mockData[SYKMELDT]));
+  });
+
+  server.get('/syk/oppfolgingsplanarbeidsgiver/api/dinesykmeldte', (req, res) => {
+    res.setHeader('Content-Type', 'application/json');
+    res.send(JSON.stringify(mockData[DINE_SYKMELDTE_MED_SYKMELDINGER]));
   });
 
   server.get('/syfooppfolgingsplanservice/api/arbeidsgiver/oppfolgingsplaner', (req, res) => {
