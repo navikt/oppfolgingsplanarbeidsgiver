@@ -61,6 +61,12 @@ export const finnOppfolgingsplanerPaVirksomhet = (planer, orgnummer) => {
   });
 };
 
+export const finnDineSykmeldteMedSykmeldingerPaVirksomhet = (dineSykmeldteMedSykmeldinger, orgnummer) => {
+  return dineSykmeldteMedSykmeldinger.filter((s) => {
+    return s.orgnummer === orgnummer;
+  });
+};
+
 export const finnTidligereOppfolgingsdialoger = (oppfolgingsdialoger) => {
   return sorterOppfolgingsdialogerEtterSluttdato(
     oppfolgingsdialoger.filter((oppfolgingsdialog) => {
@@ -197,7 +203,11 @@ export const erOppfolgingsplanGyldigForOppfolgingMedGrensedato = (fomLastSykefra
 
 export const finnGyldigePlanerPaVirksomhet = (planer, orgnummer, dineSykmeldteMedSykmeldinger) => {
   const oppfolgingsplanerPaVirksomhet = finnOppfolgingsplanerPaVirksomhet(planer, orgnummer);
-  const lastSykefravar = getLastSykefravar(dineSykmeldteMedSykmeldinger, orgnummer);
+  const dineSykmeldteMedSykmeldingerPaVirksomhet = finnDineSykmeldteMedSykmeldingerPaVirksomhet(
+    dineSykmeldteMedSykmeldinger,
+    orgnummer
+  );
+  const lastSykefravar = getLastSykefravar(dineSykmeldteMedSykmeldingerPaVirksomhet);
 
   return oppfolgingsplanerPaVirksomhet.filter((oppfolgingsplan) => {
     if (oppfolgingsplan.godkjentPlan) {
@@ -210,20 +220,21 @@ export const finnGyldigePlanerPaVirksomhet = (planer, orgnummer, dineSykmeldteMe
   });
 };
 
-let getLastSykefravar = (dineSykmeldteMedSykmeldinger, orgnummer) => {
-  const dineSykmeldteMedSykmeldingerWithOrgnummer = dineSykmeldteMedSykmeldinger.filter((s) => {
-    return s.orgnummer === orgnummer;
-  });
+const mapToPerioderDatesListSorted = (sykmelding) => {
+  return sykmelding.mulighetForArbeid.perioder
+    .map((periode) => {
+      return { fom: new Date(periode.fom), tom: new Date(periode.tom) };
+    })
+    .sort(compareFomDate);
+};
 
+const getLastSykefravar = (dineSykmeldteMedSykmeldinger) => {
   let sykefravarList = [];
 
-  dineSykmeldteMedSykmeldingerWithOrgnummer.filter((dineSykmeldte) => {
+  dineSykmeldteMedSykmeldinger.filter((dineSykmeldte) => {
     dineSykmeldte.sykmeldinger.filter((sykmelding) => {
-      const perioderDates = sykmelding.mulighetForArbeid.perioder.map((periode) => {
-        return { fom: new Date(periode.fom), tom: new Date(periode.tom) };
-      });
+      const perioderDatesSorted = mapToPerioderDatesListSorted(sykmelding);
 
-      const perioderDatesSorted = perioderDates.sort(compareFomDate);
       let currentFravar = { fom: perioderDatesSorted[0].fom, tom: perioderDatesSorted[0].tom };
 
       if (perioderDatesSorted.length === 1) {
