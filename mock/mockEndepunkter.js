@@ -3,6 +3,7 @@ const fs = require('fs');
 const express = require('express');
 
 const mockOppfolgingsplan = require('./oppfolgingsplan/mockOppfolgingsplan');
+const { dineSykmeldteMedSykmeldinger } = require('./data/dineSykmeldteMedSykmeldinger');
 
 const mockData = {};
 
@@ -22,13 +23,11 @@ const NAERMESTELEDER = 'naermesteleder';
 const PERSON = 'person';
 const PERSON_SEVERUS = 'personSeverus';
 const SYKMELDT = 'sykmeldt';
-const DINE_SYKMELDTE_MED_SYKMELDINGER = 'dineSykmeldteMedSykmeldinger';
 const TILGANG = 'tilgang';
 const VIRKSOMHET = 'virksomhet';
 
 lastFilTilMinne(ARBEIDSFORHOLD);
 lastFilTilMinne(SYKMELDT);
-lastFilTilMinne(DINE_SYKMELDTE_MED_SYKMELDINGER);
 lastFilTilMinne(PERSON);
 lastFilTilMinne(PERSON_SEVERUS);
 lastFilTilMinne(KONTAKTINFO);
@@ -54,7 +53,7 @@ function mockForOpplaeringsmiljo(server) {
 
   server.get('/syk/oppfolgingsplanarbeidsgiver/api/dinesykmeldte', (req, res) => {
     res.setHeader('Content-Type', 'application/json');
-    res.send(JSON.stringify(mockData[DINE_SYKMELDTE_MED_SYKMELDINGER]));
+    res.send(JSON.stringify(dineSykmeldteMedSykmeldinger));
   });
 
   server.get('/syfooppfolgingsplanservice/api/arbeidsgiver/oppfolgingsplaner', (req, res) => {
