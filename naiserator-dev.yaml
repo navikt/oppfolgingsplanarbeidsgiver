@@ -42,7 +42,11 @@ spec:
       value: "dev"
     - name: LOGINSERVICE_URL
       value: https://loginservice.dev.nav.no/login
-    - name: SYFOOPREST_URL
-      value: https://syfooprest.dev.nav.no
     - name: SYKMELDINGER_ARBEIDSGIVER_URL
       value: https://sykmeldinger-arbeidsgiver.dev.nav.no
+    - name: SYFOOPPFOLGINGSPLANSERVICE_HOST
+      value: https://syfooppfolgingsplanservice.dev-fss-pub.nais.io
+  accessPolicy:
+    outbound:
+      external:
+        - host: syfooppfolgingsplanservice.dev-fss-pub.nais.io

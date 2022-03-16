@@ -4,6 +4,7 @@ const prometheus = require('prom-client');
 const getHtmlWithDecorator = require('./server/getHtmlWithDecorator');
 const winstonLogger = require('./server/winstonLogger');
 const appProxy = require('./server/appProxy');
+const cookieParser = require('cookie-parser');
 
 // Prometheus metrics
 const collectDefaultMetrics = prometheus.collectDefaultMetrics;
@@ -30,6 +31,8 @@ server.get('/', (req, res) => {
 
 server.use(['/static', '/syk/oppfolgingsplanarbeidsgiver/static'], express.static(DIST_DIR, { index: false }));
 server.get('/internal/isAlive|isReady', (req, res) => res.sendStatus(200));
+
+server.use(cookieParser());
 
 if (env === 'opplaering') {
   require('./mock/mockEndepunkter').mockForOpplaeringsmiljo(server);

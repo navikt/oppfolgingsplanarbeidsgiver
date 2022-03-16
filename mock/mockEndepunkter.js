@@ -56,48 +56,47 @@ function mockForOpplaeringsmiljo(server) {
     res.send(JSON.stringify(dineSykmeldteMedSykmeldinger));
   });
 
-  server.get('/syfooppfolgingsplanservice/api/arbeidsgiver/oppfolgingsplaner', (req, res) => {
+  server.get('/syk/oppfolgingsplanarbeidsgiver/api/oppfolgingsplanservice/arbeidsgiver/oppfolgingsplaner', (req, res) => {
     res.setHeader('Content-Type', 'application/json');
     res.send(mockOppfolgingsplan.getOppfolgingsplaner(mockOppfolgingsplan.TYPE_DEFAULT));
   });
 
-  server.get('/syfooppfolgingsplanservice/api/tilgang', (req, res) => {
+  server.get('/syk/oppfolgingsplanarbeidsgiver/api/oppfolgingsplanservice/tilgang', (req, res) => {
     res.setHeader('Content-Type', 'application/json');
     res.send(JSON.stringify(mockData[TILGANG]));
   });
 
-  server.get('/syk/oppfolgingsplanarbeidsgiver/api/syfooprest/arbeidsforhold', (req, res) => {
+  server.get('/syk/oppfolgingsplanarbeidsgiver/api/oppfolgingsplanservice/v2/arbeidsforhold', (req, res) => {
     res.setHeader('Content-Type', 'application/json');
     res.send(JSON.stringify(mockData[ARBEIDSFORHOLD]));
   });
 
-  server.get('/syk/oppfolgingsplanarbeidsgiver/api/syfooprest/virksomhet/*', (req, res) => {
+  server.get('/syk/oppfolgingsplanarbeidsgiver/api/oppfolgingsplanservice/v2/virksomhet/*', (req, res) => {
     res.setHeader('Content-Type', 'application/json');
     res.send(JSON.stringify(mockData[VIRKSOMHET]));
   });
 
-  server.get('/syk/oppfolgingsplanarbeidsgiver/api/syfooprest/person/01010112345', (req, res) => {
+  server.get('/syk/oppfolgingsplanarbeidsgiver/api/oppfolgingsplanservice/v2/person/01010112345', (req, res) => {
     res.setHeader('Content-Type', 'application/json');
     res.send(JSON.stringify(mockData[PERSON_SEVERUS]));
   });
 
-  server.get('/syk/oppfolgingsplanarbeidsgiver/api/syfooprest/person/*', (req, res) => {
+  server.get('/syk/oppfolgingsplanarbeidsgiver/api/oppfolgingsplanservice/v2/person/*', (req, res) => {
     res.setHeader('Content-Type', 'application/json');
     res.send(JSON.stringify(mockData[PERSON]));
   });
 
-  server.get('/syk/oppfolgingsplanarbeidsgiver/api/syfooprest/naermesteleder/*', (req, res) => {
+  server.get('/syk/oppfolgingsplanarbeidsgiver/api/oppfolgingsplanservice/v2/narmesteleder/*', (req, res) => {
     res.setHeader('Content-Type', 'application/json');
     res.send(JSON.stringify(mockData[NAERMESTELEDER]));
   });
 
-  server.get('/syk/oppfolgingsplanarbeidsgiver/api/syfooprest/kontaktinfo/*', (req, res) => {
+  server.get('/syk/oppfolgingsplanarbeidsgiver/api/oppfolgingsplanservice/v2/kontaktinfo/*', (req, res) => {
     res.setHeader('Content-Type', 'application/json');
     res.send(JSON.stringify(mockData[KONTAKTINFO]));
   });
 
   server.post('/setHeader/api/logging', (req, res) => {
-    console.log('Logger i syfooprest');
     res.send(200);
   });
 
@@ -123,31 +122,31 @@ function mockForLokaltMiljo(server) {
     res.send(JSON.stringify(mockData[SYKMELDT]));
   });
 
-  server.post('/syfooppfolgingsplanservice/api/tiltak/actions/:response/lagreKommentar', (req, res) => {
+  server.post('/syk/oppfolgingsplanarbeidsgiver/api/oppfolgingsplanservice/api/tiltak/actions/:response/lagreKommentar', (req, res) => {
     mockOpprettetIdResultat(res);
   });
 
-  server.post('/syfooppfolgingsplanservice/api/kommentar/actions/:response/slett', (req, res) => {
+  server.post('/syk/oppfolgingsplanarbeidsgiver/api/oppfolgingsplanservice/api/kommentar/actions/:response/slett', (req, res) => {
     res.send();
   });
 
-  server.post('/syfooppfolgingsplanservice/api/arbeidsoppgave/actions/:id/slett', (req, res) => {
+  server.post('/syk/oppfolgingsplanarbeidsgiver/api/oppfolgingsplanservice/api/arbeidsoppgave/actions/:id/slett', (req, res) => {
     res.send();
   });
 
-  server.post('/syfooppfolgingsplanservice/api/tiltak/actions/:id/slett', (req, res) => {
+  server.post('/syk/oppfolgingsplanarbeidsgiver/api/oppfolgingsplanservice/api/tiltak/actions/:id/slett', (req, res) => {
     res.send();
   });
 
-  server.post('/syfooppfolgingsplanservice/api/oppfolgingsplan/actions/:id/lagreArbeidsoppgave', (req, res) => {
+  server.post('/syk/oppfolgingsplanarbeidsgiver/api/oppfolgingsplanservice/api/oppfolgingsplan/actions/:id/lagreArbeidsoppgave', (req, res) => {
     mockOpprettetIdResultat(res);
   });
 
-  server.post('/syfooppfolgingsplanservice/api/oppfolgingsplan/actions/:id/lagreTiltak', (req, res) => {
+  server.post('/syk/oppfolgingsplanarbeidsgiver/api/oppfolgingsplanservice/api/oppfolgingsplan/actions/:id/lagreTiltak', (req, res) => {
     mockOpprettetIdResultat(res);
   });
 
-  server.post('/syfooppfolgingsplanservice/api/oppfolgingsplan/actions/:id/godkjenn', (req, res) => {
+  server.post('/syk/oppfolgingsplanarbeidsgiver/api/oppfolgingsplanservice/api/oppfolgingsplan/actions/:id/godkjenn', (req, res) => {
     res.send({
       fom: req.body.fom,
       tom: req.body.tom,
@@ -155,23 +154,23 @@ function mockForLokaltMiljo(server) {
     });
   });
 
-  server.post('/syfooppfolgingsplanservice/api/oppfolgingsplan/actions/:id/samtykk', (req, res) => {
+  server.post('/syk/oppfolgingsplanarbeidsgiver/api/oppfolgingsplanservice/api/oppfolgingsplan/actions/:id/samtykk', (req, res) => {
     res.send();
   });
 
-  server.post('/syfooppfolgingsplanservice/api/oppfolgingsplan/actions/:id/nullstillGodkjenning', (req, res) => {
+  server.post('/syk/oppfolgingsplanarbeidsgiver/api/oppfolgingsplanservice/api/oppfolgingsplan/actions/:id/nullstillGodkjenning', (req, res) => {
     res.send();
   });
 
-  server.post('/syfooppfolgingsplanservice/api/oppfolgingsplan/actions/:id/avvis', (req, res) => {
+  server.post('/syk/oppfolgingsplanarbeidsgiver/api/oppfolgingsplanservice/api/oppfolgingsplan/actions/:id/avvis', (req, res) => {
     res.send();
   });
 
-  server.post('/syfooppfolgingsplanservice/api/arbeidsgiver/oppfolgingsplaner', (req, res) => {
+  server.post('/syk/oppfolgingsplanarbeidsgiver/api/oppfolgingsplanservice/api/arbeidsgiver/oppfolgingsplaner', (req, res) => {
     mockOpprettetIdResultat(res);
   });
 
-  server.post('/syfooppfolgingsplanservice/api/oppfolgingsplan/actions/:id/sett', (req, res) => {
+  server.post('/syk/oppfolgingsplanarbeidsgiver/api/oppfolgingsplanservice/api/oppfolgingsplan/actions/:id/sett', (req, res) => {
     res.send();
   });
 }

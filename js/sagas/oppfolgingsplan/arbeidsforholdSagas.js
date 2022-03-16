@@ -1,11 +1,11 @@
-import { call, fork, put, takeEvery } from 'redux-saga/effects';
-import { get } from '../../gateway-api';
+import { call, put, takeEvery } from 'redux-saga/effects';
+import { get, SYFOOPPFOLGINGSPLANSERVICE_PROXY_HOST } from '../../gateway-api';
 import * as actions from '../../actions/oppfolgingsplan/arbeidsforhold_actions';
 
 export function* hentArbeidsforhold(action) {
   yield put(actions.henterArbeidsforhold(action.fnr, action.virksomhetsnummer));
   try {
-    const url = `${process.env.REACT_APP_SYFOOPREST_PROXY_PATH}/arbeidsforhold?fnr=${action.fnr}&virksomhetsnummer=${action.virksomhetsnummer}&fom=${action.fom}`;
+    const url = `${SYFOOPPFOLGINGSPLANSERVICE_PROXY_HOST}/v2/arbeidsforhold?fnr=${action.fnr}&virksomhetsnummer=${action.virksomhetsnummer}&fom=${action.fom}`;
     const stillinger = yield call(get, url);
     yield put(actions.hentetArbeidsforhold(stillinger, action.fnr, action.virksomhetsnummer));
   } catch (e) {
@@ -13,10 +13,6 @@ export function* hentArbeidsforhold(action) {
   }
 }
 
-function* watchHentArbeidsforhold() {
-  yield takeEvery(actions.HENT_ARBEIDSFORHOLD_FORESPURT, hentArbeidsforhold);
-}
-
 export default function* arbeidsforholdSagas() {
-  yield fork(watchHentArbeidsforhold);
+  yield takeEvery(actions.HENT_ARBEIDSFORHOLD_FORESPURT, hentArbeidsforhold);
 }

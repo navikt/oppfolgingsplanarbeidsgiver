@@ -1,11 +1,11 @@
-import { call, put, fork, takeEvery, all } from 'redux-saga/effects';
-import { API_NAVN, hentSyfoapiUrl, get, post } from '../../gateway-api/gatewayApi';
+import { all, call, fork, put, takeEvery } from 'redux-saga/effects';
 import * as actions from '../../actions/oppfolgingsplan/oppfolgingsplan_actions';
+import { get, post, SYFOOPPFOLGINGSPLANSERVICE_PROXY_HOST } from '@/gateway-api';
 
 export function* hentArbeidsgiversOppfolginger() {
   yield put(actions.henterOppfolgingsplaner());
   try {
-    const url = `${hentSyfoapiUrl(API_NAVN.SYFOOPPFOLGINGSPLANSERVICE)}/arbeidsgiver/oppfolgingsplaner`;
+    const url = `${SYFOOPPFOLGINGSPLANSERVICE_PROXY_HOST}/arbeidsgiver/oppfolgingsplaner`;
     const data = yield call(get, url);
     yield put(actions.oppfolgingsplanerHentet(data));
   } catch (e) {
@@ -18,7 +18,7 @@ export function* opprettOppfolgingsplan(action) {
 
   yield put(actions.oppretterOppfolgingsplan(fnr));
   try {
-    const url = `${hentSyfoapiUrl(API_NAVN.SYFOOPPFOLGINGSPLANSERVICE)}/arbeidsgiver/oppfolgingsplaner`;
+    const url = `${SYFOOPPFOLGINGSPLANSERVICE_PROXY_HOST}/arbeidsgiver/oppfolgingsplaner`;
     const data = yield call(post, url, action.oppfolgingsplan);
     yield put(actions.oppfolgingsplanOpprettet(data, fnr));
   } catch (e) {
@@ -36,9 +36,7 @@ export function* godkjennPlanSaga(action) {
   yield put(actions.godkjennerPlan(fnr));
   try {
     const delMedNav = `&delmednav=${action.delMedNav}`;
-    const url = `${hentSyfoapiUrl(API_NAVN.SYFOOPPFOLGINGSPLANSERVICE)}/oppfolgingsplan/actions/${
-      action.id
-    }/godkjenn?status=${action.status}&aktoer=arbeidsgiver${delMedNav}`;
+    const url = `${SYFOOPPFOLGINGSPLANSERVICE_PROXY_HOST}/oppfolgingsplan/actions/${action.id}/godkjenn?status=${action.status}&aktoer=arbeidsgiver${delMedNav}`;
     const data = yield call(post, url, action.gyldighetstidspunkt);
     yield put(actions.planGodkjent(action.id, data, action.status, fnr, action.delMedNav));
   } catch (e) {
@@ -55,7 +53,7 @@ export function* avvisPlanSaga(action) {
 
   yield put(actions.avviserPlan(fnr));
   try {
-    const url = `${hentSyfoapiUrl(API_NAVN.SYFOOPPFOLGINGSPLANSERVICE)}/oppfolgingsplan/actions/${action.id}/avvis`;
+    const url = `${SYFOOPPFOLGINGSPLANSERVICE_PROXY_HOST}/oppfolgingsplan/actions/${action.id}/avvis`;
     yield call(post, url);
     yield put(actions.planAvvist(action.id, fnr));
   } catch (e) {

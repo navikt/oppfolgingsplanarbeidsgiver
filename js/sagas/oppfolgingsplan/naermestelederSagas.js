@@ -1,7 +1,7 @@
-import { call, fork, put, takeEvery } from 'redux-saga/effects';
-import { get } from '../../gateway-api';
+import { call, put, takeEvery } from 'redux-saga/effects';
+import { get, SYFOOPPFOLGINGSPLANSERVICE_PROXY_HOST } from '../../gateway-api';
 import * as actions from '../../actions/oppfolgingsplan/naermesteLeder_actions';
-import { personHentet } from '../../actions/oppfolgingsplan/person_actions';
+import { personHentet } from '@/actions/oppfolgingsplan/person_actions';
 
 export const mapNarmesteLederToPerson = (narmesteLeder) => {
   return {
@@ -13,7 +13,7 @@ export const mapNarmesteLederToPerson = (narmesteLeder) => {
 export function* hentNaermesteLederSaga(action) {
   yield put(actions.henterNaermesteLeder(action.fnr, action.virksomhetsnummer));
   try {
-    const url = `${process.env.REACT_APP_SYFOOPREST_PROXY_PATH}/naermesteleder/${action.fnr}?virksomhetsnummer=${action.virksomhetsnummer}`;
+    const url = `${SYFOOPPFOLGINGSPLANSERVICE_PROXY_HOST}/v2/narmesteleder/${action.fnr}?virksomhetsnummer=${action.virksomhetsnummer}`;
     const narmesteLeder = yield call(get, url);
     yield put(personHentet(mapNarmesteLederToPerson(narmesteLeder), narmesteLeder.fnr));
     yield put(actions.naermesteLederHentet(narmesteLeder, action.fnr, action.virksomhetsnummer));
@@ -26,10 +26,6 @@ export function* hentNaermesteLederSaga(action) {
   }
 }
 
-function* watchHentNaermesteLeder() {
-  yield takeEvery(actions.HENT_NAERMESTELEDER_FORESPURT, hentNaermesteLederSaga);
-}
-
 export default function* naermesteLederSagas() {
-  yield fork(watchHentNaermesteLeder);
+  yield takeEvery(actions.HENT_NAERMESTELEDER_FORESPURT, hentNaermesteLederSaga);
 }

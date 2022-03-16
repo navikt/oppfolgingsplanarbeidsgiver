@@ -1,11 +1,11 @@
-import { call, put, fork, takeEvery } from 'redux-saga/effects';
-import { API_NAVN, hentSyfoapiUrl, post } from '../../gateway-api/gatewayApi';
+import { call, put, takeEvery } from 'redux-saga/effects';
 import * as actions from '../../actions/oppfolgingsplan/sett_actions';
+import { post, SYFOOPPFOLGINGSPLANSERVICE_PROXY_HOST } from '@/gateway-api';
 
 export function* settDialoger(action) {
   yield put(actions.setterSettDialog());
   try {
-    const url = `${hentSyfoapiUrl(API_NAVN.SYFOOPPFOLGINGSPLANSERVICE)}/oppfolgingsplan/actions/${action.id}/sett`;
+    const url = `${SYFOOPPFOLGINGSPLANSERVICE_PROXY_HOST}/oppfolgingsplan/actions/${action.id}/sett`;
     yield call(post, url);
     yield put(actions.dialogSett(action.id));
   } catch (e) {
@@ -13,10 +13,6 @@ export function* settDialoger(action) {
   }
 }
 
-function* watchSettDialoger() {
-  yield takeEvery(actions.SETT_DIALOG_FORESPURT, settDialoger);
-}
-
 export default function* settDialogSagas() {
-  yield fork(watchSettDialoger);
+  yield takeEvery(actions.SETT_DIALOG_FORESPURT, settDialoger);
 }

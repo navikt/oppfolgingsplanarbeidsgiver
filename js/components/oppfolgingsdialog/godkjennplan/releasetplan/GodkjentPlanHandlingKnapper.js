@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { oppfolgingsplanPt } from '../../../../proptypes/opproptypes';
-import { erGyldigDatoIFortiden } from '../../../../utils/datoUtils';
-import { STATUS } from '../../../../konstanter';
-import { API_NAVN, hentSyfoapiUrl } from '../../../../gateway-api';
+import { oppfolgingsplanPt } from '@/proptypes/opproptypes';
+import { erGyldigDatoIFortiden } from '@/utils/datoUtils';
+import { STATUS } from '@/konstanter';
+import { SYFOOPPFOLGINGSPLANSERVICE_PROXY_HOST } from '@/gateway-api';
 
 const texts = {
   buttonEndre: 'Gjør endringer',
@@ -16,7 +16,7 @@ export const ButtonDownload = ({ oppfolgingsplan }) => {
     <div className="godkjentPlanKnapper__knapp godkjentPlanDelKnapper__lastNed">
       <a
         className="lenke"
-        href={`${hentSyfoapiUrl(API_NAVN.SYFOOPPFOLGINGSPLANSERVICE)}/dokument/${oppfolgingsplan.id}/`}
+        href={`${SYFOOPPFOLGINGSPLANSERVICE_PROXY_HOST}/dokument/${oppfolgingsplan.id}/`}
         download="oppfølgingsplan"
       >
         {texts.buttonDownload}
