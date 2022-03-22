@@ -1,4 +1,4 @@
-const { createProxyMiddleware, fixRequestBody } = require('http-proxy-middleware');
+const { createProxyMiddleware } = require('http-proxy-middleware');
 
 const appProxy = (server) => {
   server.use(
@@ -42,7 +42,6 @@ const appProxy = (server) => {
       },
       logLevel: 'error',
       changeOrigin: true,
-      onProxyReq: fixRequestBody,
     })
   );
 };
