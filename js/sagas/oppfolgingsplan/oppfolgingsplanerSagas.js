@@ -31,11 +31,17 @@ export function* opprettOppfolgingsplan(action) {
 }
 
 export function* godkjennPlanSaga(action) {
+  console.log("Hei og hopp");
   const fnr = action.fnr;
 
+  console.log("Etter fnr");
+
   yield put(actions.godkjennerPlan(fnr));
+  console.log("Etter godkjenner plan");
   try {
     const delMedNav = `&delmednav=${action.delMedNav}`;
+    console.log("Etter del med nav");
+
     const proxyUrl = process.env.SYFOOPPFOLGINGSPLANSERVICE_PROXY_HOST;
 
     console.log("ProxyUrl: " + proxyUrl);
