@@ -31,26 +31,15 @@ export function* opprettOppfolgingsplan(action) {
 }
 
 export function* godkjennPlanSaga(action) {
-  console.log("Hei og hopp");
   const fnr = action.fnr;
 
-  console.log("Etter fnr");
-
   yield put(actions.godkjennerPlan(fnr));
-  console.log("Etter godkjenner plan");
+
   try {
     const delMedNav = `&delmednav=${action.delMedNav}`;
-    console.log("Etter del med nav");
-
-    const proxyUrl = process.env.SYFOOPPFOLGINGSPLANSERVICE_PROXY_HOST;
-
-    console.log("ProxyUrl: " + proxyUrl);
-
     const url = action.gyldighetstidspunkt
-      ? `${proxyUrl}/oppfolgingsplan/actions/${action.id}/godkjenn?status=${action.status}&aktoer=arbeidsgiver${delMedNav}`
-      : `${proxyUrl}/oppfolgingsplan/actions/${action.id}/godkjennsist?status=${action.status}&aktoer=arbeidsgiver${delMedNav}`;
-
-    console.log("Url: " + url);
+      ? `${SYFOOPPFOLGINGSPLANSERVICE_PROXY_HOST}/oppfolgingsplan/actions/${action.id}/godkjenn?status=${action.status}&aktoer=arbeidsgiver${delMedNav}`
+      : `${SYFOOPPFOLGINGSPLANSERVICE_PROXY_HOST}/oppfolgingsplan/actions/${action.id}/godkjennsist?status=${action.status}&aktoer=arbeidsgiver${delMedNav}`;
 
     const data = yield call(post, url, action.gyldighetstidspunkt);
     yield put(actions.planGodkjent(action.id, data, action.status, fnr, action.delMedNav));

@@ -40,10 +40,10 @@ export const hentLoginUrl = () => {
 };
 
 const log = (...data) => {
-  // if (window.location.search.indexOf('log=true') > -1 || process.env.NODE_ENV === 'development') {
+  if (window.location.search.indexOf('log=true') > -1 || process.env.NODE_ENV === 'development') {
     // eslint-disable-next-line no-console
     console.log(data);
-  // }
+  }
 };
 
 export function get(url, headers = null) {
