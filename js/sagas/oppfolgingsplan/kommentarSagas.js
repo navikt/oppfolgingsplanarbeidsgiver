@@ -1,15 +1,13 @@
-import { call, put, fork, takeEvery, all } from 'redux-saga/effects';
-import { API_NAVN, hentSyfoapiUrl, post } from '../../gateway-api/gatewayApi';
+import { call, put, takeEvery } from 'redux-saga/effects';
 import * as actions from '../../actions/oppfolgingsplan/kommentar_actions';
+import { post, SYFOOPPFOLGINGSPLANSERVICE_PROXY_HOST } from '@/gateway-api';
 
 export function* lagreKommentar(action) {
   const fnr = action.fnr;
   yield put(actions.lagrerKommentar(fnr, action.tiltakId));
   const body = action.kommentar;
   try {
-    const url = `${hentSyfoapiUrl(API_NAVN.SYFOOPPFOLGINGSPLANSERVICE)}/tiltak/actions/${
-      action.tiltakId
-    }/lagreKommentar`;
+    const url = `${SYFOOPPFOLGINGSPLANSERVICE_PROXY_HOST}/tiltak/actions/${action.tiltakId}/lagreKommentar`;
     const data = yield call(post, url, body);
     yield put(actions.kommentarLagret(action.id, action.tiltakId, data, action.kommentar, fnr));
   } catch (e) {
@@ -26,7 +24,7 @@ export function* slettKommentar(action) {
 
   yield put(actions.sletterKommentar(fnr));
   try {
-    const url = `${hentSyfoapiUrl(API_NAVN.SYFOOPPFOLGINGSPLANSERVICE)}/kommentar/actions/${action.kommentarId}/slett`;
+    const url = `${SYFOOPPFOLGINGSPLANSERVICE_PROXY_HOST}/kommentar/actions/${action.kommentarId}/slett`;
     yield call(post, url);
     yield put(actions.kommentarSlettet(action.id, action.tiltakId, action.kommentarId, fnr));
   } catch (e) {
@@ -38,14 +36,7 @@ export function* slettKommentar(action) {
   }
 }
 
-function* watchLagreKommentar() {
-  yield takeEvery(actions.LAGRE_KOMMENTAR_FORESPURT, lagreKommentar);
-}
-
-function* watchSlettKommentar() {
-  yield takeEvery(actions.SLETT_KOMMENTAR_FORESPURT, slettKommentar);
-}
-
 export default function* kommentarSagas() {
-  yield all([fork(watchLagreKommentar), fork(watchSlettKommentar)]);
+  yield takeEvery(actions.LAGRE_KOMMENTAR_FORESPURT, lagreKommentar);
+  yield takeEvery(actions.SLETT_KOMMENTAR_FORESPURT, slettKommentar);
 }

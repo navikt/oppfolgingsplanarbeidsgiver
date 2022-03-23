@@ -1,13 +1,13 @@
-import { call, put, fork, takeEvery } from 'redux-saga/effects';
-import { hentSyfoapiUrl, API_NAVN, post } from '../../gateway-api/gatewayApi';
+import { call, put, takeEvery } from 'redux-saga/effects';
 import * as actions from '../../actions/oppfolgingsplan/avbrytdialog_actions';
+import { post, SYFOOPPFOLGINGSPLANSERVICE_PROXY_HOST } from '@/gateway-api';
 
 export function* avbrytDialog(action) {
   const fnr = action.fnr;
 
   yield put(actions.avbryterDialog(fnr));
   try {
-    const url = `${hentSyfoapiUrl(API_NAVN.SYFOOPPFOLGINGSPLANSERVICE)}/oppfolgingsplan/actions/${action.id}/avbryt`;
+    const url = `${SYFOOPPFOLGINGSPLANSERVICE_PROXY_HOST}/oppfolgingsplan/actions/${action.id}/avbryt`;
     yield call(post, url);
     yield put(actions.dialogAvbrutt(action.id, fnr));
   } catch (e) {
@@ -19,10 +19,6 @@ export function* avbrytDialog(action) {
   }
 }
 
-function* watchAvbrytDialog() {
-  yield takeEvery(actions.AVBRYT_DIALOG_FORESPURT, avbrytDialog);
-}
-
 export default function* avbrytdialogSagas() {
-  yield fork(watchAvbrytDialog);
+  yield takeEvery(actions.AVBRYT_DIALOG_FORESPURT, avbrytDialog);
 }

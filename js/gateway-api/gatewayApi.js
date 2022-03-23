@@ -1,12 +1,13 @@
-import { isLabs, isLocal, isPreProd } from '@/utils/urlUtils';
 import ponyfill from 'fetch-ponyfill';
 import store from '../store';
-import { forlengInnloggetSesjon } from '../timeout/timeout_actions';
+import { forlengInnloggetSesjon } from '@/timeout/timeout_actions';
 
 const ponyfills = ponyfill();
 
 export const MANGLER_OIDC_TOKEN = 'MANGLER_OIDC_TOKEN';
 export const REDIRECT_ETTER_LOGIN = 'REDIRECT_ETTER_LOGIN';
+
+export const SYFOOPPFOLGINGSPLANSERVICE_PROXY_HOST = '/syk/oppfolgingsplanarbeidsgiver/api/oppfolgingsplanservice';
 
 const isEdge = () => {
   return window.navigator.userAgent.indexOf('Edge') > -1;
@@ -33,9 +34,6 @@ export const hentLoginUrl = () => {
   if (window.location.href.indexOf('www.nav') > -1) {
     // Prod
     return 'https://loginservice.nav.no/login';
-  } else if (window.location.href.indexOf('localhost') > -1) {
-    // Lokalt
-    return 'http://localhost:8080/syfoapi/local/cookie';
   }
   // Preprod
   return 'https://loginservice.dev.nav.no/login';
@@ -116,17 +114,4 @@ export const post = (url, body) => {
       log(err);
       throw err;
     });
-};
-
-export const hentSyfoapiUrl = (appNavn) => {
-  if (isPreProd()) {
-    return `https://syfoapi.dev.nav.no/${appNavn}/api`;
-  } else if (isLocal() || isLabs()) {
-    return `/${appNavn}/api`;
-  }
-  return `https://syfoapi.nav.no/${appNavn}/api`;
-};
-
-export const API_NAVN = {
-  SYFOOPPFOLGINGSPLANSERVICE: 'syfooppfolgingsplanservice',
 };

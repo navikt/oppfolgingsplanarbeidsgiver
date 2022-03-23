@@ -23,10 +23,6 @@ export const maanedListe = [
 
 export const MND_SIDEN_SYKMELDING_GRENSE_FOR_OPPFOLGING = 4;
 
-export const HOST_NAMES = {
-  SYFOOPREST: 'syfooprest',
-};
-
 export const NOTIFIKASJONBOKS_TYPE = {
   ADVARSEL: 'ADVARSEL',
   SUKSESS: 'SUKSESS',
