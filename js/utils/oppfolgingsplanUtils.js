@@ -216,6 +216,7 @@ export const finnGyldigePlanerPaVirksomhet = (planer, orgnummer, dineSykmeldteMe
         oppfolgingsplan.godkjentPlan.gyldighetstidspunkt.tom
       );
     }
+    return true
   });
 };
 
