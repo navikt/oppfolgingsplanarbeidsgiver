@@ -39,6 +39,7 @@ import { getContextRoot } from '../routers/paths';
 import history from '../history';
 import { hentSykmeldt } from '../actions/sykmeldt_actions';
 import { OppfolgingsdialogFeilmeldingAGImage } from '@/images/imageComponents';
+import { isLabs } from '@/utils/urlUtils';
 
 const pageTitleArbeidsoppgaver = 'Oppfølgingsplan - Arbeidsoppgaver';
 const pageTitleTiltak = 'Oppfølgingsplan - Tiltak';
@@ -311,12 +312,18 @@ export function mapStateToProps(state, ownProps) {
     brodsmuler: [
       {
         tittel: texts.brodsmuler.dineSykmeldte,
-        sti: '/sykefravaerarbeidsgiver',
+        sti: isLabs()
+          ? 'https://sykefravaerarbeidsgiver.labs.nais.io/sykefravaerarbeidsgiver/'
+          : '/sykefravaerarbeidsgiver',
         erKlikkbar: true,
       },
       {
         tittel: sykmeldt ? sykmeldt.navn : '',
-        sti: sykmeldt ? `/sykefravaerarbeidsgiver/${sykmeldt.narmestelederId}` : '',
+        sti: isLabs()
+          ? 'https://sykefravaerarbeidsgiver.labs.nais.io/sykefravaerarbeidsgiver/6f460a78-fef9-48b0-ac69-3585b7d9367c'
+          : sykmeldt
+          ? `/sykefravaerarbeidsgiver/${sykmeldt.narmestelederId}`
+          : '',
         erKlikkbar: true,
       },
       {
