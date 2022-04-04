@@ -312,22 +312,11 @@ export function mapStateToProps(state, ownProps) {
     brodsmuler: [
       {
         tittel: texts.brodsmuler.dineSykmeldte,
-        sti: isLabs()
-          ? 'https://sykefravaerarbeidsgiver.labs.nais.io/sykefravaerarbeidsgiver/'
-          : '/sykefravaerarbeidsgiver',
+        sti: isLabs() ? 'https://dinesykmeldte.labs.nais.io/arbeidsgiver/sykmeldte' : '/arbeidsgiver/sykmeldte',
         erKlikkbar: true,
       },
       {
-        tittel: sykmeldt ? sykmeldt.navn : '',
-        sti: isLabs()
-          ? 'https://sykefravaerarbeidsgiver.labs.nais.io/sykefravaerarbeidsgiver/6f460a78-fef9-48b0-ac69-3585b7d9367c'
-          : sykmeldt
-          ? `/sykefravaerarbeidsgiver/${sykmeldt.narmestelederId}`
-          : '',
-        erKlikkbar: true,
-      },
-      {
-        tittel: texts.brodsmuler.oppfolgingsplaner,
+        tittel: `${texts.brodsmuler.oppfolgingsplaner}${sykmeldt ? ' for ' + sykmeldt.navn : ''}`,
         sti: sykmeldt ? `/${sykmeldt.narmestelederId}/oppfolgingsplaner` : '',
         erKlikkbar: true,
       },
