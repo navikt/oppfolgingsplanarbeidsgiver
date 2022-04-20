@@ -24,6 +24,7 @@ import virksomhet from './reducers/virksomhet';
 
 import sykmeldt from './reducers/sykmeldt';
 import rootSaga from './sagas';
+import dineSykmeldteMedSykmeldinger from '@/reducers/dineSykmeldteMedSykmeldinger';
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -39,6 +40,7 @@ const rootReducer = combineReducers({
   samtykke,
   kommentar,
   sykmeldt,
+  dineSykmeldteMedSykmeldinger,
   tiltak,
   delmednav,
   fastlegeDeling,

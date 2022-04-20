@@ -4,6 +4,7 @@ const prometheus = require('prom-client');
 const getHtmlWithDecorator = require('./server/getHtmlWithDecorator');
 const winstonLogger = require('./server/winstonLogger');
 const appProxy = require('./server/appProxy');
+const cookieParser = require('cookie-parser');
 
 // Prometheus metrics
 const collectDefaultMetrics = prometheus.collectDefaultMetrics;
@@ -12,7 +13,6 @@ collectDefaultMetrics({ timeout: 5000 });
 const server = express();
 const env = process.argv[2];
 
-server.use(express.json());
 server.disable('x-powered-by');
 
 const DIST_DIR = path.join(__dirname, './dist');
@@ -31,6 +31,8 @@ server.get('/', (req, res) => {
 server.use(['/static', '/syk/oppfolgingsplanarbeidsgiver/static'], express.static(DIST_DIR, { index: false }));
 server.get('/internal/isAlive|isReady', (req, res) => res.sendStatus(200));
 
+server.use(cookieParser());
+
 if (env === 'opplaering') {
   require('./mock/mockEndepunkter').mockForOpplaeringsmiljo(server);
 } else if (env === 'local') {
@@ -44,6 +46,8 @@ if (env === 'opplaering') {
     res.end(prometheus.register.metrics());
   });
 }
+
+server.use(express.json());
 
 server.use('*', (req, res) =>
   getHtmlWithDecorator(HTML_FILE)

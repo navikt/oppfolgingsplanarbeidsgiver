@@ -24,11 +24,11 @@ const appProxy = (server) => {
   );
 
   server.use(
-    '/syk/oppfolgingsplanarbeidsgiver/api/syfooprest',
+    '/syk/oppfolgingsplanarbeidsgiver/api/oppfolgingsplanservice',
     createProxyMiddleware({
-      target: process.env.SYFOOPREST_URL,
+      target: process.env.SYFOOPPFOLGINGSPLANSERVICE_HOST,
       pathRewrite: {
-        '^/syk/oppfolgingsplanarbeidsgiver/api/syfooprest': '/syfooprest/api',
+        '^/syk/oppfolgingsplanarbeidsgiver/api/oppfolgingsplanservice': '/syfooppfolgingsplanservice/api',
       },
       onError: (err, req, res) => {
         res.statusCode = 500;
