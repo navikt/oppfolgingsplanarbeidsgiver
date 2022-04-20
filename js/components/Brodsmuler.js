@@ -7,7 +7,7 @@ import { PersonImage } from '@/images/imageComponents';
 
 const Brodsmule = ({ sti, tittel, sisteSmule, erKlikkbar }) => {
   const nySti = sti;
-  const root = sti && sti.indexOf('/sykefravaerarbeidsgiver') > -1 ? '' : getContextRoot();
+  const root = sti && sti.indexOf('/arbeidsgiver/sykmeldte') > -1 ? '' : getContextRoot();
   const link =
     root === '' ? (
       <a className="js-smule js-smule-a brodsmuler__smule" href={nySti}>
