@@ -216,7 +216,7 @@ export const finnGyldigePlanerPaVirksomhet = (planer, orgnummer, dineSykmeldteMe
         oppfolgingsplan.godkjentPlan.gyldighetstidspunkt.tom
       );
     }
-    return erOppfolgingsplanGyldigForOppfolgingMedGrensedato(lastSykefravar.fom, oppfolgingsplan.sistEndretDato);
+    return true;
   });
 };
 
