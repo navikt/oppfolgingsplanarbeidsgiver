@@ -39,6 +39,7 @@ import { getContextRoot } from '../routers/paths';
 import history from '../history';
 import { hentSykmeldt } from '../actions/sykmeldt_actions';
 import { OppfolgingsdialogFeilmeldingAGImage } from '@/images/imageComponents';
+import { isLabs } from '@/utils/urlUtils';
 
 const pageTitleArbeidsoppgaver = 'Oppfølgingsplan - Arbeidsoppgaver';
 const pageTitleTiltak = 'Oppfølgingsplan - Tiltak';
@@ -311,16 +312,11 @@ export function mapStateToProps(state, ownProps) {
     brodsmuler: [
       {
         tittel: texts.brodsmuler.dineSykmeldte,
-        sti: '/sykefravaerarbeidsgiver',
+        sti: isLabs() ? 'https://dinesykmeldte.labs.nais.io/arbeidsgiver/sykmeldte' : '/arbeidsgiver/sykmeldte',
         erKlikkbar: true,
       },
       {
-        tittel: sykmeldt ? sykmeldt.navn : '',
-        sti: sykmeldt ? `/sykefravaerarbeidsgiver/${sykmeldt.narmestelederId}` : '',
-        erKlikkbar: true,
-      },
-      {
-        tittel: texts.brodsmuler.oppfolgingsplaner,
+        tittel: `${texts.brodsmuler.oppfolgingsplaner}${sykmeldt ? ' for ' + sykmeldt.navn : ''}`,
         sti: sykmeldt ? `/${sykmeldt.narmestelederId}/oppfolgingsplaner` : '',
         erKlikkbar: true,
       },

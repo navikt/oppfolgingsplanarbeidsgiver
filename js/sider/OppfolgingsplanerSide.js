@@ -1,33 +1,39 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { brodsmule as brodsmulePt, sykmeldt as sykmeldtPt } from '../shapes';
+import {
+  brodsmule as brodsmulePt,
+  dineSykmeldteMedSykmeldinger as dineSykmeldteMedSykmeldingerPt,
+  sykmeldt as sykmeldtPt,
+} from '../shapes';
 import {
   forsoektHentetSykmeldt,
   henterEllerHarHentetOppfolgingsdialoger,
   oppfolgingsdialogHarBlittOpprettet,
-} from '../utils/reducerUtils';
-import { populerDialogFraState } from '../utils/stateUtils';
-import { finnOppfolgingsplanerPaVirksomhet } from '../utils/oppfolgingsplanUtils';
-import { Side } from '../sider/Side';
+} from '@/utils/reducerUtils';
+import { populerDialogFraState } from '@/utils/stateUtils';
+import { finnGyldigePlanerPaVirksomhet } from '@/utils/oppfolgingsplanUtils';
+import { Side } from '@/sider/Side';
 import AppSpinner from '../components/AppSpinner';
 import Feilmelding from '../components/Feilmelding';
 import OppfolgingsplanInfoboks from '../components/app/OppfolgingsplanInfoboks';
 import history from '../history';
 
 import * as opproptypes from '../proptypes/opproptypes';
-import { hentOppfolgingsplaner, opprettOppfolgingsplan } from '../actions/oppfolgingsplan/oppfolgingsplan_actions';
-import { kopierOppfolgingsdialog } from '../actions/oppfolgingsplan/kopierOppfolgingsdialog_actions';
-import { giSamtykke } from '../actions/oppfolgingsplan/samtykke_actions';
-import { hentKontaktinfo } from '../actions/oppfolgingsplan/kontaktinfo_actions';
-import { hentNaermesteLeder } from '../actions/oppfolgingsplan/naermesteLeder_actions';
-import { hentPerson } from '../actions/oppfolgingsplan/person_actions';
-import { hentVirksomhet } from '../actions/oppfolgingsplan/virksomhet_actions';
-import { sjekkTilgang } from '../actions/oppfolgingsplan/sjekkTilgang_actions';
+import { hentOppfolgingsplaner, opprettOppfolgingsplan } from '@/actions/oppfolgingsplan/oppfolgingsplan_actions';
+import { kopierOppfolgingsdialog } from '@/actions/oppfolgingsplan/kopierOppfolgingsdialog_actions';
+import { giSamtykke } from '@/actions/oppfolgingsplan/samtykke_actions';
+import { hentKontaktinfo } from '@/actions/oppfolgingsplan/kontaktinfo_actions';
+import { hentNaermesteLeder } from '@/actions/oppfolgingsplan/naermesteLeder_actions';
+import { hentPerson } from '@/actions/oppfolgingsplan/person_actions';
+import { hentVirksomhet } from '@/actions/oppfolgingsplan/virksomhet_actions';
+import { sjekkTilgang } from '@/actions/oppfolgingsplan/sjekkTilgang_actions';
 import Oppfolgingsdialoger from '../components/oppfolgingsdialog/Oppfolgingsdialoger';
-import { getContextRoot } from '../routers/paths';
-import { hentSykmeldt } from '../actions/sykmeldt_actions';
+import { getContextRoot } from '@/routers/paths';
+import { hentSykmeldt } from '@/actions/sykmeldt_actions';
 import { OppfolgingsdialogFeilmeldingAGImage } from '@/images/imageComponents';
+import { hentDineSykmeldteMedSykmeldinger } from '@/actions/sykmeldinger/sykmeldinger_actions';
+import { isLabs } from '@/utils/urlUtils';
 
 const texts = {
   pageTitle: 'Oppfølgingsplaner - Oversikt',
@@ -58,6 +64,7 @@ export class OppfolgingsplanerSide extends Component {
     if (!forsoektHentetSykmeldt(sykmeldtReducer)) {
       this.props.hentSykmeldt(narmestelederId);
     }
+    this.props.hentDineSykmeldteMedSykmeldinger();
   }
 
   // eslint-disable-next-line camelcase
@@ -149,6 +156,7 @@ OppfolgingsplanerSide.propTypes = {
   sendingFeilet: PropTypes.bool,
   kopierDialogReducer: opproptypes.kopierDialogReducerPt,
   sykmeldtReducer: opproptypes.sykmeldtReducerPt,
+  dineSykmeldteMedSykmeldingerReducer: opproptypes.dineSykmeldteMedSykmeldingerReducerPt,
   oppfolgingsdialogerReducer: opproptypes.oppfolgingsdialogerAgPt,
   alleOppfolgingsdialogerReducer: opproptypes.alleOppfolgingsdialogerAgPt,
   naermesteleder: opproptypes.naermestelederReducerPt,
@@ -158,11 +166,13 @@ OppfolgingsplanerSide.propTypes = {
   oppfolgingsdialoger: PropTypes.arrayOf(opproptypes.oppfolgingsplanPt),
   narmestelederId: PropTypes.string,
   sykmeldt: sykmeldtPt,
+  dineSykmeldteMedSykmeldinger: PropTypes.arrayOf(dineSykmeldteMedSykmeldingerPt),
   brodsmuler: PropTypes.arrayOf(brodsmulePt),
   giSamtykke: PropTypes.func,
   hentNaermesteLeder: PropTypes.func,
   hentOppfolgingsplaner: PropTypes.func,
   hentSykmeldt: PropTypes.func,
+  hentDineSykmeldteMedSykmeldinger: PropTypes.func,
   hentPerson: PropTypes.func,
   hentVirksomhet: PropTypes.func,
   kopierOppfolgingsdialog: PropTypes.func,
@@ -170,21 +180,36 @@ OppfolgingsplanerSide.propTypes = {
   sjekkTilgang: PropTypes.func,
 };
 
+const populatePlanerPaVirksomhetKnyttetTilGyldigSykmelding = (data, orgnummer, dineSykmeldteMedSykmeldinger, state) => {
+  const planerPaVirksomhetKnyttetTilGyldigSykmelding = finnGyldigePlanerPaVirksomhet(
+    data,
+    orgnummer,
+    dineSykmeldteMedSykmeldinger
+  );
+
+  return planerPaVirksomhetKnyttetTilGyldigSykmelding.map((oppfolgingsdialog) => {
+    return populerDialogFraState(oppfolgingsdialog, state);
+  });
+};
+
 export function mapStateToProps(state, ownProps) {
   const narmestelederId = ownProps.params.narmestelederId;
   const sykmeldt = state.sykmeldt.data;
+  const dineSykmeldteMedSykmeldinger = state.dineSykmeldteMedSykmeldinger.data;
   let tilgang = { data: {} };
   const alleOppfolgingsdialogerReducer = state.oppfolgingsdialoger;
   let oppfolgingsdialogerReducer = {};
   let oppfolgingsdialoger = [];
-  if (sykmeldt && sykmeldt.fnr) {
+  if (sykmeldt && sykmeldt.fnr && dineSykmeldteMedSykmeldinger) {
     tilgang = state.tilgang[sykmeldt.fnr] || tilgang;
     oppfolgingsdialogerReducer = state.oppfolgingsdialoger[sykmeldt.fnr] || {};
+
     oppfolgingsdialoger = oppfolgingsdialogerReducer.data
-      ? finnOppfolgingsplanerPaVirksomhet(oppfolgingsdialogerReducer.data, sykmeldt.orgnummer).map(
-          (oppfolgingsdialog) => {
-            return populerDialogFraState(oppfolgingsdialog, state);
-          }
+      ? populatePlanerPaVirksomhetKnyttetTilGyldigSykmelding(
+          oppfolgingsdialogerReducer.data,
+          sykmeldt.orgnummer,
+          dineSykmeldteMedSykmeldinger,
+          state
         )
       : [];
   }
@@ -194,14 +219,19 @@ export function mapStateToProps(state, ownProps) {
   return {
     henter:
       state.sykmeldt.henter ||
+      state.dineSykmeldteMedSykmeldinger.henter ||
       alleOppfolgingsdialogerReducer.henter ||
       tilgang.henter ||
       !harForsoektHentetAlt ||
       (erSykmeldtHentet && sykmeldt && !tilgang.hentingForsokt),
     hentingFeilet:
-      state.sykmeldt.hentingFeilet || alleOppfolgingsdialogerReducer.hentingFeilet || tilgang.hentingFeilet,
+      state.sykmeldt.hentingFeilet ||
+      state.dineSykmeldteMedSykmeldinger.hentingFeilet ||
+      alleOppfolgingsdialogerReducer.hentingFeilet ||
+      tilgang.hentingFeilet,
     hentet:
       state.sykmeldt.hentet ||
+      state.dineSykmeldteMedSykmeldinger.hentet ||
       harForsoektHentetOppfolgingsdialoger ||
       tilgang.hentet ||
       oppfolgingsdialogerReducer.opprettet,
@@ -217,21 +247,18 @@ export function mapStateToProps(state, ownProps) {
     narmestelederId,
     oppfolgingsdialoger,
     sykmeldt,
+    dineSykmeldteMedSykmeldinger: dineSykmeldteMedSykmeldinger,
     sykmeldtReducer: state.sykmeldt,
+    dineSykmeldteMedSykmeldingerReducer: state.dineSykmeldteMedSykmeldinger,
     kontaktinfo: state.kontaktinfo,
     brodsmuler: [
       {
         tittel: texts.brodsmuler.dineSykmeldte,
-        sti: '/sykefravaerarbeidsgiver',
+        sti: isLabs() ? 'https://dinesykmeldte.labs.nais.io/arbeidsgiver/sykmeldte' : '/arbeidsgiver/sykmeldte',
         erKlikkbar: true,
       },
       {
-        tittel: sykmeldt ? sykmeldt.navn : '',
-        sti: sykmeldt ? `/sykefravaerarbeidsgiver/${sykmeldt.narmestelederId}` : '',
-        erKlikkbar: true,
-      },
-      {
-        tittel: texts.brodsmuler.oppfolgingsplaner,
+        tittel: `${texts.brodsmuler.oppfolgingsplaner}${sykmeldt ? ' for ' + sykmeldt.navn : ''}`,
       },
     ],
   };
@@ -248,6 +275,7 @@ const OppfolgingsdialogerContainer = connect(mapStateToProps, {
   hentPerson,
   hentKontaktinfo,
   hentSykmeldt,
+  hentDineSykmeldteMedSykmeldinger,
 })(OppfolgingsplanerSide);
 
 export default OppfolgingsdialogerContainer;
