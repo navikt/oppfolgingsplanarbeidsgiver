@@ -258,7 +258,16 @@ export function mapStateToProps(state, ownProps) {
         erKlikkbar: true,
       },
       {
-        tittel: `${texts.brodsmuler.oppfolgingsplaner}${sykmeldt ? ' for ' + sykmeldt.navn : ''}`,
+        tittel: sykmeldt ? sykmeldt.navn : '',
+        sti: isLabs()
+          ? 'https://dinesykmeldte.labs.nais.io/arbeidsgiver/sykmeldte/6f460a78-fef9-48b0-ac69-3585b7d9367c'
+          : sykmeldt
+          ? `/arbeidsgiver/sykmeldte/${sykmeldt.narmestelederId}`
+          : '',
+        erKlikkbar: true,
+      },
+      {
+        tittel: texts.brodsmuler.oppfolgingsplaner,
       },
     ],
   };
