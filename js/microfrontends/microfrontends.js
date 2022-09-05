@@ -41,4 +41,5 @@ export const SamtalestottePodlet = AsyncNavspa.importer({
   appName: SAMTALESTOTTE_MIKROFRONTEND,
   appBaseUrl: getMikrofrontendConfig().appBaseUrl,
   loader: <LasterInn />,
+  wrapperClassName: SAMTALESTOTTE_MIKROFRONTEND
 });
