@@ -7,6 +7,5 @@ export const textBothApprovedOppfolgingsplan = (arbeidstakerName) => {
 };
 
 export const addSpaceAfterEverySixthCharacter = (value) => {
-  return value.replace(/(.{6})/g, "$1 ");
-}
-
+  return value.replace(/(.{6})/g, '$1 ');
+};

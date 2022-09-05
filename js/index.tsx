@@ -9,7 +9,7 @@ import AppRouter from './routers/AppRouter';
 import history from './history';
 import store from './store';
 import { forlengInnloggetSesjon, sjekkInnloggingssesjon } from './timeout/timeout_actions';
-import "@navikt/dinesykmeldte-sidemeny/dist/style.css";
+import '@navikt/dinesykmeldte-sidemeny/dist/style.css';
 import '../styles/styles.less';
 
 Sentry.init({
