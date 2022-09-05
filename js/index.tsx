@@ -8,8 +8,9 @@ import React from 'react';
 import AppRouter from './routers/AppRouter';
 import history from './history';
 import store from './store';
-import '../styles/styles.less';
 import { forlengInnloggetSesjon, sjekkInnloggingssesjon } from './timeout/timeout_actions';
+import "@navikt/dinesykmeldte-sidemeny/dist/style.css";
+import '../styles/styles.less';
 
 Sentry.init({
   dsn: 'https://0a85ce6fefed42a49d44a727614d6b97@sentry.gc.nav.no/25',
