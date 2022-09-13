@@ -19,7 +19,7 @@
   "license": "ISC",
   "dependencies": {
     "@babel/runtime": "^7.16.0",
-    "@navikt/dinesykmeldte-sidemeny": "^1.2.0",
+    "@navikt/dinesykmeldte-sidemeny": "^1.3.0",
     "@navikt/ds-css": "^1.2.4",
     "@navikt/ds-icons": "^1.2.4",
     "@navikt/ds-react": "^1.2.4",

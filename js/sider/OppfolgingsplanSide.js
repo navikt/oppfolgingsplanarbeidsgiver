@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { PageContainer } from '@navikt/dinesykmeldte-sidemeny';
 import { brodsmule as brodsmulePt, sykmeldt as sykmeldtPt } from '../shapes';
 import * as opProptypes from '../proptypes/opproptypes';
 import {
@@ -40,6 +41,7 @@ import history from '../history';
 import { hentSykmeldt } from '../actions/sykmeldt_actions';
 import { OppfolgingsdialogFeilmeldingAGImage } from '@/images/imageComponents';
 import { isLabs } from '@/utils/urlUtils';
+import { getAgSideMenuHeader } from '@/utils/arbeidsgiverSideMenu';
 
 const pageTitleArbeidsoppgaver = 'Oppfølgingsplan - Arbeidsoppgaver';
 const pageTitleTiltak = 'Oppfølgingsplan - Tiltak';
@@ -162,20 +164,35 @@ export class OppfolgingsplanSide extends Component {
       >
         {(() => {
           if (henter || sender) {
-            return <AppSpinner />;
+            return (
+              <PageContainer header={false}>
+                <AppSpinner />
+              </PageContainer>
+            );
           } else if (hentingFeilet || sendingFeilet) {
-            return <Feilmelding />;
+            return (
+              <PageContainer header={false}>
+                <Feilmelding />
+              </PageContainer>
+            );
           } else if (!tilgang.data.harTilgang || !sykmeldt) {
             return (
-              <OppfolgingsplanInfoboks
-                svgUrl={OppfolgingsdialogFeilmeldingAGImage}
-                svgAlt=""
-                tittel={texts.infoboksNoAccess.title}
-                tekst={texts.infoboksNoAccess.info}
-              />
+              <PageContainer header={false}>
+                <OppfolgingsplanInfoboks
+                  svgUrl={OppfolgingsdialogFeilmeldingAGImage}
+                  svgAlt=""
+                  tittel={texts.infoboksNoAccess.title}
+                  tekst={texts.infoboksNoAccess.info}
+                />
+              </PageContainer>
             );
           }
-          return <Oppfolgingsdialog {...this.props} steg={navigasjontoggles.steg} />;
+
+          return (
+            <PageContainer header={getAgSideMenuHeader(sykmeldt)}>
+              <Oppfolgingsdialog {...this.props} steg={navigasjontoggles.steg} />
+            </PageContainer>
+          );
         })()}
       </Side>
     );
