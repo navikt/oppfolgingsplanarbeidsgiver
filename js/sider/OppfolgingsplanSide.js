@@ -41,7 +41,7 @@ import history from '../history';
 import { hentSykmeldt } from '../actions/sykmeldt_actions';
 import { OppfolgingsdialogFeilmeldingAGImage } from '@/images/imageComponents';
 import { isLabs } from '@/utils/urlUtils';
-import { getAgSideMenuHeader } from '@/utils/arbeidsgiverSideMenu';
+import { getSykmeldtHeader } from '@/utils/sideMenu';
 
 const pageTitleArbeidsoppgaver = 'Oppfølgingsplan - Arbeidsoppgaver';
 const pageTitleTiltak = 'Oppfølgingsplan - Tiltak';
@@ -189,7 +189,7 @@ export class OppfolgingsplanSide extends Component {
           }
 
           return (
-            <PageContainer header={getAgSideMenuHeader(sykmeldt)}>
+            <PageContainer header={getSykmeldtHeader(sykmeldt)}>
               <Oppfolgingsdialog {...this.props} steg={navigasjontoggles.steg} />
             </PageContainer>
           );

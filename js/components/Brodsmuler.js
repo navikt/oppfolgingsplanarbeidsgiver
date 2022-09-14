@@ -74,9 +74,9 @@ const Brodsmuler = ({ brodsmuler }) => {
       <nav className="brodsmuler" aria-label="Du er her: ">
         <img src={PersonImage} alt="" className="brodsmuler__ikon" />
         <div className="brodsmuler__smuler">
-          {brodsmuler.map((smule, index) => {
-            return <Brodsmule key={index} {...smule} sisteSmule={brodsmuler.length === index + 1} />;
-          })}
+          {brodsmuler.map((smule, index) => (
+            <Brodsmule key={index} {...smule} sisteSmule={brodsmuler.length === index + 1} />
+          ))}
         </div>
       </nav>
     </div>

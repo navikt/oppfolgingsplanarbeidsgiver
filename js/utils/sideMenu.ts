@@ -2,7 +2,7 @@ import { Sykmeldt } from '@/shapes/types';
 import { addSpaceAfterEverySixthCharacter } from '@/utils/tekstUtils';
 import { People } from '@navikt/ds-icons';
 
-export const getAgSideMenuHeader = (sykmeldt?: Sykmeldt) => {
+export const getSykmeldtHeader = (sykmeldt?: Sykmeldt) => {
   if (sykmeldt?.navn && sykmeldt?.fnr) {
     return {
       title: sykmeldt?.navn,

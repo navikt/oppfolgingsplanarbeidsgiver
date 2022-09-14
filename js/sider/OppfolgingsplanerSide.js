@@ -35,7 +35,7 @@ import { hentSykmeldt } from '@/actions/sykmeldt_actions';
 import { OppfolgingsdialogFeilmeldingAGImage } from '@/images/imageComponents';
 import { hentDineSykmeldteMedSykmeldinger } from '@/actions/sykmeldinger/sykmeldinger_actions';
 import { isLabs } from '@/utils/urlUtils';
-import { getAgSideMenuHeader, getSykmeldtNameAndFnr } from '@/utils/arbeidsgiverSideMenu';
+import { getSykmeldtHeader, getSykmeldtNameAndFnr } from '@/utils/sideMenu';
 import { ArbeidsgiverSideMenu } from '@/components/ArbeidsgiverSideMenu';
 
 const texts = {
@@ -160,7 +160,7 @@ export class OppfolgingsplanerSide extends Component {
           return (
             <PageContainer
               sykmeldt={getSykmeldtNameAndFnr(sykmeldt)}
-              header={getAgSideMenuHeader(sykmeldt)}
+              header={getSykmeldtHeader(sykmeldt)}
               navigation={<ArbeidsgiverSideMenu sykmeldt={sykmeldt} />}
             >
               <Oppfolgingsdialoger {...this.props} opprettOppfolgingsdialog={this.opprettdialog} />
