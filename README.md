@@ -7,6 +7,8 @@ i kontekst av sykefraværsoppfølging på arbeidsplassen (SYFO) https://www.nav.
 
 React-app for den sykmeldtes nærmeste leder. Viser oppfølgingsplaner til lederens sykmeldte.
 
+Dette repoet avhenger av moduler på Github Package Repository. Sett en miljøvariabel som heter `NPM_AUTH_TOKEN` med en PAT token som har `package:read` for å kunne installere avhengighetene.
+
 - For å kjøre koden lokalt:
   - `$ npm install`
   - `$ npm start`

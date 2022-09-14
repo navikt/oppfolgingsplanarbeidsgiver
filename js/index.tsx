@@ -1,16 +1,16 @@
-import 'core-js/stable';
-import 'regenerator-runtime/runtime';
-import 'whatwg-fetch';
-import { render } from 'react-dom';
-import * as Sentry from '@sentry/browser';
-import { Provider } from 'react-redux';
+import '@navikt/dinesykmeldte-sidemeny/dist/style.css';
+import '../styles/styles.less';
 import React from 'react';
+import { Provider } from 'react-redux';
+import { render } from 'react-dom';
+import 'core-js/stable';
+import 'whatwg-fetch';
+import 'regenerator-runtime/runtime';
+import * as Sentry from '@sentry/browser';
 import AppRouter from './routers/AppRouter';
 import history from './history';
 import store from './store';
 import { forlengInnloggetSesjon, sjekkInnloggingssesjon } from './timeout/timeout_actions';
-import '../styles/styles.less';
-import '@navikt/dinesykmeldte-sidemeny/dist/style.css';
 
 Sentry.init({
   dsn: 'https://0a85ce6fefed42a49d44a727614d6b97@sentry.gc.nav.no/25',

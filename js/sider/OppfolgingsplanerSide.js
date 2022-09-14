@@ -127,9 +127,6 @@ export class OppfolgingsplanerSide extends Component {
       <Side
         tittel={texts.pageTitle}
         brodsmuler={brodsmuler}
-        sykmeldt={sykmeldt}
-        withAGHeader
-        withAGNavigation
         laster={(henter || sender || !hentet) && !(sendingFeilet || hentingFeilet)}
       >
         {(() => {
