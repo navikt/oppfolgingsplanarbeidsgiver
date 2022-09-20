@@ -5,3 +5,7 @@ export const capitalizeFirstLetter = (string) => {
 export const textBothApprovedOppfolgingsplan = (arbeidstakerName) => {
   return `Denne versjonen av planen er godkjent av ${arbeidstakerName} og deg.`;
 };
+
+export const addSpaceAfterEverySixthCharacter = (value) => {
+  return value.replace(/(.{6})/g, '$1 ');
+};

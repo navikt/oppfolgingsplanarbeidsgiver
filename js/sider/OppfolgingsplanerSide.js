@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { PageContainer } from '@navikt/dinesykmeldte-sidemeny';
 import {
   brodsmule as brodsmulePt,
   dineSykmeldteMedSykmeldinger as dineSykmeldteMedSykmeldingerPt,
@@ -34,6 +35,8 @@ import { hentSykmeldt } from '@/actions/sykmeldt_actions';
 import { OppfolgingsdialogFeilmeldingAGImage } from '@/images/imageComponents';
 import { hentDineSykmeldteMedSykmeldinger } from '@/actions/sykmeldinger/sykmeldinger_actions';
 import { isLabs } from '@/utils/urlUtils';
+import { getSykmeldtHeader, getSykmeldtNameAndFnr } from '@/utils/sideMenu';
+import { ArbeidsgiverSideMenu } from '@/components/ArbeidsgiverSideMenu';
 
 const texts = {
   pageTitle: 'Oppfølgingsplaner - Oversikt',
@@ -128,20 +131,38 @@ export class OppfolgingsplanerSide extends Component {
       >
         {(() => {
           if (henter || sender) {
-            return <AppSpinner />;
+            return (
+              <PageContainer header={false}>
+                <AppSpinner />
+              </PageContainer>
+            );
           } else if (hentingFeilet || sendingFeilet) {
-            return <Feilmelding />;
+            return (
+              <PageContainer header={false}>
+                <Feilmelding />
+              </PageContainer>
+            );
           } else if (!tilgang.data.harTilgang || !sykmeldt) {
             return (
-              <OppfolgingsplanInfoboks
-                svgUrl={OppfolgingsdialogFeilmeldingAGImage}
-                svgAlt=""
-                tittel={texts.infoboksNoAccess.title}
-                tekst={texts.infoboksNoAccess.info}
-              />
+              <PageContainer header={false}>
+                <OppfolgingsplanInfoboks
+                  svgUrl={OppfolgingsdialogFeilmeldingAGImage}
+                  svgAlt=""
+                  tittel={texts.infoboksNoAccess.title}
+                  tekst={texts.infoboksNoAccess.info}
+                />
+              </PageContainer>
             );
           }
-          return <Oppfolgingsdialoger {...this.props} opprettOppfolgingsdialog={this.opprettdialog} />;
+          return (
+            <PageContainer
+              sykmeldt={getSykmeldtNameAndFnr(sykmeldt)}
+              header={getSykmeldtHeader(sykmeldt)}
+              navigation={<ArbeidsgiverSideMenu sykmeldt={sykmeldt} />}
+            >
+              <Oppfolgingsdialoger {...this.props} opprettOppfolgingsdialog={this.opprettdialog} />
+            </PageContainer>
+          );
         })()}
       </Side>
     );

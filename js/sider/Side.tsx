@@ -1,8 +1,8 @@
 import React, { ReactNode } from 'react';
-import AppSpinner from '../components/AppSpinner';
-import TimeoutBox from '../timeout/TimeoutBox';
 import DocumentTitle from 'react-document-title';
 import Brodsmuler from '@/components/Brodsmuler';
+import AppSpinner from '../components/AppSpinner';
+import TimeoutBox from '../timeout/TimeoutBox';
 
 interface SideProps {
   tittel: string;
@@ -21,10 +21,8 @@ export const Side = ({ tittel, brodsmuler, laster, children }: SideProps) => {
             <AppSpinner />
           </div>
         )}
-        <div className={'side__innhold side__innhold--begrenset js-begrensning'}>
-          <Brodsmuler brodsmuler={brodsmuler} />
-          {children}
-        </div>
+        <Brodsmuler brodsmuler={brodsmuler} />
+        {children}
       </div>
     </DocumentTitle>
   );

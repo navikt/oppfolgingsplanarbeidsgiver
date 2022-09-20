@@ -70,14 +70,16 @@ ToggleLink.propTypes = {
 
 const Brodsmuler = ({ brodsmuler }) => {
   return (
-    <nav className="brodsmuler" aria-label="Du er her: ">
-      <img src={PersonImage} alt="" className="brodsmuler__ikon" />
-      <div className="brodsmuler__smuler">
-        {brodsmuler.map((smule, index) => {
-          return <Brodsmule key={index} {...smule} sisteSmule={brodsmuler.length === index + 1} />;
-        })}
-      </div>
-    </nav>
+    <div className="brodsmuler__container">
+      <nav className="brodsmuler" aria-label="Du er her: ">
+        <img src={PersonImage} alt="" className="brodsmuler__ikon" />
+        <div className="brodsmuler__smuler">
+          {brodsmuler.map((smule, index) => (
+            <Brodsmule key={index} {...smule} sisteSmule={brodsmuler.length === index + 1} />
+          ))}
+        </div>
+      </nav>
+    </div>
   );
 };
 
